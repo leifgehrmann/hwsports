@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://www.recyclefinder.co.uk';
+$config['base_url']	= 'http://www.hwsports.co.uk';
 
 /*
 |--------------------------------------------------------------------------
@@ -224,7 +224,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = 'leifgivesyoulemons';
+$config['encryption_key'] = 'group8';
 
 /*
 |--------------------------------------------------------------------------
@@ -244,7 +244,7 @@ $config['encryption_key'] = 'leifgivesyoulemons';
 | 'sess_time_to_update'		= how many seconds between CI refreshing Session Information
 |
 */
-$config['sess_cookie_name']		= 'recyclefinder_session';
+$config['sess_cookie_name']		= 'hwsports_session';
 $config['sess_expiration']		= 7200;
 $config['sess_expire_on_close']	= TRUE;
 $config['sess_encrypt_cookie']	= FALSE;
@@ -266,7 +266,7 @@ $config['sess_time_to_update']	= 300;
 |
 */
 $config['cookie_prefix']	= "";
-$config['cookie_domain']	= ".recyclefinder.co.uk";
+$config['cookie_domain']	= ".hwsports.co.uk";
 $config['cookie_path']		= "/";
 $config['cookie_secure']	= FALSE;
 

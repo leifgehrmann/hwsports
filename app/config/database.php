@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = FALSE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'recycle_finder';
-$db['default']['password'] = 'leifgivesyoulemons';
-$db['default']['database'] = 'recycle_finder';
+$db['default']['username'] = 'hwsports_web';
+$db['default']['password'] = 'group8';
+$db['default']['database'] = 'hwsports_web';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
