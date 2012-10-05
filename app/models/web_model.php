@@ -1,5 +1,5 @@
 <?php
-class map_model extends CI_Model {
+class web_model extends CI_Model {
 
 	public function __construct()
 	{
