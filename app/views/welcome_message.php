@@ -67,7 +67,6 @@
 <body>
 
 <div id="container">
-    <a href="<? error_reporting(E_ALL|E_STRICT); ini_set('display_errors', 1); echo site_url() ?>">Login</a>
 	<h1>Welcome to CodeIgniter!</h1>
 
 	<div id="body">
