@@ -7,20 +7,46 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 
+CREATE TABLE IF NOT EXISTS `authGroups` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+CREATE TABLE IF NOT EXISTS `authMeta` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` mediumint(8) unsigned DEFAULT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `company` varchar(100) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+CREATE TABLE IF NOT EXISTS `authUsers` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `group_id` mediumint(8) unsigned NOT NULL,
+  `ip_address` char(16) NOT NULL,
+  `username` varchar(15) NOT NULL,
+  `password` varchar(40) NOT NULL,
+  `salt` varchar(40) DEFAULT NULL,
+  `email` varchar(254) NOT NULL,
+  `activation_code` varchar(40) DEFAULT NULL,
+  `forgotten_password_code` varchar(40) DEFAULT NULL,
+  `remember_code` varchar(40) DEFAULT NULL,
+  `created_on` int(11) unsigned NOT NULL,
+  `last_login` int(11) unsigned DEFAULT NULL,
+  `active` tinyint(1) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
 CREATE TABLE IF NOT EXISTS `centreData` (
   `centreID` int(11) NOT NULL AUTO_INCREMENT,
   `key` text NOT NULL,
   `value` text NOT NULL,
   KEY `centreID` (`centreID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
-CREATE TABLE IF NOT EXISTS `loginAttempts` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `ip_address` varbinary(16) NOT NULL,
-  `login` varchar(100) NOT NULL,
-  `time` int(11) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `match` (
   `matchID` int(11) NOT NULL AUTO_INCREMENT,
@@ -36,6 +62,27 @@ CREATE TABLE IF NOT EXISTS `matchData` (
   `key` text NOT NULL,
   `value` text NOT NULL,
   KEY `matchID` (`matchID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `personData` (
+  `personID` int(11) NOT NULL,
+  `key` text NOT NULL,
+  `value` text NOT NULL,
+  KEY `personID` (`personID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `persons` (
+  `personID` int(11) NOT NULL AUTO_INCREMENT,
+  `personType` int(11) NOT NULL,
+  PRIMARY KEY (`personID`),
+  KEY `personType` (`personType`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `personTypes` (
+  `personType` int(11) NOT NULL,
+  `key` text NOT NULL,
+  `value` text NOT NULL,
+  KEY `personType` (`personType`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `results` (
@@ -74,11 +121,11 @@ CREATE TABLE IF NOT EXISTS `teamData` (
   KEY `teamID` (`teamID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS `teamsUsers` (
+CREATE TABLE IF NOT EXISTS `teamsPersons` (
   `teamID` int(11) NOT NULL,
-  `userID` mediumint(8) unsigned NOT NULL,
+  `personID` int(11) NOT NULL,
   KEY `teamID` (`teamID`),
-  KEY `personID` (`userID`)
+  KEY `personID` (`personID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `ticketData` (
@@ -91,10 +138,10 @@ CREATE TABLE IF NOT EXISTS `ticketData` (
 CREATE TABLE IF NOT EXISTS `tickets` (
   `ticketID` int(11) NOT NULL AUTO_INCREMENT,
   `ticketTypeID` int(11) NOT NULL,
-  `userID` mediumint(8) unsigned NOT NULL,
+  `personID` int(11) NOT NULL,
   PRIMARY KEY (`ticketID`),
   KEY `ticketTypeID` (`ticketTypeID`),
-  KEY `personID` (`userID`)
+  KEY `personID` (`personID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `ticketTypes` (
@@ -119,46 +166,6 @@ CREATE TABLE IF NOT EXISTS `tournamentMatches` (
   KEY `tournamentID` (`tournamentID`),
   KEY `matchID` (`matchID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE IF NOT EXISTS `userData` (
-  `userID` mediumint(8) unsigned NOT NULL,
-  `key` text NOT NULL,
-  `value` text NOT NULL,
-  KEY `userID` (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE IF NOT EXISTS `userGroups` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
-  `description` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `ip_address` varbinary(16) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(80) NOT NULL,
-  `salt` varchar(40) DEFAULT NULL,
-  `email` varchar(100) NOT NULL,
-  `activation_code` varchar(40) DEFAULT NULL,
-  `forgotten_password_code` varchar(40) DEFAULT NULL,
-  `forgotten_password_time` int(11) unsigned DEFAULT NULL,
-  `remember_code` varchar(40) DEFAULT NULL,
-  `created_on` int(11) unsigned NOT NULL,
-  `last_login` int(11) unsigned DEFAULT NULL,
-  `active` tinyint(1) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
-CREATE TABLE IF NOT EXISTS `usersGroups` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `userID` mediumint(8) unsigned NOT NULL,
-  `groupID` mediumint(8) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `userID` (`userID`),
-  KEY `groupID` (`groupID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 CREATE TABLE IF NOT EXISTS `venueData` (
   `venueID` int(11) NOT NULL,
@@ -189,6 +196,12 @@ ALTER TABLE `match`
 ALTER TABLE `matchData`
   ADD CONSTRAINT `matchData_ibfk_1` FOREIGN KEY (`matchID`) REFERENCES `match` (`matchID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+ALTER TABLE `personData`
+  ADD CONSTRAINT `personData_ibfk_1` FOREIGN KEY (`personID`) REFERENCES `persons` (`personID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `persons`
+  ADD CONSTRAINT `persons_ibfk_1` FOREIGN KEY (`personType`) REFERENCES `personTypes` (`personType`);
+
 ALTER TABLE `results`
   ADD CONSTRAINT `results_ibfk_1` FOREIGN KEY (`matchID`) REFERENCES `match` (`matchID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -199,17 +212,17 @@ ALTER TABLE `sports`
   ADD CONSTRAINT `sports_ibfk_1` FOREIGN KEY (`sportTypeID`) REFERENCES `sportTypeData` (`sportTypeID`);
 
 ALTER TABLE `teamData`
-  ADD CONSTRAINT `teamData_ibfk_1` FOREIGN KEY (`teamID`) REFERENCES `teamsUsers` (`teamID`);
+  ADD CONSTRAINT `teamData_ibfk_1` FOREIGN KEY (`teamID`) REFERENCES `teamsPersons` (`teamID`);
 
-ALTER TABLE `teamsUsers`
-  ADD CONSTRAINT `teamsUsers_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`id`);
+ALTER TABLE `teamsPersons`
+  ADD CONSTRAINT `teamsPersons_ibfk_1` FOREIGN KEY (`personID`) REFERENCES `persons` (`personID`);
 
 ALTER TABLE `ticketData`
   ADD CONSTRAINT `ticketData_ibfk_2` FOREIGN KEY (`ticketID`) REFERENCES `tickets` (`ticketID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `tickets`
-  ADD CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`ticketTypeID`) REFERENCES `ticketTypes` (`ticketTypeID`);
+  ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`ticketTypeID`) REFERENCES `ticketTypes` (`ticketTypeID`),
+  ADD CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`personID`) REFERENCES `persons` (`personID`);
 
 ALTER TABLE `ticketTypes`
   ADD CONSTRAINT `ticketTypes_ibfk_1` FOREIGN KEY (`matchID`) REFERENCES `match` (`matchID`);
@@ -219,13 +232,6 @@ ALTER TABLE `tournamentData`
 
 ALTER TABLE `tournamentMatches`
   ADD CONSTRAINT `tournamentMatches_ibfk_1` FOREIGN KEY (`matchID`) REFERENCES `match` (`matchID`);
-
-ALTER TABLE `userData`
-  ADD CONSTRAINT `userData_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`id`);
-
-ALTER TABLE `usersGroups`
-  ADD CONSTRAINT `usersGroups_ibfk_2` FOREIGN KEY (`groupID`) REFERENCES `userGroups` (`id`),
-  ADD CONSTRAINT `usersGroups_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`id`);
 
 ALTER TABLE `venueData`
   ADD CONSTRAINT `venueData_ibfk_1` FOREIGN KEY (`venueID`) REFERENCES `venues` (`venueID`);

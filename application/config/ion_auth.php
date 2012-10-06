@@ -31,10 +31,10 @@ $config['collections']['login_attempts'] = 'login_attempts';
 | -------------------------------------------------------------------------
 | Database table names.
 */
-$config['tables']['users']           = 'authUsers';
-$config['tables']['groups']          = 'authGroups';
-$config['tables']['users_groups']    = 'authUsersGroups';
-$config['tables']['login_attempts']  = 'authLoginAttempts';
+$config['tables']['users']           = 'users';
+$config['tables']['groups']          = 'userGroups';
+$config['tables']['users_groups']    = 'usersGroups';
+$config['tables']['login_attempts']  = 'loginAttempts';
 
 /*
  | Users table column and Group table column you want to join WITH.
@@ -42,8 +42,8 @@ $config['tables']['login_attempts']  = 'authLoginAttempts';
  | Joins from users.id
  | Joins from groups.id
  */
-$config['join']['users']  = 'user_id';
-$config['join']['groups'] = 'group_id';
+$config['join']['users']  = 'userID';
+$config['join']['groups'] = 'groupID';
 
 /*
  | -------------------------------------------------------------------------

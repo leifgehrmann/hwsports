@@ -7,16 +7,6 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 
-INSERT INTO `authGroups` (`id`, `name`, `description`) VALUES
-(1, 'admin', 'Administrator'),
-(2, 'members', 'General User');
-
-INSERT INTO `authMeta` (`id`, `user_id`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, 1, 'Admin', 'istrator', 'ADMIN', '0');
-
-INSERT INTO `authUsers` (`id`, `group_id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `remember_code`, `created_on`, `last_login`, `active`) VALUES
-(1, 1, '127.0.0.1', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, 1268889823, 1268889823, 1);
-
 INSERT INTO `centreData` (`centreID`, `key`, `value`) VALUES
 (1, 'name', 'Heriot-Watt University Centre for Sport and Exercise'),
 (1, 'address', 'Centre for Sport and Exercise, Heriot-Watt University, Edinburgh, EH14 4AS'),
@@ -101,6 +91,17 @@ INSERT INTO `sportTypeData` (`sportTypeID`, `key`, `value`) VALUES
 (45, 'name', 'Miscellaneous'),
 (46, 'name', 'Running'),
 (47, 'name', 'Sailing');
+
+INSERT INTO `userGroups` (`id`, `name`, `description`) VALUES
+(1, 'admin', 'Administrator'),
+(2, 'members', 'General User');
+
+INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`) VALUES
+(1, '\0\0', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'hwsports@techfixuk.com', '', NULL, NULL, NULL, 1268889823, 1349495276, 1);
+
+INSERT INTO `usersGroups` (`id`, `userID`, `groupID`) VALUES
+(1, 1, 1),
+(2, 1, 2);
 
 INSERT INTO `venueData` (`venueID`, `key`, `value`) VALUES
 (1, 'name', 'Sports Hall 1'),
