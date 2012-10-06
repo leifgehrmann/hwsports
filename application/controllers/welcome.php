@@ -19,17 +19,16 @@ class Welcome extends CI_Controller {
             $identity = $this->input->post('identity', true);
             $password = $this->input->post('password', true);
 
-            //Ion_Auth Login fun
             if($this->ion_auth->login($identity,$password)) {
 
-                //capture the user
                 $user = $this->ion_auth->user()->row();
-
-                redirect($user->group.'/home');
-
-                /*redirect to the proper home
-                  controller using the user
-                  groups as folder names */
+				$user_groups = $this->ion_auth->get_users_groups($user->id)->result();
+				if (in_array("admin", $user_groups)) {
+					redirect('admin/home');
+				} else {
+					redirect('user/home');
+				}
+				
             }
             else {
 
