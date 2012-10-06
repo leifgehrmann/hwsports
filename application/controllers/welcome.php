@@ -42,7 +42,7 @@ class Welcome extends CI_Controller {
                 redirect('/');
             }
         }
-        redirect('/');
+        $this->load->view('login_form');
     }
 
     /**
