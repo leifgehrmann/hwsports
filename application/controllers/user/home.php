@@ -1,5 +1,5 @@
 <?php
-class Home extends User_Controller {
+class Home extends MY_User_Controller {
 
     function __construct() {
         parent::__construct();
