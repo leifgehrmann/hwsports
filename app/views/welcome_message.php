@@ -67,7 +67,7 @@
 <body>
 
 <div id="container">
-    <a href="<?= site_url('welcome/login') ?>">Login</a>
+    <a href="<?php echo site_url('welcome/login') ?>">Login</a>
 	<h1>Welcome to CodeIgniter!</h1>
 
 	<div id="body">
