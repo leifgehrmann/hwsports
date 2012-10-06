@@ -1,5 +1,5 @@
-<h1>Protected View!!</h1>
+<h1>User View!</h1>
 
-<h4>Email: <?= $the_user->email ?></h4>
+<h4>User info: <?= print_r($the_user,1) ?></h4>
 
-<a href="<?= site_url('user/logout') ?>">logout</a>
+<a href="<?= site_url('public/logout') ?>">logout</a>

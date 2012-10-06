@@ -68,7 +68,7 @@
 
 <div id="container">
 	<h1>Welcome to HW Sports!</h1>
-	<a href="<?= site_url('welcome/login') ?>">Login</a>
+	<a href="<?= site_url('public/login') ?>">Login</a>
 </div>
 
 </body>
