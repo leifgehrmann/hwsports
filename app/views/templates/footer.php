@@ -5,6 +5,5 @@
         <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js"></script>
    
         <script src="/js/<?=$page?>"></script>
-        
     </body>
 </html>
