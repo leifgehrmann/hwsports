@@ -34,6 +34,7 @@ if (defined('ENVIRONMENT'))
 	{
 		case 'development':
 			error_reporting(E_ALL);
+			ini_set('display_errors', 1);
 		break;
 	
 		case 'testing':
@@ -56,7 +57,7 @@ if (defined('ENVIRONMENT'))
  * as this file.
  *
  */
-	$system_path = 'system';
+	$system_path = 'sys';
 
 /*
  *---------------------------------------------------------------
@@ -72,7 +73,7 @@ if (defined('ENVIRONMENT'))
  * NO TRAILING SLASH!
  *
  */
-	$application_folder = 'application';
+	$application_folder = 'app';
 
 /*
  * --------------------------------------------------------------------
