@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class PublicHome extends CI_Controller {
+class Front extends CI_Controller {
 
 	public function index()
 	{

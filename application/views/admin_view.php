@@ -2,4 +2,4 @@
 
 <h4>User info: <?= print_r($the_user,1) ?></h4>
 
-<a href="<?= site_url('public/logout') ?>">logout</a>
+<a href="<?= site_url('front/logout') ?>">logout</a>
