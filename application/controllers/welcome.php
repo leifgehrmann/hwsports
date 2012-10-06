@@ -22,8 +22,7 @@ class Welcome extends CI_Controller {
             if($this->ion_auth->login($identity,$password)) {
 
                 $user = $this->ion_auth->user()->row();
-				$user_groups = $this->ion_auth->get_users_groups($user->id)->result();
-				if (in_array("admin", $user_groups)) {
+				if($this->ion_auth->is_admin()) {
 					redirect('admin/home');
 				} else {
 					redirect('user/home');
