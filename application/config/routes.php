@@ -37,10 +37,17 @@
 | in the URL cannot be matched to a valid route.
 |
 */
+$slug = '';
+if ($_SERVER['HTTP_HOST']=="hwsports.co.uk") {
+    $slug = "hwsports";
+	$config['base_url'] = 'http://hwsports.co.uk/';
+	$route['default_controller'] = "sis/index/$slug";
+} else {
+	$route['default_controller'] = "product";
+}
 
-$route['(:any)'] = 'auth/login';
+$route['auth/login'] = "auth/login/$slug";
 
-$route['default_controller'] = "sis";
 $route['404_override'] = '';
 
 /* End of file routes.php */
