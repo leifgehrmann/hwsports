@@ -490,7 +490,7 @@ class Auth extends CI_Controller {
 			);
 
 			$this->load->view('sis/header',$this->data);
-			$this->load->view('auth/create_user', $this->data);
+			$this->load->view('auth/register', $this->data);
 			$this->load->view('sis/footer',$this->data);
 		}
 	}
@@ -518,10 +518,7 @@ class Auth extends CI_Controller {
 		//validate form input
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
-		$this->form_validation->set_rules('phone1', 'First Part of Phone', 'required|xss_clean|min_length[3]|max_length[3]');
-		$this->form_validation->set_rules('phone2', 'Second Part of Phone', 'required|xss_clean|min_length[3]|max_length[3]');
-		$this->form_validation->set_rules('phone3', 'Third Part of Phone', 'required|xss_clean|min_length[4]|max_length[4]');
-		$this->form_validation->set_rules('company', 'Company Name', 'required|xss_clean');
+		$this->form_validation->set_rules('phone', 'Third Part of Phone', 'required|xss_clean|min_length[8]|max_length[12]');
 		$this->form_validation->set_rules('groups', 'Groups', 'xss_clean');
 		
 		if (isset($_POST) && !empty($_POST))
@@ -535,8 +532,7 @@ class Auth extends CI_Controller {
 			$data = array(
 				'first_name' => $this->input->post('first_name'),
 				'last_name'  => $this->input->post('last_name'),
-				'company'    => $this->input->post('company'),
-				'phone'      => $this->input->post('phone1') . '-' . $this->input->post('phone2') . '-' . $this->input->post('phone3'),
+				'phone'      => $this->input->post('phone')
 			);
 			
 			//Update the groups user belongs to
@@ -595,29 +591,11 @@ class Auth extends CI_Controller {
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('last_name', $user->last_name),
 		);
-		$this->data['company'] = array(
-			'name'  => 'company',
-			'id'    => 'company',
+		$this->data['phone'] = array(
+			'name'  => 'phone',
+			'id'    => 'phone',
 			'type'  => 'text',
-			'value' => $this->form_validation->set_value('company', $user->company),
-		);
-		$this->data['phone1'] = array(
-			'name'  => 'phone1',
-			'id'    => 'phone1',
-			'type'  => 'text',
-			'value' => $this->form_validation->set_value('phone1', $user->phone[0]),
-		);
-		$this->data['phone2'] = array(
-			'name'  => 'phone2',
-			'id'    => 'phone2',
-			'type'  => 'text',
-			'value' => $this->form_validation->set_value('phone2', $user->phone[1]),
-		);
-		$this->data['phone3'] = array(
-			'name'  => 'phone3',
-			'id'    => 'phone3',
-			'type'  => 'text',
-			'value' => $this->form_validation->set_value('phone3', $user->phone[2]),
+			'value' => $this->form_validation->set_value('phone', $user->phone),
 		);
 		$this->data['password'] = array(
 			'name' => 'password',
