@@ -20,7 +20,8 @@ body {
 	font-family: sans-serif;
 	color: #FFF;
 }
-#header #title-bar {
+#header #title-bar a{
+	display: block;
 	margin:10px;
 	font-size: 24px;
 }
