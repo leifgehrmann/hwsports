@@ -11,3 +11,6 @@ RewriteRule ^(.*)$ /index.php/$1 [L]
 # 
 RewriteCond %{HTTP_HOST} ^hwsports.co.uk/(.+)/* [NC]  
 RewriteRule (.*) /index.php/%1/hwsports [L]  
+
+RewriteCond %{HTTP_HOST} ^hwsports.co.uk/* [NC]  
+RewriteRule (.*) /index.php/sis/home/hwsports [L]  
