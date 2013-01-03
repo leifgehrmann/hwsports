@@ -38,9 +38,7 @@
 |
 */
 
-$route['(:any)'] = 'auth/login';
-
-$route['default_controller'] = "sis";
+$route['default_controller'] = "product";
 $route['404_override'] = '';
 
 /* End of file routes.php */
