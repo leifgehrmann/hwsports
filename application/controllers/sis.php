@@ -15,11 +15,12 @@ class Sis extends CI_Controller {
 		//set the flash data error message if there is one
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		
-		$this->data['currentUser'] = $this->ion_auth->user()->row();
-		
-		$query = $this->db->query("SELECT `key`,`value` FROM `userData` WHERE `userID` = '{$this->data['currentUser']->id}'");
-		foreach($query->result_array() as $userDataRow) {
-			$this->data['currentUser']->$userDataRow['key'] = $userDataRow['value'];
+		$this->data['currentUser'] = $currentUser = $this->ion_auth->user()->row();
+		if(!empty($currentUser)) {
+			$query = $this->db->query("SELECT `key`,`value` FROM `userData` WHERE `userID` = '{$currentUser->id}'");
+			foreach($query->result_array() as $userDataRow) {
+				$currentUser->$userDataRow['key'] = $userDataRow['value'];
+			}
 		}
 		
 		$this->load->view('sis/header',$this->data);
