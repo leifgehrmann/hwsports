@@ -1,9 +1,9 @@
 <h1>Welcome to HW Sports!</h1>
 
-(centre ID: <?=$this->session->userdata('centreID');?>)
-
-
 <div id="infoMessage"><?php echo $message;?></div>
 
-<? print_r($currentUser); //$currentUser->username ?>
+Current User ID: <?=$currentUser->id?><br />
+Current User Email: <?=$currentUser->id?><br />
+Current User Data: <?print_r($currentUserData)?><br />
+
 <a href="<?= base_url('auth/login') ?>">Login</a>

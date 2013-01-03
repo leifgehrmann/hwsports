@@ -17,6 +17,10 @@ class Sis extends CI_Controller {
 		
 		$this->data['currentUser'] = $this->ion_auth->user()->row();
 		
+		$query = $this->db->query("SELECT `key`,`value` FROM `userData` WHERE `userID` = '{$this->data['currentUser']->id}'");
+		$row = $query->row_array();
+		$this->data['currentUserData'] = $row;
+		
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('sis/home',$this->data);
 		$this->load->view('sis/footer',$this->data);
