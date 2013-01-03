@@ -18,22 +18,22 @@
         <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
         <div id="header">
-            <div id="title-bar" class="left">
+			<a href="/tms" id="title-bar" class="left">
                 <div class="logo"></div>
-                <div class="name">Heriot Watt University</div>
+                <div class="name"><?=$this->session->userdata('centreName')?></div>
                 <div class="system">Tournaments System</div>
-            </div>
+            </a>
             <div id="user-bar" class="right">
-                <span class="username">Leif Gehrmann</span>
+                <span class="username"><?=$currentUser->firstName.' '.$currentUser->lastName?></span>
                 <span class="sep">|</span>
-                <a href=""><span class="role">Switch Account</span></a>
+                <a href="/"><span class="role">Customer Homepage</span></a>
                 <span class="sep">|</span>
-                <a href=""><span class="logout">Logout</span></a>
+                <a href="auth/logout"><span class="logout">Logout</span></a>
             </div>
         </div>
         <div id="menu">
             <ul>
-                <li class="selected"><img src="/img/icons/home.14.png"/>Dashboard</li>
+                <li class="selected"><a href="/tms"><img src="/img/icons/home.14.png"/>Dashboard</a></li>
             </ul>
             <ul>
                 <li><a href=""><img src="/img/icons/tournament.14.png"/>Tournaments</a></li>

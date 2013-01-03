@@ -1458,6 +1458,9 @@ class Ion_auth_model extends CI_Model
 
 		// remove user from groups
 		$this->remove_from_group(NULL, $id);
+		
+		// delete user data
+		$this->db->delete($this->tables['userData'], array('userID' => $id));
 
 		// delete user from users table
 		$this->db->delete($this->tables['users'], array('id' => $id));

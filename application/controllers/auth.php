@@ -74,7 +74,12 @@ class Auth extends CI_Controller {
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/', 'refresh');
+				
+				if($this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin')){
+					redirect('/tms', 'refresh');
+				} else {
+					redirect('/', 'refresh');
+				}
 			}
 			else
 			{
@@ -117,7 +122,7 @@ class Auth extends CI_Controller {
 
 		//redirect them to the login page
 		$this->session->set_flashdata('message', $this->ion_auth->messages());
-		redirect('auth/login', 'refresh');
+		redirect('/', 'refresh');
 	}
 
 	//change password
@@ -413,11 +418,6 @@ class Auth extends CI_Controller {
 	{
 		$this->data['title'] = "Registration";
 
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth', 'refresh');
-		}
-
 		//validate form input
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
@@ -441,10 +441,9 @@ class Auth extends CI_Controller {
 		}
 		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data))
 		{
-			//check to see if we are creating the user
-			//redirect them back to the admin page
+			// Successful creation, show success message
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("auth", 'refresh');
+			redirect("/", 'refresh');
 		}
 		else
 		{
@@ -726,14 +725,30 @@ class Auth extends CI_Controller {
 			'value' => $this->form_validation->set_value('group_description', $group->description),
 		);
 
-		$data = Array(
-			'title' => "Auth"
-		);
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('auth/edit_group', $this->data);
 		$this->load->view('sis/footer',$this->data);
 	}
 
+	function delete_user()
+	{
+		$user = $this->ion_auth->user()->row();
+
+		if ($this->ion_auth->delete_user($user->id))
+		{
+			// Remove session cookies for logged in user, eliminate zombie problems
+			$this->ion_auth->logout();
+			
+			// Successful deletion, show success message
+			$this->session->set_flashdata('message', $this->ion_auth->messages());
+			redirect("/", 'refresh');
+		}
+		else
+		{
+			//set the flash data error message if there is one
+			$this->data['message'] = ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'));
+		}
+	}
 
 	function _get_csrf_nonce()
 	{
