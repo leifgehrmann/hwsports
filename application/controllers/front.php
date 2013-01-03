@@ -40,7 +40,7 @@ class Front extends CI_Controller {
                     'Your login attempt failed.'
                 );
 
-                redirect('/');
+                //redirect('/');
             }
         }
         $this->load->view('login_form');
