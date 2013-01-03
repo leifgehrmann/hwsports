@@ -408,10 +408,10 @@ class Auth extends CI_Controller {
 		}
 	}
 
-	//create a new user
-	function create_user()
+	//create a new user account
+	function register()
 	{
-		$this->data['title'] = "Create User";
+		$this->data['title'] = "Registration";
 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
@@ -428,15 +428,15 @@ class Auth extends CI_Controller {
 
 		if ($this->form_validation->run() == true)
 		{
-			$username = strtolower($this->input->post('first_name')) . ' ' . strtolower($this->input->post('last_name'));
-			$email    = $this->input->post('email');
+			$username = $email    = $this->input->post('email');
 			$password = $this->input->post('password');
+			$centreID = $this->session->userdata('centreID');
 
 			$additional_data = array(
-				'first_name' => $this->input->post('first_name'),
-				'last_name'  => $this->input->post('last_name'),
-				'company'    => $this->input->post('company'),
-				'phone'      => $this->input->post('phone1') . '-' . $this->input->post('phone2') . '-' . $this->input->post('phone3'),
+				'centreID' => $centreID,
+				'firstName' => $this->input->post('first_name'),
+				'lastName'  => $this->input->post('last_name'),
+				'phone'      => $this->input->post('phone')
 			);
 		}
 		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data))
@@ -470,29 +470,11 @@ class Auth extends CI_Controller {
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('email'),
 			);
-			$this->data['company'] = array(
-				'name'  => 'company',
-				'id'    => 'company',
+			$this->data['phone'] = array(
+				'name'  => 'phone',
+				'id'    => 'phone',
 				'type'  => 'text',
-				'value' => $this->form_validation->set_value('company'),
-			);
-			$this->data['phone1'] = array(
-				'name'  => 'phone1',
-				'id'    => 'phone1',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('phone1'),
-			);
-			$this->data['phone2'] = array(
-				'name'  => 'phone2',
-				'id'    => 'phone2',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('phone2'),
-			);
-			$this->data['phone3'] = array(
-				'name'  => 'phone3',
-				'id'    => 'phone3',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('phone3'),
+				'value' => $this->form_validation->set_value('phone'),
 			);
 			$this->data['password'] = array(
 				'name'  => 'password',
@@ -507,7 +489,6 @@ class Auth extends CI_Controller {
 				'value' => $this->form_validation->set_value('password_confirm'),
 			);
 
-			
 			$this->load->view('sis/header',$this->data);
 			$this->load->view('auth/create_user', $this->data);
 			$this->load->view('sis/footer',$this->data);

@@ -801,17 +801,22 @@ class Ion_auth_model extends CI_Model
 		{
 			$data['salt'] = $salt;
 		}
-
-		//filter out any data passed that doesnt have a matching column in the users table
-		//and merge the set user data and the additional data
-		$user_data = array_merge($this->_filter_data($this->tables['users'], $additional_data), $data);
-
-		$this->trigger_events('extra_set');
-
-		$this->db->insert($this->tables['users'], $user_data);
-
+		
+		// Insert main ion auth login user into users table
+		$this->db->insert($this->tables['users'], $data);
+		// Get user ID
 		$id = $this->db->insert_id();
-
+		
+		// Insert all additional user data into userData table
+		foreach ($additional_data as $datakey => $datavalue) {
+			$this->db->insert($this->tables['userData'], Array(
+					'userID' => $id,
+					'key' => $datakey,
+					'value' => $datavalue,
+				) 
+			);
+		}
+		
 		if (!empty($groups))
 		{
 			//add to groups
