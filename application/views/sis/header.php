@@ -51,7 +51,7 @@
                     <a href=""><li><img src="../../img/icons/match.14.png"/>Matches</li></a>
 
                     <a href=""><li><img src="../../img/icons/ticket.14.png"/>Tickets</li></a>
-                    <a href="/auth/create_user"><li class="special"><img src="../../img/icons/star.14.png"/>Registration</li></a>
+                    <a href="/auth/register"><li class="special"><img src="../../img/icons/star.14.png"/>Registration</li></a>
                     <a href="/auth/login"><li><img src="../../img/icons/key.14.png"/>Login</li></a>
                     <a href=""><li><img src="../../img/icons/help.14.png"/>Help</li></a>
                 </ul>

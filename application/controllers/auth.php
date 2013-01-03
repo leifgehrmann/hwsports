@@ -17,6 +17,9 @@ class Auth extends CI_Controller {
 		$this->load->database();
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
+	
+		// Page title
+		$this->data['title'] = "Auth";
 	}
 
 	//redirect if needed, otherwise display the user list
@@ -44,14 +47,10 @@ class Auth extends CI_Controller {
 			{
 				$this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
 			}
-
-
-			$data = Array(
-				'title' => "Auth"
-			);
-			$this->load->view('sis/header',$data);
+					
+			$this->load->view('sis/header',$this->data);
 			$this->load->view('auth/index', $this->data);
-			$this->load->view('sis/footer',$data);
+			$this->load->view('sis/footer',$this->data);
 		}
 	}
 
@@ -75,14 +74,14 @@ class Auth extends CI_Controller {
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/loginsuccess', 'refresh');
+				redirect('/', 'refresh');
 			}
 			else
 			{
 				//if the login was un-successful
 				//redirect them back to the login page
 				$this->session->set_flashdata('message', $this->ion_auth->errors());
-				redirect('/loginfail', 'refresh'); //use redirects instead of loading views for compatibility with MY_Controller libraries
+				redirect('/auth/login', 'refresh'); //use redirects instead of loading views for compatibility with MY_Controller libraries
 			}
 		}
 		else
@@ -101,12 +100,10 @@ class Auth extends CI_Controller {
 				'type' => 'password',
 			);
 
-			$data = Array(
-				'title' => "Auth"
-			);
-			$this->load->view('sis/header',$data);
+			
+			$this->load->view('sis/header',$this->data);
 			$this->load->view('auth/login', $this->data);
-			$this->load->view('sis/footer',$data);
+			$this->load->view('sis/footer',$this->data);
 		}
 	}
 
@@ -169,12 +166,10 @@ class Auth extends CI_Controller {
 			);
 
 			//render
-			$data = Array(
-				'title' => "Auth"
-			);
-			$this->load->view('sis/header',$data);
+			
+			$this->load->view('sis/header',$this->data);
 			$this->load->view('auth/change_password', $this->data);
-			$this->load->view('sis/footer',$data);
+			$this->load->view('sis/footer',$this->data);
 		}
 		else
 		{
@@ -220,12 +215,10 @@ class Auth extends CI_Controller {
 			//set any errors and display the form
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 			
-			$data = Array(
-				'title' => "Auth"
-			);
-			$this->load->view('sis/header',$data);
+			
+			$this->load->view('sis/header',$this->data);
 			$this->load->view('auth/forgot_password', $this->data);
-			$this->load->view('sis/footer',$data);
+			$this->load->view('sis/footer',$this->data);
 		}
 		else
 		{
@@ -300,9 +293,9 @@ class Auth extends CI_Controller {
 				$data = Array(
 					'title' => "Auth"
 				);
-				$this->load->view('sis/header',$data);				
+				$this->load->view('sis/header',$this->data);				
 				$this->load->view('auth/reset_password', $this->data);
-				$this->load->view('sis/footer',$data);
+				$this->load->view('sis/footer',$this->data);
 			}
 			else
 			{
@@ -387,12 +380,10 @@ class Auth extends CI_Controller {
 			$this->data['csrf'] = $this->_get_csrf_nonce();
 			$this->data['user'] = $this->ion_auth->user($id)->row();
 
-			$data = Array(
-				'title' => "Auth"
-			);
-			$this->load->view('sis/header',$data);
+			
+			$this->load->view('sis/header',$this->data);
 			$this->load->view('auth/deactivate_user', $this->data);
-			$this->load->view('sis/footer',$data);
+			$this->load->view('sis/footer',$this->data);
 		}
 		else
 		{
@@ -417,10 +408,10 @@ class Auth extends CI_Controller {
 		}
 	}
 
-	//create a new user
-	function create_user()
+	//create a new user account
+	function register()
 	{
-		$this->data['title'] = "Create User";
+		$this->data['title'] = "Registration";
 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
@@ -437,15 +428,15 @@ class Auth extends CI_Controller {
 
 		if ($this->form_validation->run() == true)
 		{
-			$username = strtolower($this->input->post('first_name')) . ' ' . strtolower($this->input->post('last_name'));
-			$email    = $this->input->post('email');
+			$username = $email    = $this->input->post('email');
 			$password = $this->input->post('password');
+			$centreID = $this->session->userdata('centreID');
 
 			$additional_data = array(
-				'first_name' => $this->input->post('first_name'),
-				'last_name'  => $this->input->post('last_name'),
-				'company'    => $this->input->post('company'),
-				'phone'      => $this->input->post('phone1') . '-' . $this->input->post('phone2') . '-' . $this->input->post('phone3'),
+				'centreID' => $centreID,
+				'firstName' => $this->input->post('first_name'),
+				'lastName'  => $this->input->post('last_name'),
+				'phone'      => $this->input->post('phone')
 			);
 		}
 		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data))
@@ -479,29 +470,11 @@ class Auth extends CI_Controller {
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('email'),
 			);
-			$this->data['company'] = array(
-				'name'  => 'company',
-				'id'    => 'company',
+			$this->data['phone'] = array(
+				'name'  => 'phone',
+				'id'    => 'phone',
 				'type'  => 'text',
-				'value' => $this->form_validation->set_value('company'),
-			);
-			$this->data['phone1'] = array(
-				'name'  => 'phone1',
-				'id'    => 'phone1',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('phone1'),
-			);
-			$this->data['phone2'] = array(
-				'name'  => 'phone2',
-				'id'    => 'phone2',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('phone2'),
-			);
-			$this->data['phone3'] = array(
-				'name'  => 'phone3',
-				'id'    => 'phone3',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('phone3'),
+				'value' => $this->form_validation->set_value('phone'),
 			);
 			$this->data['password'] = array(
 				'name'  => 'password',
@@ -516,12 +489,9 @@ class Auth extends CI_Controller {
 				'value' => $this->form_validation->set_value('password_confirm'),
 			);
 
-			$data = Array(
-				'title' => "Auth"
-			);
-			$this->load->view('sis/header',$data);
-			$this->load->view('auth/create_user', $this->data);
-			$this->load->view('sis/footer',$data);
+			$this->load->view('sis/header',$this->data);
+			$this->load->view('auth/register', $this->data);
+			$this->load->view('sis/footer',$this->data);
 		}
 	}
 
@@ -548,10 +518,7 @@ class Auth extends CI_Controller {
 		//validate form input
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
-		$this->form_validation->set_rules('phone1', 'First Part of Phone', 'required|xss_clean|min_length[3]|max_length[3]');
-		$this->form_validation->set_rules('phone2', 'Second Part of Phone', 'required|xss_clean|min_length[3]|max_length[3]');
-		$this->form_validation->set_rules('phone3', 'Third Part of Phone', 'required|xss_clean|min_length[4]|max_length[4]');
-		$this->form_validation->set_rules('company', 'Company Name', 'required|xss_clean');
+		$this->form_validation->set_rules('phone', 'Third Part of Phone', 'required|xss_clean|min_length[8]|max_length[12]');
 		$this->form_validation->set_rules('groups', 'Groups', 'xss_clean');
 		
 		if (isset($_POST) && !empty($_POST))
@@ -565,8 +532,7 @@ class Auth extends CI_Controller {
 			$data = array(
 				'first_name' => $this->input->post('first_name'),
 				'last_name'  => $this->input->post('last_name'),
-				'company'    => $this->input->post('company'),
-				'phone'      => $this->input->post('phone1') . '-' . $this->input->post('phone2') . '-' . $this->input->post('phone3'),
+				'phone'      => $this->input->post('phone')
 			);
 			
 			//Update the groups user belongs to
@@ -625,29 +591,11 @@ class Auth extends CI_Controller {
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('last_name', $user->last_name),
 		);
-		$this->data['company'] = array(
-			'name'  => 'company',
-			'id'    => 'company',
+		$this->data['phone'] = array(
+			'name'  => 'phone',
+			'id'    => 'phone',
 			'type'  => 'text',
-			'value' => $this->form_validation->set_value('company', $user->company),
-		);
-		$this->data['phone1'] = array(
-			'name'  => 'phone1',
-			'id'    => 'phone1',
-			'type'  => 'text',
-			'value' => $this->form_validation->set_value('phone1', $user->phone[0]),
-		);
-		$this->data['phone2'] = array(
-			'name'  => 'phone2',
-			'id'    => 'phone2',
-			'type'  => 'text',
-			'value' => $this->form_validation->set_value('phone2', $user->phone[1]),
-		);
-		$this->data['phone3'] = array(
-			'name'  => 'phone3',
-			'id'    => 'phone3',
-			'type'  => 'text',
-			'value' => $this->form_validation->set_value('phone3', $user->phone[2]),
+			'value' => $this->form_validation->set_value('phone', $user->phone),
 		);
 		$this->data['password'] = array(
 			'name' => 'password',
@@ -663,9 +611,9 @@ class Auth extends CI_Controller {
 		$data = Array(
 			'title' => "Auth"
 		);
-		$this->load->view('sis/header',$data);		
+		$this->load->view('sis/header',$this->data);		
 		$this->load->view('auth/edit_user', $this->data);
-		$this->load->view('sis/footer',$data);
+		$this->load->view('sis/footer',$this->data);
 	}
 
 	// create a new group
@@ -712,12 +660,10 @@ class Auth extends CI_Controller {
 				'value' => $this->form_validation->set_value('description'),
 			);
 
-			$data = Array(
-				'title' => "Auth"
-			);
-			$this->load->view('sis/header',$data);
+			
+			$this->load->view('sis/header',$this->data);
 			$this->load->view('auth/create_group', $this->data);
-			$this->load->view('sis/footer',$data);
+			$this->load->view('sis/footer',$this->data);
 		}
 	}
 
@@ -783,9 +729,9 @@ class Auth extends CI_Controller {
 		$data = Array(
 			'title' => "Auth"
 		);
-		$this->load->view('sis/header',$data);
+		$this->load->view('sis/header',$this->data);
 		$this->load->view('auth/edit_group', $this->data);
-		$this->load->view('sis/footer',$data);
+		$this->load->view('sis/footer',$this->data);
 	}
 
 
