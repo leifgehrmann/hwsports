@@ -40,10 +40,10 @@
             <a href="/"><div id="header"></div></a>
             <div id="menu">
                 <ul>
-                    <a href=""><li><img src="../../img/icons/home.14.png"/>Homepage</li></a>
-                    <a href=""><li><img src="../../img/icons/match.14.png"/>What's On</li></a>
-                    <a href=""><li><img src="../../img/icons/calendar.14.png"/>Calendar</li></a>
-                    <a href=""><li><img src="../../img/icons/tournament.14.png"/>Tournaments</li></a>
+                    <a href="/"><li <? if($title=="Homepage"){ ?>class="selected"<? } ?>><img src="../../img/icons/home.14.png"/>Homepage</li></a>
+                    <a href="/sis/whatson"><li <? if($title=="What's On"){ ?>class="selected"<? } ?>><img src="../../img/icons/match.14.png"/>What's On</li></a>
+                    <a href="/sis/calendar"><li <? if($title=="Calendar"){ ?>class="selected"<? } ?>><img src="../../img/icons/calendar.14.png"/>Calendar</li></a>
+                    <a href="/sis/tournaments"><li <? if($title=="Tournaments"){ ?>class="selected"<? } ?>><img src="../../img/icons/tournament.14.png"/>Tournaments</li></a>
                     <a href="/auth/register"><li class="special"><img src="../../img/icons/star.14.png"/>Registration</li></a>
                     <? if($this->ion_auth->logged_in()){ ?>
                         <a href="/auth/logout"><li><img src="../../img/icons/key.14.png"/>Logout</li></a>
@@ -53,7 +53,7 @@
 					<? if($this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin')){ ?>
                         <a href="/tms"><li><img src="../../img/icons/key.14.png"/>Management</li></a>
                     <? } ?>
-                    <a href=""><li><img src="../../img/icons/help.14.png"/>Help</li></a>
+                    <a href="sis/help"><li <? if($title=="Help"){ ?>class="selected"<? } ?>><img src="../../img/icons/help.14.png"/>Help</li></a>
                 </ul>
             </div>
             <div id="content">
