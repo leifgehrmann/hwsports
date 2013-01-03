@@ -37,10 +37,8 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-$route['auth/(:any)'] = 'auth/$1';
-$route['default_controller'] = "front";
+$route['default_controller'] = "sis/home";
 $route['404_override'] = '';
-
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
