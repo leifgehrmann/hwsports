@@ -19,7 +19,7 @@ class Sis extends CI_Controller {
 		
 		$query = $this->db->query("SELECT `key`,`value` FROM `userData` WHERE `userID` = '{$this->data['currentUser']->id}'");
 		foreach($query->result_array() as $userDataRow) {
-			$this->data['currentUser'][$userDataRow['key']] = $userDataRow['value'];
+			$this->data['currentUser']->$userDataRow['key'] = $userDataRow['value'];
 		}
 		
 		$this->load->view('sis/header',$this->data);
