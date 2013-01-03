@@ -41,16 +41,9 @@
             <div id="menu">
                 <ul>
                     <a href=""><li><img src="../../img/icons/home.14.png"/>Homepage</li></a>
+                    <a href=""><li><img src="../../img/icons/match.14.png"/>What's On</li></a>
+                    <a href=""><li><img src="../../img/icons/calendar.14.png"/>Calendar</li></a>
                     <a href=""><li><img src="../../img/icons/tournament.14.png"/>Tournaments</li></a>
-                    <!-- ************************************************************* -->
-                    <!-- ************************************************************* -->
-                    <!-- ************************************************************* -->
-                    <!-- ************************************************************* -->
-                    <!-- ************************************************************* -->
-                    <a href=""><li class="selected"><img src="../../img/icons/calendar.14.png"/>Calendar</li></a>
-                    <a href=""><li><img src="../../img/icons/match.14.png"/>Matches</li></a>
-
-                    <a href=""><li><img src="../../img/icons/ticket.14.png"/>Tickets</li></a>
                     <a href="/auth/register"><li class="special"><img src="../../img/icons/star.14.png"/>Registration</li></a>
                     <? if($this->ion_auth->logged_in()){ ?>
                         <a href="/auth/logout"><li><img src="../../img/icons/key.14.png"/>Logout</li></a>
