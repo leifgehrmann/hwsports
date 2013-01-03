@@ -39,7 +39,7 @@ class Sis extends CI_Controller {
 		$this->load->view('sis/footer',$this->data);
 	}
 
-	public function whatson($slug)
+	public function whatson()
 	{
 		// Page title
 		$this->data['title'] = "What's On";
