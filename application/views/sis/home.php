@@ -10,5 +10,5 @@
 	Current User Last Name: <?=$currentUser->lastName?><br />
 	Current User Phone: <?=$currentUser->phone?><br />
 <? } else { ?>
-	No user currently logged in.
+	This is the homepage news stuff for public people.
 <? } ?>
