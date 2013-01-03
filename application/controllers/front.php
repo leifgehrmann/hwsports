@@ -43,9 +43,9 @@ class Front extends CI_Controller {
                 //redirect('/');
             }
         }
-		$data['page'] = "landingPage";
+		$data;
 		$this->load->view('templates/header',$data);
-		$this->load->view('landingPage',$data);
+		$this->load->view('login_form',$data);
 		$this->load->view('templates/footer',$data);
     }
 
