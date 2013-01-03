@@ -32,7 +32,7 @@
     <![endif]-->
     <body>
         <div id="container">
-            <a href=""><div id="header"></div></a>
+            <a href="/<?=$centreSlug?>/"><div id="header"></div></a>
             <div id="menu">
                 <ul>
                     <a href=""><li><img src="../../img/icons/home.14.png"/>Homepage</li></a>
