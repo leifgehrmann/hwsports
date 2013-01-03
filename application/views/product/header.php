@@ -35,6 +35,7 @@
             <div id="menu">
                 <ul>
                     <a href=""><li><img src="../../img/icons/home.14.png"/>Homepage</li></a>
+                    <a href=""><li><img src="../../img/icons/appearence.14.png"/>Screenshots</li></a>
                     <a href=""><li><img src="../../img/icons/star.14.png"/>Signup</li></a>
                 </ul>
             </div>
