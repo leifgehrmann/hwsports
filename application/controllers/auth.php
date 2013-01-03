@@ -436,10 +436,9 @@ class Auth extends CI_Controller {
 		}
 		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data))
 		{
-			//check to see if we are creating the user
-			//redirect them back to the admin page
+			// Successful creation, show success message
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("auth", 'refresh');
+			redirect("/", 'refresh');
 		}
 		else
 		{
@@ -721,14 +720,27 @@ class Auth extends CI_Controller {
 			'value' => $this->form_validation->set_value('group_description', $group->description),
 		);
 
-		$data = Array(
-			'title' => "Auth"
-		);
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('auth/edit_group', $this->data);
 		$this->load->view('sis/footer',$this->data);
 	}
 
+	function delete_user()
+	{
+		$user = $this->ion_auth->user()->row();
+
+		if ($this->ion_auth->delete_user($user->id))
+		{
+			// Successful deletion, show success message
+			$this->session->set_flashdata('message', $this->ion_auth->messages());
+			redirect("/", 'refresh');
+		}
+		else
+		{
+			//set the flash data error message if there is one
+			$this->data['message'] = ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'));
+		}
+	}
 
 	function _get_csrf_nonce()
 	{

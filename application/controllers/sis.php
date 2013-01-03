@@ -15,7 +15,7 @@ class Sis extends CI_Controller {
 		//set the flash data error message if there is one
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		
-		$this->data['currentUser'] = $this->ion_auth->user();
+		$this->data['currentUser'] = $this->ion_auth->user()->row();
 		
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('sis/home',$this->data);
