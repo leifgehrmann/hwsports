@@ -17,11 +17,6 @@ class Auth extends CI_Controller {
 		$this->load->database();
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
-		
-		$data = Array(
-			'title' => "Auth"
-		);
-		$this->load->view('sis/header',$data);
 	}
 
 	//redirect if needed, otherwise display the user list
@@ -51,7 +46,12 @@ class Auth extends CI_Controller {
 			}
 
 
+			$data = Array(
+				'title' => "Auth"
+			);
+			$this->load->view('sis/header',$data);
 			$this->load->view('auth/index', $this->data);
+			$this->load->view('sis/footer',$data);
 		}
 	}
 
@@ -101,7 +101,12 @@ class Auth extends CI_Controller {
 				'type' => 'password',
 			);
 
+			$data = Array(
+				'title' => "Auth"
+			);
+			$this->load->view('sis/header',$data);
 			$this->load->view('auth/login', $this->data);
+			$this->load->view('sis/footer',$data);
 		}
 	}
 
@@ -164,7 +169,12 @@ class Auth extends CI_Controller {
 			);
 
 			//render
+			$data = Array(
+				'title' => "Auth"
+			);
+			$this->load->view('sis/header',$data);
 			$this->load->view('auth/change_password', $this->data);
+			$this->load->view('sis/footer',$data);
 		}
 		else
 		{
@@ -209,7 +219,13 @@ class Auth extends CI_Controller {
 
 			//set any errors and display the form
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+			
+			$data = Array(
+				'title' => "Auth"
+			);
+			$this->load->view('sis/header',$data);
 			$this->load->view('auth/forgot_password', $this->data);
+			$this->load->view('sis/footer',$data);
 		}
 		else
 		{
@@ -281,7 +297,12 @@ class Auth extends CI_Controller {
 				$this->data['code'] = $code;
 
 				//render
+				$data = Array(
+					'title' => "Auth"
+				);
+				$this->load->view('sis/header',$data);				
 				$this->load->view('auth/reset_password', $this->data);
+				$this->load->view('sis/footer',$data);
 			}
 			else
 			{
@@ -366,7 +387,12 @@ class Auth extends CI_Controller {
 			$this->data['csrf'] = $this->_get_csrf_nonce();
 			$this->data['user'] = $this->ion_auth->user($id)->row();
 
+			$data = Array(
+				'title' => "Auth"
+			);
+			$this->load->view('sis/header',$data);
 			$this->load->view('auth/deactivate_user', $this->data);
+			$this->load->view('sis/footer',$data);
 		}
 		else
 		{
@@ -493,7 +519,12 @@ class Auth extends CI_Controller {
 				'value' => $this->form_validation->set_value('password_confirm'),
 			);
 
+			$data = Array(
+				'title' => "Auth"
+			);
+			$this->load->view('sis/header',$data);
 			$this->load->view('auth/create_user', $this->data);
+			$this->load->view('sis/footer',$data);
 		}
 	}
 
@@ -632,7 +663,12 @@ class Auth extends CI_Controller {
 			'type' => 'password'
 		);
 
+		$data = Array(
+			'title' => "Auth"
+		);
+		$this->load->view('sis/header',$data);		
 		$this->load->view('auth/edit_user', $this->data);
+		$this->load->view('sis/footer',$data);
 	}
 
 	// create a new group
@@ -679,7 +715,12 @@ class Auth extends CI_Controller {
 				'value' => $this->form_validation->set_value('description'),
 			);
 
+			$data = Array(
+				'title' => "Auth"
+			);
+			$this->load->view('sis/header',$data);
 			$this->load->view('auth/create_group', $this->data);
+			$this->load->view('sis/footer',$data);
 		}
 	}
 
@@ -742,7 +783,12 @@ class Auth extends CI_Controller {
 			'value' => $this->form_validation->set_value('group_description', $group->description),
 		);
 
+		$data = Array(
+			'title' => "Auth"
+		);
+		$this->load->view('sis/header',$data);
 		$this->load->view('auth/edit_group', $this->data);
+		$this->load->view('sis/footer',$data);
 	}
 
 
@@ -770,5 +816,4 @@ class Auth extends CI_Controller {
 		}
 	}
 
-	$this->load->view('sis/footer',$data);
 }
