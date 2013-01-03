@@ -37,6 +37,7 @@
 | in the URL cannot be matched to a valid route.
 |
 */
+$slug = '';
 if ($_SERVER['HTTP_HOST']=="hwsports.co.uk") {
     $slug = "hwsports";
 	$config['base_url'] = 'http://hwsports.co.uk/';
