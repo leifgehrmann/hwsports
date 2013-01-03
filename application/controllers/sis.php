@@ -2,10 +2,10 @@
 
 class Sis extends CI_Controller {
 
-	public function index($slug)
+	public function index()
 	{
 		$data = Array(
-			'title' => $slug
+			'title' => "Home"
 		);
 		$this->load->view('sis/header',$data);
 		$this->load->view('sis/home',$data);
