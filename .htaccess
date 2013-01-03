@@ -1,8 +1,8 @@
 RewriteEngine on
 
 # Rewrite URLs to remove www from domain name
-RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+#RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+#RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
 # Codeigniter rule for stripping index.php, with exceptions
 #RewriteCond $1 !^(index\.php|git.php|devel|img|css|favicon.ico|.+html|robots\.txt)
