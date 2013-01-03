@@ -9,7 +9,7 @@ class Sis extends CI_Controller {
 	public function index($slug)
 	{
 		// Page title
-		$this->data['title'] = "Home";
+		$this->data['title'] = "Homepage";
 		
 		$this->session->set_userdata('slug', $slug);
 		$query = $this->db->query("SELECT `centreID` FROM `centreData` WHERE `key` = 'slug' AND `value` = '$slug' LIMIT 1");
@@ -36,6 +36,15 @@ class Sis extends CI_Controller {
 		
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('sis/home',$this->data);
+		$this->load->view('sis/footer',$this->data);
+	}
+
+	public function whatson($slug)
+	{
+		// Page title
+		$this->data['title'] = "What's On";
+		$this->load->view('sis/header',$this->data);
+		$this->load->view('sis/whatson',$this->data);
 		$this->load->view('sis/footer',$this->data);
 	}
 
