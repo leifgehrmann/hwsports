@@ -3,7 +3,7 @@
 
 <div id="infoMessage"><?php echo $message;?></div>
 
-<?php echo form_open("auth/create_user"); die();?>
+<?php echo form_open("auth/create_user");?>
 
       <p>
             First Name: <br />
