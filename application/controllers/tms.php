@@ -5,15 +5,15 @@ class Tms extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		if (!$this->ion_auth->logged_in()) {
-			//redirect them to the sms homepage
-			redirect('/', 'refresh');
-		} else {
+		if ( $this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin') ) {
 			$this->data['currentUser'] = $currentUser = $this->ion_auth->user()->row();
 			$query = $this->db->query("SELECT `key`,`value` FROM `userData` WHERE `userID` = '{$currentUser->id}'");
 			foreach($query->result_array() as $userDataRow) {
 				$currentUser->$userDataRow['key'] = $userDataRow['value'];
 			}
+		} else {
+			//redirect them to the sms homepage
+			redirect('/', 'refresh');
 		}
 	}
 	public function index()
