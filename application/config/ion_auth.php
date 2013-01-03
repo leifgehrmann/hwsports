@@ -32,6 +32,7 @@ $config['collections']['login_attempts'] = 'login_attempts';
 | Database table names.
 */
 $config['tables']['users']           = 'users';
+$config['tables']['userData']           = 'userData';
 $config['tables']['groups']          = 'userGroups';
 $config['tables']['users_groups']    = 'usersGroups';
 $config['tables']['login_attempts']  = 'loginAttempts';
