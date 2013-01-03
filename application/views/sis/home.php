@@ -3,7 +3,7 @@
 <div id="infoMessage"><?php echo $message;?></div>
 
 <? if(!empty($currentUser)) { ?>
-	Current User ID: <?=$currentUser->id?><br />
+	Current User ID: <?=$currentUser->id?> (<a href="auth/delete_user">Delete?</a>)<br />
 	Current User Email: <?=$currentUser->email?><br />
 	Current User Centre ID: <?=$currentUser->centreID?><br />
 	Current User First Name: <?=$currentUser->firstName?><br />
