@@ -1,6 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth extends CI_Controller {
+	
+	$data = Array(
+		'title' => "Auth"
+	);
+	$this->load->view('sis/header',$data);
 
 	function __construct()
 	{
@@ -765,4 +770,5 @@ class Auth extends CI_Controller {
 		}
 	}
 
+	$this->load->view('sis/footer',$data);
 }
