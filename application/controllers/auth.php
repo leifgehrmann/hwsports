@@ -731,6 +731,9 @@ class Auth extends CI_Controller {
 
 		if ($this->ion_auth->delete_user($user->id))
 		{
+			// Remove session cookies for logged in user, eliminate zombie problems
+			$this->ion_auth->logout();
+			
 			// Successful deletion, show success message
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
 			redirect("/", 'refresh');
