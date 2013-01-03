@@ -20,7 +20,7 @@
         <div id="header">
 			<a href="/tms" id="title-bar" class="left">
                 <div class="logo"></div>
-                <div class="name"><?=$this->session->userdata('centreName')?></div>
+                <div class="name"><?=$this->session->userdata('centreShortName')?></div>
                 <div class="system">Tournaments System</div>
             </a>
             <div id="user-bar" class="right">
