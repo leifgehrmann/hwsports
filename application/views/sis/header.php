@@ -57,6 +57,9 @@
                     <? } else { ?>
                         <a href="/auth/login"><li><img src="../../img/icons/key.14.png"/>Login</li></a>
                     <? } ?>
+					<? if($this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin')){ ?>
+                        <a href="/tms"><li><img src="../../img/icons/key.14.png"/>Management</li></a>
+                    <? } ?>
                     <a href=""><li><img src="../../img/icons/help.14.png"/>Help</li></a>
                 </ul>
             </div>
