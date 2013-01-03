@@ -52,7 +52,11 @@
 
                     <a href=""><li><img src="../../img/icons/ticket.14.png"/>Tickets</li></a>
                     <a href="/auth/register"><li class="special"><img src="../../img/icons/star.14.png"/>Registration</li></a>
-                    <a href="/auth/login"><li><img src="../../img/icons/key.14.png"/>Login</li></a>
+                    <? if($this->ion_auth->logged_in()){ ?>
+                        <a href="/auth/logout"><li><img src="../../img/icons/key.14.png"/>Logout</li></a>
+                    <? } else { ?>
+                        <a href="/auth/login"><li><img src="../../img/icons/key.14.png"/>Login</li></a>
+                    <? } ?>
                     <a href=""><li><img src="../../img/icons/help.14.png"/>Help</li></a>
                 </ul>
             </div>
