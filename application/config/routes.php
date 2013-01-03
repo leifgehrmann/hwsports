@@ -41,13 +41,6 @@ $slug = '';
 if ($_SERVER['HTTP_HOST']=="hwsports.co.uk") {
     $slug = "hwsports";
 
-	$query = $this->db->query("SELECT centreID FROM centreData WHERE 'key' = 'slug' AND 'value' = '$slug' LIMIT 1");
-	$row = $query->row_array();
-
-	$CI =& get_instance();
-	$CI->session->set_userdata('slug', $slug);
-	$CI->session->set_userdata('centreID', $row['centreID']);
-
 	$config['base_url'] = 'http://hwsports.co.uk/';
 	$route['default_controller'] = "sis/index/$slug";
 } else {

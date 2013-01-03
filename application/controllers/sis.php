@@ -2,10 +2,10 @@
 
 class Sis extends CI_Controller {
 
-	public function index()
+	public function index($slug)
 	{
 		// Page title
-		$this->data['title'] = "Home";
+		$this->data['title'] = $slug;
 		
 		//set the flash data error message if there is one
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
