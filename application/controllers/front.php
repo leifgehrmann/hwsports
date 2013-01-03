@@ -5,8 +5,8 @@ class Front extends CI_Controller {
 	public function index()
 	{
 		$data['page'] = "landingPage";
-		//$this->load->view('templates/header');
-		//$this->load->view('landingPage');
+		$this->load->view('templates/header',$data);
+		$this->load->view('landingPage',$data);
 		$this->load->view('templates/footer',$data);
 	}
 
