@@ -38,7 +38,7 @@
 |
 */
 
-$route['hwsports.co.uk/(:any)'] = 'auth/login';
+$route['(:any)'] = 'auth/login';
 
 $route['default_controller'] = "sis";
 $route['404_override'] = '';
