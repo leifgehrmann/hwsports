@@ -39,6 +39,7 @@
 */
 if ($_SERVER['HTTP_HOST']=="hwsports.co.uk") {
     $slug = "hwsports";
+	$config['base_url'] = 'http://hwsports.co.uk/';
 	$route['default_controller'] = "sis/index/$slug";
 } else {
 	$route['default_controller'] = "product";
