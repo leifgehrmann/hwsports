@@ -47,6 +47,7 @@ if ($_SERVER['HTTP_HOST']=="hwsports.co.uk") {
 }
 
 $route['auth/login'] = "auth/login/$slug";
+$route['auth/create_user'] = "auth/create_user/$slug";
 
 $route['404_override'] = '';
 
