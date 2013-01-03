@@ -12,5 +12,3 @@
 <? } else { ?>
 	No user currently logged in.
 <? } ?>
-
-<a href="<?= base_url('auth/login') ?>">Login</a>
