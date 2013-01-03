@@ -37,7 +37,7 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-
+$route['auth/(:any)'] = 'auth/$1';
 $route['default_controller'] = "front";
 $route['404_override'] = '';
 
