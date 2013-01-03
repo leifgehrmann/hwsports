@@ -1,5 +1,10 @@
 RewriteEngine on
 
+# Redirect hwsport to hwsports
+RewriteCond %{HTTP_HOST} ^hwsport\.co\.uk$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.hwsport\.co\.uk$
+RewriteRule ^/?$ "http\:\/\/hwsports\.co\.uk" [R=301,L]
+
 # Rewrite URLs to remove www from domain name
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
@@ -7,7 +12,3 @@ RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 # Codeigniter rule for stripping index.php, with exceptions
 RewriteCond $1 !^(index\.php|git.php|devel|img|css|favicon.ico|.+html|robots\.txt)
 RewriteRule ^(.*)$ /index.php/$1 [L]
-
-RewriteCond %{HTTP_HOST} ^hwsport\.co\.uk$ [OR]
-RewriteCond %{HTTP_HOST} ^www\.hwsport\.co\.uk$
-RewriteRule ^/?$ "http\:\/\/hwsports\.co\.uk" [R=301,L]
