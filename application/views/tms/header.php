@@ -20,7 +20,7 @@
         <div id="header">
             <div id="title-bar" class="left">
                 <div class="logo"></div>
-                <div class="name">Heriot Watt University</div>
+                <div class="name"><?=$this->session->userdata('centreName')?></div>
                 <div class="system">Tournaments System</div>
             </div>
             <div id="user-bar" class="right">
