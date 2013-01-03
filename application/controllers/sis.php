@@ -18,6 +18,9 @@ class Sis extends CI_Controller {
 		$query = $this->db->query("SELECT `value` FROM `centreData` WHERE `centreID` = '{$row['centreID']}' AND `key` = 'name' LIMIT 1");
 		$row = $query->row_array();
 		$this->session->set_userdata('centreName', $row['value']);
+		$query = $this->db->query("SELECT `value` FROM `centreData` WHERE `centreID` = '{$row['centreID']}' AND `key` = 'shortName' LIMIT 1");
+		$row = $query->row_array();
+		$this->session->set_userdata('centreShortName', $row['value']);
 		
 		//set the flash data error message if there is one
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
