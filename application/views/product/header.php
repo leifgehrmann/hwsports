@@ -4,13 +4,18 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
+<<<<<<< HEAD
         <title>Infusion Sports</title>
+=======
+        <title><?=$title?> | ***********************************************************</title>
+>>>>>>> a63223c4d396be019ab8f506432cffb2ce7e7428
         <link href="../../css/normalize.min.css" rel="stylesheet" type="text/css">
         <link href="../../css/main.css" rel="stylesheet" type="text/css">
         <link href="../../css/sis.css" rel="stylesheet" type="text/css">
         <style type="text/css">
         <!--
             body {
+<<<<<<< HEAD
                 background:#ededed;
             }
             #header {
@@ -18,6 +23,21 @@
             }
             #content h1, #content h2, #content h3, #content a{
                 color:#1E303A;
+=======
+                background:#E7EEF9;
+            }
+            #header {
+                background:#00468C;
+                /************************************************************</*/
+                /************************************************************</*/
+                /************************************************************</*/
+                /************************************************************</*/
+                /************************************************************</*/
+                background-image: url("../../img/banners/hwsports.png");
+            }
+            #content h1, #content h2, #content h3, #content a{
+                color:#00468C;
+>>>>>>> a63223c4d396be019ab8f506432cffb2ce7e7428
             }
         -->
         </style>
@@ -31,11 +51,36 @@
     <![endif]-->
     <body>
         <div id="container">
+<<<<<<< HEAD
             <a href="/"><div id="header"></div></a>
             <div id="menu">
                 <ul>
                     <a href=""><li><img src="../../img/icons/home.14.png"/>Homepage</li></a>
                     <a href=""><li><img src="../../img/icons/star.14.png"/>Signup</li></a>
+=======
+            <!-- ************************************************************* -->
+            <!-- ************************************************************* -->
+            <!-- ************************************************************* -->
+            <!-- ************************************************************* -->
+            <!-- ************************************************************* -->
+            <a href="/***************************/"><div id="header"></div></a>
+            <div id="menu">
+                <ul>
+                    <a href=""><li><img src="../../img/icons/home.14.png"/>Homepage</li></a>
+                    <a href=""><li><img src="../../img/icons/tournament.14.png"/>Tournaments</li></a>
+                    <!-- ************************************************************* -->
+                    <!-- ************************************************************* -->
+                    <!-- ************************************************************* -->
+                    <!-- ************************************************************* -->
+                    <!-- ************************************************************* -->
+                    <a href=""><li class="selected"><img src="../../img/icons/calendar.14.png"/>Calendar</li></a>
+                    <a href=""><li><img src="../../img/icons/match.14.png"/>Matches</li></a>
+
+                    <a href=""><li><img src="../../img/icons/ticket.14.png"/>Tickets</li></a>
+                    <a href=""><li class="special"><img src="../../img/icons/star.14.png"/>Registration</li></a>
+                    <a href=""><li><img src="../../img/icons/key.14.png"/>Login</li></a>
+                    <a href=""><li><img src="../../img/icons/help.14.png"/>Help</li></a>
+>>>>>>> a63223c4d396be019ab8f506432cffb2ce7e7428
                 </ul>
             </div>
             <div id="content">
