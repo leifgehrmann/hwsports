@@ -7,10 +7,3 @@ RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 # Codeigniter rule for stripping index.php, with exceptions
 RewriteCond $1 !^(index\.php|git.php|devel|img|css|favicon.ico|.+html|robots\.txt)
 RewriteRule ^(.*)$ /index.php/$1 [L]
-
-# 
-RewriteCond %{HTTP_HOST} ^hwsports.co.uk/(.+)/* [NC]  
-RewriteRule (.*) /index.php/%1/hwsports [L]  
-
-RewriteCond %{HTTP_HOST} ^hwsports.co.uk/* [NC]  
-RewriteRule (.*) /index.php/sis/home/hwsports [L]  
