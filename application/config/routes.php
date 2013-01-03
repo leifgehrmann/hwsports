@@ -37,6 +37,9 @@
 | in the URL cannot be matched to a valid route.
 |
 */
+
+$route['hwsports.co.uk/(:any)'] = 'auth/login';
+
 $route['default_controller'] = "sis";
 $route['404_override'] = '';
 
