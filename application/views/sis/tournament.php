@@ -1,4 +1,4 @@
-<h1><a href="Tournaments">Tournaments</a> &gt; Tournament name</h1>
+<h1><a href="tournaments">Tournaments</a> &gt; Tournament name</h1>
 <p>A description of this tournament. Bla bla bla, very interesting</p>
 <h2>Games</h2>
 <ul>
