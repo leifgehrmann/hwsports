@@ -100,26 +100,21 @@ ul li a {color: inherit; text-decoration:none; padding:0;}
 	color:#444;
 	background:#EEE;
 	background-repeat: no-repeat;
-	background-position: 20px;
+	background-position: 20px 12px;
 }
 
 #menu li.selected{
 	background:#C8C8C8;
 	font-weight:bold;
 	background-repeat: no-repeat;
-	background-position: 20px;
-}
-
-#menu img {
-	vertical-align: text-top;
-	padding-right:10px;
+	background-position: 20px 12px;
 }
 
 #menu li:hover{
 	background:#FFF;
 	cursor: hand;
 	background-repeat: no-repeat;
-	background-position: 20px;
+	background-position: 20px 12px;
 }
 
 #menu li:last-child{

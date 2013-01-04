@@ -65,7 +65,7 @@ ul a {color: inherit; text-decoration:none; padding:0;}
 	color:#444;
 	background:#FFF;
 	background-repeat: no-repeat;
-	background-position: 20px;
+	background-position: 20px 12px;
 }
 
 #menu li.selected{
@@ -73,7 +73,7 @@ ul a {color: inherit; text-decoration:none; padding:0;}
 	background:#EEE;
 	font-weight:bold;
 	background-repeat: no-repeat;
-	background-position: 20px;
+	background-position: 20px 12px;
 }
 
 #menu li.special{
@@ -85,7 +85,7 @@ ul a {color: inherit; text-decoration:none; padding:0;}
 	background:#EEE;
 	cursor: hand;
 	background-repeat: no-repeat;
-	background-position: 20px;
+	background-position: 20px 12px;
 }
 
 #menu li.login			{ background-image: url(/img/hwsports/icons/logout.14.png); }
