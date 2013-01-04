@@ -43,15 +43,43 @@ class Tms extends MY_Controller {
 		// If form has been submitted and it validates ok
 		if ($this->form_validation->run() == true) {
 			// Form validated ok, process input
-			if ($this->db->insert_batch())
-			{
+			$venueArray = array('centreID' => $this->data['centre']['id']);
+			$this->db->insert($venueArray);
+			$venueID = $this->db->insert_id();
+			
+			$venueDataArray = array(
+				array(
+					'venueID' => $venueID,
+					'key' => 'name',
+					'date' => $this->input->post('name')
+				),
+				array(
+					'venueID' => $venueID,
+					'key' => 'description',
+					'date' => $this->input->post('description')
+				),
+				array(
+					'venueID' => $venueID,
+					'key' => 'directions',
+					'date' => $this->input->post('directions')
+				),
+				array(
+					'venueID' => $venueID,
+					'key' => 'lat',
+					'date' => $this->input->post('lat')
+				),
+				array(
+					'venueID' => $venueID,
+					'key' => 'lng',
+					'date' => $this->input->post('lng')
+				)
+			);
+			   
+			if ($this->db->insert_batch($venueDataArray)) {
 				// db success
-				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/tms', 'refresh');
-			}
-			else
-			{
+				redirect('/tms/venues', 'refresh');
+			} else {
 				// db fail
 				$this->session->set_flashdata('message', $this->ion_auth->errors());
 				redirect('/tms/venues', 'refresh');
@@ -79,9 +107,9 @@ class Tms extends MY_Controller {
 			$lng = $apiData->results[0]->geometry->location->lng;
 
 			$this->data['createLatLng'] = array('lat' => $lat, 'lng' => $lng);
-			$this->data['createName'] = array('name' => '');
-			$this->data['createDescription'] = array('description' => '');
-			$this->data['createDirections'] = array('directions' => '');
+			$this->data['createName'] = array('name' => 'name');
+			$this->data['createDescription'] = array('name' => 'description');
+			$this->data['createDirections'] = array('name' => 'directions');
 		}
 		
 		$this->load->view('tms/header',$this->data);
