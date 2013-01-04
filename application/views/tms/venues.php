@@ -48,6 +48,34 @@ No venues exist for this sports centre yet. Please create one below.
 	<?=form_input($createDirections);?>
 	</p>
 
+	<p>Location:</p>
+	<div id="map"></div>
+
 	<p><?=form_submit('submit', 'Login');?></p>
 		
 <?=form_close();?>
+
+<script type="text/javascript">
+// a global variable to access the map
+var map;
+var centre_pos  = new google.maps.LatLng( $('input[name="lat"]').val(), $('input[name="lng"]').val() );
+
+function zoomIn(){ map.setZoom(map.getZoom()+1);}
+function zoomOut(){ map.setZoom(map.getZoom()-1);}
+
+
+function initialize(){
+	map = new google.maps.Map(document.getElementById('Map'), {
+		zoom: 15,
+		center: centre_pos,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	});
+
+	google.maps.event.addListener(map, 'dragend', function() {
+		var newlocation = map.getCenter();
+	});
+}
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
