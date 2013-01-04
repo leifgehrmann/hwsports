@@ -2,6 +2,19 @@
 
 <h1>Venue List</h1>
 
+<script type='text/javascript' src="/scripts/rico/prototype.js" />
+<script type='text/javascript' src="/scripts/rico/rico.js" />
+<script type='text/javascript'>
+	Rico.loadModule('SimpleGrid','greenHdg.css');
+
+	Rico.onLoad( function() {
+	  var opts = {  
+		columnSpecs: ['specQty']  // display first column as a numeric quantity
+	  };
+	  var ex1=new Rico.SimpleGrid ('ex1', opts);
+	});
+</script>
+
 <? if(count($venues)>=1) { ?>
 <table id="venuesTable">
 	<tr>
