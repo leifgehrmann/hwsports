@@ -62,7 +62,7 @@ class Tms extends MY_Controller {
 		// If form has been submitted and it validates ok
 		if ($this->form_validation->run() == true) {
 			// Form validated ok, process input
-			$this->db->query("INSERT INTO venues (centreID) VALUES ({$this->data['centre']['id']})";
+			$this->db->query("INSERT INTO venues (centreID) VALUES ({$this->data['centre']['id']})");
 			$venueID = $this->db->insert_id();
 			
 			$venueDataArray = array(
