@@ -57,7 +57,7 @@ body {
 	width:160px;
 }
 #menu ul.menu-user{
-	background:#D8D8D8;
+	box-shadow: 0px 0px 1px #000;
 	padding-top: 10px;
 	padding-bottom: 0.1px;
 }
@@ -84,7 +84,7 @@ body {
 	background-position: 20px 12px;
 }
 
-#menu li.selected{
+#menu li.selected.menu-default{
 	/*border-radius: 4px;*/
 	background:#EEE;
 	font-weight:bold;
