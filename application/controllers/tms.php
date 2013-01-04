@@ -62,7 +62,7 @@ class Tms extends MY_Controller {
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 			
 			// query google maps api for lat / lng of sports centre
-			$address = $this->data['centre']['address'];
+			$address = urlencode($this->data['centre']['address']);
 			$url = "http://maps.google.com/maps/api/geocode/json?address=$address&sensor=false&region=uk";
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $url);
