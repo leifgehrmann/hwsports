@@ -43,6 +43,14 @@ class Sis extends MY_Controller {
 	}
 	public function tournaments()
 	{
+
+		/* We want to get:
+			- List of all the tournaments
+				- tournament name
+				- tournament start date (to get the year)
+				- tournament description?
+		*/
+
 		// Page title
 		$this->data['title'] = "Tournaments";
 		$this->data['page'] = "tournaments";
@@ -52,10 +60,24 @@ class Sis extends MY_Controller {
 	}
 	public function tournament($tournamentID)
 	{
+
+		/* We want to get:
+			- tournament name
+			- tournament start date (to get the year)
+			- tournament description
+			- tournament end date
+			- List of all games
+				- sport name
+				- sport 
+		*/
+
 		// Page title
 		$this->data['title'] = "$tournamentID value";
 		$this->data['page'] = "tournament";
 		$this->data['tournamentID'] = $tournamentID;
+
+
+
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('sis/tournament',$this->data);
 		$this->load->view('sis/footer',$this->data);
