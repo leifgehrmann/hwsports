@@ -8,19 +8,6 @@
         <link href="/css/<?=$slug?>/normalize.min.css" rel="stylesheet" type="text/css">
         <link href="/css/<?=$slug?>/main.css" rel="stylesheet" type="text/css">
         <link href="/css/<?=$slug?>/sis.css" rel="stylesheet" type="text/css">
-        <style type="text/css">
-        <!--
-            body {
-                background:#ededed;
-            }
-            #header {
-                background:#1E303A;
-            }
-            #content h1, #content h2, #content h3, #content a{
-                color:#1E303A;
-            }
-        -->
-        </style>
     </head>
     <!--[if lt IE 7]>      <body class="page-<?=$_ci_view?> lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
     <!--[if IE 7]>         <body class="page-<?=$_ci_view?> lt-ie9 lt-ie8"> <![endif]-->
@@ -34,9 +21,9 @@
             <a href="/"><div id="header"></div></a>
             <div id="menu">
                 <ul>
-                    <a href=""><li><img src="../../img/icons/home.14.png"/>Homepage</li></a>
-                    <a href=""><li><img src="../../img/icons/appearence.14.png"/>Screenshots</li></a>
-                    <a href=""><li><img src="../../img/icons/star.14.png"/>Signup</li></a>
+                    <a href=""><li><img src="/img/<?=$slug?>/icons/home.14.png"/>Homepage</li></a>
+                    <a href=""><li><img src="/img/<?=$slug?>/icons/appearence.14.png"/>Screenshots</li></a>
+                    <a href=""><li><img src="/img/<?=$slug?>/icons/star.14.png"/>Signup</li></a>
                 </ul>
             </div>
             <div id="content">
