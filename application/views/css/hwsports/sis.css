@@ -59,6 +59,7 @@ body {
 #menu ul.menu-user{
 	background:#DDD;
 	padding-top: 10px;
+	padding-bottom: 10px;
 }
 #menu ul li { 
 	margin-bottom: 10px;
