@@ -28,7 +28,7 @@
                 <span class="sep">|</span>
                 <a href="/"><span class="role">Customer Homepage</span></a>
                 <span class="sep">|</span>
-                <a href="auth/logout"><span class="logout">Logout</span></a>
+                <a href="/auth/logout"><span class="logout">Logout</span></a>
             </div>
         </div>
         <div id="menu">
