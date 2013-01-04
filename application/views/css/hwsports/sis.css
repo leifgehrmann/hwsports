@@ -1,10 +1,13 @@
+body {
+	background: #E7EEF9;
+}
+
 .company-logo {
 	vertical-align: middle;
 	display: inline-block;
 	width:99px;
 	height:33px;
 	background-image:url('/img/hwsports/logo/is.medium.png');
-	background: #E7EEF9;
 }
 
 #container {
