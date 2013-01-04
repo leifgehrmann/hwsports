@@ -2,6 +2,7 @@
 
 <h1>Venue List</h1>
 
+<? if(count($venues)>=1) { ?>
 <table cellpadding=0 cellspacing=10>
 	<tr>
 		<th>ID</th>
@@ -10,9 +11,10 @@
 		<th>Directions</th>
 		<th>Lat/Lng</th>
 	</tr>
-	<?php foreach ($venues as $venue):?>
+	<?php print_r($venues) ?>
+	<?php foreach ($venues as $id => $venue):?>
 		<tr>
-			<td><?=$venue['id'];?></td>
+			<td><?=$id;?></td>
 			<td><?=$venue['name'];?></td>
 			<td><?=$venue['description'];?></td>
 			<td><?=$venue['directions'];?></td>
@@ -20,6 +22,9 @@
 		</tr>
 	<?php endforeach;?>
 </table>
+<? } else { ?>
+No venues exist for this sports centre yet. Please create one below.
+<? } ?>
 
 <h1>Create Venue</h1>
 
