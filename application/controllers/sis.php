@@ -33,17 +33,8 @@ class Sis extends CI_Controller {
 		$this->session->set_userdata('centreShortName', $row['shortName']);
 		$this->session->set_userdata('centreLegalText', $row['legalText']);
 
-
-		// Sports Centre Name
-		/*$query = $this->db->query("SELECT `value` FROM `centreData` WHERE `centreID` = '$centreID' AND `key` = 'name' LIMIT 1");
-		$row = $query->row_array();
-		$this->session->set_userdata('centreName', $row['value']);
-		// Sports Centre Name (Abbreviated)
-		$query = $this->db->query("SELECT `value` FROM `centreData` WHERE `centreID` = '$centreID' AND `key` = 'shortName' LIMIT 1");
-		$row = $query->row_array();
-		$this->session->set_userdata('centreShortName', $row['value']);*/
 		// Page title
-		$this->data['title'] = "Homepage";
+		$this->data['title'] = "Home";
 		$this->data['page'] = "home";
 		//set the flash data error message if there is one
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');

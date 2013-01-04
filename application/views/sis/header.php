@@ -22,10 +22,10 @@
             <a href="/"><div id="header"></div></a>
             <div id="menu">
                 <ul>
-                    <a href="/"><li class="homepage <?=($page=="home" ? 'selected' : '')?>">Homepage</li></a>
+                    <a href="/"><li class="home <?=($page=="home" ? 'selected' : '')?>">Homepage</li></a>
                     <a href="/sis/whatson"><li class="whatson <?=($page=="whatson" ? 'selected' : '')?>">What's On</li></a>
                     <a href="/sis/calendar"><li class="calendar <?=($page=="calendar" ? 'selected' : '')?>">Calendar</li></a>
-                    <a href="/sis/tournaments"><li class="tournament <?=($page=="tournaments" ? 'selected' : '')?>">Tournaments</li></a>
+                    <a href="/sis/tournaments"><li class="tournaments <?=($page=="tournaments" ? 'selected' : '')?>">Tournaments</li></a>
                     <a href="/auth/register"><li class="register special <?=($page=="register" ? 'selected' : '')?>">Registration</li></a>
                     <? if($this->ion_auth->logged_in()){ ?>
                         <a href="/auth/logout"><li class="logout">Logout</li></a>
