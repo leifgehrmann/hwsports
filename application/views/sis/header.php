@@ -6,9 +6,9 @@
         <meta name="description" content="">
         <title><?=$title?> | <?=$this->session->userdata('centreShortName')?> Sports</title>
         <link rel="icon" type="image/png" href="/img/<?=$this->session->userdata('slug')?>/logo/sis.fav.16.png" />
-        <link href="/css/<?=$this->session->userdata('slug')?>/normalize.min.css" rel="stylesheet" type="text/css">
-        <link href="/css/<?=$this->session->userdata('slug')?>/main.css" rel="stylesheet" type="text/css">
-        <link href="/css/<?=$this->session->userdata('slug')?>/sis.css" rel="stylesheet" type="text/css">
+        <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
+        <link href="/css/main.css" rel="stylesheet" type="text/css">
+        <link href="/css/sis.css" rel="stylesheet" type="text/css">
     </head>
     <!--[if lt IE 7]>      <body class="page-<?=$page?> lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
     <!--[if IE 7]>         <body class="page-<?=$page?> lt-ie9 lt-ie8"> <![endif]-->
