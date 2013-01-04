@@ -49,7 +49,7 @@ class Tms extends MY_Controller {
 				"MAX(CASE WHEN `key`='lng' THEN value END ) AS lng " .
 				"FROM venueData WHERE venueID = {$venue['venueID']}"
 			);
-			$this->data['venues'][] = array_merge($venue, $venueDataQuery->row_array());
+			$this->data['venues'][$venue['venueID']] = $venueDataQuery->row_array();
 		}
 		
 		//validate form input
