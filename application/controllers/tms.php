@@ -93,7 +93,7 @@ class Tms extends MY_Controller {
 				)
 			);
 			   
-			if ($this->db->insert_batch($venueDataArray)) {
+			if ($this->db->insert_batch('venueData',$venueDataArray)) {
 				// db success
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
 				redirect('/tms/venues', 'refresh');
