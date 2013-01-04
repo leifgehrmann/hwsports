@@ -1,9 +1,13 @@
+body {
+	background: #F1F1F1;
+}
+
 .company-logo {
 	vertical-align: middle;
 	display: inline-block;
 	width:99px;
 	height:33px;
-	background-image:url('/img/hwsports/logo/is.medium.png');
+	background-image:url('/img/product/logo/is.medium.png');
 }
 
 #container {
@@ -16,6 +20,7 @@
 #header{
 	background: #827;
 	height:100px;
+	background-image:url('/img/product/header.png');
 }
 
 #header #user-bar a {
@@ -47,7 +52,7 @@ ul li {
 	padding: 10px;
 	margin-bottom: 10px;
 }
-ul a {color: inherit; text-decoration:none; padding:0;}
+a {color: inherit; text-decoration:none;}
 
 #menu {
 	margin-left:20px;
@@ -60,48 +65,36 @@ ul a {color: inherit; text-decoration:none; padding:0;}
 
 #menu li{
 	font-size:16px;
-	padding-left:34px;
+	padding-left:44px;
 	color:#444;
 	background:#FFF;
 	background-repeat: no-repeat;
-	background-position: 20px;
-	/*border: 1px solid #C8C8C8; */
-	/*border-bottom: 1px solid #FFF;*/
+	background-position: 20px 12px;
 }
 
 #menu li.selected{
 	/*border-radius: 4px;*/
 	background:#EEE;
 	font-weight:bold;
-	/*border: 1px solid #C8C8C8; */
-	/*border-bottom: 1px solid #FFF;*/
+	background-repeat: no-repeat;
+	background-position: 20px 12px;
 }
 
 #menu li.special{
 	border: 1px dashed #AAA; 
 }
 
-#menu img {
-	vertical-align: text-top;
-	padding-right:10px;
-}
 
 #menu li:hover{
 	background:#EEE;
 	cursor: hand;
 	background-repeat: no-repeat;
-	background-position: 20px;
+	background-position: 20px 12px;
 }
 
-#menu li.login { background-image: url(/img/hwsports/icons/key.14.png); }
-#menu li.logout { background-image: url(/img/hwsports/icons/key.14.png); }
-#menu li.homepage { background-image: url(/img/hwsports/icons/home.14.png); }
-#menu li.whatson { background-image: url(/img/hwsports/icons/match.14.png); }
-#menu li.calendar { background-image: url(/img/hwsports/icons/calendar.14.png); }
-#menu li.tournaments { background-image: url(/img/hwsports/icons/tournaments.14.png); }
-#menu li.register { background-image: url(/img/hwsports/icons/star.14.png); }
-#menu li.management { background-image: url(/img/hwsports/icons/match.14.png); }
-#menu li.help { background-image: url(/img/hwsports/icons/help.14.png); }
+#menu li.home     		{ background-image: url(/img/product/icons/home.14.png); }
+#menu li.screenshots 	{ background-image: url(/img/product/icons/screenshots.14.png); }
+#menu li.signup 		{ background-image: url(/img/product/icons/signup.14.png); }
 
 
 

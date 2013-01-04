@@ -21,9 +21,9 @@
             <a href="/"><div id="header"></div></a>
             <div id="menu">
                 <ul>
-                    <a href=""><li><img src="/img/<?=$this->session->userdata('slug')?>/icons/home.14.png"/>Homepage</li></a>
-                    <a href=""><li><img src="/img/<?=$this->session->userdata('slug')?>/icons/appearence.14.png"/>Screenshots</li></a>
-                    <a href=""><li><img src="/img/<?=$this->session->userdata('slug')?>/icons/star.14.png"/>Signup</li></a>
+                    <a href="/"           ><li class="home"       ><img src="/img/<?=$this->session->userdata('slug')?>/icons/home.14.png"/>Homepage</li></a>
+                    <a href="/screenshots"><li class="screenshots"><img src="/img/<?=$this->session->userdata('slug')?>/icons/screenshots.14.png"/>Screenshots</li></a>
+                    <a href="/signup"     ><li class="signup"     ><img src="/img/<?=$this->session->userdata('slug')?>/icons/star.14.png"/>Signup</li></a>
                 </ul>
             </div>
             <div id="content">
