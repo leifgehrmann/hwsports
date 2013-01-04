@@ -2,36 +2,20 @@
 <p></p>
 <h2>Games</h2>
 <?php
-	$this->load->library('table');
 
 
 	$tmpl = array (
-                    'table_open'          => '<table border="0" cellpadding="4" cellspacing="0">',
-
-                    'heading_row_start'   => '<tr>',
-                    'heading_row_end'     => '</tr>',
-                    'heading_cell_start'  => '<th>',
-                    'heading_cell_end'    => '</th>',
-
-                    'row_start'           => '<tr>',
-                    'row_end'             => '</tr>',
-                    'cell_start'          => '<td>',
-                    'cell_end'            => '</td>',
-
-                    'row_alt_start'       => '<tr>',
-                    'row_alt_end'         => '</tr>',
-                    'cell_alt_start'      => '<td>',
-                    'cell_alt_end'        => '</td>',
-
-                    'table_close'         => '</table>'
+                    'table_open'          => '<table cellspacing="0">',
+                    'heading_cell_start'  => '<td>',
+                    'heading_cell_end'    => '</td>',
               );
 
 	$this->table->set_template($tmpl);
 
 	$info = array(
-				array('<a href="/sis/game/$gameID">Wattball</a>', 'sign up'),
-				array('<a href="/sis/game/$gameID">Wattball</a>', 'sign up'),
-				array('<a href="/sis/game/$gameID">Wattball</a>', 'sign up')	
+				array('<span class="bold"><a href="/sis/game/$gameID">Wattball</a></span>', '<a href="sis/signup/$gameID">sign up</a>'),
+				array('<span class="bold"><a href="/sis/game/$gameID">Wattball</a></span>', '<a href="sis/signup/$gameID">sign up</a>'),
+				array('<span class="bold"><a href="/sis/game/$gameID">Wattball</a></span>', '<a href="sis/signup/$gameID">sign up</a>')	
 			);
 
 	echo $this->table->generate($info);
