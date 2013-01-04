@@ -22,7 +22,7 @@
             <a href="/"><div id="header"></div></a>
             <div id="menu">
                 <ul>
-                    <a href="/"><li class="home <?=($page=="home" ? 'selected' : '')?>">Homepage</li></a>
+                    <a href="/"><li class="home <?=($page=="sishome" ? 'selected' : '')?>">Homepage</li></a>
                     <a href="/sis/whatson"><li class="whatson <?=($page=="whatson" ? 'selected' : '')?>">What's On</li></a>
                     <a href="/sis/calendar"><li class="calendar <?=($page=="calendar" ? 'selected' : '')?>">Calendar</li></a>
                     <a href="/sis/tournaments"><li class="tournaments <?=($page=="tournaments" ? 'selected' : '')?>">Tournaments</li></a>

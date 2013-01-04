@@ -34,7 +34,7 @@
             </div>
             <div id="menu">
                 <ul>
-                    <a href="/tms"><li class="last-child home <?=($page=="home" ? 'selected' : '')?>">Dashboard</li></a>
+                    <a href="/tms"><li class="last-child home <?=($page=="tmshome" ? 'selected' : '')?>">Dashboard</li></a>
                 </ul>
                 <ul>
                     <a href="/tms/tournaments"><li class="tournaments <?=($page=="tournaments" ? 'selected' : '')?>">Tournaments</li></a>
