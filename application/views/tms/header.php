@@ -33,7 +33,7 @@
         </div>
         <div id="menu">
             <ul>
-                <a href="/tms"><li class="home <?=($page=="home" ? 'selected' : '')?>">Dashboard</li></a>
+                <a href="/tms"><li class="last-child home <?=($page=="home" ? 'selected' : '')?>">Dashboard</li></a>
             </ul>
             <ul>
                 <a href="/tms/tournaments"><li class="tournaments <?=($page=="tournaments" ? 'selected' : '')?>">Tournaments</li></a>
@@ -44,12 +44,12 @@
                 <a href="/tms/users"><li class="users <?=($page=="users" ? 'selected' : '')?>">Users</li></a>
                 <a href="/tms/news"><li class="news <?=($page=="news" ? 'selected' : '')?>">News</li></a>
                 <a href="/tms/tickets"><li class="tickets <?=($page=="tickets" ? 'selected' : '')?>">Tickets</li></a>
-                <a href="/tms/reports"><li class="reports <?=($page=="reports" ? 'selected' : '')?>">Reports</li></a>
+                <a href="/tms/reports"><li class="last-child reports <?=($page=="reports" ? 'selected' : '')?>">Reports</li></a>
             </ul>
             <ul>
                 <a href="/tms/appearance"><li class="appearance <?=($page=="appearance" ? 'selected' : '')?>">Appearance</li></a>
                 <a href="/tms/settings"><li class="settings <?=($page=="settings" ? 'selected' : '')?>">Settings</li></a>
-                <a href="/************/"><li class="personal-settings">Personal Settings</li></a>
+                <a href="/************/"><li class="last-child personal-settings">Personal Settings</li></a>
             </ul>
         </div>
         <div id="content">
