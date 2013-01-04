@@ -38,7 +38,7 @@ class Tms extends MY_Controller {
 		$this->data['page'] = "venues";
 		
 		// Get list of all venues
-		$this->data['venues'] = ax`rray();
+		$this->data['venues'] = array();
 		$venueQuery = $this->db->query("SELECT venueID FROM venues WHERE centreID = {$this->data['centre']['id']}");
 		foreach($venueQuery->row_array() as $venue) {
 			$venueDataQuery = $this->db->query("SELECT " .
