@@ -38,7 +38,6 @@
 |
 */
 
-$route['scripts/vendor/fullcalendar/(:any)'] = 'scripts/vendor/fullcalendar/$1';
 $route['scripts/vendor/(:any)'] = 'scripts/vendor/$1';
 $route['scripts/(:any)'] = 'scripts/view/$1';
 
