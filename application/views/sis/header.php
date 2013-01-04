@@ -24,7 +24,7 @@
                     <a href="/"><li class="homepage <? if($title=="Homepage"){ ?>selected<? } ?>">Homepage</li></a>
                     <a href="/sis/whatson"><li class="whatson <? if($title=="What's On"){ ?>selected<? } ?>">What's On</li></a>
                     <a href="/sis/calendar"><li class="calendar <? if($title=="Calendar"){ ?>selected<? } ?>">Calendar</li></a>
-                    <a href="/sis/tournaments"><li class="tournament <? if($title=="Tournaments"){ ?>selected<? } ?>">Tournaments</li></a>
+                    <a href="/sis/tournaments"><li class="tournaments <? if($title=="Tournaments"){ ?>selected<? } ?>">Tournaments</li></a>
                     <a href="/auth/register"><li class="register special">Registration</li></a>
                     <? if($this->ion_auth->logged_in()){ ?>
                         <a href="/auth/logout"><li class="logout">Logout</li></a>
