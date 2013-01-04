@@ -111,6 +111,8 @@ body {
 #menu li.calendar 		{ background-image: url(/img/hwsports/icons/calendar.14.png); }
 #menu li.tournaments 	{ background-image: url(/img/hwsports/icons/tournament.14.png); }
 #menu li.register 		{ background-image: url(/img/hwsports/icons/register.14.png); }
+#menu li.tickets 		{ background-image: url(/img/hwsports/icons/ticket.14.png); }
+#menu li.signup 		{ background-image: url(/img/hwsports/icons/signup.14.png); }
 #menu li.management 	{ background-image: url(/img/hwsports/icons/match.14.png); }
 #menu li.help 			{ background-image: url(/img/hwsports/icons/help.14.png); }
 
