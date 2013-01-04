@@ -33,10 +33,10 @@
         </div>
         <div id="menu">
             <ul>
-                <li class="selected"><a href="/tms"><img src="/img/icons/home.14.png"/>Dashboard</a></li>
+                <li class="selected"><a href="/tms"><img src="/img/<?=$slug?>/icons/home.14.png"/>Dashboard</a></li>
             </ul>
             <ul>
-                <li><a href=""><img src="/img/icons/tournament.14.png"/>Tournaments</a></li>
+                <li><a href=""><img src="/img/<?=$slug?>/icons/tournament.14.png"/>Tournaments</a></li>
                 <li><img src="/img/<?=$slug?>/icons/jellyfish.14.png"/>Venues</li>
                 <li><img src="/img/<?=$slug?>/icons/sport.14.png"/>Sports</li>
                 <li><img src="/img/<?=$slug?>/icons/match.14.png"/>Matches</li>
