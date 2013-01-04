@@ -17,22 +17,16 @@ class Auth extends CI_Controller {
 		$this->load->database();
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
-	
-		// Page title
-		$this->data['title'] = "Auth";
-		$this->data['slug'] = $this->session->userdata('slug');
 	}
 
 	//redirect if needed, otherwise display the user list
-	function index()
+	function list_users()
 	{
-
-		if (!$this->ion_auth->logged_in())
-		{
-			//redirect them to the login page
-			redirect('auth/login', 'refresh');
-		}
-		elseif (!$this->ion_auth->is_admin())
+		// Page title
+		$this->data['title'] = "User List";
+		$this->data['page'] = "userlist";
+		
+		if(!$this->ion_auth->is_admin())
 		{
 			//redirect them to the home page because they must be an administrator to view this
 			redirect('/', 'refresh');
@@ -107,7 +101,6 @@ class Auth extends CI_Controller {
 				'type' => 'password',
 			);
 
-			
 			$this->load->view('sis/header',$this->data);
 			$this->load->view('auth/login', $this->data);
 			$this->load->view('sis/footer',$this->data);
@@ -117,8 +110,6 @@ class Auth extends CI_Controller {
 	//log the user out
 	function logout()
 	{
-		$this->data['title'] = "Logout";
-
 		//log the user out
 		$logout = $this->ion_auth->logout();
 
@@ -130,6 +121,10 @@ class Auth extends CI_Controller {
 	//change password
 	function change_password()
 	{
+		// Page title
+		$this->data['title'] = "Change Password";
+		$this->data['page'] = "changepassword";
+		
 		$this->form_validation->set_rules('old', 'Old password', 'required');
 		$this->form_validation->set_rules('new', 'New Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
 		$this->form_validation->set_rules('new_confirm', 'Confirm New Password', 'required');
@@ -201,6 +196,10 @@ class Auth extends CI_Controller {
 	//forgot password
 	function forgot_password()
 	{
+		// Page title
+		$this->data['title'] = "Forgotten Password";
+		$this->data['page'] = "forgotpassword";
+		
 		$this->form_validation->set_rules('email', 'Email Address', 'required');
 		if ($this->form_validation->run() == false)
 		{
@@ -217,11 +216,8 @@ class Auth extends CI_Controller {
 				$this->data['identity_label'] = 'Email';	
 			}
 			
-			
-
 			//set any errors and display the form
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-			
 			
 			$this->load->view('sis/header',$this->data);
 			$this->load->view('auth/forgot_password', $this->data);
@@ -253,6 +249,10 @@ class Auth extends CI_Controller {
 	//reset password - final step for forgotten password
 	public function reset_password($code = NULL)
 	{
+		// Page title
+		$this->data['title'] = "Reset Password";
+		$this->data['page'] = "resetpassword";
+		
 		if (!$code)
 		{
 			show_404();
@@ -362,7 +362,7 @@ class Auth extends CI_Controller {
 		{
 			//redirect them to the auth page
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("auth", 'refresh');
+			redirect("auth/login", 'refresh');
 		}
 		else
 		{
@@ -375,6 +375,10 @@ class Auth extends CI_Controller {
 	//deactivate the user
 	function deactivate($id = NULL)
 	{
+		// Page title
+		$this->data['title'] = "Deactivate User";
+		$this->data['page'] = "deactivateuser";
+		
 		$id = $this->config->item('use_mongodb', 'ion_auth') ? (string) $id : (int) $id;
 
 		$this->load->library('form_validation');
@@ -500,6 +504,9 @@ class Auth extends CI_Controller {
 	//edit a user
 	function edit_user($id)
 	{
+		$this->data['title'] = "Edit User";
+		$this->data['page'] = "edituser";
+
 		$this->data['title'] = "Edit User";
 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())

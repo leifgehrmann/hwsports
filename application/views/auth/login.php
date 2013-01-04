@@ -1,12 +1,12 @@
 <h1>Login</h1>
-<p>Please login with your email/username and password below.</p>
+<p>Please login with your email and password below.</p>
 	
 <div id="infoMessage"><?php echo $message;?></div>
 
 <?php echo form_open("auth/login");?>
   	
   <p>
-    <label for="identity">Email/Username:</label>
+    <label for="identity">Email:</label>
     <?php echo form_input($identity);?>
   </p>
 
