@@ -5,9 +5,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
         <title><?=$title?> | ***********************************************************</title>
-        <link href="../../css/<?=$slug?>/normalize.min.css" rel="stylesheet" type="text/css">
-        <link href="../../css/<?=$slug?>/main.css" rel="stylesheet" type="text/css">
-        <link href="../../css/<?=$slug?>/sis.css" rel="stylesheet" type="text/css">
+        <link href="/css/<?=$slug?>/normalize.min.css" rel="stylesheet" type="text/css">
+        <link href="/css/<?=$slug?>/main.css" rel="stylesheet" type="text/css">
+        <link href="/css/<?=$slug?>/sis.css" rel="stylesheet" type="text/css">
         <style type="text/css">
         <!--
             body {
