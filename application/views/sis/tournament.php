@@ -13,9 +13,9 @@
 	$this->table->set_template($tmpl);
 
 	$info = array(
-				array('<span class="bold"><a href="/sis/game/$gameID">Wattball</a></span>', '<a href="sis/signup/$gameID">sign up</a>'),
-				array('<span class="bold"><a href="/sis/game/$gameID">Wattball</a></span>', '<a href="sis/signup/$gameID">sign up</a>'),
-				array('<span class="bold"><a href="/sis/game/$gameID">Wattball</a></span>', '<a href="sis/signup/$gameID">sign up</a>')	
+				array('<span class="bold"><a href="/sis/game/$gameID">Wattball</a></span>'              , '<a href="/sis/signup/$gameID">sign up</a>', 'A short descrption can maybe be added here'),
+				array('<span class="bold"><a href="/sis/game/$gameID">Mens Heriot Hurdling</a></span>'  , '<a href="/sis/signup/$gameID">sign up</a>', 'A short descrption can maybe be added here'),
+				array('<span class="bold"><a href="/sis/game/$gameID">Womens Heriot Hurdling</a></span>', '<a href="/sis/signup/$gameID">sign up</a>', 'A short descrption can maybe be added here')	
 			);
 
 	echo $this->table->generate($info);
