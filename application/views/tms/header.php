@@ -33,7 +33,7 @@
         </div>
         <div id="menu">
             <ul>
-                <li class="<?=($page=="home" ? 'selected' : '')?>"><a href="/tms"><img src="/img/<?=$this->session->userdata('slug')?>/icons/home.14.png"/>Dashboard</a></li>
+                <a href="/tms"><li class="<?=($page=="home" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/home.14.png"/>Dashboard</li></a>
             </ul>
             <ul>
                 <a href="/tms/tournaments"><li class="<?=($page=="tournaments" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/tournament.14.png"/>Tournaments</li></a>
