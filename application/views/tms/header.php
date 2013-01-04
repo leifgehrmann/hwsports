@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
         <title><?=$title?> | Tournament Management System</title>
-        <link rel="icon" type="image/png" href="/img/<?=$this->session->userdata('slug')?>/logo/tms.fav.png" />
+        <link rel="icon" type="image/png" href="/img/<?=$this->session->userdata('slug')?>/logo/tms.fav.16.png" />
         <link href="/css/<?=$this->session->userdata('slug')?>/normalize.min.css" rel="stylesheet" type="text/css">
         <link href="/css/<?=$this->session->userdata('slug')?>/main.css" rel="stylesheet" type="text/css">
         <link href="/css/<?=$this->session->userdata('slug')?>/tms.css" rel="stylesheet" type="text/css">
@@ -33,23 +33,23 @@
         </div>
         <div id="menu">
             <ul>
-                <a href="/tms"><li class="<?=($page=="home" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/home.14.png"/>Dashboard</li></a>
+                <a href="/tms"><li class="home <?=($page=="home" ? 'selected' : '')?>">Dashboard</li></a>
             </ul>
             <ul>
-                <a href="/tms/tournaments"><li class="<?=($page=="tournaments" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/tournament.14.png"/>Tournaments</li></a>
-                <a href="/tms/venues"><li class="<?=($page=="venues" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/jellyfish.14.png"/>Venues</li></a>
-                <a href="/tms/sports"><li class="<?=($page=="sports" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/sport.14.png"/>Sports</li></a>
-                <a href="/tms/matches"><li class="<?=($page=="matches" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/match.14.png"/>Matches</li></a>
-                <a href="/tms/groups"><li class="<?=($page=="groups" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/group.14.png"/>Groups</li></a>
-                <a href="/tms/users"><li class="<?=($page=="users" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/user.14.png"/>Users</li></a>
-                <a href="/tms/news"><li class="<?=($page=="news" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/news.14.png"/>News</li></a>
-                <a href="/tms/tickets"><li class="<?=($page=="tickets" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/money.14.png"/>Tickets</li></a>
-                <a href="/tms/reports"><li class="<?=($page=="reports" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/report.14.png"/>Reports</li></a>
+                <a href="/tms/tournaments"><li class="tournaments <?=($page=="tournaments" ? 'selected' : '')?>">Tournaments</li></a>
+                <a href="/tms/venues"><li class="venues <?=($page=="venues" ? 'selected' : '')?>">Venues</li></a>
+                <a href="/tms/sports"><li class="sports <?=($page=="sports" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/sport.14.png"/>Sports</li></a>
+                <a href="/tms/matches"><li class="matches <?=($page=="matches" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/match.14.png"/>Matches</li></a>
+                <a href="/tms/groups"><li class="groups <?=($page=="groups" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/group.14.png"/>Groups</li></a>
+                <a href="/tms/users"><li class="users <?=($page=="users" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/user.14.png"/>Users</li></a>
+                <a href="/tms/news"><li class="news <?=($page=="news" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/news.14.png"/>News</li></a>
+                <a href="/tms/tickets"><li class="tickets <?=($page=="tickets" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/tickets.14.png"/>Tickets</li></a>
+                <a href="/tms/reports"><li class="reports <?=($page=="reports" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/report.14.png"/>Reports</li></a>
             </ul>
             <ul>
-                <li><img src="/img/<?=$this->session->userdata('slug')?>/icons/appearence.14.png"/>Appearence</li>
-                <li><img src="/img/<?=$this->session->userdata('slug')?>/icons/cogwheel.14.png"/>Settings</li>
-                <li><img src="/img/<?=$this->session->userdata('slug')?>/icons/cogwheel.14.png"/>Personal Settings</li>
+                <a href="/tms/appearance"><li class="appearance <?=($page=="appearance" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/appearance.14.png"/>Appearance</li></a>
+                <a href="/tms/settings"><li class="settings <?=($page=="settings" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/settings.14.png"/>Settings</li></a>
+                <a href="/************/"><li class="personal-settings"><img src="/img/<?=$this->session->userdata('slug')?>/icons/settings.14.png"/>Personal Settings</li></a>
             </ul>
         </div>
         <div id="content">
