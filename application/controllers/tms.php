@@ -19,7 +19,7 @@ class Tms extends MY_Controller {
 	public function index()
 	{
 		$this->data['title'] = "Home";
-		$this->data['page'] = "home";
+		$this->data['page'] = "tmshome";
 		$this->load->view('tms/header',$this->data);
 		$this->load->view('tms/home',$this->data);
 		$this->load->view('tms/footer',$this->data);

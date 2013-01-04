@@ -4,8 +4,7 @@ class Product extends MY_Controller {
 
 	public function index() {
 		$this->data['title'] = "Infusion Sports";
-		$this->data['page'] = "Infusion Sports";
-		$this->session->set_userdata('slug', 'product');
+		$this->data['page'] = "product";
 		
 		$this->load->view('product/header',$this->data);
 		$this->load->view('product/home',$this->data);

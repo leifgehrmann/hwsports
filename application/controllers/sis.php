@@ -5,7 +5,7 @@ class Sis extends MY_Controller {
 	public function index() {
 		// Page title
 		$this->data['title'] = "Home";
-		$this->data['page'] = "home";
+		$this->data['page'] = "sishome";
 		//set the flash data error message if there is one
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		
