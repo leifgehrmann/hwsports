@@ -69,27 +69,27 @@ class Tms extends MY_Controller {
 				array(
 					'venueID' => $venueID,
 					'key' => 'name',
-					'date' => $this->input->post('name')
+					'value' => $this->input->post('name')
 				),
 				array(
 					'venueID' => $venueID,
 					'key' => 'description',
-					'date' => $this->input->post('description')
+					'value' => $this->input->post('description')
 				),
 				array(
 					'venueID' => $venueID,
 					'key' => 'directions',
-					'date' => $this->input->post('directions')
+					'value' => $this->input->post('directions')
 				),
 				array(
 					'venueID' => $venueID,
 					'key' => 'lat',
-					'date' => $this->input->post('lat')
+					'value' => $this->input->post('lat')
 				),
 				array(
 					'venueID' => $venueID,
 					'key' => 'lng',
-					'date' => $this->input->post('lng')
+					'value' => $this->input->post('lng')
 				)
 			);
 			   
