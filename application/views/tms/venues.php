@@ -11,9 +11,9 @@
 		<th>Directions</th>
 		<th>Lat/Lng</th>
 	</tr>
-	<?php foreach ($venues as $venue):?>
+	<?php foreach ($venues as $id => $venue):?>
 		<tr>
-			<td><?=$venue['id'];?></td>
+			<td><?=$id;?></td>
 			<td><?=$venue['name'];?></td>
 			<td><?=$venue['description'];?></td>
 			<td><?=$venue['directions'];?></td>
