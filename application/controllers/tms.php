@@ -56,6 +56,8 @@ class Tms extends MY_Controller {
 		}
 		
 		$grid=new SimpleGrid();
+		$numcol = 5;
+		
 		$grid->AddHeadingRow(true);
 		for ($c=1; $c<=$numcol; $c++) {
 			$grid->AddCell("Column $c");
