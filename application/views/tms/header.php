@@ -36,15 +36,15 @@
                 <li class="<?=($page=="home" ? 'selected' : '')?>"><a href="/tms"><img src="/img/<?=$this->session->userdata('slug')?>/icons/home.14.png"/>Dashboard</a></li>
             </ul>
             <ul>
-                <li class="<?=($page=="tournaments" ? 'selected' : '')?>"><a href="/tms/tournaments"><img src="/img/<?=$this->session->userdata('slug')?>/icons/tournament.14.png"/>Tournaments</a></li>
-                <li class="<?=($page=="venues" ? 'selected' : '')?>"><a href="/tms/venues"><img src="/img/<?=$this->session->userdata('slug')?>/icons/jellyfish.14.png"/>Venues</a></li>
-                <li class="<?=($page=="sports" ? 'selected' : '')?>"><a href="/tms/sports"><img src="/img/<?=$this->session->userdata('slug')?>/icons/sport.14.png"/>Sports</a></li>
-                <li class="<?=($page=="matches" ? 'selected' : '')?>"><a href="/tms/matches"><img src="/img/<?=$this->session->userdata('slug')?>/icons/match.14.png"/>Matches</a></li>
-                <li class="<?=($page=="groups" ? 'selected' : '')?>"><a href="/tms/groups"><img src="/img/<?=$this->session->userdata('slug')?>/icons/group.14.png"/>Groups</a></li>
-                <li class="<?=($page=="users" ? 'selected' : '')?>"><a href="/tms/users"><img src="/img/<?=$this->session->userdata('slug')?>/icons/user.14.png"/>Users</a></li>
-                <li class="<?=($page=="news" ? 'selected' : '')?>"><a href="/tms/news"><img src="/img/<?=$this->session->userdata('slug')?>/icons/news.14.png"/>News</a></li>
-                <li class="<?=($page=="tickets" ? 'selected' : '')?>"><a href="/tms/tickets"><img src="/img/<?=$this->session->userdata('slug')?>/icons/money.14.png"/>Tickets</a></li>
-                <li class="<?=($page=="reports" ? 'selected' : '')?>"><a href="/tms/reports"><img src="/img/<?=$this->session->userdata('slug')?>/icons/report.14.png"/>Reports</a></li>
+                <a href="/tms/tournaments"><li class="<?=($page=="tournaments" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/tournament.14.png"/>Tournaments</li></a>
+                <a href="/tms/venues"><li class="<?=($page=="venues" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/jellyfish.14.png"/>Venues</li></a>
+                <a href="/tms/sports"><li class="<?=($page=="sports" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/sport.14.png"/>Sports</li></a>
+                <a href="/tms/matches"><li class="<?=($page=="matches" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/match.14.png"/>Matches</li></a>
+                <a href="/tms/groups"><li class="<?=($page=="groups" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/group.14.png"/>Groups</li></a>
+                <a href="/tms/users"><li class="<?=($page=="users" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/user.14.png"/>Users</li></a>
+                <a href="/tms/news"><li class="<?=($page=="news" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/news.14.png"/>News</li></a>
+                <a href="/tms/tickets"><li class="<?=($page=="tickets" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/money.14.png"/>Tickets</li></a>
+                <a href="/tms/reports"><li class="<?=($page=="reports" ? 'selected' : '')?>"><img src="/img/<?=$this->session->userdata('slug')?>/icons/report.14.png"/>Reports</li></a>
             </ul>
             <ul>
                 <li><img src="/img/<?=$this->session->userdata('slug')?>/icons/appearence.14.png"/>Appearence</li>
