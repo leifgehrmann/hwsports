@@ -33,23 +33,23 @@
         </div>
         <div id="menu">
             <ul>
-                <li class="selected"><a href="/tms"><img src="/img/icons/home.14.png"/>Dashboard</a></li>
+                <li class="selected"><a href="/tms"><img src="/img/<?=$slug?>/icons/home.14.png"/>Dashboard</a></li>
             </ul>
             <ul>
-                <li><a href=""><img src="/img/icons/tournament.14.png"/>Tournaments</a></li>
-                <li><img src="/img/icons/jellyfish.14.png"/>Venues</li>
-                <li><img src="/img/icons/sport.14.png"/>Sports</li>
-                <li><img src="/img/icons/match.14.png"/>Matches</li>
-                <li ><img src="/img/icons/group.14.png"/>Groups</li>
-                <li><img src="/img/icons/user.14.png"/>Users</li>
-                <li><img src="/img/icons/news.14.png"/>News</li>
-                <li><img src="/img/icons/money.14.png"/>Tickets</li>
-                <li><img src="/img/icons/report.14.png"/>Reports</li>
+                <li><a href=""><img src="/img/<?=$slug?>/icons/tournament.14.png"/>Tournaments</a></li>
+                <li><img src="/img/<?=$slug?>/icons/jellyfish.14.png"/>Venues</li>
+                <li><img src="/img/<?=$slug?>/icons/sport.14.png"/>Sports</li>
+                <li><img src="/img/<?=$slug?>/icons/match.14.png"/>Matches</li>
+                <li ><img src="/img/<?=$slug?>/icons/group.14.png"/>Groups</li>
+                <li><img src="/img/<?=$slug?>/icons/user.14.png"/>Users</li>
+                <li><img src="/img/<?=$slug?>/icons/news.14.png"/>News</li>
+                <li><img src="/img/<?=$slug?>/icons/money.14.png"/>Tickets</li>
+                <li><img src="/img/<?=$slug?>/icons/report.14.png"/>Reports</li>
             </ul>
             <ul>
-                <li><img src="/img/icons/appearence.14.png"/>Appearence</li>
-                <li><img src="/img/icons/cogwheel.14.png"/>Settings</li>
-                <li><img src="/img/icons/cogwheel.14.png"/>Personal Settings</li>
+                <li><img src="/img/<?=$slug?>/icons/appearence.14.png"/>Appearence</li>
+                <li><img src="/img/<?=$slug?>/icons/cogwheel.14.png"/>Settings</li>
+                <li><img src="/img/<?=$slug?>/icons/cogwheel.14.png"/>Personal Settings</li>
             </ul>
         </div>
         <div id="content">
