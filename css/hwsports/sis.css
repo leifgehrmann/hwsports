@@ -63,6 +63,8 @@ ul a {color: inherit; text-decoration:none; padding:0;}
 	padding-left:20px;
 	color:#444;
 	background:#FFF;
+	background-repeat: no-repeat;
+	background-position: 0 .5em;
 	/*border: 1px solid #C8C8C8; */
 	/*border-bottom: 1px solid #FFF;*/
 }
@@ -88,6 +90,9 @@ ul a {color: inherit; text-decoration:none; padding:0;}
 	background:#EEE;
 	cursor: hand;
 }
+
+#menu li .login { background-image: url(/img/icons/key.14.png); }
+#menu li .logout { background-image: url(/img/icons/key.14.png); }
 
 
 
