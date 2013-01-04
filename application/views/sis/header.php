@@ -34,7 +34,7 @@
 					<? if($this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin')){ ?>
                         <a href="/tms"><li class="management">Management</li></a>
                     <? } ?>
-                    <a href="sis/help"><li class="help <? if($page=="help"){ ?>selected<? } ?>">Help</li></a>
+                    <a href="/sis/help"><li class="help <? if($page=="help"){ ?>selected<? } ?>">Help</li></a>
                 </ul>
             </div>
             <div id="content">
