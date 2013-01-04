@@ -39,17 +39,19 @@ class Tms extends MY_Controller {
 		
 		// Get list of all venues
 		$this->data['venues'] = array();
-		$venueQuery = $this->db->query("SELECT venueID FROM venues WHERE centreID = {$this->data['centre']['id']}");
-		foreach($venueQuery->row_array() as $venue) {
-			$venueDataQuery = $this->db->query("SELECT " .
+		$venueQueryString = "SELECT venueID FROM venues WHERE centreID = {$this->data['centre']['id']}";
+		$venueQuery = $this->db->query($venueQueryString);
+		$venuesArray = $venueQuery->result_array();
+		foreach($venuesArray as $venue) {
+			$venueDataQueryString = "SELECT " .
 				"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 				"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
 				"MAX(CASE WHEN `key`='directions' THEN value END ) AS directions, " .
 				"MAX(CASE WHEN `key`='lat' THEN value END ) AS lat, " .
 				"MAX(CASE WHEN `key`='lng' THEN value END ) AS lng " .
-				"FROM venueData WHERE venueID = {$venue['venueID']}"
-			);
-			$this->data['debug'] = $venueDataQuery->row_array();
+				"FROM venueData WHERE venueID = {$venue['venueID']}";
+			$venueDataQuery = $this->db->query($venueDataQueryString);
+			$this->data['venues'][] = array_merge($venue, $venueDataQuery->row_array());
 		}
 		
 		//validate form input
