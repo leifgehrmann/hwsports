@@ -67,10 +67,16 @@ class Sis extends MY_Controller {
 			- tournament description
 			- tournament end date
 			- List of all games
-				- sport name
-				- sport 
+				- game name
+				- game 
+			- matches
+				- match name
+				- match day
+				- match time start
+				- match duration
+				- 
 		*/
-
+		$this->load->library('table');
 		// Page title
 		$this->data['title'] = "$tournamentID value";
 		$this->data['page'] = "tournament";
