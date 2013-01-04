@@ -3,7 +3,7 @@
 	display: inline-block;
 	width:99px;
 	height:33px;
-	background-image:url('/img/logo/is.medium.png');
+	background-image:url('/img/hwsports/logo/is.medium.png');
 }
 
 body {
@@ -30,7 +30,7 @@ body {
 	float:left;
 	width:48px;
 	height:35px;
-	background-image:url('/img/logo/tms.medium.png');
+	background-image:url('/img/hwsports/logo/tms.medium.png');
 }
 
 #header #title-bar .name{
