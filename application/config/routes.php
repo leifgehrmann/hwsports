@@ -44,10 +44,10 @@ if ($_SERVER['HTTP_HOST']=="hwsports.co.uk") {
 	$route['default_controller'] = "sis/index/$slug";
 } else {
 	$slug = 'product';
-	$route['default_controller'] = "product/index/$slug";
+	$route['default_controller'] = "product";
 }
 
-$route['css/(:any)'] = "css/load/$slug/$1";
+$route['css/(:any)'] = "css/load/$1";
 $route['tms'] = "tms/index/$slug";
 $route['auth/login'] = "auth/login/$slug";
 $route['auth/create_user'] = "auth/create_user/$slug";

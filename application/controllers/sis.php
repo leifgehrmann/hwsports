@@ -5,26 +5,25 @@ class Sis extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->data['slug'] = $this->session->userdata('slug');
 	}
 	public function index($slug) {
-		// Page title
-		$this->data['title'] = "Homepage";
-		$this->data['page'] = "home";
-		
+		// Set session variables based on domain name we are at (domain slug such as hwsports provides centre name etc)
 		$this->session->set_userdata('slug', $slug);
-		$this->data['slug'] = $slug;
+		// Sports Centre ID
 		$query = $this->db->query("SELECT `centreID` FROM `centreData` WHERE `key` = 'slug' AND `value` = '$slug' LIMIT 1");
 		$row = $query->row_array(); $centreID = $row['centreID'];
 		$this->session->set_userdata('centreID', $centreID);
-		
+		// Sports Centre Name
 		$query = $this->db->query("SELECT `value` FROM `centreData` WHERE `centreID` = '$centreID' AND `key` = 'name' LIMIT 1");
 		$row = $query->row_array();
 		$this->session->set_userdata('centreName', $row['value']);
+		// Sports Centre Name (Abbreviated)
 		$query = $this->db->query("SELECT `value` FROM `centreData` WHERE `centreID` = '$centreID' AND `key` = 'shortName' LIMIT 1");
 		$row = $query->row_array();
 		$this->session->set_userdata('centreShortName', $row['value']);
-		
+		// Page title
+		$this->data['title'] = "Homepage";
+		$this->data['page'] = "home";
 		//set the flash data error message if there is one
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		

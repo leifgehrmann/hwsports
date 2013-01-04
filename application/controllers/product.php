@@ -2,10 +2,9 @@
 
 class Product extends CI_Controller {
 
-	public function index($slug) {
+	public function index() {
 		$this->data['title'] = "Infusion Sports";
-		$this->data['slug'] = $slug;
-		$this->session->set_userdata('slug', $slug);
+		$this->session->set_userdata('slug', 'product');
 		
 		$this->load->view('product/header',$this->data);
 		$this->load->view('product/home',$this->data);
