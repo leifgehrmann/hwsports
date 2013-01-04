@@ -49,7 +49,7 @@ No venues exist for this sports centre yet. Please create one below.
 	</p>
 
 	<p>Location:</p>
-	<div id="map"></div>
+	<div id="map" style="width: 500px; height: 500px;"></div>
 
 	<p><?=form_submit('submit', 'Login');?></p>
 		
