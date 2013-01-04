@@ -2,9 +2,9 @@
 
 class Css extends CI_Controller {
 
-	public function load($file)
+	public function load($slug)
 	{
 		$this->output->set_header("Content-Type: text/css"); 
-		$this->load->view("css/{$this->session->userdata('slug')}/$file");
+		$this->load->view("css/$slug/".$this->uri->rsegment(5),$this->data);
 	}
 }
