@@ -10,6 +10,7 @@ class Sis extends CI_Controller {
 	public function index($slug) {
 		// Page title
 		$this->data['title'] = "Homepage";
+		$this->data['page'] = "home";
 		
 		$this->session->set_userdata('slug', $slug);
 		$this->data['slug'] = $slug;
@@ -44,6 +45,7 @@ class Sis extends CI_Controller {
 	{
 		// Page title
 		$this->data['title'] = "What's On";
+		$this->data['page'] = "whatson";
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('sis/whatson',$this->data);
 		$this->load->view('sis/footer',$this->data);
@@ -53,6 +55,7 @@ class Sis extends CI_Controller {
 	{
 		// Page title
 		$this->data['title'] = "Calendar";
+		$this->data['page'] = "calendar";
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('sis/calendar',$this->data);
 		$this->load->view('sis/footer',$this->data);
@@ -61,6 +64,7 @@ class Sis extends CI_Controller {
 	{
 		// Page title
 		$this->data['title'] = "Tournaments";
+		$this->data['page'] = "tournaments";
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('sis/tournaments',$this->data);
 		$this->load->view('sis/footer',$this->data);
@@ -69,6 +73,7 @@ class Sis extends CI_Controller {
 	{
 		// Page title
 		$this->data['title'] = "Help";
+		$this->data['page'] = "help";
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('sis/help',$this->data);
 		$this->load->view('sis/footer',$this->data);

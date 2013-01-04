@@ -59,6 +59,7 @@ class Auth extends CI_Controller {
 	function login()
 	{
 		$this->data['title'] = "Login";
+		$this->data['page'] = "login";
 
 		//validate form input
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
@@ -418,6 +419,7 @@ class Auth extends CI_Controller {
 	function register()
 	{
 		$this->data['title'] = "Registration";
+		$this->data['page'] = "register";
 
 		//validate form input
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
