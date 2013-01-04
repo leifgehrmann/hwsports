@@ -14,7 +14,7 @@
 }
 
 #header{
-	background: #827;
+	background: #00468C;
 	height:100px;
 	background-image:url('/img/hwsports/header.png');
 }
@@ -97,7 +97,7 @@ ul a {color: inherit; text-decoration:none; padding:0;}
 #menu li.homepage 		{ background-image: url(/img/hwsports/icons/home.14.png); }
 #menu li.whatson 		{ background-image: url(/img/hwsports/icons/match.14.png); }
 #menu li.calendar 		{ background-image: url(/img/hwsports/icons/calendar.14.png); }
-#menu li.tournaments 	{ background-image: url(/img/hwsports/icons/tournaments.14.png); }
+#menu li.tournaments 	{ background-image: url(/img/hwsports/icons/tournament.14.png); }
 #menu li.register 		{ background-image: url(/img/hwsports/icons/star.14.png); }
 #menu li.management 	{ background-image: url(/img/hwsports/icons/match.14.png); }
 #menu li.help 			{ background-image: url(/img/hwsports/icons/help.14.png); }
