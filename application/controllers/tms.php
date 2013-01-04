@@ -50,7 +50,8 @@ class Tms extends MY_Controller {
 			);
 			$this->data['debug'][] = array_merge($venue, $venueDataQuery->row_array());
 		}
-		$this->data['debug'] = print_r($this->data['debug'],1);
+		$this->data['debug'] = "Centre ID: {$this->data['centre']['id']}";
+		$this->data['debug'] .= print_r($this->data['debug'],1);
 		
 		//validate form input
 		$this->form_validation->set_rules('name', 'Name', 'required');
