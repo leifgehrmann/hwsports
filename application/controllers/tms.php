@@ -41,7 +41,7 @@ class Tms extends MY_Controller {
 		$this->db->select('venueID'); 
 		$this->db->distinct(); 
 		$query = $this->db->get('venueData');
-		$this->data['debug'] = print_r($query->result(),1);
+		$this->data['debug'] = $query;
 		
 		//validate form input
 		$this->form_validation->set_rules('name', 'Name', 'required');
