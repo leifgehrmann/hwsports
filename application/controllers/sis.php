@@ -5,6 +5,7 @@ class Sis extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		$this->data['slug'] = $this->session->userdata('slug');
 	}
 	public function index($slug) {
 		// Page title
