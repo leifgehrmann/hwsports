@@ -43,7 +43,7 @@ class Tms extends MY_Controller {
 		// If form has been submitted and it validates ok
 		if ($this->form_validation->run() == true) {
 			// Form validated ok, process input
-			if (//db query to submit data is ok)
+			if ($this->db->insert_batch())
 			{
 				// db success
 				//redirect them back to the home page
