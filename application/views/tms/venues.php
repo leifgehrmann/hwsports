@@ -48,6 +48,9 @@ No venues exist for this sports centre yet. Please create one below.
 	<?=form_input($createDirections);?>
 	</p>
 
+	<p>Location:</p>
+	<div id="map"></div>
+
 	<p><?=form_submit('submit', 'Login');?></p>
 		
 <?=form_close();?>
