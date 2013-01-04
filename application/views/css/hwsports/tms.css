@@ -83,7 +83,7 @@ ul, li {
 }
 ul {margin-bottom:0px;width:190px;}
 ul li { padding: 10px;}
-ul a li {color: inherit; text-decoration:none; padding:0;}
+ul a li {color: inherit; text-decoration:none;}
 
 #menu {
 	float: left;
