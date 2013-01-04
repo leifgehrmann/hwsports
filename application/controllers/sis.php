@@ -49,4 +49,29 @@ class Sis extends CI_Controller {
 		$this->load->view('sis/footer',$this->data);
 	}
 
+	public function calendar()
+	{
+		// Page title
+		$this->data['title'] = "Calendar";
+		$this->load->view('sis/header',$this->data);
+		$this->load->view('sis/calendar',$this->data);
+		$this->load->view('sis/footer',$this->data);
+	}
+	public function tournaments()
+	{
+		// Page title
+		$this->data['title'] = "Tournaments";
+		$this->load->view('sis/header',$this->data);
+		$this->load->view('sis/tournaments',$this->data);
+		$this->load->view('sis/footer',$this->data);
+	}
+	public function help()
+	{
+		// Page title
+		$this->data['title'] = "Help";
+		$this->load->view('sis/header',$this->data);
+		$this->load->view('sis/help',$this->data);
+		$this->load->view('sis/footer',$this->data);
+	}
+
 }
