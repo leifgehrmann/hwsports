@@ -4,29 +4,10 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
-        <title><?=$title?> | ***********************************************************</title>
+        <title><?=$title?> | <?=$centreShortName?> Sports</title>
         <link href="/css/<?=$slug?>/normalize.min.css" rel="stylesheet" type="text/css">
         <link href="/css/<?=$slug?>/main.css" rel="stylesheet" type="text/css">
         <link href="/css/<?=$slug?>/sis.css" rel="stylesheet" type="text/css">
-        <style type="text/css">
-        <!--
-            body {
-                background:#E7EEF9;
-            }
-            #header {
-                background:#00468C;
-                /************************************************************</*/
-                /************************************************************</*/
-                /************************************************************</*/
-                /************************************************************</*/
-                /************************************************************</*/
-                background-image: url("../../img/banners/hwsports.png");
-            }
-            #content h1, #content h2, #content h3, #content a{
-                color:#00468C;
-            }
-        -->
-        </style>
     </head>
     <!--[if lt IE 7]>      <body class="page-<?=$_ci_view?> lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
     <!--[if IE 7]>         <body class="page-<?=$_ci_view?> lt-ie9 lt-ie8"> <![endif]-->
