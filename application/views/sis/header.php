@@ -39,8 +39,8 @@
                 <? if($this->ion_auth->logged_in()){ ?>
                     <ul class="menu-user">
                         <a href="/auth/logout"><li class="logout">Logout</li></a>
-                        <a href="/tms/tickets"><li class="tickets">Tickets</li></a>
-                        <a href="/tms/signup"><li class="signup">Sign up</li></a>
+                        <a href="/sis/tickets"><li class="tickets">Tickets</li></a>
+                        <a href="/sis/signup"><li class="signup">Sign up</li></a>
                         <? if($this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin')){ ?>
                             <a href="/tms"><li class="management">Management</li></a>
                         <? } ?>
