@@ -38,7 +38,7 @@ class Tms extends MY_Controller {
 		$this->data['page'] = "venues";
 		
 		// Get list of all venues
-		$this->data['venues'] = array();
+		$this->data['venues'] = ax`rray();
 		$venueQuery = $this->db->query("SELECT venueID FROM venues WHERE centreID = {$this->data['centre']['id']}");
 		foreach($venueQuery->row_array() as $venue) {
 			$venueDataQuery = $this->db->query("SELECT " .
@@ -62,8 +62,7 @@ class Tms extends MY_Controller {
 		// If form has been submitted and it validates ok
 		if ($this->form_validation->run() == true) {
 			// Form validated ok, process input
-			$venueArray = array('centreID' => $this->data['centre']['id']);
-			$this->db->insert($venueArray);
+			$this->db->query("INSERT INTO venues (centreID) VALUES ({$this->data['centre']['id']})";
 			$venueID = $this->db->insert_id();
 			
 			$venueDataArray = array(
