@@ -38,10 +38,19 @@ class Tms extends MY_Controller {
 		$this->data['page'] = "venues";
 		
 		// Get list of all venues
-		$this->db->select('venueID'); 
-		$this->db->distinct(); 
-		$query = $this->db->get('venueData');
-		$this->data['debug'] = $query;
+		$venueQuery = $this->db->query("SELECT venueID FROM venues WHERE centreID = {$this->data['centre']['id']}");
+		foreach($venueQuery->row_array() as $venue) {
+			$venueDataQuery = $this->db->query("SELECT " .
+				"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
+				"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
+				"MAX(CASE WHEN `key`='directions' THEN value END ) AS directions, " .
+				"MAX(CASE WHEN `key`='lat' THEN value END ) AS lat, " .
+				"MAX(CASE WHEN `key`='lng' THEN value END ) AS lng " .
+				"FROM venueData WHERE venueID = {$venue['venueID']}"
+			);
+			$this->data['debug'][] = array_merge($venue, $venueDataQuery->row_array());
+		}
+		$this->data['debug'] = print_r($this->data['debug'],1);
 		
 		//validate form input
 		$this->form_validation->set_rules('name', 'Name', 'required');
