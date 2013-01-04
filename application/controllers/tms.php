@@ -32,10 +32,56 @@ class Tms extends MY_Controller {
 		$this->load->view('tms/tournaments',$this->data);
 		$this->load->view('tms/footer',$this->data);
 	}
-	public function venues()
+	public function venues($action='portal')
 	{
 		$this->data['title'] = "Venues";
 		$this->data['page'] = "venues";
+		
+		//validate form input
+		$this->form_validation->set_rules('name', 'Name', 'required');
+
+		// If form has been submitted and it validates ok
+		if ($this->form_validation->run() == true) {
+			// Form validated ok, process input
+			if (//db query to submit data is ok)
+			{
+				// db success
+				//redirect them back to the home page
+				$this->session->set_flashdata('message', $this->ion_auth->messages());
+				redirect('/tms', 'refresh');
+			}
+			else
+			{
+				// db fail
+				$this->session->set_flashdata('message', $this->ion_auth->errors());
+				redirect('/tms/venues', 'refresh');
+			}
+		} else {
+			//eith form not submitted yet or validation failed
+			//set the flash data error message if there is one
+			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+			
+			// query google maps api for lat / lng of sports centre
+			$address = $this->data['centre']['address'];
+			$url = "http://maps.google.com/maps/api/geocode/json?address=$address&sensor=false&region=uk";
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+			$json = curl_exec($ch);
+			curl_close($ch);
+			$apiData = json_decode($json);
+			$lat = $apiData->results[0]->geometry->location->lat;
+			$lng = $apiData->results[0]->geometry->location->lng;
+
+			$this->data['createLatLng'] = array('lat' => $lat, 'lng' => $lng);
+			$this->data['createName'] = array('name' => '');
+			$this->data['createDescription'] = array('description' => '');
+			$this->data['createDirections'] = array('directions' => '');
+		}
+		
 		$this->load->view('tms/header',$this->data);
 		$this->load->view('tms/venues',$this->data);
 		$this->load->view('tms/footer',$this->data);
