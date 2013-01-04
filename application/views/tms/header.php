@@ -6,7 +6,7 @@
         <meta name="description" content="">
         <title><?=$title?> | Tournament Management System</title>
         <link rel="icon" type="image/png" href="/img/<?=$slug?>/logo/tms.fav.png" />
-        <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
+        <link href="/css/<?=$slug?>/normalize.min.css" rel="stylesheet" type="text/css">
         <link href="/css/<?=$slug?>/main.css" rel="stylesheet" type="text/css">
         <link href="/css/<?=$slug?>/tms.css" rel="stylesheet" type="text/css">
     </head>
