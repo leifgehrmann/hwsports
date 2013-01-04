@@ -21,7 +21,7 @@
 			<a href="/tms" id="title-bar" class="left">
                 <div class="logo"></div>
                 <div class="name"><?=$this->session->userdata('centreShortName')?></div>
-                <div class="system">Tournaments System</div>
+                <div class="system">Sports Management</div>
             </a>
             <div id="user-bar" class="right">
                 <span class="username"><?=$currentUser->firstName.' '.$currentUser->lastName?></span>
@@ -33,18 +33,18 @@
         </div>
         <div id="menu">
             <ul>
-                <li class="selected"><a href="/tms"><img src="/img/<?=$slug?>/icons/home.14.png"/>Dashboard</a></li>
+                <li class="<?=($page=="home" ? 'selected' : '')?>"><a href="/tms"><img src="/img/<?=$slug?>/icons/home.14.png"/>Dashboard</a></li>
             </ul>
             <ul>
-                <li><a href=""><img src="/img/<?=$slug?>/icons/tournament.14.png"/>Tournaments</a></li>
-                <li><img src="/img/<?=$slug?>/icons/jellyfish.14.png"/>Venues</li>
-                <li><img src="/img/<?=$slug?>/icons/sport.14.png"/>Sports</li>
-                <li><img src="/img/<?=$slug?>/icons/match.14.png"/>Matches</li>
-                <li ><img src="/img/<?=$slug?>/icons/group.14.png"/>Groups</li>
-                <li><img src="/img/<?=$slug?>/icons/user.14.png"/>Users</li>
-                <li><img src="/img/<?=$slug?>/icons/news.14.png"/>News</li>
-                <li><img src="/img/<?=$slug?>/icons/money.14.png"/>Tickets</li>
-                <li><img src="/img/<?=$slug?>/icons/report.14.png"/>Reports</li>
+                <li class="<?=($page=="tournaments" ? 'selected' : '')?>"><a href="/tms/tournaments"><img src="/img/<?=$slug?>/icons/tournament.14.png"/>Tournaments</a></li>
+                <li class="<?=($page=="venues" ? 'selected' : '')?>"><a href="/tms/venues"><img src="/img/<?=$slug?>/icons/jellyfish.14.png"/>Venues</a></li>
+                <li class="<?=($page=="sports" ? 'selected' : '')?>"><a href="/tms/sports"><img src="/img/<?=$slug?>/icons/sport.14.png"/>Sports</a></li>
+                <li class="<?=($page=="matches" ? 'selected' : '')?>"><a href="/tms/matches"><img src="/img/<?=$slug?>/icons/match.14.png"/>Matches</a></li>
+                <li class="<?=($page=="groups" ? 'selected' : '')?>"><a href="/tms/groups"><img src="/img/<?=$slug?>/icons/group.14.png"/>Groups</a></li>
+                <li class="<?=($page=="users" ? 'selected' : '')?>"><a href="/tms/users"><img src="/img/<?=$slug?>/icons/user.14.png"/>Users</a></li>
+                <li class="<?=($page=="news" ? 'selected' : '')?>"><a href="/tms/news"><img src="/img/<?=$slug?>/icons/news.14.png"/>News</a></li>
+                <li class="<?=($page=="tickets" ? 'selected' : '')?>"><a href="/tms/tickets"><img src="/img/<?=$slug?>/icons/money.14.png"/>Tickets</a></li>
+                <li class="<?=($page=="reports" ? 'selected' : '')?>"><a href="/tms/reports"><img src="/img/<?=$slug?>/icons/report.14.png"/>Reports</a></li>
             </ul>
             <ul>
                 <li><img src="/img/<?=$slug?>/icons/appearence.14.png"/>Appearence</li>

@@ -21,20 +21,20 @@
             <a href="/"><div id="header"></div></a>
             <div id="menu">
                 <ul>
-                    <a href="/"><li class="homepage <? if($page=="home"){ ?>selected<? } ?>">Homepage</li></a>
-                    <a href="/sis/whatson"><li class="whatson <? if($page=="whatson"){ ?>selected<? } ?>">What's On</li></a>
-                    <a href="/sis/calendar"><li class="calendar <? if($page=="calendar"){ ?>selected<? } ?>">Calendar</li></a>
-                    <a href="/sis/tournaments"><li class="tournament <? if($page=="tournaments"){ ?>selected<? } ?>">Tournaments</li></a>
-                    <a href="/auth/register"><li class="register special <? if($page=="register"){ ?>selected<? } ?>">Registration</li></a>
+                    <a href="/"><li class="homepage <?=($page=="home" ? 'selected' : '')?>">Homepage</li></a>
+                    <a href="/sis/whatson"><li class="whatson <?=($page=="whatson" ? 'selected' : '')?>">What's On</li></a>
+                    <a href="/sis/calendar"><li class="calendar <?=($page=="calendar" ? 'selected' : '')?>">Calendar</li></a>
+                    <a href="/sis/tournaments"><li class="tournament <?=($page=="tournaments" ? 'selected' : '')?>">Tournaments</li></a>
+                    <a href="/auth/register"><li class="register special <?=($page=="register" ? 'selected' : '')?>">Registration</li></a>
                     <? if($this->ion_auth->logged_in()){ ?>
                         <a href="/auth/logout"><li class="logout">Logout</li></a>
                     <? } else { ?>
-                        <a href="/auth/login"><li class="login <? if($page=="login"){ ?>selected<? } ?>">Login</li></a>
+                        <a href="/auth/login"><li class="login <?=($page=="login" ? 'selected' : '')?>">Login</li></a>
                     <? } ?>
 					<? if($this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin')){ ?>
                         <a href="/tms"><li class="management">Management</li></a>
                     <? } ?>
-                    <a href="/sis/help"><li class="help <? if($page=="help"){ ?>selected<? } ?>">Help</li></a>
+                    <a href="/sis/help"><li class="help <?=($page=="help" ? 'selected' : '')?>">Help</li></a>
                 </ul>
             </div>
             <div id="content">
