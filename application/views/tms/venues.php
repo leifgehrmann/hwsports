@@ -63,9 +63,8 @@ var centre_pos  = new google.maps.LatLng( $('input[name="lat"]').val(), $('input
 function zoomIn(){ map.setZoom(map.getZoom()+1);}
 function zoomOut(){ map.setZoom(map.getZoom()-1);}
 
-
 function initialize(){
-	map = new google.maps.Map(document.getElementById('Map'), {
+	map = new google.maps.Map($('#map'), {
 		zoom: 15,
 		center: centre_pos,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -75,7 +74,6 @@ function initialize(){
 		var newlocation = map.getCenter();
 	});
 }
-
 
 google.maps.event.addDomListener(window, 'load', initialize);
 </script>
