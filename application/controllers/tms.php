@@ -16,9 +16,8 @@ class Tms extends CI_Controller {
 			redirect('/', 'refresh');
 		}
 	}
-	public function index($slug)
+	public function index()
 	{
-		$this->data['slug'] = $slug;
 		$this->data['title'] = "Home";
 		$this->data['page'] = "home";
 		$this->load->view('tms/header',$this->data);
@@ -27,7 +26,6 @@ class Tms extends CI_Controller {
 	}
 	public function tournaments()
 	{
-		$this->data['slug'] = $slug;
 		$this->data['title'] = "Tournaments";
 		$this->data['page'] = "tournaments";
 		$this->load->view('tms/header',$this->data);
@@ -36,7 +34,6 @@ class Tms extends CI_Controller {
 	}
 	public function venues()
 	{
-		$this->data['slug'] = $slug;
 		$this->data['title'] = "Venues";
 		$this->data['page'] = "venues";
 		$this->load->view('tms/header',$this->data);
@@ -45,7 +42,6 @@ class Tms extends CI_Controller {
 	}
 	public function sports()
 	{
-		$this->data['slug'] = $slug;
 		$this->data['title'] = "Sports";
 		$this->data['page'] = "sports";
 		$this->load->view('tms/header',$this->data);
@@ -54,7 +50,6 @@ class Tms extends CI_Controller {
 	}
 	public function matches()
 	{
-		$this->data['slug'] = $slug;
 		$this->data['title'] = "Matches";
 		$this->data['page'] = "matches";
 		$this->load->view('tms/header',$this->data);
@@ -63,7 +58,6 @@ class Tms extends CI_Controller {
 	}
 	public function groups()
 	{
-		$this->data['slug'] = $slug;
 		$this->data['title'] = "Groups";
 		$this->data['page'] = "groups";
 		$this->load->view('tms/header',$this->data);
@@ -72,7 +66,6 @@ class Tms extends CI_Controller {
 	}
 	public function users()
 	{
-		$this->data['slug'] = $slug;
 		$this->data['title'] = "Users";
 		$this->data['page'] = "users";
 		$this->load->view('tms/header',$this->data);
@@ -81,7 +74,6 @@ class Tms extends CI_Controller {
 	}
 	public function news()
 	{
-		$this->data['slug'] = $slug;
 		$this->data['title'] = "News";
 		$this->data['page'] = "news";
 		$this->load->view('tms/header',$this->data);
@@ -90,7 +82,6 @@ class Tms extends CI_Controller {
 	}
 	public function tickets()
 	{
-		$this->data['slug'] = $slug;
 		$this->data['title'] = "Tickets";
 		$this->data['page'] = "tickets";
 		$this->load->view('tms/header',$this->data);
@@ -99,7 +90,6 @@ class Tms extends CI_Controller {
 	}
 	public function reports()
 	{
-		$this->data['slug'] = $slug;
 		$this->data['title'] = "Reports";
 		$this->data['page'] = "reports";
 		$this->load->view('tms/header',$this->data);
