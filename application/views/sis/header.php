@@ -31,7 +31,7 @@
                     <a href="/sis/calendar"><li class="calendar <?=($page=="calendar" ? 'selected' : '')?>">Calendar</li></a>
                     <a href="/sis/tournaments"><li class="tournaments <?=($page=="tournaments" ? 'selected' : '')?>">Tournaments</li></a>
                     <? if(!$this->ion_auth->logged_in()){ ?>
-                        <a href="/auth/register"><li class="register special <?=($page=="register" ? 'selected' : '')?>">Registration</li></a>
+                        <a href="/auth/register"><li class="register special <?=($page=="register" ? 'selected' : '')?>">Register</li></a>
                         <a href="/auth/login"><li class="login <?=($page=="login" ? 'selected' : '')?>">Login</li></a>
                     <? } ?>
                     <a href="/sis/help"><li class="help <?=($page=="help" ? 'selected' : '')?>">Help</li></a>
@@ -39,6 +39,8 @@
                 <? if($this->ion_auth->logged_in()){ ?>
                     <ul class="menu-user">
                         <a href="/auth/logout"><li class="logout">Logout</li></a>
+                        <a href="/tms/tickets"><li class="tickets">Tickets</li></a>
+                        <a href="/tms/signup"><li class="signup">Sign up</li></a>
                         <? if($this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin')){ ?>
                             <a href="/tms"><li class="management">Management</li></a>
                         <? } ?>
