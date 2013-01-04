@@ -25,7 +25,7 @@
 
 <p>Enter details of new venue below.</p>
 
-<?=form_open("tms/venues/create");?>
+<?=form_open("tms/venues");?>
 
 	<?=form_hidden($createLatLng);?>
 		
