@@ -42,17 +42,17 @@ body {
 }
 
 
-ul, li {
+#menu ul, #menu li {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
-ul {margin-bottom:0px;width:160px;}
-ul li { 
+#menu ul {margin-bottom:0px;width:160px;}
+#menu ul li { 
 	padding: 10px;
 	margin-bottom: 10px;
 }
-a {color: inherit; text-decoration:none;}
+#menu a {color: inherit; text-decoration:none;}
 
 #menu {
 	margin-left:20px;

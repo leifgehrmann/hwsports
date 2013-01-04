@@ -76,14 +76,14 @@ body {
 }
 
 
-ul, li {
+#menu ul, #menu li {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
-ul {margin-bottom:0px;width:190px;}
-ul li { padding: 10px;}
-ul a {color: inherit; text-decoration:none;}
+#menu ul {margin-bottom:0px;width:190px;}
+#menu ul li { padding: 10px;}
+#menu ul a {color: inherit; text-decoration:none;}
 
 #menu {
 	float: left;
