@@ -6,8 +6,7 @@ class Sis extends CI_Controller {
 	{
 		parent::__construct();
 	}
-	public function index($slug)
-	{
+	public function index($slug) {
 		// Page title
 		$this->data['title'] = "Homepage";
 		
