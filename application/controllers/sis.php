@@ -80,6 +80,16 @@ class Sis extends CI_Controller {
 		$this->load->view('sis/tournaments',$this->data);
 		$this->load->view('sis/footer',$this->data);
 	}
+	public function tournament($tournamentID)
+	{
+		// Page title
+		$this->data['title'] = "Tournaments";
+		$this->data['page'] = "tournaments";
+		$this->data['tournamentID'] = $tournamentID;
+		$this->load->view('sis/header',$this->data);
+		$this->load->view('sis/tournaments',$this->data);
+		$this->load->view('sis/footer',$this->data);
+	}
 	public function help()
 	{
 		// Page title
