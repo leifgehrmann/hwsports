@@ -20,7 +20,7 @@
 			<td><?//=$venue['directions'];?></td>
 			<td><?//=$venue['lat'];?> / <?//=$venue['lng'];?></td>
 		</tr>
-	<?php endforeach;?>
+	<?php //endforeach;?>
 </table>
 
 <h1>Create Venue</h1>
