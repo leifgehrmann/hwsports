@@ -2,9 +2,8 @@
 
 <h1>Venue List</h1>
 
-<? //print_r($debug) ?>
 <? if(count($venues)>=1) { ?>
-<table cellpadding=0 cellspacing=10>
+<table id="venuesTable">
 	<tr>
 		<th>ID</th>
 		<th>Name</th>
@@ -12,7 +11,6 @@
 		<th>Directions</th>
 		<th>Lat/Lng</th>
 	</tr>
-	<?php print_r($venues) ?>
 	<?php foreach ($venues as $id => $venue):?>
 		<tr>
 			<td><?=$id;?></td>
