@@ -12,15 +12,15 @@
 		<th>Directions</th>
 		<th>Lat/Lng</th>
 	</tr>
-	<?php// foreach ($venues as $venue):?>
+	<? // foreach ($venues as $venue):?>
 		<tr>
-			<td><?//=$venue['id'];?></td>
-			<td><?//=$venue['name'];?></td>
-			<td><?//=$venue['description'];?></td>
-			<td><?//=$venue['directions'];?></td>
-			<td><?//=$venue['lat'];?> / <?//=$venue['lng'];?></td>
+			<td><? //=$venue['id'];?></td>
+			<td><? //=$venue['name'];?></td>
+			<td><? //=$venue['description'];?></td>
+			<td><? //=$venue['directions'];?></td>
+			<td><? //=$venue['lat'];?> / <? //=$venue['lng'];?></td>
 		</tr>
-	<?php //endforeach;?>
+	<? //endforeach;?>
 </table>
 
 <h1>Create Venue</h1>
