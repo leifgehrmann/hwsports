@@ -64,7 +64,7 @@ function zoomIn(){ map.setZoom(map.getZoom()+1);}
 function zoomOut(){ map.setZoom(map.getZoom()-1);}
 
 function initialize(){
-	map = new google.maps.Map($('#map'), {
+	map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 15,
 		center: centre_pos,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
