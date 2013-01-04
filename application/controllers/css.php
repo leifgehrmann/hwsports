@@ -2,9 +2,9 @@
 
 class Css extends MY_Controller {
 
-	public function load()
+	public function load($file)
 	{
 		$this->output->set_header("Content-Type: text/css"); 
-		$this->load->view("css/{$this->data['slug']}/".$this->uri->rsegment(5));
+		$this->load->view("css/{$this->data['slug']}/$file");
 	}
 }
