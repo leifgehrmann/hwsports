@@ -40,9 +40,10 @@ class Tms extends MY_Controller {
 		// Get list of all venues
 		$this->data['venues'] = array();
 		$venueQueryString = "SELECT venueID FROM venues WHERE centreID = {$this->data['centre']['id']}";
-		$this->data['debug'] = $venueQueryString;
 		$venueQuery = $this->db->query($venueQueryString);
-		foreach($venueQuery->row_array() as $venue) {
+		$venuesArray = $venueQuery->row_array();
+		$this->data['debug'] = $venuesArray;
+		foreach($venuesArray as $venue) {
 			$venueDataQueryString = "SELECT " .
 				"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 				"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
