@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
         <title><?=$title?> | <?=$this->session->userdata('centreShortName')?> Sports</title>
+        <link rel="icon" type="image/png" href="/img/<?=$this->session->userdata('slug')?>/logo/sis.fav.16.png" />
         <link href="/css/<?=$this->session->userdata('slug')?>/normalize.min.css" rel="stylesheet" type="text/css">
         <link href="/css/<?=$this->session->userdata('slug')?>/main.css" rel="stylesheet" type="text/css">
         <link href="/css/<?=$this->session->userdata('slug')?>/sis.css" rel="stylesheet" type="text/css">
