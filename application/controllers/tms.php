@@ -39,6 +39,10 @@ class Tms extends MY_Controller {
 		
 		//validate form input
 		$this->form_validation->set_rules('name', 'Name', 'required');
+		$this->form_validation->set_rules('description', 'Description', 'required');
+		$this->form_validation->set_rules('directions', 'Directions', 'required');
+		$this->form_validation->set_rules('lat', 'Latitude', 'required');
+		$this->form_validation->set_rules('lng', 'Longitude', 'required');
 
 		// If form has been submitted and it validates ok
 		if ($this->form_validation->run() == true) {
@@ -85,7 +89,7 @@ class Tms extends MY_Controller {
 				redirect('/tms/venues', 'refresh');
 			}
 		} else {
-			//eith form not submitted yet or validation failed
+			//either form not submitted yet or validation failed
 			//set the flash data error message if there is one
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 			
