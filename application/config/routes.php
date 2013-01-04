@@ -37,21 +37,9 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-if ($_SERVER['HTTP_HOST']=="hwsports.co.uk") {
-    $slug = "hwsports";
 
-	$config['base_url'] = 'http://hwsports.co.uk/';
-	$route['default_controller'] = "sis/index/$slug";
-} else {
-	$slug = 'product';
-	$route['default_controller'] = "product";
-}
-
-$route['css/(:any)'] = "css/load/$slug/$1";
-$route['tms'] = "tms/index/$slug";
-$route['auth/login'] = "auth/login/$slug";
-$route['auth/create_user'] = "auth/create_user/$slug";
-
+$route['css/(:any)'] = "css/load/$1";
+$route['default_controller'] = ($_SERVER['HTTP_HOST']=="infusionsports.co.uk" ? "product" : "sis");
 $route['404_override'] = '';
 
 /* End of file routes.php */

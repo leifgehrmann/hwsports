@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Css extends CI_Controller {
+class Css extends MY_Controller {
 
 	public function load($slug)
 	{
