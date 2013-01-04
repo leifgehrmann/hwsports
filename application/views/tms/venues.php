@@ -2,6 +2,7 @@
 
 <h1>Venue List</h1>
 
+<?=$debug?>
 <? if(count($venues)>=1) { ?>
 <table cellpadding=0 cellspacing=10>
 	<tr>
