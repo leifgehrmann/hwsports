@@ -7,8 +7,6 @@
 
 <p>Enter details of new venue below.</p>
 
-<?=$apiData;?>
-
 <?=form_open("tms/venues/create");?>
 
 	<?=form_hidden($createLatLng);?>
