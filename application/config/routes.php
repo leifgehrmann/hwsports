@@ -44,7 +44,7 @@ if ($_SERVER['HTTP_HOST']=="hwsports.co.uk") {
 	$route['default_controller'] = "sis/index/$slug";
 } else {
 	$slug = 'product';
-	$route['default_controller'] = "product";
+	$route['default_controller'] = "product/index/$slug";
 }
 
 $route['css/(:any)'] = "css/load/$slug/$1";
