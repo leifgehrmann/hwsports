@@ -20,6 +20,7 @@ class Auth extends CI_Controller {
 	
 		// Page title
 		$this->data['title'] = "Auth";
+		$this->data['slug'] = $this->session->userdata('slug');
 	}
 
 	//redirect if needed, otherwise display the user list
