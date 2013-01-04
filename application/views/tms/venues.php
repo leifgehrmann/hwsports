@@ -13,7 +13,7 @@
 	</tr>
 	<?php foreach ($venues as $venue):?>
 		<tr>
-			<td><?=$venue['id'];?></td>
+			<td><?=$venue['venueID'];?></td>
 			<td><?=$venue['name'];?></td>
 			<td><?=$venue['description'];?></td>
 			<td><?=$venue['directions'];?></td>
