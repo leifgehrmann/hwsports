@@ -2,6 +2,7 @@
 
 <h1>Venue List</h1>
 
+<? if(count($venues)>=1) { ?>
 <table cellpadding=0 cellspacing=10>
 	<tr>
 		<th>ID</th>
@@ -20,6 +21,9 @@
 		</tr>
 	<?php endforeach;?>
 </table>
+<? } else { ?>
+No venues exist for this sports centre yet. Please create one below.
+<? } ?>
 
 <h1>Create Venue</h1>
 
