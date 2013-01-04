@@ -58,6 +58,7 @@ body {
 }
 #menu ul.menu-user{
 	background:#CCC;
+	padding-bottom: 20px;
 }
 #menu ul li { 
 	margin-bottom: 10px;
@@ -78,7 +79,6 @@ body {
 	padding: 10px;
 	padding-left:44px;
 	color:#444;
-	background:#FFF;
 	background-repeat: no-repeat;
 	background-position: 20px 12px;
 }
