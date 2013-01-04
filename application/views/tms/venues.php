@@ -51,7 +51,7 @@ No venues exist for this sports centre yet. Please create one below.
 	<p>Location:</p>
 	<div id="map" style="width: 500px; height: 500px;"></div>
 
-	<p><?=form_submit('submit', 'Login');?></p>
+	<p><?=form_submit('submit', 'Create Venue');?></p>
 		
 <?=form_close();?>
 
@@ -72,6 +72,8 @@ function initialize(){
 
 	google.maps.event.addListener(map, 'dragend', function() {
 		var newlocation = map.getCenter();
+		$('input[name=lat]').val(newlocation.lat());
+		$('input[name=lng]').val(newlocation.lng());
 	});
 }
 
