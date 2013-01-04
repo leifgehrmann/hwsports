@@ -1,9 +1,9 @@
-<h1><a href="Tournaments">Tournaments</a> &gt; Tournament name</h1>
-<p>A description of this tournament. Bla bla bla, very interesting</p>
+<h1><a href="/sis/tournaments">Tournaments</a> &gt; $tournamentName</h1>
+<p></p>
 <h2>Games</h2>
 <ul>
-	<li>Wattball</li>
-	<li>Mens Heriot Hurdling</li>
-	<li>Womens Heriot Hurdling</li>
+	<li><a href="/sis/game/$gameID">Wattball</a></li>
+	<li><a href="/sis/game/$gameID">Mens Heriot Hurdling</a></li>
+	<li><a href="/sis/game/$gameID">Womens Heriot Hurdling</a></li>
 </ul>
 <h2>Calendar</h2>

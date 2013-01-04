@@ -9,6 +9,7 @@
         <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
         <link href="/css/main.css" rel="stylesheet" type="text/css">
         <link href="/css/tms.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
     </head>
     <!--[if lt IE 7]>      <body class="page-<?=$page?> lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
     <!--[if IE 7]>         <body class="page-<?=$page?> lt-ie9 lt-ie8"> <![endif]-->

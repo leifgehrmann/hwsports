@@ -5,9 +5,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
         <title>Infusion Sports</title>
-        <link href="/css/<?=$slug?>/normalize.min.css" rel="stylesheet" type="text/css">
-        <link href="/css/<?=$slug?>/main.css" rel="stylesheet" type="text/css">
-        <link href="/css/<?=$slug?>/sis.css" rel="stylesheet" type="text/css">
+        <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
+        <link href="/css/main.css" rel="stylesheet" type="text/css">
+        <link href="/css/sis.css" rel="stylesheet" type="text/css">
     </head>
     <!--[if lt IE 7]>      <body class="page-<?=$page?> lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
     <!--[if IE 7]>         <body class="page-<?=$page?> lt-ie9 lt-ie8"> <![endif]-->
