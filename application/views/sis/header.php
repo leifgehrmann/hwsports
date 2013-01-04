@@ -46,12 +46,12 @@
                     <a href="/sis/tournaments"><li class="tournament <? if($title=="Tournaments"){ ?>selected<? } ?>"><img src="../../img/icons/tournament.14.png"/>Tournaments</li></a>
                     <a href="/auth/register"><li class="registration special"><img src="../../img/icons/star.14.png"/>Registration</li></a>
                     <? if($this->ion_auth->logged_in()){ ?>
-                        <a href="/auth/logout"><li class="logout"><img src="../../img/icons/key.14.png"/>Logout</li></a>
+                        <a href="/auth/logout"><li class="logout">Logout</li></a>
                     <? } else { ?>
-                        <a href="/auth/login"><li class="login"><img src="../../img/icons/key.14.png"/>Login</li></a>
+                        <a href="/auth/login"><li class="login">Login</li></a>
                     <? } ?>
 					<? if($this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin')){ ?>
-                        <a href="/tms"><li class="management"><img src="../../img/icons/key.14.png"/>Management</li></a>
+                        <a href="/tms"><li class="management">Management</li></a>
                     <? } ?>
                     <a href="sis/help"><li class="help <? if($title=="Help"){ ?>selected<? } ?>"><img src="../../img/icons/help.14.png"/>Help</li></a>
                 </ul>
