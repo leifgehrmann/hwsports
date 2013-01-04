@@ -43,7 +43,7 @@ class Tms extends MY_Controller {
 		// If form has been submitted and it validates ok
 		if ($this->form_validation->run() == true) {
 			// Form validated ok, process input
-			if (//db query to submit data is ok)
+			if ($this->db->insert_batch())
 			{
 				// db success
 				//redirect them back to the home page
@@ -73,6 +73,8 @@ class Tms extends MY_Controller {
 			$json = curl_exec($ch);
 			curl_close($ch);
 			$apiData = json_decode($json);
+			
+			print_r($apiData); die();
 			$lat = $apiData->results[0]->geometry->location->lat;
 			$lng = $apiData->results[0]->geometry->location->lng;
 
