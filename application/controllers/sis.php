@@ -20,7 +20,7 @@ class Sis extends CI_Controller {
 		// Get sports centre data
 		// Perhaps we should create a helper object
 
-		$query = $this->db->query("SELECT ".
+		$query = $this->db->query("SELECT "
 			."MAX(CASE WHEN `key`='name' THEN value END ) AS name,"
 			."MAX(CASE WHEN `key`='address' THEN value END ) AS address,"
 			."MAX(CASE WHEN `key`='legalText' THEN value END ) AS legalText,"
