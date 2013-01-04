@@ -2,6 +2,8 @@
 
 <h1>Venue List</h1>
 
+<td><?=$debug;?></td>
+
 <table cellpadding=0 cellspacing=10>
 	<tr>
 		<th>ID</th>
@@ -12,11 +14,11 @@
 	</tr>
 	<?php foreach ($venues as $venue):?>
 		<tr>
-			<td><?=$venue['id'];?></td>
-			<td><?=$venue['name'];?></td>
-			<td><?=$venue['description'];?></td>
-			<td><?=$venue['directions'];?></td>
-			<td><?=$venue['lat'];?> / <?=$venue['lng'];?></td>
+			<td><?//=$venue['id'];?></td>
+			<td><?//=$venue['name'];?></td>
+			<td><?//=$venue['description'];?></td>
+			<td><?//=$venue['directions'];?></td>
+			<td><?//=$venue['lat'];?> / <?//=$venue['lng'];?></td>
 		</tr>
 	<?php endforeach;?>
 </table>

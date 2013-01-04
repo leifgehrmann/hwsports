@@ -37,6 +37,12 @@ class Tms extends MY_Controller {
 		$this->data['title'] = "Venues";
 		$this->data['page'] = "venues";
 		
+		// Get list of all venues
+		$this->db->select('venueID'); 
+		$this->db->distinct(); 
+		$query = $this->db->get('venueData');
+		$this->data['debug'] = print_r($query->result(),1);
+		
 		//validate form input
 		$this->form_validation->set_rules('name', 'Name', 'required');
 		$this->form_validation->set_rules('description', 'Description', 'required');
