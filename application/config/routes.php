@@ -38,8 +38,10 @@
 |
 */
 
+$route['scripts/vendor/fullcalendar/(:any)'] = 'scripts/vendor/fullcalendar/$1';
 $route['scripts/vendor/(:any)'] = 'scripts/vendor/$1';
 $route['scripts/(:any)'] = 'scripts/view/$1';
+
 $route['css/(:any)'] = "css/index/$1";
 $route['default_controller'] = ($_SERVER['HTTP_HOST']=="infusionsports.co.uk" ? "product" : "sis");
 $route['404_override'] = '';
