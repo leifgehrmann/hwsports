@@ -12,12 +12,10 @@ class MY_Controller extends CI_Controller {
 		switch($_SERVER['HTTP_HOST']) {
 			case "hwsports.co.uk":
 				$this->data['slug'] = "hwsports";
-				$this->config->set_item('base_url','http://hwsports.co.uk/');
 			break;
 			case "infusionsports.co.uk":
 				$centreSite = FALSE;
 				$this->data['slug'] = "product";
-				$this->config->set_item('base_url','http://infusionsports.co.uk/');
 			break;
 			default:
 				redirect('http://infusionsports.co.uk');
