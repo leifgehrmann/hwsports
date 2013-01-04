@@ -38,6 +38,7 @@ class Tms extends MY_Controller {
 		$this->data['page'] = "venues";
 		
 		// Get list of all venues
+		$this->data['venues'] = array();
 		$venueQuery = $this->db->query("SELECT venueID FROM venues WHERE centreID = {$this->data['centre']['id']}");
 		foreach($venueQuery->row_array() as $venue) {
 			$venueDataQuery = $this->db->query("SELECT " .
@@ -48,10 +49,8 @@ class Tms extends MY_Controller {
 				"MAX(CASE WHEN `key`='lng' THEN value END ) AS lng " .
 				"FROM venueData WHERE venueID = {$venue['venueID']}"
 			);
-			$this->data['debug'][] = array_merge($venue, $venueDataQuery->row_array());
+			$this->data['venues'][] = array_merge($venue, $venueDataQuery->row_array());
 		}
-		$this->data['debug'] = "Centre ID: {$this->data['centre']['id']}";
-		$this->data['debug'] .= print_r($this->data['debug'],1);
 		
 		//validate form input
 		$this->form_validation->set_rules('name', 'Name', 'required');
