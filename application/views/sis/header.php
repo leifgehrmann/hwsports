@@ -22,10 +22,10 @@
             <div id="menu">
                 <ul>
                     <a href="/"><li class="homepage <? if($title=="Homepage"){ ?>selected<? } ?>">Homepage</li></a>
-                    <a href="/sis/whatson"><li class="match <? if($title=="What's On"){ ?>selected<? } ?>"><img src="../../img/icons/match.14.png"/>What's On</li></a>
-                    <a href="/sis/calendar"><li class="calendar <? if($title=="Calendar"){ ?>selected<? } ?>"><img src="../../img/icons/calendar.14.png"/>Calendar</li></a>
-                    <a href="/sis/tournaments"><li class="tournament <? if($title=="Tournaments"){ ?>selected<? } ?>"><img src="../../img/icons/tournament.14.png"/>Tournaments</li></a>
-                    <a href="/auth/register"><li class="registration special"><img src="../../img/icons/star.14.png"/>Registration</li></a>
+                    <a href="/sis/whatson"><li class="match <? if($title=="What's On"){ ?>selected<? } ?>">What's On</li></a>
+                    <a href="/sis/calendar"><li class="calendar <? if($title=="Calendar"){ ?>selected<? } ?>">Calendar</li></a>
+                    <a href="/sis/tournaments"><li class="tournament <? if($title=="Tournaments"){ ?>selected<? } ?>">Tournaments</li></a>
+                    <a href="/auth/register"><li class="registration special">Registration</li></a>
                     <? if($this->ion_auth->logged_in()){ ?>
                         <a href="/auth/logout"><li class="logout">Logout</li></a>
                     <? } else { ?>
@@ -34,7 +34,7 @@
 					<? if($this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin')){ ?>
                         <a href="/tms"><li class="management">Management</li></a>
                     <? } ?>
-                    <a href="sis/help"><li class="help <? if($title=="Help"){ ?>selected<? } ?>"><img src="../../img/icons/help.14.png"/>Help</li></a>
+                    <a href="sis/help"><li class="help <? if($title=="Help"){ ?>selected<? } ?>">Help</li></a>
                 </ul>
             </div>
             <div id="content">
