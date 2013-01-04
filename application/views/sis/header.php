@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
-        <title><?=$title?> | <?=$this->session->userdata('centreShortName')?> Sports</title>
-        <link rel="icon" type="image/png" href="/img/<?=$this->session->userdata('slug')?>/logo/sis.fav.16.png" />
+        <title><?=$title?> | <?=$centre['shortName']?> Sports</title>
+        <link rel="icon" type="image/png" href="/img/<?=$slug?>/logo/sis.fav.16.png" />
         <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
         <link href="/css/main.css" rel="stylesheet" type="text/css">
         <link href="/css/sis.css" rel="stylesheet" type="text/css">
@@ -22,7 +22,7 @@
             <a href="/"><div id="header"></div></a>
             <div id="menu">
                 <ul>
-                    <a href="/"><li class="home <?=($page=="home" ? 'selected' : '')?>">Homepage</li></a>
+                    <a href="/"><li class="home <?=($page=="sishome" ? 'selected' : '')?>">Homepage</li></a>
                     <a href="/sis/whatson"><li class="whatson <?=($page=="whatson" ? 'selected' : '')?>">What's On</li></a>
                     <a href="/sis/calendar"><li class="calendar <?=($page=="calendar" ? 'selected' : '')?>">Calendar</li></a>
                     <a href="/sis/tournaments"><li class="tournaments <?=($page=="tournaments" ? 'selected' : '')?>">Tournaments</li></a>
