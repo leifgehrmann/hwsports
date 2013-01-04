@@ -40,18 +40,6 @@ class MY_Controller extends CI_Controller {
 			$this->data['centre'] = array_merge($this->data['centre'], $query->row_array());
 		}
 			
-		if($this->ion_auth->is_admin()) {
-            $this->the_user = $this->ion_auth->user()->row();
-            $data->the_user = $this->the_user;
-            $this->load->vars($data);
-        }
-        elseif($this->ion_auth->is_group('user')) {
-            $this->the_user = $this->ion_auth->user()->row();
-            $data->the_user = $this->the_user;
-            $this->load->vars($data);
-        } else {
-            redirect('/');
-        }
     }
 }
 
