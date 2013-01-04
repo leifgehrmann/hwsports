@@ -53,11 +53,11 @@ class Sis extends MY_Controller {
 	public function tournament($tournamentID)
 	{
 		// Page title
-		$this->data['title'] = "Tournaments";
-		$this->data['page'] = "tournaments";
+		$this->data['title'] = "$tournament value";
+		$this->data['page'] = "tournament";
 		$this->data['tournamentID'] = $tournamentID;
 		$this->load->view('sis/header',$this->data);
-		$this->load->view('sis/tournaments',$this->data);
+		$this->load->view('sis/tournament',$this->data);
 		$this->load->view('sis/footer',$this->data);
 	}
 	public function help()
