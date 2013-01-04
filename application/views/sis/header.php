@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
-        <title><?=$title?> | <?=$centreShortName?> Sports</title>
+        <title><?=$title?> | <?=$this->session->userdata('centreShortName')?> Sports</title>
         <link href="/css/<?=$this->session->userdata('slug')?>/normalize.min.css" rel="stylesheet" type="text/css">
         <link href="/css/<?=$this->session->userdata('slug')?>/main.css" rel="stylesheet" type="text/css">
         <link href="/css/<?=$this->session->userdata('slug')?>/sis.css" rel="stylesheet" type="text/css">
