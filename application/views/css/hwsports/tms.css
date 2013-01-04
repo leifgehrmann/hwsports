@@ -217,4 +217,9 @@ body {
 	color: #777;
 }
 
+td {
+	text-align: left;
+	padding: 10px;
+}
+
 
