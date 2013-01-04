@@ -1,5 +1,5 @@
-<h1>Create User</h1>
-<p>Please enter the users information below.</p>
+<h1>Create User Account</h1>
+<p>Please enter your details information below.</p>
 
 <div id="infoMessage"><?php echo $message;?></div>
 
@@ -36,6 +36,6 @@
       </p>
 
 
-      <p><?php echo form_submit('submit', 'Create User');?></p>
+      <p><?php echo form_submit('submit', 'Submit Registration');?></p>
 
 <?php echo form_close();?>
