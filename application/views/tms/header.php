@@ -5,10 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
         <title><?=$title?> | Tournament Management System</title>
-        <link rel="icon" type="image/png" href="/img/logo/tms.fav.png" />
+        <link rel="icon" type="image/png" href="/img/<?=$slug?>/logo/tms.fav.png" />
         <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
-        <link href="/css/main.css" rel="stylesheet" type="text/css">
-        <link href="/css/tms.css" rel="stylesheet" type="text/css">
+        <link href="/css/<?=$slug?>/main.css" rel="stylesheet" type="text/css">
+        <link href="/css/<?=$slug?>/tms.css" rel="stylesheet" type="text/css">
     </head>
     <!--[if lt IE 7]>      <body class="page-<?=$_ci_view?> lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
     <!--[if IE 7]>         <body class="page-<?=$_ci_view?> lt-ie9 lt-ie8"> <![endif]-->

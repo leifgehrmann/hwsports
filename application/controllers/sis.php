@@ -12,6 +12,7 @@ class Sis extends CI_Controller {
 		$this->data['title'] = "Home";
 		
 		$this->session->set_userdata('slug', $slug);
+		$this->data['slug'] = $slug;
 		$query = $this->db->query("SELECT `centreID` FROM `centreData` WHERE `key` = 'slug' AND `value` = '$slug' LIMIT 1");
 		$row = $query->row_array(); $centreID = $row['centreID'];
 		$this->session->set_userdata('centreID', $centreID);

@@ -47,6 +47,7 @@ if ($_SERVER['HTTP_HOST']=="hwsports.co.uk") {
 	$route['default_controller'] = "product";
 }
 
+$route['tms'] = "tms/index/$slug";
 $route['auth/login'] = "auth/login/$slug";
 $route['auth/create_user'] = "auth/create_user/$slug";
 

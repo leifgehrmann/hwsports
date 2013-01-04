@@ -16,8 +16,9 @@ class Tms extends CI_Controller {
 			redirect('/', 'refresh');
 		}
 	}
-	public function index()
+	public function index($slug)
 	{
+		$this->data['slug'] = $slug;
 		$this->data['title'] = "Home";
 		$this->load->view('tms/header',$this->data);
 		$this->load->view('tms/home',$this->data);

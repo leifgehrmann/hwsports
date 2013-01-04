@@ -6,8 +6,8 @@
         <meta name="description" content="">
         <title><?=$title?> | ***********************************************************</title>
         <link href="../../css/normalize.min.css" rel="stylesheet" type="text/css">
-        <link href="../../css/main.css" rel="stylesheet" type="text/css">
-        <link href="../../css/sis.css" rel="stylesheet" type="text/css">
+        <link href="../../css/<?=$slug?>/main.css" rel="stylesheet" type="text/css">
+        <link href="../../css/<?=$slug?>/sis.css" rel="stylesheet" type="text/css">
         <style type="text/css">
         <!--
             body {
