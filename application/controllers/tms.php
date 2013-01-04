@@ -74,14 +74,14 @@ class Tms extends MY_Controller {
 			curl_close($ch);
 			$apiData = json_decode($json);
 			
-			print_r($apiData); die();
-			$lat = $apiData->results[0]->geometry->location->lat;
-			$lng = $apiData->results[0]->geometry->location->lng;
+			print_r($apiData);
+			//$lat = $apiData->results[0]->geometry->location->lat;
+			//$lng = $apiData->results[0]->geometry->location->lng;
 
-			$this->data['createLatLng'] = array('lat' => $lat, 'lng' => $lng);
-			$this->data['createName'] = array('name' => '');
-			$this->data['createDescription'] = array('description' => '');
-			$this->data['createDirections'] = array('directions' => '');
+			//$this->data['createLatLng'] = array('lat' => $lat, 'lng' => $lng);
+			//$this->data['createName'] = array('name' => '');
+			//$this->data['createDescription'] = array('description' => '');
+			//$this->data['createDirections'] = array('directions' => '');
 		}
 		
 		$this->load->view('tms/header',$this->data);
