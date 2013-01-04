@@ -73,6 +73,8 @@ class Tms extends MY_Controller {
 			$json = curl_exec($ch);
 			curl_close($ch);
 			$apiData = json_decode($json);
+			
+			print_r($apiData); die();
 			$lat = $apiData->results[0]->geometry->location->lat;
 			$lng = $apiData->results[0]->geometry->location->lng;
 
