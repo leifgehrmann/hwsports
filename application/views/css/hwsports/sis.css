@@ -57,9 +57,9 @@ body {
 	width:160px;
 }
 #menu ul.menu-user{
-	background:#DDD;
+	background:#D8D8D8;
 	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-bottom: 0.1px;
 }
 #menu ul li { 
 	margin-bottom: 10px;
