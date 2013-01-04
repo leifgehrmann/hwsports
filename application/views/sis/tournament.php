@@ -1,7 +1,7 @@
 <h1><a href="/sis/tournaments">Tournaments</a> &gt; $tournamentName</h1>
 <p></p>
 <h2>Games</h2>
-<?
+<?php
 	$this->load->library('table');
 
 
@@ -29,7 +29,6 @@
 	$this->table->set_template($tmpl);
 
 	$info = array(
-				array('Name', 'Color'),
 				array('<a href="/sis/game/$gameID">Wattball</a>', 'sign up'),
 				array('<a href="/sis/game/$gameID">Wattball</a>', 'sign up'),
 				array('<a href="/sis/game/$gameID">Wattball</a>', 'sign up')	
