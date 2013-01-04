@@ -4,13 +4,13 @@
 <?
 	$this->load->library('table');
 
-	$data = array(
+	$info = array(
 				array('Name', 'Color'),
 				array('<a href="/sis/game/$gameID">Wattball</a>', 'sign up'),
 				array('<a href="/sis/game/$gameID">Wattball</a>', 'sign up'),
 				array('<a href="/sis/game/$gameID">Wattball</a>', 'sign up')	
 			);
 
-	echo $this->table->generate($data);
+	echo $this->table->generate($info);
 ?>
 <h2>Calendar</h2>
