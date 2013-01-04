@@ -56,6 +56,9 @@ body {
     padding: 0;
 	width:160px;
 }
+#menu ul.menu-user{
+	background:#CCC;
+}
 #menu ul li { 
 	margin-bottom: 10px;
 }

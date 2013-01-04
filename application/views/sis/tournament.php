@@ -21,6 +21,7 @@
 	echo $this->table->generate($info);
 ?>
 <h2>Calendar</h2>
+<p>Click the entries for details on individual matches</p>
 
 <script type='text/javascript'>
 

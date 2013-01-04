@@ -25,21 +25,26 @@
         <div id="container">
             <a href="/"><div id="header"></div></a>
             <div id="menu">
-                <ul>
+                <ul class="menu-default">
                     <a href="/"><li class="home <?=($page=="sishome" ? 'selected' : '')?>">Homepage</li></a>
                     <a href="/sis/whatson"><li class="whatson <?=($page=="whatson" ? 'selected' : '')?>">What's On</li></a>
                     <a href="/sis/calendar"><li class="calendar <?=($page=="calendar" ? 'selected' : '')?>">Calendar</li></a>
                     <a href="/sis/tournaments"><li class="tournaments <?=($page=="tournaments" ? 'selected' : '')?>">Tournaments</li></a>
-                    <a href="/auth/register"><li class="register special <?=($page=="register" ? 'selected' : '')?>">Registration</li></a>
                     <? if($this->ion_auth->logged_in()){ ?>
                         <a href="/auth/logout"><li class="logout">Logout</li></a>
-                    <? } else { ?>
+                    <? if($this->ion_auth->logged_in()){ ?>
+                        <a href="/auth/register"><li class="register special <?=($page=="register" ? 'selected' : '')?>">Registration</li></a>
                         <a href="/auth/login"><li class="login <?=($page=="login" ? 'selected' : '')?>">Login</li></a>
-                    <? } ?>
-					<? if($this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin')){ ?>
-                        <a href="/tms"><li class="management">Management</li></a>
                     <? } ?>
                     <a href="/sis/help"><li class="help <?=($page=="help" ? 'selected' : '')?>">Help</li></a>
                 </ul>
+                <? if($this->ion_auth->logged_in()){ ?>
+                    <ul class="menu-user">
+                        <a href="/auth/logout"><li class="logout">Logout</li></a>
+                        <? if($this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin')){ ?>
+                            <a href="/tms"><li class="management">Management</li></a>
+                        <? } ?>
+                    </ul>
+                <? } ?>
             </div>
             <div id="content">
