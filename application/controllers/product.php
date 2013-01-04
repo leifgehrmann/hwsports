@@ -2,14 +2,14 @@
 
 class Product extends CI_Controller {
 
-	public function index()
-	{
-		$data = Array(
-			'title' => "Infusion Sports"
-		);
-		$this->load->view('product/header',$data);
-		$this->load->view('product/home',$data);
-		$this->load->view('product/footer',$data);
+	public function index($slug) {
+		$this->data['title'] = "Infusion Sports";
+		$this->data['slug'] = $slug;
+		$this->session->set_userdata('slug', $slug);
+		
+		$this->load->view('product/header',$this->data);
+		$this->load->view('product/home',$this->data);
+		$this->load->view('product/footer',$this->data);
 	}
 
 }
