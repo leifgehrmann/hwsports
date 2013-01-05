@@ -4,7 +4,6 @@
 
 <script type='text/javascript'>Rico_CONFIG={};</script>
 <script src='http://ajax.googleapis.com/ajax/libs/prototype/1.7/prototype.js' type='text/javascript'></script>
-<script src='/scripts/tiny_mce/tiny_mce.js' type='text/javascript'></script>
 <script src='/scripts/rico/js/rico2pro.js' type='text/javascript'></script>
 <script src='/scripts/rico/js/rico_min.js' type='text/javascript'></script>
 <link href='/scripts/rico/css/rico.css' type='text/css' rel='stylesheet'/>
@@ -30,24 +29,25 @@ require "/home/sports/public_html/scripts/rico/plugins/php/ricoLiveGridForms.php
 session_set_cookie_params(60*60);
 
 $GLOBALS['oDB'] = new dbClass();
-if (! $GLOBALS['oDB']->MySqlLogon("sports_web", "sports_web", "group8") ) die('MySqlLogon failed');
+if (! $GLOBALS['oDB']->MySqlLogon("sports_northwind", "sports_northwind", "northwind") ) die('MySqlLogon failed');
 
 $oForm=new TableEditClass();
-$oForm->SetTableName("venues");
+$oForm->SetTableName("shippers");
 $oForm->options["XMLprovider"]="/scripts/rico/plugins/php/ricoQuery.php";
 $oForm->convertCharSet=true;
 $oForm->options["canAdd"]=1;
 $oForm->options["canEdit"]=1;
 $oForm->options["canDelete"]=1;
-$oForm->options["frozenColumns"]=0;
+$oForm->options["frozenColumns"]=1;
 $oForm->options["menuEvent"]='click';
 $oForm->options["highlightElem"]='cursorRow';
 
-$oForm->AddEntryFieldW("venueID", "venueID", "B", "",50);
-$oForm->AddEntryFieldW("centreID", "centreID", "B", "", 50);
-
+$oForm->AddEntryFieldW("ShipperID", "ID", "B", "<auto>",50);
+$oForm->AddEntryFieldW("CompanyName", "Company Name", "B", "", 150);
 $oForm->ConfirmDeleteColumn();
 $oForm->SortAsc();
+$oForm->AddEntryFieldW("Phone", "Phone Number", "B", "", 150);
+
 $oForm->DisplayPage();
 
 $GLOBALS['oDB']->dbClose();
@@ -76,7 +76,7 @@ $GLOBALS['oDB']->dbClose();
 	<?=form_input($createDirections);?>
 	</p>
 
-	<p>Location (drag map center to venue position):</p>
+	<p>Location:</p>
 	<div id="map" style="width: 400px; height: 250px;"></div>
 
 	<p><?=form_submit('submit', 'Create Venue');?></p>
