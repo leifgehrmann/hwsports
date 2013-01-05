@@ -205,9 +205,12 @@ body {
 	margin-bottom:10px;
 	clear:both;
 }
-.page-account #content a.button div.subtitle, .page-account div.icon {
-	color: inherit;
+.page-account #content a.button .subtitle {
+	color: #444;
 	text-decoration: none;
+}
+
+.page-account #content a.button div.subtitle, .page-account div.icon {
 	clear:both;
 }
 .page-account #content div.icon {
