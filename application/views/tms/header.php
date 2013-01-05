@@ -53,7 +53,6 @@
                 <ul>
                     <a href="/tms/appearance"><li class="appearance <?=($page=="appearance" ? 'selected' : '')?>">Appearance</li></a>
                     <a href="/tms/settings"><li class="settings <?=($page=="settings" ? 'selected' : '')?>">Settings</li></a>
-                    <a href="/************/"><li class="last-child personal-settings">Personal Settings</li></a>
                 </ul>
             </div>
             <div id="content">
