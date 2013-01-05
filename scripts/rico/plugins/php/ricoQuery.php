@@ -1,6 +1,7 @@
 <?php
 if (!isset ($_SESSION)) session_start();
 
+require "/home/sports/public_html/scripts/rico/plugins/php/dbClass3.php";
 require "/home/sports/public_html/scripts/rico/plugins/php/ricoResponse.php";
 
 $id=isset($_GET["id"]) ? $_GET["id"] : "";
