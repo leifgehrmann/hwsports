@@ -1,7 +1,7 @@
 <? if($this->ion_auth->logged_in()){ ?>
 	<h1>Welcome <?=$currentUser->firstName?> <?=$currentUser->lastName?></h1>
 
-	<? !empty($message) ?>
+	<? if(!empty($message)){ ?>
 		<div id="infoMessage"><?php echo $message;?></div>
 	<? } ?>
 
