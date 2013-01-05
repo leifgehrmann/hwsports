@@ -10,43 +10,18 @@
 <script src='/scripts/rico/js/ricoThemeroller.js' type='text/javascript'></script>
 <link type='text/css' rel='Stylesheet' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-lightness/jquery-ui.css'/>
 <link type='text/css' rel='stylesheet' href='/scripts/rico/css/striping_ui-lightness.css'/>
-<style type='text/css'>.ricoLG_Resize{background-repeat:repeat;background-image:url(/scripts/rico/images/resize.gif)}.rico-icon{background-repeat:no-repeat;background-image:url(/scripts/rico/images/ricoIcons.gif)}</style>
-<style type="text/css">/* this file is only for running the Rico 3 examples */
-
-body {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
+<style type='text/css'>
+.ricoLG_Resize{
+	background-repeat:repeat;
+	background-image:url(/scripts/rico/images/resize.gif);
 }
-
-h1 {
-  font-family : Trebuchet MS, Arial, Helvetica, sans-serif;
+.rico-icon{
+	background-repeat:no-repeat;
+	background-image:url(/scripts/rico/images/ricoIcons.gif)
 }
-
-table#explanation {
-  width: 100%;
-}
-
-div#explanation {
-  padding: 4px;
-}
-
-#explanation {
-  background-color:#EEEEFF;
-  font-size:small;
-  margin-bottom:0.5em;
-  border: 1px solid #CFCFFF;
-}
-
-#addplaceholder {
-  height: 125px;
-  width: 125px;
-  background-color:white;
-  border: 1px solid blue;
-}
-
 div.ricoLG_cell {
   white-space:nowrap;
 }
-#explanation * { font-size: 8pt; }
 </style>
 <?
 require "/home/sports/public_html/scripts/rico/plugins/php/dbClass3.php";
