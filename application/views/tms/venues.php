@@ -25,7 +25,6 @@ div.ricoLG_cell {
 }
 </style>
 <?
-if (!isset ($_SESSION)) session_start();
 require "/home/sports/public_html/scripts/rico/plugins/php/dbClass3.php";
 require "/home/sports/public_html/scripts/rico/plugins/php/ricoLiveGridForms.php";
 session_set_cookie_params(60*60);
