@@ -2,6 +2,9 @@
 if (!isset ($_SESSION)) session_start();
 
 require "/home/sports/public_html/scripts/rico/plugins/php/dbClass3.php";
+$GLOBALS['oDB'] = new dbClass();
+if (! $GLOBALS['oDB']->MySqlLogon("sports_northwind", "sports_northwind", "northwind") ) die('MySqlLogon failed');
+
 require "/home/sports/public_html/scripts/rico/plugins/php/ricoResponse.php";
 
 $id=isset($_GET["id"]) ? $_GET["id"] : "";
@@ -22,4 +25,5 @@ if (!isset($_SESSION[$id])) {
 $oXmlResp->ProcessQuery($id, $query, $filters, $errmsg);
 $oXmlResp=NULL;
 
+$GLOBALS['oDB']->dbClose();
 ?>
