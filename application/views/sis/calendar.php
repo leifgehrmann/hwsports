@@ -1,8 +1,8 @@
 <h1>Calendar</h1>
 <p>Below is a list of upcoming matches and tournaments.</p>
 <ul>
-	<li>Tournaments are coloured as <span style="colour:rgb(73, 134, 231);font-weight:bold;">blue</span>.</li>
-	<li>Matches are coloured as <span style="colour:rgb(123, 209, 72);font-weight:bold;">green</span>.</li>
+	<li>Tournaments are coloured as <span style="color:rgb(73, 134, 231);font-weight:bold;">blue</span>.</li>
+	<li>Matches are coloured as <span style="color:rgb(123, 209, 72);font-weight:bold;">green</span>.</li>
 </ul>
 <p>Click the matches/tournaments for more information.</p>
 
