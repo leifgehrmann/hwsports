@@ -21,7 +21,7 @@ if (! $GLOBALS['oDB']->MySqlLogon("sports_northwind", "sports_northwind", "north
 
 $oForm=new TableEditClass();
 $oForm->SetTableName("shippers");
-$oForm->options["XMLprovider"]="ricoQuery.php";
+$oForm->options["XMLprovider"]="/scripts/rico/plugins/php/ricoQuery.php";
 $oForm->convertCharSet=true;
 $oForm->options["canAdd"]=1;
 $oForm->options["canEdit"]=1;
