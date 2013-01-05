@@ -33,7 +33,7 @@ $GLOBALS['oDB'] = new dbClass();
 if (! $GLOBALS['oDB']->MySqlLogon("sports_web", "sports_web", "group8") ) die('MySqlLogon failed');
 
 $oForm=new TableEditClass();
-$oForm->SetTableName("shippers");
+$oForm->SetTableName("venues");
 $oForm->options["XMLprovider"]="/scripts/rico/plugins/php/ricoQuery.php";
 $oForm->convertCharSet=true;
 $oForm->options["canAdd"]=1;
@@ -45,7 +45,6 @@ $oForm->options["highlightElem"]='cursorRow';
 
 $oForm->AddEntryFieldW("venueID", "venueID", "B", "<auto>",50);
 $oForm->AddEntryFieldW("centreID", "centreID", "tinyMCE", "", 150);
-$oForm->AddEntryFieldW("Phone", "Phone Number", "B", "", 150);
 
 $oForm->ConfirmDeleteColumn();
 $oForm->SortAsc();
