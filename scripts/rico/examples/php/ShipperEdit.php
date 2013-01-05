@@ -6,7 +6,6 @@ require "dbConnect.php";
 require "LoadRicoClient.php";
 require "../../plugins/php/ricoLiveGridForms.php";
 ?>
-<link href="../demo.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
 <?php
