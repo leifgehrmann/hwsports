@@ -15,7 +15,6 @@ class Tms extends MY_Controller {
 			//redirect them to the sms homepage
 			redirect('/', 'refresh');
 		}
-		require_once(APPPATH.'libraries/rico/rico.php');
 	}
 	public function index()
 	{
@@ -54,25 +53,6 @@ class Tms extends MY_Controller {
 			$venueDataQuery = $this->db->query($venueDataQueryString);
 			$this->data['venues'][] = array_merge($venue, $venueDataQuery->row_array());
 		}
-		
-		$grid=new SimpleGrid();
-		$numcol = 5;
-		
-		$grid->AddHeadingRow(true);
-		for ($c=1; $c<=$numcol; $c++) {
-			$grid->AddCell("Column $c");
-		}
-		
-		for ($r=1; $r<=100; $r++) {
-			$grid->AddDataRow();
-			$grid->AddCell($r);
-			for ($c=2; $c<=$numcol; $c++) {
-				$grid->AddCell("Cell $r:$c");
-			}
-		}
-		
-		$grid->Render("ex1", 1);
-
 		
 		//validate form input
 		$this->form_validation->set_rules('name', 'Name', 'required');
