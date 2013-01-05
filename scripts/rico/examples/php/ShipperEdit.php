@@ -43,6 +43,5 @@ function DefineFields() {
   $oForm->DisplayPage();
 }
 ?>
-
 </body>
 </html>
