@@ -44,15 +44,17 @@
                     <a href="/tms/venues"><li class="venues <?=($page=="venues" ? 'selected' : '')?>">Venues</li></a>
                     <a href="/tms/sports"><li class="sports <?=($page=="sports" ? 'selected' : '')?>">Sports</li></a>
                     <a href="/tms/matches"><li class="matches <?=($page=="matches" ? 'selected' : '')?>">Matches</li></a>
-                    <a href="/tms/groups"><li class="groups <?=($page=="groups" ? 'selected' : '')?>">Groups</li></a>
-                    <a href="/tms/users"><li class="users <?=($page=="users" ? 'selected' : '')?>">Users</li></a>
                     <a href="/tms/news"><li class="news <?=($page=="news" ? 'selected' : '')?>">News</li></a>
                     <a href="/tms/tickets"><li class="tickets <?=($page=="tickets" ? 'selected' : '')?>">Tickets</li></a>
                     <a href="/tms/reports"><li class="last-child reports <?=($page=="reports" ? 'selected' : '')?>">Reports</li></a>
                 </ul>
                 <ul>
+                    <a href="/tms/groups"><li class="groups <?=($page=="groups" ? 'selected' : '')?>">Groups</li></a>
+                    <a href="/tms/users"><li class="last-child users <?=($page=="users" ? 'selected' : '')?>">Users</li></a>
+                </ul>
+                <ul>
                     <a href="/tms/appearance"><li class="appearance <?=($page=="appearance" ? 'selected' : '')?>">Appearance</li></a>
-                    <a href="/tms/settings"><li class="settings <?=($page=="settings" ? 'selected' : '')?>">Settings</li></a>
+                    <a href="/tms/settings"><li class="last-child settings <?=($page=="settings" ? 'selected' : '')?>">Settings</li></a>
                 </ul>
             </div>
             <div id="content">
