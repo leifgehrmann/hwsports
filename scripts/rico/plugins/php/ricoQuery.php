@@ -3,7 +3,7 @@ if (!isset ($_SESSION)) session_start();
 
 require "/home/sports/public_html/scripts/rico/plugins/php/dbClass3.php";
 $GLOBALS['oDB'] = new dbClass();
-if (! $GLOBALS['oDB']->MySqlLogon("sports_web", "sports_web", "group8") ) die('MySqlLogon failed');
+if (! $GLOBALS['oDB']->MySqlLogon("sports_northwind", "sports_northwind", "northwind") ) die('MySqlLogon failed');
 
 require "/home/sports/public_html/scripts/rico/plugins/php/ricoResponse.php";
 
@@ -14,14 +14,13 @@ $query='';
 $filters=array();
 
 if (!isset($_SESSION[$id])) {
-  $errmsg="Your connection with the server was idle for too long and timed out. Please refresh this page and try again. Your GET id var was $id and SESSION is";
-  $errmsg.=print_r($_SESSION,1);
+  $errmsg="Your connection with the server was idle for too long and timed out. Please refresh this page and try again.";
 } else {
   $query=$_SESSION[$id];
   if (isset($_SESSION[$id . ".filters"])) $filters=$_SESSION[$id . ".filters"];
-  $oXmlResp->SetDbConn($GLOBALS['oDB']);
+  $oXmlResp->SetDbConn($oDB);
   $oXmlResp->sendDebugMsgs=true;
-  $oXmlResp->convertCharSet=true;
+  $oXmlResp->convertCharSet=true;  // MySQL sample database is encoded with ISO-8859-1
 }
 $oXmlResp->ProcessQuery($id, $query, $filters, $errmsg);
 $oXmlResp=NULL;
