@@ -38,7 +38,7 @@ $oForm->AddEntryFieldW("Phone", "Phone Number", "B", "", 150);
 
 $oForm->DisplayPage();
 
-$oDB->dbClose();
+$GLOBALS['oDB']->dbClose();
 ?>
 
 
