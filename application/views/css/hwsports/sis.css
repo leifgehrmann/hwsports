@@ -193,6 +193,7 @@ body {
 	color: inherit;
 	text-decoration: none;
 	text-align:center;
+	float:left;
 	display:block;
 }
 .page-account #content div.label {
@@ -208,9 +209,9 @@ body {
 	height: 64px;
 	clear:both;
 }
-.page-account .ticket div.icon { background-image: url('/img/hwsports/icon/ticket.64.png'); }
-.page-account .signup div.icon { background-image: url('/img/hwsports/icon/settings.64.png'); }
-.page-account .tms    div.icon { background-image: url('/img/hwsports/icon/tms.64.png'); }
+.page-account #content a.ticket div.icon { background-image: url('/img/hwsports/icon/ticket.64.png'); }
+.page-account #content a.signup div.icon { background-image: url('/img/hwsports/icon/settings.64.png'); }
+.page-account #content a.tms    div.icon { background-image: url('/img/hwsports/icon/tms.64.png'); }
 
 
 
