@@ -14,6 +14,13 @@
 
 <h1>News</h1>
 
+<div class="subscribe-item">
+	<form>
+		<input type="text" name="email"/>
+		<input type="Submit" label="Subscribe"/>
+	</form>
+</div>
+
 <div class="news-item">
 	<div class="news-header">Register Now!</div>
 	<div class="news-published">February 14th, 2013</div>
