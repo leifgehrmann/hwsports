@@ -44,7 +44,7 @@ $oForm->options["menuEvent"]='click';
 $oForm->options["highlightElem"]='cursorRow';
 
 $oForm->AddEntryFieldW("venueID", "venueID", "B", "<auto>",50);
-$oForm->AddEntryFieldW("centreID", "centreID", "tinyMCE", "", 150);
+$oForm->AddEntryFieldW("centreID", "centreID", "B", "", 150);
 
 $oForm->ConfirmDeleteColumn();
 $oForm->SortAsc();
