@@ -4,27 +4,53 @@
 	<div id="infoMessage"><?php echo $message;?></div>
 <? } ?>
 
-<p>This is the homepage news stuff for public people.</p>
-<p>This part could be a welcome message that can be defined in the appearence menu in the
-	TMS. We are also assuming that the title of this page will be changeable as well.</p>
+<div class="home-content">
+	<p>This is the homepage news stuff for public people.</p>
+	<p>
+		This part could be a welcome message that can be defined in the <b>appearence menu</b> in the
+		TMS. We are also assuming that the <b>title of this page will be changeable as well</b>.
+	</p>
+</div>
 
 <h1>News</h1>
 
-<h2>Register Now!</h2>
-<p>Published: February 14th, 2013 | <a href="news/$newsID">permalink</a></p>
-<p>Want to participate in the Heriot Watt Tournament, well now you can register on this website!</p>
-<p>We are offering the following sports this year.</p>
-<ul>
-	<li>Heriot Hurdling (Men &amp; Womens)</li>
-	<li>Wattball</li>
-</ul>
+<div class="news-item">
+	<div class="news-header">Register Now!</div>
+	<div class="news-published">February 14th, 2013</div>
+	<a href="news/$newsID" class="news-permalink">permalink</a>
+	<div class="news-content">
+		<p>Want to participate in the Heriot Watt Tournament, well now you can register on this website!</p>
+		<p>We are offering the following sports this year.</p>
+		<ul>
+			<li>Heriot Hurdling (Men &amp; Womens)</li>
+			<li>Wattball</li>
+		</ul>
+		<p>
+			If you have already made an account, be sure to check into your account and sign up for
+ 			the games you want to participate in.
+ 		</p>
+		<p>If you want to create a team in the Wattball tournament</p>
+	</div>
+</div>
 
-<h2>Opening soon...</h2>
-<p>Published: February 10th, 2013 | <a href="news/$newsID">permalink</a></p>
-<p>The website will work soon hopefully by February... I hope</p>
+<div class="news-item">
+	<div class="news-header">Opening soon...</div>
+	<div class="news-published">February 10th, 2013</div>
+	<a href="news/$newsID" class="news-permalink">permalink</a>
+	<div class="news-content">
+		<p>Published: February 10th, 2013 | <a href="news/$newsID">permalink</a></p>
+		<p>The website will work soon hopefully by February... I hope</p>
+	</div>
+</div>
 
-<h2>Essay: Why Applejack is best pony.</h2>
-<p>Published: January 5th, 2013 | <a href="news/$newsID">permalink</a></p>
-<img src="http://i.minus.com/iE8nEjmu51rGN.gif"/>
+<div class="news-item">
+	<div class="news-header">Essay: Why Applejack is <em>best</em> pony.</div>
+	<div class="news-published">January 5th, 2013</div>
+	<a href="news/$newsID" class="news-permalink">permalink</a>
+	<div class="news-content">
+		<img src="http://i.minus.com/iE8nEjmu51rGN.gif"/>
+		<p>'nuff said</P>
+	</div>
+</div>
 
-<h1>FYI ANDREW, THIS STUFF IS NOT REAL (AKA IN DATABASE)</h1>
+<h1>FYI ANDREW, THIS STUFF IS NOT REAL (AKA NOT IN DATABASE)</h1>
