@@ -8,9 +8,9 @@ class Client {
 
   // Load Rico client files and create style sheet
 
-  static public $jsDir="../../ricoClient/js/";       // directory containing Rico's javascript files
-  static public $cssDir="../../ricoClient/css/";     // directory containing Rico's css files
-  static public $imgDir="../../ricoClient/images/";  // directory containing Rico's image files
+  static public $jsDir="/scripts/rico/js/";       // directory containing Rico's javascript files
+  static public $cssDir="/scripts/rico/css/";     // directory containing Rico's css files
+  static public $imgDir="/scripts/rico/images/";  // directory containing Rico's image files
   static public $transDir;
   static public $checkQueryString = false; // load settings from QueryString? true only for demo
 
