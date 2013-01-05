@@ -49,14 +49,14 @@
 					title: 'Meeting',
 					start: new Date(y, m, d, 10, 30),
 					allDay: false,
-					color: 'rgb(123, 209, 72)'
+					color: '#7AD148'
 				},
 				{
 					title: 'Lunch',
 					start: new Date(y, m, d, 12, 0),
 					end: new Date(y, m, d, 14, 0),
 					allDay: false
-					color: 'rgb(73, 134, 231)'
+					color: '#4986E7'
 				},
 				{
 					title: 'Birthday Party',
