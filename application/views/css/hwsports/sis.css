@@ -206,14 +206,16 @@ body {
 	clear:both;
 }
 .page-account #content div.icon {
+	width: 100px;
+	margin: 0 auto;
 	opacity: 0.7;
 	width: 64px;
 	height: 64px;
 	clear:both;
 }
-.page-account #content a.ticket div.icon { background-image: url('/img/hwsports/icons/ticket.64.png'); }
-.page-account #content a.signup div.icon { background-image: url('/img/hwsports/icons/settings.64.png'); }
-.page-account #content a.tms    div.icon { background-image: url('/img/hwsports/icons/tms.64.png'); }
+.page-account #content a.tickets div.icon { background-image: url('/img/hwsports/icons/ticket.64.png'); }
+.page-account #content a.signup  div.icon { background-image: url('/img/hwsports/icons/settings.64.png'); }
+.page-account #content a.tms     div.icon { background-image: url('/img/hwsports/icons/tms.64.png'); }
 
 
 
