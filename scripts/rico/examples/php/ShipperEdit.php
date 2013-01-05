@@ -1,29 +1,13 @@
-<?php
-if (!isset ($_SESSION)) session_start();
-header("Cache-Control: no-cache");
-header("Pragma: no-cache");
-header("Expires: ".gmdate("D, d M Y H:i:s",time()+(-1*60))." GMT");
-header('Content-type: text/html; charset=utf-8');
-?>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<title>Rico LiveGrid-Shippers (editable)</title>
-
 <?php
 require "dbConnect.php";
 require "LoadRicoClient.php";
 require "../../plugins/php/ricoLiveGridForms.php";
 ?>
-
 <link href="../demo.css" type="text/css" rel="stylesheet" />
-<style type="text/css">
-div.ricoLG_cell {
-  white-space:nowrap;
-}
-#explanation * { font-size: 8pt; }
-</style>
+
 </head>
 <body>
 
