@@ -4,10 +4,10 @@
 <title>Rico 3.0</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 
-<script src="../../ricoClient/js/proto_min.js" type="text/javascript"></script>
-<script src="../../ricoClient/js/rico2pro.js" type="text/javascript"></script>
-<script src="../../ricoClient/js/rico_min.js" type="text/javascript"></script>
-<link href="../../ricoClient/css/rico.css" type="text/css" rel="stylesheet" />
+<script src="/scripts/rico/js/proto_min.js" type="text/javascript"></script>
+<script src="/scripts/rico/js/rico2pro.js" type="text/javascript"></script>
+<script src="/scripts/rico/js/rico_min.js" type="text/javascript"></script>
+<link href="/scripts/rico/css/rico.css" type="text/css" rel="stylesheet" />
 
 <script src="../menu.js" type="text/javascript"></script>
 <link href="../menu.css" type="text/css" rel="stylesheet">

@@ -1,7 +1,7 @@
 <?php
 require "../../plugins/php/dbClass3.php";
 $appName="Northwind";
-$appDB="northwind";
+$appDB="sports_northwind";
 
 function CreateDbClass() {
   global $oDB;
@@ -13,7 +13,7 @@ function OpenDB() {
   CreateDbClass();
 
   // MySQL
-  return $oDB->MySqlLogon($appDB, "userid", "password");
+  return $oDB->MySqlLogon($appDB, "sports_northwind", "northwind");
 
   // MS SQL
   //$oDB->Dialect="TSQL";
