@@ -71,11 +71,11 @@ class Auth extends MY_Controller {
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
 				
-				if($this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin')){
+				/*if($this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin')){
 					redirect('/tms', 'refresh');
-				} else {
-					redirect('/', 'refresh');
-				}
+				} else {*/
+					redirect('/sis/account', 'refresh');
+				//}
 			}
 			else
 			{
