@@ -19,6 +19,7 @@ session_set_cookie_params(60*60);
 $oDB = new dbClass();
 if (! $oDB->MySqlLogon("sports_northwind", "sports_northwind", "northwind") ) die('MySqlLogon failed');
 
+$oForm=new TableEditClass();
 ?>
 
 
