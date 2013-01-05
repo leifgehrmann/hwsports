@@ -3,7 +3,6 @@
 <head>
 <?php
 require "../../plugins/php/dbClass3.php";
-require "LoadRicoClient.php";
 require "../../plugins/php/ricoLiveGridForms.php";
 session_set_cookie_params(60*60);
 $GLOBALS['sqltext']='.';
