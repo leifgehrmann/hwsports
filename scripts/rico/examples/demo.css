@@ -1,0 +1,31 @@
+/* this file is only for running the Rico 3 examples */
+
+body {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-family : Trebuchet MS, Arial, Helvetica, sans-serif;
+}
+
+table#explanation {
+  width: 100%;
+}
+
+div#explanation {
+  padding: 4px;
+}
+
+#explanation {
+  background-color:#EEEEFF;
+  font-size:small;
+  margin-bottom:0.5em;
+  border: 1px solid #CFCFFF;
+}
+
+#addplaceholder {
+  height: 125px;
+  width: 125px;
+  background-color:white;
+  border: 1px solid blue;
+}
