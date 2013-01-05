@@ -40,10 +40,6 @@
                 <? } else { ?>
                     <ul class="menu-user">
                         <a href="/sis/account"><li class="account <?=($page=="account" ? 'selected' : '')?>">Account</li></a>
-                        <!--<a href="/sis/signup"><li class="signup">Sign up</li></a>-->
-                        <!--<? if($this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin')){ ?>
-                            <a href="/tms"><li class="management">Management</li></a>
-                        <? } ?>-->
                         <a href="/auth/logout"><li class="logout">Logout</li></a>
                     </ul>
                 <? } ?>

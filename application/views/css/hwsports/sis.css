@@ -134,6 +134,31 @@ body {
 	font-size:14px;
 }
 
+#content .infoMessage{
+	padding:20px;
+	padding-left:72px;
+	background-repeat: no-repeat;
+	background-position: 20px 20px;
+	background: #EEF;
+	background-image: url('/img/hwsports/icons/info.32.png');
+}
+#content .warningMessage{
+	padding:20px;
+	padding-left:72px;
+	background-repeat: no-repeat;
+	background-position: 20px 20px;
+	background: #FFE;
+	background-image: url('/img/hwsports/icons/warning.32.png');
+}
+#content .errorMessage{
+	padding:20px;
+	padding-left:72px;
+	background-repeat: no-repeat;
+	background-position: 20px 20px;
+	background: #FEE;
+	background-image: url('/img/hwsports/icons/error.32.png');
+}
+
 #content .widget {
 	display: inline-block;
 	vertical-align: top;
@@ -265,3 +290,5 @@ body {
 	color: #777;
 }
 
+
+infoMessage
