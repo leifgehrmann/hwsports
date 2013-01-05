@@ -81,7 +81,7 @@ class TableEditClass {
     $this->TableCnt=-1;
     $this->AutoInit=true;
     $this->formView=true;
-    $this->sessions=isset($_SESSION);
+    $this->sessions=true;
     $this->ErrorFlag=false;
     $this->ErrorMsg="";
     $this->convertCharSet=false;
