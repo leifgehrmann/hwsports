@@ -3,7 +3,7 @@ if (!isset ($_SESSION)) session_start();
 
 require "/home/sports/public_html/scripts/rico/plugins/php/dbClass3.php";
 $GLOBALS['oDB'] = new dbClass();
-if (! $GLOBALS['oDB']->MySqlLogon("sports_northwind", "sports_northwind", "northwind") ) die('MySqlLogon failed');
+if (! $GLOBALS['oDB']->MySqlLogon("sports_web", "sports_web", "group8") ) die('MySqlLogon failed');
 
 require "/home/sports/public_html/scripts/rico/plugins/php/ricoResponse.php";
 
