@@ -38,16 +38,16 @@ $oForm->convertCharSet=true;
 $oForm->options["canAdd"]=1;
 $oForm->options["canEdit"]=1;
 $oForm->options["canDelete"]=1;
-$oForm->options["frozenColumns"]=1;
+$oForm->options["frozenColumns"]=0;
 $oForm->options["menuEvent"]='click';
 $oForm->options["highlightElem"]='cursorRow';
 
 $oForm->AddEntryFieldW("ShipperID", "ID", "B", "<auto>",50);
-$oForm->AddEntryFieldW("CompanyName", "Company Name", "B", "", 150);
-$oForm->ConfirmDeleteColumn();
-$oForm->SortAsc();
+$oForm->AddEntryFieldW("CompanyName", "Company Name", "tinyMCE", "", 150);
 $oForm->AddEntryFieldW("Phone", "Phone Number", "B", "", 150);
 
+$oForm->ConfirmDeleteColumn();
+$oForm->SortAsc();
 $oForm->DisplayPage();
 
 $GLOBALS['oDB']->dbClose();
