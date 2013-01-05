@@ -1,4 +1,4 @@
-<? if(!$this->ion_auth->logged_in()){ ?>
+<? if($this->ion_auth->logged_in()){ ?>
 	<h1>Hi <?=$currentUser->firstName?>,</h1>
 
 	<a class="account-button tickets" href="/sis/tickets"><div class="icon"></div><div class="label">Tickets</div><div class="subtitle">See which tickets you have purchased</div></a>
