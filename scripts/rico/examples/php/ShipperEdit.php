@@ -6,6 +6,11 @@ require "dbConnect.php";
 require "LoadRicoClient.php";
 require "../../plugins/php/ricoLiveGridForms.php";
 ?>
+<style type="text/css">
+div.ricoLG_cell {
+  white-space:nowrap;
+}
+</style>
 </head>
 <body>
 <?php
