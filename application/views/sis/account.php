@@ -8,9 +8,7 @@
 		<a class="button tms" href="/tms/"><div class="icon"></div><div class="label">Tournament Management System</div><div class="subtitle">Enter the tournament Management System portal</div></a>
 	<? } ?>
 
-	<p> </p>
-	<p> </p>
-	<hr>
+	<div style="clear:both;"></div>
 
 	<div id="infoMessage"><?php echo $message;?></div>
 
