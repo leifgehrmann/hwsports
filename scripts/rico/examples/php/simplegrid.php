@@ -78,7 +78,7 @@ can be formatted individually.
 </td>
 <td>
 <?php
-require "info.php";
+//require "info.php";
 ?>
 </td>
 </tr></table>

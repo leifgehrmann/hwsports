@@ -63,7 +63,7 @@ Click on a cell to see available actions.
 </td>
 <td>
 <?php
-require "info.php";
+//require "info.php";
 ?>
 </td>
 </tr></table>

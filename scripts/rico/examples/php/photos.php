@@ -97,7 +97,7 @@ to process the query and format the response in the Rico LiveGrid XML format.
 </td>
 <td>
 <?php
-require "info.php";
+//require "info.php";
 ?>
 </td>
 </tr></table>

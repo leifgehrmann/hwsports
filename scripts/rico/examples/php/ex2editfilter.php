@@ -67,7 +67,7 @@ function DisplayTable() {
   echo "Notice on the Edit form how the Rico Calendar is used to change dates. ";
   echo "Updates are disabled on the database, so you will get an error message if you try to save.";
   echo "</td><td>";
-  require "info.php";
+  //require "info.php";
   echo "</td></tr></table>";
   echo "<p><strong>Orders Table</strong></p>";
 

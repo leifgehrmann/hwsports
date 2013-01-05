@@ -50,7 +50,7 @@ Department of Economic and Social Affairs of the United Nations Secretariat</a> 
 </td>
 <td>
 <?php
-require "info.php";
+//require "info.php";
 ?>
 </td>
 </tr></table>

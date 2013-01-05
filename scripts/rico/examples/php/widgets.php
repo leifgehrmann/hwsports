@@ -70,7 +70,7 @@ The widgets are compatible with all base libraries and themes.
 </td>
 <td>
 <?php
-require "info.php";
+//require "info.php";
 ?>
 </td>
 </tr></table>

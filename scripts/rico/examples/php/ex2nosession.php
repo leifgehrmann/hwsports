@@ -79,7 +79,7 @@ Notice on the Edit form how the Rico Calendar is used to change dates.
 Updates are disabled on the database, so you will get an error message if you try to save.
 </td><td>
 <?php
-require "info.php";
+//require "info.php";
 ?>
 </td></tr></table>
 
