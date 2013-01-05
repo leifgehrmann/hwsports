@@ -1,0 +1,95 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>Rico Pull-Down Example</title>
+
+<script src="LoadRicoClient.js" type="text/javascript"></script>
+<script type='text/javascript'>
+function slidepanel(id, maxht) {
+  var p=Rico.$(id);
+  var ht=parseInt(p.style.height);
+  var newht=ht > 0 ? 0 : maxht;
+  Rico.animate(p,{duration:500},{height:newht});
+}
+</script>
+
+<link href="../demo.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+#header{
+  margin: 10px;
+  position: relative;
+}
+#top-panel {
+  background-color : #6b795a;
+  height: 17px;
+  margin: 0px;
+  padding:0px;
+  position: relative;
+  width: 570px;
+  font-size: 8pt;
+}
+#inner_panel {
+  position: relative;
+  top: 0px;
+  background-color: #adba8c;
+  margin:0px;
+  border: 1px solid #6b795a;
+}
+#outer_panel {
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
+  padding-left: 15px;
+  top: 17px;
+  width: 530px
+}
+pre {font-size: 11px;}
+a img { border: none;vertical-align:top; }
+a { 
+  text-decoration:none; 
+  color: Bisque;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Rico Pull-Down Example</h1>
+
+<p id='libname'>Base Library: 
+<script type='text/javascript'>
+document.write(Rico.Lib+' '+Rico.LibVersion);
+</script>
+</p>
+
+<div id="header">
+  <div id="top-panel">
+    <a href="javascript:void(0);" onclick="slidepanel('outer_panel',200); return false;">
+        <img alt="code" src="down_arrow.png">
+    &nbsp;View the code...
+    </a>
+  </div>
+	<div id="outer_panel" style='height:0px'>
+		<div id="inner_panel">
+	    <div style="font-size:14px">
+	    Pull down demonstration</div>
+	    <br><br>
+<pre>
+function slidepanel(id, maxht) {
+  var p=Rico.$(id);
+  var ht=parseInt(p.style.height);
+  var newht=ht > 0 ? 0 : maxht;
+  Rico.animate(p,{duration:500},{height:newht});
+}
+</pre>
+<br>
+   	</div>
+  </div>
+</div>
+
+<h1>Welcome to Rico!</h1>
+
+</body>
+</html>

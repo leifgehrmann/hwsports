@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Rico LiveGrid-Example 1</title>
+
+<script src="LoadRicoClient.js" type="text/javascript"></script>
+<link href="../demo.css" type="text/css" rel="stylesheet" />
+
+<script type='text/javascript'>
+Rico.onLoad( function() {
+  var opts = {
+    frozenColumns: 1,
+    highlightElem: 'cursorRow',
+    menuEvent: 'click',
+    visibleRows: 'body',
+    defaultWidth: 120
+  };
+  var buffer=new Rico.Buffer.Base(Rico.$('derby').tBodies[0]);
+  var derby=new Rico.LiveGrid ('derby', buffer, opts);
+  derby.menu=new Rico.GridMenu();
+});
+</script>
+</head>
+
+<body>
+<div id='explanation'>
+Base Library: 
+<script type='text/javascript'>
+document.write(Rico.Lib+' '+Rico.LibVersion);
+</script>
+<hr>
+This example demonstrates how to populate a grid from an HTML table.
+In this case, the table whose data is to be loaded into the grid
+has an id="derby", and the table's body element is passed
+to the buffer constructor which then loads the data.
+<pre>
+Rico.onLoad( function() {
+  var opts = { frozenColumns: 1, highlightElem: 'cursorRow', menuEvent: 'click', visibleRows: 'body', defaultWidth: 120 };
+  var buffer=new Rico.Buffer.Base(Rico.$('derby').tBodies[0]);
+  var derby=new Rico.LiveGrid ('derby', buffer, opts);
+  derby.menu=new Rico.GridMenu();
+});
+</pre>
+</div>
+
+<p><strong>The Kentucky Derby</strong></p>
+<p class="ricoBookmark"><span id="derby_bookmark">&nbsp;</span></p>
+
+<table id="derby" class="ricoLiveGrid" cellspacing="0" cellpadding="0">
+<thead>
+<tr> <td>Year</td> <td>Horse</td> <td>Jockey</td> </tr> 
+</thead>
+<tbody>
+<tr> <td>1875</td> <td>Aristides</td> <td>O. Lewis</td> </tr> 
+<tr> <td>1876</td> <td>Vagrant</td> <td>B. Swim</td> </tr> 
+<tr> <td>1877</td> <td>Baden-Baden</td> <td>W. Walker</td> </tr> 
+<tr> <td>1878</td> <td>Day Star</td> <td>J. Carter</td> </tr> 
+<tr> <td>1879</td> <td>Lord Murphy</td> <td>C. Shauer</td> </tr> 
+<tr> <td>1880</td> <td>Fonso</td> <td>G. Lewis</td> </tr> 
+<tr> <td>1881</td> <td>Hindoo</td> <td>J. McLaughlin</td> </tr> 
+<tr> <td>1882</td> <td>Apollo</td> <td>B. Hurd</td> </tr> 
+<tr> <td>1883</td> <td>Leonatus</td> <td>W. Donohue</td> </tr> 
+<tr> <td>1884</td> <td>Buchanan</td> <td>I. Murphy</td> </tr> 
+<tr> <td>1885</td> <td>Joe Cotton</td> <td>E. Henderson</td> </tr> 
+<tr> <td>1886</td> <td>Ben Ali</td> <td>P. Duffy</td> </tr> 
+<tr> <td>1887</td> <td>Montrose</td> <td>I. Lewis</td> </tr> 
+<tr> <td>1888</td> <td>Macbeth II</td> <td>G. Covington</td> </tr> 
+<tr> <td>1889</td> <td>Spokane</td> <td>T. Kiley</td> </tr> 
+<tr> <td>1890</td> <td>Riley</td> <td>I. Murphy</td> </tr> 
+<tr> <td>1891</td> <td>Kingman</td> <td>I. Murphy</td> </tr> 
+<tr> <td>1892</td> <td>Azra</td> <td>A. Clayton</td> </tr> 
+<tr> <td>1893</td> <td>Lookout</td> <td>E. Kunze</td> </tr> 
+<tr> <td>1894</td> <td>Chant</td> <td>F. Goodale</td> </tr> 
+<tr> <td>1895</td> <td>Halma</td> <td>J. Perkins</td> </tr> 
+<tr> <td>1896</td> <td>Ben Brush</td> <td>W. Simms</td> </tr> 
+<tr> <td>1897</td> <td>Typhoon II</td> <td>F. Garner</td> </tr> 
+<tr> <td>1898</td> <td>Plaudit</td> <td>W. Simms</td> </tr> 
+<tr> <td>1899</td> <td>Manuel</td> <td>F. Taral</td> </tr> 
+<tr> <td>1900</td> <td>Lieut. Gibson</td> <td>J. Boland</td> </tr> 
+<tr> <td>1901</td> <td>His Eminence</td> <td>J. Winkfield</td> </tr> 
+<tr> <td>1902</td> <td>Alan-a-Dale</td> <td>J. Winkfield</td> </tr> 
+<tr> <td>1903</td> <td>Judge Himes</td> <td>H. Booker</td> </tr> 
+<tr> <td>1904</td> <td>Elwood</td> <td>F. Prior</td> </tr> 
+<tr> <td>1905</td> <td>Agile</td> <td>J. Martin</td> </tr> 
+<tr> <td>1906</td> <td>Sir Huon</td> <td>R. Troxler</td> </tr> 
+<tr> <td>1907</td> <td>Pink Star</td> <td>A. Minder</td> </tr> 
+<tr> <td>1908</td> <td>Stone Street</td> <td>A. Pickens</td> </tr> 
+<tr> <td>1909</td> <td>Wintergreen</td> <td>V. Powers</td> </tr> 
+<tr> <td>1910</td> <td>Donau</td> <td>F. Herbert</td> </tr> 
+<tr> <td>1911</td> <td>Meridian</td> <td>G. Archibald</td> </tr> 
+<tr> <td>1912</td> <td>Worth</td> <td>C.H. Shilling</td> </tr> 
+<tr> <td>1913</td> <td>Donerail</td> <td>R. Goose</td> </tr> 
+<tr> <td>1914</td> <td>Old Rosebud</td> <td>J. McCabe</td> </tr> 
+<tr> <td>1915</td> <td>Regret</td> <td>J. Nolter</td> </tr> 
+<tr> <td>1916</td> <td>George Smith</td> <td>J. Loftus</td> </tr> 
+<tr> <td>1917</td> <td>Omar Khayyam</td> <td>C. Borel</td> </tr> 
+<tr> <td>1918</td> <td>Exterminator</td> <td>W. Knapp</td> </tr> 
+<tr> <td>1919</td> <td>Sir Barton</td> <td>J. Loftus</td> </tr> 
+<tr> <td>1920</td> <td>Paul Jones</td> <td>T. Rice</td> </tr> 
+<tr> <td>1921</td> <td>Behave Yourself</td> <td>C. Thompson</td> </tr> 
+<tr> <td>1922</td> <td>Morvich</td> <td>A. Johnson</td> </tr> 
+<tr> <td>1923</td> <td>Zev</td> <td>E. Sande</td> </tr> 
+<tr> <td>1924</td> <td>Black Gold</td> <td>J.D. Mooney</td> </tr> 
+<tr> <td>1925</td> <td>Flying Ebony</td> <td>E. Sande</td> </tr> 
+<tr> <td>1926</td> <td>Bubbling Over</td> <td>A. Johnson</td> </tr> 
+<tr> <td>1927</td> <td>Whiskery</td> <td>L. McAtee</td> </tr> 
+<tr> <td>1928</td> <td>Reigh Count</td> <td>C. Lang</td> </tr> 
+<tr> <td>1929</td> <td>Clyde Van Dusen</td> <td>L. McAtee</td> </tr> 
+<tr> <td>1930</td> <td>Gallant Fox</td> <td>E. Sande</td> </tr> 
+<tr> <td>1931</td> <td>Twenty Grand</td> <td>C. Kurtsinger</td> </tr> 
+<tr> <td>1932</td> <td>Burgoo King</td> <td>E. James</td> </tr> 
+<tr> <td>1933</td> <td>Brokers Tip</td> <td>D. Meade</td> </tr> 
+<tr> <td>1934</td> <td>Cavalcade</td> <td>M. Garner</td> </tr> 
+<tr> <td>1935</td> <td>Omaha</td> <td>W. Saunders</td> </tr> 
+<tr> <td>1936</td> <td>Bold Venture</td> <td>I. Hanford</td> </tr> 
+<tr> <td>1937</td> <td>War Admiral</td> <td>C. Kurtsinger</td> </tr> 
+<tr> <td>1938</td> <td>Lawrin</td> <td>E. Arcaro</td> </tr> 
+<tr> <td>1939</td> <td>Johnstown</td> <td>J. Scout</td> </tr> 
+<tr> <td>1940</td> <td>Gallahadion</td> <td>C. Bierman</td> </tr> 
+<tr> <td>1941</td> <td>Whirlaway</td> <td>E. Arcaro</td> </tr> 
+<tr> <td>1942</td> <td>Shut Out</td> <td>W.D. Wright</td> </tr> 
+<tr> <td>1943</td> <td>Count Fleet</td> <td>J. Longden</td> </tr> 
+<tr> <td>1944</td> <td>Pensive</td> <td>C. McCreary</td> </tr> 
+<tr> <td>1945</td> <td>Hoop Jr.</td> <td>E. Arcaro</td> </tr> 
+<tr> <td>1946</td> <td>Assault</td> <td>W. Mehrtens</td> </tr> 
+<tr> <td>1947</td> <td>Jet Pilot</td> <td>E. Guerin</td> </tr> 
+<tr> <td>1948</td> <td>Citation</td> <td>E. Arcaro</td> </tr> 
+<tr> <td>1949</td> <td>Ponder</td> <td>S. Brooks</td> </tr> 
+<tr> <td>1950</td> <td>Middleground</td> <td>W. Boland</td> </tr> 
+<tr> <td>1951</td> <td>Count Turf</td> <td>C. McCreary</td> </tr> 
+<tr> <td>1952</td> <td>Hill Gail</td> <td>E. Arcaro</td> </tr> 
+<tr> <td>1953</td> <td>Dark Star</td> <td>H. Moreno</td> </tr> 
+<tr> <td>1954</td> <td>Determine</td> <td>R. York</td> </tr> 
+<tr> <td>1955</td> <td>Swaps</td> <td>W. Shoemaker</td> </tr> 
+<tr> <td>1956</td> <td>Needles</td> <td>D. Erb</td> </tr> 
+<tr> <td>1957</td> <td>Iron Liege</td> <td>W. Hartack</td> </tr> 
+<tr> <td>1958</td> <td>Tim Tam</td> <td>I. Valenzuela</td> </tr> 
+<tr> <td>1959</td> <td>Tomy Lee</td> <td>W. Shoemaker</td> </tr> 
+<tr> <td>1960</td> <td>Venetian Way</td> <td>W. Hartack</td> </tr> 
+<tr> <td>1961</td> <td>Carry Back</td> <td>J. Sellers</td> </tr> 
+<tr> <td>1962</td> <td>Decidedly</td> <td>W. Hartack</td> </tr> 
+<tr> <td>1963</td> <td>Chateaugay</td> <td>B. Baeza</td> </tr> 
+<tr> <td>1964</td> <td>Northern Dancer</td> <td>W. Hartack</td> </tr> 
+<tr> <td>1965</td> <td>Lucky Debonair</td> <td>W. Shoemaker</td> </tr> 
+<tr> <td>1966</td> <td>Kauai King</td> <td>D. Brumfield</td> </tr> 
+<tr> <td>1967</td> <td>Proud Clarion</td> <td>R. Ussery</td> </tr> 
+<tr> <td>1968*</td> <td>Dancer&rsquo;s Image</td> <td>I. Valenzuela</td> </tr> 
+<tr> <td>1969</td> <td>Majestic Prince</td> <td>W. Hartack</td> </tr> 
+<tr> <td>1970</td> <td>Dust Commander</td> <td>M. Manganello</td> </tr> 
+<tr> <td>1971</td> <td>Canonero II</td> <td>G. Avila</td> </tr> 
+<tr> <td>1972</td> <td>Riva Ridge</td> <td>R. Turcotte</td> </tr> 
+<tr> <td>1973**</td> <td>Secretariat</td> <td>R. Turcotte</td> </tr> 
+<tr> <td>1974</td> <td>Cannonade</td> <td>A. Cordero, Jr.</td> </tr> 
+<tr> <td>1975</td> <td>Foolish Pleasure</td> <td>J. Vasquez</td> </tr> 
+<tr> <td>1976</td> <td>Bold Forbes</td> <td>A. Cordero, Jr.</td> </tr> 
+<tr> <td>1977</td> <td>Seattle Slew</td> <td>J. Cruguet</td> </tr> 
+<tr> <td>1978</td> <td>Affirmed</td> <td>S. Cauthen</td> </tr> 
+<tr> <td>1979</td> <td>Spectacular Bid</td> <td>R. Franklin</td> </tr> 
+<tr> <td>1980</td> <td>Genuine Risk</td> <td>J. Vasquez</td> </tr> 
+<tr> <td>1981</td> <td>Pleasant Colony</td> <td>J. Velasquez</td> </tr> 
+<tr> <td>1982</td> <td>Gato del Sol</td> <td>E. Delahoussaye</td> </tr> 
+<tr> <td>1983</td> <td>Sunny&rsquo;s Halo</td> <td>E. Delahoussaye</td> </tr> 
+<tr> <td>1984</td> <td>Swale</td> <td>L. Pincay</td> </tr> 
+<tr> <td>1985</td> <td>Spend a Buck</td> <td>A. Cordero, Jr.</td> </tr> 
+<tr> <td>1986</td> <td>Ferdinand</td> <td>W. Shoemaker</td> </tr> 
+<tr> <td>1987</td> <td>Alysheba</td> <td>C. McCarron</td> </tr> 
+<tr> <td>1988</td> <td>Winning Colors</td> <td>G. Stevens</td> </tr> 
+<tr> <td>1989</td> <td>Sunday Silence</td> <td>P. Valenzuela</td> </tr> 
+<tr> <td>1990</td> <td>Unbridled</td> <td>C. Perret</td> </tr> 
+<tr> <td>1991</td> <td>Strike the Gold</td> <td>C. Antley</td> </tr> 
+<tr> <td>1992</td> <td>Lil E. Tee</td> <td>P. Day</td> </tr> 
+<tr> <td>1993</td> <td>Sea Hero</td> <td>J. Bailey</td> </tr> 
+<tr> <td>1994</td> <td>Go For Gin</td> <td>C. McCarron</td> </tr> 
+<tr> <td>1995</td> <td>Thunder Gulch</td> <td>G. Stevens</td> </tr> 
+<tr> <td>1996</td> <td>Grindstone</td> <td>J. Bailey</td> </tr> 
+<tr> <td>1997</td> <td>Silver Charm</td> <td>G. Stevens</td> </tr> 
+<tr> <td>1998</td> <td>Real Quiet</td> <td>K. Desormeaux</td> </tr> 
+<tr> <td>1999</td> <td>Charismatic</td> <td>C. Antley</td> </tr> 
+<tr> <td>2000</td> <td>Fusaichi Pegasus</td> <td>K. Desormeaux</td> </tr> 
+<tr> <td>2001</td> <td>Monarchos</td> <td>J. Chavez</td> </tr> 
+<tr> <td>2002</td> <td>War Emblem</td> <td>V. Espinoza</td> </tr> 
+<tr> <td>2003</td> <td>Funny Cide</td> <td>J. Santos</td> </tr> 
+<tr> <td>2004</td> <td>Smarty Jones</td> <td>S. Elliott</td> </tr> 
+<tr> <td>2005</td> <td>Giacomo</td> <td>M. Smith</td> </tr> 
+<tr> <td>2006</td> <td>Barbaro</td> <td>E. Prado</td> </tr> 
+<tr> <td>2007</td> <td>Street Sense</td> <td>C. Borel</td> </tr> 
+<tr> <td>2008</td> <td>Big Brown</td> <td>K. Desormeaux</td> </tr> 
+<tr> <td>2009</td> <td>Mine That Bird</td> <td>C. Borel</td> </tr> 
+</tbody> 
+</table>   
+
+<p style='font-size: x-small;'>*Dancer&rsquo;s Image disqualified but later reinstated.
+<br> **Fastest time&mdash;1 min 59 2/5 s. No other horse has raced the Derby in less than 2 min.</p> 
+
+</body>
+</html>
+

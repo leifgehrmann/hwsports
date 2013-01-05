@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<title>Rico 3.0 - Animation</title>
+
+<script src="LoadRicoClient.js" type="text/javascript"></script>
+<link href="../demo.css" type="text/css" rel="stylesheet" />
+
+<script type='text/javascript'>
+var container, step=0, phase=0, offsetX=-5, offsetY=-5, duration=750;
+
+var animData = [
+// R
+[20,25,40,325,'#00F'],
+[40,305,140,325,'#00F'],
+[40,165,140,185,'#00F'],
+[140,185,160,305,'#00F'],
+[140,25,160,60,'#00F'],
+[120,60,140,95,'#00F'],
+[100,95,120,130,'#00F'],
+[80,130,100,165,'#00F'],
+
+// I
+[200,25,220,325,'#F00'],
+
+// C
+[260,45,280,305,'#0F0'],
+[280,305,380,325,'#0F0'],
+[280,25,380,45,'#0F0'],
+
+// O
+[420,45,440,305,'#000'],
+[440,305,540,325,'#000'],
+[440,25,540,45,'#000'],
+[540,45,560,305,'#000']
+];
+
+
+Rico.onLoad( function() {
+  container=Rico.$('animContainer');
+  RunAnim();
+});
+
+
+function RunAnim() {
+  if (step >= animData.length) {
+    switch (phase) {
+      case 0:
+        step=0;
+        offsetX=0;
+        offsetY=0;
+        phase++;
+        RunAnim();
+        break;
+      case 1:
+        StartFadeOut();
+        break;
+    }
+    return;
+  }
+  Rico.log('Running step '+step+' '+typeof(step));
+  var pts=animData[step];
+  Rico.log('  pts = '+animData.length);
+  //Rico.log('  pts = '+pts.join(' '));
+  var elem=container.appendChild(document.createElement("div"));
+  var color=phase ? pts[4] : pts[4].replace(/0/g,'C');
+  var elstyle={left:(pts[0]+offsetX)+'px', position:'absolute', width:'1px', height:'1px', backgroundColor:color}
+  if (pts[3] > pts[1]) {
+    elstyle['bottom']=(pts[1]+offsetY)+'px';
+    endHt=pts[3] - pts[1];
+  } else {
+    elstyle['top']=(pts[1]+offsetY)+'px';
+    endHt=pts[1] - pts[3];
+  }
+  Rico.setStyle(elem,elstyle);
+  var opts={duration:duration,onEnd:RunAnim};
+  var props={width:(pts[2]-pts[0]), height:endHt};
+  Rico.animate(elem,opts,props);
+  step++;
+}
+
+
+function StartFadeOut() {
+  Rico.fadeOut(container,1000,StartFadeIn);
+}
+
+function StartFadeIn() {
+  Rico.fadeIn(container,1000);
+}
+</script>
+
+<style type="text/css">
+#animContainer {
+  position:relative; 
+  border:1px solid black;
+  height:350px;
+  width:600px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div id='explanation'>
+Base Library: 
+<script type='text/javascript'>
+document.write(Rico.Lib+' '+Rico.LibVersion);
+</script>
+<hr><p>This example demonstrates Rico's 
+ability to animate elements.
+</div>
+
+
+<div id='animContainer'>
+
+</div>
+
+</body>
+</html>

@@ -1,5 +1,12 @@
 /* display grid headings with a green background */
 
+div.ricoLG_outerDiv *, div.ricoLG_outerDiv div.ricoLG_cell, div.ricoLG_editDiv *, .ricoTitle, .Rico_tabTitle, .Rico_accTitle, .ricoTree *, .ricoBookmark  {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.Rico_accordion , .Rico_tabPanel, .ricoWindow {
+  font-size:90%;
+}
+
 tr.ricoLG_hdg .ricoLG_cell, tr.ricoLG_hdg th, tr.ricoLG_hdg td {  /* td/th required for IE */
   background-color : #cedebd;
   color            : #000000;
@@ -9,10 +16,97 @@ tr.ricoLG_hdg .ricoLG_cell, tr.ricoLG_hdg th, tr.ricoLG_hdg td {  /* td/th requi
 div.ricoLG_selection {
   background-color: #cedebd;
 }
-div.ricoLG_chooser .ricoTitle  {
-  background-color: #cedebd;
-  color: black;
-}
 tr.ricoLG_hdg div.hover, table.ricoLiveGrid thead td, table.ricoLiveGrid thead th {
   background-color: #dee8cd !important;
+}
+
+div.ricoLG_messageDiv {
+  border:2px solid green;
+  background-color:white;
+  color:navy;
+}
+
+a.RicoButton {
+  background-color: #D8E0F2;
+  color: #444;
+  border: 1px solid #444;
+}
+a.RicoButton.hover {
+  background-color: #cedebd;
+}
+
+.ricoWindow {
+  border: 1px solid black;
+  background-color: white;
+}
+.ricoTitle  {
+  background-color: #cedebd;
+  color: black;
+  font-weight: bold;
+  border: 1px solid #aebe9d;
+}
+
+.Rico_tabNavContainer .selected {
+  background: #cedebd;
+  cursor: auto;
+}
+.Rico_tabContent, .noTabContent {
+    background: #e7efde;
+}
+
+.Rico_tabContentContainer, .noTabContent {
+  border : 1px solid #4f4f4f;
+}
+.Rico_tabTitle {
+  height: 1.5em;
+  background: #D8E0F2;
+  font-weight : bold;
+  margin-left: 2px;
+  margin-right: 2px;
+  text-align: center;
+  white-space:nowrap;
+  padding: 4px 5px 0px 5px;
+  border-color: #4f4f4f;
+  border-width: 1px 1px 0px 1px;
+  border-style: solid;
+}
+
+.Rico_accordion  {
+  border : 1px solid #1f669b;
+}
+.Rico_accTitle {
+  background-color : #cedebd;
+  height: 1.7em;
+  font-weight : normal;
+  border-bottom:1px solid #becead;
+  border-top:1px solid #f0f0f0;
+  font-weight : normal;
+  padding-left: 1em;
+  padding-top:0.3em;
+}
+
+.Rico_accTitle a , .Rico_tabTitle a {
+  color : #AAA;
+  text-decoration: none;
+}
+.Rico_accordion .hover a, .Rico_tabNavContainer .hover a {
+  color : #666;
+}
+.Rico_accordion .selected a, .Rico_tabNavContainer .selected a {
+  color : #444;
+  font-weight : bold;
+  
+}
+td.RicoCalHeading {
+  background-color: #becead;
+}
+td.RicoCalHeading a.hover, a.ricoCloseHover {
+  background-color: #deeecd !important;
+}
+td.RicoCalHeading a:link, td.RicoCalHeading a:visited {
+  color:blue;
+}
+.ricoTree a.hover {
+  text-decoration: underline;
+  cursor:pointer;
 }

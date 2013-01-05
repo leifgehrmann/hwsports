@@ -3,15 +3,34 @@ Based on "Coffee with milk" table design by Roger Johansson, 456 Berea Street
 www.456bereastreet.com
 ================================================*/
 
-.ricoLG_table {
-  border-top:1px solid #523A0B !important;
-  border-right:none;
-  font:normal 76%/150% "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+.ricoLG_table, tr.ricoLG_hdg .ricoLG_cell, .ricoTitle, a.RicoButton, .Rico_tabTitle , .Rico_accTitle, .ricoCalContainer *, .ricoTree *, .ricoBookmark {
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+}
+.Rico_accordion , .Rico_tabPanel, .ricoWindow {
+  font-size:80%;
+}
+.ricoWindow .Rico_accordion , .ricoWindow .Rico_tabPanel{
+  font-size:90%;
+}
+div.ricoLG_outerDiv div.ricoLG_cell, table.ricoLiveGrid td, table.ricoLiveGrid th  {
+  font-size: 70%;
   color:#000;
+}
+
+table.ricoLG_table {
+  border-top:1px solid #523A0B !important;
+}
+
+.ricoLG_table thead tr:last-child   td {
+  border-bottom:1px solid #523A0B !important;
+}
+
+.ricoLG_table thead * {
+  border-right:none;
 }
 tr.ricoLG_hdg .ricoLG_cell, tr.ricoLG_hdg th, tr.ricoLG_hdg td {  /* td/th required for IE */
   background:#EBE5D9 !important;
-  line-height:normal;
+  height:1.5em;
   text-align:left;
 }
 
@@ -31,9 +50,11 @@ tr.ricoLG_hdg th, tr.ricoLG_hdg td {
 tr.ricoLG_hdg div.ricoLG_cell {
   background:#EBE5D9;
   font-weight:bold;
-  padding:0.5em 0 0.5em 0.5em;
 }
-div.ricoLG_outerDiv table a {
+div.ricoLG_cell {
+  padding:0.25em 0.5em;
+}
+div.ricoLG_outerDiv a {
   color:#523A0B;
   text-decoration:none;
   border-bottom:1px dotted;
@@ -46,16 +67,7 @@ div.ricoLG_outerDiv table a:hover {
   border-bottom-style:solid;
 }
 
-.ricoLG_bottom div.ricoLG_oddRow {
-  background-color:#F7F4EE;
-  border-top: 1px solid #EBE5D9;
-  border-bottom: 1px solid #EBE5D9;
-}
-.ricoLG_bottom div.ricoLG_evenRow {
-  border-top: 1px solid #FFF;
-  border-bottom: 1px solid #FFF;
-}
-.ricoLG_selection {
+div.ricoLG_selection {
   background-color:#ffffee !important;
   border-color:#523A0B !important;
 }
@@ -63,18 +75,115 @@ div.ricoLG_outerDiv table a:hover {
   border-style:none;
 }
 
-caption {
-  font-family:Georgia,Times,serif;
-  font-weight:normal;
-  font-size:1.4em;
-  text-align:left;
-  margin:0;
-  padding:0.5em 0.25em;
+.ricoLG_FilterRow  div.ricoLG_cell {
+  height:1.9em !important;
+  line-height: 1.9em !important;
 }
-div.ricoLG_chooser .ricoTitle  {
-  background-color: #EBE5D9;
+
+div.ricoLG_messageDiv {
+  border:2px solid #523A0B;
+  background-color:#ffffee;
   color:#444;
 }
-div.ricoLG_chooser {
+
+a.RicoButton {
+  border:1px solid #523A0B;
+  background-color: #EBE5D9;
+  color: #000;
+}
+a.RicoButton.hover {
+  background-color: #f5f0e1;
+}
+
+.ricoWindow {
   border: 1px solid #523A0B;
+  background-color: #fffff8;
+}
+.ricoTitle  {
+  background-color: #EBE5D9;
+  border-bottom: 1px solid #523A0B;
+  color: #000;
+  font-weight: bold;
+}
+
+
+.Rico_tabNavContainer .selected {
+  background: #EBE5D9;
+  cursor: auto;
+}
+.Rico_tabContent, .Rico_accContent {
+  background-color: #ffffee;
+}
+.Rico_tabContentContainer {
+  border : 1px solid #4f4f4f;
+}
+.Rico_tabTitle {
+  height: 1.5em;
+  background: #EBE5D9;
+  margin-left: 2px;
+  margin-right: 2px;
+  text-align: center;
+  white-space:nowrap;
+  padding: 3px 5px 0px 5px;
+  border-color: #523A0B;
+  border-width: 1px 1px 0px 1px;
+  border-style: solid;
+}
+
+
+.Rico_accTitle {
+  background-color: #EBE5D9;
+  font-weight: normal;
+  height: 1.6em;
+  border-bottom:1px solid #523A0B;
+  border-top:1px solid #523A0B;
+  font-weight : normal;
+  padding-left: 1em;
+  padding-top:0.1em;
+}
+
+.Rico_accTitle a , .Rico_tabTitle a {
+  color : #AAA;
+  text-decoration: none;
+}
+.Rico_accordion .hover a, .Rico_tabNavContainer .hover a {
+  color: #000;
+}
+.Rico_accordion .selected a, .Rico_tabNavContainer .selected a {
+  color: #000;
+  font-weight : normal;
+}
+.Rico_accordion  {
+  border : 1px solid #523A0B;
+}
+.ricoCalContainer {
+  border : 1px solid #523A0B;
+}
+td.RicoCalHeading {
+  font-weight: normal;
+  color:#000;
+  background-color: #EBE5D9;
+  border-bottom : 1px solid #523A0B;
+}
+td.RicoCalHeading a.hover, a.ricoCloseHover {
+  background-color: #F7F4EE !important;
+}
+td.RicoCalHeading a:link, td.RicoCalHeading a:visited {
+  color:#000;
+}
+.ricoCalContainer tfoot td {
+  border-top : 1px solid #523A0B;
+  background-color:#EBE5D9;
+  color:#000;
+}
+.ricoCalContainer  {
+  background-color:#F7F4EE;
+}
+.ricoCalContainer tbody td.hover {
+  background-color: #ffffcc;
+}
+
+.ricoTree a.hover {
+  text-decoration: underline;
+  cursor:pointer;
 }

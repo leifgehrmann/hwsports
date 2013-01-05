@@ -1,0 +1,7 @@
+div.ricoLG_evenRow {  background-color: #C9C9C9; }
+div.ricoLG_oddRow {  background-color: #D9D9D9; }
+.ricoLG_bottom div.ui-state-hover {
+  border-left: none;
+  border-top: none;
+  border-right: none;
+}

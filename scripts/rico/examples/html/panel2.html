@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>Rico Tabbed Panel Example</title>
+
+<script src="LoadRicoClient.js" type="text/javascript"></script>
+
+<script type='text/javascript'>
+Rico.onLoad( function() {
+  var label=Rico.$('BaseLib');
+  if (label) label.innerHTML=Rico.Lib+' '+Rico.LibVersion;
+  new Rico.TabbedPanel( 'tab1');
+});
+</script>
+
+<link href="../demo.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+#tab1 {
+  width: 650px;
+  font-size:small;
+}
+.Rico_tabContentContainer {
+  font-size:small;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Rico Tabbed Panel - Variable Height</h1>
+
+<p id='libname'>Base Library: <span id='BaseLib'></span></p>
+
+<div id='tab1'>
+   <ul>
+     <li>Overview</li>
+     <li>HTML Code</li>
+     <li>Rico Code</li>
+   </ul>
+
+   <div>
+     <div>
+      <br>This example illustrates how to use Rico.TabbedPanel to transform a set of 
+      divs into a first class tabbed panel component.<br><br>
+     The Rico.TabbedPanel is actually a very simple component built off of Rico behaviors and effects.
+     It adds the necessary event handlers on the respective divs to handle the visual aspects of switching tabs.
+     </div>
+     <div>
+     <br>The HTML structure for tabbed panels is an outer div that contains an unordered list (ul)
+     to contain the titles and a div to contain the contents.  Inside the unordered list is a LI element for each title.
+     Inside the content container is a DIV element for each panel. Make sure the number of LI title elements
+     matches the number of panel content DIV elements!
+     <br><br>If you are only using Rico themes, then alternatively, you can use DIV elements instead of UL/LI
+     elements to specify the titles. This method is compatible with older versions of Rico.
+  <pre>
+  &lt;div id="tabContainer"&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Title 1
+      &lt;li&gt;Title 2
+      &lt;li&gt;Title 3
+    &lt;/ul&gt;
+    &lt;div&gt;
+      &lt;div&gt;
+        Content 1 ...
+      &lt;/div&gt;
+      &lt;div&gt;
+        Content 2 ...
+      &lt;/div&gt;
+      &lt;div&gt;
+        Content 3 ...
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  </pre>
+          </div>
+          <div>
+          <br>To attach the tabbed panel behavior to the tabbed panel container div, construct a Rico.TabbedPanel
+      object and pass the id of the outer div to it.  This is a bit different than the previous versions.  
+<pre>
+  new Rico.TabbedPanel( 'tabContainer');
+</pre>
+    There are many other configuration parameters that can be specified to modify various visual aspects of the
+    tabbed panel. The panelHeight is the attribute that is most commonly overridden.
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

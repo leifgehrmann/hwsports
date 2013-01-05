@@ -1,0 +1,106 @@
+html {
+  padding: 10px;
+}
+body {
+  font-family: Arial, Tahoma, Verdana;
+  background: #4f4f4f;
+  color: #fff;
+  margin: 2px;
+  overflow: hidden;
+}
+div.top {
+  margin: 6px 0px;
+  padding-left: 5px;
+  font-size: 12px;
+}
+
+#accordion1 {
+  width: 99%;
+}
+
+div.selected, div.hover {
+  background-color:#63699C;
+  color:#FFFFFF;
+  font-weight:bold;
+  height: 22px;
+  padding-left: 5px;
+}
+
+.Rico_accTitle {
+  background-color:#6B79A5;
+  color:#CED7EF;
+  height: 22px;
+  font-weight : normal;
+  padding-left: 5px;
+  padding-top: 5px;
+  overflow: hidden;
+
+  border-bottom:1px solid #182052;
+  border-style:solid none;
+  border-top:1px solid #BDC7E7;
+  border-width:1px 0px;
+  font-size:12px;
+  white-space:nowrap;
+}
+
+.Rico_accContent {
+  font-size: 12px;
+  padding-left: 5px;
+  overflow: auto;
+}
+
+#menuheader {
+  background-color: #1381d4;
+  border: 0px none;
+  overflow:visible;
+  width: 97%;
+}
+
+#menuheader p {
+  padding: 1em;
+  margin: 0px;
+  font-weight: bold;
+  font-size:11pt;
+}
+
+ul {
+  margin:3px 0 0 0;
+  padding: 0px;
+}
+#accordion1 ul li {
+  list-style: none;
+  padding: 0 0 0 16px;
+  margin: 4px 0;
+  font-size: 12px;
+}
+
+form ul li {
+  list-style: none;
+  padding: 0px;
+  margin: 4px 0;
+  font-size: 12px;
+}
+
+a {
+  color: #9999ff;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+div.subhead {
+  font-weight: bold;
+  margin-top:18px;
+  margin-bottom:3px;
+}
+img {
+  border: 0px;
+}
+
+#RicoDir {
+  margin: 0px 0.3em;
+}
+
+#demolist {
+  height:3em;
+}

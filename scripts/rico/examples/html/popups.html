@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Rico: Auto-sizing Window</title>
+
+<script src="LoadRicoClient.js" type="text/javascript"></script>
+<link href="../demo.css" type="text/css" rel="stylesheet" />
+
+<script type='text/javascript'>
+var popup;
+
+Rico.onLoad( function() {
+  Rico.eventBind('btnWinCreate',"click", Rico.eventHandle(window,'DisplayText'));
+  Rico.eventBind('btnSmall',"click", Rico.eventHandle(window,'setSmall'));
+  Rico.eventBind('btnMedium',"click", Rico.eventHandle(window,'setMedium'));
+  Rico.eventBind('btnLarge',"click", Rico.eventHandle(window,'setLarge'));
+  Rico.$('btnWinCreate').disabled=false;
+  Rico.$('btnSmall').disabled=true;
+  Rico.$('btnMedium').disabled=true;
+  Rico.$('btnLarge').disabled=true;
+  Rico.log('onLoad finished');
+});
+
+function setSmall(e) {
+  popup.setContent("<table border='1' cellpadding='10'><tr><td>A<td>B<tr><td>C<td>D</table>");
+}
+
+function setMedium(e) {
+  popup.setContent("<p><input type='text'><p><input type='text'>");
+}
+
+function setLarge(e) {
+  popup.setContent("<p><input type='text'>&nbsp;&nbsp;<input type='text'><p><input type='text'>&nbsp;&nbsp;<input type='text'><p><input type='text'>&nbsp;&nbsp;<input type='text'>");
+}
+
+function DisplayText(e) {
+  Rico.eventStop(e);
+  var options={
+    hideOnClick: false,
+    overflow   : 'auto'
+  };
+  popup=new Rico.Window('Auto-sizing Window',options);
+  popup.setContent('Hello World!');
+  popup.openPopup(100,250);
+  Rico.eventElement(e).disabled=true;
+  Rico.$('btnSmall').disabled=false;
+  Rico.$('btnMedium').disabled=false;
+  Rico.$('btnLarge').disabled=false;
+}
+</script>
+
+</head>
+
+
+<body>
+
+<div id='explanation'>
+Base Library: 
+<script type='text/javascript'>
+document.write(Rico.Lib+' '+Rico.LibVersion);
+</script>
+<hr>
+<p>This example displays a dialog window, then allows you to change the window contents - demonstrating how the window automatically resizes.
+</p>
+</div>
+
+
+<button id='btnWinCreate'>Display popup window</button>
+<button id='btnSmall'>Content=ABCD</button>
+<button id='btnMedium'>Content=2 inputs</button>
+<button id='btnLarge'>Content=6 inputs</button>
+
+<p>Here are some select boxes to show that there is no bleed-through in IE6.
+
+<p style='margin-left:5em;'>
+<select>
+<option>Rome</option>
+<option>London</option>
+<option>Houston</option>
+<option selected>Hong Kong</option>
+</select>
+
+<p>&nbsp;
+
+<p style='margin-left:10em;'>
+<select>
+<option>Rome</option>
+<option selected>London</option>
+<option>Houston</option>
+<option>Hong Kong</option>
+</select>
+
+<p>&nbsp;
+
+<p style='margin-left:15em;'>
+<select>
+<option>Rome</option>
+<option>London</option>
+<option selected>Houston</option>
+<option>Hong Kong</option>
+</select>
+
+</body>
+</html>

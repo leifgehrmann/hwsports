@@ -15,7 +15,7 @@ class Tms extends MY_Controller {
 			//redirect them to the sms homepage
 			redirect('/', 'refresh');
 		}
-		require_once(APPPATH.'libraries/SimpleGrid.php');
+		require_once(APPPATH.'libraries/rico/rico.php');
 	}
 	public function index()
 	{

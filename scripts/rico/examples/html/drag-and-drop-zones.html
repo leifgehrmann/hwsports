@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<title>Rico TV Networks</title>
+
+<script src="LoadRicoClient.js" type="text/javascript"></script>
+<link href="../demo.css" type="text/css" rel="stylesheet" />
+
+<script type='text/javascript'>
+var seAsia = ['Brunei','Cambodia','East Timor','Indonesia','Laos','Malaysia','Myanmar (Burma)','Philippines','Singapore','Thailand','Vietnam'];
+var eastAsia = ['People\'s Republic of China (PRC)','Hong Kong (China)','Japan','Macau (China)','Mongolia','North Korea','South Korea','Republic of China (Taiwan)'];
+
+var CustomDraggable;
+Rico.onLoad( function() {
+  Rico.setDebugArea('logger');
+  Rico.enableLogging();
+  Rico.extend(CustomDraggable.prototype, new Rico.Draggable());
+  Rico.extend(CustomDraggable.prototype, CustomDraggableMethods);
+  
+  // East Asia is zone 0
+  PopulateZone(eastAsia, 'eastAsia', 0);
+  Rico.registerDropZone( new Rico.Dropzone('EastAsiaDrop1'), 0);
+  Rico.registerDropZone( new Rico.Dropzone('EastAsiaDrop2'), 0);
+
+  // SE Asia is zone 1
+  PopulateZone(seAsia, 'seAsia', 1);
+  Rico.registerDropZone( new Rico.Dropzone('SEAsiaDrop1'), 1);
+  Rico.registerDropZone( new Rico.Dropzone('SEAsiaDrop2'), 1);
+});
+
+function PopulateZone(names, id, zoneNumber) {
+  var n=Rico.$(id);
+  for ( var i=0; i < names.length; i++ ) {
+    var d=document.createElement('div');
+    d.id="d" + i;
+    d.className='CustomDraggable';
+    d.innerHTML=names[i];
+    n.appendChild(d);
+    Rico.registerDraggable( new CustomDraggable('Custom', d), zoneNumber );
+  }
+}
+
+function CustomDraggable(type, htmlElement) {
+  this.initialize(type, htmlElement);
+}
+
+var CustomDraggableMethods = {
+
+  startDrag: function() {
+    this.startParent=this.htmlElement.parentNode;
+    Rico.log("startDragging: " + this.htmlElement.innerHTML + " from [" + this.startParent.id +"]");
+  },
+  
+  endDrag: function() {
+    this.endParent=this.htmlElement.parentNode;
+    Rico.log("endDragging: " + this.htmlElement.innerHTML + " from [" + this.startParent.id + "] to [" + this.endParent.id + "]" );
+  }
+
+}
+
+</script>
+
+<style type="text/css">
+p {
+  font-size : 8pt;
+}
+
+.logBox {
+  background-color : #ffffcc;
+  border : 1px solid #8b8b8b;
+  font-size : 8pt;
+}
+
+.listBox {
+  padding: 5px;
+  background-color : #ffffff;
+  border : 1px solid #8b8b8b;
+  width:200px;
+  height:90px;
+  overflow:auto;
+}
+.listBox * {
+  margin: 0px;
+  padding: 0px;
+  font-size : 11px;
+  font-family : Arial, Helvetica;
+}
+span.catHeader {
+  font-family : Arial;
+  font-weight : bold;
+  font-size : 11px;
+  color : #5b5b5b;
+  margin-left : 8px;
+  margin-top : 12px;
+  display : block;
+}
+.zone {
+  display:inline;
+  margin-left:8px;
+  margin-bottom:8px;
+  float:left;
+}
+div.CustomDraggable {
+  z-index:10;
+  color: blue;
+}
+</style>
+</head>
+
+
+<body>
+
+<h1>Rico Drag-and-Drop: Separate Drop Zones</h1>
+
+<p>Base Library: 
+<script type='text/javascript'>
+document.write(Rico.Lib+' '+Rico.LibVersion);
+</script>
+</p>
+
+<p>This example demonstrates how to set up distinct drop zones. Watch the log messages!</p>
+
+<div id="exampleContainer" style="float:left;background-color:#DDD; width: 680px;">
+
+<div>
+<div id="drag1" class='zone'>
+  <span class="catHeader">East Asia</span>
+  <div class="listBox" id="eastAsia"></div>
+</div>
+
+<div id="dropBox1a" class='zone'>
+  <span class="catHeader">East Asia Drop 1</span>
+  <div class="listBox" id="EastAsiaDrop1"></div>
+</div>
+
+<div id="dropBox1b" class='zone'>
+  <span class="catHeader">East Asia Drop 2</span>
+  <div class="listBox" id="EastAsiaDrop2"></div>
+</div>
+
+</div>
+
+<div style='clear:both'>
+<div id="drag2" class='zone'>
+  <span class="catHeader">SE Asia</span>
+  <div class="listBox" id="seAsia"></div>
+</div>
+
+<div id="dropBox2a" class='zone'>
+  <span class="catHeader">SE Asia Drop 1</span>
+  <div class="listBox" id="SEAsiaDrop1"></div>
+</div>
+
+<div id="dropBox2b" class='zone'>
+  <span class="catHeader">SE Asia Drop 2</span>
+  <div class="listBox" id="SEAsiaDrop2"></div>
+</div>
+</div>
+
+<div style="clear:both;margin:8px;">
+  <span id='loghead' class="catHeader">drag-n-drop message log:</span>
+  <textarea class="logBox" id="logger" rows='7' cols='80'></textarea>
+</div>
+
+</div>
+</body>
+</html>
