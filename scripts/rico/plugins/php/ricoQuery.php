@@ -12,16 +12,15 @@ $errmsg='';
 $query='';
 $filters=array();
 
-if (!isset($this->session->userdata($id))) {
-  $errmsg="Session error. Please reload page. Your GET id var was $id and CI userdata is: ";
-  $errmsg.=print_r($this->session->all_userdata(),1);
-} else {
-  $query=$this->session->userdata($id);
+//if (!isset($this->session->userdata($id);)) {
+//  $errmsg="Session error. Please reload page. Your GET id var was $id and SESSION is ";
+  $errmsg.=print_r($_SESSION,1);
+//} else {
   $oXmlResp->SetDbConn($GLOBALS['oDB']);
   $oXmlResp->sendDebugMsgs=true;
   $oXmlResp->convertCharSet=true;
-}
-$oXmlResp->ProcessQuery($id, $query, $filters, $errmsg);
+//}
+$oXmlResp->ProcessQuery($id, $_SESSION[$id], $filters, $errmsg);
 $oXmlResp=NULL;
 
 $GLOBALS['oDB']->dbClose();
