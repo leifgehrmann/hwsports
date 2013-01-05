@@ -14,13 +14,13 @@ $query='';
 $filters=array();
 
 if (!isset($_SESSION[$id])) {
-  $errmsg="Your connection with the server was idle for too long and timed out. Please refresh this page and try again.";
+  $errmsg="Your connection with the server was idle for too long and timed out. Please refresh this page and try again. Your GET id var was $id";
 } else {
   $query=$_SESSION[$id];
   if (isset($_SESSION[$id . ".filters"])) $filters=$_SESSION[$id . ".filters"];
-  $oXmlResp->SetDbConn($oDB);
+  $oXmlResp->SetDbConn($GLOBALS['oDB']);
   $oXmlResp->sendDebugMsgs=true;
-  $oXmlResp->convertCharSet=true;  // MySQL sample database is encoded with ISO-8859-1
+  $oXmlResp->convertCharSet=true;
 }
 $oXmlResp->ProcessQuery($id, $query, $filters, $errmsg);
 $oXmlResp=NULL;
