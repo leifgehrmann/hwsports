@@ -76,4 +76,4 @@
 	});
 
 </script>
-<div id='calendar' style="text-decoration:none;"></div>
+<div id='calendar'></div>

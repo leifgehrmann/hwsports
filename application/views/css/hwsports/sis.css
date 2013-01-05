@@ -250,6 +250,9 @@ body {
 	width: 680px;
 	margin: 0 auto;
 }
+#calendar a{
+	text-decoration:none;
+}
 
 
 
