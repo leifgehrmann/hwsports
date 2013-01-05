@@ -1,5 +1,5 @@
 <? if($this->ion_auth->logged_in()){ ?>
-	<h1>Hi <?=$currentUser->firstName?>,</h1>
+	<h1>Welcome <?=$currentUser->firstName?> <?=$currentUser->lastName?></h1>
 
 	<a class="button tickets" href="/sis/tickets"><div class="icon"></div><div class="label">Buy Tickets</div><div class="subtitle">Purchase and view your tickets for tournaments</div></a>
 	<a class="button signup" href="/sis/signup"><div class="icon"></div><div class="label">Sign up</div><div class="subtitle">Sign up for sports tournaments</div></a>
