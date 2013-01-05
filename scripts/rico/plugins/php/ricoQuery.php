@@ -14,7 +14,7 @@ $filters=array();
 
 //if (!isset($_SESSION[$id])) {
 //  $errmsg="Session error. Please reload page. Your GET id var was $id and SESSION is ";
- $errmsg=print_r($_SESSION,1);
+print_r($_SESSION); die();
 /*} else {
   $oXmlResp->SetDbConn($GLOBALS['oDB']);
   $oXmlResp->sendDebugMsgs=true;
