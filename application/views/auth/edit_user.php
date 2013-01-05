@@ -1,7 +1,9 @@
 <h1>Edit User</h1>
 <p>Please enter the users information below.</p>
 
-<div id="infoMessage"><?php echo $message;?></div>
+<? if(!empty($message)){ ?>
+      <div id="infoMessage"><?php echo $message;?></div>
+<? } ?>
 
 <?php echo form_open(current_url());?>
 

@@ -1,7 +1,9 @@
 <h1>Create User Account</h1>
 <p>Please enter your details information below.</p>
 
-<div id="infoMessage"><?php echo $message;?></div>
+<? if(!empty($message)){ ?>
+      <div id="infoMessage"><?php echo $message;?></div>
+<? } ?>
 
 <?php echo form_open("auth/register");?>
 

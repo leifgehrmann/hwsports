@@ -1,6 +1,8 @@
 <h1>Change Password</h1>
 
-<div id="infoMessage"><?php echo $message;?></div>
+<? if(!empty($message)){ ?>
+	<div id="infoMessage"><?php echo $message;?></div>
+<? } ?>
 
 <?php echo form_open('auth/reset_password/' . $code);?>
       

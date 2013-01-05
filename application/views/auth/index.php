@@ -1,7 +1,9 @@
 <h1>Users</h1>
 <p>Below is a list of the users.</p>
 
-<div id="infoMessage"><?php echo $message;?></div>
+<? if(!empty($message)){ ?>
+	<div id="infoMessage"><?php echo $message;?></div>
+<? } ?>
 
 <table cellpadding=0 cellspacing=10>
 	<tr>

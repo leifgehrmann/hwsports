@@ -1,7 +1,9 @@
 <h1>Login</h1>
 <p>Please login with your email and password below.</p>
 	
-<div id="infoMessage"><?php echo $message;?></div>
+<? if(!empty($message)){ ?>
+  <div id="infoMessage"><?php echo $message;?></div>
+<? } ?>
 
 <?php echo form_open("auth/login");?>
   	

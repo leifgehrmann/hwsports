@@ -1,7 +1,9 @@
 <h1>Forgot Password</h1>
 <p>Please enter your email address so we can send you an email to reset your password.</p>
 
-<div id="infoMessage"><?php echo $message;?></div>
+<? if(!empty($message)){ ?>
+	<div id="infoMessage"><?php echo $message;?></div>
+<? } ?>
 
 <?php echo form_open("auth/forgot_password");?>
 
