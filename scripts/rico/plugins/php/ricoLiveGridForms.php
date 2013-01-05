@@ -310,7 +310,7 @@ class TableEditClass {
           break;
 
         default:
-          $this->session->set_userdata( array($this->gridID => $this->SqlSelectData()) );
+          //$this->session->set_userdata( array($this->gridID => $this->SqlSelectData()) );
           $this->TableDisplay();
           break;
       }
