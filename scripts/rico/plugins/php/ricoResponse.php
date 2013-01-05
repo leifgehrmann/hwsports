@@ -1,5 +1,7 @@
 <?php
 
+require "/home/sports/public_html/scripts/rico/plugins/php/dbClass3.php";
+
 // for PHP4
 // copied from http://www.php.net/json_encode
 if (!function_exists('json_encode'))
