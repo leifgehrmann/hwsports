@@ -4,7 +4,7 @@
 
 <? 
 if (!isset ($_SESSION)) session_start();
-print_r($_SESSION); ?>
+print_r($_SESSION); echo "sess1<br /><br />"; ?>
 
 <script type='text/javascript'>Rico_CONFIG={};</script>
 <script src='http://ajax.googleapis.com/ajax/libs/prototype/1.7/prototype.js' type='text/javascript'></script>
@@ -32,12 +32,12 @@ div.ricoLG_cell {
 require "/home/sports/public_html/scripts/rico/plugins/php/dbClass3.php";
 require "/home/sports/public_html/scripts/rico/plugins/php/ricoLiveGridForms.php";
 session_set_cookie_params(60*60);
-print_r($_SESSION);
+print_r($_SESSION); echo "sess2br /><br />";
 
 $GLOBALS['oDB'] = new dbClass();
 if (! $GLOBALS['oDB']->MySqlLogon("sports_web", "sports_web", "group8") ) die('MySqlLogon failed');
 
-print_r($_SESSION);
+print_r($_SESSION); echo "sess3<br /><br />";
 $oForm=new TableEditClass();
 $oForm->SetTableName("venues");
 $oForm->options["XMLprovider"]="/scripts/rico/plugins/php/ricoQuery.php";
@@ -55,7 +55,7 @@ $oForm->AddEntryFieldW("centreID", "centreID", "B", "", 50);
 $oForm->ConfirmDeleteColumn();
 $oForm->SortAsc();
 
-print_r($_SESSION);
+print_r($_SESSION); echo "sess4<br /><br />";
 $oForm->DisplayPage();
 
 $GLOBALS['oDB']->dbClose();
