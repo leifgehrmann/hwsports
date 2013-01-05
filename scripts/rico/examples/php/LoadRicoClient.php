@@ -98,7 +98,6 @@ function setLang() {
   }
 }
 
-
 // set theme
 // "j-ui-lightness" for a Themeroller theme
 // "r-greenHdg" for a native Rico theme

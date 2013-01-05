@@ -23,6 +23,7 @@ $GLOBALS['sqltext']='.';
 	$oForm->options["frozenColumns"]=1;
 	$oForm->options["menuEvent"]='click';
 	$oForm->options["highlightElem"]='cursorRow';
+	
 	$oForm->AddEntryFieldW("ShipperID", "ID", "B", "<auto>",50);
 	$oForm->AddEntryFieldW("CompanyName", "Company Name", "B", "", 150);
 	$oForm->ConfirmDeleteColumn();

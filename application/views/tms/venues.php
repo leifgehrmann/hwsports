@@ -2,18 +2,44 @@
 
 <h1>Venue List</h1>
 
-<script type='text/javascript' src="/scripts/rico/prototype.js" />
-<script type='text/javascript' src="/scripts/rico/rico.js" />
-<script type='text/javascript'>
-	Rico.loadModule('SimpleGrid','greenHdg.css');
+<script type='text/javascript'>Rico_CONFIG={};</script>
+<script src='http://ajax.googleapis.com/ajax/libs/prototype/1.7/prototype.js' type='text/javascript'></script>
+<script src='/scripts/rico/js/rico2pro.js' type='text/javascript'></script>
+<script src='/scripts/rico/js/rico_min.js' type='text/javascript'></script>
+<link href='/scripts/rico/css/rico.css' type='text/css' rel='stylesheet'/>
+<script src='/scripts/rico/js/ricoThemeroller.js' type='text/javascript'></script>
+<link type='text/css' rel='Stylesheet' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-lightness/jquery-ui.css'/>
+<link type='text/css' rel='stylesheet' href='/scripts/rico/css/striping_ui-lightness.css'/>
+<style type='text/css'>.ricoLG_Resize{background-repeat:repeat;background-image:url(/scripts/rico/images/resize.gif)}.rico-icon{background-repeat:no-repeat;background-image:url(/scripts/rico/images/ricoIcons.gif)}</style>
+<?
+require "../../../plugins/php/dbClass3.php";
+require "../../../plugins/php/ricoLiveGridForms.php";
+session_set_cookie_params(60*60);
 
-	Rico.onLoad( function() {
-	  var opts = {  
-		columnSpecs: ['specQty']  // display first column as a numeric quantity
-	  };
-	  var ex1=new Rico.SimpleGrid ('ex1', opts);
-	});
-</script>
+$oDB = new dbClass();
+if (! $oDB->MySqlLogon("sports_northwind", "sports_northwind", "northwind") ) die('MySqlLogon failed');
+$oForm=new TableEditClass();
+$oForm->SetTableName("shippers");
+$oForm->options["XMLprovider"]="ricoQuery.php";
+$oForm->convertCharSet=true;
+$oForm->options["canAdd"]=1;
+$oForm->options["canEdit"]=1;
+$oForm->options["canDelete"]=1;
+$oForm->options["frozenColumns"]=1;
+$oForm->options["menuEvent"]='click';
+$oForm->options["highlightElem"]='cursorRow';
+
+$oForm->AddEntryFieldW("ShipperID", "ID", "B", "<auto>",50);
+$oForm->AddEntryFieldW("CompanyName", "Company Name", "B", "", 150);
+$oForm->ConfirmDeleteColumn();
+$oForm->SortAsc();
+$oForm->AddEntryFieldW("Phone", "Phone Number", "B", "", 150);
+
+$oForm->DisplayPage();
+
+$oDB->dbClose();
+?>
+
 
 <? if(count($venues)>=1) { ?>
 <table id="venuesTable">
