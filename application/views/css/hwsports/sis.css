@@ -83,7 +83,7 @@ body {
 	background-position: 20px 12px;
 }
 
-#menu li.selected.menu-default{
+#menu li.selected{
 	/*border-radius: 4px;*/
 	background:#EEE;
 	font-weight:bold;
