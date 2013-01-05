@@ -20,7 +20,7 @@ $filters=array();
   $oXmlResp->sendDebugMsgs=true;
   $oXmlResp->convertCharSet=true;
 }*/
-$oXmlResp->ProcessQuery($id, $_SESSION[$id], $filters, $errmsg);
+$oXmlResp->ProcessQuery($id, $query, $filters, $errmsg);
 $oXmlResp=NULL;
 
 $GLOBALS['oDB']->dbClose();
