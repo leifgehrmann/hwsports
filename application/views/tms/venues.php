@@ -43,7 +43,7 @@ $oForm->options["menuEvent"]='click';
 $oForm->options["highlightElem"]='cursorRow';
 
 $oForm->AddEntryFieldW("ShipperID", "ID", "B", "<auto>",50);
-$oForm->AddEntryFieldW("CompanyName", "Company Name", "B", "", 150);
+$oForm->AddEntryFieldW("CompanyName", "Company Name", "tinyMCE", "", 150);
 $oForm->ConfirmDeleteColumn();
 $oForm->SortAsc();
 $oForm->AddEntryFieldW("Phone", "Phone Number", "B", "", 150);
