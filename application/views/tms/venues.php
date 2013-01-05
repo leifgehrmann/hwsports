@@ -30,10 +30,12 @@ div.ricoLG_cell {
 require "/home/sports/public_html/scripts/rico/plugins/php/dbClass3.php";
 require "/home/sports/public_html/scripts/rico/plugins/php/ricoLiveGridForms.php";
 session_set_cookie_params(60*60);
+print_r($_SESSION);
 
 $GLOBALS['oDB'] = new dbClass();
 if (! $GLOBALS['oDB']->MySqlLogon("sports_web", "sports_web", "group8") ) die('MySqlLogon failed');
 
+print_r($_SESSION);
 $oForm=new TableEditClass();
 $oForm->SetTableName("venues");
 $oForm->options["XMLprovider"]="/scripts/rico/plugins/php/ricoQuery.php";
@@ -50,6 +52,8 @@ $oForm->AddEntryFieldW("centreID", "centreID", "B", "", 50);
 
 $oForm->ConfirmDeleteColumn();
 $oForm->SortAsc();
+
+print_r($_SESSION);
 $oForm->DisplayPage();
 
 $GLOBALS['oDB']->dbClose();
