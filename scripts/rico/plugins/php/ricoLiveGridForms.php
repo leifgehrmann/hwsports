@@ -81,7 +81,7 @@ class TableEditClass {
     $this->TableCnt=-1;
     $this->AutoInit=true;
     $this->formView=true;
-    $this->sessions=true;
+    $this->sessions=isset($_SESSION);
     $this->ErrorFlag=false;
     $this->ErrorMsg="";
     $this->convertCharSet=false;
@@ -310,7 +310,7 @@ class TableEditClass {
           break;
 
         default:
-          $_SESSION[$this->gridID]=$this->SqlSelectData();
+          if ($this->sessions) $_SESSION[$this->gridID]=$this->SqlSelectData();
           $this->TableDisplay();
           break;
       }
