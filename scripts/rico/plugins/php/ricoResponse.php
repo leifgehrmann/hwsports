@@ -622,4 +622,3 @@ class ricoXmlResponse {
 }
 
 ?>
-
