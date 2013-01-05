@@ -12,8 +12,8 @@
 <link type='text/css' rel='stylesheet' href='/scripts/rico/css/striping_ui-lightness.css'/>
 <style type='text/css'>.ricoLG_Resize{background-repeat:repeat;background-image:url(/scripts/rico/images/resize.gif)}.rico-icon{background-repeat:no-repeat;background-image:url(/scripts/rico/images/ricoIcons.gif)}</style>
 <?
-require "../../../plugins/php/dbClass3.php";
-require "../../../plugins/php/ricoLiveGridForms.php";
+require "../../../rico/plugins/php/dbClass3.php";
+require "../../../rico/plugins/php/ricoLiveGridForms.php";
 session_set_cookie_params(60*60);
 
 $oDB = new dbClass();
