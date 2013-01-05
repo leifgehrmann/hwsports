@@ -87,7 +87,7 @@ $GLOBALS['oDB']->dbClose();
 // a global variable to access the map
 var map;
 var centre_marker;
-var centre_pos  = new google.maps.LatLng( $('input[name="lat"]').val(), $('input[name="lng"]').val() );
+var centre_pos  = new google.maps.LatLng( jQuery('input[name="lat"]').val(), jQuery('input[name="lng"]').val() );
 
 function zoomIn(){ map.setZoom(map.getZoom()+1);}
 function zoomOut(){ map.setZoom(map.getZoom()-1);}
@@ -104,8 +104,8 @@ function initialize(){
 	google.maps.event.addListener(map, 'dragend', function() {
 		var newcentre = map.getCenter();
 		centre_marker.setPosition(newcentre);
-		$('input[name=lat]').val(newcentre.lat());
-		$('input[name=lng]').val(newcentre.lng());
+		jQuery('input[name=lat]').val(newcentre.lat());
+		jQuery('input[name=lng]').val(newcentre.lng());
 	});
 }
 
