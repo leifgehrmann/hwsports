@@ -55,7 +55,7 @@
 					title: 'Lunch',
 					start: new Date(y, m, d, 12, 0),
 					end: new Date(y, m, d, 14, 0),
-					allDay: false
+					allDay: false,
 					color: '#4986E7'
 				},
 				{
