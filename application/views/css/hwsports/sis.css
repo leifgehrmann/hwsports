@@ -136,26 +136,13 @@ body {
 
 #content #infoMessage{
 	padding:20px;
-	padding-left:72px;
+	padding-left:20px;
 	margin-bottom:10px;
 	margin-top:10px;
 	background: #EEE;
 }
-#content #warningMessage{
-	padding:20px;
-	padding-left:72px;
-	background-repeat: no-repeat;
-	background-position: 20px 20px;
-	background: #FFE;
-	background-image: url('/img/hwsports/icons/warning.32.png');
-}
-#content #errorMessage{
-	padding:20px;
-	padding-left:72px;
-	background-repeat: no-repeat;
-	background-position: 20px 20px;
-	background: #FEE;
-	background-image: url('/img/hwsports/icons/error.32.png');
+#content #infoMessage p{
+	padding-bottom: 0px;
 }
 
 #content .widget {
