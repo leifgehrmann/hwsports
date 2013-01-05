@@ -88,6 +88,14 @@ class Sis extends MY_Controller {
 		$this->load->view('sis/tournament',$this->data);
 		$this->load->view('sis/footer',$this->data);
 	}
+	public function account()
+	{
+		$this->data['title'] = "Account";
+		$this->data['page'] = "account";
+		$this->load->view('sis/header',$this->data);
+		$this->load->view('sis/account',$this->data);
+		$this->load->view('sis/footer',$this->data);
+	}
 	public function help()
 	{
 		// Page title
