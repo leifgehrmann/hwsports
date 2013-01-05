@@ -49,13 +49,14 @@
 					title: 'Meeting',
 					start: new Date(y, m, d, 10, 30),
 					allDay: false,
-					backgroundColor: '#000'
+					color: 'rgb(123, 209, 72)'
 				},
 				{
 					title: 'Lunch',
 					start: new Date(y, m, d, 12, 0),
 					end: new Date(y, m, d, 14, 0),
 					allDay: false
+					color: 'rgb(73, 134, 231)'
 				},
 				{
 					title: 'Birthday Party',
@@ -75,4 +76,4 @@
 	});
 
 </script>
-<div id='calendar'></div>
+<div id='calendar' style="text-decoration:none;"></div>
