@@ -310,7 +310,7 @@ class TableEditClass {
           break;
 
         default:
-          if ($this->sessions) $_SESSION[$this->gridID]=$this->SqlSelectData();
+          $_SESSION[$this->gridID]=$this->SqlSelectData();
           $this->TableDisplay();
           break;
       }

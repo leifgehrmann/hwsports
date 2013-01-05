@@ -76,7 +76,7 @@ $GLOBALS['oDB']->dbClose();
 	<?=form_input($createDirections);?>
 	</p>
 
-	<p>Location:</p>
+	<p>Location (drag map center to venue position):</p>
 	<div id="map" style="width: 400px; height: 250px;"></div>
 
 	<p><?=form_submit('submit', 'Create Venue');?></p>
