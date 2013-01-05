@@ -2,7 +2,9 @@
 
 <h1>Venue List</h1>
 
-<? print_r($_SESSION); ?>
+<? 
+if (!isset ($_SESSION)) session_start();
+print_r($_SESSION); ?>
 
 <script type='text/javascript'>Rico_CONFIG={};</script>
 <script src='http://ajax.googleapis.com/ajax/libs/prototype/1.7/prototype.js' type='text/javascript'></script>
