@@ -2,24 +2,31 @@
 <html>
 <head>
 <?php
-require "dbConnect.php";
+require "../../plugins/php/dbClass3.php";
 require "LoadRicoClient.php";
 require "../../plugins/php/ricoLiveGridForms.php";
+$GLOBALS['sqltext']='.';
 ?>
 </head>
 <body>
 <?php
-if (OpenGridForm("", "shippers")) {
-  if ($oForm->action == "table") {
-    DisplayTable();
-  }
-  else {
-    DefineFields();
-  }
+$oDB = new dbClass();
+if (! $oDB->MySqlLogon("sports_northwind", "sports_northwind", "northwind") ) die('MySqlLogon failed');
+$oForm=new TableEditClass();
+$oForm->SetTableName("shippers");
+$oForm->options["XMLprovider"]="ricoQuery.php";
+$oForm->convertCharSet=true;
+$oForm->options["canAdd"]=1;
+$oForm->options["canEdit"]=1;
+$oForm->options["canDelete"]=1;
+
+if ($oForm->action == "table") {
+	DisplayTable();
 } else {
-  echo 'open failed';
+	DefineFields();
 }
-CloseApp();
+
+$oDB->dbClose();
 
 function DisplayTable() {
   global $oForm,$oDB;
