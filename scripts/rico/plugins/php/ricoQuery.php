@@ -12,12 +12,11 @@ $errmsg='';
 $query='';
 $filters=array();
 
-if (!isset($_SESSION[$id])) {
-  $errmsg="Your connection with the server was idle for too long and timed out. Please refresh this page and try again. Your GET id var was $id and SESSION is";
-  $errmsg.=print_r($_SESSION,1);
+if (!isset($this->session->userdata($id))) {
+  $errmsg="Session error. Please reload page. Your GET id var was $id and CI userdata is: ";
+  $errmsg.=print_r($this->session->all_userdata(),1);
 } else {
-  $query=$_SESSION[$id];
-  if (isset($_SESSION[$id . ".filters"])) $filters=$_SESSION[$id . ".filters"];
+  $query=$this->session->userdata($id);
   $oXmlResp->SetDbConn($GLOBALS['oDB']);
   $oXmlResp->sendDebugMsgs=true;
   $oXmlResp->convertCharSet=true;
