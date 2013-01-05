@@ -15,7 +15,7 @@ $filters=array();
 
 if (!isset($_SESSION[$id])) {
   $errmsg="Your connection with the server was idle for too long and timed out. Please refresh this page and try again. Your GET id var was $id and SESSION is";
-  print_r($_SESSION);
+  $errmsg.=print_r($_SESSION,1);
 } else {
   $query=$_SESSION[$id];
   if (isset($_SESSION[$id . ".filters"])) $filters=$_SESSION[$id . ".filters"];
