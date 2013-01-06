@@ -211,10 +211,10 @@ body {
 }
 #content .news-published {
 	float:left;
-	margin-right:20px;
+	margin-right:10px;
 }
 #content .news-published:after {
-	margin-left:20px;
+	margin-left:10px;
 	content: "|";
 }
 #content .news-permalink{
@@ -222,7 +222,7 @@ body {
 	float:left;
 }
 #content .news-content {
-	margin-top:20px;
+	margin:30px;
 	clear: both;
 }
 
