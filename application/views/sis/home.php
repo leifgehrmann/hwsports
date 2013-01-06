@@ -17,7 +17,7 @@
 <div class="subscribe-item">
 	<form>
 		<input type="text" name="email"/>
-		<input type="Submit" label="Subscribe"/>
+		<input type="Submit" label="Subscribe"/><!-- Oh god, I'm too lazy to check how to properly do this right now-->
 	</form>
 </div>
 
