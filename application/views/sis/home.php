@@ -16,7 +16,8 @@
 
 <div class="subscribe-item">
 	<form method="POST" action="/subscribe/">
-		<p>Want to keep up with sport tournament news? Enter in your email below to get any updates we post on the site.</p>
+		<p>Want to keep up with sport tournament news?</p>
+		<p>Enter in your email below to get any updates we post on the site.</p>
 		<input type="text" placeholder="Your email..." name="email"/>
 		<input type="submit" value="Subscribe" name="Subscribe"/>
 	</form>
