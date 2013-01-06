@@ -204,6 +204,7 @@ body {
 	margin-bottom:15px;
 }
 #content .news-header {
+	display: block;
 	font-size: 16px;
 	color: #00468C;
 	clear: both;

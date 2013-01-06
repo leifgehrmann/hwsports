@@ -54,8 +54,7 @@
 	<div class="news-published">January 5th, 2013</div>
 	<a href="news/$newsID" class="news-permalink">permalink</a>
 	<div class="news-content">
-		<img src="http://i.minus.com/iE8nEjmu51rGN.gif"/>
-		<p>'nuff said</P>
+		<p>Because she is</p>
 	</div>
 </div>
 
