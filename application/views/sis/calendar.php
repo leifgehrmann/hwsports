@@ -3,6 +3,7 @@
 <ul>
 	<li>Tournaments are coloured as <span style="color:rgb(73, 134, 231);font-weight:bold;">blue</span>.</li>
 	<li>Matches are coloured as <span style="color:rgb(123, 209, 72);font-weight:bold;">green</span>.</li>
+	<li>Registration periods are coloured as <span style="color:rgb(250, 87, 60);font-weight:bold;">red</span>.</li>
 </ul>
 <p>Click the matches/tournaments for more information.</p>
 
@@ -62,7 +63,8 @@
 					title: 'Birthday Party',
 					start: new Date(y, m, d+1, 19, 0),
 					end: new Date(y, m, d+1, 22, 30),
-					allDay: false
+					allDay: false,
+					color: 'rgb(250, 87, 60)';
 				},
 				{
 					title: 'Click for Google',
