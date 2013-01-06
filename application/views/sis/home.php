@@ -22,7 +22,7 @@
 </div>
 
 <div class="news-item">
-	<div class="news-header">Register Now!</div>
+	<a href="news/$newsID" class="news-header">Register Now!</a>
 	<div class="news-published">February 14th, 2013</div>
 	<a href="news/$newsID" class="news-permalink">permalink</a>
 	<div class="news-content">
@@ -41,17 +41,16 @@
 </div>
 
 <div class="news-item">
-	<div class="news-header">Opening soon...</div>
+	<a href="news/$newsID" class="news-header">Opening soon...</a>
 	<div class="news-published">February 10th, 2013</div>
 	<a href="news/$newsID" class="news-permalink">permalink</a>
 	<div class="news-content">
-		<p>Published: February 10th, 2013 | <a href="news/$newsID">permalink</a></p>
 		<p>The website will work soon hopefully by February... I hope</p>
 	</div>
 </div>
 
 <div class="news-item">
-	<div class="news-header">Essay: Why Applejack is <em>best</em> pony.</div>
+	<a href="news/$newsID" class="news-header">Essay: Why Applejack is <em>best</em> pony.</a>
 	<div class="news-published">January 5th, 2013</div>
 	<a href="news/$newsID" class="news-permalink">permalink</a>
 	<div class="news-content">
