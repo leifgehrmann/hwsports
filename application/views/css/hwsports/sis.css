@@ -196,7 +196,33 @@ body {
 }
 
 /*
-	TEXT DECORATION
+	NEWS
+*/
+#content .news-item {
+	width: 100%;
+	margin-bottom:30px;
+}
+#content .news-header {
+	font-size: 16px;
+	color: #00468C;
+	clear: both;
+}
+#content .news-published {
+	float:left;
+}
+#content .news-published:after {
+	content: " | ";
+}
+#content .news-permalink a {
+	display: block;
+	float:left;
+}
+#content .news-content {
+	clear: both;
+}
+
+/*
+	ACCOUNT
 */
 
 .page-account #content a.button {
@@ -234,7 +260,6 @@ body {
 	margin-bottom:20px;
 	background-size: 100%;
 }
-
 .page-account #content a.tickets div.icon { background-image: url('/img/hwsports/icons/ticket.64.png'); }
 .page-account #content a.signup  div.icon { background-image: url('/img/hwsports/icons/signup.64.png'); }
 .page-account #content a.details div.icon { background-image: url('/img/hwsports/icons/details.64.png'); }
