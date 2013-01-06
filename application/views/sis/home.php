@@ -26,8 +26,10 @@
 	<div class="news-published">February 14th, 2013</div>
 	<a href="news/$newsID" class="news-permalink">permalink</a>
 	<div class="news-content">
-		<p>Want to participate in the Heriot Watt Tournament, well now you can register on this website!</p>
-		<p>We are offering the following sports this year.</p>
+		<p>
+			Want to participate in the Heriot Watt Tournament, well now you can register on this 
+			website! We are offering the following sports this year.
+		</p>
 		<ul>
 			<li>Heriot Hurdling (Men &amp; Womens)</li>
 			<li>Wattball</li>
@@ -36,7 +38,7 @@
 			If you have already made an account, be sure to check into your account and sign up for
  			the games you want to participate in.
  		</p>
-		<p>If you want to create a team in the Wattball tournament</p>
+		<p>If you want to create a team in the Wattball tournament, you can do so when signing up for a</p>
 	</div>
 </div>
 
@@ -57,5 +59,3 @@
 		<p>Because she is</p>
 	</div>
 </div>
-
-<h1>FYI ANDREW, THIS STUFF IS NOT REAL (AKA NOT IN DATABASE)</h1>
