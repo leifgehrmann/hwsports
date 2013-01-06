@@ -15,9 +15,10 @@
 <h1>News</h1>
 
 <div class="subscribe-item">
-	<form>
-		<input type="text" name="email"/>
-		<input type="Submit" label="Subscribe"/><!-- Oh god, I'm too lazy to check how to properly do this right now-->
+	<form method="POST" action="/subscribe/">
+		<p>Want to keep up with sport tournament news? Enter in your email below to get any updates we post on the site.</p>
+		<input type="text" placeholder="Your email..." name="email"/>
+		<input type="submit" value="Subscribe" name="Subscribe"/>
 	</form>
 </div>
 
