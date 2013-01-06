@@ -64,7 +64,7 @@
 					start: new Date(y, m, d+1, 19, 0),
 					end: new Date(y, m, d+1, 22, 30),
 					allDay: false,
-					color: 'rgb(250, 87, 60)';
+					color: '#FA573C'
 				},
 				{
 					title: 'Click for Google',
