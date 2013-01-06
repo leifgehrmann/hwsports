@@ -210,9 +210,11 @@ body {
 }
 #content .news-published {
 	float:left;
+	margin-right:20px;
 }
 #content .news-published:after {
-	content: "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+	margin-left:20px;
+	content: "|";
 }
 #content .news-permalink{
 	display: block;
