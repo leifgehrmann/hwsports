@@ -298,20 +298,28 @@ body {
 	vertical-align: middle;
 	clear: both;
 	height: 35px;
-	color: #777;
+	color: #000;
 	padding: 20px;
-}
-
-#footer .legal{
-	width:50%;
 	font-size:12px;
-	color:#000;
+}
+#footer .legal{
+	float:left;
+	width:50%;
 	opacity: 0.8;
 }
-
-#footer a {
-	color: #777;
+#footer .powered{
+	float:right;
+	opacity: 0.8;
 }
-
-
-infoMessage
+#footer a {
+	color: #000;
+}
+#footer .logo{
+	margin-left:20px;
+	vertical-align: middle;
+	display: inline-block;
+	width:99px;
+	height:33px;
+	background-image:url('/img/product/logo/is.medium.png');
+	opacity: 0.8;
+}
