@@ -1,7 +1,7 @@
 			</div>
 			<div id="footer">
-				<div class="left legal"><?=$centre['legalText']?></div>
-				<div class="right"><a href="http://www.infusionsystems.co.uk"><div class="company-logo"></div></a></div>
+				<div class="legal"><?=$centre['legalText']?></div>
+				<div class="powered">Powered By:<a href="http://www.infusionsystems.co.uk"><div class="logo"></div></a></div>
 			</div>
 		</div>
 	</body>
