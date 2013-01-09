@@ -25,77 +25,58 @@
 				right: 'month,agendaWeek,agendaDay'
 			},
 			events: [
-				{
-					title: 'All Day Event',
-					start: new Date(y, m, 1)
-				},
-				{
-					title: 'Long Event',
-					start: new Date(y, m, d-5),
-					end: new Date(y, m, d-2)
-				},
 
-				// Ficitional Matches
+				// Matches
 
 				{
 					title: 'Wattball - Hunters vs. Blue Jays',
-					start: new Date(y, m, d-3, 10, 11.5),
+					start: new Date(y, m, d, 10, 11.5),
 					allDay: false,
-					color: '#2966C7'
+					color: '#2966C7',
+					url: 'http://google.com/'
 				},
 				{
 					title: 'Wattball - Greens vs. The Red Cows',
-					start: new Date(y, m, d-3, 10, 11.5),
+					start: new Date(y, m, d, 10, 11.5),
 					allDay: false,
-					color: '#2966C7'
+					color: '#2966C7',
+					url: 'http://google.com/'
 				},
 				{
 					title: 'Wattball - Hunters vs. Blue Jays',
-					start: new Date(y, m, d-3, 14, 15.5),
+					start: new Date(y, m, d, 14, 15.5),
 					allDay: false,
-					color: '#2966C7'
+					color: '#2966C7',
+					url: 'http://google.com/'
 				},
 				{
 					title: 'Mens Hurdling - Round 1',
-					start: new Date(y, m, d-3, 14, 15.5),
+					start: new Date(y, m, d, 14, 15.5),
 					allDay: false,
-					color: '#2966C7'
+					color: '#2966C7',
+					url: 'http://google.com/'
+				},
+
+				// Tournaments
+
+				{
+					title: 'Heriot Watt Tournament 2013',
+					start: new Date(y, m, d-3),
+					end: new Date(y, m, d+2)
+					color: '#5AB128',
+					url: '/sis/tournament/1'
 				},
 
 
+				// Registration times
 
 				{
-					id: 999,
-					title: 'Repeating Event',
-					start: new Date(y, m, d+4, 16, 0),
-					allDay: false
-				},
-				{
-					title: 'Meeting',
-					start: new Date(y, m, d, 10, 30),
-					allDay: false,
-					color: '#5AB128'
-				},
-				{
-					title: 'Lunch',
-					start: new Date(y, m, d, 12, 0),
-					end: new Date(y, m, d, 14, 0),
-					allDay: false,
-					color: '#2966C7'
-				},
-				{
-					title: 'Birthday Party',
-					start: new Date(y, m, d+1, 19, 0),
-					end: new Date(y, m, d+1, 22, 30),
+					title: 'WattBall Registration Period',
+					start: new Date(y, m, d+1),
+					end: new Date(y, m, d+1),
 					allDay: false,
 					color: '#EA472C'
 				},
-				{
-					title: 'Click for Google',
-					start: new Date(y, m, 28),
-					end: new Date(y, m, 29),
-					url: 'http://google.com/'
-				}
 			]
 		});
 		
