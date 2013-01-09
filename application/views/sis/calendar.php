@@ -32,28 +32,32 @@
 					// Monday
 					{
 						title: 'Mens Hurdling - Preliminary Rounds',
-						start: new Date(y, m, d-3, 12, 14),
+						start: new Date(y, m, d-3, 12, 0),
+						end:   new Date(y, m, d-3, 14, 0),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/1'
 					},
 					{
-						title: 'Mens Hurdling - Recoba vs. WattBulls',
-						start: new Date(y, m, d-3, 10, 11.5),
+						title: 'WattBall - Recoba vs. WattBulls',
+						start: new Date(y, m, d-3, 10, 0),
+						end:   new Date(y, m, d-3, 11, 30),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/2'
 					},
 					{
-						title: 'Mens Hurdling - The Red Cows vs. Hunters',
-						start: new Date(y, m, d-3, 10, 11.5),
+						title: 'WattBall - The Red Cows vs. Hunters',
+						start: new Date(y, m, d-3, 10, 0),
+						end:   new Date(y, m, d-3, 11, 30),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/2'
 					},
 					{
-						title: 'Mens Hurdling - Blue Jays vs. Greens',
-						start: new Date(y, m, d-3, 14, 15.5),
+						title: 'WattBall - Blue Jays vs. Greens',
+						start: new Date(y, m, d-3, 14, 0),
+						end:   new Date(y, m, d-3, 15, 30),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/2'
@@ -63,21 +67,32 @@
 					// Tuesday
 					{
 						title: 'Mens Hurdling - Round 1',
-						start: new Date(y, m, d-2, 12, 14),
+						start: new Date(y, m, d-2, 12, 0),
+						end:   new Date(y, m, d-2, 14, 0),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/1'
 					},
 					{
-						title: 'Mens Hurdling - The Red Cows vs. Greens',
-						start: new Date(y, m, d-2, 10, 11.5),
+						title: 'WattBall - The Red Cows vs. Greens',
+						start: new Date(y, m, d-2, 10, 0),
+						end:   new Date(y, m, d-2, 11, 30),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/2'
 					},
 					{
-						title: 'Mens Hurdling - Blue Jays vs. Greens',
-						start: new Date(y, m, d-3, 14, 15.5),
+						title: 'WattBall - Blue Jays vs. Recoba',
+						start: new Date(y, m, d-2, 10, 0),
+						end:   new Date(y, m, d-2, 11, 30),
+						allDay: false,
+						color: '#2966C7',
+						url: '/sis/match/2'
+					},
+					{
+						title: 'WattBall - Hunters vs. WattBulls',
+						start: new Date(y, m, d-2, 14, 0),
+						end:   new Date(y, m, d-2, 15, 30),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/2'
@@ -87,7 +102,8 @@
 
 					{
 						title: 'Mens Hurdling - Round 2',
-						start: new Date(y, m, d-1, 12, 14),
+						start: new Date(y, m, d-1, 12, 0),
+						end:   new Date(y, m, d-1, 14, 0),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/1'
@@ -97,45 +113,42 @@
 
 					{
 						title: 'Mens Hurdling - Round 3',
-						start: new Date(y, m, d, 12, 14),
+						start: new Date(y, m, d, 12, 0),
+						end:   new Date(y, m, d, 14, 0),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/1'
 					},
 					{
 						title: 'Wattball - Hunters vs. Blue Jays',
-						start: new Date(y, m, d, 10, 11.5),
+						start: new Date(y, m, d, 10, 0),
+						end:   new Date(y, m, d, 11, 30),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/'
 					},
 					{
 						title: 'Wattball - Greens vs. The Red Cows',
-						start: new Date(y, m, d, 10, 11.5),
+						start: new Date(y, m, d, 10, 0),
+						end:   new Date(y, m, d, 11, 30),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/'
 					},
 					{
 						title: 'Wattball - Hunters vs. Blue Jays',
-						start: new Date(y, m, d, 14, 15.5),
-						allDay: false,
-						color: '#2966C7',
-						url: '/sis/match/'
-					},
-					{
-						title: 'Mens Hurdling - Round 1',
-						start: new Date(y, m, d, 14, 15.5),
+						start: new Date(y, m, d, 14, 0),
+						end:   new Date(y, m, d, 15, 30),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/'
 					},
 
 					// Friday
-
 					{
 						title: 'Mens Hurdling - Round 4',
-						start: new Date(y, m, d, 12, 14),
+						start: new Date(y, m, d+1, 12, 0),
+						end:   new Date(y, m, d+1, 14, 0),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/1'
