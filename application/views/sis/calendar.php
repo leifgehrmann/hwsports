@@ -63,7 +63,7 @@
 				{
 					title: 'Heriot Watt Tournament 2013',
 					start: new Date(y, m, d-3),
-					end: new Date(y, m, d+2)
+					end: new Date(y, m, d+2),
 					color: '#5AB128',
 					url: '/sis/tournament/1'
 				},
