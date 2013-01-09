@@ -240,10 +240,12 @@ body {
 	vertical-align: top;
 	width: 45%;
 }
-#content .match-item a:hover{
-	background: #EEE;
+#content .match-item{
 	display: block;
 	padding: 5px;
+}
+#content .match-item:hover{
+	background: #EEE;
 }
 
 
