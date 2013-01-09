@@ -1,5 +1,7 @@
 <h1>Tickets</h1>
-<p>In order to purchase tickets, you have to first <a href="/auth/register/">register an account with us</a>.</p>
+<p>In order to purchase tickets, you have to first <a href="/auth/register/">register an account with us</a>. From your account interface you should then see the options to purchase tickets.</p>
+<h2>What does a ticket exactly get?</h2>
+<p>Tickets are bought for a full day, not a particular match. Tickets cannot be used the next day.</p>
 <h2>How much do tickets cost?</h2>
 <p>We have two different tickets that one can purchase.</p>
 <table>

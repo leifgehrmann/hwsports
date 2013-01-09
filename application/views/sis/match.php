@@ -1,13 +1,13 @@
 <h1><a href="">WattBall</a> &gt; Hunters vs. Blue Jays</h1>
-<h2>Match Description</h2>
+<h2>Description</h2>
 <table>
 	<tr>
 		<th>Team A</th>
-		<td>Hunters</td>
+		<td><a href="">Hunters</a></td>
 	</tr>
 	<tr>
 		<th>Team B</th>
-		<td>Blue Jays</td>
+		<td><a href="">Blue Jays</a></td>
 	</tr>
 </table>
 <h2>Match Details</h2>
@@ -30,3 +30,4 @@
 		<td><a href="">View on Google Maps</a></td>
 	</tr>
 </table>
+<h2>Results</h2>
