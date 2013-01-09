@@ -22,16 +22,6 @@ class Sis extends MY_Controller {
 		$this->load->view('sis/footer',$this->data);
 	}
 
-	public function whatson()
-	{
-		// Page title
-		$this->data['title'] = "What's On";
-		$this->data['page'] = "whatson";
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('sis/whatson',$this->data);
-		$this->load->view('sis/footer',$this->data);
-	}
-
 	public function calendar()
 	{
 		// Page title
@@ -41,6 +31,67 @@ class Sis extends MY_Controller {
 		$this->load->view('sis/calendar',$this->data);
 		$this->load->view('sis/footer',$this->data);
 	}
+
+	public function matches()
+	{
+		// Page title
+		$this->data['title'] = "Matches";
+		$this->data['page'] = "matches";
+		$this->load->view('sis/header',$this->data);
+		$this->load->view('sis/matches',$this->data);
+		$this->load->view('sis/footer',$this->data);
+	}
+
+	public function match($matchID)
+	{
+
+		/* We want to get:
+			- match name
+			- which game is it part of?
+			- which tournament is it part of?
+			- Where is it?
+			- The results of this match?
+			- When does the match begin
+			- when long is the match?
+			- who is playing in this match
+			- what type of sport is this first of all?
+		*/
+		$this->load->library('table');
+		// Page title
+		$this->data['title'] = "$matchID value";
+		$this->data['page'] = "match";
+		$this->data['matchID'] = $matchID;
+
+		$this->load->view('sis/header',$this->data);
+		$this->load->view('sis/match',$this->data);
+		$this->load->view('sis/footer',$this->data);
+	}
+
+	public function game($gameID)
+	{
+
+		/* We want to get:
+			- match name
+			- which game is it part of?
+			- which tournament is it part of?
+			- Where is it?
+			- The results of this match?
+			- When does the match begin
+			- when long is the match?
+			- who is playing in this match
+			- what type of sport is this first of all?
+		*/
+		$this->load->library('table');
+		// Page title
+		$this->data['title'] = "$gameID value";
+		$this->data['page'] = "game";
+		$this->data['gameID'] = $gameID;
+
+		$this->load->view('sis/header',$this->data);
+		$this->load->view('sis/game',$this->data);
+		$this->load->view('sis/footer',$this->data);
+	}
+
 	public function tournaments()
 	{
 
@@ -58,6 +109,7 @@ class Sis extends MY_Controller {
 		$this->load->view('sis/tournaments',$this->data);
 		$this->load->view('sis/footer',$this->data);
 	}
+
 	public function tournament($tournamentID)
 	{
 
@@ -88,6 +140,15 @@ class Sis extends MY_Controller {
 		$this->load->view('sis/tournament',$this->data);
 		$this->load->view('sis/footer',$this->data);
 	}
+	public function ticketinfo()
+	{
+		// Page title
+		$this->data['title'] = "Tickets";
+		$this->data['page'] = "ticketsinfo";
+		$this->load->view('sis/header',$this->data);
+		$this->load->view('sis/ticketsinfo',$this->data);
+		$this->load->view('sis/footer',$this->data);
+	}
 	public function account()
 	{
 		//set the flash data error message if there is one
@@ -105,6 +166,15 @@ class Sis extends MY_Controller {
 		$this->data['page'] = "account";
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('sis/account',$this->data);
+		$this->load->view('sis/footer',$this->data);
+	}
+	public function info()
+	{
+		// Page title
+		$this->data['title'] = "About Us";
+		$this->data['page'] = "info";
+		$this->load->view('sis/header',$this->data);
+		$this->load->view('sis/info',$this->data);
 		$this->load->view('sis/footer',$this->data);
 	}
 	public function help()
