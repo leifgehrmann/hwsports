@@ -24,6 +24,7 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
+			editable: true,
 			events: [
 
 				// Matches
