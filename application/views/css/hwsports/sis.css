@@ -233,6 +233,22 @@ body {
 }
 
 /*
+	MATCHES
+*/
+#content .matches-upcoming, #content .matches-latest{
+	display: inline-block;
+	vertical-align: top;
+	width: 45%;
+}
+#content .match-item a:hover{
+	background: #EEE;
+	display: block;
+	padding: 5px;
+}
+
+
+
+/*
 	ACCOUNT
 */
 
