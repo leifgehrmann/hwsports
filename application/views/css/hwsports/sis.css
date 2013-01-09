@@ -241,8 +241,7 @@ body {
 	MATCHES
 */
 #content .matches-upcoming, #content .matches-latest{
-	display: inline-block;
-	vertical-align: top;
+	float: left;
 	width: 330px;
 	margin-left:10px;
 	margin-right:10px;
