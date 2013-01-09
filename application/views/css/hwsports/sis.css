@@ -243,7 +243,7 @@ body {
 #content .matches-upcoming, #content .matches-latest{
 	display: inline-block;
 	vertical-align: top;
-	width: 310px;
+	width: 320px;
 	margin-left:10px;
 	margin-right:10px;
 }
