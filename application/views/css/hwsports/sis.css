@@ -278,6 +278,7 @@ body {
 #content .match-button-next, #content .match-button-prev {
 	padding:20px;
 	width: 100%;
+	display:block;
 }
 #content .match-button-next:hover, #content .match-button-prev:hover {
 	background: #EEE;
