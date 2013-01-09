@@ -267,12 +267,17 @@ body {
 	clear: both;
 	color: #444;
 }
+#content .match-venue {
+	clear: both;
+	color: #444;
+}
 #content .match-time {
 	clear: both;
 	color: #444;
 }
 #content .match-tournament:before { content: 'Tournament: ' }
 #content .match-time:before       { content: 'Time: '       }
+#content .match-venue:before       { content: 'Venue: '       }
 
 
 
