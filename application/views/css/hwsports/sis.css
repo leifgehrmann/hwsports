@@ -237,6 +237,9 @@ body {
 	clear: both;
 }
 
+
+
+
 /*
 	MATCHES
 */
@@ -244,8 +247,8 @@ body {
 	display: inline-block;
 	vertical-align: top;
 	width: 320px;
-	margin-left:10px;
-	margin-right:9px;
+	margin-left:9px;
+	margin-right:8px;
 }
 #content .match-item{
 	display: block;
@@ -276,7 +279,6 @@ body {
 #content .match-tournament:before { content: 'Tournament: '; font-weight:bold; }
 #content .match-time:before       { content: 'Time: '; font-weight:bold;      }
 #content .match-venue:before      { content: 'Venue: '; font-weight:bold;       }
-
 #content .match-button-next, #content .match-button-prev {
 	padding-top:20px;
 	padding-bottom:20px;
@@ -287,6 +289,13 @@ body {
 #content .match-button-next:hover, #content .match-button-prev:hover {
 	background: #EEE;
 }
+
+
+
+/*
+	Tournaments
+*/
+
 
 
 
