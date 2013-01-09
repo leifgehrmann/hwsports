@@ -256,8 +256,11 @@ body {
 #content .match-name{
 	font-weight:bold;
 	text-decoration:underline;
+	float: left;
+	margin-right: 10px;
 }
 #content .match-game {
+	float:left;
 	color: #444;
 }
 #content .match-tournament {
@@ -266,6 +269,8 @@ body {
 #content .match-time {
 	color: #444;
 }
+#content .match-tournament:before { content: 'Tournament: ' }
+#content .match-time:before       { content: 'Time: '       }
 
 
 
