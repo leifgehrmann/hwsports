@@ -27,9 +27,11 @@
             <div id="menu">
                 <ul class="menu-default">
                     <a href="/"><li class="home <?=($page=="sishome" ? 'selected' : '')?>">Homepage</li></a>
-                    <a href="/sis/whatson"><li class="whatson <?=($page=="whatson" ? 'selected' : '')?>">What's On</li></a>
                     <a href="/sis/calendar"><li class="calendar <?=($page=="calendar" ? 'selected' : '')?>">Calendar</li></a>
+                    <a href="/sis/Matches"><li class="matches <?=($page=="matches" ? 'selected' : '')?>">Matches</li></a>
                     <a href="/sis/tournaments"><li class="tournaments <?=($page=="tournaments" ? 'selected' : '')?>">Tournaments</li></a>
+                    <a href="/sis/ticketsinfo"><li class="ticketsinfo <?=($page=="ticketsinfo" ? 'selected' : '')?>">Tickets</li></a>
+                    <a href="/sis/info"><li class="info <?=($page=="info" ? 'selected' : '')?>">About Us</li></a>
                     <a href="/sis/help"><li class="help <?=($page=="help" ? 'selected' : '')?>">Help</li></a>
                 </ul>
                 <? if(!$this->ion_auth->logged_in()){ ?>

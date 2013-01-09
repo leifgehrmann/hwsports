@@ -107,12 +107,14 @@ body {
 #menu li.logout 		{ background-image: url('/img/hwsports/icons/logout.14.png'); }
 #menu li.home	 		{ background-image: url('/img/hwsports/icons/home.14.png'); }
 #menu li.whatson 		{ background-image: url('/img/hwsports/icons/match.14.png'); }
+#menu li.matches 		{ background-image: url('/img/hwsports/icons/match.14.png'); }
 #menu li.calendar 		{ background-image: url('/img/hwsports/icons/calendar.14.png'); }
 #menu li.tournaments 	{ background-image: url('/img/hwsports/icons/tournament.14.png'); }
 #menu li.register 		{ background-image: url('/img/hwsports/icons/register.14.png'); }
-#menu li.tickets 		{ background-image: url('/img/hwsports/icons/ticket.14.png'); }
+#menu li.ticketsinfo	{ background-image: url('/img/hwsports/icons/ticket.14.png'); }
 #menu li.signup 		{ background-image: url('/img/hwsports/icons/signup.14.png'); }
 #menu li.account 		{ background-image: url('/img/hwsports/icons/user.14.png'); }
+#menu li.info 			{ background-image: url('/img/hwsports/icons/info.14.png'); }
 #menu li.help 			{ background-image: url('/img/hwsports/icons/help.14.png'); }
 
 
