@@ -33,28 +33,28 @@
 					start: new Date(y, m, d, 10, 11.5),
 					allDay: false,
 					color: '#2966C7',
-					url: 'http://google.com/'
+					url: '/sis/match/'
 				},
 				{
 					title: 'Wattball - Greens vs. The Red Cows',
 					start: new Date(y, m, d, 10, 11.5),
 					allDay: false,
 					color: '#2966C7',
-					url: 'http://google.com/'
+					url: '/sis/match/'
 				},
 				{
 					title: 'Wattball - Hunters vs. Blue Jays',
 					start: new Date(y, m, d, 14, 15.5),
 					allDay: false,
 					color: '#2966C7',
-					url: 'http://google.com/'
+					url: '/sis/match/'
 				},
 				{
 					title: 'Mens Hurdling - Round 1',
 					start: new Date(y, m, d, 14, 15.5),
 					allDay: false,
 					color: '#2966C7',
-					url: 'http://google.com/'
+					url: '/sis/match/'
 				},
 
 				// Tournaments
@@ -76,7 +76,7 @@
 					end: new Date(y, m, d+1),
 					allDay: false,
 					color: '#EA472C'
-				},
+				}
 			]
 		});
 		
