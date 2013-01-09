@@ -193,8 +193,8 @@ body {
 }
 
 #content h3 {
-	font-size: 16px;
-	color: #2066AC; 
+	font-size: 14px;
+	color: #444; 
 }
 
 #content td, #content th {
@@ -243,7 +243,7 @@ body {
 #content .matches-upcoming, #content .matches-latest{
 	display: inline-block;
 	vertical-align: top;
-	width: 45%;
+	width: 48%;
 }
 #content .match-item{
 	display: block;
@@ -252,6 +252,19 @@ body {
 }
 #content .match-item:hover{
 	background: #EEE;
+}
+#content .match-name{
+	font-weight:bold;
+	text-decoration:underline;
+}
+#content .match-game {
+	color: #444;
+}
+#content .match-tournament {
+	color: #444;
+}
+#content .match-time {
+	color: #444;
 }
 
 
