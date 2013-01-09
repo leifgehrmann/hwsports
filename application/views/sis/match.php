@@ -4,32 +4,32 @@
 <h2>Match Details</h2>
 <table>
 	<tr>
-		<td>Date</td>
+		<th>Date</th>
 		<td>14th February 2012</td>
 	</tr>
 	<tr>
-		<td>Time</td>
+		<th>Time</th>
 		<td>14th February 2012</td>
 	</tr>
 	<tr>
-		<td>Duration</td>
+		<th>Duration</th>
 		<td>14th February 2012</td>
 	</tr>
 	<tr>
-		<td>Venue</td>
+		<th>Venue</th>
 		<td>Pitch A</td>
 		<td><a href="">View on Google Maps</a></td>
 	</tr>
 	<tr>
-		<td>Team A</td>
+		<th>Team A</th>
 		<td>Hunters</td>
 	</tr>
 	<tr>
-		<td>Team B</td>
+		<th>Team B</th>
 		<td>Blue Jays</td>
 	</tr>
 	<tr>
-		<td>Team B</td>
+		<th>Team B</th>
 		<td>Blue Jays</td>
 	</tr>
 </table>
