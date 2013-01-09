@@ -192,6 +192,11 @@ body {
 	color: #00468C; 
 }
 
+#content h3 {
+	font-size: 16px;
+	color: #2066AC; 
+}
+
 #content td, #content th {
 	padding:10px;
 	text-align:left;
@@ -242,7 +247,8 @@ body {
 }
 #content .match-item{
 	display: block;
-	padding: 5px;
+	padding: 10px;
+	text-decoration: none;
 }
 #content .match-item:hover{
 	background: #EEE;
