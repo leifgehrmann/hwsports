@@ -34,13 +34,36 @@
 					start: new Date(y, m, d-5),
 					end: new Date(y, m, d-2)
 				},
+
+				// Ficitional Matches
+
 				{
-					id: 999,
 					title: 'Wattball - Hunters vs. Blue Jays',
-					start: new Date(y, m, d-3, 16, 0),
+					start: new Date(y, m, d-3, 10, 11.5),
 					allDay: false,
-					color: '#3976D7'
+					color: '#2966C7'
 				},
+				{
+					title: 'Wattball - Greens vs. The Red Cows',
+					start: new Date(y, m, d-3, 10, 11.5),
+					allDay: false,
+					color: '#2966C7'
+				},
+				{
+					title: 'Wattball - Hunters vs. Blue Jays',
+					start: new Date(y, m, d-3, 14, 15.5),
+					allDay: false,
+					color: '#2966C7'
+				},
+				{
+					title: 'Mens Hurdling - Round 1',
+					start: new Date(y, m, d-3, 14, 15.5),
+					allDay: false,
+					color: '#2966C7'
+				},
+
+
+
 				{
 					id: 999,
 					title: 'Repeating Event',
@@ -51,21 +74,21 @@
 					title: 'Meeting',
 					start: new Date(y, m, d, 10, 30),
 					allDay: false,
-					color: '#7AD148'
+					color: '#5AB128'
 				},
 				{
 					title: 'Lunch',
 					start: new Date(y, m, d, 12, 0),
 					end: new Date(y, m, d, 14, 0),
 					allDay: false,
-					color: '#4986E7'
+					color: '#2966C7'
 				},
 				{
 					title: 'Birthday Party',
 					start: new Date(y, m, d+1, 19, 0),
 					end: new Date(y, m, d+1, 22, 30),
 					allDay: false,
-					color: '#FA573C'
+					color: '#EA472C'
 				},
 				{
 					title: 'Click for Google',
