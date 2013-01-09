@@ -140,7 +140,7 @@ class Sis extends MY_Controller {
 		$this->load->view('sis/tournament',$this->data);
 		$this->load->view('sis/footer',$this->data);
 	}
-	public function ticketinfo()
+	public function ticketsinfo()
 	{
 		// Page title
 		$this->data['title'] = "Tickets";
