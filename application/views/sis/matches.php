@@ -9,7 +9,6 @@
 		<div class="match-tournament">Tournament Name</div>
 		<div class="match-venue">Somewhere</div>
 		<div class="match-time">23:99 - 23:23</div>
-		<div class="match-more">More Info</div>
 	</a>
 	<a href="" class="match-item">
 		<div class="match-name">Team A vs Team B</div>
@@ -17,7 +16,6 @@
 		<div class="match-tournament">Tournament Name</div>
 		<div class="match-venue">Somewhere</div>
 		<div class="match-time">23:99 - 23:23</div>
-		<div class="match-more">More Info</div>
 	</a>
 	<h3>15th February, 2012</h3>
 	<a href="" class="match-item">
@@ -26,7 +24,6 @@
 		<div class="match-tournament">Tournament Name</div>
 		<div class="match-venue">Somewhere</div>
 		<div class="match-time">23:99 - 23:23</div>
-		<div class="match-more">More Info</div>
 	</a>
 	<h3>16th February</h3>
 	<a href="" class="match-item">
@@ -35,7 +32,6 @@
 		<div class="match-tournament">Tournament Name</div>
 		<div class="match-venue">Somewhere</div>
 		<div class="match-time">23:99 - 23:23</div>
-		<div class="match-more">More Info</div>
 	</a>
 	<a href="" class="match-button-next">Full Upcoming List</a>
 </div>
@@ -48,7 +44,6 @@
 		<div class="match-tournament">Tournament Name</div>
 		<div class="match-venue">Somewhere</div>
 		<div class="match-time">23:99 - 23:23</div>
-		<div class="match-more">More Info</div>
 	</a>
 	<a href="" class="match-item">
 		<div class="match-name">Team A vs Team B</div>
@@ -56,7 +51,6 @@
 		<div class="match-tournament">Tournament Name</div>
 		<div class="match-venue">Somewhere</div>
 		<div class="match-time">23:99 - 23:23</div>
-		<div class="match-more">More Info</div>
 	</a>
 	<h3>12th February</h3>
 	<a href="" class="match-item">
@@ -65,7 +59,6 @@
 		<div class="match-tournament">Tournament Name</div>
 		<div class="match-venue">Somewhere</div>
 		<div class="match-time">23:99 - 23:23</div>
-		<div class="match-more">More Info</div>
 	</a>
 	<a href="" class="match-button-prev">Previous Matches</a>
 </div>
