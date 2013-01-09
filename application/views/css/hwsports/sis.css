@@ -256,28 +256,32 @@ body {
 #content .match-name{
 	font-weight:bold;
 	text-decoration:underline;
-	float: left;
 	margin-right: 10px;
 }
 #content .match-game {
-	float:left;
 	color: #444;
 }
 #content .match-tournament {
-	clear: both;
 	color: #444;
 }
 #content .match-venue {
-	clear: both;
 	color: #444;
 }
 #content .match-time {
-	clear: both;
 	color: #444;
 }
-#content .match-tournament:before { content: 'Tournament: ' }
-#content .match-time:before       { content: 'Time: '       }
-#content .match-venue:before       { content: 'Venue: '       }
+#content .match-game:before       { content: 'Sport: '; font-weight:bold; }
+#content .match-tournament:before { content: 'Tournament: '; font-weight:bold; }
+#content .match-time:before       { content: 'Time: '; font-weight:bold;      }
+#content .match-venue:before      { content: 'Venue: '; font-weight:bold;       }
+
+#content .match-button-next, #content .match-button-prev {
+	padding:100px;
+	width: 100%;
+}
+#content .match-button-next:hover, #content .match-button-prev:hover {
+	background: #EEE;
+}
 
 
 
