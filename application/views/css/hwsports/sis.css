@@ -244,7 +244,8 @@ body {
 	display: inline-block;
 	vertical-align: top;
 	width: 300px;
-	margin-left: 20px;
+	margin-left:10px;
+	margin-right:10px;
 }
 #content .match-item{
 	display: block;
