@@ -4,8 +4,8 @@
 <p>We have two different tickets that one can purchase.</p>
 <table>
 	<tr>
-		<td>Ticket Type</td>
-		<td>Cost</td>
+		<th>Ticket Type</th>
+		<th>Cost</th>
 	</tr>
 	<tr>
 		<td>Adult</td>
