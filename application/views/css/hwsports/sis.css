@@ -276,7 +276,7 @@ body {
 #content .match-venue:before      { content: 'Venue: '; font-weight:bold;       }
 
 #content .match-button-next, #content .match-button-prev {
-	padding:100px;
+	padding:20px;
 	width: 100%;
 }
 #content .match-button-next:hover, #content .match-button-prev:hover {
