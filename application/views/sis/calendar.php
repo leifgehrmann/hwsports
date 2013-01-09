@@ -36,9 +36,10 @@
 				},
 				{
 					id: 999,
-					title: 'Repeating Event',
+					title: 'Wattball - Hunters vs. Blue Jays',
 					start: new Date(y, m, d-3, 16, 0),
 					allDay: false
+					color: '#3976D7'
 				},
 				{
 					id: 999,
@@ -76,6 +77,8 @@
 		});
 		
 	});
-
+	// Gblue '#4986E7'
+	// GGreen '#7AD148'
+	// Gred '#FA573C'
 </script>
 <div id='calendar'></div>
