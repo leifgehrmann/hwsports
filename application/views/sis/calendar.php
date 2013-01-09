@@ -38,7 +38,7 @@
 					id: 999,
 					title: 'Wattball - Hunters vs. Blue Jays',
 					start: new Date(y, m, d-3, 16, 0),
-					allDay: false
+					allDay: false,
 					color: '#3976D7'
 				},
 				{
