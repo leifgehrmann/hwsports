@@ -7,7 +7,7 @@ class Venues_model extends CI_Model {
 	 * @return array
 	 **/
 
-	public function get_all_venues_data($centreID, $fields=array("name","description","directions","lat","lng"))
+	public function get_all_venues_data($centreID, $fields)
 	{
 		$output = array();
 		$queryString = "SELECT venueID FROM venues WHERE centreID = $centreID";
