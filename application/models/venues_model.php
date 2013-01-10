@@ -28,7 +28,7 @@ class Venues_model extends CI_Model {
 	{
 		$dataQueryString = "SELECT ";
 		$i = 0;
-		$len = count($array);
+		$len = count($fields);
 		foreach($fields as $field) {
 			$dataQueryString .= "MAX(CASE WHEN `key`='$field' THEN value END ) AS $field";
 			if($i==$len-1)
