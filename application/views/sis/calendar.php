@@ -145,24 +145,24 @@
 					},
 					{
 						title: 'WattBall - The Red Cows vs. Blue Jays',
-						start: new Date(y, m, d-1, 10, 0),
-						end:   new Date(y, m, d-1, 11, 30),
+						start: new Date(y, m, d, 10, 0),
+						end:   new Date(y, m, d, 11, 30),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/2'
 					},
 					{
 						title: 'WattBall - Recoba vs. Hunters',
-						start: new Date(y, m, d-1, 14, 0),
-						end:   new Date(y, m, d-1, 15, 30),
+						start: new Date(y, m, d, 14, 0),
+						end:   new Date(y, m, d, 15, 30),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/2'
 					},
 					{
 						title: 'Wattball - Greens vs. The Red Cows',
-						start: new Date(y, m, d-1, 10, 0),
-						end:   new Date(y, m, d-1, 11, 30),
+						start: new Date(y, m, d, 10, 0),
+						end:   new Date(y, m, d, 11, 30),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/'
@@ -179,24 +179,24 @@
 					},
 					{
 						title: 'WattBall - The Red Cows vs. Recoba',
-						start: new Date(y, m, d-1, 10, 0),
-						end:   new Date(y, m, d-1, 11, 30),
+						start: new Date(y, m, d+1, 10, 0),
+						end:   new Date(y, m, d+1, 11, 30),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/2'
 					},
 					{
 						title: 'WattBall - Blue Jays vs. WattBulls',
-						start: new Date(y, m, d-1, 14, 0),
-						end:   new Date(y, m, d-1, 15, 30),
+						start: new Date(y, m, d+1, 14, 0),
+						end:   new Date(y, m, d+1, 15, 30),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/2'
 					},
 					{
 						title: 'Wattball - Greens vs. Hunters',
-						start: new Date(y, m, d-1, 10, 0),
-						end:   new Date(y, m, d-1, 11, 30),
+						start: new Date(y, m, d+1, 10, 0),
+						end:   new Date(y, m, d+1, 11, 30),
 						allDay: false,
 						color: '#2966C7',
 						url: '/sis/match/'
