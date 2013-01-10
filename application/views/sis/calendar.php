@@ -24,7 +24,6 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			editable: true,
 			events: [
 
 				// Matches
@@ -201,6 +200,17 @@
 						color: '#2966C7',
 						url: '/sis/match/'
 					},
+
+					// Saturday
+					{
+						title: 'Mens Hurdling - Round 5',
+						start: new Date(y, m, d+2, 12, 0),
+						end:   new Date(y, m, d+2, 14, 0),
+						allDay: false,
+						color: '#2966C7',
+						url: '/sis/match/1'
+					},
+
 
 				// Tournaments
 
