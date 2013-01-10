@@ -15,9 +15,9 @@ class Venues_model extends CI_Model {
 		$array = $query->result_array();
 		foreach($array as $venue) {
 			$dataQueryString = "SELECT ";
-				foreach($fields as $field) {
-					$dataQueryString .= "MAX(CASE WHEN `key`='$field' THEN value END ) AS $field, "
-				}
+			foreach($fields as $field) {
+				$dataQueryString .= "MAX(CASE WHEN `key`='$field' THEN value END ) AS $field, ";
+			}
 				//"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 				//"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
 				//"MAX(CASE WHEN `key`='directions' THEN value END ) AS directions, " .
