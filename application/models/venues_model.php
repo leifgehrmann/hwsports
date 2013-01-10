@@ -1,5 +1,5 @@
 <?php
-class venues extends CI_Model {
+class Venues_model extends CI_Model {
 
 	public function get_venues($centreID)
 	{
@@ -26,7 +26,7 @@ class venues extends CI_Model {
 
 	}
 
-	public function create_venue_data($centreID, $data)
+	public function create_venue($centreID, $data)
 	{
 
 	}
