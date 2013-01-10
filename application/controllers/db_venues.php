@@ -9,7 +9,7 @@ class Db_venues extends CI_Controller {
 
 	public function getVenues($centreID)
 	{
-		$output = $this->venues->getVenues($centreID);
+		$output = $this->venues->get_venues($centreID);
 
 		$this->load->view('tms/header',$this->data);
 		echo print_r($output);
