@@ -136,6 +136,40 @@ class Tms extends MY_Controller {
 		$this->load->view('tms/venues',$this->data);
 		$this->load->view('tms/footer',$this->data);
 	}
+	public function altVenues(){
+
+
+		/* Request information about venues from the database.
+		 * This includes:
+		 * 		name
+		 * 		description
+		 * 		directions
+		 * 		lat
+		 * 		lng
+		 */
+		$this->data['venues'] = array();
+		$venueQueryString = "SELECT venueID FROM venues WHERE centreID = {$this->data['centre']['id']}";
+		$venueQuery = $this->db->query($venueQueryString);
+		$venuesArray = $venueQuery->result_array();
+		foreach($venuesArray as $venue) {
+			$venueDataQueryString = "SELECT " .
+				"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
+				"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
+				"MAX(CASE WHEN `key`='directions' THEN value END ) AS directions, " .
+				"MAX(CASE WHEN `key`='lat' THEN value END ) AS lat, " .
+				"MAX(CASE WHEN `key`='lng' THEN value END ) AS lng " .
+				"FROM venueData WHERE venueID = {$venue['venueID']}";
+			$venueDataQuery = $this->db->query($venueDataQueryString);
+			$this->data['venues'][] = array_merge($venue, $venueDataQuery->row_array());
+		}
+
+		// Display the page.
+		$this->data['title'] = "Venues";
+		$this->data['page']  = "venues";
+		$this->load->view('tms/header',$this->data);
+		$this->load->view('tms/altvenues',$this->data);
+		$this->load->view('tms/footer',$this->data);
+	}
 	public function sports()
 	{
 		$this->data['title'] = "Sports";
