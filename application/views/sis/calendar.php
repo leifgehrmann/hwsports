@@ -30,7 +30,7 @@
 
 					// Monday
 					{
-						title: 'Men&#39;s Hurdling - Preliminary Rounds',
+						title: 'Men\'s Hurdling - Preliminary Rounds',
 						start: new Date(y, m, d-3, 12, 0),
 						end:   new Date(y, m, d-3, 14, 0),
 						allDay: false,
@@ -65,7 +65,7 @@
 
 					// Tuesday
 					{
-						title: 'Men&#39;s Hurdling - Round 1',
+						title: 'Men\'s Hurdling - Round 1',
 						start: new Date(y, m, d-2, 12, 0),
 						end:   new Date(y, m, d-2, 14, 0),
 						allDay: false,
@@ -100,7 +100,7 @@
 					// Wednesday
 
 					{
-						title: 'Men&#39;s Hurdling - Round 2',
+						title: 'Men\'s Hurdling - Round 2',
 						start: new Date(y, m, d-1, 12, 0),
 						end:   new Date(y, m, d-1, 14, 0),
 						allDay: false,
@@ -135,7 +135,7 @@
 					// Thursday
 
 					{
-						title: 'Men&#39;s Hurdling - Round 3',
+						title: 'Men\'s Hurdling - Round 3',
 						start: new Date(y, m, d, 12, 0),
 						end:   new Date(y, m, d, 14, 0),
 						allDay: false,
@@ -169,7 +169,7 @@
 
 					// Friday
 					{
-						title: 'Men&#39;s Hurdling - Round 4',
+						title: 'Men\'s Hurdling - Round 4',
 						start: new Date(y, m, d+1, 12, 0),
 						end:   new Date(y, m, d+1, 14, 0),
 						allDay: false,
@@ -203,7 +203,7 @@
 
 					// Saturday
 					{
-						title: 'Men&#39;s Hurdling - Round 5',
+						title: 'Men\'s Hurdling - Round 5',
 						start: new Date(y, m, d+2, 12, 0),
 						end:   new Date(y, m, d+2, 14, 0),
 						allDay: false,
