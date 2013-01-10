@@ -33,6 +33,8 @@ class Venues_model extends CI_Model {
 			$dataQueryString .= "MAX(CASE WHEN `key`='$field' THEN value END ) AS $field";
 			if($i<$len-1)
 				$dataQueryString .= ", ";
+			else
+				$dataQueryString .= " ";
 			$i++;
 		}
 		$dataQueryString .= "FROM venueData WHERE venueID = $venueID";
