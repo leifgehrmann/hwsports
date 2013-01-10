@@ -14,7 +14,7 @@ class Venues_model extends CI_Model {
 		$query = $this->db->query($queryString);
 		$array = $query->result_array();
 		foreach($array as $venue) {
-			$output[] = get_venue_data($venue['venueID'],$fields);
+			$output[] = $this->get_venue_data($venue['venueID'],$fields);
 		}
 		return $output;
 	}
