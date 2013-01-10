@@ -297,7 +297,7 @@ body {
 #content .tournament-list {
 	width: 100%;
 }
-#content .match-item{
+#content .tournament-item{
 	display: inline-block;
 	vertical-align: top;
 	width:300px;
@@ -306,19 +306,19 @@ body {
 	margin-right: 10px;
 	text-decoration: none;
 }
-#content .match-item:hover{
+#content .tournament-item:hover{
 	background: #EEE;
 }
-#content .match-name{
+#content .tournament-name{
 	font-weight:bold;
 	text-decoration:underline;
 }
-#content .match-date-start { color: #444; }
-#content .match-date-end { color: #444; }
-#content .match-date-start:before     { content: 'Start Date: '; font-weight:bold;      }
-#content .match-date-end:before       { content: 'End Date: '; font-weight:bold;      }
+#content .tournament-date-start { color: #444; }
+#content .tournament-date-end { color: #444; }
+#content .tournament-date-start:before     { content: 'Start Date: '; font-weight:bold;      }
+#content .tournament-date-end:before       { content: 'End Date: '; font-weight:bold;      }
 
-#content .match-button-next, #content .match-button-prev {
+#content .tournament-button-next, #content .tournament-button-prev {
 	padding-top:20px;
 	padding-bottom:20px;
 	margin:40px;
@@ -326,7 +326,7 @@ body {
 	width: 50%;
 	display:block;
 }
-#content .match-button-next:hover, #content .match-button-prev:hover {
+#content .tournament-button-next:hover, #content .tournament-button-prev:hover {
 	background: #EEE;
 }
 
