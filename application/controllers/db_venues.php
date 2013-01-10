@@ -11,11 +11,10 @@ class Db_venues extends CI_Controller {
 	{
 		$output = $this->venues_model->get_venues($centreID);
 		foreach ($output as $venueID=>$data) {
-			echo "\n<br/><br/>\n$venue[venueID]\n<br/>\n<br/>";
+			echo "\n<br/><br/>\n$venueID\n<br/>\n<br/>";
 			foreach ($data as $key=>$value) {
         		echo "<br/>$key=$value\n<br/>";
     		}
-			$value = $value * 2;
 		}
 		//echo print_r($output);
 
