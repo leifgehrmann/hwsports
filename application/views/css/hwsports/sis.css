@@ -302,8 +302,7 @@ body {
 	vertical-align: top;
 	width:300px;
 	padding: 10px;
-	margin-left: 10px;
-	margin-right: 10px;
+	margin-right: 15px;
 	text-decoration: none;
 }
 #content .tournament-item:hover{
@@ -321,7 +320,6 @@ body {
 #content .tournament-button-next, #content .tournament-button-prev {
 	padding-top:20px;
 	padding-bottom:20px;
-	margin:40px;
 	text-align:center;
 	width: 50%;
 	display:block;

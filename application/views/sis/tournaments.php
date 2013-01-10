@@ -23,5 +23,5 @@
 		<div class="tournament-date-start">7th January, 2012</div>
 		<div class="tournament-date-end">12th January, 2012</div>
 	</a>
-	<a href="/sis/tournament/2" class="tournament-button-next">Previous Tournaments</a>
+	<a href="/sis/tournament/2" class="tournament-button-prev">Previous Tournaments</a>
 </div>
