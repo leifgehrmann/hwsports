@@ -11,9 +11,7 @@ class Db_venues extends CI_Controller {
 	{
 		$output = $this->venues_model->get_venues($centreID);
 
-		$this->load->view('tms/header',$this->data);
 		echo print_r($output);
-		$this->load->view('tms/footer',$this->data);
 
 	}
 }
