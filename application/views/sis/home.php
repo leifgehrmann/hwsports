@@ -5,10 +5,14 @@
 <? } ?>
 
 <div class="home-content">
-	<p>This is the homepage news stuff for public people.</p>
 	<p>
-		This part could be a welcome message that can be defined in the <b>appearence menu</b> in the
-		TMS. We are also assuming that the <b>title of this page will be changeable as well</b>.
+		Welcome to the Heriot Watt Sports Tournament Homepage!
+	</p>
+	<p>
+		On this website you can get the latest information about tournament events
+		occuring on campus. This includes the calendar, scores of the matches, and
+		winners of tournaments. You can also register here to purchase tickets and
+		sign up for sports events.
 	</p>
 </div>
 
@@ -54,10 +58,15 @@
 </div>
 
 <div class="news-item">
-	<a href="news/$newsID" class="news-header">Essay: Why Applejack is <em>best</em> pony.</a>
+	<a href="news/$newsID" class="news-header">Congratulations to the winnders!</a>
 	<div class="news-published">January 5th, 2013</div>
 	<a href="news/$newsID" class="news-permalink">permalink</a>
 	<div class="news-content">
-		<p>Because she is</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
+			incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
+			nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+			Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
+			fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
+			culpa qui officia deserunt mollit anim id est laborum.</p>
 	</div>
 </div>
