@@ -1,5 +1,5 @@
 <?php
-class Venues extends CI_Controller {
+class Db_venues extends CI_Controller {
 
 	public function __construct()
 	{
