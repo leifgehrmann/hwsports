@@ -49,17 +49,19 @@
 </div>
 
 <div class="news-item">
-	<a href="news/$newsID" class="news-header">Opening soon...</a>
+	<a href="news/$newsID" class="news-header">2013 Tournaments announced!</a>
 	<div class="news-published">February 10th, 2013</div>
 	<a href="news/$newsID" class="news-permalink">permalink</a>
 	<div class="news-content">
-		<p>The website will work soon hopefully by February... I hope</p>
+		<p>Within a couple of days, we will allow you all to register online for the sports
+			tournaments. Before you can participate directly, it would be best to register
+			now. </p>
 	</div>
 </div>
 
 <div class="news-item">
-	<a href="news/$newsID" class="news-header">Congratulations to the winnders!</a>
-	<div class="news-published">January 5th, 2013</div>
+	<a href="news/$newsID" class="news-header">Congratulations to the winners!</a>
+	<div class="news-published">January 5th, 2012</div>
 	<a href="news/$newsID" class="news-permalink">permalink</a>
 	<div class="news-content">
 		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
