@@ -39,7 +39,7 @@ class Venues_model extends CI_Model {
 		}
 		$dataQueryString .= "FROM venueData WHERE venueID = $venueID";
 		$dataQuery = $this->db->query($dataQueryString);
-		$output = array_merge($venue, $dataQuery->row_array());
+		$output = array_merge(array("venueID"=>$venueID), $dataQuery->row_array());
 		return $output;
 	}
 
