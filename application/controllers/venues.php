@@ -4,7 +4,7 @@ class Venues extends CI_Controller {
 	public function __construct()
 	{
 	    parent::__construct();
-	    $this->load->model('venues');
+	    $this->load->model('venues_model');
 	}
 
 	public function getVenues($centreID)
