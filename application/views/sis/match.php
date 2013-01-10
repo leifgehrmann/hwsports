@@ -30,4 +30,3 @@
 		<td><a href="">View on Google Maps</a></td>
 	</tr>
 </table>
-<h2>Results</h2>
