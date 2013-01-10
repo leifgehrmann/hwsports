@@ -260,7 +260,6 @@ body {
 #content .match-name{
 	font-weight:bold;
 	text-decoration:underline;
-	margin-right: 10px;
 }
 #content .match-game {
 	color: #444;
@@ -295,7 +294,41 @@ body {
 	Tournaments
 */
 
+#content .tournament-list {
+	width: 100%;
+}
+#content .match-item{
+	display: inline-block;
+	vertical-align: top;
+	width:300px;
+	padding: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	text-decoration: none;
+}
+#content .match-item:hover{
+	background: #EEE;
+}
+#content .match-name{
+	font-weight:bold;
+	text-decoration:underline;
+}
+#content .match-date-start { color: #444; }
+#content .match-date-end { color: #444; }
+#content .match-date-start:before     { content: 'Start Date: '; font-weight:bold;      }
+#content .match-date-end:before       { content: 'End Date: '; font-weight:bold;      }
 
+#content .match-button-next, #content .match-button-prev {
+	padding-top:20px;
+	padding-bottom:20px;
+	margin:40px;
+	text-align:center;
+	width: 50%;
+	display:block;
+}
+#content .match-button-next:hover, #content .match-button-prev:hover {
+	background: #EEE;
+}
 
 
 /*
