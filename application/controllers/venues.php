@@ -16,3 +16,4 @@ class Venues extends CI_Controller {
 		$this->load->view('tms/footer',$this->data);
 
 	}
+}
