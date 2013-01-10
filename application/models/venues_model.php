@@ -16,7 +16,7 @@ class Venues_model extends CI_Model {
 				"MAX(CASE WHEN `key`='lng' THEN value END ) AS lng " .
 				"FROM venueData WHERE venueID = {$venue['venueID']}";
 			$dataQuery = $this->db->query($dataQueryString);
-			$output = array_merge($venue, $dataQuery->row_array());
+			$output[$venue['venueID']] = array_merge($venue, $dataQuery->row_array());
 		}
 		return $output;
 	}
