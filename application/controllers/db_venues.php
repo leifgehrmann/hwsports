@@ -30,12 +30,12 @@ class Db_venues extends MY_Controller {
 	*/
 
 	// NVM, we don't need this for JSON
-	/*public function get_venues($centreID)
+	public function get_venues($centreID)
 	{
 		$out = $this->venues_model->get_venues($centreID);
 
 		$this->load->view('data', $data);
-	}*/
+	}
 
 	/**
 	 *	This method takes in form data which is going to be sent into
