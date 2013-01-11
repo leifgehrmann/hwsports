@@ -32,9 +32,10 @@ class Db_venues extends MY_Controller {
 	// NVM, we don't need this for JSON
 	public function get_venues($centreID)
 	{
-		$out = $this->venues_model->get_venues($centreID);
+		$output = $this->venues_model->get_venues($centreID);
+		$this->data['data'] = $output;
 
-		$this->load->view('data', $data);
+		$this->load->view('data', $this->data);
 	}
 
 	/**
@@ -113,8 +114,8 @@ class Db_venues extends MY_Controller {
 		}
 
 		// data should go out.
-		$this->$data['data'] = $output;
-		$this->load->view('pages/data', $this->$data);
+		$this->data['data'] = $output;
+		$this->load->view('pages/data', $this->data);
 	}
 
 	public function update_venue($venueID)
