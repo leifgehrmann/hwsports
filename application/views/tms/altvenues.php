@@ -6,7 +6,7 @@
 			<?php
 				$venues = $this->data['venues'];
 				foreach($venues[0] as $key=>$value){
-					echo "<th class='table-$key'>$key</th>\n";
+					echo "<th sort='$key'>$key</th>\n";
 				}
 			?>
 		</tr>
@@ -23,7 +23,6 @@
 			}
 		?>
 	</tbody>
-	?>
 	<tfoot class="nav">
 		<tr>
 			<td colspan="6">
