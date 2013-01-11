@@ -164,6 +164,7 @@ class Tms extends MY_Controller {
 
 	public function altVenues(){
 
+		$this->load->library('table');
 		$this->load->model('venues_model');
 
 		// Get data for all venues.
