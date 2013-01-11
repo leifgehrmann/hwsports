@@ -19,6 +19,7 @@
 			$row[] = $value;
 		}
 		$out[] = $row;
+		echo print_r($row);
 	}
 	/*$data = array(
              array('Name', 'Color', 'Size'),
