@@ -63,7 +63,7 @@
 
 <p>Enter details of new venue below.</p>
 
-<?=form_open("tms/venues");?>
+<?=form_open("javascript:alert('I'm different!');");?>
 
 	<?=form_hidden($createLatLng);?>
 		
