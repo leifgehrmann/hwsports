@@ -30,9 +30,9 @@ class Db_venues extends MY_Controller {
 	*/
 
 	// 
-	public function get_venues($centreID)
+	public function get_venues()
 	{
-		$output = $this->venues_model->get_venues($centreID);
+		$output = $this->venues_model->get_venues($this->data['centre']['id']);
 		$this->data['data'] =  "var data = ".json_encode($output);
 
 		$this->load->view('data', $this->data);
