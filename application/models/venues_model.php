@@ -46,7 +46,7 @@ class Venues_model extends CI_Model {
 		$i = 0;
 		$len = count($fields);
 		foreach($fields as $field) {
-			$dataQueryString .= "MAX(CASE WHEN `key`='".$this->db->escape($field)."' THEN value END ) AS ".$this->db->escape($field);
+			$dataQueryString .= "MAX(CASE WHEN `key`=".$this->db->escape($field)." THEN value END ) AS ".$this->db->escape($field);
 			if($i<$len-1)
 				$dataQueryString .= ", ";
 			else
@@ -101,8 +101,8 @@ class Venues_model extends CI_Model {
 				$escKey = $this->db->escape($key);
 				$escValue = $this->db->escape($value);
 				$dataQueryString = 	"INSERT INTO `venuesData` (venueID,`key`,value) ".
-									"VALUES (".$escVenueID.",".$escKey.",'".$escValue."') ".
-									"ON DUPLICATE KEY UPDATE value='".$escValue."'";
+									"VALUES (".$escVenueID.",".$escKey.",".$escValue.") ".
+									"ON DUPLICATE KEY UPDATE value=".$escValue;
 				$this->db->query($dataQueryString);
 			}
 			return true;
