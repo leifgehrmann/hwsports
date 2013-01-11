@@ -29,18 +29,97 @@ class Db_venues extends MY_Controller {
 
 	*/
 
-	public function get_venues($centreID)
+	// NVM, we don't need this for JSON
+	/*public function get_venues($centreID)
 	{
+		$out = $this->venues_model->get_venues($centreID);
 
+		$this->load->view('data', $data);
+	}*/
+
+	/**
+	 *	This method takes in form data which is going to be sent into
+	 * 	the database. If it works, it will return JSON file with the value:
+	 *
+	 * 	var data = {"success": true, "message": "The venue was created."}
+	 *
+	 * 	If not, that means either the database is messed up, or more
+	 *  likely, the validation was incorrect. In the case of DB errors:
+	 *
+	 *	var data = {"success": false, "message": "There was a database error."}
+	 *
+	 *	And in the case of incorrect form details:
+	 *
+	 *	var data = {
+	 *				"success": false,
+	 *				"message": "There was an error in your form.", 
+	 * 				"errors":[{
+	 *					"name":"the input element name", 
+	 *					"message":"Why it is wrong" 
+	 *				} ] 
+	 *	}
+	 *
+	 *	NOTE: FOR NOW IT WILL SIMPLE PRINT OUT THE validation_errors(); NOT THE
+	 *  INDIVIDUAL ERRORS FOR EACH ELEMENT. SO THEREFORE:
+	 *
+	 *	var data = {
+	 *				"success": false, 
+	 *				"message": "There was an error in your form.", 
+	 * 				"errors": "messages" 
+	 *	}
+	 * 	
+	 *
+	 */
+	public function insert_venue()
+	{
+		// Is the use authorized? We might want to make this into a shortcut later
+		// because we need to make sure that the staff of one centre cannot
+		// access the controls of another centre.
+
+		if ( $this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin') ) {
+
+			// Which data parameters are we expecting form the post data?
+			// This should be a direct copy from the 
+			$formNames = array('name','description','directions','lat','lng');
+			$formLabels = array('Name','Description','Directions','Latitude','longitude');
+			$formRules = array('required','required','required','required','required');
+			$formLength = min(len($formNames),len($formLabels),len($formRules));
+			for ($i = 0; $i < $formLength; $i++) {
+				$this->form_validation->set_rules($formNames[$i], $formLabels[$i], $formRules[$i]);
+			}
+
+			// Does the form validate?
+			if ($this->form_validation->run() == true) {
+
+				$data = array();
+				for ($i = 0; $i < $formLength; $i++) {
+					$row = array(
+						'key' => $formNames[$i],
+						'value' => $this->input->post($formNames[$i])
+					);
+					$data[] = $row;
+				}
+
+				if($this->venues_model->insert_venues($this->data['centre']['id'],$data)>=0){
+					$output = 'var data = {"success": true, "message": "The venue was created."}';
+				} else {
+					$output = 'var data = {"success": false, "message": "There was a database error."}';
+				}
+				
+			} else {
+				$errors = validation_errors();
+				$output = 'var data = {"success": false, "message": "There was an error in your form.", "errors": "$errors" }';
+			}
+		}
+
+		// data should go out.
+		$this->$data['data'] = $output;
+		$this->load->view('pages/data', $this->$data);
 	}
 
-
-	public function insert_venue($centreID)
+	public function update_venue($venueID)
 	{
-
-	}
-
-	public function update_venue($venueID, $data){
-
+		// We need to have proper auth here
+		// (check if admin, centreadmin, staff in correct centre)
 	}
 }

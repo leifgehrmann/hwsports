@@ -21,12 +21,6 @@
 		$out[] = $row;
 		echo print_r($row);
 	}
-	/*$data = array(
-             array('Name', 'Color', 'Size'),
-             array('Fred', 'Blue', 'Small'),
-             array('Mary', 'Red', 'Large'),
-             array('John', 'Green', 'Medium')	
-             );*/
 	//echo print_r($this->data['venues']);
 	echo $this->table->generate($out);
 ?>
