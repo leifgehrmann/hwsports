@@ -1,8 +1,25 @@
-<h1>Venues<h1>
+<h1>Venues</h1>
 
 <?php 
 	$this->load->library('table');
 
+	$out = array();
+	$i = 0;
+	foreach($this->data['venues'] as $venue){
+		if($i==0){
+			$head = array();
+			foreach($venue as $key=>$value){
+				$head[] = $key;
+			}
+			$out[] = $head;
+			$i = 1;
+		}
+		$row = array();
+		foreach($venue as $key=>$value){
+			$row[] = $value;
+		}
+		$out[] = $row;
+	}
 	/*$data = array(
              array('Name', 'Color', 'Size'),
              array('Fred', 'Blue', 'Small'),
