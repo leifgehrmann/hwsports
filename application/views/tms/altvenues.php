@@ -26,8 +26,8 @@
              array('Mary', 'Red', 'Large'),
              array('John', 'Green', 'Medium')	
              );*/
-	echo print_r($this->data['venues']);
-	//echo $this->table->generate($data['venues']);
+	//echo print_r($this->data['venues']);
+	echo $this->table->generate($out);
 ?>
 
 <h1>Create New Venue</h1>
