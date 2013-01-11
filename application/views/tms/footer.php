@@ -17,6 +17,7 @@
 			<script src='/scripts/rico/js/rico_min.js' type='text/javascript'></script>
 			<script src='/scripts/rico/js/ricoThemeroller.js' type='text/javascript'></script>
 
+			<link type='text/css' rel='stylesheet' href='/scripts/jTPS/jTPS.css'/>
 			<script src='/scripts/jTPS/jTPS.js' type='text/javascript'></script>
 		<? } ?>
 		<script type="text/javascript" src="/js/<?=$page?>.js"></script>
