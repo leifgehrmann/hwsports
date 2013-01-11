@@ -91,6 +91,7 @@ $GLOBALS['oDB']->dbClose();
 		
 <?=form_close();?>
 
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
 <script type="text/javascript">
 
 	$(document).ready(function() {
