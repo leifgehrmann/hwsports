@@ -2,6 +2,22 @@
 class Venues_model extends CI_Model {
 
 	/**
+	 * $venueID is int(11)
+	 *  
+	 * @return boolean
+	 **/
+
+	public function venue_exists($venueID)
+	{
+		$output = array();
+		$queryString = 	"SELECT ".$this->db->escape($venueID)." AS venueID, ".
+						"EXISTS(SELECT * FROM venues WHERE venueID = ".$this->db->escape($venueID).") AS `exists`";
+		$query = $this->db->query($queryString);
+		$output = array_merge(array("venueID"=>$venueID), $dataQuery->row_array());
+		return $output;
+	}
+
+	/**
 	 * Returns a 2d array of venue data
 	 *  
 	 * @return array
@@ -10,7 +26,7 @@ class Venues_model extends CI_Model {
 	public function get_venues($centreID, $fields=array("name","description","directions","lat","lng"))
 	{
 		$output = array();
-		$queryString = "SELECT venueID FROM venues WHERE centreID = $centreID";
+		$queryString = "SELECT venueID FROM venues WHERE centreID = ".$this->db->escape($centreID);
 		$query = $this->db->query($queryString);
 		$array = $query->result_array();
 		foreach($array as $venue) {
@@ -30,14 +46,14 @@ class Venues_model extends CI_Model {
 		$i = 0;
 		$len = count($fields);
 		foreach($fields as $field) {
-			$dataQueryString .= "MAX(CASE WHEN `key`='$field' THEN value END ) AS $field";
+			$dataQueryString .= "MAX(CASE WHEN `key`='".$this->db->escape($field)."' THEN value END ) AS ".$this->db->escape($field);
 			if($i<$len-1)
 				$dataQueryString .= ", ";
 			else
 				$dataQueryString .= " ";
 			$i++;
 		}
-		$dataQueryString .= "FROM venueData WHERE venueID = $venueID";
+		$dataQueryString .= "FROM venueData WHERE venueID = ".$this->db->escape($venueID);
 		$dataQuery = $this->db->query($dataQueryString);
 		$output = array_merge(array("venueID"=>$venueID), $dataQuery->row_array());
 		return $output;
@@ -52,7 +68,7 @@ class Venues_model extends CI_Model {
 	 **/
 	public function insert_venue($centreID, $data)
 	{
-		$this->db->query("INSERT INTO venues (centreID) VALUES ($centreID)");
+		$this->db->query("INSERT INTO venues (centreID) VALUES (".$this->db->escape($centreID).")");
 		$venueID = $this->db->insert_id();
 
 		$insertDataArray = array();
@@ -75,11 +91,20 @@ class Venues_model extends CI_Model {
 
 	/**
 	 * Updates a venue with data.
-	 * return True if success, False if failure
-	 *  
-	 * @return int
+	 *
+	 * @return boolean
 	 **/
 	public function update_venue($venueID, $data){
-
+		if($this->venue_exists()){
+			foreach($data as $key=>$value) {
+				$dataQueryString = 	"INSERT INTO `venuesData` (venueID,`key`,value) ".
+									"VALUES (".$this->db->escape($venueID).",".$this->db->escape($key).",'".$this->db->escape($value)."') ".
+									"ON DUPLICATE KEY UPDATE value='".$this->db->escape($value)."'";
+				$this->db->query($dataQueryString));
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
