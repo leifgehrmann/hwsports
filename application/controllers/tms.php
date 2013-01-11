@@ -167,7 +167,7 @@ class Tms extends MY_Controller {
 		$this->load->model('venues_model');
 
 		// Get data for all venues.
-		$this->data['venues'] = $this->venues_model->get_all_venues($this->data['centre']['id']);
+		$this->data['venues'] = $this->venues_model->get_venues($this->data['centre']['id']);
 
 		//validate form input
 		$this->form_validation->set_rules('name', 'Name', 'required');
@@ -212,7 +212,7 @@ class Tms extends MY_Controller {
 				$this->session->set_flashdata('message', $this->ion_auth->errors());
 				redirect('/tms/venues', 'refresh');
 			}
-			
+
 		} else {
 			//either form not submitted yet or validation failed
 			//set the flash data error message if there is one
