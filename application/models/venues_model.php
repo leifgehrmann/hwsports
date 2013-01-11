@@ -7,17 +7,14 @@ class Venues_model extends CI_Model {
 	 * @return array
 	 **/
 
-	public function get_all_venues_data($centreID, $fields)
+	public function get_venues($centreID, $fields=array("name","description","directions","lat","lng"))
 	{
 		$output = array();
 		$queryString = "SELECT venueID FROM venues WHERE centreID = $centreID";
 		$query = $this->db->query($queryString);
 		$array = $query->result_array();
 		foreach($array as $venue) {
-			if(defined("fields"))
-				$output[] = $this->get_venue_data($venue['venueID'],$fields);
-			else
-				$output[] = $this->get_venue_data($venue['venueID']);
+			$output[] = $this->get_venue_data($venue['venueID'],$fields);
 		}
 		return $output;
 	}
@@ -27,7 +24,7 @@ class Venues_model extends CI_Model {
 	 *  
 	 * @return array
 	 **/
-	public function get_venue_data($venueID, $fields=array("name","description","directions","lat","lng"))
+	public function get_venue($venueID, $fields=array("name","description","directions","lat","lng"))
 	{
 		$dataQueryString = "SELECT ";
 		$i = 0;
@@ -46,8 +43,43 @@ class Venues_model extends CI_Model {
 		return $output;
 	}
 
-	public function create_venue($centreID, $data)
+	/**
+	 * Creates a venue with data.
+	 * returns the venueID of the new venue if it was
+	 * successful. If not, it should return -1.
+	 *  
+	 * @return int
+	 **/
+	public function insert_venue($centreID, $data)
 	{
+		$this->db->query("INSERT INTO venues (centreID) VALUES ($centreID)");
+		$venueID = $this->db->insert_id();
+
+		$insertDataArray = array();
+		foreach($data as $key=>$value) {
+			$dataArray = array(
+					'venueID' => $venueID,
+					'key' => $key,
+					'value' => $value
+				)
+			$insertDataArray[] = $dataArray;
+		}
+		if ($this->db->insert_batch('venueData',$insertDataArray)) {
+			// db success
+			return $venueID;
+		} else {
+			// db fail
+			return -1;
+		}
+	}
+
+	/**
+	 * Updates a venue with data.
+	 * return True if success, False if failure
+	 *  
+	 * @return int
+	 **/
+	public function update_venue($venueID, $data){
 
 	}
 }
