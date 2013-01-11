@@ -8,6 +8,7 @@ class Js extends MY_Controller {
 		{
 			// Whoops, we don't have a page for that!
 			//show_404();
+			$this->output->set_header("Content-Type: text/javascript"); 
 			echo "// The file $file does not exist :(";
 		} else {	
 			$this->output->set_header("Content-Type: text/javascript"); 
