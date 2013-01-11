@@ -61,7 +61,7 @@ class Venues_model extends CI_Model {
 					'venueID' => $venueID,
 					'key' => $key,
 					'value' => $value
-				)
+				);
 			$insertDataArray[] = $dataArray;
 		}
 		if ($this->db->insert_batch('venueData',$insertDataArray)) {
