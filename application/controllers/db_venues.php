@@ -84,7 +84,7 @@ class Db_venues extends MY_Controller {
 			$formNames = array('name','description','directions','lat','lng');
 			$formLabels = array('Name','Description','Directions','Latitude','longitude');
 			$formRules = array('required','required','required','required','required');
-			$formLength = min(len($formNames),len($formLabels),len($formRules));
+			$formLength = min(count($formNames),count($formLabels),count($formRules));
 			for ($i = 0; $i < $formLength; $i++) {
 				$this->form_validation->set_rules($formNames[$i], $formLabels[$i], $formRules[$i]);
 			}
