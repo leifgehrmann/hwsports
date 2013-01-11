@@ -10,7 +10,7 @@
              array('John', 'Green', 'Medium')	
              );*/
 
-	echo $this->table->generate($this->data['venues']);
+	echo $this->table->generate($data['venues']);
 ?>
 
 <h1>Create New Venue</h1>
