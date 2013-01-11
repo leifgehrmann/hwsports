@@ -171,38 +171,26 @@ class Tms extends MY_Controller {
 		$this->data['venues'] = $this->venues_model->get_venues($this->data['centre']['id']);
 
 		//validate form input
-		$this->form_validation->set_rules('name', 'Name', 'required');
-		$this->form_validation->set_rules('description', 'Description', 'required');
-		$this->form_validation->set_rules('directions', 'Directions', 'required');
-		$this->form_validation->set_rules('lat', 'Latitude', 'required');
-		$this->form_validation->set_rules('lng', 'Longitude', 'required');
+		$formNames = array('name','description','directions','lat','lng');
+		$formLabels = array('Name','Description','Directions','Latitude','longitude');
+		$formRules = array('required','required','required','required','required');
+		$formLength = min(count($formNames),count($formLabels),count($formRules));
+		for ($i = 0; $i < $formLength; $i++) {
+			$this->form_validation->set_rules($formNames[$i], $formLabels[$i], $formRules[$i]);
+		}
 
 		// If form has been submitted and it validates ok
 		if ($this->form_validation->run() == true) {
 
 			// Form validated ok, process input
-			$venueDataArray = array(
-				array(
-					'key' => 'name',
-					'value' => $this->input->post('name')
-				),
-				array(
-					'key' => 'description',
-					'value' => $this->input->post('description')
-				),
-				array(
-					'key' => 'directions',
-					'value' => $this->input->post('directions')
-				),
-				array(
-					'key' => 'lat',
-					'value' => $this->input->post('lat')
-				),
-				array(
-					'key' => 'lng',
-					'value' => $this->input->post('lng')
-				)
-			);
+			$venueDataArray = array();
+			for ($i = 0; $i < $formLength; $i++) {
+				$row = array(
+					'key' => $formNames[$i],
+					'value' => $this->input->post($formNames[$i])
+				);
+				$venueDataArray[] = $row;
+			}
 
 			if(insert_venue($this->data['centre']['id'],$venueDataArray)>=0){
 				// db success

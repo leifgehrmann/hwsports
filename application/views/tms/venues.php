@@ -6,13 +6,13 @@
 if (!isset ($_SESSION)) session_start();
 print_r($_SESSION); echo "sess1<br /><br />"; ?>
 
-<script type='text/javascript'>Rico_CONFIG={};</script>
+<!--<script type='text/javascript'>Rico_CONFIG={};</script>
 <script src='http://ajax.googleapis.com/ajax/libs/prototype/1.7/prototype.js' type='text/javascript'></script>
 <script src='/scripts/tiny_mce/tiny_mce.js' type='text/javascript'></script>
 <script src='/scripts/rico/js/rico2pro.js' type='text/javascript'></script>
 <script src='/scripts/rico/js/rico_min.js' type='text/javascript'></script>
+<script src='/scripts/rico/js/ricoThemeroller.js' type='text/javascript'></script>-->
 <link href='/scripts/rico/css/rico.css' type='text/css' rel='stylesheet'/>
-<script src='/scripts/rico/js/ricoThemeroller.js' type='text/javascript'></script>
 <link type='text/css' rel='Stylesheet' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-lightness/jquery-ui.css'/>
 <link type='text/css' rel='stylesheet' href='/scripts/rico/css/striping_ui-lightness.css'/>
 <style type='text/css'>

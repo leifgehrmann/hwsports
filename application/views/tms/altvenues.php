@@ -1,7 +1,9 @@
 <h1>Venues</h1>
 
-<?php 
-	$this->load->library('table');
+
+
+<!--<?php 
+	/*$this->load->library('table');
 
 	$out = array();
 	$i = 0;
@@ -19,11 +21,10 @@
 			$row[] = $value;
 		}
 		$out[] = $row;
-		echo print_r($row);
 	}
 	//echo print_r($this->data['venues']);
-	echo $this->table->generate($out);
-?>
+	echo $this->table->generate($out);*/
+?>-->
 
 <h1>Create New Venue</h1>
 

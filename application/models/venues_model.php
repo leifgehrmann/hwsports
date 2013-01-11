@@ -11,7 +11,7 @@ class Venues_model extends CI_Model {
 	{
 		$output = array();
 		$queryString = 	"SELECT ".$this->db->escape($venueID)." AS venueID, ".
-						"EXISTS(SELECT * FROM venues WHERE venueID = ".$this->db->escape($venueID).") AS `exists`";
+						"EXISTS(SELECT 1 FROM venues WHERE venueID = ".$this->db->escape($venueID).") AS `exists`";
 		$queryData = $this->db->query($queryString);
 		$output = $queryData->row_array();
 		return $output;

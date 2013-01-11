@@ -14,18 +14,9 @@ class Db_venues extends MY_Controller {
 		used via jQuery. This will hopefully make interactions much
 		easier to handle by offering JSON I/O with client/server.
 
-		Example, if the user wants to change the name or any other 
-		field, they would have to reload the page to see their updates.
-		If we instead use jQuery, the database can be updated immedietly
-		and not annoy the customer.
-		
-		
-		We need to make sure that every function cannot be accessed
-		from users who do not have to correct creditials. This can
-		be done using ion-auth (checking if they are admin or staff
-		and if they are at the correct centre).
-
-		
+		Perhaps we won't need this in the end, but I'd like to use
+		ajax for updating venue data from a venue page, instead of 
+		using a form to update each individual detail.
 
 	*/
 	public function venue_exists($venueID){
@@ -164,7 +155,7 @@ class Db_venues extends MY_Controller {
 	 * 	
 	 *
 	 */
-	public function update_venue()
+	public function update_venue($venueID)
 	{
 		// Create the output variable that will be converted
 		// into JSON in the end.
@@ -198,7 +189,7 @@ class Db_venues extends MY_Controller {
 					$data[] = $row;
 				}
 
-				if($this->venues_model->update_venues($this->data['centre']['id'],$data)>=0){
+				if($this->venues_model->update_venue($venueID,$data)>=0){
 					$output['success'] = true;
 					$output['message'] = 'The venue was updated.';
 				} else {
