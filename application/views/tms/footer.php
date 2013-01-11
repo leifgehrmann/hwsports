@@ -9,7 +9,6 @@
         <script>window.jQuery || document.write('<script src="/vendor/jquery-1.8.1.min.js"><\/script>')</script>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
 		<!--<script type="text/javascript" src="/scripts/pagination.js"></script>-->
-		<script type="text/javascript" src="/js/<?=$page?>.js"></script>
 		<? if($page=="venues"){ ?>
 			<script type='text/javascript'>Rico_CONFIG={};</script>
 			<script src='http://ajax.googleapis.com/ajax/libs/prototype/1.7/prototype.js' type='text/javascript'></script>
@@ -20,5 +19,6 @@
 
 			<script src='/scripts/jTPS/jTPS.js' type='text/javascript'></script>
 		<? } ?>
+		<script type="text/javascript" src="/js/<?=$page?>.js"></script>
     </body>
 </html>
