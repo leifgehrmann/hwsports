@@ -115,7 +115,7 @@ class Db_venues extends MY_Controller {
 
 		// data should go out.
 		$this->data['data'] = $output;
-		$this->load->view('pages/data', $this->data);
+		$this->load->view('data', $this->data);
 	}
 
 	public function update_venue($venueID)
