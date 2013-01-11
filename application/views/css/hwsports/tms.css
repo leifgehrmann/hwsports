@@ -205,6 +205,10 @@ body {
 	color: #00468C; 
 }
 
+#content td, #content th {
+	text-align: left;
+}
+
 
 
 
@@ -231,11 +235,6 @@ body {
 
 #footer a {
 	color: #777;
-}
-
-td, th {
-	text-align: left;
-	padding: 10px;
 }
 
 

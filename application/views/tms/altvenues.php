@@ -59,7 +59,7 @@
 	echo $this->table->generate($out);*/
 ?>-->
 
-<h1>Create New Venue</h1>
+<h2>Create new venue</h2>
 
 <p>Enter details of new venue below.</p>
 
