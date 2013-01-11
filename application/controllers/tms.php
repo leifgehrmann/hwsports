@@ -245,7 +245,7 @@ class Tms extends MY_Controller {
 		$this->data['title'] = "Venues";
 		$this->data['page']  = "venues";
 		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/venues',$this->data);
+		$this->load->view('tms/altvenues',$this->data);
 		$this->load->view('tms/footer',$this->data);
 	}
 

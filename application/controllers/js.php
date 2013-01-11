@@ -4,13 +4,13 @@ class Js extends MY_Controller {
 
 	public function index($file)
 	{				
-		if ( ! file_exists('app/views/scripts/'.$file.'.js'))
+		if ( ! file_exists('application/views/js/'.$file.'.js'))
 		{
 			// Whoops, we don't have a page for that!
 			show_404();
 		}
 		
 		$this->output->set_header("Content-Type: text/javascript"); 
-		$this->load->view('scripts/'.$file.'.js');
+		$this->load->view('js/'.$file.'.js');
 	}
 }
