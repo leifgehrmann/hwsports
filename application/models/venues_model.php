@@ -96,10 +96,10 @@ class Venues_model extends CI_Model {
 	 **/
 	public function update_venue($venueID, $data){
 		if($this->venue_exists($venueID)){
-			$escVenueID = $this->db->escape($venueID)
+			$escVenueID = $this->db->escape($venueID);
 			foreach($data as $key=>$value) {
-				$escKey = $this->db->escape($key)
-				$escValue = $this->db->escape($value)
+				$escKey = $this->db->escape($key);
+				$escValue = $this->db->escape($value);
 				$dataQueryString = 	"INSERT INTO `venuesData` (venueID,`key`,value) ".
 									"VALUES (".$escVenueID.",".$escKey.",'".$escValue."') ".
 									"ON DUPLICATE KEY UPDATE value='".$escValue."'";
