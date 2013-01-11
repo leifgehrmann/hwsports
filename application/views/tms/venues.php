@@ -91,10 +91,10 @@ $GLOBALS['oDB']->dbClose();
 		
 <?=form_close();?>
 
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
 <script type="text/javascript">
 
 	$(document).ready(function() {
+		alert("Test"),
 		// a global variable to access the map
 		var map;
 		var centre_marker;
@@ -120,6 +120,6 @@ $GLOBALS['oDB']->dbClose();
 				jQuery('input[name=lng]').val(newcentre.lng());
 			});
 		}
-		google.maps.event.addDomListener(window, 'load', initialize);
 	}
+	google.maps.event.addDomListener(window, 'load', initialize);
 </script>
