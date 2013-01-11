@@ -24,6 +24,4 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 /******     The data table section      ******/
 
-$(function () { 
-	$('#venuesTable').jTPS( {perPages:[2]} );
-});
+$('#venuesTable').jTPS( {perPages:[2]} );
