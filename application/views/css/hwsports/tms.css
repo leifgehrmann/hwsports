@@ -205,6 +205,21 @@ body {
 	color: #00468C; 
 }
 
+
+
+
+#content .venues-map {
+	width: 400px;
+	height: 250px;
+}
+
+
+
+
+
+
+
+
 #footer {
 	border-top:1px solid #C8C8C8;
 	vertical-align: middle;
