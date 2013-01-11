@@ -18,7 +18,7 @@
 			$venues = $this->data['venues'];
 			foreach($venues as $venue){
 				echo "<tr>\n";
-				foreach($venues as $key=>$value){
+				foreach($venue as $key=>$value){
 					echo "<td>$value</td>\n";
 				}
 				echo "</tr>\n";
