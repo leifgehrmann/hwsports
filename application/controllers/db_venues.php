@@ -89,6 +89,11 @@ class Db_venues extends MY_Controller {
 				$this->form_validation->set_rules($formNames[$i], $formLabels[$i], $formRules[$i]);
 			}
 
+			// Create the output variable that will be converted
+			// into JSON in the end.
+			$output = array();
+			$output['success'] = false;
+
 			// Does the form validate?
 			if ($this->form_validation->run() == true) {
 
@@ -102,19 +107,20 @@ class Db_venues extends MY_Controller {
 				}
 
 				if($this->venues_model->insert_venues($this->data['centre']['id'],$data)>=0){
-					$output = 'var data = {"success": true, "message": "The venue was created."}';
+					$output['success'] = true;
+					$output['message'] = 'The venue was created.';
 				} else {
-					$output = 'var data = {"success": false, "message": "There was a database error."}';
+					$output['message'] = 'There was a database error.';
 				}
 				
 			} else {
-				$errors = validation_errors();
-				$output = 'var data = {"success": false, "message": "There was an error in your form.", "errors": "$errors" }';
+				$output['message'] = 'There was an error in your form.';
+				$output['errors'] = validation_errors();
 			}
 		}
 
-		// data should go out.
-		$this->data['data'] = $output;
+		// data should go out here
+		$this->data['data'] = "var data = ".json_encode($output);
 		$this->load->view('data', $this->data);
 	}
 
