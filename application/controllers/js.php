@@ -7,10 +7,11 @@ class Js extends MY_Controller {
 		if ( ! file_exists('application/views/js/'.$file))
 		{
 			// Whoops, we don't have a page for that!
-			show_404();
+			//show_404();
+			echo "// The file $file does not exist :(";
+		} else {	
+			$this->output->set_header("Content-Type: text/javascript"); 
+			$this->load->view('js/'.$file);
 		}
-				
-		$this->output->set_header("Content-Type: text/javascript"); 
-		$this->load->view('js/'.$file);
 	}
 }

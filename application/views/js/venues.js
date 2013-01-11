@@ -3,9 +3,6 @@ var map;
 var centre_marker;
 var centre_pos  = new google.maps.LatLng( jQuery('input[name="lat"]').val(), jQuery('input[name="lng"]').val() );
 
-function zoomIn(){ map.setZoom(map.getZoom()+1);}
-function zoomOut(){ map.setZoom(map.getZoom()-1);}
-
 function initialize(){
 	map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 15,
@@ -15,7 +12,7 @@ function initialize(){
 	
 	centre_marker = new google.maps.Marker({ position: centre_pos, map: map, title: "New Venue Location" });
 
-	google.maps.event.addListener(map, 'dragend', function() {
+	google.maps.event.addListener(map, 'center_changed', function() {
 		var newcentre = map.getCenter();
 		centre_marker.setPosition(newcentre);
 		jQuery('input[name=lat]').val(newcentre.lat());
