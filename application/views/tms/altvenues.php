@@ -31,7 +31,7 @@
 <?=form_close();?>
 
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
 	$(document).ready(function() {
 		// a global variable to access the map
 		var map;
@@ -60,4 +60,4 @@
 
 		google.maps.event.addDomListener(window, 'load', initialize);
 	}
-</script>
+</script>-->
