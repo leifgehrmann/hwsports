@@ -9,7 +9,7 @@ class Js extends MY_Controller {
 			// Whoops, we don't have a page for that!
 			//show_404();
 			$this->output->set_header("Content-Type: text/javascript"); 
-			echo "// The file $file does not exist :(";
+			$this->load->view('js/404.js');
 		} else {	
 			$this->output->set_header("Content-Type: text/javascript"); 
 			$this->load->view('js/'.$file);
