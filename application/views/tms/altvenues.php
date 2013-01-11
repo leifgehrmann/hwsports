@@ -3,36 +3,29 @@
 <table id="venuesTable">
 	<thead>
 		<tr>
+			<?php
+				$venues = $this->data['venues'];
+				foreach($venues[0] as $key=>$value){
+					echo "<th class='table-$key'>$key</th>\n";
+				}
+			?>
 			<th sort="decrip">Description</th>
 			<th sort="price">Price</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td>Product 1.09</td>
-			<td>$1002.99</td>
-		</tr>
-		<tr>
-			<td>Product 1.01</td>
-			<td>$432.77</td>
-		</tr>
-		<tr>
-			<td>Product 1.05</td>
-			<td>$432.76</td>
-		</tr>
-		<tr>
-			<td>Product 1.03</td>
-			<td>$102.01</td>
-		</tr>
-		<tr>
-			<td>Product 1.06</td>
-			<td>$100.99</td>
-		</tr>
-		<tr>
-			<td>Product 1.00</td>
-			<td>$10202.00</td>
-		</tr>
+		<?php
+			$venues = $this->data['venues'];
+			foreach($venues as $venue){
+				echo "<tr>\n";
+				foreach($venues as $key=>$value){
+					echo "<td>$value</td>\n";
+				}
+				echo "</tr>\n";
+			}
+		?>
 	</tbody>
+	?>
 	<tfoot class="nav">
 		<tr>
 			<td colspan="2">
