@@ -9,8 +9,6 @@
 					echo "<th class='table-$key'>$key</th>\n";
 				}
 			?>
-			<th sort="decrip">Description</th>
-			<th sort="price">Price</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -28,7 +26,7 @@
 	?>
 	<tfoot class="nav">
 		<tr>
-			<td colspan="2">
+			<td colspan="6">
 				<div class="pagination"></div>
 				<div class="paginationTitle">Page</div>
 				<div class="selectPerPage"></div>
