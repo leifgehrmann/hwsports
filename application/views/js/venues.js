@@ -21,3 +21,10 @@ function initialize(){
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
+
+/******     The data table section      ******/
+$(document).ready(function() {
+	$(function () { 
+		$('#venuesTable').jTPS( {perPages:[2]} );
+	});
+}
