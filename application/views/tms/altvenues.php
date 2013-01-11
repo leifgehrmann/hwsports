@@ -1,5 +1,18 @@
 <h1>Venues<h1>
 
+<?php 
+	$this->load->library('table');
+
+	/*$data = array(
+             array('Name', 'Color', 'Size'),
+             array('Fred', 'Blue', 'Small'),
+             array('Mary', 'Red', 'Large'),
+             array('John', 'Green', 'Medium')	
+             );*/
+
+	echo $this->table->generate($this->data['venues']);
+?>
+
 <h1>Create New Venue</h1>
 
 <p>Enter details of new venue below.</p>
