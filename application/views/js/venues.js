@@ -25,3 +25,26 @@ google.maps.event.addDomListener(window, 'load', initialize);
 /******     The data table section      ******/
 
 jQuery('#venuesTable').jTPS( {perPages:[4,8,16,32]} );
+
+$(document).ready(function() {
+	$('#submit').click(function() {
+		var form_data = {
+			name : $('[name="name"]').val(),
+			description : $('[name="directions"]').val(),
+			directions : $('[name="directions"]').val(),
+			lat : $('[name="lat"]').val(),
+			lng : $('[name="lng"]').val(),
+			ajax : '1'
+		};
+		$.ajax({
+			url: "<?php echo site_url(''); ?>",
+			type: 'POST',
+			async : false,
+			data: form_data,
+			success: function(msg) {
+				$('#message').html(msg);
+			}
+		});
+		return false;
+	});
+});
