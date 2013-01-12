@@ -1,8 +1,7 @@
 			</div>
 			<div id="footer">
-				<div class="left"><a href="http://www.infusionsystems.co.uk"><div class="company-logo"></div></a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="">Feedback</a></diV>
-				<div class="right"><span style="font-weight:bold;">Tournament Management System 1.0</span>
-				</diV>
+				<div class="info"><a href="http://www.infusionsystems.co.uk"><div class="logo"></div></a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="">Feedback</a></diV>
+				<div class="system">Tournament Management System 1.0</div>
 			</div>
 		</div>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
