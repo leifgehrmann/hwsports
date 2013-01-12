@@ -228,11 +228,11 @@ body {
 #footer .info{
 	float:left;
 	width:50%;
-	opacity: 0.6;
+	opacity: 0.46;
 }
 #footer .system{
 	float:right;
-	opacity: 0.6;
+	opacity: 0.46;
 	font-weight:bold;
 }
 
