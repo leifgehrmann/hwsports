@@ -20,6 +20,6 @@
 			<link type='text/css' rel='stylesheet' href='/scripts/jTPS/jTPS.css'/>
 			<script src='/scripts/jTPS/jTPS.js' type='text/javascript'></script>
 		<? } ?>
-		<script type="text/javascript" src="/js/<?=$page?>.js"></script>
+		<script type="text/javascript" src="/js/tms-<?=$page?>.js"></script>
     </body>
 </html>
