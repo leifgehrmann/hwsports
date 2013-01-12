@@ -29,7 +29,7 @@ jQuery('#venuesTable').jTPS( {perPages:[4,8,16,32]} );
 $(document).ready(function() {
 	$('#submit').click(function() {
 		alert("HAHAHAHAHAHHAH");
-		var form_data = {
+		/*var form_data = {
 			name : $('[name="name"]').val(),
 			description : $('[name="directions"]').val(),
 			directions : $('[name="directions"]').val(),
@@ -46,6 +46,6 @@ $(document).ready(function() {
 				$('#message').html(msg);
 			}
 		});
-		return false;
+		return false;*/
 	});
 });
