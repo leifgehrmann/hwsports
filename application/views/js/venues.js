@@ -46,5 +46,5 @@ jQuery('#submit').click(function() {
 			}
 		});
 		return false;*/
-	});
+	//});
 });
