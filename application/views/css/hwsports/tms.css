@@ -230,8 +230,7 @@ body {
         border-bottom: 2px solid #00468C;
 }
 #content .jTPS tfoot .selectPerPage .perPageHilight {
-		opacity:0.5;
-        border-bottom: 2px solid #00468C;
+        border-bottom: 1px solid #00468C;
 }
 
 
