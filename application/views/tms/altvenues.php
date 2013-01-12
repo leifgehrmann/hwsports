@@ -17,7 +17,7 @@
 			foreach($venues as $venue){
 				echo "<tr>\n";
 				foreach($venue as $key=>$value){
-					echo "<td>$value></td>\n";
+					echo "<td>$value</td>\n";
 					//echo "<td><textarea cols='10' rows='5'>$value</textarea></td>\n";
 				}
 				echo "</tr>\n";
