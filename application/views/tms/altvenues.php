@@ -63,7 +63,7 @@
 
 <p>Enter details of new venue below.</p>
 
-<?=form_open("#");?>
+<?=form_open("");?>
 
 	<?=form_hidden($createLatLng);?>
 		
