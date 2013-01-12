@@ -220,17 +220,18 @@ body {
 
 
 #content .jTPS tfoot .pagination .pageSelector:hover {
-        border: 1px solid #f00;
+        border: 1px solid #00468C;
 }
 #content .jTPS tfoot .pagination .hilightPageSelector {
-        border: 1px solid #0f0 !important;
-        background: #0ff !important;
+        border: 1px solid #00468C !important;
+        background: #00468C !important;
 }
 #content .jTPS tfoot .selectPerPage .perPageSelected {
-        border-bottom: 2px solid #f0f;
+        border-bottom: 2px solid #00468C;
 }
 #content .jTPS tfoot .selectPerPage .perPageHilight {
-        border-bottom: 2px solid #00f;
+		opacity:0.5;
+        border-bottom: 2px solid #00468C;
 }
 
 
