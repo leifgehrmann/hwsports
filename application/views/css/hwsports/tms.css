@@ -216,6 +216,26 @@ body {
 
 
 
+
+
+
+#content .jTPS tfoot .pagination .pageSelector:hover {
+        border: 1px solid #f00;
+}
+#content .jTPS tfoot .pagination .hilightPageSelector {
+        border: 1px solid #0f0 !important;
+        background: #0ff !important;
+}
+#content .jTPS tfoot .selectPerPage .perPageSelected {
+        border-bottom: 2px solid #f0f;
+}
+#content .jTPS tfoot .selectPerPage .perPageHilight {
+        border-bottom: 2px solid #00f;
+}
+
+
+
+
 #footer {
 	border-top:1px solid #C8C8C8;
 	vertical-align: middle;
