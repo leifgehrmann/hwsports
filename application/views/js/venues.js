@@ -26,9 +26,25 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 jQuery('#venuesTable').jTPS( {perPages:[4,8,16,32]} );
 
-jQuery('#submit').submit(function(e){//
+$('#{createVenue}').submit(function(e){//
+   e.preventDefault();
+    var first_name = $('#register_form1').val();
+    alert("HAHAHAHAHAHHAH");
+
+    /*$.ajax({
+        type: "POST", 
+        async: false, 
+        url: base_url+"register/registration_val",   
+        data: "register_first_name="+first_name,
+        success: function(data){
+            $('#inferiz').html(data);
+        },
+        error: function(){alert('error');}
+    }); */    
+});
+/*jQuery('#submit').submit(function(e){//
 	e.preventDefault();
-		alert("HAHAHAHAHAHHAH");
+	alert("HAHAHAHAHAHHAH");
 		/*var form_data = {
 			name : $('[name="name"]').val(),
 			description : $('[name="directions"]').val(),
@@ -48,4 +64,5 @@ jQuery('#submit').submit(function(e){//
 		});
 		return false;*/
 	//});
-});
+	//return false;
+//});*/
