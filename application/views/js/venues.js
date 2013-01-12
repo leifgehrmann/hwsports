@@ -26,7 +26,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 jQuery('#venuesTable').jTPS( {perPages:[4,8,16,32]} );
 
-jQuery('#submit').click(function() {
+jQuery('#submit').submit(function(e){//
+	e.preventDefault();
 		alert("HAHAHAHAHAHHAH");
 		/*var form_data = {
 			name : $('[name="name"]').val(),
