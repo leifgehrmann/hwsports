@@ -215,7 +215,7 @@ class Tms extends MY_Controller {
 		$this->data['venue'] = $this->venues_model->get_venue($venueID);
 
 		$this->data['title'] = "Venue";
-		$this->data['page']  = "venue";
+		$this->data['page']  = "venue"; // We need to fix this later to contain the name of the venue!!!!EAKFHAEOUFHEONUFYAILUSFDLSIFLSIUFSD
 		$this->load->view('tms/header',$this->data);
 		$this->load->view('tms/venue',$this->data);
 		$this->load->view('tms/footer',$this->data);
