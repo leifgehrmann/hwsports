@@ -52,12 +52,12 @@ if ( !isset($_POST['action']) ) {
 			"MAX(CASE WHEN `key`='lat' THEN value END ) AS lat, " .
 			"MAX(CASE WHEN `key`='lng' THEN value END ) AS lng " .
 			"FROM venueData WHERE venueID = {$venue['venueID']}";
-	
 		$venueData = $db->sql($venueDataQueryString)->fetch();
+		
 		$out['aaData'][$aaDataID] = array_merge($venue, $venueData);
 	}
 } else {
-	//print_r($_POST);
+	print_r($_POST);
 }
 
 // Send it back to the client
