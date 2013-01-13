@@ -206,9 +206,17 @@ class Tms extends MY_Controller {
 	}
 
 
-	public function venue()
+	public function venue($venueID)
 	{
+		$this->load->library('table');
+		$this->load->model('venues_model');
 
+		// Get data for this venue
+		$this->data['venue'] = $this->venues_model->get_venue($venueID);
+
+		$this->load->view('tms/header',$this->data);
+		$this->load->view('tms/venue',$this->data);
+		$this->load->view('tms/footer',$this->data);
 	}
 
 
