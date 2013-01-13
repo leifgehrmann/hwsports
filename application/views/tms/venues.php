@@ -7,6 +7,9 @@
 		<table cellpadding="0" cellspacing="0" border="0" class="display" id="example" width="100%">
 			<thead>
 				<tr>
+					<th width="30%">Centre ID</th>
+					<th width="30%">Lat</th>
+					<th width="30%">Lng</th>
 					<th width="30%">Venue ID</th>
 					<th width="30%">Name</th>
 					<th width="30%">Description</th>
