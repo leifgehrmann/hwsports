@@ -207,13 +207,13 @@ body {
 #content #venuemap {
 	width: 500px;
 	height: 300px;
+	display: none;
 }
 
 #mapcontainer {
 	width: 500px;
 	height: 300px;
 	margin: 0 auto;
-	background-color: #FFF000;
 }
 
 #content td, #content th {
