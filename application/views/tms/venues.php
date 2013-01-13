@@ -30,6 +30,7 @@
 <link rel='stylesheet' href='/css/dataTables.tabletools.css'>
 <link rel='stylesheet' href='/css/dataTables.editor.css'>
 <link rel='stylesheet' href='http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/themes/eggplant/jquery-ui.css'>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/jquery-ui.min.js"></script>
 <script src="/scripts/datatables/jquery.dataTables.min.js"></script>
 <script src="/scripts/datatables/dataTables.tabletools.min.js"></script>
