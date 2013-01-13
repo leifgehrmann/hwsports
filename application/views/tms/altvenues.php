@@ -4,9 +4,11 @@
 	<thead>
 		<tr>
 			<?php
+				$columns = array('venueID'=>'ID','name'=>'Venue Name','description'=>'Description','directions'=>'Directions');
 				$venues = $this->data['venues'];
 				foreach($venues[0] as $key=>$value){
-					echo "<th sort='$key'>$key</th>\n";
+					if(array_key_exists($key,$colunms))
+						echo "<th sort='$key'>columns[$key]</th>\n";
 				}
 			?>
 		</tr>
@@ -17,7 +19,8 @@
 			foreach($venues as $venue){
 				echo "<tr>\n";
 				foreach($venue as $key=>$value){
-					echo "<td>$value</td>\n";
+					if(array_key_exists($key,$colunms))
+						echo "<td>$value</td>\n";
 					//echo "<td><textarea cols='10' rows='5'>$value</textarea></td>\n";
 				}
 				echo "</tr>\n";
@@ -26,7 +29,7 @@
 	</tbody>
 	<tfoot class="nav">
 		<tr>
-			<td colspan="6">
+			<td colspan="<?=count($columns)?>">
 				<div class="pagination"></div>
 				<div class="paginationTitle">Page</div>
 				<div class="selectPerPage"></div>
