@@ -3,7 +3,7 @@
 	var map;
 	var newcentre;
 	var centre_pos  = new google.maps.LatLng( jQuery('#centreLat').text(), jQuery('#centreLng').text() );
-	var centre_marker = new google.maps.Marker({ position: centre_pos, map: map, title: "New Venue Location" });
+	var centre_marker;
 
 	function mapInitialize(){
 		map = new google.maps.Map(document.getElementById('venuemap'), {
@@ -11,6 +11,8 @@
 			center: centre_pos,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
+		
+		centre_marker = new google.maps.Marker({ position: centre_pos, map: map, title: "New Venue Location" });
 		
 		google.maps.event.addListener(map, 'center_changed', function() {
 			newcentre = map.getCenter();
@@ -60,6 +62,7 @@
 				"onOpen": function ( settings, json ) {
 					$('.DTE_Action_Create .DTE_Body_Content').append("<div id='mapcontainer'></div>");
 					$('#mapcontainer').append($('#venuemap'));
+					$('#venuemap').toggle();
 					mapInitialize();
 				}
 			}
