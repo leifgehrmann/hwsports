@@ -23,7 +23,7 @@
 				foreach($venue as $key=>$value){
 					if(array_key_exists($key,$columns))
 						if($key=='name'){
-							echo "<td><a href='tms/venue/".$venue['venueID']."'>$value</a></td>\n";
+							echo "<td><a href='/tms/venue/".$venue['venueID']."'>$value</a></td>\n";
 						} else {
 							echo "<td>$value</td>\n";
 						}
