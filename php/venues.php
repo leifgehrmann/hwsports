@@ -35,7 +35,7 @@ $out = $editor
 if ( !isset($_POST['action']) ) {
 	foreach ( $out['aaData'] as $aaDataID => $user ) {
 
-	$out['aaData'][$aaDataID]['name'] = $db->sql("SELECT `value` AS 'name' FROM `users` WHERE `key` = 'name' AND `userID` = '{$user['userID']}'");
+	$out['aaData'][$aaDataID]['name'] = print_r($db->sql("SELECT `value` AS 'name' FROM `users` WHERE `key` = 'name' AND `userID` = '{$user['userID']}'") );
 	}
 }
 
