@@ -45,7 +45,6 @@
 				},
 				"onOpen": function ( settings, json ) {
 					$('.DTE_Action_Create .DTE_Body_Content').append($('#venuemap'));
-					$('#venuemap').toggle();
 					google.maps.event.trigger(map, 'resize');
 				}
 			}
