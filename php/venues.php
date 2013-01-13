@@ -56,7 +56,15 @@ if ( !isset($_POST['action']) ) {
 		
 		$out['aaData'][$aaDataID] = array_merge($venue, $venueData);
 	}
-} else {
+} elseif($_POST['action']=='create') {
+	$venueID = $db->sql("SELECT MAX(venueID) FROM venues")->fetch();
+	$venueID = $venueID[0];
+	$db->sql("INSERT INTO `venueData` (`venueID`,`key`,`value`) VALUES ('$venueID','name','{$_POST['data']['name']}')");
+	$db->sql("INSERT INTO `venueData` (`venueID`,`key`,`value`) VALUES ('$venueID','description','{$_POST['data']['description']}')");
+	$db->sql("INSERT INTO `venueData` (`venueID`,`key`,`value`) VALUES ('$venueID','directions','{$_POST['data']['directions']}')");
+	$db->sql("INSERT INTO `venueData` (`venueID`,`key`,`value`) VALUES ('$venueID','lat','{$_POST['data']['lat']}')");
+	$db->sql("INSERT INTO `venueData` (`venueID`,`key`,`value`) VALUES ('$venueID','lng','{$_POST['data']['lng']}')");
+} elseif($_POST['action']=='update') {
 	print_r($_POST);
 }
 
