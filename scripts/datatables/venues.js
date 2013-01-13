@@ -59,6 +59,9 @@
 					{ "sExtends": "editor_remove", "editor": editor }
 				]
 			},
+			"onInitCreate": function ( settings, json ) {
+				console.log($('.DTE_Action_Create .DTE_Body_Content'));
+			},
 			"fnInitComplete": function ( settings, json ) {
 				// Set the allowed values for the select field based on
 				// what is available in the database
