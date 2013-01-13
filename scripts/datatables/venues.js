@@ -2,7 +2,7 @@
 
 	$(document).ready(function() {
 		editor = new $.fn.dataTable.Editor( {
-			"ajaxUrl": "/php/joinSelf.php",
+			"ajaxUrl": "/php/venues.php",
 			"domTable": "#example",
 			"fields": [ {
 					"label": "userID",
@@ -19,7 +19,7 @@
 
 		$('#example').dataTable( {
 			"sDom": "Tfrtip",
-			"sAjaxSource": "/php/joinSelf.php",
+			"sAjaxSource": "/php/venues.php",
 			"aoColumns": [
 				{ "mData": "userID" },
 				{ "mData": "key" },
