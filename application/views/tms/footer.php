@@ -9,7 +9,7 @@
 		<? if($page=="venuesold"){ ?>
 			<link type='text/css' rel='stylesheet' href='/scripts/jTPS/jTPS.css'/>
 			<script src='/scripts/jTPS/jTPS.js' type='text/javascript'></script>
+			<script type="text/javascript" src="/js/tms_<?=$page?>.js"></script>
 		<? } ?>
-		<script type="text/javascript" src="/js/tms_<?=$page?>.js"></script>
     </body>
 </html>
