@@ -102,7 +102,7 @@ class Db_venues extends MY_Controller {
 					$data[] = $row;
 				}
 
-				if($this->venues_model->insert_venues($this->data['centre']['id'],$data)>=0){
+				if($this->venues_model->insert_venue($this->data['centre']['id'],$data)>=0){
 					$output['success'] = true;
 					$output['message'] = 'The venue was created.';
 				} else {
