@@ -213,6 +213,7 @@ body {
 	width: 500px;
 	height: 250px;
 	margin: 0 auto;
+	background-color: #FFF000;
 }
 
 #content td, #content th {

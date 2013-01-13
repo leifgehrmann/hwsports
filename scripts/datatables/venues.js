@@ -1,8 +1,9 @@
 	var editor; // use a global for the submit and return data rendering in the examples
 	// a global variable to access the map
 	var map;
-	var centre_marker;
+	var newcentre;
 	var centre_pos  = new google.maps.LatLng( jQuery('#centreLat').text(), jQuery('#centreLng').text() );
+	var centre_marker = new google.maps.Marker({ position: centre_pos, map: map, title: "New Venue Location" });
 
 	function mapInitialize(){
 		map = new google.maps.Map(document.getElementById('venuemap'), {
@@ -11,20 +12,16 @@
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
 		
-		centre_marker = new google.maps.Marker({ position: centre_pos, map: map, title: "New Venue Location" });
-
 		google.maps.event.addListener(map, 'center_changed', function() {
-			var newcentre = map.getCenter();
+			newcentre = map.getCenter();
 			centre_marker.setPosition(newcentre);
-			//jQuery('input[name=lat]').val(newcentre.lat());
-			//jQuery('input[name=lng]').val(newcentre.lng());
 		});
 	}
 
 	$(document).ready(function() {
 		editor = new $.fn.dataTable.Editor( {
 			"ajaxUrl": "/php/venues.php",
-			"domTable": "#example",
+			"domTable": "#venues",
 			"fields": [ {
 					"label": "centreID",
 					"name": "centreID",
@@ -64,7 +61,6 @@
 					$('.DTE_Action_Create .DTE_Body_Content').append("<div id='mapcontainer'></div>");
 					$('#mapcontainer').append($('#venuemap'));
 					mapInitialize();
-					google.maps.event.trigger(map, 'resize');
 				}
 			}
 		} );
