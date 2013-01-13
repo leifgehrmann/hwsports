@@ -76,6 +76,8 @@ if ( !isset($_POST['action']) ) {
 	$out['row'] = array_merge($out['row'], $venueData);
 } elseif($_POST['action']=='update') {
 	print_r($_POST);
+} elseif($_POST['action']=='remove') {
+	print_r($_POST);
 }
 
 // Send it back to the client
