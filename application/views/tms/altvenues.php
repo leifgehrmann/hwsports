@@ -21,6 +21,7 @@
 	<tbody>
 		<?php
 			$venues = $this->data['venues'];
+			$venues = array();
 			foreach($venues as $venue){
 				echo "<tr>\n";
 				foreach($columnID as $key){
