@@ -22,7 +22,7 @@
 			"sAjaxSource": "/php/venues.php",
 			"aoColumns": [
 				{ "mData": "userID" },
-				{ "mData": "firstName" }
+				{ "mData": "firstName" },
 				{ "mData": "lastName" }
 			],
 			"oTableTools": {
