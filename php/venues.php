@@ -20,7 +20,7 @@ use
  */
 if ( isset($_POST['action']) ) {
 	if($_POST['action']=='remove') {
-		print_r($_POST);
+		//print_r($_POST);
 	}
 }
 
@@ -77,7 +77,11 @@ if ( !isset($_POST['action']) ) {
 } elseif($_POST['action']=='update') {
 	print_r($_POST);
 } elseif($_POST['action']=='remove') {
-	print_r($_POST);
+	foreach($_POST['data'] as $rowString) {
+		$venueID = substr($rowString,3);
+		echo $venueID;
+		$db->sql("DELETE FROM `venueData` WHERE `venueID` = '{$venueID}')");
+	}
 }
 
 // Send it back to the client
