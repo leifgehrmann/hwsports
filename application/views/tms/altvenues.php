@@ -29,7 +29,7 @@
 	</tbody>
 	<tfoot class="nav">
 		<tr>
-			<td colspan="<?=count($columns)?>">
+			<td colspan="4">
 				<div class="pagination"></div>
 				<div class="paginationTitle">Page</div>
 				<div class="selectPerPage"></div>
