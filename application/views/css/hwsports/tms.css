@@ -205,13 +205,13 @@ body {
 
 
 #content #venuemap {
-	width: 400px;
-	height: 250px;
+	width: 500px;
+	height: 300px;
 }
 
 #mapcontainer {
-	width: 400px;
-	height: 250px;
+	width: 500px;
+	height: 300px;
 	margin: 0 auto;
 	background-color: #FFF000;
 }
