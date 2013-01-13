@@ -26,7 +26,7 @@ if ( isset($_POST['action']) ) {
 
 $editor = Editor::inst( $db, 'venues', 'venueID' )
 	->field( 
-		Field::inst( 'venueID' )->set( false )
+		Field::inst( 'venueID' )
 	);
 		
 $out = $editor
