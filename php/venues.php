@@ -19,7 +19,7 @@ use
  * a user, you would change the 'manager' value in the 'users' table, so the
  * information from the join is read-only.
  */
-$editor = Editor::inst( $db, 'users' )
+$editor = Editor::inst( $db, 'users', 'userID' )
 	->field( 
 		Field::inst( 'userID' )->set( false ),
 		Field::inst( 'key' )->validator( 'Validate::required' ),
