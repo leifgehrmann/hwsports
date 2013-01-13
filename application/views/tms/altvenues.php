@@ -6,7 +6,7 @@
 			<?php
 				$columnID = array('venueID','name','description','view','maps');
 				$columnNames = array('venueID'=>'ID','name'=>'Venue Name','description'=>'Description','view'=>'','maps'=>'');
-				$columnWidths = array('venueID'=>30,'name'=>100,'description'=>180,'view'=>100,'maps'=>100);
+				$columnWidths = array('venueID'=>30,'name'=>100,'description'=>230,'view'=>100,'maps'=>100);
 				$columnSortable = array('venueID'=>true,'name'=>true,'description'=>true,'view'=>false,'maps'=>false);
 				
 				foreach($columnID as $key){
