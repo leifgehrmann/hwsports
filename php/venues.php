@@ -18,10 +18,8 @@ use
  * a user, you would change the 'manager' value in the 'users' table, so the
  * information from the join is read-only.
  */
-if ( isset($_POST['action']) ) {
-
-	//print_r($_POST);
-
+if($_POST['action']=='remove') {
+	print_r($_POST);
 }
 
 $editor = Editor::inst( $db, 'venues', 'venueID' )
