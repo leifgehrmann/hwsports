@@ -184,11 +184,14 @@ class Db_venues extends MY_Controller {
 
 				$data = array();
 				for ($i = 0; $i < $formLength; $i++) {
-					$row = array(
-						'key' => $formNames[$i],
-						'value' => $this->input->post($formNames[$i])
-					);
-					$data[] = $row;
+					if($this->input->post($formNames[$i])){
+						$data[$formNames[$i]] = $this->input->post($formNames[$i]);
+						/*$row = array(
+							'key' => $formNames[$i],
+							'value' => $this->input->post($formNames[$i])
+						);
+						$data[] = $row;*/
+					}
 				}
 
 				if($this->venues_model->update_venue($venueID,$data)>=0){

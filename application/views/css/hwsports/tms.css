@@ -262,6 +262,9 @@ body {
 #content .jTPS tbody td {
         padding: 6px !important;
 }
+#content .jTPS tbody td {
+        border-bottom: 1px solid #C8C8C8;
+}
 
 
 
