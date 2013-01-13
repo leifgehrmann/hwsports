@@ -7,16 +7,14 @@
 		<table cellpadding="0" cellspacing="0" border="0" class="display" id="example" width="100%">
 			<thead>
 				<tr>
-					<th width="30%">First name</th>
-					<th width="30%">Last name</th>
-					<th width="40%">Manager</th>
+					<th width="30%">Venue ID</th>
+					<th width="30%">Name</th>
 				</tr>
 			</thead>
 			<tfoot>
 				<tr>
-					<th>First name</th>
-					<th>Last name</th>
-					<th>Manager</th>
+					<th>Venue ID</th>
+					<th>Name</th>
 				</tr>
 			</tfoot>
 		</table>

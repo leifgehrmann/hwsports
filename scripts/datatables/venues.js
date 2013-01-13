@@ -5,14 +5,11 @@
 			"ajaxUrl": "/php/venues.php",
 			"domTable": "#example",
 			"fields": [ {
-					"label": "userID",
+					"label": "Venue ID",
 					"name": "userID"
 				}, {
-					"label": "key",
-					"name": "key"
-				}, {
-					"label": "value",
-					"name": "value"
+					"label": "Name",
+					"name": "name"
 				}
 			]
 		} );
@@ -22,8 +19,7 @@
 			"sAjaxSource": "/php/venues.php",
 			"aoColumns": [
 				{ "mData": "userID" },
-				{ "mData": "key" },
-				{ "mData": "value" }
+				{ "mData": "name" }
 			],
 			"oTableTools": {
 				"sRowSelect": "multi",

@@ -21,9 +21,7 @@ use
  */
 $editor = Editor::inst( $db, 'users', 'userID' )
 	->field( 
-		Field::inst( 'userID' )->set( false ),
-		Field::inst( 'key' )->validator( 'Validate::required' ),
-		Field::inst( 'value' )->validator( 'Validate::required' )
+		Field::inst( 'userID' )->set( false )
 	);
 
 $out = $editor
@@ -35,15 +33,15 @@ $out = $editor
 // case we want to send extra data back to the client, with the options
 // for the 'department' select list and 'access' radio boxes
 if ( !isset($_POST['action']) ) {
-	/*$userList = $db->select( 'users', 'id, first_name, last_name' );
+	foreach ( $out['aaData'] as $aaDataID => $user ) {
 
-	$out['userList'] = array();
-	while ( $row = $userList->fetch() ) {
-		$out['userList'][] = array(
-			"value" => $row['id'],
-			"label" => $row['id'].' '.$row['first_name'].' '.$row['last_name']
-		);
-	}*/
+	$out['aaData'][$aaDataID]['name'] = $db
+		->table( 'users' )
+		->get( 'value as name' )
+		->where( 'userID', $user['userID'] )
+		->and_where( 'key', 'name' )
+		->exec();
+	}
 }
 
 // Send it back to the client
