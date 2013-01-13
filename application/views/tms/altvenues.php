@@ -20,7 +20,7 @@
 			foreach($venues as $venue){
 				echo "<tr>\n";
 				foreach($venue as $key=>$value){
-					//if(array_key_exists($key,$colunms))
+					if(array_key_exists($key,$columns))
 						echo "<td>$value</td>\n";
 					//echo "<td><textarea cols='10' rows='5'>$value</textarea></td>\n";
 				}
