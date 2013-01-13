@@ -47,6 +47,7 @@
 					$('.DTE_Action_Create .DTE_Body_Content').append("<div id='mapcontainer'></div>");
 					$('#mapcontainer').append($('#venuemap'));
 					google.maps.event.trigger(map, 'resize');
+					google.maps.setCenter(centre_pos);
 				}
 			}
 		} );
