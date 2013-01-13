@@ -18,13 +18,17 @@ use
  * a user, you would change the 'manager' value in the 'users' table, so the
  * information from the join is read-only.
  */
+if ( isset($_POST['action']) ) {
+
+	print_r($_POST);
+
+}
+
 $editor = Editor::inst( $db, 'venues', 'venueID' )
 	->field( 
 		Field::inst( 'venueID' )->set( false )
 	);
-	
-	print_r($_POST);
-	
+		
 $out = $editor
 	->process($_POST)
 	->data();
@@ -44,6 +48,8 @@ if ( !isset($_POST['action']) ) {
 		$venueData = $db->sql($venueDataQueryString)->fetch();
 		$out['aaData'][$aaDataID] = array_merge($venue, $venueData);
 	}
+} else {
+	print_r($_POST);
 }
 
 // Send it back to the client
