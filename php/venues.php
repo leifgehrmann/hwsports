@@ -38,7 +38,7 @@ if ( !isset($_POST['action']) ) {
 	$out['aaData'][$aaDataID]['name'] = $db
 		->query( 'select' )
 		->table( 'users' )
-		->get( 'value' )
+		->get( 'value as name' )
 		->where( 'userID', $user['userID'] )
 		->exec();
 	}
