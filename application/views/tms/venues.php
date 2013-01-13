@@ -19,8 +19,8 @@
 		</table>
 	</div>
 	<div class="spacer"></div>
+	<div id="map" class="venues-map"></div>
 	<div id="centreID" style="display:none;"><?=$centre['id']?></div>
-
 </div><!-- /#main -->
 
 <link rel='stylesheet' href='/css/jquery.dataTables.css'>
