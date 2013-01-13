@@ -17,7 +17,6 @@
 	<div class="fix"></div>
 </div><!-- /#main -->
 
-<link rel='stylesheet' href='/css/venues.css'>
 <link rel='stylesheet' href='/css/jquery.dataTables.css'>
 <link rel='stylesheet' href='/css/dataTables.tabletools.css'>
 <link rel='stylesheet' href='/css/dataTables.editor.css'>
