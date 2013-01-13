@@ -40,9 +40,10 @@ jQuery('#createVenue').submit(function(e){//
 	jQuery.ajax({
 			url: "/db_venue/venue_exists/14",
 			type: 'POST',
-			async : true,
+			async : false,
 			data: form_data,
 			success: function(msg) {
+				alert(msg);
 				jQuery('#message').html(msg);
 			}
 		});
