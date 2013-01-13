@@ -34,17 +34,16 @@ $out = $editor
 // for the 'department' select list and 'access' radio boxes
 if ( !isset($_POST['action']) ) {
 	foreach ( $out['aaData'] as $aaDataID => $user ) {
-	print_r($user['userID']);
+
 	$out['aaData'][$aaDataID]['name'] = $db
 		->query( 'select' )
 		->table( 'users' )
-		->get( 'value as name' )
+		->get( 'value' )
 		->where( 'userID', $user['userID'] )
-		->where( 'key', 'name' )
 		->exec();
 	}
 }
 
 // Send it back to the client
-//echo json_encode( $out );
+echo json_encode( $out );
 
