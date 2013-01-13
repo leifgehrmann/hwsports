@@ -204,7 +204,7 @@ body {
 
 
 
-#content .venues-map {
+#content #venuemap {
 	width: 400px;
 	height: 250px;
 	display: none;
