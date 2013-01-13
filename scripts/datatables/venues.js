@@ -1,7 +1,6 @@
 	var editor; // use a global for the submit and return data rendering in the examples
 	// a global variable to access the map
 	var map;
-	var newcentre;
 	var centre_pos  = new google.maps.LatLng( jQuery('#centreLat').text(), jQuery('#centreLng').text() );
 	var centre_marker;
 
@@ -15,8 +14,10 @@
 		centre_marker = new google.maps.Marker({ position: centre_pos, map: map, title: "New Venue Location" });
 		
 		google.maps.event.addListener(map, 'center_changed', function() {
-			newcentre = map.getCenter();
+			var newcentre = map.getCenter();
 			centre_marker.setPosition(newcentre);
+			editor.set( 'lat', newcentre.lat() );
+			editor.set( 'lng', newcentre.lng() );
 		});
 	}
 
