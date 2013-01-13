@@ -95,11 +95,12 @@ class Db_venues extends MY_Controller {
 
 				$data = array();
 				for ($i = 0; $i < $formLength; $i++) {
-					$row = array(
+					array_push($formNames[$i]=>$this->input->post($formNames[$i]));
+					/*$row = array(
 						'key' => $formNames[$i],
 						'value' => $this->input->post($formNames[$i])
-					);
-					$data[] = $row;
+					);*/
+					//$data[] = $row;
 				}
 
 				if($this->venues_model->insert_venue($this->data['centre']['id'],$data)>=0){
