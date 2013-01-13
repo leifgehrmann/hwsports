@@ -35,12 +35,7 @@ $out = $editor
 if ( !isset($_POST['action']) ) {
 	foreach ( $out['aaData'] as $aaDataID => $user ) {
 
-	$out['aaData'][$aaDataID]['name'] = "the user id is: ".$user['userID']." and the p is: ".print_r($db
-		->query( 'select' )
-		->table( 'users' )
-		->get( 'value' )
-		->where( 'userID', $user['userID'] )
-		->exec(),1);
+	$out['aaData'][$aaDataID]['name'] = print_r( $db->sql("SELECT `value` AS 'name' FROM `users` WHERE `key` = 'name' AND `userID` = '{$user['userID']}'") , 1);
 	}
 }
 
