@@ -170,65 +170,32 @@ class Tms extends MY_Controller {
 		// Get data for all venues.
 		$this->data['venues'] = $this->venues_model->get_venues($this->data['centre']['id']);
 
-		//validate form input
-		$formNames = array('name','description','directions','lat','lng');
-		$formLabels = array('Name','Description','Directions','Latitude','longitude');
-		$formRules = array('required','required','required','required','required');
-		$formLength = min(count($formNames),count($formLabels),count($formRules));
-		for ($i = 0; $i < $formLength; $i++) {
-			$this->form_validation->set_rules($formNames[$i], $formLabels[$i], $formRules[$i]);
-		}
+		//set the flash data error message if there is one
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		
+		// query google maps api for lat / lng of sports centre
+		$address = urlencode($this->data['centre']['address']);
+		$url = "http://maps.google.com/maps/api/geocode/json?address=$address&sensor=false&region=uk";
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+		$json = curl_exec($ch);
+		curl_close($ch);
+		$apiData = json_decode($json);
+		
+		//$this->data['apiData'] = $json;
+		$lat = $apiData->results[0]->geometry->location->lat;
+		$lng = $apiData->results[0]->geometry->location->lng;
 
-		// If form has been submitted and it validates ok
-		if ($this->form_validation->run() == true) {
-
-			// Form validated ok, process input
-			$venueDataArray = array();
-			for ($i = 0; $i < $formLength; $i++) {
-				$row = array(
-					'key' => $formNames[$i],
-					'value' => $this->input->post($formNames[$i])
-				);
-				$venueDataArray[] = $row;
-			}
-
-			if(insert_venue($this->data['centre']['id'],$venueDataArray)>=0){
-				// db success
-				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/tms/venues', 'refresh');
-			} else {
-				// db fail
-				$this->session->set_flashdata('message', $this->ion_auth->errors());
-				redirect('/tms/venues', 'refresh');
-			}
-
-		} else {
-			//either form not submitted yet or validation failed
-			//set the flash data error message if there is one
-			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-			
-			// query google maps api for lat / lng of sports centre
-			$address = urlencode($this->data['centre']['address']);
-			$url = "http://maps.google.com/maps/api/geocode/json?address=$address&sensor=false&region=uk";
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $url);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-			$json = curl_exec($ch);
-			curl_close($ch);
-			$apiData = json_decode($json);
-			
-			//$this->data['apiData'] = $json;
-			$lat = $apiData->results[0]->geometry->location->lat;
-			$lng = $apiData->results[0]->geometry->location->lng;
-
-			$this->data['createLatLng'] = array('lat' => $lat, 'lng' => $lng);
-			$this->data['createName'] = array('name' => 'name');
-			$this->data['createDescription'] = array('name' => 'description');
-			$this->data['createDirections'] = array('name' => 'directions');
-		}
+		// Perhaps this isn't necessary anymore....
+		// Create the form
+		$this->data['createLatLng'] = array('lat' => $lat, 'lng' => $lng);
+		$this->data['createName'] = array('name' => 'name');
+		$this->data['createDescription'] = array('name' => 'description');
+		$this->data['createDirections'] = array('name' => 'directions');
 
 		// Display the page.
 		$this->data['title'] = "Venues";
@@ -236,6 +203,12 @@ class Tms extends MY_Controller {
 		$this->load->view('tms/header',$this->data);
 		$this->load->view('tms/altvenues',$this->data);
 		$this->load->view('tms/footer',$this->data);
+	}
+
+
+	public function venue()
+	{
+
 	}
 
 
