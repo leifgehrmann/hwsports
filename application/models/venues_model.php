@@ -84,12 +84,12 @@ class Venues_model extends CI_Model {
 		}
 		if ($this->db->insert_batch('venueData',$insertDataArray)) {
 			// db success
+			$this->db->trans_complete();
 			return $venueID;
 		} else {
 			// db fail
 			return -1;
 		}
-		$this->db->trans_complete();
 	}
 
 	/**
@@ -112,11 +112,9 @@ class Venues_model extends CI_Model {
 				$this->db->query($dataQueryString);
 			}
 			return true;
+			$this->db->trans_complete();
 		} else {
 			return false;
 		}
-
-		$this->db->trans_complete();
-
 	}
 }
