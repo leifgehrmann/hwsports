@@ -45,7 +45,8 @@
 				},
 				"onOpen": function ( settings, json ) {
 					$('.DTE_Action_Create .DTE_Body_Content').append("<div id='mapcontainer'></div>");
-					$('#mapcontainer').append(map.getDiv());
+					$('#mapcontainer').append($('#venuemap'));
+					initialize();
 					google.maps.event.trigger(map, 'resize');
 				}
 			}
@@ -99,7 +100,5 @@
 				//jQuery('input[name=lng]').val(newcentre.lng());
 			});
 		}
-
-		google.maps.event.addDomListener(window, 'load', initialize);
 
 	} );
