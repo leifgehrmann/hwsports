@@ -24,7 +24,7 @@
 					if(array_key_exists($key,$columns))
 						if($key=='name'){
 							echo "<td><a href='/tms/venue/".$venue['venueID']."'>$value</a></td>\n";
-						} if($key=='name'){
+						} else if($key=='lat'){
 							echo "<td><a href='http://maps.google.com/maps?q=".$venue['lat'].",".$venue['lng']."'>View on Google Maps</a></td>\n";
 						} else {
 							echo "<td>$value</td>\n";
@@ -37,7 +37,7 @@
 	</tbody>
 	<tfoot class="nav">
 		<tr>
-			<td colspan="4">
+			<td colspan="<?=count($columns)?>">
 				<div class="pagination"></div>
 				<div class="paginationTitle">Page</div>
 				<div class="selectPerPage"></div>
