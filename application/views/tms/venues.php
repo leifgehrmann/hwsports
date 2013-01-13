@@ -1,6 +1,9 @@
 <div id="infoMessage"><?=$message;?></div>
 
 <h1>Venue List</h1>
+
+<div id="map" class="venues-map"></div>
+
 <div id="main">
 
 	<div id="demo">
@@ -22,7 +25,6 @@
 	<div id="centreID" style="display:none;"><?=$centre['id']?></div>
 </div><!-- /#main -->
 
-<div id="map" class="venues-map"></div>
 
 <link rel='stylesheet' href='/css/jquery.dataTables.css'>
 <link rel='stylesheet' href='/css/dataTables.tabletools.css'>
