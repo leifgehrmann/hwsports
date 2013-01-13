@@ -38,7 +38,7 @@ jQuery('#createVenue').submit(function(e){//
 		lng : jQuery('[name="lng"]').val()
 	};
 	jQuery.ajax({
-			url: "/db_venues/venue_exists/14",
+			url: "/db_venues/insert_venue/",
 			type: 'POST',
 			async : false,
 			data: form_data,
