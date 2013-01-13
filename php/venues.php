@@ -22,8 +22,7 @@ if ( isset($_POST['action']) ) {
 	if($_POST['action']=='remove') {
 		// Clean up venue data
 		foreach($_POST['data'] as $rowString) {
-			$venueID = substr($rowString,3);
-			echo $venueID;
+			$venueID = substr($rowString,4);
 			$db->sql("DELETE FROM `venueData` WHERE `venueID` = '{$venueID}'");
 		}
 	}
