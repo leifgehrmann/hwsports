@@ -69,7 +69,7 @@
 		// a global variable to access the map
 		var map;
 		var centre_marker;
-		var centre_pos  = new google.maps.LatLng( jQuery('input[name="lat"]').val(), jQuery('input[name="lng"]').val() );
+		var centre_pos  = new google.maps.LatLng( jQuery('#centreLat').text(), jQuery('#centreLng').text() );
 
 		function initialize(){
 			map = new google.maps.Map(document.getElementById('map'), {

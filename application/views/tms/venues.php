@@ -3,6 +3,8 @@
 <h1>Venue List</h1>
 
 <div id="map" class="venues-map"></div>
+<div id="centreLat" style="display:none;"><?=$centreLat?></div>
+<div id="centreLng" style="display:none;"><?=$centreLng?></div>
 
 <div id="main">
 
