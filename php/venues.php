@@ -23,6 +23,7 @@ if ( isset($_POST['action']) ) {
 		// Clean up venue data
 		foreach($_POST['data'] as $rowString) {
 			$venueID = substr($rowString,3);
+			echo $venueID;
 			$db->sql("DELETE FROM `venueData` WHERE `venueID` = '{$venueID}'");
 		}
 	}
