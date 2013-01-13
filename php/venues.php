@@ -38,7 +38,7 @@ if ( !isset($_POST['action']) ) {
 	$out['aaData'][$aaDataID]['name'] = "the user id is: ".$user['userID']." and the p is: ".print_r($db
 		->query( 'select' )
 		->table( 'users' )
-		->get( 'value as name' )
+		->get( 'value' )
 		->where( 'userID', $user['userID'] )
 		->exec(),1);
 	}
