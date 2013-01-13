@@ -19,7 +19,8 @@
 					"type": "hidden"
 				}, {
 					"label": "Venue ID",
-					"name": "venueID"
+					"name": "venueID",
+					"type": "hidden"
 				}, {
 					"label": "Name",
 					"name": "name"
