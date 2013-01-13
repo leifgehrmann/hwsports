@@ -4,13 +4,16 @@
 	<thead>
 		<tr>
 			<?php
-				$columns = array('venueID'=>'ID','name'=>'Venue Name','description'=>'Description','lat'=>'');
-				$widths = array('venueID'=>30,'name'=>100,'description'=>180,'directions'=>180,'lat'=>100);
-				$venues = $this->data['venues'];
-				foreach($venues[0] as $key=>$value){
-					if(array_key_exists($key,$columns)){
-						echo "<th style='width:".$widths[$key]."px' sort='$key'>".$columns[$key]."</th>\n";
-					}
+				$columnID = array('venueID','name','description','view','maps');
+				$columnNames = array('venueID'=>'ID','name'=>'Venue Name','description'=>'Description','view'=>'','maps'=>'');
+				$columnWidths = array('venueID'=>30,'name'=>100,'description'=>180,'view'=>100,'maps'=>100);
+				$columnSortable = array('venueID'=>true,'name'=>true,'description'=>true,'view'=>false,'maps'=>false);
+				
+				foreach($columnID as $key){
+					echo "<th style='width:".$columnWidths[$key]."px'";
+					if($columnSortable[$key])
+						echo " sort='$key'";
+					echo ">".$columnNames[$key]."</th>\n";
 				}
 			?>
 		</tr>
@@ -20,17 +23,21 @@
 			$venues = $this->data['venues'];
 			foreach($venues as $venue){
 				echo "<tr>\n";
-				foreach($venue as $key=>$value){
-					if(array_key_exists($key,$columns))
-						if($key=='name'){
-							echo "<td><a href='/tms/venue/".$venue['venueID']."'>$value</a></td>\n";
-						} else if($key=='lat'){
-							echo "<td><a href='/tms/venue/".$venue['venueID']."'>View Details</a></td>\n";
-							echo "<td><a target='_blank' href='http://maps.google.com/maps?q=".$venue['lat'].",".$venue['lng']."'>View on Map</a></td>\n";
-						} else {
-							echo "<td>$value</td>\n";
-						}
-					//echo "<td><textarea cols='10' rows='5'>$value</textarea></td>\n";
+				foreach($columnID as $key){
+					echo "<td>\n";
+					switch ($columnID) {
+						case 'venueID':
+							echo $venue['venueID']; break;
+						case 'name':
+							echo "<a href='/tms/venue/".$venue['venueID']."'>".$venue['name']."</a>"; break;
+						case 'description':
+							echo $venue['description']; break;
+						case 'view':
+							echo "<a href='/tms/venue/".$venue['venueID']."'>View Details</a>"; break;
+						case 'maps':
+							echo "<a target='_blank' href='http://maps.google.com/maps?q=".$venue['lat'].",".$venue['lng']."'>View on Map</a>"; break;
+					}
+					echo "</td>\n";
 				}
 				echo "</tr>\n";
 			}
@@ -38,7 +45,7 @@
 	</tbody>
 	<tfoot class="nav">
 		<tr>
-			<td colspan="<?=(count($columns)+1)?>">
+			<td colspan="<?=count($columnID)?>">
 				<div class="pagination"></div>
 				<div class="paginationTitle">Page</div>
 				<div class="selectPerPage"></div>
