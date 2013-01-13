@@ -8,15 +8,10 @@
 			<thead>
 				<tr>
 					<th width="30%">Venue ID</th>
-					<th width="30%">Name</th>
+					<th width="30%">First Name</th>
+					<th width="30%">Last Name</th>
 				</tr>
 			</thead>
-			<tfoot>
-				<tr>
-					<th>Venue ID</th>
-					<th>Name</th>
-				</tr>
-			</tfoot>
 		</table>
 	</div>
 	<div class="spacer"></div>
