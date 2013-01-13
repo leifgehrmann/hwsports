@@ -8,8 +8,11 @@
 					"label": "Venue ID",
 					"name": "userID"
 				}, {
-					"label": "Name",
-					"name": "name"
+					"label": "First Name",
+					"name": "firstName"
+				}, {
+					"label": "Last Name",
+					"name": "lastName"
 				}
 			]
 		} );
@@ -19,7 +22,8 @@
 			"sAjaxSource": "/php/venues.php",
 			"aoColumns": [
 				{ "mData": "userID" },
-				{ "mData": "name" }
+				{ "mData": "firstName" }
+				{ "mData": "lastName" }
 			],
 			"oTableTools": {
 				"sRowSelect": "multi",

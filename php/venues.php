@@ -34,8 +34,11 @@ $out = $editor
 // for the 'department' select list and 'access' radio boxes
 if ( !isset($_POST['action']) ) {
 	foreach ( $out['aaData'] as $aaDataID => $user ) {
-
-	$out['aaData'][$aaDataID]['name'] = print_r( $db->sql("SELECT `value` FROM `users` WHERE `key` = 'firstName' AND `userID` = '{$user['userID']}'")->fetch() , 1);
+		$result = $db->sql("SELECT `value` FROM `users` WHERE `key` = 'firstName' AND `userID` = '{$user['userID']}'")->fetch();
+		$out['aaData'][$aaDataID]['firstName'] = $result['value'];
+		
+		$result = $db->sql("SELECT `value` FROM `users` WHERE `key` = 'lastName' AND `userID` = '{$user['userID']}'")->fetch();
+		$out['aaData'][$aaDataID]['lastName'] = $result['value'];
 	}
 }
 
