@@ -91,7 +91,7 @@ if ( !isset($_POST['action']) ) {
 		"MAX(CASE WHEN `key`='directions' THEN value END ) AS directions, " .
 		"MAX(CASE WHEN `key`='lat' THEN value END ) AS lat, " .
 		"MAX(CASE WHEN `key`='lng' THEN value END ) AS lng " .
-		"FROM venueData WHERE venueID = {$venueID}";
+		"FROM venueData WHERE venueID = {$_POST['data']['venueID']}";
 	$venueData = $db->sql($venueDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $venueData);
 }
