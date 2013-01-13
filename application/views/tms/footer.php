@@ -6,14 +6,7 @@
 		</div>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
 		<!--<script type="text/javascript" src="/scripts/pagination.js"></script>-->
-		<? if($page=="venues"){ ?>
-			<script type='text/javascript'>Rico_CONFIG={};</script>
-			<script src='http://ajax.googleapis.com/ajax/libs/prototype/1.7/prototype.js' type='text/javascript'></script>
-			<script src='/scripts/tiny_mce/tiny_mce.js' type='text/javascript'></script>
-			<script src='/scripts/rico/js/rico2pro.js' type='text/javascript'></script>
-			<script src='/scripts/rico/js/rico_min.js' type='text/javascript'></script>
-			<script src='/scripts/rico/js/ricoThemeroller.js' type='text/javascript'></script>
-
+		<? if($page=="venuesold"){ ?>
 			<link type='text/css' rel='stylesheet' href='/scripts/jTPS/jTPS.css'/>
 			<script src='/scripts/jTPS/jTPS.js' type='text/javascript'></script>
 		<? } ?>
