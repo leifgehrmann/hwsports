@@ -214,6 +214,8 @@ class Tms extends MY_Controller {
 		// Get data for this venue
 		$this->data['venue'] = $this->venues_model->get_venue($venueID);
 
+		$this->data['title'] = "Venue";
+		$this->data['page']  = "venue";
 		$this->load->view('tms/header',$this->data);
 		$this->load->view('tms/venue',$this->data);
 		$this->load->view('tms/footer',$this->data);
