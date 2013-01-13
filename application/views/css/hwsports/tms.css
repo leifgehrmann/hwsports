@@ -213,7 +213,7 @@ body {
 #mapcontainer {
 	width: 500px;
 	height: 250px;
-	margin: 0 auto;
+	margin: 20px auto;
 }
 
 #content td, #content th {
