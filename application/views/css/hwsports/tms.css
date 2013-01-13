@@ -209,6 +209,13 @@ body {
 	height: 250px;
 }
 
+#mapcontainer {
+	width: 400px;
+	height: 250px;
+	margin: 0 auto;
+	background-color: #FFF000;
+}
+
 #content td, #content th {
 	padding:10px;
 	text-align:left;
