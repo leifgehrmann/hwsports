@@ -15,6 +15,7 @@
 	</thead>
 	<tbody>
 		<?php
+			$columns = array('venueID'=>'ID','name'=>'Venue Name','description'=>'Description','directions'=>'Directions');
 			$venues = $this->data['venues'];
 			foreach($venues as $venue){
 				echo "<tr>\n";
