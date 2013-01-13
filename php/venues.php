@@ -79,7 +79,21 @@ if ( !isset($_POST['action']) ) {
 	$venueData = $db->sql($venueDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $venueData);
 } elseif($_POST['action']=='update') {
-	print_r($_POST);
+	$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['name']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'name'");
+	$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['description']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'description'");
+	$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['directions']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'directions'");
+	$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['lat']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'lat'");
+	$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['lng']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'lng'");
+	
+	$venueDataQueryString = "SELECT " .
+		"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
+		"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
+		"MAX(CASE WHEN `key`='directions' THEN value END ) AS directions, " .
+		"MAX(CASE WHEN `key`='lat' THEN value END ) AS lat, " .
+		"MAX(CASE WHEN `key`='lng' THEN value END ) AS lng " .
+		"FROM venueData WHERE venueID = {$venueID}";
+	$venueData = $db->sql($venueDataQueryString)->fetch();
+	$out['row'] = array_merge($out['row'], $venueData);
 }
 
 // Send it back to the client
