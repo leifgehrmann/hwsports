@@ -4,8 +4,8 @@
 	<thead>
 		<tr>
 			<?php
-				$columns = array('venueID'=>'ID','name'=>'Venue Name','description'=>'Description','directions'=>'Directions');
-				$widths = array('venueID'=>30,'name'=>150,'description'=>200,'directions'=>200);
+				$columns = array('venueID'=>'ID','name'=>'Venue Name','description'=>'Description','directions'=>'Directions','lat'=>'');
+				$widths = array('venueID'=>30,'name'=>130,'description'=>180,'directions'=>180,'lat'=>180);
 				$venues = $this->data['venues'];
 				foreach($venues[0] as $key=>$value){
 					if(array_key_exists($key,$columns)){
