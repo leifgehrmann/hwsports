@@ -95,7 +95,7 @@ class Db_venues extends MY_Controller {
 
 				$data = array();
 				for ($i = 0; $i < $formLength; $i++) {
-					insertDataArray[$formNames[$i]] = $this->input->post($formNames[$i]);
+					$data[$formNames[$i]] = $this->input->post($formNames[$i]);
 					//array_push($formNames[$i]=>);
 					/*$row = array(
 						'key' => $formNames[$i],
