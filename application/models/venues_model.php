@@ -67,7 +67,9 @@ class Venues_model extends CI_Model {
 	 * @return int
 	 **/
 	public function insert_venue($centreID, $data)
-	{
+	{	
+		$this->db->trans_start();
+
 		$this->db->query("INSERT INTO venues (centreID) VALUES (".$this->db->escape($centreID).")");
 		$venueID = $this->db->insert_id();
 
@@ -87,6 +89,7 @@ class Venues_model extends CI_Model {
 			// db fail
 			return -1;
 		}
+		$this->db->trans_complete();
 	}
 
 	/**
@@ -95,6 +98,9 @@ class Venues_model extends CI_Model {
 	 * @return boolean
 	 **/
 	public function update_venue($venueID, $data){
+
+		$this->db->trans_start();
+
 		if($this->venue_exists($venueID)){
 			$escVenueID = $this->db->escape($venueID);
 			foreach($data as $key=>$value) {
@@ -109,5 +115,8 @@ class Venues_model extends CI_Model {
 		} else {
 			return false;
 		}
+
+		$this->db->trans_complete();
+
 	}
 }
