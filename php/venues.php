@@ -73,9 +73,9 @@ if ( !isset($_POST['action']) ) {
 		"MAX(CASE WHEN `key`='lng' THEN value END ) AS lng " .
 		"FROM venueData WHERE venueID = {$venueID}";
 	$venueData = $db->sql($venueDataQueryString)->fetch();
-	$out['aaData'][$aaDataID] = $venueData;
-	$out['aaData'][$aaDataID]['venueID'] = $venueID;
-	$out['aaData'][$aaDataID]['centreID'] = $_POST['data']['centreID'];
+	$out['aaData'][0] = $venueData;
+	$out['aaData'][0]['venueID'] = $venueID;
+	$out['aaData'][0]['centreID'] = $_POST['data']['centreID'];
 } elseif($_POST['action']=='update') {
 	print_r($_POST);
 }
