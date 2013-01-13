@@ -44,8 +44,9 @@
 					alert( "A new row was edited!" );
 				},
 				"onOpen": function ( settings, json ) {
-					$('.DTE_Action_Create .DTE_Body_Content').append($('#venuemap'));
-					google.maps.event.trigger(map, 'resize');
+					$('.DTE_Action_Create .DTE_Body_Content').append("<div style='backgrond-color: #FFF000; width: 200px; height: 200px;'>HELLO WORLD</div>");
+					//$('.DTE_Action_Create .DTE_Body_Content').append($('#venuemap'));
+					//google.maps.event.trigger(map, 'resize');
 				}
 			}
 		} );
