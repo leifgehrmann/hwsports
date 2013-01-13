@@ -36,6 +36,7 @@ if ( !isset($_POST['action']) ) {
 	foreach ( $out['aaData'] as $aaDataID => $user ) {
 
 	$out['aaData'][$aaDataID]['name'] = $db
+		->query( 'select' )
 		->table( 'users' )
 		->get( 'value as name' )
 		->where( 'userID', $user['userID'] )
