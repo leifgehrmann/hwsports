@@ -35,7 +35,7 @@ $out = $editor
 if ( !isset($_POST['action']) ) {
 	foreach ( $out['aaData'] as $aaDataID => $user ) {
 
-	$out['aaData'][$aaDataID]['name'] = print_r($db
+	$out['aaData'][$aaDataID]['name'] = "the user id is: ".$user['userID']." and the p is: ".print_r($db
 		->query( 'select' )
 		->table( 'users' )
 		->get( 'value as name' )
