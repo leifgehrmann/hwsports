@@ -241,7 +241,7 @@ body {
 		border-right: 1px solid #C8C8C8;
         padding: 10px !important;
 }
-#content .jTPS thead .sortDesc {
+#content .jTPS thead th .sortDesc {
         border-bottom: 1px solid #C8C8C8;
         background:#F8F8F8;
 }
