@@ -4,7 +4,7 @@
 	<thead>
 		<tr>
 			<?php
-				$columns = array('venueID'=>'ID','name'=>'Venue Name','description'=>'Description','directions'=>'Directions','lat'=>'');
+				$columns = array('venueID'=>'ID','name'=>'Venue Name','description'=>'Description','lat'=>'');
 				$widths = array('venueID'=>30,'name'=>100,'description'=>180,'directions'=>180,'lat'=>100);
 				$venues = $this->data['venues'];
 				foreach($venues[0] as $key=>$value){
@@ -25,7 +25,8 @@
 						if($key=='name'){
 							echo "<td><a href='/tms/venue/".$venue['venueID']."'>$value</a></td>\n";
 						} else if($key=='lat'){
-							echo "<td><a target='_blank' href='http://maps.google.com/maps?q=".$venue['lat'].",".$venue['lng']."'>View on Google Maps</a></td>\n";
+							echo "<td><a href='/tms/venue/".$venue['venueID']."'>View Details</a></td>\n";
+							echo "<td><a target='_blank' href='http://maps.google.com/maps?q=".$venue['lat'].",".$venue['lng']."'>View on Map</a></td>\n";
 						} else {
 							echo "<td>$value</td>\n";
 						}
@@ -37,7 +38,7 @@
 	</tbody>
 	<tfoot class="nav">
 		<tr>
-			<td colspan="<?=count($columns)?>">
+			<td colspan="<?=(count($columns)+1)?>">
 				<div class="pagination"></div>
 				<div class="paginationTitle">Page</div>
 				<div class="selectPerPage"></div>
