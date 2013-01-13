@@ -2,19 +2,27 @@
 
 <h1>Venue List</h1>
 <div id="main">
-	<table cellpadding="0" cellspacing="0" border="0" class="display" id="venues" width="100%">
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Name</th>
-				<th>Description</th>
-				<th>Directions</th>
-				<th>lat</th>
-				<th>lng</th>
-			</tr>
-		</thead>
-	</table>
-	<div class="fix"></div>
+
+	<div id="demo">
+		<table cellpadding="0" cellspacing="0" border="0" class="display" id="example" width="100%">
+			<thead>
+				<tr>
+					<th width="30%">First name</th>
+					<th width="30%">Last name</th>
+					<th width="40%">Manager</th>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<th>First name</th>
+					<th>Last name</th>
+					<th>Manager</th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	<div class="spacer"></div>
+
 </div><!-- /#main -->
 
 <link rel='stylesheet' href='/css/jquery.dataTables.css'>

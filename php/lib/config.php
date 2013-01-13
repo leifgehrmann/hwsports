@@ -13,10 +13,10 @@ ini_set('display_errors', '1');
  */
 $sql_details = array(
 	"type" => "Mysql",
-	"user" => "sports_web",
+	"user" => "sports_editor",
 	"pass" => "group8",
 	"host" => "localhost",
 	"port" => "3306",
-	"db"   => "sports_web"
+	"db"   => "sports_editor"
 );
 
