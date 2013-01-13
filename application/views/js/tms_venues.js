@@ -24,7 +24,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 /******     The data table section      ******/
 
-jQuery('#venuesTable').jTPS( {perPages:[4,8,16,32]} );
+jQuery('#venuesTable').jTPS( {perPages:[5,10,15,50,'ALL']} );
 
 jQuery('#createVenue').submit(function(e){//
    e.preventDefault();
