@@ -73,7 +73,7 @@ class Venues_model extends CI_Model {
 		$this->db->query("INSERT INTO venues (centreID) VALUES (".$this->db->escape($centreID).")");
 		$venueID = $this->db->insert_id();
 
-		$insertDataArray = array();
+		insertDataArray = array();
 		foreach($data as $key=>$value) {
 			$dataArray = array(
 					'venueID' => $venueID,
