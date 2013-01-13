@@ -84,7 +84,7 @@
 		var centre_pos  = new google.maps.LatLng( jQuery('#centreLat').text(), jQuery('#centreLng').text() );
 
 		function initialize(){
-			map = new google.maps.Map(document.getElementById('map'), {
+			map = new google.maps.Map(document.getElementById('venuemap'), {
 				zoom: 15,
 				center: centre_pos,
 				mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -95,8 +95,8 @@
 			google.maps.event.addListener(map, 'center_changed', function() {
 				var newcentre = map.getCenter();
 				centre_marker.setPosition(newcentre);
-				jQuery('input[name=lat]').val(newcentre.lat());
-				jQuery('input[name=lng]').val(newcentre.lng());
+				//jQuery('input[name=lat]').val(newcentre.lat());
+				//jQuery('input[name=lng]').val(newcentre.lng());
 			});
 		}
 
