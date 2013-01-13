@@ -25,7 +25,7 @@
 				echo "<tr>\n";
 				foreach($columnID as $key){
 					echo "<td>\n";
-					switch ($columnID) {
+					switch ($key) {
 						case 'venueID':
 							echo $venue['venueID']; break;
 						case 'name':
