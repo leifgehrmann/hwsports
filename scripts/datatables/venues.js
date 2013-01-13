@@ -65,7 +65,7 @@
 			}
 		} );
 
-		$('#example').dataTable( {
+		$('#venues').dataTable( {
 			"sDom": "Tfrtip",
 			"sAjaxSource": "/php/venues.php",
 			"aoColumns": [
