@@ -20,7 +20,11 @@ use
  */
 if ( isset($_POST['action']) ) {
 	if($_POST['action']=='remove') {
-		//print_r($_POST);
+		// Clean up venue data
+		foreach($_POST['data'] as $rowString) {
+			$venueID = substr($rowString,3);
+			$db->sql("DELETE FROM `venueData` WHERE `venueID` = '{$venueID}')");
+		}
 	}
 }
 
@@ -76,12 +80,6 @@ if ( !isset($_POST['action']) ) {
 	$out['row'] = array_merge($out['row'], $venueData);
 } elseif($_POST['action']=='update') {
 	print_r($_POST);
-} elseif($_POST['action']=='remove') {
-	foreach($_POST['data'] as $rowString) {
-		$venueID = substr($rowString,3);
-		echo $venueID;
-		$db->sql("DELETE FROM `venueData` WHERE `venueID` = '{$venueID}')");
-	}
 }
 
 // Send it back to the client
