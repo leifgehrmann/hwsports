@@ -46,7 +46,6 @@
 				"onOpen": function ( settings, json ) {
 					$('.DTE_Action_Create .DTE_Body_Content').append("<div id='mapcontainer'></div>");
 					$('#mapcontainer').append($('#venuemap'));
-					$('#venuemap').toggle();
 					google.maps.event.trigger(map, 'resize');
 				}
 			}
