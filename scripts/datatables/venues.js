@@ -10,10 +10,12 @@
 					"type": "hidden"
 				}, {
 					"label": "Lat",
-					"name": "lat"
+					"name": "lat",
+					"type": "hidden"
 				}, {
 					"label": "Lng",
-					"name": "lng"
+					"name": "lng",
+					"type": "hidden"
 				}, {
 					"label": "Venue ID",
 					"name": "venueID"
