@@ -5,15 +5,14 @@
 			"ajaxUrl": "/php/joinSelf.php",
 			"domTable": "#example",
 			"fields": [ {
-					"label": "First name:",
-					"name": "first_name"
+					"label": "userID",
+					"name": "userID"
 				}, {
-					"label": "Last name:",
-					"name": "last_name"
+					"label": "key",
+					"name": "key"
 				}, {
-					"label": "Manager:",
-					"name": "manager",
-					"type": "select"
+					"label": "value",
+					"name": "value"
 				}
 			]
 		} );
@@ -22,18 +21,9 @@
 			"sDom": "Tfrtip",
 			"sAjaxSource": "/php/joinSelf.php",
 			"aoColumns": [
-				{ "mData": "first_name" },
-				{ "mData": "last_name" },
-				{
-					"mData": "manager.first_name",
-					"mRender": function ( val, type, row ) {
-						if ( val ) {
-							return val +' '+ row.manager.last_name;
-						}
-						return "";
-					},
-					"sDefaultContent": ""
-				}
+				{ "mData": "userID" },
+				{ "mData": "key" },
+				{ "mData": "value" }
 			],
 			"oTableTools": {
 				"sRowSelect": "multi",
@@ -46,7 +36,7 @@
 			"fnInitComplete": function ( settings, json ) {
 				// Set the allowed values for the select field based on
 				// what is available in the database
-				editor.field('manager').update( json.userList );
+				//editor.field('manager').update( json.userList );
 			}
 		} );
 	} );

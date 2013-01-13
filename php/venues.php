@@ -21,21 +21,9 @@ use
  */
 $editor = Editor::inst( $db, 'users' )
 	->field( 
-		Field::inst( 'id' )->set( false ),
-		Field::inst( 'first_name' )->validator( 'Validate::required' ),
-		Field::inst( 'last_name' )->validator( 'Validate::required' ),
-		Field::inst( 'manager' )->validator( 'Validate::required' )
-	)
-	->join(
-		Join::inst( 'users', 'object' )      // Read from 'users' table
-			->aliasParentTable( 'manager' )  // i.e. FROM users as manager
-			->name( 'manager' )              // JSON / POST field
-			->join( 'id', 'manager' )        // Join parent `id`, to child `manager`
-			->set( false )                   // Used for read-only (change the 'manager' on the parent to change the value)
-			->field(
-				Field::inst( 'manager.first_name', 'first_name' ),
-				Field::inst( 'manager.last_name', 'last_name' )
-			)
+		Field::inst( 'userID' )->set( false ),
+		Field::inst( 'key' )->validator( 'Validate::required' ),
+		Field::inst( 'value' )->validator( 'Validate::required' )
 	);
 
 $out = $editor
@@ -47,7 +35,7 @@ $out = $editor
 // case we want to send extra data back to the client, with the options
 // for the 'department' select list and 'access' radio boxes
 if ( !isset($_POST['action']) ) {
-	$userList = $db->select( 'users', 'id, first_name, last_name' );
+	/*$userList = $db->select( 'users', 'id, first_name, last_name' );
 
 	$out['userList'] = array();
 	while ( $row = $userList->fetch() ) {
@@ -55,7 +43,7 @@ if ( !isset($_POST['action']) ) {
 			"value" => $row['id'],
 			"label" => $row['id'].' '.$row['first_name'].' '.$row['last_name']
 		);
-	}
+	}*/
 }
 
 // Send it back to the client
