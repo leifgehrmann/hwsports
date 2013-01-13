@@ -235,6 +235,7 @@ body {
 #content .jTPS thead th {
 		border-top: 1px solid #C8C8C8;
         padding: 6px !important;
+        background:#F1F1F1;
 }
 #content .jTPS thead {
 		border-left: 1px solid #C8C8C8;
@@ -243,7 +244,7 @@ body {
 }
 #content .jTPS thead th .sortDesc {
         border-bottom: 1px solid #C8C8C8;
-        background:#F8F8F8;
+        background:#FFFFFF;
 }
 #content .jTPS tfoot {
         border-left: 1px solid #C8C8C8;
