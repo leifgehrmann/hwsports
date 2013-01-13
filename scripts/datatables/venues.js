@@ -40,7 +40,8 @@
 					alert( "A new row was edited!" );
 				},
 				"onInitCreate": function ( settings, json ) {
-					console.log($('.DTE_Action_Create .DTE_Body_Content'));
+					$('.DTE_Action_Create .DTE_Body_Content').append($('#map'));
+					$('#map').toggle();
 				}
 			}
 		} );
