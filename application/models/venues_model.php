@@ -77,7 +77,7 @@ class Venues_model extends CI_Model {
 		foreach($data as $key=>$value) {
 			$dataArray = array(
 					'venueID' => $venueID,
-					'key2' => $key,
+					'key' => $key,
 					'value' => $value
 				);
 			$insertDataArray[] = $dataArray;
@@ -111,8 +111,8 @@ class Venues_model extends CI_Model {
 									"ON DUPLICATE KEY UPDATE value=".$escValue;
 				$this->db->query($dataQueryString);
 			}
-			return true;
 			$this->db->trans_complete();
+			return true;
 		} else {
 			return false;
 		}
