@@ -8,8 +8,11 @@
 			<thead>
 				<tr>
 					<th width="30%">Venue ID</th>
-					<th width="30%">First Name</th>
-					<th width="30%">Last Name</th>
+					<th width="30%">Name</th>
+					<th width="30%">Description</th>
+					<th width="30%">Directions</th>
+					<th width="30%">Lat</th>
+					<th width="30%">Lng</th>
 				</tr>
 			</thead>
 		</table>

@@ -6,13 +6,22 @@
 			"domTable": "#example",
 			"fields": [ {
 					"label": "Venue ID",
-					"name": "userID"
+					"name": "venueID"
 				}, {
-					"label": "First Name",
-					"name": "firstName"
+					"label": "Name",
+					"name": "name"
 				}, {
-					"label": "Last Name",
-					"name": "lastName"
+					"label": "Description",
+					"name": "description"
+				}, {
+					"label": "Directions",
+					"name": "directions"
+				}, {
+					"label": "Lat",
+					"name": "lat"
+				}, {
+					"label": "Lng",
+					"name": "lng"
 				}
 			]
 		} );
@@ -21,9 +30,12 @@
 			"sDom": "Tfrtip",
 			"sAjaxSource": "/php/venues.php",
 			"aoColumns": [
-				{ "mData": "userID" },
-				{ "mData": "firstName" },
-				{ "mData": "lastName" }
+				{ "mData": "venueID" },
+				{ "mData": "name" },
+				{ "mData": "description" },
+				{ "mData": "directions" },
+				{ "mData": "lat" },
+				{ "mData": "lng" }
 			],
 			"oTableTools": {
 				"sRowSelect": "multi",

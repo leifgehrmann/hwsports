@@ -11,7 +11,6 @@ use
 	DataTables\Editor\Join,
 	DataTables\Editor\Validate;
 
-
 /*
  * Example PHP implementation used for the joinSelf.html example - the basic idea
  * here is that the join performed is simply to get extra information about the
@@ -19,26 +18,28 @@ use
  * a user, you would change the 'manager' value in the 'users' table, so the
  * information from the join is read-only.
  */
-$editor = Editor::inst( $db, 'users', 'userID' )
+$editor = Editor::inst( $db, 'venues', 'venueID' )
 	->field( 
-		Field::inst( 'userID' )->set( false )
+		Field::inst( 'venueID' )->set( false )
 	);
-
 $out = $editor
 	->process($_POST)
 	->data();
 
-
 // When there is no 'action' parameter we are getting data, and in this
-// case we want to send extra data back to the client, with the options
-// for the 'department' select list and 'access' radio boxes
+// case we want to send extra data from venueData back to the client
 if ( !isset($_POST['action']) ) {
-	foreach ( $out['aaData'] as $aaDataID => $user ) {
-		$result = $db->sql("SELECT `value` FROM `users` WHERE `key` = 'firstName' AND `userID` = '{$user['userID']}'")->fetch();
-		$out['aaData'][$aaDataID]['firstName'] = $result['value'];
-		
-		$result = $db->sql("SELECT `value` FROM `users` WHERE `key` = 'lastName' AND `userID` = '{$user['userID']}'")->fetch();
-		$out['aaData'][$aaDataID]['lastName'] = $result['value'];
+	foreach ( $out['aaData'] as $aaDataID => $venue ) {
+		$venueDataQueryString = "SELECT " .
+			"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
+			"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
+			"MAX(CASE WHEN `key`='directions' THEN value END ) AS directions, " .
+			"MAX(CASE WHEN `key`='lat' THEN value END ) AS lat, " .
+			"MAX(CASE WHEN `key`='lng' THEN value END ) AS lng " .
+			"FROM venueData WHERE venueID = {$venue['venueID']}";
+	
+		$venueData = $db->sql($venueDataQueryString)->fetch();
+		$out['aaData'][$aaDataID] = array_merge($venue, $venueData);
 	}
 }
 
