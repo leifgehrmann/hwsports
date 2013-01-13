@@ -209,6 +209,11 @@ body {
 	height: 250px;
 }
 
+#content td, #content th {
+	padding:10px;
+	text-align:left;
+}
+
 
 
 
