@@ -11,13 +11,12 @@
 					<th width="30%">Name</th>
 					<th width="30%">Description</th>
 					<th width="30%">Directions</th>
-					<th width="30%">Lat</th>
-					<th width="30%">Lng</th>
 				</tr>
 			</thead>
 		</table>
 	</div>
 	<div class="spacer"></div>
+	<div id="centreID" style="display:none;"><?=$centre['id']?></div>
 
 </div><!-- /#main -->
 

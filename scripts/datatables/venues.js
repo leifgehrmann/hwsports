@@ -5,6 +5,16 @@
 			"ajaxUrl": "/php/venues.php",
 			"domTable": "#example",
 			"fields": [ {
+					"label": "centreID",
+					"name": "centreID",
+					"type": "hidden"
+				}, {
+					"label": "Lat",
+					"name": "lat"
+				}, {
+					"label": "Lng",
+					"name": "lng"
+				}, {
 					"label": "Venue ID",
 					"name": "venueID"
 				}, {
@@ -16,12 +26,6 @@
 				}, {
 					"label": "Directions",
 					"name": "directions"
-				}, {
-					"label": "Lat",
-					"name": "lat"
-				}, {
-					"label": "Lng",
-					"name": "lng"
 				}
 			]
 		} );
@@ -30,13 +34,19 @@
 			"sDom": "Tfrtip",
 			"sAjaxSource": "/php/venues.php",
 			"aoColumns": [
+				{ "mData": "centreID" },
+				{ "mData": "lat" },
+				{ "mData": "lng" },
 				{ "mData": "venueID" },
 				{ "mData": "name" },
 				{ "mData": "description" },
-				{ "mData": "directions" },
-				{ "mData": "lat" },
-				{ "mData": "lng" }
+				{ "mData": "directions" }
 			],
+			"aoColumnDefs": [
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] }
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 1 ] }
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 2 ] }
+            ],
 			"oTableTools": {
 				"sRowSelect": "multi",
 				"aButtons": [

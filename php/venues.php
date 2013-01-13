@@ -40,6 +40,11 @@ $out = $editor
 // case we want to send extra data from venueData back to the client
 if ( !isset($_POST['action']) ) {
 	foreach ( $out['aaData'] as $aaDataID => $venue ) {
+		if($venue['centreID'] != 1) {
+			unset($out['aaData'][$aaDataID]);
+			continue;
+		}
+	
 		$venueDataQueryString = "SELECT " .
 			"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 			"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
