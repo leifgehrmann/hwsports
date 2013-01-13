@@ -4,6 +4,23 @@
 	var centre_marker;
 	var centre_pos  = new google.maps.LatLng( jQuery('#centreLat').text(), jQuery('#centreLng').text() );
 
+	function mapInitialize(){
+		map = new google.maps.Map(document.getElementById('venuemap'), {
+			zoom: 15,
+			center: centre_pos,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		});
+		
+		centre_marker = new google.maps.Marker({ position: centre_pos, map: map, title: "New Venue Location" });
+
+		google.maps.event.addListener(map, 'center_changed', function() {
+			var newcentre = map.getCenter();
+			centre_marker.setPosition(newcentre);
+			//jQuery('input[name=lat]').val(newcentre.lat());
+			//jQuery('input[name=lng]').val(newcentre.lng());
+		});
+	}
+
 	$(document).ready(function() {
 		editor = new $.fn.dataTable.Editor( {
 			"ajaxUrl": "/php/venues.php",
@@ -46,7 +63,7 @@
 				"onOpen": function ( settings, json ) {
 					$('.DTE_Action_Create .DTE_Body_Content').append("<div id='mapcontainer'></div>");
 					$('#mapcontainer').append($('#venuemap'));
-					initialize();
+					mapInitialize();
 					google.maps.event.trigger(map, 'resize');
 				}
 			}
@@ -83,22 +100,5 @@
 				//editor.field('manager').update( json.userList );
 			}
 		} );
-
-		function initialize(){
-			map = new google.maps.Map(document.getElementById('venuemap'), {
-				zoom: 15,
-				center: centre_pos,
-				mapTypeId: google.maps.MapTypeId.ROADMAP
-			});
-			
-			centre_marker = new google.maps.Marker({ position: centre_pos, map: map, title: "New Venue Location" });
-
-			google.maps.event.addListener(map, 'center_changed', function() {
-				var newcentre = map.getCenter();
-				centre_marker.setPosition(newcentre);
-				//jQuery('input[name=lat]').val(newcentre.lat());
-				//jQuery('input[name=lng]').val(newcentre.lng());
-			});
-		}
 
 	} );
