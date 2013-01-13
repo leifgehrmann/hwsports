@@ -241,10 +241,17 @@ body {
 		border-right: 1px solid #C8C8C8;
         padding: 10px !important;
 }
+#content .jTPS thead .sortDesc {
+        border-bottom: 1px solid #C8C8C8;
+        background:#EEE;
+}
 #content .jTPS tfoot {
         border-left: 1px solid #C8C8C8;
 		border-right: 1px solid #C8C8C8;
 		border-bottom: 1px solid #C8C8C8;
+}
+#content .jTPS tbody td {
+        padding: 6px !important;
 }
 
 

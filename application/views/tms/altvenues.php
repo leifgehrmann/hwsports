@@ -5,7 +5,7 @@
 		<tr>
 			<?php
 				$columns = array('venueID'=>'ID','name'=>'Venue Name','description'=>'Description','directions'=>'Directions','lat'=>'');
-				$widths = array('venueID'=>30,'name'=>130,'description'=>180,'directions'=>180,'lat'=>60);
+				$widths = array('venueID'=>30,'name'=>100,'description'=>180,'directions'=>180,'lat'=>100);
 				$venues = $this->data['venues'];
 				foreach($venues[0] as $key=>$value){
 					if(array_key_exists($key,$columns)){
@@ -25,7 +25,7 @@
 						if($key=='name'){
 							echo "<td><a href='/tms/venue/".$venue['venueID']."'>$value</a></td>\n";
 						} else if($key=='lat'){
-							echo "<td><a href='http://maps.google.com/maps?q=".$venue['lat'].",".$venue['lng']."'>View on Google Maps</a></td>\n";
+							echo "<td><a target='_blank' href='http://maps.google.com/maps?q=".$venue['lat'].",".$venue['lng']."'>View on Google Maps</a></td>\n";
 						} else {
 							echo "<td>$value</td>\n";
 						}
