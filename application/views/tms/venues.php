@@ -1,5 +1,3 @@
-<div id="infoMessage"><?=$message;?></div>
-
 <h1>Venue List</h1>
 
 <div id="map" class="venues-map"></div>
