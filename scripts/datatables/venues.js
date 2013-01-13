@@ -7,6 +7,7 @@
 			"fields": [ {
 					"label": "centreID",
 					"name": "centreID",
+					"default": $('#centreID').text(),
 					"type": "hidden"
 				}, {
 					"label": "Lat",
