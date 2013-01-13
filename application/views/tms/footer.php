@@ -4,8 +4,6 @@
 				<div class="system">Tournament Management System 1.0</div>
 			</div>
 		</div>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/vendor/jquery-1.8.1.min.js"><\/script>')</script>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
 		<!--<script type="text/javascript" src="/scripts/pagination.js"></script>-->
 		<? if($page=="venues"){ ?>
