@@ -64,6 +64,18 @@ if ( !isset($_POST['action']) ) {
 	$db->sql("INSERT INTO `venueData` (`venueID`,`key`,`value`) VALUES ('$venueID','directions','{$_POST['data']['directions']}')");
 	$db->sql("INSERT INTO `venueData` (`venueID`,`key`,`value`) VALUES ('$venueID','lat','{$_POST['data']['lat']}')");
 	$db->sql("INSERT INTO `venueData` (`venueID`,`key`,`value`) VALUES ('$venueID','lng','{$_POST['data']['lng']}')");
+	
+	$venueDataQueryString = "SELECT " .
+		"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
+		"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
+		"MAX(CASE WHEN `key`='directions' THEN value END ) AS directions, " .
+		"MAX(CASE WHEN `key`='lat' THEN value END ) AS lat, " .
+		"MAX(CASE WHEN `key`='lng' THEN value END ) AS lng " .
+		"FROM venueData WHERE venueID = {$venueID}";
+	$venueData = $db->sql($venueDataQueryString)->fetch();
+	$out['aaData'][$aaDataID] = $venueData;
+	$out['aaData'][$aaDataID]['venueID'] = $venueID;
+	$out['aaData'][$aaDataID]['centreID'] = $_POST['data']['centreID'];
 } elseif($_POST['action']=='update') {
 	print_r($_POST);
 }
