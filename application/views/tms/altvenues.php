@@ -21,7 +21,6 @@
 	<tbody>
 		<?php
 			$venues = $this->data['venues'];
-			$venues = array();
 			foreach($venues as $venue){
 				echo "<tr>\n";
 				foreach($columnID as $key){
@@ -56,30 +55,6 @@
 	</tfoot>
 </table>
 
-<!--<?php 
-	/*$this->load->library('table');
-
-	$out = array();
-	$i = 0;
-	foreach($this->data['venues'] as $venue){
-		if($i==0){
-			$head = array();
-			foreach($venue as $key=>$value){
-				$head[] = $key;
-			}
-			$out[] = $head;
-			$i = 1;
-		}
-		$row = array();
-		foreach($venue as $key=>$value){
-			$row[] = $value;
-		}
-		$out[] = $row;
-	}
-	//echo print_r($this->data['venues']);
-	echo $this->table->generate($out);*/
-?>-->
-
 <h2>Create new venue</h2>
 
 <p>Enter details of new venue below.</p>
@@ -87,25 +62,27 @@
 <?=form_open("",array('id'=>'createVenue'));?>
 
 	<?=form_hidden($createLatLng);?>
-		
-	<p>
-	<label for="name">Name:</label>
-	<?=form_input($createName);?>
-	</p>
 	
-	<p>
-	<label for="description">Description:</label>
-	<?=form_input($createDescription);?>
-	</p>
-	
-	<p>
-	<label for="directions">Directions:</label>
-	<?=form_input($createDirections);?>
-	</p>
-
-	<p>Location (drag map center to venue position):</p>
-	<div id="map" class="venues-map"></div>
-
-	<p><?=form_submit('submit', 'Create Venue');?></p>
-		
+	<table>
+		<tr>
+			<td><label for="name">Name:</label></td>
+			<td><?=form_input($createName);?></td>
+		</tr>
+		<tr>
+			<td><label for="description">Description:</label></td>
+			<td><?=form_input($createDescription);?></td>
+		</tr>
+		<tr>
+			<td><label for="directions">Directions:</label></td>
+			<td><?=form_input($createDirections);?></td>
+		</tr>
+		<tr>
+			<td>Location:</td>
+			<td><div id="map" class="venues-map"></div></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><?=form_submit('submit', 'Create Venue');?></td>
+		</tr>
+	</table>
 <?=form_close();?>
