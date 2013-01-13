@@ -1,4 +1,8 @@
 	var editor; // use a global for the submit and return data rendering in the examples
+	// a global variable to access the map
+	var map;
+	var centre_marker;
+	var centre_pos  = new google.maps.LatLng( jQuery('#centreLat').text(), jQuery('#centreLng').text() );
 
 	$(document).ready(function() {
 		editor = new $.fn.dataTable.Editor( {
@@ -42,6 +46,7 @@
 				"onInitCreate": function ( settings, json ) {
 					$('.DTE_Action_Create .DTE_Body_Content').append($('#venuemap'));
 					$('#venuemap').toggle();
+					google.maps.event.trigger(map, 'resize');
 				}
 			}
 		} );
@@ -77,11 +82,6 @@
 				//editor.field('manager').update( json.userList );
 			}
 		} );
-		
-		// a global variable to access the map
-		var map;
-		var centre_marker;
-		var centre_pos  = new google.maps.LatLng( jQuery('#centreLat').text(), jQuery('#centreLng').text() );
 
 		function initialize(){
 			map = new google.maps.Map(document.getElementById('venuemap'), {
