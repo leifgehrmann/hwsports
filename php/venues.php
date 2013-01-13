@@ -20,7 +20,7 @@ use
  */
 if ( isset($_POST['action']) ) {
 
-	print_r($_POST);
+	//print_r($_POST);
 
 }
 
@@ -57,7 +57,7 @@ if ( !isset($_POST['action']) ) {
 		$out['aaData'][$aaDataID] = array_merge($venue, $venueData);
 	}
 } else {
-	print_r($_POST);
+	//print_r($_POST);
 }
 
 // Send it back to the client
