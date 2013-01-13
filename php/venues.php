@@ -78,7 +78,7 @@ if ( !isset($_POST['action']) ) {
 		"FROM venueData WHERE venueID = {$venueID}";
 	$venueData = $db->sql($venueDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $venueData);
-} elseif($_POST['action']=='update') {
+} elseif($_POST['action']=='edit') {
 	$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['name']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'name'");
 	$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['description']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'description'");
 	$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['directions']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'directions'");
