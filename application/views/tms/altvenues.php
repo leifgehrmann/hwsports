@@ -86,3 +86,4 @@
 		</tr>
 	</table>
 <?=form_close();?>
+<div id="message"></div>

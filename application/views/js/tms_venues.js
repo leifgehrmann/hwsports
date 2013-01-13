@@ -27,10 +27,25 @@ google.maps.event.addDomListener(window, 'load', initialize);
 jQuery('#venuesTable').jTPS( {perPages:[5,10,15,50,'ALL']} );
 
 jQuery('#createVenue').submit(function(e){//
-   e.preventDefault();
-    //var first_name = jQuery('#register_form1').val();
+	e.preventDefault();
     alert("HAHAHAHAHAHHAH");
 
+    var form_data = {
+		name : jQuery('[name="name"]').val(),
+		description : jQuery('[name="directions"]').val(),
+		directions : jQuery('[name="directions"]').val(),
+		lat : jQuery('[name="lat"]').val(),
+		lng : jQuery('[name="lng"]').val()
+	};
+	jQuery.ajax({
+			url: "/db_venue/venue_exists/14",
+			type: 'POST',
+			async : true,
+			data: form_data,
+			success: function(msg) {
+				jQuery('#message').html(msg);
+			}
+		});
     /*$.ajax({
         type: "POST", 
         async: false, 

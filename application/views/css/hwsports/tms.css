@@ -276,9 +276,11 @@ body {
 	opacity: 0.5;
 }
 #footer .system{
+	height: 33px;
 	float:right;
 	opacity: 0.5;
 	font-weight:bold;
+	vertical-align: middle;
 }
 
 #footer a {
@@ -291,6 +293,11 @@ body {
 	width:99px;
 	height:33px;
 	background-image:url('/img/hwsports/logo/is.medium.png');
+	margin-right:20px;
+}
+#footer .logo:after{
+	content: ' | ';
+	margin-right:20px;
 }
 
 
