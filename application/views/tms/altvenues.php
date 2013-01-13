@@ -8,14 +8,13 @@
 				$venues = $this->data['venues'];
 				foreach($venues[0] as $key=>$value){
 					if(array_key_exists($key,$colunms))
-						echo "<th sort='$key'>$columns[$key]</th>\n";
+						echo "<th sort='$key'>{$columns[$key]}</th>\n";
 				}
 			?>
 		</tr>
 	</thead>
 	<tbody>
 		<?php
-			$columns = array('venueID'=>'ID','name'=>'Venue Name','description'=>'Description','directions'=>'Directions');
 			$venues = $this->data['venues'];
 			foreach($venues as $venue){
 				echo "<tr>\n";
