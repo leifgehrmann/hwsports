@@ -22,6 +22,9 @@ $editor = Editor::inst( $db, 'venues', 'venueID' )
 	->field( 
 		Field::inst( 'venueID' )->set( false )
 	);
+	
+	print_r($_POST);
+	
 $out = $editor
 	->process($_POST)
 	->data();
