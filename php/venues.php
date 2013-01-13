@@ -40,7 +40,7 @@ if ( !isset($_POST['action']) ) {
 		->table( 'users' )
 		->get( 'value as name' )
 		->where( 'userID', $user['userID'] )
-		->exec());
+		->exec(),1);
 	}
 }
 
