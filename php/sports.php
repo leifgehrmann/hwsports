@@ -80,7 +80,7 @@ if ( !isset($_POST['action']) ) {
 	$sportData = $db->sql($sportDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $sportData);
 	
-	$sportCategoryNameQueryString = "SELECT MAX(CASE WHEN `key`='name' THEN value END ) AS name FROM `sportCategoryData` WHERE `sportCategoryID` = '{$sport['sportCategoryID']}'";
+	$sportCategoryNameQueryString = "SELECT MAX(CASE WHEN `key`='name' THEN value END ) AS name FROM `sportCategoryData` WHERE `sportCategoryID` = '{$_POST['data']['sportCategoryID']}'";
 	$sportCategoryName = $db->sql($sportCategoryNameQueryString)->fetch();
 	$out['row']['sportCategoryName'] = $sportCategoryName['name'];
 } elseif($_POST['action']=='edit') {
@@ -94,7 +94,7 @@ if ( !isset($_POST['action']) ) {
 	$sportData = $db->sql($sportDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $sportData);
 	
-	$sportCategoryNameQueryString = "SELECT MAX(CASE WHEN `key`='name' THEN value END ) AS name FROM `sportCategoryData` WHERE `sportCategoryID` = '{$sport['sportCategoryID']}'";
+	$sportCategoryNameQueryString = "SELECT MAX(CASE WHEN `key`='name' THEN value END ) AS name FROM `sportCategoryData` WHERE `sportCategoryID` = '{$_POST['data']['sportCategoryID']}'";
 	$sportCategoryName = $db->sql($sportCategoryNameQueryString)->fetch();
 	$out['row']['sportCategoryName'] = $sportCategoryName['name'];
 }
