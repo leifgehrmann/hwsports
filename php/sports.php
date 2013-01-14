@@ -50,13 +50,18 @@ if ( !isset($_POST['action']) ) {
 			unset($out['aaData'][$aaDataID]);
 			continue;
 		}
-	
+		
 		$sportDataQueryString = "SELECT " .
 			"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 			"MAX(CASE WHEN `key`='description' THEN value END ) AS description " .
 			"FROM `sportData` WHERE `sportID` = '{$sport['sportID']}'";
 		$sportData = $db->sql($sportDataQueryString)->fetch();
 		$out['aaData'][$aaDataID] = array_merge($sport, $sportData);
+		
+		$sportCategoryNameQueryString = "SELECT MAX(CASE WHEN `key`='name' THEN value END ) AS name FROM `sportCategoryData` WHERE `sportCategoryID` = '{$sport['sportCategoryID']}'";
+		$sportCategoryName = $db->sql($sportCategoryNameQueryString)->fetch();
+		
+		$out['aaData'][$aaDataID]['sportCategoryName'] = $sportCategoryName['name'];
 	}
 	
 	$sportCategoryDataQueryString = "SELECT `sportCategoryID` AS value, `value` AS label FROM `sportCategoryData` WHERE `key` = 'name'";

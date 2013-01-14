@@ -47,7 +47,7 @@
 				{ "mData": "name" },
 				{ "mData": "description" },
 				{ 	
-					"mData": "sportCategoryID.name",
+					"mData": "sportCategoryName",
 					"sDefaultContent": "" 
 				}
 			],
