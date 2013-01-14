@@ -63,7 +63,7 @@ if ( !isset($_POST['action']) ) {
 		$sportData = $db->sql($sportDataQueryString)->fetch();
 		$out['aaData'][$aaDataID] = array_merge($sport, $sportData);
 
-		$out['aaData'][$aaDataID]['sportCategoryName'] = $sportCategoryName['sportCategoryName'];
+		$out['aaData'][$aaDataID]['sportCategoryName'] = $sportCategoryName;
 	}
 	
 } elseif($_POST['action']=='create') {
