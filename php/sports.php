@@ -54,7 +54,6 @@ if ( !isset($_POST['action']) ) {
 		
 		$sportCategoryNameQueryString = "SELECT MAX(CASE WHEN `key`='name' THEN value END ) AS name FROM `sportCategoryData` WHERE `sportCategoryID` = '$sportCategoryID'";
 		$sportCategoryName = $db->sql($sportCategoryNameQueryString)->fetch();
-		$sportCategoryName = $sportCategoryName['name'];
 		
 		$out['aaData'][$aaDataID]['sportCategoryName'] = $sportCategoryName;
 	
