@@ -27,13 +27,10 @@
 			],
 			"events": {
 				"onCreate": function (json, data) {
-					alert( "New venue created." );
 				},
 				"onEdit": function (json, data) {
-					alert( "Edit complete." );
 				},
 				"onOpen": function ( settings, json ) {
-					
 				}
 			}
 		} );
