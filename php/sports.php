@@ -22,7 +22,7 @@ if ( isset($_POST['action']) ) {
 	if($_POST['action']=='remove') {
 		/* Clean up venue data
 		foreach($_POST['data'] as $rowString) {
-			$venueID = substr($rowString,4);
+			$sportID = substr($rowString,4);
 			$db->sql("DELETE FROM `sportData` WHERE `sportID` = '{$sportID}'");
 		}*/
 	}
@@ -56,44 +56,32 @@ if ( !isset($_POST['action']) ) {
 			"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 			"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
 			"FROM sportData WHERE sportID = {$sport['sportID']}";
-		$venueData = $db->sql($sportDataQueryString)->fetch();
+		$sportData = $db->sql($sportDataQueryString)->fetch();
 		
 		$out['aaData'][$aaDataID] = array_merge($sport, $sportData);
 	}
 } elseif($_POST['action']=='create') {
-	/*$venueID = $db->sql("SELECT MAX(venueID) FROM venues")->fetch();
-	$venueID = $venueID[0];
-	$db->sql("INSERT INTO `venueData` (`venueID`,`key`,`value`) VALUES ('$venueID','name','{$_POST['data']['name']}')");
-	$db->sql("INSERT INTO `venueData` (`venueID`,`key`,`value`) VALUES ('$venueID','description','{$_POST['data']['description']}')");
-	$db->sql("INSERT INTO `venueData` (`venueID`,`key`,`value`) VALUES ('$venueID','directions','{$_POST['data']['directions']}')");
-	$db->sql("INSERT INTO `venueData` (`venueID`,`key`,`value`) VALUES ('$venueID','lat','{$_POST['data']['lat']}')");
-	$db->sql("INSERT INTO `venueData` (`venueID`,`key`,`value`) VALUES ('$venueID','lng','{$_POST['data']['lng']}')");
+	$sportID = $db->sql("SELECT MAX(sportID) FROM sports")->fetch();
+	$sportID = $sportID[0];
+	$db->sql("INSERT INTO `sportData` (`sportID`,`key`,`value`) VALUES ('$sportID','name','{$_POST['data']['name']}')");
+	$db->sql("INSERT INTO `sportData` (`sportID`,`key`,`value`) VALUES ('$sportID','description','{$_POST['data']['description']}')");
 	
-	$venueDataQueryString = "SELECT " .
+	$sportDataQueryString = "SELECT " .
 		"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 		"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
-		"MAX(CASE WHEN `key`='directions' THEN value END ) AS directions, " .
-		"MAX(CASE WHEN `key`='lat' THEN value END ) AS lat, " .
-		"MAX(CASE WHEN `key`='lng' THEN value END ) AS lng " .
-		"FROM venueData WHERE venueID = {$venueID}";
-	$venueData = $db->sql($venueDataQueryString)->fetch();
-	$out['row'] = array_merge($out['row'], $venueData);*/
+		"FROM sportData WHERE sportID = {$sportID}";
+	$sportData = $db->sql($sportDataQueryString)->fetch();
+	$out['row'] = array_merge($out['row'], $sportData);
 } elseif($_POST['action']=='edit') {
-	/*$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['name']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'name'");
-	$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['description']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'description'");
-	$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['directions']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'directions'");
-	$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['lat']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'lat'");
-	$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['lng']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'lng'");
+	$db->sql("UPDATE `sportData` SET `value` = '{$_POST['data']['name']}' WHERE `sportID` = '{$_POST['data']['sportID']}' AND `key` = 'name'");
+	$db->sql("UPDATE `sportData` SET `value` = '{$_POST['data']['description']}' WHERE `sportID` = '{$_POST['data']['sportID']}' AND `key` = 'description'");
 	
-	$venueDataQueryString = "SELECT " .
+	$sportDataQueryString = "SELECT " .
 		"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 		"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
-		"MAX(CASE WHEN `key`='directions' THEN value END ) AS directions, " .
-		"MAX(CASE WHEN `key`='lat' THEN value END ) AS lat, " .
-		"MAX(CASE WHEN `key`='lng' THEN value END ) AS lng " .
-		"FROM venueData WHERE venueID = {$_POST['data']['venueID']}";
-	$venueData = $db->sql($venueDataQueryString)->fetch();
-	$out['row'] = array_merge($out['row'], $venueData);*/
+		"FROM sportData WHERE sportID = {$_POST['data']['sportID']}";
+	$sportData = $db->sql($sportDataQueryString)->fetch();
+	$out['row'] = array_merge($out['row'], $sportData);
 }
 
 // Send it back to the client
