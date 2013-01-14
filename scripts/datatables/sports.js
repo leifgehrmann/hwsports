@@ -46,7 +46,10 @@
 				{ "mData": "centreID" },
 				{ "mData": "name" },
 				{ "mData": "description" },
-				{ "mData": "sportCategoryID" }
+				{ 	
+					"mData": "sportCategoryID.name",
+					"sDefaultContent": "" 
+				}
 			],
 			"aoColumnDefs": [
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
