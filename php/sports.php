@@ -78,7 +78,7 @@ if ( !isset($_POST['action']) ) {
 	
 	$sportDataQueryString = "SELECT " .
 		"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
-		"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
+		"MAX(CASE WHEN `key`='description' THEN value END ) AS description " .
 		"FROM `sportData` WHERE `sportID` = '{$_POST['data']['sportID']}'";
 	$sportData = $db->sql($sportDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $sportData);
