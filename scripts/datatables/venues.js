@@ -65,6 +65,11 @@
 					$('#mapcontainer').append($('#venuemap'));
 					$('#venuemap').show();
 					mapInitialize();
+					var existingLat = editor.get('lat');
+					var existingLng = editor.get('lng');
+					if(existingLat.length != 0) {
+						centre_marker.setPosition( new google.maps.LatLng(existingLat,existingLng) );
+					}
 				}
 			}
 		} );
