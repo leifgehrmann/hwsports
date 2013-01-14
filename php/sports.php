@@ -66,6 +66,9 @@ if ( !isset($_POST['action']) ) {
 		$out['aaData'][$aaDataID]['sportCategoryName'] = $sportCategoryName['name'];
 	}
 	
+	$sportCategoryNamesQueryString = "SELECT `sportCategoryID`, `value` AS name FROM `sportCategoryData` WHERE `key` = 'name'";
+	$sportCategoryNames = $db->sql($sportCategoryNamesQueryString)->fetchAll();
+	$out['sportCategoryName'] = $sportCategoryNames;
 } elseif($_POST['action']=='create') {
 	$sportID = $db->sql("SELECT MAX(sportID) FROM sports")->fetch();
 	$sportID = $sportID[0];
