@@ -21,8 +21,7 @@
 					"name": "description"
 				}, {
 					"label": "Category",
-					"name": "sportCategoryName",
-					"type": "select"
+					"name": "sportCategoryName"
 				}
 			],
 			"events": {
