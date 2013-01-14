@@ -46,7 +46,7 @@
 				{ "mData": "sportID" },
 				{ "mData": "name" },
 				{ "mData": "description" },
-				{ "mData": "sportCategoryName.name" }
+				{ "mData": "sportCategoryName" }
 			],
 			"aoColumnDefs": [
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
