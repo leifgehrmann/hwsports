@@ -23,14 +23,14 @@ if ( isset($_POST['action']) ) {
 		// Clean up venue data
 		foreach($_POST['data'] as $rowString) {
 			$venueID = substr($rowString,4);
-			$db->sql("DELETE FROM `venueData` WHERE `venueID` = '{$venueID}'");
+			$db->sql("DELETE FROM `sportData` WHERE `sportID` = '{$sportID}'");
 		}
 	}
 }
 
-$editor = Editor::inst( $db, 'venues', 'venueID' )
+$editor = Editor::inst( $db, 'sports', 'sportID' )
 	->field( 
-		Field::inst( 'venueID' )
+		Field::inst( 'sportID' )
 	)
 	->field( 
 		Field::inst( 'centreID' )
