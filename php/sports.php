@@ -33,6 +33,9 @@ $editor = Editor::inst( $db, 'sports', 'sportID' )
 	)
 	->field( 
 		Field::inst( 'centreID' )
+	)
+	->field( 
+		Field::inst( 'sportCategoryID' )
 	);
 	
 $out = $editor
@@ -48,27 +51,17 @@ if ( !isset($_POST['action']) ) {
 			continue;
 		}
 	
-		$sportCategoryIDQueryString = "SELECT sportCategoryID FROM `sports` WHERE `sportID` = '{$sport['sportID']}'";
-		$sportCategoryID = $db->sql($sportCategoryIDQueryString)->fetch();
-		$sportCategoryID = $sportCategoryID['sportCategoryID'];
-		
-		$sportCategoryNameQueryString = "SELECT MAX(CASE WHEN `key`='name' THEN value END ) AS name FROM `sportCategoryData` WHERE `sportCategoryID` = '$sportCategoryID'";
-		$sportCategoryName = $db->sql($sportCategoryNameQueryString)->fetch();
-		
-	
 		$sportDataQueryString = "SELECT " .
 			"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 			"MAX(CASE WHEN `key`='description' THEN value END ) AS description " .
 			"FROM `sportData` WHERE `sportID` = '{$sport['sportID']}'";
 		$sportData = $db->sql($sportDataQueryString)->fetch();
 		$out['aaData'][$aaDataID] = array_merge($sport, $sportData);
-
-		$out['aaData'][$aaDataID]['sportCategoryName'] = $sportCategoryName['name'];
 	}
 	
-	$sportCategoryNamesQueryString = "SELECT `sportCategoryID` AS value, `value` AS label FROM `sportCategoryData` WHERE `key` = 'name'";
-	$sportCategoryNames = $db->sql($sportCategoryNamesQueryString)->fetchAll();
-	$out['sportCategoryName'] = $sportCategoryNames;
+	$sportCategoryDataQueryString = "SELECT `sportCategoryID` AS value, `value` AS label FROM `sportCategoryData` WHERE `key` = 'name'";
+	$sportCategoryData = $db->sql($sportCategoryDataQueryString)->fetchAll();
+	$out['sportCategoryData'] = $sportCategoryData;
 } elseif($_POST['action']=='create') {
 	$sportID = $db->sql("SELECT MAX(sportID) FROM sports")->fetch();
 	$sportID = $sportID[0];

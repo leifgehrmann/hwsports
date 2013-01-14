@@ -5,24 +5,24 @@
 			"ajaxUrl": "/php/sports.php",
 			"domTable": "#sports",
 			"fields": [ {
-					"label": "centreID",
+					"label": "Sport ID",
+					"name": "sportID",
+					"type": "hidden"
+				}, {
+					"label": "Centre ID",
 					"name": "centreID",
 					"default": $('#centreID').text(),
 					"type": "hidden"
 				}, {
-					"label": "Sport ID",
-					"name": "sportID",
-					"type": "hidden"
+					"label": "Category",
+					"name": "sportCategoryID",
+					"type": "select"
 				}, {
 					"label": "Name",
 					"name": "name"
 				}, {
 					"label": "Description",
 					"name": "description"
-				}, {
-					"label": "Category",
-					"name": "sportCategoryName.sportCategoryID",
-					"type": "select"
 				}
 			],
 			"events": {
@@ -42,11 +42,11 @@
 			"sDom": "Tfrtip",
 			"sAjaxSource": "/php/sports.php",
 			"aoColumns": [
-				{ "mData": "centreID" },
 				{ "mData": "sportID" },
+				{ "mData": "centreID" },
+				{ "mData": "sportCategoryID" },
 				{ "mData": "name" },
-				{ "mData": "description" },
-				{ "mData": "sportCategoryName" }
+				{ "mData": "description" }
 			],
 			"aoColumnDefs": [
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
@@ -61,7 +61,7 @@
 				]
 			},
 			"fnInitComplete": function ( settings, json ) {
-				editor.field('sportCategoryName.sportCategoryID').update( json.sportCategoryName );
+				editor.field('sportCategoryID').update( json.sportCategoryData );
 			}
 		} );
 
