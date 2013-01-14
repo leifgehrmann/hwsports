@@ -61,7 +61,7 @@
 					alert( "A new row was edited!" );
 				},
 				"onOpen": function ( settings, json ) {
-					$('.DTE_Action_Create .DTE_Body_Content').append("<div id='mapcontainer'></div>");
+					$('.DTE_Body_Content').append("<div id='mapcontainer'></div>");
 					$('#mapcontainer').append($('#venuemap'));
 					$('#venuemap').toggle();
 					mapInitialize();
