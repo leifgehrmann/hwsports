@@ -14,15 +14,15 @@
 					"default": $('#centreID').text(),
 					"type": "hidden"
 				}, {
-					"label": "Category",
-					"name": "sportCategoryID",
-					"type": "select"
-				}, {
 					"label": "Name",
 					"name": "name"
 				}, {
 					"label": "Description",
 					"name": "description"
+				}, {
+					"label": "Category",
+					"name": "sportCategoryID",
+					"type": "select"
 				}
 			],
 			"events": {
@@ -44,9 +44,9 @@
 			"aoColumns": [
 				{ "mData": "sportID" },
 				{ "mData": "centreID" },
-				{ "mData": "sportCategoryID" },
 				{ "mData": "name" },
-				{ "mData": "description" }
+				{ "mData": "description" },
+				{ "mData": "sportCategoryID" }
 			],
 			"aoColumnDefs": [
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
