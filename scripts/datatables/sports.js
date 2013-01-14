@@ -49,8 +49,7 @@
 			],
 			"aoColumnDefs": [
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 1 ] },
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 2 ] }
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 1 ] }
             ],
 			"oTableTools": {
 				"sRowSelect": "multi",
