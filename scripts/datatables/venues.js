@@ -55,10 +55,10 @@
 			],
 			"events": {
 				"onCreate": function (json, data) {
-					alert( "A new row was created!" );
+					alert( "New venue created." );
 				},
 				"onEdit": function (json, data) {
-					alert( "A new row was edited!" );
+					alert( "Edit complete." );
 				},
 				"onOpen": function ( settings, json ) {
 					$('.DTE_Body_Content').append("<div id='mapcontainer'></div>");
