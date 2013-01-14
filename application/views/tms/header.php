@@ -9,6 +9,7 @@
         <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
         <link href="/css/main.css" rel="stylesheet" type="text/css">
         <link href="/css/tms.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="/scripts/fullcalendar/fullcalendar.css" />
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="/vendor/jquery-1.8.1.min.js"><\/script>')</script>
         <script type="text/javascript" src="/scripts/fullcalendar/fullcalendar.js"></script>
