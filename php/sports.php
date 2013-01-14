@@ -20,20 +20,16 @@ use
  */
 if ( isset($_POST['action']) ) {
 	if($_POST['action']=='remove') {
-		/* Clean up venue data
 		foreach($_POST['data'] as $rowString) {
 			$sportID = substr($rowString,4);
 			$db->sql("DELETE FROM `sportData` WHERE `sportID` = '{$sportID}'");
-		}*/
+		}
 	}
 }
 
 $editor = Editor::inst( $db, 'sports', 'sportID' )
 	->field( 
 		Field::inst( 'sportID' )
-	)
-	->field( 
-		Field::inst( 'sportCategoryID' )
 	)
 	->field( 
 		Field::inst( 'centreID' )
@@ -59,6 +55,11 @@ if ( !isset($_POST['action']) ) {
 		$sportData = $db->sql($sportDataQueryString)->fetch();
 		
 		$out['aaData'][$aaDataID] = array_merge($sport, $sportData);
+		
+		$sportCategoryDataQueryString = "SELECT sportCategoryID, MAX(CASE WHEN `key`='name' THEN value END ) AS name FROM `sportCategoryData`";
+		$sportCategoryData = $db->sql($sportCategoryDataQueryString)->fetchAll();
+		
+		$out['aaData'][$aaDataID]['sportCategoryData'] = $sportCategoryData;
 	}
 } elseif($_POST['action']=='create') {
 	$sportID = $db->sql("SELECT MAX(sportID) FROM sports")->fetch();
