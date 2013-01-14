@@ -11,7 +11,7 @@ class Calendar extends MY_Controller {
 		$this->data['data'] = json_encode(array(
 			array(
 				'title' => 'Men\'s Hurdling - Preliminary Rounds',
-				'start' => 2013,
+				'start' => mktime(12, 0, 0, 1, 10-3, 2013),
 				'end' => mktime(14, 0, 0, 1, 10-3, 2013),
 				'allDay' => false,
 				'color' => '#2966C7',
@@ -198,7 +198,6 @@ class Calendar extends MY_Controller {
 			),
 
 			// Registration times
-
 			array(
 				'title' => 'WattBall Registration Period',
 				'start' => mktime(0, 0, 0, 1, 10-30, 2013),
