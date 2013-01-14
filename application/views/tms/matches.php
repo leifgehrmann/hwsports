@@ -18,7 +18,8 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			events: '/calendar/getAllMatches/'
+			events: '/calendar/getAllMatches/',
+			editable: true
 		});
 		
 	});
