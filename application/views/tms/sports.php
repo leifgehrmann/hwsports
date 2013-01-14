@@ -8,7 +8,7 @@
 				<th width="30%">Sport ID</th>
 				<th width="30%">Name</th>
 				<th width="30%">Description</th>
-				<th width="30%">Sport Category</th>
+				<th width="30%">Category</th>
 			</tr>
 		</thead>
 	</table>

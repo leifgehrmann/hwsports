@@ -3,23 +3,15 @@
 	$(document).ready(function() {
 		editor = new $.fn.dataTable.Editor( {
 			"ajaxUrl": "/php/sports.php",
-			"domTable": "#venues",
+			"domTable": "#sports",
 			"fields": [ {
 					"label": "centreID",
 					"name": "centreID",
 					"default": $('#centreID').text(),
 					"type": "hidden"
 				}, {
-					"label": "Lat",
-					"name": "lat",
-					"type": "hidden"
-				}, {
-					"label": "Lng",
-					"name": "lng",
-					"type": "hidden"
-				}, {
-					"label": "Venue ID",
-					"name": "venueID",
+					"label": "Sport ID",
+					"name": "sportID",
 					"type": "hidden"
 				}, {
 					"label": "Name",
@@ -28,8 +20,9 @@
 					"label": "Description",
 					"name": "description"
 				}, {
-					"label": "Directions",
-					"name": "directions"
+					"label": "Category",
+					"name": "sportCategoryID",
+					"type": "select"
 				}
 			],
 			"events": {
@@ -40,32 +33,20 @@
 					alert( "Edit complete." );
 				},
 				"onOpen": function ( settings, json ) {
-					$('.DTE_Body_Content').append("<div id='mapcontainer'></div>");
-					$('#mapcontainer').append($('#venuemap'));
-					$('#venuemap').show();
-					mapInitialize();
-					var existingLat = editor.get('lat');
-					var existingLng = editor.get('lng');
-					if(existingLat.length != 0) {
-						var existingVenuePosition = new google.maps.LatLng(existingLat,existingLng);
-						centre_marker.setPosition(existingVenuePosition);
-						map.setCenter(existingVenuePosition);
-					}
+					
 				}
 			}
 		} );
 
-		$('#venues').dataTable( {
+		$('#sports').dataTable( {
 			"sDom": "Tfrtip",
-			"sAjaxSource": "/php/venues.php",
+			"sAjaxSource": "/php/sports.php",
 			"aoColumns": [
 				{ "mData": "centreID" },
-				{ "mData": "lat" },
-				{ "mData": "lng" },
-				{ "mData": "venueID" },
+				{ "mData": "sportID" },
 				{ "mData": "name" },
 				{ "mData": "description" },
-				{ "mData": "directions" }
+				{ "mData": "sportCategoryID" }
 			],
 			"aoColumnDefs": [
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },

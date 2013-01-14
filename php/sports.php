@@ -20,48 +20,48 @@ use
  */
 if ( isset($_POST['action']) ) {
 	if($_POST['action']=='remove') {
-		// Clean up venue data
+		/* Clean up venue data
 		foreach($_POST['data'] as $rowString) {
 			$venueID = substr($rowString,4);
 			$db->sql("DELETE FROM `venueData` WHERE `venueID` = '{$venueID}'");
-		}
+		}*/
 	}
 }
 
-$editor = Editor::inst( $db, 'venues', 'venueID' )
+$editor = Editor::inst( $db, 'sports', 'sportID' )
 	->field( 
-		Field::inst( 'venueID' )
+		Field::inst( 'sportID' )
+	)
+	->field( 
+		Field::inst( 'sportCategoryID' )
 	)
 	->field( 
 		Field::inst( 'centreID' )
 	);
-		
+	
 $out = $editor
 	->process($_POST)
 	->data();
 
 // When there is no 'action' parameter we are getting data, and in this
-// case we want to send extra data from venueData back to the client
+// case we want to send extra data from sportData back to the client
 if ( !isset($_POST['action']) ) {
-	foreach ( $out['aaData'] as $aaDataID => $venue ) {
-		if($venue['centreID'] != 1) {
+	foreach ( $out['aaData'] as $aaDataID => $sport ) {
+		if($sport['centreID'] != 1) {
 			unset($out['aaData'][$aaDataID]);
 			continue;
 		}
 	
-		$venueDataQueryString = "SELECT " .
+		$sportDataQueryString = "SELECT " .
 			"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 			"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
-			"MAX(CASE WHEN `key`='directions' THEN value END ) AS directions, " .
-			"MAX(CASE WHEN `key`='lat' THEN value END ) AS lat, " .
-			"MAX(CASE WHEN `key`='lng' THEN value END ) AS lng " .
-			"FROM venueData WHERE venueID = {$venue['venueID']}";
-		$venueData = $db->sql($venueDataQueryString)->fetch();
+			"FROM sportData WHERE sportID = {$sport['sportID']}";
+		$venueData = $db->sql($sportDataQueryString)->fetch();
 		
-		$out['aaData'][$aaDataID] = array_merge($venue, $venueData);
+		$out['aaData'][$aaDataID] = array_merge($sport, $sportData);
 	}
 } elseif($_POST['action']=='create') {
-	$venueID = $db->sql("SELECT MAX(venueID) FROM venues")->fetch();
+	/*$venueID = $db->sql("SELECT MAX(venueID) FROM venues")->fetch();
 	$venueID = $venueID[0];
 	$db->sql("INSERT INTO `venueData` (`venueID`,`key`,`value`) VALUES ('$venueID','name','{$_POST['data']['name']}')");
 	$db->sql("INSERT INTO `venueData` (`venueID`,`key`,`value`) VALUES ('$venueID','description','{$_POST['data']['description']}')");
@@ -77,9 +77,9 @@ if ( !isset($_POST['action']) ) {
 		"MAX(CASE WHEN `key`='lng' THEN value END ) AS lng " .
 		"FROM venueData WHERE venueID = {$venueID}";
 	$venueData = $db->sql($venueDataQueryString)->fetch();
-	$out['row'] = array_merge($out['row'], $venueData);
+	$out['row'] = array_merge($out['row'], $venueData);*/
 } elseif($_POST['action']=='edit') {
-	$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['name']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'name'");
+	/*$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['name']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'name'");
 	$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['description']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'description'");
 	$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['directions']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'directions'");
 	$db->sql("UPDATE `venueData` SET `value` = '{$_POST['data']['lat']}' WHERE `venueID` = '{$_POST['data']['venueID']}' AND `key` = 'lat'");
@@ -93,7 +93,7 @@ if ( !isset($_POST['action']) ) {
 		"MAX(CASE WHEN `key`='lng' THEN value END ) AS lng " .
 		"FROM venueData WHERE venueID = {$_POST['data']['venueID']}";
 	$venueData = $db->sql($venueDataQueryString)->fetch();
-	$out['row'] = array_merge($out['row'], $venueData);
+	$out['row'] = array_merge($out['row'], $venueData);*/
 }
 
 // Send it back to the client
