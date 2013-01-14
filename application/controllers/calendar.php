@@ -14,32 +14,28 @@ class Calendar extends MY_Controller {
 				'start' => mktime(12, 0, 0, 1, 10-3, 2013),
 				'end' => mktime(14, 0, 0, 1, 10-3, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/1'
+				'color' => '#2966C7'
 			),
 			array(
 				'title' => 'WattBall - Recoba vs. WattBulls',
 				'start' => mktime(10, 0, 0, 1, 10-3, 2013),
 				'end' => mktime(11, 30, 0, 1, 10-3, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/2'
+				'color' => '#2966C7'
 			),
 			array(
 				'title' => 'WattBall - The Red Cows vs. Hunters',
 				'start' => mktime(10, 0, 0, 1, 10-3, 2013),
 				'end' => mktime(11, 30, 0, 1, 10-3, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/2'
+				'color' => '#2966C7'
 			),
 			array(
 				'title' => 'WattBall - Blue Jays vs. Greens',
 				'start' => mktime(14, 0, 0, 1, 10-3, 2013),
 				'end' => mktime(15, 30, 0, 1, 10-3, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/2'
+				'color' => '#2966C7'
 			),
 					
 			// Tuesday
@@ -48,32 +44,28 @@ class Calendar extends MY_Controller {
 				'start' => mktime(12, 0, 0, 1, 10-2, 2013),
 				'end' => mktime(14, 0, 0, 1, 10-2, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/1'
+				'color' => '#2966C7'
 			),
 			array(
 				'title' => 'WattBall - The Red Cows vs. Greens',
 				'start' => mktime(10, 0, 0, 1, 10-2, 2013),
 				'end' => mktime(11, 30, 0, 1, 10-2, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/2'
+				'color' => '#2966C7'
 			),
 			array(
 				'title' => 'WattBall - Blue Jays vs. Recoba',
 				'start' => mktime(10, 0, 0, 1, 10-2, 2013),
 				'end' => mktime(11, 30, 0, 1, 10-2, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/2'
+				'color' => '#2966C7'
 			),
 			array(
 				'title' => 'WattBall - Hunters vs. WattBulls',
 				'start' => mktime(14, 0, 0, 1, 10-2, 2013),
 				'end' => mktime(15, 30, 0, 1, 10-2, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/2'
+				'color' => '#2966C7'
 			),
 
 			// Wednesday
@@ -82,32 +74,28 @@ class Calendar extends MY_Controller {
 				'start' => mktime(12, 0, 0, 1, 10-1, 2013),
 				'end' => mktime(14, 0, 0, 1, 10-1, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/1'
+				'color' => '#2966C7'
 			),
 			array(
 				'title' => 'WattBall - The Red Cows vs. WattBulls',
 				'start' => mktime(10, 0, 0, 1, 10-1, 2013),
 				'end' => mktime(11, 30, 0, 1, 10-1, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/2'
+				'color' => '#2966C7'
 			),
 			array(
 				'title' => 'WattBall - Recoba vs. Greens',
 				'start' => mktime(14, 0, 0, 1, 10-1, 2013),
 				'end' => mktime(15, 30, 0, 1, 10-1, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/2'
+				'color' => '#2966C7'
 			),
 			array(
 				'title' => 'Wattball - Hunters vs. Blue Jays',
 				'start' => mktime(10, 0, 0, 1, 10-1, 2013),
 				'end' => mktime(11, 30, 0, 1, 10-1, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/'
+				'color' => '#2966C7'
 			),
 
 			// Thursday
@@ -116,32 +104,28 @@ class Calendar extends MY_Controller {
 				'start' => mktime(12, 0, 0, 1, 10, 2013),
 				'end' => mktime(14, 0, 0, 1, 10, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/1'
+				'color' => '#2966C7'
 			),
 			array(
 				'title' => 'WattBall - The Red Cows vs. Blue Jays',
 				'start' => mktime(10, 0, 0, 1, 10, 2013),
 				'end' => mktime(11, 30, 0, 1, 10, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/2'
+				'color' => '#2966C7'
 			),
 			array(
 				'title' => 'WattBall - Recoba vs. Hunters',
 				'start' => mktime(14, 0, 0, 1, 10, 2013),
 				'end' => mktime(15, 30, 0, 1, 10, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/2'
+				'color' => '#2966C7'
 			),
 			array(
 				'title' => 'Wattball - Greens vs. The Red Cows',
 				'start' => mktime(10, 0, 0, 1, 10, 2013),
 				'end' => mktime(11, 30, 0, 1, 10, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/'
+				'color' => '#2966C7'
 			),
 
 			// Friday
@@ -150,32 +134,28 @@ class Calendar extends MY_Controller {
 				'start' => mktime(12, 0, 0, 1, 10+1, 2013),
 				'end' => mktime(14, 0, 0, 1, 10+1, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/1'
+				'color' => '#2966C7'
 			),
 			array(
 				'title' => 'WattBall - The Red Cows vs. Recoba',
 				'start' => mktime(10, 0, 0, 1, 10+1, 2013),
 				'end' => mktime(11, 30, 0, 1, 10+1, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/2'
+				'color' => '#2966C7'
 			),
 			array(
 				'title' => 'WattBall - Blue Jays vs. WattBulls',
 				'start' => mktime(14, 0, 0, 1, 10+1, 2013),
 				'end' => mktime(15, 30, 0, 1, 10+1, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/2'
+				'color' => '#2966C7'
 			),
 			array(
 				'title' => 'Wattball - Greens vs. Hunters',
 				'start' => mktime(10, 0, 0, 1, 10+1, 2013),
 				'end' => mktime(11, 30, 0, 1, 10+1, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/'
+				'color' => '#2966C7'
 			),
 
 			// Saturday
@@ -184,8 +164,7 @@ class Calendar extends MY_Controller {
 				'start' => mktime(12, 0, 0, 1, 10+2, 2013),
 				'end' => mktime(14, 0, 0, 1, 10+2, 2013),
 				'allDay' => false,
-				'color' => '#2966C7',
-				'url' => '/sis/match/1'
+				'color' => '#2966C7'
 			),
 
 			// Tournaments
@@ -193,8 +172,7 @@ class Calendar extends MY_Controller {
 				'title' => 'Heriot Watt Tournament 2013',
 				'start' => mktime(0, 0, 0, 1, 10-3, 2013),
 				'end' => mktime(0, 0, 0, 1, 10+2, 2013),
-				'color' => '#5AB128',
-				'url' => '/sis/tournament/1'
+				'color' => '#5AB128'
 			),
 
 			// Registration times
