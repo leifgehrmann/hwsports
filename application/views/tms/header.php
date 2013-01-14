@@ -12,6 +12,7 @@
         <link rel="stylesheet" type="text/css" href="/scripts/fullcalendar/fullcalendar.css" />
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="/vendor/jquery-1.8.1.min.js"><\/script>')</script>
+        <script type="text/javascript" src="/scripts/fullcalendar/jquery-ui-1.9.2.custom.min.js"></script>
         <script type="text/javascript" src="/scripts/fullcalendar/fullcalendar.js"></script>
     </head>
     <!--[if lt IE 7]>      <body class="page-<?=$page?> lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
