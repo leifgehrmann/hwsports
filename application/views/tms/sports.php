@@ -1,26 +1,16 @@
 <h1>Venue List</h1>
 
-<div id="venuemap"></div>
-<div id="centreLat" style="display:none;"><?=$centreLat?></div>
-<div id="centreLng" style="display:none;"><?=$centreLng?></div>
-
 <div id="main">
-
-	<div id="demo">
-		<table cellpadding="0" cellspacing="0" border="0" class="display" id="venues" width="100%">
-			<thead>
-				<tr>
-					<th width="30%">Centre ID</th>
-					<th width="30%">Lat</th>
-					<th width="30%">Lng</th>
-					<th width="30%">Venue ID</th>
-					<th width="30%">Name</th>
-					<th width="30%">Description</th>
-					<th width="30%">Directions</th>
-				</tr>
-			</thead>
-		</table>
-	</div>
+	<table cellpadding="0" cellspacing="0" border="0" class="display" id="venues" width="100%">
+		<thead>
+			<tr>
+				<th width="30%">Sport ID</th>
+				<th width="30%">Name</th>
+				<th width="30%">Description</th>
+				<th width="30%">Sport Category</th>
+			</tr>
+		</thead>
+	</table>
 	<div class="spacer"></div>
 	<div id="centreID" style="display:none;"><?=$centre['id']?></div>
 </div><!-- /#main -->
