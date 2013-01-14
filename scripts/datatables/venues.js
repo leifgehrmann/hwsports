@@ -63,7 +63,7 @@
 				"onOpen": function ( settings, json ) {
 					$('.DTE_Body_Content').append("<div id='mapcontainer'></div>");
 					$('#mapcontainer').append($('#venuemap'));
-					$('#venuemap').toggle();
+					$('#venuemap').show();
 					mapInitialize();
 				}
 			}
