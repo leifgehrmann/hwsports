@@ -66,7 +66,7 @@ if ( !isset($_POST['action']) ) {
 		$out['aaData'][$aaDataID]['sportCategoryName'] = $sportCategoryName['name'];
 	}
 	
-	$sportCategoryNamesQueryString = "SELECT `value` AS name FROM `sportCategoryData` WHERE `key` = 'name'";
+	$sportCategoryNamesQueryString = "SELECT `sportCategoryID` AS value, `value` AS label FROM `sportCategoryData` WHERE `key` = 'name'";
 	$sportCategoryNames = $db->sql($sportCategoryNamesQueryString)->fetchAll();
 	$out['sportCategoryName'] = $sportCategoryNames;
 } elseif($_POST['action']=='create') {

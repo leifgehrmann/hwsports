@@ -21,7 +21,7 @@
 					"name": "description"
 				}, {
 					"label": "Category",
-					"name": "sportCategoryName.name",
+					"name": "sportCategoryName.sportCategoryID",
 					"type": "select"
 				}
 			],
@@ -46,7 +46,7 @@
 				{ "mData": "sportID" },
 				{ "mData": "name" },
 				{ "mData": "description" },
-				{ "mData": "sportCategoryName" }
+				{ "mData": "sportCategoryName.name" }
 			],
 			"aoColumnDefs": [
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
@@ -61,9 +61,7 @@
 				]
 			},
 			"fnInitComplete": function ( settings, json ) {
-				// Set the allowed values for the select field based on
-				// what is available in the database
-				//editor.field('manager').update( json.userList );
+				editor.field('sportCategoryName.sportCategoryID').update( json.sportCategoryName );
 			}
 		} );
 
