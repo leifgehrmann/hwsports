@@ -1,9 +1,10 @@
-<h1>Venue List</h1>
+<h1>Sports List</h1>
 
 <div id="main">
-	<table cellpadding="0" cellspacing="0" border="0" class="display" id="venues" width="100%">
+	<table cellpadding="0" cellspacing="0" border="0" class="display" id="sports" width="100%">
 		<thead>
 			<tr>
+				<th width="30%">Centre ID</th>
 				<th width="30%">Sport ID</th>
 				<th width="30%">Name</th>
 				<th width="30%">Description</th>
