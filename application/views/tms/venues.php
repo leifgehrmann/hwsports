@@ -16,8 +16,8 @@
 					<th width="0%">Venue ID</th>
 					<th width="20%">Name</th>
 					<th width="30%">Description</th>
-					<th width="30%">Directions</th>
-					<th width="20%">&nbsp;</th>
+					<th width="45%">Directions</th>
+					<th width="5%">&nbsp;</th>
 				</tr>
 			</thead>
 		</table>
