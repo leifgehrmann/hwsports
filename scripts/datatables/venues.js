@@ -78,8 +78,7 @@
 
 		$('#venues').on('click', 'a.editor-details', function (e) {
 			e.preventDefault();
-
-			window.location = ("/tms/venue/"+$(this).parents('tr').attr('id').substring(4));
+			$.get("/tms/venue/"+$(this).parents('tr').attr('id').substring(4));
 		} );
 
 		$('#venues').dataTable( {
