@@ -95,7 +95,6 @@
 				{ "mData": "directions" },
 				{
 	                "mData": null,
-	                "sClass": "right",
 	                "sDefaultContent": '<a href="" class="editor-details">Details</a>'
             	}
 			],
