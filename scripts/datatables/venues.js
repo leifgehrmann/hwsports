@@ -79,7 +79,7 @@
 		$('#venues').on('click', 'a.editor-details', function (e) {
 			e.preventDefault();
 
-			alert($(this).parents('tr')[0]);
+			alert($(this).parents('tr').attr('id').substring(4));
 		} );
 
 		$('#venues').dataTable( {
@@ -95,15 +95,15 @@
 				{ "mData": "directions" },
 				{
 	                "mData": null,
-	                "sClass": "center",
+	                "sClass": "right",
 	                "sDefaultContent": '<a href="" class="editor-details">Details</a>'
             	}
 			],
 			"aoColumnDefs": [
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 1 ] },
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 1 ] },
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 2 ] }
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 2 ] },
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 3 ] }
             ],
 			"oTableTools": {
 				"sRowSelect": "multi",
