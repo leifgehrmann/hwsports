@@ -76,6 +76,12 @@
 			}
 		} );
 
+		$('#venues').on('click', 'a.editor-details', function (e) {
+			e.preventDefault();
+
+			alert($(this).parents('tr')[0]);
+		} );
+
 		$('#venues').dataTable( {
 			"sDom": "Tfrtip",
 			"sAjaxSource": "/php/venues.php",
@@ -86,10 +92,16 @@
 				{ "mData": "venueID" },
 				{ "mData": "name" },
 				{ "mData": "description" },
-				{ "mData": "directions" }
+				{ "mData": "directions" },
+				{
+	                "mData": null,
+	                "sClass": "center",
+	                "sDefaultContent": '<a href="" class="editor-details">Details</a>'
+            	}
 			],
 			"aoColumnDefs": [
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 1 ] },
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 1 ] },
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 2 ] }
             ],
@@ -98,7 +110,12 @@
 				"aButtons": [
 					{ "sExtends": "editor_create", "editor": editor },
 					{ "sExtends": "editor_edit",   "editor": editor },
-					{ "sExtends": "editor_remove", "editor": editor }
+					{ "sExtends": "editor_remove", "editor": editor },
+					{
+						"sExtends":    "collection",
+						"sButtonText": "Save",
+						"aButtons":    [ "csv", "xls", "pdf" ]
+					}
 				]
 			},
 			"fnInitComplete": function ( settings, json ) {
