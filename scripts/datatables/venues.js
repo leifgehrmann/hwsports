@@ -94,7 +94,7 @@
 				{ "mData": "directions" },
 				{
 	                "mData": null,
-	                "sDefaultContent": '<a href="" class="editor-details">Details</a>'
+	                "sDefaultContent": '<a class="editor-details">Details</a>'
             	}
 			],
 			"aoColumnDefs": [
