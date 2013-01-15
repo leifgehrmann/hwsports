@@ -17,7 +17,7 @@
 					<th width="20%">Name</th>
 					<th width="30%">Description</th>
 					<th width="30%">Directions</th>
-					<th width="20%"></th>
+					<th width="20%">&nbsp;</th>
 				</tr>
 			</thead>
 		</table>
