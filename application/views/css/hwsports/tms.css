@@ -275,21 +275,21 @@ body {
 
 
 #content button.dTTT_button, #content div.dTTT_button, #content a.dTTT_button {
-	text-decoration: none;
-	background: #eee;
-	border: 1px solid #ccc;
-	font-weight: bold;
-	box-shadow: 0px 1px 0px #ccc;
-	font-size: inherit;
+	text-decoration: none !important;
+	background: #eee !important;
+	border: 1px solid #ccc !important;
+	font-weight: bold !important;
+	box-shadow: 0px 1px 0px #ccc !important;
+	font-size: inherit !important;
 }
 #content button.dTTT_disabled, #content div.dTTT_disabled, #content a.dTTT_disabled {
-	color: #aaa;
-	border: 1px solid #d8d8d8;
+	color: #aaa !important;
+	border: 1px solid #d8d8d8 !important;
 }
 
 #content table.dataTable {
-	box-shadow: 0px 0px 1px #000;
-	margin-bottom:20px;
+	box-shadow: 0px 0px 1px #000 !important;
+	margin-bottom:20px !important;
 }
 
 #content table.dataTable thead th {
