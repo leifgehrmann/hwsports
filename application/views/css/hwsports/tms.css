@@ -279,7 +279,7 @@ body {
 	background: #eee;
 	border: 1px solid #ccc;
 	font-weight: bold;
-	text-shadow: 0px 1px 0px #ccc;
+	box-shadow: 0px 1px 0px #ccc;
 	font-size: inherit;
 }
 #content button.dTTT_disabled, #content div.dTTT_disabled, #content a.dTTT_disabled {
@@ -288,8 +288,8 @@ body {
 }
 
 #content table.dataTable {
-	text-shadow: 0px 0px 1px #000;
-	margin-bottom:10px;
+	box-shadow: 0px 0px 1px #000;
+	margin-bottom:20px;
 }
 
 #content table.dataTable thead th {
