@@ -305,11 +305,11 @@ body {
 	background-color: #e8e8e8;
 }
 
-#content div.DTED_Lightbox_Content{
+div.DTED_Lightbox_Content{
 	border: 1px solid #000;
 	border-radius:0px;
 }
-#content div.DTE_Form_Buttons button{
+div.DTE_Form_Buttons button{
 	border-radius: 0px;
 }
 
