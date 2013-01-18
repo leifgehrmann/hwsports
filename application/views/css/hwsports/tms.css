@@ -283,8 +283,9 @@ body {
 	font-size: inherit;
 }
 #content button.DTTT_disabled, #content div.DTTT_disabled, #content a.DTTT_disabled {
-	color: #aaa;
-	border: 1px solid #d8d8d8;
+	color: #aaa !important;
+	border: 1px solid #d8d8d8 !important;
+	background: #fff !important;
 }
 
 #content table.dataTable {
@@ -305,12 +306,12 @@ body {
 	background-color: #e8e8e8;
 }
 
-body div.DTED_Lightbox_Content{
-	border: 1px solid #000;
-	border-radius:0px;
+body .DTED_Lightbox_Content{
+	border: 1px solid #000 !important;
+	border-radius:0px !important;
 }
-body div.DTE_Form_Buttons button{
-	border-radius: 0px;
+body .DTED_Lightbox_Content button{
+	border-radius: 0px !important;
 }
 
 
