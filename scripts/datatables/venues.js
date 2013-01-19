@@ -94,7 +94,7 @@
 				{ "mData": "directions" },
 				{
 	                "mData": null,
-	                "sDefaultContent": '<a class="editor-details">Details</a>'
+	                "sDefaultContent": ""
             	}
 			],
 			"aoColumnDefs": [
@@ -113,11 +113,26 @@
 					{
 						"sExtends":    "collection",
 						"sButtonText": "Save",
-						"aButtons":    [ "csv", "xls", "pdf" ],
+						"aButtons":    [
+							
+							{
+								"sExtends": "csv"
+							},
+							{
+								"sExtends": "xls"
+							},
+							{
+								"sExtends": "pdf",
+								"mColumns": [ 4, 5, 6 ]
+							}
+						],
 						"mColumns": "visible"
 					}
 				]
 			},
+			"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+				$('td:eq(4)', nRow).html( '<a href="/tms/venue/'+aData[3]+'" class="editor-details">Details</a>' );
+			}
 			"fnInitComplete": function ( settings, json ) {
 				// Set the allowed values for the select field based on
 				// what is available in the database
