@@ -63,6 +63,7 @@ if ( !isset($_POST['action']) ) {
 			"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 			"MAX(CASE WHEN `key`='timestamp' THEN value END ) AS timestamp, " .
 			"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
+			"MAX(CASE WHEN `key`='tournamentID' THEN value END ) AS tournamentID, " .
 			"FROM matchData WHERE matchID = {$match['matchID']}";
 		$matchData = $db->sql($matchDataQueryString)->fetch();
 		
@@ -74,6 +75,7 @@ if ( !isset($_POST['action']) ) {
 	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','name','{$_POST['data']['name']}')");
 	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','timestamp','{$_POST['data']['timestamp']}')");
 	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','description','{$_POST['data']['description']}')");
+	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','tournamentID','{$_POST['data']['tournamentID']}')");
 	
 	$matchDataQueryString = "SELECT " .
 		"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
@@ -86,11 +88,13 @@ if ( !isset($_POST['action']) ) {
 	$db->sql("UPDATE `matchData` SET `value` = '{$_POST['data']['name']}' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'name'");
 	$db->sql("UPDATE `matchData` SET `value` = '{$_POST['data']['timestamp']}' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'timestamp'");
 	$db->sql("UPDATE `matchData` SET `value` = '{$_POST['data']['description']}' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'description'");
+	$db->sql("UPDATE `matchData` SET `value` = '{$_POST['data']['tournamentID']}' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'tournamentID'");
 	
 	$matchDataQueryString = "SELECT " .
 		"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 		"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
 		"MAX(CASE WHEN `key`='timestamp' THEN value END ) AS timestamp, " .
+		"MAX(CASE WHEN `key`='tournamentID' THEN value END ) AS tournamentID, " .
 		"FROM matchData WHERE matchID = {$_POST['data']['matchID']}";
 	$matchData = $db->sql($matchDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $matchData);

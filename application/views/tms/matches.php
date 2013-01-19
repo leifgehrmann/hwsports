@@ -4,13 +4,13 @@
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="matches" width="100%">
 		<thead>
 			<tr>
+				<th>Match ID</th>
+				<th>Venue ID</th>
+				<th>Sport ID</th>
+				<th>Tournament ID</th>
 				<th>Name</th>
-				<th>Date</th>
-				<th>Time</th>
 				<th>Description</th>
-				<th>Sport</th>
-				<th>Venue</th>
-				<th>Tournament</th>
+				<th>Timestamp</th>
 			</tr>
 		</thead>
 	</table>

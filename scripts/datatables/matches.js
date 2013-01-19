@@ -19,6 +19,9 @@
 					"label": "Venue ID",
 					"name": "venueID"
 				}, {
+					"label": "Tournament ID",
+					"name": "tournamentID"
+				}, {
 					"label": "Name",
 					"name": "name"
 				}, {
@@ -46,6 +49,7 @@
 				{ "mData": "centreID" },
 				{ "mData": "matchID" },
 				{ "mData": "sportID" },
+				{ "mData": "tournamentID" },
 				{ "mData": "venueID" },
 				{ "mData": "name" },
 				{ "mData": "description" },
