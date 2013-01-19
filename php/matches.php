@@ -79,7 +79,7 @@ if ( !isset($_POST['action']) ) {
 	$out['venueData'] = $venueData;
 	
 } elseif($_POST['action']=='create') {
-	$matchID = $db->sql("SELECT MAX(matchID) FROM venues")->fetch();
+	$matchID = $db->sql("SELECT MAX(matchID) FROM matches")->fetch();
 	$matchID = $matchID[0];
 	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','name','{$_POST['data']['name']}')");
 	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','timestamp','{$_POST['data']['timestamp']}')");
