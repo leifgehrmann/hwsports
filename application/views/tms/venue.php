@@ -14,7 +14,7 @@
 			echo "\t\t<td style='width:{$widths[1]}'><input type='text' onchange='' value='{$this->data['venue'][$fields[$i]]}'></td>";
 		else if($types[$i]=="textfield")
 			echo "\t\t<td style='width:{$widths[1]}'><textarea onchange=''>{$this->data['venue'][$fields[$i]]}</textarea></td>";
-		else if()		
+		//else if()		
 		echo "\t\t<td style='width:{$widths[2]}' class='hidden'><button>Update</button><button>Cancel</button></td>";
 		echo "\t</tr>";
 	}
