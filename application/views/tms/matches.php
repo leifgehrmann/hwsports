@@ -1,26 +1,28 @@
-<h1>Calendar</h1>
-<p>Below is a list of upcoming matches and tournaments.</p>
-<ul>
-	<li>Tournaments are coloured as <span style="color:rgb(73, 134, 231);font-weight:bold;">blue</span>.</li>
-	<li>Tournament matches are coloured as <span style="color:rgb(123, 209, 72);font-weight:bold;">green</span>.</li>
-	<li>Standard bookings are coloured as <span style="color:rgb(123, 209, 72);font-weight:bold;">brown</span>.</li>
-</ul>
-<p>Click the matches/tournaments for more information.</p>
+<h1>Matches</h1>
 
-<div id='calendar'></div>
+<div id="main">
+	<table cellpadding="0" cellspacing="0" border="0" class="display" id="matches" width="100%">
+		<thead>
+			<tr>
+				<th width="30%">Sport ID</th>
+				<th width="30%">Centre ID</th>
+				<th width="30%">Name</th>
+				<th width="30%">Description</th>
+				<th width="30%">Category</th>
+			</tr>
+		</thead>
+	</table>
+	<div class="spacer"></div>
+	<div id="centreID" style="display:none;"><?=$centre['id']?></div>
+</div><!-- /#main -->
 
-<script type='text/javascript'>
-	$(document).ready(function() {
-		$('#calendar').fullCalendar({
-			firstDay: '1',
-			header: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'month,agendaWeek,agendaDay'
-			},
-			events: '/calendar/getAllMatches/',
-			editable: true
-		});
-		
-	});
-</script>
+
+<link rel='stylesheet' href='/css/jquery.dataTables.css'>
+<link rel='stylesheet' href='/css/dataTables.tabletools.css'>
+<link rel='stylesheet' href='/css/dataTables.editor.css'>
+<link rel='stylesheet' href='http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/themes/eggplant/jquery-ui.css'>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/jquery-ui.min.js"></script>
+<script src="/scripts/datatables/jquery.dataTables.min.js"></script>
+<script src="/scripts/datatables/dataTables.tabletools.min.js"></script>
+<script src="/scripts/datatables/dataTables.editor.min.js"></script>
+<script src="/scripts/datatables/matches.js"></script>
