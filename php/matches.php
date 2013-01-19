@@ -39,7 +39,7 @@ $editor = Editor::inst( $db, 'matches', 'matchID' )
 		Field::inst( 'venueID' )
 	)
 	->join(
-        Join::inst( 'sports', 'array' )
+        Join::inst( 'sports', 'object' )
             ->join( 'sportID', 'sportID' )
             ->field(
                 Field::inst( 'centreID' )
