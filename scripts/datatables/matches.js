@@ -44,7 +44,7 @@
 		} );
 
 		$('#matches').dataTable( {
-			"sDom": "Tfrtip",
+			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/php/matches.php",
 			"aoColumns": [
 				{ "mData": "centreID" },
@@ -60,11 +60,29 @@
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] }
             ],
 			"oTableTools": {
+				"sSwfPath": "/scripts/datatables/copy_csv_xls_pdf.swf",
 				"sRowSelect": "multi",
 				"aButtons": [
 					{ "sExtends": "editor_create", "editor": editor },
 					{ "sExtends": "editor_edit",   "editor": editor },
-					{ "sExtends": "editor_remove", "editor": editor }
+					{ "sExtends": "editor_remove", "editor": editor },
+					{
+						"sExtends":    "collection",
+						"sButtonText": "Save",
+						"aButtons":    [
+							
+							{
+								"sExtends": "csv"
+							},
+							{
+								"sExtends": "xls"
+							},
+							{
+								"sExtends": "pdf",
+								"mColumns": "visible"
+							}
+						]
+					}
 				]
 			},
 			"fnInitComplete": function ( settings, json ) {
