@@ -29,9 +29,8 @@
 
 	}
 	function cancel(fieldname){
-		$("[name="+fieldname+"]").val(
-			$("[name="+fieldname+"]").attr('oldvalue')
-		);
+		input = document.getElementsByName(fieldname)[0];
+		input.val(input.attr('oldvalue'));
 	}
 	function update(fieldname){
 		
