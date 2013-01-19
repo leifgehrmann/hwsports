@@ -19,7 +19,8 @@
 					"type": "select"
 				}, {
 					"label": "Venue",
-					"name": "venueID"
+					"name": "venueID",
+					"type": "select"
 				}, {
 					"label": "Tournament",
 					"name": "tournamentID",
