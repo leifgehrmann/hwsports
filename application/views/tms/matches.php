@@ -4,6 +4,7 @@
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="matches" width="100%">
 		<thead>
 			<tr>
+				<th>Centre ID</th>
 				<th>Match ID</th>
 				<th>Venue ID</th>
 				<th>Sport ID</th>
