@@ -51,10 +51,10 @@ if ( !isset($_POST['action']) ) {
 		$sportCentreQueryString = "SELECT `centreID` FROM `sports` WHERE `sportID` = {$match['sportID']}";
 		$sportCentre = $db->sql($sportCentreQueryString)->fetch();
 		$centreID = $sportCentre['centreID'];
-		//if($centreID != 1) {
-			//unset($out['aaData'][$aaDataID]);
-			//continue;
-		//}
+		if($centreID != 1) {
+			unset($out['aaData'][$aaDataID]);
+			continue;
+		}
 	
 		$matchDataQueryString = "SELECT " .
 			"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
