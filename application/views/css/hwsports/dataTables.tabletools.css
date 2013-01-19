@@ -319,3 +319,6 @@ div.DTTT_collection a.DTTT_button {
 	line-height: 20px;
 }
 
+.clear {
+clear: both;
+}
