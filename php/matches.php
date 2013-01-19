@@ -54,10 +54,10 @@ $out = $editor
 // case we want to send extra data from matchData back to the client
 if ( !isset($_POST['action']) ) {
 	foreach ( $out['aaData'] as $aaDataID => $match ) {
-		/*if($match['centreID'] != 1) {
+		if($match['sports']['centreID'] != 1) {
 			unset($out['aaData'][$aaDataID]);
 			continue;
-		}*/
+		}
 	
 		$matchDataQueryString = "SELECT " .
 			"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .

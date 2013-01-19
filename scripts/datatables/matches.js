@@ -50,7 +50,7 @@
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/php/matches.php",
 			"aoColumns": [
-				{ "mData": "centreID" },
+				{ "mData": "sports.centreID" },
 				{ "mData": "matchID" },
 				{ "mData": "sportID" },
 				{ "mData": "tournamentID" },
