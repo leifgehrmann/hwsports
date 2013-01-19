@@ -76,11 +76,6 @@
 			}
 		} );
 
-		$('#venues').on('click', 'a.editor-details', function (e) {
-			e.preventDefault();
-			window.location = ("/tms/venue/"+$(this).parents('tr').attr('id').substring(4));
-		} );
-
 		$('#venues').dataTable( {
 			"sDom": "Tfrtip",
 			"sAjaxSource": "/php/venues.php",
@@ -131,7 +126,7 @@
 				]
 			},
 			"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-				$('td:eq(3)', nRow).html( '<a href="/tms/venue/'+aData[3]+'" class="editor-details">Details</a>' );
+				$('td:eq(3)', nRow).html( '<a href="/tms/venue/'+aData[4]+'" class="editor-details">Details</a>' );
 			},
 			"fnInitComplete": function ( settings, json ) {
 				// Set the allowed values for the select field based on
