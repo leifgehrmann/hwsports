@@ -1,4 +1,4 @@
-<h1><a href="/tms/venues/">Venue</a> &#9656; <?=$this->data["venue"]["name"]?></h1>
+<h1><a href="/tms/venues/">Venues</a> &#9656; <?=$this->data["venue"]["name"]?></h1>
 
 <?php
 	$fields = array("name","description","directions");
@@ -36,7 +36,19 @@
 		editform.hide();
 	}
 	function update(fieldname){
-		
+		var form_data = {};
+		form_data[fieldname] = $("#form-"+fieldname).val();
+		jQuery.ajax({
+			url: "/db_venues/update_venue/<?=$this->data['venue']['venueID']?>",
+			type: 'POST',
+			async : false,
+			data: form_data,
+			success: function(msg) {
+				alert(fieldname+" was updated to "+$("#form-"+fieldname).val());
+				editform = $("#edit-"+fieldname);
+				editform.hide();
+			}
+		});
 	}
 	$(document).ready(function() {
 		$('#calendar').fullCalendar({
