@@ -12,6 +12,7 @@
 				}, {
 					"label": "Match ID",
 					"name": "matchID",
+					"type": "hidden"
 				}, {
 					"label": "Sport ID",
 					"name": "sportID"
