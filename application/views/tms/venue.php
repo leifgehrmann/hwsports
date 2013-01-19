@@ -2,17 +2,17 @@
 
 <table>
 	<tr>
-		<td>Venue Name</td>
+		<th>Venue Name</th>
 		<td><?=$this->data["venue"]["name"]?></td>
 		<td><button value="Edit"></td>
 	</tr>
 	<tr>
-		<td>Description</td>
+		<th>Description</th>
 		<td><?=$this->data["venue"]["description"]?></td>
 		<td><button value="Edit"></td>
 	</tr>
 	<tr>
-		<td>Directions</td>
+		<th>Directions</th>
 		<td><?=$this->data["venue"]["directions"]?></td>
 		<td><button value="Edit"></td>
 	</tr>
