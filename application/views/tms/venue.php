@@ -6,7 +6,7 @@
 	$widths = array("20%","60%","20%");
 
 	echo "<table>";
-	for($i=0;$i<count($fields),$i){
+	for($i=0;$i<count($fields);$i++){
 		echo "\t<tr>";
 		echo "\t\t<th style='width:{$widths[0]}'>{$labels[$i]}</th>";
 		echo "\t\t<td style='width:{$widths[1]}'><?=$this->data['venue']['{$fields[$i]}']?></td>";
