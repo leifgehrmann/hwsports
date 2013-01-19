@@ -11,7 +11,7 @@
 		echo "\t<tr>";
 		echo "\t\t<th style='width:{$widths[0]}'>{$labels[$i]}</th>";
 		if($types[$i]=="text")
-			echo "\t\t<td style='width:{$widths[1]}'><input id='form-{$fields[$i]}' type='text' oldvalue='{$this->data['venue'][$fields[$i]]}' onchange='' value='{$this->data['venue'][$fields[$i]]}'></td>";
+			echo "\t\t<td style='width:{$widths[1]}'><input id='form-{$fields[$i]}' type='text' oldvalue='{$this->data['venue'][$fields[$i]]}' onchange='changed(\"{$fields[$i]}\")' value='{$this->data['venue'][$fields[$i]]}'></td>";
 		else if($types[$i]=="textfield")
 			echo "\t\t<td style='width:{$widths[1]}'><textarea id='form-{$fields[$i]}' onchange='changed(\"{$fields[$i]}\")' oldvalue='{$this->data['venue'][$fields[$i]]}'>{$this->data['venue'][$fields[$i]]}</textarea></td>";
 		echo "\t\t<td id='edit-{$fields[$i]}' style='width:{$widths[2]}'><button onclick='update(\"{$fields[$i]}\")'>Update</button><button onclick='cancel(\"{$fields[$i]}\")'>Cancel</button></td>";
