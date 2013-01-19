@@ -25,7 +25,7 @@
 <div id='calendar'></div>
 
 <script type='text/javascript'>
-	function changed(){
+	function changed(fieldname){
 		editform = $("#edit-"+fieldname);
 		editform.hide();
 	}
