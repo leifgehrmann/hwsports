@@ -87,10 +87,14 @@ if ( !isset($_POST['action']) ) {
 	$matchDataQueryString = "SELECT " .
 		"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 		"MAX(CASE WHEN `key`='timestamp' THEN value END ) AS timestamp, " .
-		"MAX(CASE WHEN `key`='directions' THEN value END ) AS directions " .
+		"MAX(CASE WHEN `key`='description' THEN value END ) AS description " .
 		"FROM matchData WHERE matchID = {$matchID}";
 	$matchData = $db->sql($matchDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $matchData);
+	
+	$sportCentreQueryString = "SELECT `centreID` FROM `sports` WHERE `sportID` = {$match['sportID']}";
+	$sportCentre = $db->sql($sportCentreQueryString)->fetch();
+	$out['row']['centreID'] = $sportCentre['centreID'];
 } elseif($_POST['action']=='edit') {
 	$db->sql("UPDATE `matchData` SET `value` = '{$_POST['data']['name']}' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'name'");
 	$db->sql("UPDATE `matchData` SET `value` = '{$_POST['data']['timestamp']}' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'timestamp'");
@@ -105,6 +109,10 @@ if ( !isset($_POST['action']) ) {
 		"FROM matchData WHERE matchID = {$_POST['data']['matchID']}";
 	$matchData = $db->sql($matchDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $matchData);
+	
+	$sportCentreQueryString = "SELECT `centreID` FROM `sports` WHERE `sportID` = {$match['sportID']}";
+	$sportCentre = $db->sql($sportCentreQueryString)->fetch();
+	$out['row']['centreID'] = $sportCentre['centreID'];
 }
 
 // Send it back to the client
