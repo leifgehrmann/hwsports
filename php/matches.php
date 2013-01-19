@@ -63,7 +63,7 @@ if ( !isset($_POST['action']) ) {
 			"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 			"MAX(CASE WHEN `key`='timestamp' THEN value END ) AS timestamp, " .
 			"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
-			"MAX(CASE WHEN `key`='tournamentID' THEN value END ) AS tournamentID, " .
+			"MAX(CASE WHEN `key`='tournamentID' THEN value END ) AS tournamentID " .
 			"FROM matchData WHERE matchID = {$match['matchID']}";
 		$matchData = $db->sql($matchDataQueryString)->fetch();
 		
@@ -89,7 +89,7 @@ if ( !isset($_POST['action']) ) {
 	$matchDataQueryString = "SELECT " .
 		"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 		"MAX(CASE WHEN `key`='timestamp' THEN value END ) AS timestamp, " .
-		"MAX(CASE WHEN `key`='directions' THEN value END ) AS directions, " .
+		"MAX(CASE WHEN `key`='directions' THEN value END ) AS directions " .
 		"FROM matchData WHERE matchID = {$matchID}";
 	$matchData = $db->sql($matchDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $matchData);
@@ -103,7 +103,7 @@ if ( !isset($_POST['action']) ) {
 		"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 		"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
 		"MAX(CASE WHEN `key`='timestamp' THEN value END ) AS timestamp, " .
-		"MAX(CASE WHEN `key`='tournamentID' THEN value END ) AS tournamentID, " .
+		"MAX(CASE WHEN `key`='tournamentID' THEN value END ) AS tournamentID " .
 		"FROM matchData WHERE matchID = {$_POST['data']['matchID']}";
 	$matchData = $db->sql($matchDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $matchData);
