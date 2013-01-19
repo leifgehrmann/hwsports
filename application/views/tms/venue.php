@@ -1,8 +1,22 @@
-<h1><a href="/tms/venues/">Venue</a> &#9654; <?=$this->data["venue"]["name"]?></h1>
+<h1><a href="/tms/venues/">Venue</a> &#9656; <?=$this->data["venue"]["name"]?></h1>
 
-<?=$this->data["venue"]["name"]?>
-<?=$this->data["venue"]["description"]?>
-<?=$this->data["venue"]["directions"]?>
+<table>
+	<tr>
+		<td>Venue Name</td>
+		<td><?=$this->data["venue"]["name"]?></td>
+		<td><button value="Edit"></td>
+	</tr>
+	<tr>
+		<td>Description</td>
+		<td><?=$this->data["venue"]["description"]?></td>
+		<td><button value="Edit"></td>
+	</tr>
+	<tr>
+		<td>Directions</td>
+		<td><?=$this->data["venue"]["directions"]?></td>
+		<td><button value="Edit"></td>
+	</tr>
+</table>
 
 <h2>Occupied Calendar</h2>
 

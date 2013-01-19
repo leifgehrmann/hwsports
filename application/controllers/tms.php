@@ -159,6 +159,14 @@ class Tms extends MY_Controller {
 		$this->load->view('tms/matches',$this->data);
 		$this->load->view('tms/footer',$this->data);
 	}
+	public function calendar()
+	{
+		$this->data['title'] = "Calendar";
+		$this->data['page'] = "calendar";
+		$this->load->view('tms/header',$this->data);
+		$this->load->view('tms/matches',$this->data);
+		$this->load->view('tms/footer',$this->data);
+	}
 	public function groups()
 	{
 		$this->data['title'] = "Groups";
