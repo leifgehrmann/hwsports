@@ -27,7 +27,7 @@
 <script type='text/javascript'>
 	function changed(fieldname){
 		editform = $("#edit-"+fieldname);
-		editform.hide();
+		editform.show();
 	}
 	function cancel(fieldname){
 		input = $("#form-"+fieldname);
