@@ -3,14 +3,19 @@
 <?php
 	$fields = array("name","description","directions");
 	$labels = array("Venue Name","Description","Directions");
+	$types = array("text","textfield","textfield");
 	$widths = array("20%","60%","20%");
 
 	echo "<table>";
 	for($i=0;$i<count($fields);$i++){
 		echo "\t<tr>";
 		echo "\t\t<th style='width:{$widths[0]}'>{$labels[$i]}</th>";
-		echo "\t\t<td style='width:{$widths[1]}'>{$this->data['venue'][$fields[$i]]}</td>";
-		echo "\t\t<td style='width:{$widths[2]}'><button>Edit</button></td>";
+		if($types[$i]=="text")
+			echo "\t\t<td style='width:{$widths[1]}'><input type='text' onchange='' value='{$this->data['venue'][$fields[$i]]}'></td>";
+		else if($types[$i]=="textfield")
+			echo "\t\t<td style='width:{$widths[1]}'><textarea onchange=''>{$this->data['venue'][$fields[$i]]}</textarea></td>";
+		else if()		
+		echo "\t\t<td style='width:{$widths[2]}' class='hidden'><button>Update</button><button>Cancel</button></td>";
 		echo "\t</tr>";
 	}
 	echo "</table>";
@@ -40,7 +45,7 @@
 
 <script type='text/javascript'>
 	function toggle(){
-		
+
 	}
 	$(document).ready(function() {
 		$('#calendar').fullCalendar({
