@@ -37,13 +37,6 @@ $editor = Editor::inst( $db, 'matches', 'matchID' )
 	)
 	->field( 
 		Field::inst( 'venueID' )
-	)
-	->join(
-        Join::inst( 'sports', 'object' )
-            ->join( 'sportID', 'sportID' )
-            ->field(
-                Field::inst( 'centreID' )
-            )
 	);
 		
 $out = $editor
@@ -54,10 +47,15 @@ $out = $editor
 // case we want to send extra data from matchData back to the client
 if ( !isset($_POST['action']) ) {
 	foreach ( $out['aaData'] as $aaDataID => $match ) {
-		if($match['sports']['centreID'] != 1) {
+		
+		$sportCentreQueryString = "SELECT `centreID` FROM `sports` WHERE `sportID` = {$match['sportID']}";
+		$sportCentre = $db->sql($sportCentreQueryString)->fetch();
+		$centreID = $sportCentre['centreID'];
+		if($centreID != 1) {
 			unset($out['aaData'][$aaDataID]);
 			continue;
 		}
+		$out['aaData'][$aaDataID]['centreID'] = $centreID;
 	
 		$matchDataQueryString = "SELECT " .
 			"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
