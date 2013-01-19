@@ -37,13 +37,6 @@ $editor = Editor::inst( $db, 'matches', 'matchID' )
 	)
 	->field( 
 		Field::inst( 'venueID' )
-	)
-	->join(
-        Join::inst( 'sports', 'array' )
-            ->join( 'sportID', 'sportID' )
-            ->field(
-                Field::inst( 'centreID' )
-            )
 	);
 		
 $out = $editor
@@ -54,20 +47,25 @@ $out = $editor
 // case we want to send extra data from matchData back to the client
 if ( !isset($_POST['action']) ) {
 	foreach ( $out['aaData'] as $aaDataID => $match ) {
-		/*if($match['centreID'] != 1) {
+		
+		$sportCentreQueryString = "SELECT `centreID` FROM `sports` WHERE `sportID` = {$match['sportID']}";
+		$sportCentre = $db->sql($sportCentreQueryString)->fetch();
+		$centreID = $sportCentre['centreID'];
+		if($centreID != 1) {
 			unset($out['aaData'][$aaDataID]);
 			continue;
-		}*/
+		}
 	
 		$matchDataQueryString = "SELECT " .
 			"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 			"MAX(CASE WHEN `key`='timestamp' THEN value END ) AS timestamp, " .
 			"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
-			"MAX(CASE WHEN `key`='tournamentID' THEN value END ) AS tournamentID, " .
+			"MAX(CASE WHEN `key`='tournamentID' THEN value END ) AS tournamentID " .
 			"FROM matchData WHERE matchID = {$match['matchID']}";
 		$matchData = $db->sql($matchDataQueryString)->fetch();
 		
 		$out['aaData'][$aaDataID] = array_merge($match, $matchData);
+		$out['aaData'][$aaDataID]['centreID'] = $centreID;
 	}
 	
 	$sportQueryString = "SELECT DISTINCT `sportID` AS value, `value` AS label FROM `sportData` WHERE `key` = 'name'";
@@ -89,10 +87,14 @@ if ( !isset($_POST['action']) ) {
 	$matchDataQueryString = "SELECT " .
 		"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 		"MAX(CASE WHEN `key`='timestamp' THEN value END ) AS timestamp, " .
-		"MAX(CASE WHEN `key`='directions' THEN value END ) AS directions, " .
+		"MAX(CASE WHEN `key`='description' THEN value END ) AS description " .
 		"FROM matchData WHERE matchID = {$matchID}";
 	$matchData = $db->sql($matchDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $matchData);
+	
+	$sportCentreQueryString = "SELECT `centreID` FROM `sports` WHERE `sportID` = '{$_POST['data']['sportID']}'";
+	$sportCentre = $db->sql($sportCentreQueryString)->fetch();
+	$out['row']['centreID'] = $sportCentre['centreID'];
 } elseif($_POST['action']=='edit') {
 	$db->sql("UPDATE `matchData` SET `value` = '{$_POST['data']['name']}' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'name'");
 	$db->sql("UPDATE `matchData` SET `value` = '{$_POST['data']['timestamp']}' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'timestamp'");
@@ -103,10 +105,14 @@ if ( !isset($_POST['action']) ) {
 		"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 		"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
 		"MAX(CASE WHEN `key`='timestamp' THEN value END ) AS timestamp, " .
-		"MAX(CASE WHEN `key`='tournamentID' THEN value END ) AS tournamentID, " .
+		"MAX(CASE WHEN `key`='tournamentID' THEN value END ) AS tournamentID " .
 		"FROM matchData WHERE matchID = {$_POST['data']['matchID']}";
 	$matchData = $db->sql($matchDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $matchData);
+	
+	$sportCentreQueryString = "SELECT `centreID` FROM `sports` WHERE `sportID` = '{$_POST['data']['sportID']}'";
+	$sportCentre = $db->sql($sportCentreQueryString)->fetch();
+	$out['row']['centreID'] = $sportCentre['centreID'];
 }
 
 // Send it back to the client
