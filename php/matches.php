@@ -55,7 +55,6 @@ if ( !isset($_POST['action']) ) {
 			//unset($out['aaData'][$aaDataID]);
 			//continue;
 		//}
-		$out['aaData'][$aaDataID]['centreID'] = $centreID;
 	
 		$matchDataQueryString = "SELECT " .
 			"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
@@ -66,6 +65,7 @@ if ( !isset($_POST['action']) ) {
 		$matchData = $db->sql($matchDataQueryString)->fetch();
 		
 		$out['aaData'][$aaDataID] = array_merge($match, $matchData);
+		$out['aaData'][$aaDataID]['centreID'] = $centreID;
 	}
 	
 	$sportQueryString = "SELECT DISTINCT `sportID` AS value, `value` AS label FROM `sportData` WHERE `key` = 'name'";
