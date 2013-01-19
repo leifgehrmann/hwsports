@@ -113,7 +113,8 @@
 					{
 						"sExtends":    "collection",
 						"sButtonText": "Save",
-						"aButtons":    [ "csv", "xls", "pdf" ]
+						"aButtons":    [ "csv", "xls", "pdf" ],
+						"mColumns": "visible"
 					}
 				]
 			},
