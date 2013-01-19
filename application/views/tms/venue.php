@@ -39,8 +39,8 @@
 <div id='calendar'></div>
 
 <script type='text/javascript'>
-	function {
-
+	function toggle(){
+		
 	}
 	$(document).ready(function() {
 		$('#calendar').fullCalendar({
