@@ -8,12 +8,12 @@
 	</tr>
 	<tr>
 		<th>Description</th>
-		<td><?=$this->data["venue"]["description"]?></td>
+		<td style="width:50%"><?=$this->data["venue"]["description"]?></td>
 		<td><button>Edit</button></td>
 	</tr>
 	<tr>
 		<th>Directions</th>
-		<td><?=$this->data["venue"]["directions"]?></td>
+		<td style="width:50%"><?=$this->data["venue"]["directions"]?></td>
 		<td><button>Edit</button></td>
 	</tr>
 </table>
