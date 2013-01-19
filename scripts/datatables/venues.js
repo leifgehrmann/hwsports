@@ -123,7 +123,7 @@
 							},
 							{
 								"sExtends": "pdf",
-								"mColumns": "visible"
+								"mColumns": [ 4, 5, 6 ]
 							}
 						],
 						"mColumns": "visible"
