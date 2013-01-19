@@ -125,7 +125,8 @@
 				]
 			},
 			"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-				$('td:eq(3)', nRow).html( '<a href="/tms/venue/'+aData[5]+'" class="editor-details">Details</a>' );
+				$('td:eq(3)', nRow).html( '<a href="/tms/venue/'+aData[4]+'" class="editor-details">Details</a>' );
+				console.log(aData);
 			},
 			"fnInitComplete": function ( settings, json ) {
 				// Set the allowed values for the select field based on
