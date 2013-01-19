@@ -1,8 +1,8 @@
-<h1><a href="/tms/venues/">Venue</a> &#9656; <?=$this->data["venue"]["name"]?></h1>
+<h1><a href="/tms/venues/">Venues</a> &#9656; <?=$this->data["venue"]["name"]?></h1>
 
 <?php
 	$fields = array("venueID","name","description","directions");
-	$labels = array("Venue ID""Venue Name","Description","Directions");
+	$labels = array("Venue ID","Venue Name","Description","Directions");
 	$types = array("text","text","textfield","textfield");
 	$widths = array("15%","40%","20%");
 
