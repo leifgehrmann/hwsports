@@ -29,7 +29,9 @@
 
 	}
 	function cancel(fieldname){
-		$("input[name="+fieldname+"]").val($("input[name="+fieldname+"]").attr('oldvalue'));
+		$("[name="+fieldname+"]").val(
+			$("[name="+fieldname+"]").attr('oldvalue')
+		);
 	}
 	function update(fieldname){
 		
