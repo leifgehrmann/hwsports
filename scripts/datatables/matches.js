@@ -33,7 +33,8 @@
 					"name": "description"
 				}, {
 					"label": "Date",
-					"name": "timestamp"
+					"name": "timestamp",
+					"type": "datetime"
 				}
 			],
 			"events": {
