@@ -69,6 +69,10 @@ if ( !isset($_POST['action']) ) {
 		
 		$out['aaData'][$aaDataID] = array_merge($match, $matchData);
 	}
+	
+	$sportQueryString = "SELECT DISTINCT `sportID` AS value, `value` AS label FROM `sportData` WHERE `key` = 'name'";
+	$sportData = $db->sql($sportQueryString)->fetchAll();
+	$out['sportData'] = $sportData;
 } elseif($_POST['action']=='create') {
 	$matchID = $db->sql("SELECT MAX(matchID) FROM venues")->fetch();
 	$matchID = $matchID[0];

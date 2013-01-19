@@ -16,7 +16,7 @@
 				}, {
 					"label": "Sport ID",
 					"name": "sportID",
-					"type": "hidden"
+					"type": "select"
 				}, {
 					"label": "Venue ID",
 					"name": "venueID"
@@ -88,7 +88,7 @@
 				]
 			},
 			"fnInitComplete": function ( settings, json ) {
-				//editor.field('matchCategoryID').update( json.matchCategoryData );
+				editor.field('sportID').update( json.sportData );
 			}
 		} );
 
