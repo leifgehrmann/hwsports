@@ -299,13 +299,13 @@ body {
 
 #content table.dataTable tr.even                            { background-color: #ffffff; }
 #content table.dataTable tr.odd                             { background-color: #f8f8f8; }
-#content table.dataTable tr.DTTT_selected.even              { background-color: #e4e4e8; }
-#content table.dataTable tr.DTTT_selected.odd               { background-color: #dbdbdf; }
+#content table.dataTable tr.DTTT_selected.even              { background-color: #e0e0e8; }
+#content table.dataTable tr.DTTT_selected.odd               { background-color: #dadadf; }
 
 #content table.dataTable tr.even td.sorting_1               { background-color: #e8e8e8; }
 #content table.dataTable tr.odd  td.sorting_1               { background-color: #dfdfdf; }
-#content table.dataTable tr.DTTT_selected.even td.sorting_1 { background-color: #cbcbcf; }
-#content table.dataTable tr.DTTT_selected.odd  td.sorting_1 { background-color: #c4c4c8; }
+#content table.dataTable tr.DTTT_selected.even td.sorting_1 { background-color: #cacacf; }
+#content table.dataTable tr.DTTT_selected.odd  td.sorting_1 { background-color: #c0c0c8; }
 
 body .DTED_Lightbox_Content{
 	border: 1px solid #000 !important;
