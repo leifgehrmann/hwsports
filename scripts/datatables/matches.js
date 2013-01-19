@@ -15,13 +15,15 @@
 					"type": "hidden"
 				}, {
 					"label": "Sport ID",
-					"name": "sportID"
+					"name": "sportID",
+					"type": "hidden"
 				}, {
 					"label": "Venue ID",
 					"name": "venueID"
 				}, {
 					"label": "Tournament ID",
-					"name": "tournamentID"
+					"name": "tournamentID",
+					"type": "hidden"
 				}, {
 					"label": "Name",
 					"name": "name"
