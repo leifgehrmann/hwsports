@@ -1,9 +1,9 @@
 <h1><a href="/tms/venues/">Venues</a> &#9656; <?=$this->data["venue"]["name"]?></h1>
 
 <?php
-	$fields = array("venueID","name","description","directions");
-	$labels = array("Venue ID","Venue Name","Description","Directions");
-	$types = array("text","text","textfield","textfield");
+	$fields = array("name","description","directions");
+	$labels = array("Venue Name","Description","Directions");
+	$types = array("text","textfield","textfield");
 	$widths = array("15%","40%","20%");
 
 	echo "<table>";
