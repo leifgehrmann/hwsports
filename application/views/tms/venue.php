@@ -11,9 +11,9 @@
 		echo "\t<tr>";
 		echo "\t\t<th style='width:{$widths[0]}'>{$labels[$i]}</th>";
 		if($types[$i]=="text")
-			echo "\t\t<td style='width:{$widths[1]}'><input name='{$fields[$i]}' type='text' oldvalue='{$this->data['venue'][$fields[$i]]}' onchange='' value='{$this->data['venue'][$fields[$i]]}'></td>";
+			echo "\t\t<td style='width:{$widths[1]}'><input id='form-{$fields[$i]}' type='text' oldvalue='{$this->data['venue'][$fields[$i]]}' onchange='' value='{$this->data['venue'][$fields[$i]]}'></td>";
 		else if($types[$i]=="textfield")
-			echo "\t\t<td style='width:{$widths[1]}'><textarea onchange='' oldvalue=''>{$this->data['venue'][$fields[$i]]}</textarea></td>";
+			echo "\t\t<td style='width:{$widths[1]}'><textarea id='form-{$fields[$i]}' onchange='' oldvalue='{$this->data['venue'][$fields[$i]]}'>{$this->data['venue'][$fields[$i]]}</textarea></td>";
 		echo "\t\t<td style='width:{$widths[2]}'><button onclick='update(\"{$fields[$i]}\")'>Update</button><button onclick='cancel(\"{$fields[$i]}\")'>Cancel</button></td>";
 		echo "\t</tr>";
 	}
@@ -29,9 +29,8 @@
 
 	}
 	function cancel(fieldname){
-		$("[name="+fieldname+"]").val(
-			$("[name="+fieldname+"]").attr('oldvalue')
-		);
+		input = $("#form-"+fieldname);
+		input.val(input.attr('oldvalue'));
 	}
 	function update(fieldname){
 		
