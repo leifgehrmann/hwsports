@@ -1,9 +1,9 @@
 <h1><a href="/tms/venues/">Venue</a> &#9656; <?=$this->data["venue"]["name"]?></h1>
 
 <?php
-	$fields = array("name","description","directions");
-	$labels = array("Venue Name","Description","Directions");
-	$types = array("text","textfield","textfield");
+	$fields = array("venueID","name","description","directions");
+	$labels = array("Venue ID""Venue Name","Description","Directions");
+	$types = array("text","text","textfield","textfield");
 	$widths = array("15%","40%","20%");
 
 	echo "<table>";
@@ -36,7 +36,21 @@
 		editform.hide();
 	}
 	function update(fieldname){
-		
+		var form_data = {};
+		form_data[fieldname] = $("#form-"+fieldname).val();
+		alert(fieldname+"was updated to "+$("#form-"+fieldname).val());
+		return;
+		jQuery.ajax({
+			url: "/db_venues/update_venue/<?=$this->data['venue']['venueID']?>",
+			type: 'POST',
+			async : false,
+			data: form_data,
+			success: function(msg) {
+				alert(fieldname+"was updated to "+$("#form-"+fieldname).val());
+				editform = $("#edit-"+fieldname);
+				editform.hide();
+			}
+		});
 	}
 	$(document).ready(function() {
 		$('#calendar').fullCalendar({
