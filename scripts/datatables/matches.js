@@ -10,18 +10,19 @@
 					"default": $('#centreID').text(),
 					"type": "hidden"
 				}, {
-					"label": "Match ID",
+					"label": "ID",
 					"name": "matchID",
 					"type": "hidden"
 				}, {
-					"label": "Sport ID",
+					"label": "Sport",
 					"name": "sportID",
 					"type": "select"
 				}, {
-					"label": "Venue ID",
-					"name": "venueID"
+					"label": "Venue",
+					"name": "venueID",
+					"type": "select"
 				}, {
-					"label": "Tournament ID",
+					"label": "Tournament",
 					"name": "tournamentID",
 					"type": "hidden"
 				}, {
@@ -89,6 +90,7 @@
 			},
 			"fnInitComplete": function ( settings, json ) {
 				editor.field('sportID').update( json.sportData );
+				editor.field('venueID').update( json.venueData );
 			}
 		} );
 

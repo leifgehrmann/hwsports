@@ -73,6 +73,11 @@ if ( !isset($_POST['action']) ) {
 	$sportQueryString = "SELECT DISTINCT `sportID` AS value, `value` AS label FROM `sportData` WHERE `key` = 'name'";
 	$sportData = $db->sql($sportQueryString)->fetchAll();
 	$out['sportData'] = $sportData;
+	
+	$venueQueryString = "SELECT DISTINCT `venueData`.`venueID` AS value, `value` AS label FROM `venueData`  LEFT JOIN `venues` ON `venueData`.`venueID` =  `venues`.`venueID` WHERE `key` = 'name' AND `venues`.`centreID` = 1";
+	$venueData = $db->sql($venueQueryString)->fetchAll();
+	$out['venueData'] = $venueData;
+	
 } elseif($_POST['action']=='create') {
 	$matchID = $db->sql("SELECT MAX(matchID) FROM venues")->fetch();
 	$matchID = $matchID[0];
