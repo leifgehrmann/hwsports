@@ -2,19 +2,19 @@
 
 <table>
 	<tr>
-		<th>Venue Name</th>
-		<td><?=$this->data["venue"]["name"]?></td>
-		<td><button>Edit</button></td>
+		<th style="width:20%">Venue Name</th>
+		<td style="width:60%"><?=$this->data["venue"]["name"]?></td>
+		<td style="width:20%"><button>Edit</button></td>
 	</tr>
 	<tr>
-		<th>Description</th>
-		<td style="width:50%"><?=$this->data["venue"]["description"]?></td>
-		<td><button>Edit</button></td>
+		<th style="width:20%">Description</th>
+		<td style="width:60%"><?=$this->data["venue"]["description"]?></td>
+		<td style="width:20%"><button>Edit</button></td>
 	</tr>
 	<tr>
-		<th>Directions</th>
-		<td style="width:50%"><?=$this->data["venue"]["directions"]?></td>
-		<td><button>Edit</button></td>
+		<th style="width:20%">Directions</th>
+		<td style="width:60%"><?=$this->data["venue"]["directions"]?></td>
+		<td style="width:20%"><button>Edit</button></td>
 	</tr>
 </table>
 
