@@ -44,6 +44,7 @@
 			async : false,
 			data: form_data,
 			success: function(msg) {
+				alert("msg");
 				alert(fieldname+" was updated to "+$("#form-"+fieldname).val());
 				editform = $("#edit-"+fieldname);
 				editform.hide();
