@@ -203,6 +203,7 @@ body {
 
 
 #content button {
+	margin-right: 5px;
 	border-radius:2px;
 	text-decoration: none;
 	background: #eee;
