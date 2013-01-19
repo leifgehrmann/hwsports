@@ -11,10 +11,10 @@
 		echo "\t<tr>";
 		echo "\t\t<th style='width:{$widths[0]}'>{$labels[$i]}</th>";
 		if($types[$i]=="text")
-			echo "\t\t<td style='width:{$widths[1]}'><input name='{$labels[$i]}' type='text' oldvalue='' onchange='' value='{$this->data['venue'][$fields[$i]]}'></td>";
+			echo "\t\t<td style='width:{$widths[1]}'><input name='{$fields[$i]}' type='text' oldvalue='{$this->data['venue'][$fields[$i]]}' onchange='' value='{$this->data['venue'][$fields[$i]]}'></td>";
 		else if($types[$i]=="textfield")
-			echo "\t\t<td style='width:{$widths[1]}'><textarea onchange=''>{$this->data['venue'][$fields[$i]]}</textarea></td>";
-		echo "\t\t<td style='width:{$widths[2]}'><button>Update</button><button>Cancel</button></td>";
+			echo "\t\t<td style='width:{$widths[1]}'><textarea onchange='' oldvalue=''>{$this->data['venue'][$fields[$i]]}</textarea></td>";
+		echo "\t\t<td style='width:{$widths[2]}'><button onclick='update($fields)'>Update</button><button onclick='cancel($fields)'>Cancel</button></td>";
 		echo "\t</tr>";
 	}
 	echo "</table>";
@@ -28,8 +28,11 @@
 	function toggle(){
 
 	}
-	function toggle(){
-
+	function cancel(fieldname){
+		$("input[name="+fieldname+"]").val($("input[name="+fieldname+"]").attr('oldvalue'));
+	}
+	function update(fieldname){
+		
 	}
 	$(document).ready(function() {
 		$('#calendar').fullCalendar({
