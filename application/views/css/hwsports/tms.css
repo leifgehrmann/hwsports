@@ -203,6 +203,7 @@ body {
 
 
 #content button {
+	border-radius:2px;
 	text-decoration: none;
 	background: #eee;
 	border: 1px solid #ccc;
@@ -211,7 +212,7 @@ body {
 	font-size: inherit;
 	color: #444;
 }
-#content button {
+#content button.disabled {
 	color: #aaa !important;
 	border: 1px solid #d8d8d8 !important;
 	background: #fff !important;
