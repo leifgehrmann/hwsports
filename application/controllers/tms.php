@@ -16,12 +16,6 @@ class Tms extends MY_Controller {
 
 		// If user is regular user, then redirect to sis
 
-
-		/*
-		 *  ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW 
-		 *	ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW ANDREW 
-		 *  DO WE ACTUALLY MAKE SURE STAFF AND CENTRE ADMIN ARE PART OF THE CENTRE, AND NOT ANOTHER CENTRE???
-		 */
 		/*$authorized = False;
 		if ( $this->ion_auth->in_group('admin') ){
 			$authorized = True;
