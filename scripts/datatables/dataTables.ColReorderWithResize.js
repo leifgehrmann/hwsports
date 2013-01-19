@@ -694,7 +694,7 @@ ColReorder.prototype = {
           /* are we on the col border (if so, resize col) */     
           if (Math.abs(e.pageX - Math.round(offset.left + nLength)) <= 5)
            {                                                       
-            $(nThTarget).css({'cursor': 'col-resize'});            
+            $(nThTarget).css({'cursor': 'col-resize'},{'border-right': '1px solid #000'});            
           }
           else                              
             $(nThTarget).css({'cursor': 'pointer'});          

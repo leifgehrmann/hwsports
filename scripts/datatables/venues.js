@@ -77,7 +77,7 @@
 		} );
 
 		$('#venues').dataTable( {
-			"sDom": "Tfrtip",
+			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/php/venues.php",
 			"aoColumns": [
 				{ "mData": "centreID" },

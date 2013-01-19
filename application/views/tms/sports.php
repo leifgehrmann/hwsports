@@ -25,4 +25,7 @@
 <script src="/scripts/datatables/jquery.dataTables.min.js"></script>
 <script src="/scripts/datatables/dataTables.tabletools.min.js"></script>
 <script src="/scripts/datatables/dataTables.editor.min.js"></script>
+<link rel='stylesheet' href='/css/dataTables.ColVis.css'>
+<script src="/scripts/datatables/dataTables.ColReorderWithResize.js"></script>
+<script src="/scripts/datatables/dataTables.ColVis.js"></script>
 <script src="/scripts/datatables/sports.js"></script>
