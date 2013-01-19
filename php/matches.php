@@ -92,7 +92,7 @@ if ( !isset($_POST['action']) ) {
 	$matchData = $db->sql($matchDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $matchData);
 	
-	$sportCentreQueryString = "SELECT `centreID` FROM `sports` WHERE `sportID` = {$match['sportID']}";
+	$sportCentreQueryString = "SELECT `centreID` FROM `sports` WHERE `sportID` = {$_POST['data']['sportID']}";
 	$sportCentre = $db->sql($sportCentreQueryString)->fetch();
 	$out['row']['centreID'] = $sportCentre['centreID'];
 } elseif($_POST['action']=='edit') {
@@ -110,7 +110,7 @@ if ( !isset($_POST['action']) ) {
 	$matchData = $db->sql($matchDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $matchData);
 	
-	$sportCentreQueryString = "SELECT `centreID` FROM `sports` WHERE `sportID` = {$match['sportID']}";
+	$sportCentreQueryString = "SELECT `centreID` FROM `sports` WHERE `sportID` = {$_POST['data']['sportID']}";
 	$sportCentre = $db->sql($sportCentreQueryString)->fetch();
 	$out['row']['centreID'] = $sportCentre['centreID'];
 }
