@@ -5,10 +5,10 @@
 		<thead>
 			<tr>
 				<th>Centre ID</th>
-				<th>Match ID</th>
-				<th>Venue ID</th>
-				<th>Sport ID</th>
-				<th>Tournament ID</th>
+				<th>ID</th>
+				<th>Venue</th>
+				<th>Sport</th>
+				<th>Tournament</th>
 				<th>Name</th>
 				<th>Description</th>
 				<th>Timestamp</th>
