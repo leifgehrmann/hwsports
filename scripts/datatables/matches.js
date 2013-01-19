@@ -32,7 +32,7 @@
 					"label": "Description",
 					"name": "description"
 				}, {
-					"label": "Timestamp",
+					"label": "Date",
 					"name": "timestamp"
 				}
 			],
