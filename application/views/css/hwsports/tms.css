@@ -360,7 +360,7 @@ body .DTED_Lightbox_Content button{
 	border-radius: 0px !important;
 }
 
-#content .dataTables_filter {
+#content .dataTables_filter input {
 	padding:6px;
 	width:auto;	
 }
