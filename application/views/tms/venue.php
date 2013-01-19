@@ -11,11 +11,10 @@
 		echo "\t<tr>";
 		echo "\t\t<th style='width:{$widths[0]}'>{$labels[$i]}</th>";
 		if($types[$i]=="text")
-			echo "\t\t<td style='width:{$widths[1]}'><input type='text' onchange='' value='{$this->data['venue'][$fields[$i]]}'></td>";
+			echo "\t\t<td style='width:{$widths[1]}'><input type='text' oldvalue='' onchange='' value='{$this->data['venue'][$fields[$i]]}'></td>";
 		else if($types[$i]=="textfield")
 			echo "\t\t<td style='width:{$widths[1]}'><textarea onchange=''>{$this->data['venue'][$fields[$i]]}</textarea></td>";
-		//else if()		
-		echo "\t\t<td style='width:{$widths[2]}' class='hidden'><button>Update</button><button>Cancel</button></td>";
+		echo "\t\t<td style='width:{$widths[2]}'><button>Update</button><button>Cancel</button></td>";
 		echo "\t</tr>";
 	}
 	echo "</table>";
