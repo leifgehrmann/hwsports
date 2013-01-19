@@ -38,15 +38,13 @@
 	function update(fieldname){
 		var form_data = {};
 		form_data[fieldname] = $("#form-"+fieldname).val();
-		alert(fieldname+"was updated to "+$("#form-"+fieldname).val());
-		return;
 		jQuery.ajax({
 			url: "/db_venues/update_venue/<?=$this->data['venue']['venueID']?>",
 			type: 'POST',
 			async : false,
 			data: form_data,
 			success: function(msg) {
-				alert(fieldname+"was updated to "+$("#form-"+fieldname).val());
+				alert(fieldname+" was updated to "+$("#form-"+fieldname).val());
 				editform = $("#edit-"+fieldname);
 				editform.hide();
 			}
