@@ -9,7 +9,7 @@
 	for($i=0;$i<count($fields);$i++){
 		echo "\t<tr>";
 		echo "\t\t<th style='width:{$widths[0]}'>{$labels[$i]}</th>";
-		echo "\t\t<td style='width:{$widths[1]}'><?=$this->data['venue']['{$fields[$i]}']?></td>";
+		echo "\t\t<td style='width:{$widths[1]}'>{$this->data['venue'][{$fields[$i]}]}</td>";
 		echo "\t\t<td style='width:{$widths[2]}'><button>Edit</button></td>";
 		echo "\t</tr>";
 	}
