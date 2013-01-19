@@ -104,6 +104,7 @@
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 3 ] }
             ],
 			"oTableTools": {
+				"sSwfPath": "/scripts/datatables/copy_csv_xls_pdf.swf",
 				"sRowSelect": "multi",
 				"aButtons": [
 					{ "sExtends": "editor_create", "editor": editor },
