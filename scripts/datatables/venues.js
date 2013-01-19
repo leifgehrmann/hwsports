@@ -119,7 +119,7 @@
 								"sExtends": "csv"
 							},
 							{
-								"sExtends": "ajax"
+								"sExtends": "xls"
 							},
 							{
 								"sExtends": "pdf",
