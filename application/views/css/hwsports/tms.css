@@ -298,12 +298,12 @@ body {
 }
 
 #content table.dataTable tr.even                            { background-color: #ffffff; }
-#content table.dataTable tr.odd                             { background-color: #f4f4f8; }
+#content table.dataTable tr.odd                             { background-color: #f8f8f8; }
 #content table.dataTable tr.DTTT_selected.even              { background-color: #e4e4e8; }
 #content table.dataTable tr.DTTT_selected.odd               { background-color: #dbdbdf; }
 
-#content table.dataTable tr.even td.sorting_1               { background-color: #e4e4e8; }
-#content table.dataTable tr.odd  td.sorting_1               { background-color: #dbdbdf; }
+#content table.dataTable tr.even td.sorting_1               { background-color: #e8e8e8; }
+#content table.dataTable tr.odd  td.sorting_1               { background-color: #dfdfdf; }
 #content table.dataTable tr.DTTT_selected.even td.sorting_1 { background-color: #cbcbcf; }
 #content table.dataTable tr.DTTT_selected.odd  td.sorting_1 { background-color: #c4c4c8; }
 
