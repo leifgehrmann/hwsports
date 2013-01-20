@@ -20,7 +20,7 @@ class Db_Calendar extends MY_Controller {
 	
 		// Should return registration periods
 
-		$this->data['test'] .= json_encode(array(
+		$this->data['test'] = json_encode(array(
 			array(
 				'title' => 'Men\'s Hurdling - Preliminary Rounds',
 				'start' => mktime(12, 0, 0, 1, 10-3, 2013),
