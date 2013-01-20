@@ -66,7 +66,7 @@ if ( !isset($_POST['action']) ) {
 		
 		$out['aaData'][$aaDataID] = array_merge($match, $matchData);
 		$out['aaData'][$aaDataID]['centreID'] = $centreID;
-		$out['aaData'][$aaDataID]['timestamp'] = $out['aaData'][$aaDataID]['timestamp'];
+		$out['aaData'][$aaDataID]['timestamp'] = date("d/m/Y @ H:i",(int)$out['aaData'][$aaDataID]['timestamp']);
 	}
 	
 	$sportQueryString = "SELECT DISTINCT `sportID` AS value, `value` AS label FROM `sportData` WHERE `key` = 'name'";
