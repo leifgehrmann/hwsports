@@ -38,5 +38,10 @@ class Db_Calendar extends MY_Controller {
 		// Should return registration periods
 	}
 
+	public function changeMatchStart() {
+		$this->data['data'] = json_encode(  $_POST  );
+		$this->load->view('data',$this->data);
+	}
+	
 }
 ?>
