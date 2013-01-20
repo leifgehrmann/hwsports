@@ -34,7 +34,7 @@
 					"type": "datetime",
 					"dateFormat": "dd/mm/yyyy",
 					"timeFormat": "HH:mm",
-					"separator": "@"
+					"separator": " @ "
 				}, {
 					"label": "Description",
 					"name": "description"
