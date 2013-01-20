@@ -442,24 +442,24 @@ body .DTED_Lightbox_Content button{
 .ui-timepicker-rtl dl { text-align: right; }
 .ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }
 
-#content .ui-timepicker-div {
+body .ui-timepicker-div {
 	background: #FFF;
 	color: #000;
 	font-size: 14px;
 	font-family: sans-serif;
 }
 
-#content .ui-widget-content {
+body .ui-widget-content {
 	border: 1px solid #444;
 	background:none;
 }
 
-#content .ui-state-default,#content .ui-widget-content .ui-state-default,#content .ui-widget-header .ui-state-default{
+body .ui-state-default,body .ui-widget-content .ui-state-default,body .ui-widget-header .ui-state-default{
 	color: #444;
 	background: #ddd;
 	border: 1px solid #aaa;
 }
-#content .ui-widget-header{
+body .ui-widget-header{
 	border: 1px solid #444;
 	background: #555;
 }
