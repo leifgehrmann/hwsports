@@ -49,7 +49,7 @@
 		var form_data = {};
 		form_data[fieldname] = $("#form-"+fieldname).val();
 		jQuery.ajax({
-			url: "/db_venues/update_venue/<?=$this->data['venue']['venueID']?>",
+			url: "/db_venues/update_venue/<?=$this->data['match']['matchID']?>",
 			type: 'POST',
 			async : false,
 			data: form_data,
