@@ -11,7 +11,7 @@
 		echo "\t<tr>";
 		echo "\t\t<th style='width:{$widths[0]}'>{$labels[$i]}</th>";
 		//$JS_value = json_encode($this->data['venue'][$fields[$i]]);
-		$escapedValue = htmlspecialchars($this->data['venue'][$fields[$i]]);
+		$escapedValue = htmlspecialchars($this->data['venue'][$fields[$i]],ENT_QUOTES);
 		if($types[$i]=="text")
 			echo "\t\t<td style='width:{$widths[1]}'>
 						<input 
