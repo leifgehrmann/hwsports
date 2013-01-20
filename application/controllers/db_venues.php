@@ -185,7 +185,7 @@ class Db_venues extends MY_Controller {
 					}
 				}
 
-				if($this->venues_model->update_venue($venueID,$data)>=0){
+				if($this->venues_model->update_venue($venueID,$data)){
 					$output['success'] = true;
 					$output['message'] = 'The venue was updated.';
 				} else {
@@ -200,7 +200,7 @@ class Db_venues extends MY_Controller {
 			$output['message'] = 'You are not authorized to view this page.';
 		}
 		// data should go out here
-		$this->data['data'] = "var data = ".json_encode($output);
+		$this->data['data'] = json_encode($output);
 		$this->load->view('data', $this->data);
 	}
 }
