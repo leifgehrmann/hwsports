@@ -451,7 +451,7 @@ body .ui-timepicker-div {
 
 body .ui-widget-content {
 	border: 1px solid #444;
-	background:none;
+	background: #fff;
 }
 
 body .ui-state-default,body .ui-widget-content .ui-state-default,body .ui-widget-header .ui-state-default{
