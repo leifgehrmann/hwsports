@@ -11,7 +11,7 @@
 	for($i=0;$i<count($fields);$i++){
 		echo "\t<tr>";
 		echo "\t\t<th style='width:{$widths[0]}'>{$labels[$i]}</th>";
-		$value = htmlspecialchars($this->data['venue'][$fields[$i]], ENT_QUOTES);
+		$value = htmlspecialchars(utf8_encode($this->data['venue'][$fields[$i]]), ENT_QUOTES);
 		if($types[$i]=="text")
 			echo "\t\t<td style='width:{$widths[1]}'>
 							<input 
