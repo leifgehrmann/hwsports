@@ -17,11 +17,11 @@
 							id='form-{$fields[$i]}'
 							type='text'
 							onkeyup='changed(\"{$fields[$i]}\")'
-							oldvalue='{$this->data["venue"]["name"]}'
-							value='{$this->data["venue"]["name"]}'>
+							oldvalue='{$this->data['venue'][$fields[$i]]}'
+							value='{$this->data['venue'][$fields[$i]]}'>
 						</td>";
 		else if($types[$i]=="textfield")
-			echo "\t\t<td style='width:{$widths[1]}'><textarea id='form-{$fields[$i]}' onkeyup='changed(\"{$fields[$i]}\")' oldvalue='{$this->data["venue"]["name"]}'>{$this->data["venue"]["name"]}</textarea></td>";
+			echo "\t\t<td style='width:{$widths[1]}'><textarea id='form-{$fields[$i]}' onkeyup='changed(\"{$fields[$i]}\")' oldvalue='{$this->data['venue'][$fields[$i]]}'>{$this->data['venue'][$fields[$i]]}</textarea></td>";
 		echo "\t\t<td id='edit-{$fields[$i]}' style='visibility:hidden;width:{$widths[2]}'><button onclick='update(\"{$fields[$i]}\")'>Update</button><button onclick='cancel(\"{$fields[$i]}\")'>Cancel</button></td>";
 		echo "\t</tr>";
 	}
