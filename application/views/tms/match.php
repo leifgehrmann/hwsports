@@ -1,6 +1,6 @@
 <h1><a href="/tms/matches/">Matches</a> &#9656; <span id="title-name"><?=$this->data["match"]["name"]?></span></h1>
 <div id='message'></div>
-<!--<?php
+<?php
 	$fields = array("name","description","directions");
 	$labels = array("Match Name","Description","Directions");
 	$types = array("text","textfield","textfield");
@@ -32,9 +32,7 @@
 		echo "\t</tr>";
 	}
 	echo "</table>";
-?>-->
-
-<?php echo print_r($this->data["match"]);?>
+?>
 
 <script type='text/javascript'>
 	function changed(fieldname){
