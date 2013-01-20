@@ -466,4 +466,12 @@ body .ui-widget-header{
 
 body .ui-datepicker th{
 	color: #000;
+	font-size: 14px;
+}
+body .ui-datepicker td{
+	font-size: 14px;
+}
+
+body .ui-datepicker .ui-datepicker-title{
+	font-size: 14px;
 }
