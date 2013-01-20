@@ -3,8 +3,8 @@
 <?php
 	$fields = array("name","description","startTime","endTime");
 	$labels = array("Match Name","Description","StartTime","End Time");
-	$types = array("text","text","text");
-	$types = array("text","text","text");
+	$types = array("text","text","text","text");
+	$types = array("text","text","text","text");
 	$widths = array("15%","40%","20%");
 
 	echo "<table>";
