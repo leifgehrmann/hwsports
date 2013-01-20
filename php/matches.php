@@ -66,6 +66,7 @@ if ( !isset($_POST['action']) ) {
 		
 		$out['aaData'][$aaDataID] = array_merge($match, $matchData);
 		$out['aaData'][$aaDataID]['centreID'] = $centreID;
+		$out['aaData'][$aaDataID]['timestamp'] = date("d/m/Y @ H:i");
 	}
 	
 	$sportQueryString = "SELECT DISTINCT `sportID` AS value, `value` AS label FROM `sportData` WHERE `key` = 'name'";
@@ -77,10 +78,13 @@ if ( !isset($_POST['action']) ) {
 	$out['venueData'] = $venueData;
 	
 } elseif($_POST['action']=='create') {
+	$a = strptime($_POST['data']['timestamp'], '%d/%m/%Y @ %H:%M');
+	$timestamp = mktime($a['tm_hour'], $a['tm_min'], 0, $a['tm_mon']+1, $a['tm_mday'], $a['tm_year']+1900);
+
 	$matchID = $db->sql("SELECT MAX(matchID) FROM matches")->fetch();
 	$matchID = $matchID[0];
 	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','name','{$_POST['data']['name']}')");
-	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','timestamp','{$_POST['data']['timestamp']}')");
+	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','timestamp','$timestamp')");
 	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','description','{$_POST['data']['description']}')");
 	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','tournamentID','{$_POST['data']['tournamentID']}')");
 	
@@ -96,8 +100,11 @@ if ( !isset($_POST['action']) ) {
 	$sportCentre = $db->sql($sportCentreQueryString)->fetch();
 	$out['row']['centreID'] = $sportCentre['centreID'];
 } elseif($_POST['action']=='edit') {
+	$a = strptime($_POST['data']['timestamp'], '%d/%m/%Y @ %H:%M');
+	$timestamp = mktime($a['tm_hour'], $a['tm_min'], 0, $a['tm_mon']+1, $a['tm_mday'], $a['tm_year']+1900);
+	
 	$db->sql("UPDATE `matchData` SET `value` = '{$_POST['data']['name']}' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'name'");
-	$db->sql("UPDATE `matchData` SET `value` = '{$_POST['data']['timestamp']}' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'timestamp'");
+	$db->sql("UPDATE `matchData` SET `value` = '$timestamp' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'timestamp'");
 	$db->sql("UPDATE `matchData` SET `value` = '{$_POST['data']['description']}' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'description'");
 	$db->sql("UPDATE `matchData` SET `value` = '{$_POST['data']['tournamentID']}' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'tournamentID'");
 	
@@ -117,4 +124,3 @@ if ( !isset($_POST['action']) ) {
 
 // Send it back to the client
 echo json_encode( $out );
-

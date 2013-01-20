@@ -29,12 +29,15 @@
 					"label": "Name",
 					"name": "name"
 				}, {
+					"label": "Date / Time",
+					"name": "timestamp",
+					"type": "datetime",
+					"dateFormat": "dd/mm/yyyy",
+					"timeFormat": "HH:mm",
+					"separator": "@"
+				}, {
 					"label": "Description",
 					"name": "description"
-				}, {
-					"label": "Date",
-					"name": "timestamp",
-					"type": "datetime"
 				}
 			],
 			"events": {
@@ -57,8 +60,8 @@
 				{ "mData": "tournamentID" },
 				{ "mData": "venueID" },
 				{ "mData": "name" },
-				{ "mData": "description" },
-				{ "mData": "timestamp" }
+				{ "mData": "timestamp" },
+				{ "mData": "description" }
 			],
 			"aoColumnDefs": [
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] }
