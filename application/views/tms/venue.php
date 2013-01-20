@@ -26,9 +26,7 @@
 							<textarea 
 								id='form-{$fields[$i]}'
 								onkeyup='changed(\"{$fields[$i]}\")'
-								oldvalue='{$value}'>
-								{$value}
-							</textarea>
+								oldvalue='{$value}'>{$value}</textarea>
 						</td>";
 		echo "\t\t<td id='edit-{$fields[$i]}' style='visibility:hidden;width:{$widths[2]}'><button onclick='update(\"{$fields[$i]}\")'>Update</button><button onclick='cancel(\"{$fields[$i]}\")'>Cancel</button></td>";
 		echo "\t</tr>";
@@ -64,7 +62,7 @@
 				if(msg['success']){
 					$("#edit-"+fieldname).css("visibility", "hidden");
 					if(fieldname=="name"){
-						$("#title-name").html(form_data[fieldname]);
+						$("#title-name").html($("#form-"+fieldname).val());
 					}
 				} else {
 					alert("Could not update the field. Please contact support.");
