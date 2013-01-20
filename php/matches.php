@@ -86,7 +86,6 @@ if ( !isset($_POST['action']) ) {
 	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','name','{$_POST['data']['name']}')");
 	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','timestamp','$timestamp')");
 	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','description','{$_POST['data']['description']}')");
-	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','tournamentID','{$_POST['data']['tournamentID']}')");
 	
 	$matchDataQueryString = "SELECT " .
 		"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
