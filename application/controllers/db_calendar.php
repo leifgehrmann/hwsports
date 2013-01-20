@@ -17,6 +17,7 @@ class Db_Calendar extends MY_Controller {
 		$this->data['data'] = array();		
 		foreach($matches as $match) {
 			$this->data['data'][] = array(
+				'id' => $match['matchID'],
 				'title' => $match['name'],
 				'start' => $match['startTime'],
 				'end' => $match['endTime'],
