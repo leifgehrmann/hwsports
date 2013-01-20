@@ -1,4 +1,4 @@
-<h1><a href="/tms/venues/">Venues</a> &#9656; <span id="title-name"><?=utf8_encode($this->data["venue"]["name"])?></span></h1>
+<h1><a href="/tms/venues/">Venues</a> &#9656; <span id="title-name"><?=$this->data["venue"]["name"]?></span></h1>
 <div id='message'></div>
 <?php
 	$fields = array("name","description","directions");
@@ -11,7 +11,7 @@
 	for($i=0;$i<count($fields);$i++){
 		echo "\t<tr>";
 		echo "\t\t<th style='width:{$widths[0]}'>{$labels[$i]}</th>";
-		$value = htmlspecialchars(utf8_encode($this->data['venue'][$fields[$i]]), ENT_QUOTES);
+		$value = htmlspecialchars(utf8_encode($this->data['venue'][$fields[$i]]), ENT_QUOTES, 'UTF-8');
 		if($types[$i]=="text")
 			echo "\t\t<td style='width:{$widths[1]}'>
 							<input 
