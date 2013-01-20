@@ -6,8 +6,8 @@
 			<tr>
 				<th>Centre ID</th>
 				<th>ID</th>
-				<th>Venue</th>
 				<th>Sport</th>
+				<th>Venue</th>
 				<th>Tournament</th>
 				<th>Name</th>
 				<th>Date / Time</th>
