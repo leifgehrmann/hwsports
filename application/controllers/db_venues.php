@@ -180,7 +180,7 @@ class Db_venues extends MY_Controller {
 
 				$data = array();
 				for ($i = 0; $i < $formLength; $i++) {
-					if(isset($_POST[$formNames[$i]])){
+					if($_POST[$formNames[$i]]){
 						$data[$formNames[$i]] = $_POST[$formNames[$i]];
 					}
 				}
@@ -200,7 +200,7 @@ class Db_venues extends MY_Controller {
 			$output['message'] = 'You are not authorized to view this page.';
 		}
 		// data should go out here
-		$this->data['data'] = "var data = ".json_encode($output);
+		$this->data['data'] = json_encode($output);
 		$this->load->view('data', $this->data);
 	}
 }
