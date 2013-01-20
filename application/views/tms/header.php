@@ -9,7 +9,12 @@
         <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
         <link href="/css/main.css" rel="stylesheet" type="text/css">
         <link href="/css/tms.css" rel="stylesheet" type="text/css">
+		<link rel='stylesheet' href='http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/themes/eggplant/jquery-ui.css'>
         <link rel="stylesheet" type="text/css" href="/scripts/fullcalendar/fullcalendar.css" />
+		<link rel='stylesheet' href='/css/jquery.dataTables.css'>		
+		<link rel='stylesheet' href='/css/dataTables.tabletools.css'>		
+		<link rel='stylesheet' href='/css/dataTables.editor.css'>		
+		<link rel='stylesheet' href='/css/dataTables.ColVis.css'>		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="/vendor/jquery-1.8.1.min.js"><\/script>')</script>
         <script type="text/javascript" src="/scripts/fullcalendar/jquery-ui-1.9.2.custom.min.js"></script>
@@ -21,7 +26,6 @@
 		<script src="/scripts/datatables/dataTables.editor.min.js"></script>
 		<script src="/scripts/datatables/dataTables.ColReorderWithResize.js"></script>
 		<script src="/scripts/datatables/dataTables.ColVis.js"></script>
-
     </head>
     <!--[if lt IE 7]>      <body class="page-<?=$page?> lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
     <!--[if IE 7]>         <body class="page-<?=$page?> lt-ie9 lt-ie8"> <![endif]-->
