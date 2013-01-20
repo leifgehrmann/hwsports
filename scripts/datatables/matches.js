@@ -57,11 +57,11 @@
 				{ "mData": "centreID" },
 				{ "mData": "matchID" },
 				{ "mData": "sportName" },
+				{ "mData": "venueName" },
 				{ 
 					"mData": "tournamentName",
 					"sDefaultContent": ""
 				},
-				{ "mData": "venueName" },
 				{ "mData": "name" },
 				{ "mData": "timestamp" },
 				{ "mData": "description" }
