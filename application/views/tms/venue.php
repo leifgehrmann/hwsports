@@ -47,13 +47,14 @@
 	}
 	function update(fieldname){
 		var form_data = {};
-		form_data[fieldname] = $("#form-"+fieldname).val();
+		form_data[fieldname] = encodeURI($("#form-"+fieldname).val());
 		jQuery.ajax({
 			url: "/db_venues/update_venue/<?=$this->data['venue']['venueID']?>",
 			type: 'POST',
 			async : false,
 			data: form_data,
 			success: function(msg) {
+				alert(msg['success']);
 				if(msg['success']){
 					$("#edit-"+fieldname).css("visibility", "hidden");
 					if(fieldname=="name"){
