@@ -77,7 +77,7 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			//events: '/calendar/getVenueMatches/<?=$this->data["venue"]["venueID"]?>',
+			events: '/db_calendar/getVenueMatches/<?=$this->data["venue"]["venueID"]?>',
 			editable: true
 		});
 		
