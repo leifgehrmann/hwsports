@@ -66,7 +66,7 @@ if ( !isset($_POST['action']) ) {
 		
 		$out['aaData'][$aaDataID] = array_merge($match, $matchData);
 		$out['aaData'][$aaDataID]['centreID'] = $centreID;
-		$out['aaData'][$aaDataID]['timestamp'] = date("d/m/Y @ H:i");
+		$out['aaData'][$aaDataID]['timestamp'] = date("d/m/Y @ H:i",(int)$out['aaData'][$aaDataID]['timestamp']);
 	}
 	
 	$sportQueryString = "SELECT DISTINCT `sportID` AS value, `value` AS label FROM `sportData` WHERE `key` = 'name'";
@@ -95,6 +95,7 @@ if ( !isset($_POST['action']) ) {
 		"FROM matchData WHERE matchID = {$matchID}";
 	$matchData = $db->sql($matchDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $matchData);
+	$out['row']['timestamp'] = date("d/m/Y @ H:i",$out['row']['timestamp']);
 	
 	$sportCentreQueryString = "SELECT `centreID` FROM `sports` WHERE `sportID` = '{$_POST['data']['sportID']}'";
 	$sportCentre = $db->sql($sportCentreQueryString)->fetch();
@@ -116,6 +117,7 @@ if ( !isset($_POST['action']) ) {
 		"FROM matchData WHERE matchID = {$_POST['data']['matchID']}";
 	$matchData = $db->sql($matchDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $matchData);
+	$out['row']['timestamp'] = date("d/m/Y @ H:i",$out['row']['timestamp']);
 	
 	$sportCentreQueryString = "SELECT `centreID` FROM `sports` WHERE `sportID` = '{$_POST['data']['sportID']}'";
 	$sportCentre = $db->sql($sportCentreQueryString)->fetch();
