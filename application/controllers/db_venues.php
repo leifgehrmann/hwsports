@@ -21,7 +21,7 @@ class Db_venues extends MY_Controller {
 	*/
 	public function venue_exists($venueID){
 		$output = $this->venues_model->venue_exists($venueID);
-		$this->data['data'] =  json_encode(utf8_encode($output));
+		$this->data['data'] =  json_encode($output);
 		header('Content-Type: application/json');
 		$this->load->view('data', $this->data);
 	}
@@ -30,7 +30,7 @@ class Db_venues extends MY_Controller {
 	public function get_venues()
 	{
 		$output = $this->venues_model->get_venues($this->data['centre']['id']);
-		$this->data['data'] =  json_encode(utf8_encode($output));
+		$this->data['data'] =  json_encode($output);
 		header('Content-Type: application/json');
 		$this->load->view('data', $this->data);
 	}
@@ -114,7 +114,7 @@ class Db_venues extends MY_Controller {
 		}
 
 		// data should go out here
-		$this->data['data'] = json_encode(utf8_encode($output));
+		$this->data['data'] = json_encode($output);
 		header('Content-Type: application/json');
 		$this->load->view('data', $this->data);
 	}
@@ -201,7 +201,7 @@ class Db_venues extends MY_Controller {
 			$output['message'] = 'You are not authorized to view this page.';
 		}
 		// data should go out here
-		$this->data['data'] = json_encode(utf8_encode($output));
+		$this->data['data'] = json_encode($output);
 		header('Content-Type: application/json');
 		$this->load->view('data', $this->data);
 	}
