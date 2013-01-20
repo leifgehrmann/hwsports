@@ -67,6 +67,22 @@ if ( !isset($_POST['action']) ) {
 		$out['aaData'][$aaDataID] = array_merge($match, $matchData);
 		$out['aaData'][$aaDataID]['centreID'] = $centreID;
 		$out['aaData'][$aaDataID]['timestamp'] = date("d/m/Y @ H:i",(int)$out['aaData'][$aaDataID]['timestamp']);
+
+		$sportQueryString = "SELECT DISTINCT `value` FROM `sportData` WHERE `key` = 'name' AND `sportID` = '{$out['aaData'][$aaDataID]['sportID']}'";
+		$sportName = $db->sql($sportQueryString)->fetch();
+		$out['aaData'][$aaDataID]['sportName'] = $sportName['value'];
+		
+		$venueQueryString = "SELECT DISTINCT `value` FROM `venueData` WHERE `key` = 'name' AND `venueID` = '{$out['aaData'][$aaDataID]['venueID']}'";
+		$venueName = $db->sql($venueQueryString)->fetch();
+		$out['aaData'][$aaDataID]['venueName'] = $venueName['value'];
+		
+		if(!empty($out['aaData'][$aaDataID]['tournamentID'])) {
+			$tournamentQueryString = "SELECT DISTINCT `value` FROM `tournamentData` WHERE `key` = 'name' AND `tournamentID` = '{$out['aaData'][$aaDataID]['tournamentID']}'";
+			$tournamentName = $db->sql($tournamentQueryString)->fetch();
+			$out['aaData'][$aaDataID]['tournamentName'] = $tournamentName['value'];
+		} else {
+			$out['aaData'][$aaDataID]['tournamentName'] = "None";
+		}
 	}
 	
 	$sportQueryString = "SELECT DISTINCT `sportID` AS value, `value` AS label FROM `sportData` WHERE `key` = 'name'";
