@@ -76,9 +76,9 @@ class Venues_model extends CI_Model {
 		$insertDataArray = array();
 		foreach($data as $key=>$value) {
 			$dataArray = array(
-					'venueID' => $venueID,
-					'key' => $key,
-					'value' => $value
+					'venueID' => $this->db->escape($venueID),
+					'key' => $this->db->escape($key),
+					'value' => $this->db->escape($value)
 				);
 			$insertDataArray[] = $dataArray;
 		}
@@ -103,10 +103,12 @@ class Venues_model extends CI_Model {
 
 		if($this->venue_exists($venueID)){
 			foreach($data as $key=>$value) {
+				$escKey = $this->db->escape($key);
+				$escValue = $this->db->escape($value);
 				$dataQueryString = 	"UPDATE `venueData` ".
-									"SET `value`='$value' ".
-									"WHERE `key`='$key' ".
-									"AND `venueID`='$venueID'";
+									"SET `value`=$escValue ".
+									"WHERE `key`=$escKey ".
+									"AND `venueID`=$venueID";
 				$this->db->query($dataQueryString);
 			}
 			$this->db->trans_complete();
