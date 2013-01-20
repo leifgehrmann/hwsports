@@ -45,8 +45,4 @@ class Db_Calendar extends MY_Controller {
 		// Should return registration periods
 	}
 
-
-
-
-	public function get
 }
