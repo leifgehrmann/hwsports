@@ -133,8 +133,8 @@ class Tms extends MY_Controller {
 		// Get data for this venue
 		$this->data['venue'] = $this->venues_model->get_venue($venueID);
 
-		$this->data['title'] = "Venue";
-		$this->data['page']  = $this->data['venue']['name']; 
+		$this->data['title'] = $this->data['venue']['name']+" venue";
+		$this->data['page']  = "venue"; 
 		$this->load->view('tms/header',$this->data);
 		$this->load->view('tms/venue',$this->data);
 		$this->load->view('tms/footer',$this->data);
@@ -149,6 +149,20 @@ class Tms extends MY_Controller {
 		$this->data['page'] = "sports";
 		$this->load->view('tms/header',$this->data);
 		$this->load->view('tms/sports',$this->data);
+		$this->load->view('tms/footer',$this->data);
+	}
+	public function match($matchID)
+	{
+		$this->load->library('table');
+		$this->load->model('matches_model');
+
+		// Get data for this venue
+		$this->data['match'] = $this->matches_model->get_match($matchID);
+
+		$this->data['title'] = $this->data['match']['name']." match";
+		$this->data['page']  = "match"; 
+		$this->load->view('tms/header',$this->data);
+		$this->load->view('tms/match',$this->data);
 		$this->load->view('tms/footer',$this->data);
 	}
 	public function matches()
