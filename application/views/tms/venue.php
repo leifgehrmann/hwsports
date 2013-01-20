@@ -57,7 +57,7 @@
 			success: function(msg) {
 				$("#edit-"+fieldname).css("visibility", "hidden");
 				if(fieldname=="name"){
-					$("#title-name").html(form_data[fieldname]));
+					$("#title-name").html(form_data[fieldname]);
 				}
 			}
 		});
