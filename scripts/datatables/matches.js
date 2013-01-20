@@ -29,8 +29,15 @@
 					"label": "Name",
 					"name": "name"
 				}, {
-					"label": "Date / Time",
-					"name": "timestamp",
+					"label": "Start Time",
+					"name": "startTime",
+					"type": "datetime",
+					"dateFormat": "dd/mm/yy",
+					"timeFormat": "HH:mm",
+					"separator": " @ "
+				}, {
+					"label": "End Time",
+					"name": "endTime",
 					"type": "datetime",
 					"dateFormat": "dd/mm/yy",
 					"timeFormat": "HH:mm",
@@ -63,7 +70,8 @@
 					"sDefaultContent": ""
 				},
 				{ "mData": "name" },
-				{ "mData": "timestamp" },
+				{ "mData": "startTime" },
+				{ "mData": "endTime" },
 				{ "mData": "description" }
 			],
 			"aoColumnDefs": [
