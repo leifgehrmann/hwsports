@@ -95,13 +95,7 @@ class Db_venues extends MY_Controller {
 
 				$data = array();
 				for ($i = 0; $i < $formLength; $i++) {
-					$data[$formNames[$i]] = $this->input->post($formNames[$i]);
-					//array_push($formNames[$i]=>);
-					/*$row = array(
-						'key' => $formNames[$i],
-						'value' => $this->input->post($formNames[$i])
-					);*/
-					//$data[] = $row;
+					$data[$formNames[$i]] = $_POST[$formNames[$i]];
 				}
 
 				if($this->venues_model->insert_venue($this->data['centre']['id'],$data)>=0){
@@ -176,7 +170,7 @@ class Db_venues extends MY_Controller {
 			$formRules = array('required','required','required','required','required');
 			$formLength = min(count($formNames),count($formLabels),count($formRules));
 			for ($i = 0; $i < $formLength; $i++) {
-				if($this->input->post($formNames[$i])){
+				if($_POST[$formNames[$i]]){
 					$this->form_validation->set_rules($formNames[$i], $formLabels[$i], $formRules[$i]);
 				}
 			}
@@ -186,8 +180,8 @@ class Db_venues extends MY_Controller {
 
 				$data = array();
 				for ($i = 0; $i < $formLength; $i++) {
-					if($this->input->post($formNames[$i])){
-						$data[$formNames[$i]] = $this->input->post($formNames[$i]);
+					if($_POST[$formNames[$i]]){
+						$data[$formNames[$i]] = $_POST[$formNames[$i]];
 					}
 				}
 
