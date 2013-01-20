@@ -124,14 +124,7 @@ if ( !isset($_POST['action']) ) {
 	$venueName = $db->sql($venueQueryString)->fetch();
 	$out['row']['venueName'] = $venueName['value'];
 	
-	if(!empty($out['aaData'][$aaDataID]['tournamentID'])) {
-		$tournamentQueryString = "SELECT DISTINCT `value` FROM `tournamentData` WHERE `key` = 'name' AND `tournamentID` = '{$_POST['data']['tournamentID']}'";
-		$tournamentName = $db->sql($tournamentQueryString)->fetch();
-		$out['row']['tournamentName'] = $tournamentName['value'];
-	} else {
-		$out['row']['tournamentName'] = "None";
-	}
-	
+	$out['row']['tournamentName'] = "None";	
 } elseif($_POST['action']=='edit') {
 	$a = strptime($_POST['data']['timestamp'], '%d/%m/%Y @ %H:%M');
 	$timestamp = mktime($a['tm_hour'], $a['tm_min'], 0, $a['tm_mon']+1, $a['tm_mday'], $a['tm_year']+1900);
@@ -163,7 +156,7 @@ if ( !isset($_POST['action']) ) {
 	$venueName = $db->sql($venueQueryString)->fetch();
 	$out['row']['venueName'] = $venueName['value'];
 	
-	if(!empty($out['aaData'][$aaDataID]['tournamentID'])) {
+	if(!empty($out['row']['tournamentID'])) {
 		$tournamentQueryString = "SELECT DISTINCT `value` FROM `tournamentData` WHERE `key` = 'name' AND `tournamentID` = '{$_POST['data']['tournamentID']}'";
 		$tournamentName = $db->sql($tournamentQueryString)->fetch();
 		$out['row']['tournamentName'] = $tournamentName['value'];
