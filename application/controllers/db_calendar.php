@@ -20,6 +20,7 @@ class Db_Calendar extends MY_Controller {
 				'title' => $match['name'],
 				'start' => $match['startTime'],
 				'end' => $match['endTime'],
+				'url' => "/tms/match/".$match['matchID'],
 				'allDay' => false,
 				'color' => '#2966C7'
 			);
