@@ -114,19 +114,20 @@ body {
 	border-bottom: 1px solid #C8C8C8; 
 }
 
-#menu li.home				{ background-image: url(/img/hwsports/icons/home.14.png); }
-#menu li.tournaments 		{ background-image: url(/img/hwsports/icons/tournament.14.png); }
-#menu li.venues 			{ background-image: url(/img/hwsports/icons/venue.14.png); }
-#menu li.sports 			{ background-image: url(/img/hwsports/icons/sport.14.png); }
-#menu li.matches 			{ background-image: url(/img/hwsports/icons/match.14.png); }
-#menu li.groups 			{ background-image: url(/img/hwsports/icons/group.14.png); }
-#menu li.users 				{ background-image: url(/img/hwsports/icons/user.14.png); }
-#menu li.news 				{ background-image: url(/img/hwsports/icons/news.14.png); }
-#menu li.tickets 			{ background-image: url(/img/hwsports/icons/tickets.14.png); }
-#menu li.reports 			{ background-image: url(/img/hwsports/icons/report.14.png); }
-#menu li.appearance 		{ background-image: url(/img/hwsports/icons/appearance.14.png); }
-#menu li.settings 			{ background-image: url(/img/hwsports/icons/settings.14.png); }
-#menu li.personal-settings	{ background-image: url(/img/hwsports/icons/personal-settings.14.png); }
+#menu li.home				{ background-image: url('/img/hwsports/icons/home.14.png'); }
+#menu li.calendar			{ background-image: url('/img/hwsports/icons/calendar.14.png'); }
+#menu li.tournaments 		{ background-image: url('/img/hwsports/icons/tournament.14.png'); }
+#menu li.matches 			{ background-image: url('/img/hwsports/icons/match.14.png'); }
+#menu li.venues 			{ background-image: url('/img/hwsports/icons/venue.14.png'); }
+#menu li.sports 			{ background-image: url('/img/hwsports/icons/sport.14.png'); }
+#menu li.groups 			{ background-image: url('/img/hwsports/icons/group.14.png'); }
+#menu li.users 				{ background-image: url('/img/hwsports/icons/user.14.png'); }
+#menu li.news 				{ background-image: url('/img/hwsports/icons/news.14.png'); }
+#menu li.tickets 			{ background-image: url('/img/hwsports/icons/tickets.14.png'); }
+#menu li.reports 			{ background-image: url('/img/hwsports/icons/report.14.png'); }
+#menu li.appearance 		{ background-image: url('/img/hwsports/icons/appearance.14.png'); }
+#menu li.settings 			{ background-image: url('/img/hwsports/icons/settings.14.png'); }
+#menu li.personal-settings	{ background-image: url('/img/hwsports/icons/personal-settings.14.png'); }
 
 
 

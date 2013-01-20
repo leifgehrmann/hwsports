@@ -55,10 +55,11 @@
                     <a href="/tms"><li class="last-child home <?=($page=="tmshome" ? 'selected' : '')?>">Dashboard</li></a>
                 </ul>
                 <ul>
+                    <a href="/tms/calendar"><li class="calendar <?=($page=="calendar" ? 'selected' : '')?>">Calendar</li></a>
                     <a href="/tms/tournaments"><li class="tournaments <?=($page=="tournaments" ? 'selected' : '')?>">Tournaments</li></a>
+                    <a href="/tms/matches"><li class="matches <?=($page=="matches" ? 'selected' : '')?>">Matches</li></a>
                     <a href="/tms/venues"><li class="venues <?=($page=="venues" ? 'selected' : '')?>">Venues</li></a>
                     <a href="/tms/sports"><li class="sports <?=($page=="sports" ? 'selected' : '')?>">Sports</li></a>
-                    <a href="/tms/matches"><li class="matches <?=($page=="matches" ? 'selected' : '')?>">Matches</li></a>
                     <a href="/tms/news"><li class="news <?=($page=="news" ? 'selected' : '')?>">News</li></a>
                     <a href="/tms/tickets"><li class="tickets <?=($page=="tickets" ? 'selected' : '')?>">Tickets</li></a>
                     <a href="/tms/reports"><li class="last-child reports <?=($page=="reports" ? 'selected' : '')?>">Reports</li></a>

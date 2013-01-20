@@ -58,7 +58,6 @@
 			async : false,
 			data: form_data,
 			success: function(msg) {
-				alert(msg['success']);
 				if(msg['success']){
 					$("#edit-"+fieldname).css("visibility", "hidden");
 					if(fieldname=="name"){
