@@ -26,6 +26,7 @@
 		<script src="/scripts/datatables/dataTables.editor.min.js"></script>
 		<script src="/scripts/datatables/dataTables.ColReorderWithResize.js"></script>
 		<script src="/scripts/datatables/dataTables.ColVis.js"></script>
+		<script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
     </head>
     <!--[if lt IE 7]>      <body class="page-<?=$page?> lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
     <!--[if IE 7]>         <body class="page-<?=$page?> lt-ie9 lt-ie8"> <![endif]-->
