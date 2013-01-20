@@ -106,7 +106,7 @@ class Venues_model extends CI_Model {
 			foreach($data as $key=>$value) {
 				$dataQueryString = 	"UPDATE `venuesData` ".
 									"SET `value`='$value' ".
-									"WHERE `key`='$escValue' ".
+									"WHERE `key`='$key' ".
 									"AND `venueID`='$venueID'";
 				$this->db->query($dataQueryString);
 			}
