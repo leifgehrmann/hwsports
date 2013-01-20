@@ -26,12 +26,16 @@
 
 <script type='text/javascript'>
 	function changed(fieldname){
-		$("#edit-"+fieldname).next('button').show();
+		$("#edit-"+fieldname).each(function(){
+			$("button", this).show();
+		}
 	}
 	function cancel(fieldname){
 		input = $("#form-"+fieldname);
 		input.val(input.attr('oldvalue'));
-		$("#edit-"+fieldname).next('button').hide();
+		$("#edit-"+fieldname).each(function(){
+			$("button", this).hide();
+		}
 	}
 	function update(fieldname){
 		var form_data = {};
@@ -42,7 +46,9 @@
 			async : false,
 			data: form_data,
 			success: function(msg) {
-				$("#edit-"+fieldname).next('button').show();
+				$("#edit-"+fieldname).each(function(){
+					$("button", this).hide();
+				}
 			}
 		});
 	}
