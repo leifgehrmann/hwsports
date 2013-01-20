@@ -55,11 +55,12 @@
 			data: form_data,
 			success: function(msg) {
 				if(msg['success']){
-					alert(fieldname+" : "+form_data[fieldname]);
-				}
-				$("#edit-"+fieldname).css("visibility", "hidden");
-				if(fieldname=="name"){
-					$("#title-name").html(form_data[fieldname]);
+					$("#edit-"+fieldname).css("visibility", "hidden");
+					if(fieldname=="name"){
+						$("#title-name").html(form_data[fieldname]);
+					}
+				} else {
+					alert("Could not update the field. Please contact support.");
 				}
 			}
 		});
