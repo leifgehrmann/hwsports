@@ -185,7 +185,7 @@ class Db_venues extends MY_Controller {
 					}
 				}
 
-				if($this->venues_model->update_venue($venueID,$data)>=0){
+				if($this->venues_model->update_venue($venueID,$data)){
 					$output['success'] = true;
 					$output['message'] = 'The venue was updated.';
 				} else {

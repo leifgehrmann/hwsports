@@ -102,7 +102,6 @@ class Venues_model extends CI_Model {
 		$this->db->trans_start();
 
 		if($this->venue_exists($venueID)){
-			$escVenueID = $this->db->escape($venueID);
 			foreach($data as $key=>$value) {
 				$dataQueryString = 	"UPDATE `venuesData` ".
 									"SET `value`='$value' ".
