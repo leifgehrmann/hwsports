@@ -19,7 +19,15 @@
 				right: 'month,agendaWeek,agendaDay'
 			},
 			events: '/db_calendar/getAllMatches/',
-			editable: true
+			editable: true,
+			eventResize: function(match,dayDelta,minuteDelta,revertFunc) {
+				var minutesDelta = (dayDelta*1440)+minuteDelta;
+				alert("The end date of match " + match.matchID + "has been moved " + minutesDelta + " minutes.");
+			},
+			eventDrop: function(match,dayDelta,minuteDelta,allDay,revertFunc) {
+				var minutesDelta = (dayDelta*1440)+minuteDelta;
+				alert("The start date of match " + match.matchID + "has been moved " + minutesDelta + " minutes.");
+			}
 		});
 		
 	});
