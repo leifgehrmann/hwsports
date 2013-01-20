@@ -1,17 +1,17 @@
 <h1><a href="/tms/matches/">Matches</a> &#9656; <span id="title-name"><?=$this->data["match"]["name"]?></span></h1>
 <div id='message'></div>
 <?php
-	$fields = array("name","description","directions");
-	$labels = array("Match Name","Description","Directions");
-	$types = array("text","textfield","textfield");
-	$types = array("text","textfield","textfield");
+	$fields = array("name","description","starttime","endtime");
+	$labels = array("Match Name","Description","starttime","endtime");
+	$types = array("text","text","text");
+	$types = array("text","text","text");
 	$widths = array("15%","40%","20%");
 
 	echo "<table>";
 	for($i=0;$i<count($fields);$i++){
 		echo "\t<tr>";
 		echo "\t\t<th style='width:{$widths[0]}'>{$labels[$i]}</th>";
-		$value = htmlspecialchars($this->data['venue'][$fields[$i]], ENT_QUOTES);
+		$value = htmlspecialchars($this->data['match'][$fields[$i]], ENT_QUOTES);
 		if($types[$i]=="text")
 			echo "\t\t<td style='width:{$widths[1]}'>
 							<input 
