@@ -22,12 +22,24 @@
 			editable: true,
 			eventResize: function(match,dayDelta,minuteDelta,revertFunc) {
 				console.log(match);
-				var minutesDelta = (dayDelta*1440)+minuteDelta;
-				alert("The end date of match " + match.data.id + "has been moved " + minutesDelta + " minutes.");
+				var minutesDelta = ((dayDelta*1440)+minuteDelta)*60;
+				var request = $.ajax({
+					type: "POST",
+					url: '/db_calendar/changeMatchEnd',
+					data: { 'minutesDelta': minutesDelta, 'id': match.data.id }
+				});
+ 
+				request.done(function(msg) {
+				 alert( msg );
+				});
+				 
+				request.fail(function(jqXHR, textStatus) {
+				  alert( "Request failed: " + textStatus );
+				});
 			},
 			eventDrop: function(match,dayDelta,minuteDelta,allDay,revertFunc) {
 				console.log(match);
-				var minutesDelta = (dayDelta*1440)+minuteDelta;
+				var minutesDelta = ((dayDelta*1440)+minuteDelta)*60;
 				var request = $.ajax({
 					type: "POST",
 					url: '/db_calendar/changeMatchStart',
@@ -35,14 +47,12 @@
 				});
  
 				request.done(function(msg) {
-				 console.log( msg );
 				 alert( msg );
 				});
 				 
 				request.fail(function(jqXHR, textStatus) {
 				  alert( "Request failed: " + textStatus );
 				});
-				alert("The start date of match " + match.data.id + "has been moved " + minutesDelta + " minutes.");
 			}
 		});
 		

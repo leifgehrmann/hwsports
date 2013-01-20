@@ -39,7 +39,20 @@ class Db_Calendar extends MY_Controller {
 	}
 
 	public function changeMatchStart() {
-		$this->data['data'] = json_encode(  $_POST  );
+		$matchData = $this->matches_model->get_match($_POST['id']);
+		$oldStartTime = $matchData['startTime'];
+		$newStartTime = $oldStartTime+$_POST['minutesDelta'];
+		$updateResult = $this->matches_model->update_match($_POST['id'],array('startTime'=>$newStartTime);
+		$this->data['data'] = ($updateResult ? "Success!" : "False!");
+		$this->load->view('data',$this->data);
+	}
+
+	public function changeMatchEnd() {
+		$matchData = $this->matches_model->get_match($_POST['id']);
+		$oldEndTime = $matchData['endTime'];
+		$newEndTime = $oldEndTime+$_POST['minutesDelta'];
+		$updateResult = $this->matches_model->update_match($_POST['id'],array('endTime'=>$newEndTime);
+		$this->data['data'] = ($updateResult ? "Success!" : "False!");
 		$this->load->view('data',$this->data);
 	}
 	
