@@ -35,7 +35,6 @@ class Db_Calendar extends MY_Controller {
 				'color' => '#EA472C'
 			)
 		));
-		header('Content-Type: application/json');
 		$this->load->view('data',$this->data);
 	}
 	public function getVenueMatches($venueID){
