@@ -176,7 +176,9 @@ class Db_venues extends MY_Controller {
 			$formRules = array('required','required','required','required','required');
 			$formLength = min(count($formNames),count($formLabels),count($formRules));
 			for ($i = 0; $i < $formLength; $i++) {
-				$this->form_validation->set_rules($formNames[$i], $formLabels[$i], $formRules[$i]);
+				if($this->input->post($formNames[$i])){
+					$this->form_validation->set_rules($formNames[$i], $formLabels[$i], $formRules[$i]);
+				}
 			}
 
 			// Does the form validate?
