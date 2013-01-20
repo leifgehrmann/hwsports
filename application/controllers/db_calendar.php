@@ -22,7 +22,7 @@ class Db_Calendar extends MY_Controller {
 				'end' => $match['timestamp']+7200,
 				'allDay' => false,
 				'color' => '#2966C7'
-			)
+			);
 		}
 		$this->load->view('data',$this->data);
 	}
