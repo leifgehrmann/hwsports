@@ -15,7 +15,7 @@ class Db_Calendar extends MY_Controller {
 	public function getAllMatches() {
 		$output = $this->matches_model->get_matches($this->data['centre']['id']);
 			
-		$this->data['data'] = $output;
+		$this->data['data'] = json_encode($output);
 	
 	
 		// Should return registration periods
