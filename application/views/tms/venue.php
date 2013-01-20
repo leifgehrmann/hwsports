@@ -11,19 +11,17 @@
 	for($i=0;$i<count($fields);$i++){
 		echo "\t<tr>";
 		echo "\t\t<th style='width:{$widths[0]}'>{$labels[$i]}</th>";
-		//$JS_value = json_encode($this->data['venue'][$fields[$i]]);
-		$escapedValue = htmlspecialchars($this->data['venue'][$fields[$i]],ENT_QUOTES);
 		if($types[$i]=="text")
 			echo "\t\t<td style='width:{$widths[1]}'>
 						<input 
 							id='form-{$fields[$i]}'
 							type='text'
-							oldvalue='{$escapedValue}'
 							onkeyup='changed(\"{$fields[$i]}\")'
-							value='{$escapedValue}'>
+							oldvalue='{$this->data["venue"]["name"]}'
+							value='{$this->data["venue"]["name"]}'>
 						</td>";
 		else if($types[$i]=="textfield")
-			echo "\t\t<td style='width:{$widths[1]}'><textarea id='form-{$fields[$i]}' onkeyup='changed(\"{$fields[$i]}\")' oldvalue='{$escapedValue}'>{$escapedValue}</textarea></td>";
+			echo "\t\t<td style='width:{$widths[1]}'><textarea id='form-{$fields[$i]}' onkeyup='changed(\"{$fields[$i]}\")' oldvalue='{$this->data["venue"]["name"]}'>{$this->data["venue"]["name"]}</textarea></td>";
 		echo "\t\t<td id='edit-{$fields[$i]}' style='visibility:hidden;width:{$widths[2]}'><button onclick='update(\"{$fields[$i]}\")'>Update</button><button onclick='cancel(\"{$fields[$i]}\")'>Cancel</button></td>";
 		echo "\t</tr>";
 	}
