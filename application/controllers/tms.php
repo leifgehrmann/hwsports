@@ -159,7 +159,7 @@ class Tms extends MY_Controller {
 		// Get data for this venue
 		$this->data['match'] = $this->matches_model->get_match($matchID);
 
-		$this->data['title'] = $this->data['match']['name']+" match";
+		$this->data['title'] = $this->data['match']['name']." match";
 		$this->data['page']  = "match"; 
 		$this->load->view('tms/header',$this->data);
 		$this->load->view('tms/match',$this->data);
