@@ -10,8 +10,8 @@
 				<th>Sport</th>
 				<th>Tournament</th>
 				<th>Name</th>
+				<th>Date / Time</th>
 				<th>Description</th>
-				<th>Timestamp</th>
 			</tr>
 		</thead>
 	</table>
