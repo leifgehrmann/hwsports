@@ -24,6 +24,7 @@ class Db_Calendar extends MY_Controller {
 				'color' => '#2966C7'
 			);
 		}
+		$this->data['data'] = json_encode($this->data['data']);
 		$this->load->view('data',$this->data);
 	}
 	public function getVenueMatches($venueID){
