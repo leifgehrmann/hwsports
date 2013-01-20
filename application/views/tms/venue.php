@@ -1,5 +1,5 @@
 <h1><a href="/tms/venues/">Venues</a> &#9656; <?=$this->data["venue"]["name"]?></h1>
-
+<div id='message'></div>
 <?php
 	$fields = array("name","description","directions");
 	$labels = array("Venue Name","Description","Directions");
@@ -44,10 +44,10 @@
 			async : false,
 			data: form_data,
 			success: function(msg) {
-				alert(msg);
-				alert(fieldname+" was updated to "+$("#form-"+fieldname).val());
 				editform = $("#edit-"+fieldname);
 				editform.hide();
+				$('#message').html(msg);
+				alert(fieldname+" was updated to "+$("#form-"+fieldname).val());
 			}
 		});
 	}
