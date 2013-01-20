@@ -27,7 +27,7 @@ class Db_Calendar extends MY_Controller {
 				'end' => mktime(14, 0, 0, 1, 10-3, 2013),
 				'allDay' => false,
 				'color' => '#2966C7'
-			)
+			),
 			array(
 				'title' => 'Heriot Hurdling Registration Period',
 				'start' => mktime(0, 0, 0, 1, 10-30, 2013),
