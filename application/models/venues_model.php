@@ -103,10 +103,10 @@ class Venues_model extends CI_Model {
 
 		if($this->venue_exists($venueID)){
 			foreach($data as $key=>$value) {
-				$dataQueryString = 	"UPDATE `venuesData` ".
+				$dataQueryString = 	"UPDATE `venueData` ".
 									"SET `value`='$value' ".
 									"WHERE `key`='$key' ".
-									"AND`venueID`='$venueID'";
+									"AND `venueID`='$venueID'";
 				$this->db->query($dataQueryString);
 			}
 			$this->db->trans_complete();
