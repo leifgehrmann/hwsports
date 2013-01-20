@@ -32,7 +32,7 @@
 					"label": "Date / Time",
 					"name": "timestamp",
 					"type": "datetime",
-					"dateFormat": "dd/mm/yyyy",
+					"dateFormat": "dd/mm/yy",
 					"timeFormat": "HH:mm",
 					"separator": " @ "
 				}, {
