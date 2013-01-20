@@ -56,12 +56,12 @@
 			"aoColumns": [
 				{ "mData": "centreID" },
 				{ "mData": "matchID" },
-				{ "mData": "sportID" },
+				{ "mData": "sportName" },
+				{ "mData": "venueName" },
 				{ 
-					"mData": "tournamentID",
+					"mData": "tournamentName",
 					"sDefaultContent": ""
 				},
-				{ "mData": "venueID" },
 				{ "mData": "name" },
 				{ "mData": "timestamp" },
 				{ "mData": "description" }
