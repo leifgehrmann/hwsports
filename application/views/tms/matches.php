@@ -10,7 +10,8 @@
 				<th>Venue</th>
 				<th>Tournament</th>
 				<th>Name</th>
-				<th>Date / Time</th>
+				<th>Start Time</th>
+				<th>End Time</th>
 				<th>Description</th>
 			</tr>
 		</thead>

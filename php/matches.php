@@ -58,7 +58,8 @@ if ( !isset($_POST['action']) ) {
 	
 		$matchDataQueryString = "SELECT " .
 			"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
-			"MAX(CASE WHEN `key`='timestamp' THEN value END ) AS timestamp, " .
+			"MAX(CASE WHEN `key`='startTime' THEN value END ) AS startTime, " .
+			"MAX(CASE WHEN `key`='endTime' THEN value END ) AS endTime, " .
 			"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
 			"MAX(CASE WHEN `key`='tournamentID' THEN value END ) AS tournamentID " .
 			"FROM matchData WHERE matchID = {$match['matchID']}";
@@ -66,7 +67,8 @@ if ( !isset($_POST['action']) ) {
 		
 		$out['aaData'][$aaDataID] = array_merge($match, $matchData);
 		$out['aaData'][$aaDataID]['centreID'] = $centreID;
-		$out['aaData'][$aaDataID]['timestamp'] = date("d/m/Y @ H:i",(int)$out['aaData'][$aaDataID]['timestamp']);
+		$out['aaData'][$aaDataID]['startTime'] = date("d/m/Y @ H:i",(int)$out['aaData'][$aaDataID]['startTime']);
+		$out['aaData'][$aaDataID]['endTime'] = date("d/m/Y @ H:i",(int)$out['aaData'][$aaDataID]['endTime']);
 
 		$sportQueryString = "SELECT DISTINCT `value` FROM `sportData` WHERE `key` = 'name' AND `sportID` = '{$out['aaData'][$aaDataID]['sportID']}'";
 		$sportName = $db->sql($sportQueryString)->fetch();
@@ -94,23 +96,28 @@ if ( !isset($_POST['action']) ) {
 	$out['venueData'] = $venueData;
 	
 } elseif($_POST['action']=='create') {
-	$a = strptime($_POST['data']['timestamp'], '%d/%m/%Y @ %H:%M');
-	$timestamp = mktime($a['tm_hour'], $a['tm_min'], 0, $a['tm_mon']+1, $a['tm_mday'], $a['tm_year']+1900);
+	$a = strptime($_POST['data']['startTime'], '%d/%m/%Y @ %H:%M');
+	$startTime = mktime($a['tm_hour'], $a['tm_min'], 0, $a['tm_mon']+1, $a['tm_mday'], $a['tm_year']+1900);
+	$a = strptime($_POST['data']['endTime'], '%d/%m/%Y @ %H:%M');
+	$endTime = mktime($a['tm_hour'], $a['tm_min'], 0, $a['tm_mon']+1, $a['tm_mday'], $a['tm_year']+1900);
 
 	$matchID = $db->sql("SELECT MAX(matchID) FROM matches")->fetch();
 	$matchID = $matchID[0];
 	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','name','{$_POST['data']['name']}')");
-	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','timestamp','$timestamp')");
+	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','startTime','$startTime')");
+	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','endTime','$endTime')");
 	$db->sql("INSERT INTO `matchData` (`matchID`,`key`,`value`) VALUES ('$matchID','description','{$_POST['data']['description']}')");
 	
 	$matchDataQueryString = "SELECT " .
 		"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
-		"MAX(CASE WHEN `key`='timestamp' THEN value END ) AS timestamp, " .
+		"MAX(CASE WHEN `key`='startTime' THEN value END ) AS startTime, " .
+		"MAX(CASE WHEN `key`='endTime' THEN value END ) AS endTime, " .
 		"MAX(CASE WHEN `key`='description' THEN value END ) AS description " .
 		"FROM matchData WHERE matchID = {$matchID}";
 	$matchData = $db->sql($matchDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $matchData);
-	$out['row']['timestamp'] = date("d/m/Y @ H:i",$out['row']['timestamp']);
+	$out['row']['startTime'] = date("d/m/Y @ H:i",$out['row']['startTime']);
+	$out['row']['endTime'] = date("d/m/Y @ H:i",$out['row']['endTime']);
 	
 	$sportCentreQueryString = "SELECT `centreID` FROM `sports` WHERE `sportID` = '{$_POST['data']['sportID']}'";
 	$sportCentre = $db->sql($sportCentreQueryString)->fetch();
@@ -126,23 +133,28 @@ if ( !isset($_POST['action']) ) {
 	
 	$out['row']['tournamentName'] = "None";	
 } elseif($_POST['action']=='edit') {
-	$a = strptime($_POST['data']['timestamp'], '%d/%m/%Y @ %H:%M');
-	$timestamp = mktime($a['tm_hour'], $a['tm_min'], 0, $a['tm_mon']+1, $a['tm_mday'], $a['tm_year']+1900);
+	$a = strptime($_POST['data']['startTime'], '%d/%m/%Y @ %H:%M');
+	$startTime = mktime($a['tm_hour'], $a['tm_min'], 0, $a['tm_mon']+1, $a['tm_mday'], $a['tm_year']+1900);
+	$a = strptime($_POST['data']['endTime'], '%d/%m/%Y @ %H:%M');
+	$endTime = mktime($a['tm_hour'], $a['tm_min'], 0, $a['tm_mon']+1, $a['tm_mday'], $a['tm_year']+1900);
 	
 	$db->sql("UPDATE `matchData` SET `value` = '{$_POST['data']['name']}' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'name'");
-	$db->sql("UPDATE `matchData` SET `value` = '$timestamp' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'timestamp'");
+	$db->sql("UPDATE `matchData` SET `value` = '$startTime' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'startTime'");
+	$db->sql("UPDATE `matchData` SET `value` = '$endTime' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'endTime'");
 	$db->sql("UPDATE `matchData` SET `value` = '{$_POST['data']['description']}' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'description'");
 	$db->sql("UPDATE `matchData` SET `value` = '{$_POST['data']['tournamentID']}' WHERE `matchID` = '{$_POST['data']['matchID']}' AND `key` = 'tournamentID'");
 	
 	$matchDataQueryString = "SELECT " .
 		"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 		"MAX(CASE WHEN `key`='description' THEN value END ) AS description, " .
-		"MAX(CASE WHEN `key`='timestamp' THEN value END ) AS timestamp, " .
+		"MAX(CASE WHEN `key`='startTime' THEN value END ) AS startTime, " .
+		"MAX(CASE WHEN `key`='endTime' THEN value END ) AS endTime, " .
 		"MAX(CASE WHEN `key`='tournamentID' THEN value END ) AS tournamentID " .
 		"FROM matchData WHERE matchID = {$_POST['data']['matchID']}";
 	$matchData = $db->sql($matchDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $matchData);
-	$out['row']['timestamp'] = date("d/m/Y @ H:i",$out['row']['timestamp']);
+	$out['row']['startTime'] = date("d/m/Y @ H:i",$out['row']['startTime']);
+	$out['row']['endTime'] = date("d/m/Y @ H:i",$out['row']['endTime']);
 		
 	$sportCentreQueryString = "SELECT `centreID` FROM `sports` WHERE `sportID` = '{$_POST['data']['sportID']}'";
 	$sportCentre = $db->sql($sportCentreQueryString)->fetch();
