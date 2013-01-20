@@ -14,7 +14,7 @@
 			echo "\t\t<td style='width:{$widths[1]}'><input id='form-{$fields[$i]}' type='text' oldvalue='{$this->data['venue'][$fields[$i]]}' onchange='changed(\"{$fields[$i]}\")' value='{$this->data['venue'][$fields[$i]]}'></td>";
 		else if($types[$i]=="textfield")
 			echo "\t\t<td style='width:{$widths[1]}'><textarea id='form-{$fields[$i]}' onchange='changed(\"{$fields[$i]}\")' oldvalue='{$this->data['venue'][$fields[$i]]}'>{$this->data['venue'][$fields[$i]]}</textarea></td>";
-		echo "\t\t<td id='edit-{$fields[$i]}' style='visibility:hidden;width:{$widths[2]}'><button onclick='update(\"{$fields[$i]}\")'>Update</button><button onclick='cancel(\"{$fields[$i]}\")'>Cancel</button></td>";
+		echo "\t\t<td id='edit-{$fields[$i]}' style='width:{$widths[2]}'><button style='display:none' onclick='update(\"{$fields[$i]}\")'>Update</button><button style='display:none' onclick='cancel(\"{$fields[$i]}\")'>Cancel</button></td>";
 		echo "\t</tr>";
 	}
 	echo "</table>";
@@ -26,14 +26,12 @@
 
 <script type='text/javascript'>
 	function changed(fieldname){
-		editform = $("#edit-"+fieldname);
-		editform.show();
+		$("#edit-"+fieldname).next('button').show();
 	}
 	function cancel(fieldname){
 		input = $("#form-"+fieldname);
 		input.val(input.attr('oldvalue'));
-		editform = $("#edit-"+fieldname);
-		editform.hide();
+		$("#edit-"+fieldname).next('button').hide();
 	}
 	function update(fieldname){
 		var form_data = {};
@@ -44,8 +42,7 @@
 			async : false,
 			data: form_data,
 			success: function(msg) {
-				editform = $("#edit-"+fieldname);
-				editform.hide();
+				$("#edit-"+fieldname).next('button').show();
 			}
 		});
 	}
