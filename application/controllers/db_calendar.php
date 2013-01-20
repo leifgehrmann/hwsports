@@ -18,8 +18,8 @@ class Db_Calendar extends MY_Controller {
 		foreach($matches as $match) {
 			$this->data['data'][] = array(
 				'title' => $match['name'],
-				'start' => $match['timestamp'],
-				'end' => $match['timestamp']+7200,
+				'start' => $match['startTime'],
+				'end' => $match['endTime'],
 				'allDay' => false,
 				'color' => '#2966C7'
 			);
