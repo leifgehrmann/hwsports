@@ -40,6 +40,7 @@
 			eventDrop: function(match,dayDelta,minuteDelta,allDay,revertFunc) {
 				console.log(match);
 				var minutesDelta = ((dayDelta*1440)+minuteDelta)*60;
+				alert(minutesDelta);
 				var request = $.ajax({
 					type: "POST",
 					url: '/db_calendar/changeMatchStart',
