@@ -53,8 +53,8 @@
 				 
 				request.fail(function(jqXHR, textStatus) {
 				  alert( "Request failed: " + textStatus );
-				});*/
-			}
+				});
+			}*/
 		});
 		
 	});
