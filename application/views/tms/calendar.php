@@ -19,7 +19,7 @@
 				right: 'month,agendaWeek,agendaDay'
 			},
 			events: '/db_calendar/getAllMatches/',
-			editable: true,
+			editable: true/*,
 			eventResize: function(match,dayDelta,minuteDelta,revertFunc) {
 				console.log(match);
 				var minutesDelta = ((dayDelta*1440)+minuteDelta)*60;
@@ -53,7 +53,7 @@
 				 
 				request.fail(function(jqXHR, textStatus) {
 				  alert( "Request failed: " + textStatus );
-				});
+				});*/
 			}
 		});
 		
