@@ -24,7 +24,7 @@
                 <ul>
                     <a href="/"                   ><li class="home"       >Homepage</li></a>
                     <a href="/product/screenshots"><li class="screenshots">Screenshots</li></a>
-                    <a href="mailto:Signup@infusionsports.co.uk"><li class="signup">Signup</li></a>
+                    <a href="http://infusionsystems.co.uk/contact-us/"><li class="signup">Signup</li></a>
                 </ul>
             </div>
             <div id="content">
