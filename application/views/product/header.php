@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <link rel="icon" type="image/png" href="/img/<?=$slug?>/logo/is.16.png" />
         <meta name="description" content="">
         <title>Infusion Sports</title>
         <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
