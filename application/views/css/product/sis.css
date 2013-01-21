@@ -160,6 +160,9 @@ body {
 	font-size: 16px;
 	color: #1E303A; 
 }
+#content img {
+	width: 100%;
+}
 
 #footer {
 	border-top:1px solid #C8C8C8;

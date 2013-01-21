@@ -21,9 +21,9 @@
             <a href="/"><div id="header"></div></a>
             <div id="menu">
                 <ul>
-                    <a href="/"           ><li class="home"       >Homepage</li></a>
-                    <a href="/screenshots"><li class="screenshots">Screenshots</li></a>
-                    <a href="/signup"     ><li class="signup"     >Signup</li></a>
+                    <a href="/"                   ><li class="home"       >Homepage</li></a>
+                    <a href="/product/screenshots"><li class="screenshots">Screenshots</li></a>
+                    <a href="mailto:Signup@infusionsports.co.uk"><li class="signup">Signup</li></a>
                 </ul>
             </div>
             <div id="content">
