@@ -124,11 +124,70 @@ class Tms extends MY_Controller {
 		$this->load->model('tournament_model');
 		
 		if( $this->tournament_model->tournament_exists($id) ) {
-			$this->data['tournament'] = $this->tournament_model->get_tournament($id);
+			$tournament = $this->tournament_model->get_tournament($id);
+						
+			$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
+			$this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
 			
-			$this->load->view('tms/header',$this->data);
-			$this->load->view('tms/tournament',$this->data);
-			$this->load->view('tms/footer',$this->data);
+			if ($this->form_validation->run() == true) {
+				$newdata = $_POST;
+				
+				$this->tournament_model->update_tournament($tournamentID, $newdata);
+				if($tournamentID > -1) {
+					// Successful update, show success message
+					$this->session->set_flashdata('message',  'Successfully Created Tournament.');
+				} else {
+					$this->session->set_flashdata('message',  'Failed. Please contact Infusion Systems.');
+				}
+				redirect("/tms/tournament/$tournamentID", 'refresh');
+			} else {
+				//set the flash data error message if there is one
+				$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message') );
+			
+				$this->data['name'] = array(
+					'name'  => 'name',
+					'id'    => 'name',
+					'type'  => 'text',
+					'value' => $this->form_validation->set_value('name',(isset($tournament['name']) ? $tournament['name'] : '') )
+				);
+				$this->data['description'] = array(
+					'name'  => 'description',
+					'id'    => 'description',
+					'type'  => 'text',
+					'value' => $this->form_validation->set_value('description',(isset($tournament['description']) ? $tournament['description'] : '') )
+				);
+				$this->data['registrationStart'] = array(
+					'name'  => 'registrationStart',
+					'id'    => 'registrationStart',
+					'type'  => 'text',
+					'class' => 'date',
+					'value' => $this->form_validation->set_value('registrationStart',(isset($tournament['registrationStart']) ? $tournament['registrationStart'] : '') )
+				);
+				$this->data['registrationEnd'] = array(
+					'name'  => 'registrationEnd',
+					'id'    => 'registrationEnd',
+					'type'  => 'text',
+					'class' => 'date',
+					'value' => $this->form_validation->set_value('registrationEnd',(isset($tournament['registrationEnd']) ? $tournament['registrationEnd'] : '') )
+				);
+				$this->data['tournamentStart'] = array(
+					'name'  => 'tournamentStart',
+					'id'    => 'tournamentStart',
+					'type'  => 'text',
+					'class' => 'date',
+					'value' => $this->form_validation->set_value('tournamentStart',(isset($tournament['tournamentStart']) ? $tournament['tournamentStart'] : '') )
+				);
+				$this->data['tournamentEnd'] = array(
+					'name'  => 'tournamentEnd',
+					'id'    => 'tournamentEnd',
+					'type'  => 'text',
+					'class' => 'date',
+					'value' => $this->form_validation->set_value('tournamentEnd',(isset($tournament['tournamentEnd']) ? $tournament['tournamentEnd'] : '') )
+				);
+				
+			}
+				
+				
 		} else {
 			$this->session->set_flashdata('message',  "Tournament ID $id does not exist.");
 			redirect("/tms/tournaments", 'refresh');
