@@ -209,7 +209,7 @@ class Tms extends MY_Controller {
 					$nameResult = $query->result_array();
 					$users
 					[$userkey]
-					->centreName = $nameResult['value'];
+					->centreName = print_r($nameResult,1);
 				}
 			}
 		}
