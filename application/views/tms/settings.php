@@ -69,6 +69,7 @@
 			<td><?php echo form_input($sunOpenTime);?></td>
 			<td><?php echo form_input($sunCloseTime);?></td>
 		</tr>
+	</table>
 
   <h2>Website Appearance:</h2>
   <p>
