@@ -107,11 +107,10 @@ class Tournament_model extends CI_Model {
 
 		if($this->tournament_exists($tournamentID)){
 			foreach($data as $key=>$value) {
-				$escKey = $this->db->escape($key);
 				$escValue = $this->db->escape($value);
 				$dataQueryString = 	"UPDATE `tournamentData` ".
 									"SET `value`=$escValue ".
-									"WHERE `key`=$escKey ".
+									"WHERE `key`=$key ".
 									"AND `tournamentID`=$tournamentID";
 				$this->db->query($dataQueryString);
 			}
