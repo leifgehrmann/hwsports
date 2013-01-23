@@ -56,7 +56,6 @@
 			"events": {
 				"onOpen": function ( settings, json ) {
 					if($('.DTE_Header_Content').text() != 'Delete') {
-						console.log($('.DTE_Header_Content').text());
 						$('.DTE_Body_Content').append("<div id='mapcontainer'></div>");
 						$('#mapcontainer').append($('#venuemap'));
 						$('#venuemap').show();
@@ -68,6 +67,8 @@
 							centre_marker.setPosition(existingVenuePosition);
 							map.setCenter(existingVenuePosition);
 						}
+					} else {
+						$('#venuemap').hide();
 					}
 				}
 			}
