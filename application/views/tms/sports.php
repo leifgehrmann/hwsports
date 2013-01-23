@@ -13,7 +13,7 @@
 		</thead>
 	</table>
 	<div class="spacer"></div>
-	<div id="centreID" style="display:none;"><?=$centre['id']?></div>
+	<div id="centreID" style="display:none;"><?=$centre['centreID']?></div>
 </div><!-- /#main -->
 
 <script src="/scripts/datatables/sports.js"></script>
