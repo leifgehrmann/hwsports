@@ -485,3 +485,7 @@ body .ui-datepicker .ui-datepicker-title{
 	width: auto;
 	padding: 5px;
 }
+
+#tournamentSelect {
+	height: 100px;
+}

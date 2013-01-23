@@ -5,12 +5,11 @@
 <? } ?>
 
 <h2>View / Edit Existing Tournament:</h2>
-<select id="tournamentSelect">
+<div id="tournamentSelect">
 	<? foreach($tournaments as $tournament) { 
-		echo "<option value='{$tournament['tournamentID']}'>{$tournament['name']}</option>\n";
+		echo "<a href='/tms/tournament/{$tournament['tournamentID']}'>{$tournament['name']}</a><br />\n";
 	 } ?>
-</select>
-<button id="viewEditTournament">Proceed</button>
+</div>
 <br />
 <br />
 
@@ -53,9 +52,6 @@
 
 <script type="text/javascript">
 	$('.date').datepicker();
-	$('#viewEditTournament').click( function() {
-		document.location.href='/tms/tournament/' + $("#tournamentSelect option:selected").value();
-	});
 </script>
 
 <!-- /#main -->
