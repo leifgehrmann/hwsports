@@ -122,7 +122,17 @@ class Tms extends MY_Controller {
 		$this->data['page'] = "tournament";
 		
 		$this->load->model('tournament_model');
-		$this->data['tournament'] = $this->tournament_model->get_tournament($id);
+		
+		if( $this->tournament_model->tournament_exists($id) ) {
+			$this->data['tournament'] = $this->tournament_model->get_tournament($id);
+			
+			$this->load->view('tms/header',$this->data);
+			$this->load->view('tms/tournament',$this->data);
+			$this->load->view('tms/footer',$this->data);
+		} else {
+			$this->session->set_flashdata('message',  "Tournament ID $id does not exist.");
+			redirect("/tms/tournaments", 'refresh');
+		}
 	}
 	public function venues($action='portal')
 	{
