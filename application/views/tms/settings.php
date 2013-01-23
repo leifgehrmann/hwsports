@@ -42,7 +42,7 @@
 <?php echo form_close();?>
 
 <script type="text/javascript">
-$('input[name="headerColour"], input[name="backgroundColour"]').ColorPicker({
+$('#headerColour, #backgroundColour').ColorPicker({
 	onSubmit: function(hsb, hex, rgb, el) {
 		$(el).val(hex);
 		$(el).ColorPickerHide();
