@@ -53,13 +53,14 @@ class Tms extends MY_Controller {
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
 			
-			if($this->tournament_model->insert_tournament($newdata) ) {
+			$tournamentID = $this->tournament_model->insert_tournament($newdata);
+			if($tournamentID > -1) {
 				// Successful update, show success message
 				$this->session->set_flashdata('message',  'Successfully Created Tournament.');
 			} else {
 				$this->session->set_flashdata('message',  'Failed. Please contact Infusion Systems.');
 			}
-			redirect("/tms/tournaments", 'refresh');
+			redirect("/tms/tournament/$tournamentID", 'refresh');
 		} else {
 			//display the create user form
 			//set the flash data error message if there is one
@@ -75,6 +76,34 @@ class Tms extends MY_Controller {
 				'name'  => 'description',
 				'id'    => 'description',
 				'type'  => 'text',
+				'value' => ''
+			);
+			$this->data['registrationStart'] = array(
+				'name'  => 'registrationStart',
+				'id'    => 'registrationStart',
+				'type'  => 'text',
+				'class' => 'date',
+				'value' => ''
+			);
+			$this->data['registrationEnd'] = array(
+				'name'  => 'registrationEnd',
+				'id'    => 'registrationEnd',
+				'type'  => 'text',
+				'class' => 'date',
+				'value' => ''
+			);
+			$this->data['tournamentStart'] = array(
+				'name'  => 'tournamentStart',
+				'id'    => 'tournamentStart',
+				'type'  => 'text',
+				'class' => 'date',
+				'value' => ''
+			);
+			$this->data['tournamentEnd'] = array(
+				'name'  => 'tournamentEnd',
+				'id'    => 'tournamentEnd',
+				'type'  => 'text',
+				'class' => 'date',
 				'value' => ''
 			);
 			
