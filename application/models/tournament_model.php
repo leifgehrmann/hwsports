@@ -51,7 +51,7 @@ class Tournament_model extends CI_Model {
 		$i = 0;
 		$len = count($fields);
 		foreach($fields as $field) {
-			$dataQueryString .= "MAX(CASE WHEN `key`=".$this->db->escape($field)." THEN value END ) AS ".$this->db->escape($field);
+			$dataQueryString .= "MAX(CASE WHEN `key`=".$this->db->escape($field)." THEN value END ) AS $field;
 			if($i<$len-1)
 				$dataQueryString .= ", ";
 			else
@@ -60,7 +60,7 @@ class Tournament_model extends CI_Model {
 		}
 		$dataQueryString .= "FROM tournamentData WHERE tournamentID = ".$this->db->escape($tournamentID);
 		$dataQuery = $this->db->query($dataQueryString);
-		$output = array_merge(array("tournamentID"=>$tournamentID), $dataQuery->result_array());
+		$output = array_merge(array("tournamentID"=>$tournamentID), $dataQuery->row_array());
 		return $output;
 	}
 
