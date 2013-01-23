@@ -480,3 +480,7 @@ body .ui-datepicker .ui-datepicker-title{
 	width: 100px;
 	padding: 5px;
 }
+#settingsForm input[type="checkbox"] {
+	width: auto;
+	padding: 5px;
+}
