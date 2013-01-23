@@ -1,3 +1,3 @@
 This page is still under development.<br />
 <br />
-<? print_r($users) ?>
+<pre><? print_r($users) ?></pre>
