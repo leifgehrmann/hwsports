@@ -201,15 +201,11 @@ class Tms extends MY_Controller {
 		foreach($users as $userkey => $user) {
 			$query = $this->db->query("SELECT `key`,`value` FROM `userData` WHERE `userID` = '{$user->id}'");
 			foreach($query->result_array() as $userDataRow) {
-				$users
-					[$userkey]
-					->$userDataRow['key'] = $userDataRow['value'];
+				$users[$userkey]->$userDataRow['key'] = $userDataRow['value'];
 				if($userDataRow['key'] == 'centreID') {
 					$query = $this->db->query("SELECT `value` FROM `centreData` WHERE `key` = 'name' AND `centreID` = {$userDataRow['value']}");
 					$nameResult = $query->result_array();
-					$users
-					[$userkey]
-					->centreName = print_r($nameResult,1);
+					$users[$userkey]->centreName = print_r($nameResult,1);
 				}
 			}
 		}
