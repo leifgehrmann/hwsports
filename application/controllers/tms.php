@@ -489,17 +489,5 @@ class Tms extends MY_Controller {
 		}
 	}
 
-	function obj2arr($obj) {
-		if(is_object($obj)) $obj = (array) $obj;
-		if(is_array($obj)) {
-			$new = array();
-			foreach($obj as $key => $val) {
-				$new[$key] = obj2arr($val);
-			}
-		}
-		else $new = $obj;
-		return $new;       
-	}
-	
 }
 

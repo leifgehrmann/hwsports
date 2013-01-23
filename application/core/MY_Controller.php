@@ -32,6 +32,20 @@ class MY_Controller extends CI_Controller {
 			// Make all centre data accessible from all controllers and views
 			$this->data['centre'] = $this->centre_model->get_centre( $row['centreID'] );
 		}	
+		
+		
+		function obj2arr($obj) {
+			if(is_object($obj)) $obj = (array) $obj;
+			if(is_array($obj)) {
+				$new = array();
+				foreach($obj as $key => $val) {
+					$new[$key] = obj2arr($val);
+				}
+			}
+			else $new = $obj;
+			return $new;       
+		}
+		
     }
 }
 
