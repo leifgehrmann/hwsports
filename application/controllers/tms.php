@@ -234,6 +234,8 @@ class Tms extends MY_Controller {
 			//set the flash data error message if there is one
 			$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message') );
 			
+			print_r($this->data['centreData']['name']);
+			
 			$this->data['name'] = array(
 				'name'  => 'name',
 				'id'    => 'name',
