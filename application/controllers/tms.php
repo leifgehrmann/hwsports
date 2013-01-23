@@ -291,12 +291,14 @@ class Tms extends MY_Controller {
 				'name'  => 'headerColour',
 				'id'    => 'headerColour',
 				'type'  => 'text',
+				'style' => 'background-color: #'.(isset($this->data['centre']['headerColour']) ? $this->data['centre']['headerColour'] : 'FFFFFF'),
 				'value' => $this->form_validation->set_value('headerColour',(isset($this->data['centre']['headerColour']) ? $this->data['centre']['headerColour'] : '') )
 			);
 			$this->data['backgroundColour'] = array(
 				'name'  => 'backgroundColour',
 				'id'    => 'backgroundColour',
 				'type'  => 'text',
+				'style' => 'background-color: #'.(isset($this->data['centre']['backgroundColour']) ? $this->data['centre']['backgroundColour'] : 'FFFFFF'),
 				'value' => $this->form_validation->set_value('backgroundColour',(isset($this->data['centre']['backgroundColour']) ? $this->data['centre']['backgroundColour'] : '') )
 			);
 			$this->data['footerText'] = array(

@@ -80,7 +80,8 @@
     <label for="backgroundColour">Background Colour:</label><br />
     <?php echo form_input($backgroundColour);?>
   </p>
-    
+  <br />
+  
   <p><?php echo form_submit('submit', 'Submit Changes');?></p>
     
 <?php echo form_close();?>
