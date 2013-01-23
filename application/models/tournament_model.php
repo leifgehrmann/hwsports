@@ -22,14 +22,14 @@ class Tournament_model extends CI_Model {
 	 *  
 	 * @return array
 	 **/
-	public function get_tournaments($tournamentID, $fields=array("name","shortName","address","headerColour","backgroundColour","footerText"))
+	public function get_tournaments()
 	{
 		$output = array();
 		$queryString = "SELECT DISTINCT tournamentID FROM tournamentData";
 		$queryData = $this->db->query($queryString);
 		$data = $queryData->result_array();
 		foreach($data as $tournament) {
-			$output[] = $this->get_tournament($tournament['tournamentID'],$fields);
+			$output[] = $this->get_tournament($tournament['tournamentID']);
 		}
 		return $output;
 	}
@@ -39,8 +39,7 @@ class Tournament_model extends CI_Model {
 	 *  
 	 * @return array
 	 **/
-	public function get_tournament($tournamentID)
-	{
+	public function get_tournament($tournamentID) {
 		$fields = array();
 		$fieldsQuery = $this->db->query("SELECT `key` FROM `tournamentData` WHERE `tournamentID` = ".$this->db->escape($tournamentID) );
 		$fieldsResult = $fieldsQuery->result_array();
@@ -75,18 +74,17 @@ class Tournament_model extends CI_Model {
 	public function insert_tournament($data)
 	{	
 		$this->db->trans_start();
-
-		$this->db->query("INSERT INTO tournamentData (tournamentID) VALUES (".$this->db->escape($tournamentID).")");
+		
+		$this->db->query("INSERT INTO tournaments (centreID) VALUES ({$this->data['centre']['centreID']})");
 		$tournamentID = $this->db->insert_id();
 
 		$insertDataArray = array();
 		foreach($data as $key=>$value) {
-			$dataArray = array(
-					'tournamentID' => $this->db->escape($tournamentID),
-					'key' => $this->db->escape($key),
-					'value' => $this->db->escape($value)
-				);
-			$insertDataArray[] = $dataArray;
+			$insertDataArray[] = array(
+				'tournamentID' => $this->db->escape($tournamentID),
+				'key' => $this->db->escape($key),
+				'value' => $this->db->escape($value)
+			);
 		}
 		if ($this->db->insert_batch('tournamentData',$insertDataArray)) {
 			// db success

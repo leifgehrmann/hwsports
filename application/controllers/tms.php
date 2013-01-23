@@ -51,7 +51,7 @@ class Tms extends MY_Controller {
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
 			
-			if($this->centre_model->insert_tournament($newdata) ) {
+			if($this->tournament_model->insert_tournament($newdata) ) {
 				// Successful update, show success message
 				$this->session->set_flashdata('message',  'Successfully Created Tournament.');
 			} else {
