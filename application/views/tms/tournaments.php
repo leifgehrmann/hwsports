@@ -51,7 +51,9 @@
 <?php echo form_close();?>
 
 <script type="text/javascript">
-	$('.date').datepicker( "option", "dateFormat", "dd/mm/yy" );
+	$('.date').datepicker({
+      dateFormat: "dd/mm/yy"
+    });
 </script>
 
 <!-- /#main -->
