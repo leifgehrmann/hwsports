@@ -10,4 +10,5 @@ This page is still under development.<br />
 	Phone: <?=$user['phone']?><br>
 	Email: <?=$user['email']?><br>
 </div>
+<br />
 <? } ?>
