@@ -55,7 +55,6 @@
 			],
 			"events": {
 				"onInitCreate": function ( settings, json ) {
-					$('.DTE_Body_Content').append("<div id='mapcontainer'></div>");
 					$('#mapcontainer').append($('#venuemap'));
 					$('#venuemap').show();
 					mapInitialize();
@@ -68,7 +67,6 @@
 					}
 				},
 				"onInitEdit": function ( settings, json ) {
-					$('.DTE_Body_Content').append("<div id='mapcontainer'></div>");
 					$('#mapcontainer').append($('#venuemap'));
 					$('#venuemap').show();
 					mapInitialize();
@@ -79,6 +77,9 @@
 						centre_marker.setPosition(existingVenuePosition);
 						map.setCenter(existingVenuePosition);
 					}
+				},
+				"onOpen": function ( settings, json ) {
+					$('.DTE_Body_Content').append("<div id='mapcontainer'></div>");
 				}
 			}
 		} );
