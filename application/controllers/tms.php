@@ -19,7 +19,7 @@ class Tms extends MY_Controller {
 		/*$authorized = False;
 		if ( $this->ion_auth->in_group('admin') ){
 			$authorized = True;
-		} else if ( $this->ion_auth->in_group('centreadmin') && $this->data['centre']['id'])*/
+		} else if ( $this->ion_auth->in_group('centreadmin') && $this->data['centre']['centreID'])*/
 
 		if ( $this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin') ) {
 			$this->data['currentUser'] = $currentUser = $this->ion_auth->user()->row();
@@ -87,7 +87,7 @@ class Tms extends MY_Controller {
 		$this->load->model('venues_model');
 
 		// Get data for all venues.
-		$this->data['venues'] = $this->venues_model->get_venues($this->data['centre']['id']);
+		$this->data['venues'] = $this->venues_model->get_venues($this->data['centre']['centreID']);
 
 		//set the flash data error message if there is one
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
@@ -225,7 +225,6 @@ class Tms extends MY_Controller {
 		$this->form_validation->set_rules('backgroundColour', 'Background Colour', 'required|xss_clean');
 		$this->form_validation->set_rules('footerText', 'Footer Text', 'required|xss_clean');
 		
-		
 		if ($this->form_validation->run() == true) {
 			// Successful creation, show success message
 			$this->session->set_flashdata('message', print_r($_POST,1) );
@@ -234,42 +233,42 @@ class Tms extends MY_Controller {
 			//display the create user form
 			//set the flash data error message if there is one
 			$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message') );
-
+			
 			$this->data['name'] = array(
 				'name'  => 'name',
 				'id'    => 'name',
 				'type'  => 'text',
-				'value' => $this->form_validation->set_value('name'),
+				'value' => $this->form_validation->set_value('name',(isset($this->data['centreData']['name']) ? $this->data['centreData']['name'] : '') )
 			);
 			$this->data['shortName'] = array(
 				'name'  => 'shortName',
 				'id'    => 'shortName',
 				'type'  => 'text',
-				'value' => $this->form_validation->set_value('shortName'),
+				'value' => $this->form_validation->set_value('shortName',(isset($this->data['centreData']['shortName']) ? $this->data['centreData']['shortName'] : '') )
 			);
 			$this->data['address'] = array(
 				'name'  => 'address',
 				'id'    => 'address',
 				'type'  => 'text',
-				'value' => $this->form_validation->set_value('address'),
+				'value' => $this->form_validation->set_value('address',(isset($this->data['centreData']['address']) ? $this->data['centreData']['address'] : '') )
 			);
 			$this->data['headerColour'] = array(
 				'name'  => 'headerColour',
 				'id'    => 'headerColour',
 				'type'  => 'text',
-				'value' => $this->form_validation->set_value('headerColour'),
+				'value' => $this->form_validation->set_value('headerColour',(isset($this->data['centreData']['headerColour']) ? $this->data['centreData']['headerColour'] : '') )
 			);
 			$this->data['backgroundColour'] = array(
 				'name'  => 'backgroundColour',
 				'id'    => 'backgroundColour',
 				'type'  => 'text',
-				'value' => $this->form_validation->set_value('backgroundColour'),
+				'value' => $this->form_validation->set_value('backgroundColour',(isset($this->data['centreData']['backgroundColour']) ? $this->data['centreData']['backgroundColour'] : '') )
 			);
 			$this->data['footerText'] = array(
 				'name'  => 'footerText',
 				'id'    => 'footerText',
 				'type'  => 'text',
-				'value' => $this->form_validation->set_value('footerText'),
+				'value' => $this->form_validation->set_value('footerText',(isset($this->data['centreData']['footerText']) ? $this->data['centreData']['footerText'] : '') )
 			);
 
 			$this->load->view('tms/header',$this->data);

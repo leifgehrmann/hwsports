@@ -29,7 +29,7 @@ class Db_venues extends MY_Controller {
 	// 
 	public function get_venues()
 	{
-		$output = $this->venues_model->get_venues($this->data['centre']['id']);
+		$output = $this->venues_model->get_venues($this->data['centre']['centreID']);
 		$this->data['data'] =  json_encode($output);
 		header('Content-Type: application/json');
 		$this->load->view('data', $this->data);
@@ -98,7 +98,7 @@ class Db_venues extends MY_Controller {
 					$data[$formNames[$i]] = $_POST[$formNames[$i]];
 				}
 
-				if($this->venues_model->insert_venue($this->data['centre']['id'],$data)>=0){
+				if($this->venues_model->insert_venue($this->data['centre']['centreID'],$data)>=0){
 					$output['success'] = true;
 					$output['message'] = 'The venue was created.';
 				} else {
