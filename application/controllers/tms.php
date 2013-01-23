@@ -226,7 +226,7 @@ class Tms extends MY_Controller {
 		$this->form_validation->set_rules('footerText', 'Footer Text', 'required|xss_clean');
 		
 		if ($this->form_validation->run() == true) {
-			if($this->centre_model->update_centre($this->data['centre']['centreID'],print_r($_POST,1) ) ) {
+			if($this->centre_model->update_centre($this->data['centre']['centreID'],$_POST ) ) {
 				// Successful update, show success message
 				$this->session->set_flashdata('message',  'Successfully Updated');
 			} else {
