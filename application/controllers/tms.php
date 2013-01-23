@@ -197,15 +197,15 @@ class Tms extends MY_Controller {
 		$this->data['title'] = "Users";
 		$this->data['page'] = "users";
 		
-		$users = $this->ion_auth->users()->result();
+		$users = obj2arr( $this->ion_auth->users()->result() );
 		foreach($users as $userkey => $user) {
-			$query = $this->db->query("SELECT `key`,`value` FROM `userData` WHERE `userID` = '{$user->id}'");
+			$query = $this->db->query("SELECT `key`,`value` FROM `userData` WHERE `userID` = '{$user['id']}'");
 			foreach($query->result_array() as $userDataRow) {
-				$users[$userkey]->$userDataRow['key'] = $userDataRow['value'];
+				$users[$userkey][$userDataRow['key']] = $userDataRow['value'];
 				if($userDataRow['key'] == 'centreID') {
 					$query = $this->db->query("SELECT `value` FROM `centreData` WHERE `key` = 'name' AND `centreID` = {$userDataRow['value']}");
 					$nameResult = $query->result_array();
-					$users[$userkey]->centreName = print_r($nameResult,1);
+					$users[$userkey]->centreName = $nameResult[0]['value'];
 				}
 			}
 		}
@@ -489,4 +489,17 @@ class Tms extends MY_Controller {
 		}
 	}
 
+	function obj2arr($obj) {
+		if(is_object($obj)) $obj = (array) $obj;
+		if(is_array($obj)) {
+			$new = array();
+			foreach($obj as $key => $val) {
+				$new[$key] = obj2arr($val);
+			}
+		}
+		else $new = $obj;
+		return $new;       
+	}
+	
 }
+
