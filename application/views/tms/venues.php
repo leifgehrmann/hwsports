@@ -1,5 +1,6 @@
 <h1>Venue List</h1>
 
+<div id='mapcontainer'></div>
 <div id="venuemap"></div>
 <div id="centreLat" style="display:none;"><?=$centreLat?></div>
 <div id="centreLng" style="display:none;"><?=$centreLng?></div>

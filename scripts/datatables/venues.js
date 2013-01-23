@@ -56,8 +56,9 @@
 			"events": {
 				"onOpen": function ( settings, json ) {
 					if($('.DTE_Header_Content').text() != 'Delete') {
-						$('.DTE_Body_Content').append("<div id='mapcontainer'></div>");
+						$('.DTE_Body_Content').append($('#mapcontainer'));
 						$('#mapcontainer').append($('#venuemap'));
+						$('#mapcontainer').show();
 						$('#venuemap').show();
 						mapInitialize();
 						var existingLat = editor.get('lat');
@@ -68,6 +69,7 @@
 							map.setCenter(existingVenuePosition);
 						}
 					} else {
+						$('#mapcontainer').hide();
 						$('#venuemap').hide();
 					}
 				}
