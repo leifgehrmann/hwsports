@@ -24,35 +24,51 @@
     <?php echo form_input($footerText);?>
   </p>
   
-  <h2>Opening Times:</h2>
-  <p>
-    <label for="monOpenTime">Monday:</label><br />
-    Open? <?php echo form_checkbox($monOpen);?> From: <?php echo form_input($monOpenTime);?> Till: <?php echo form_input($monCloseTime);?><br />
-  </p>
-  <p>
-    <label for="tueOpenTime">Tuesday:</label><br />
-    Open? <?php echo form_checkbox($tueOpen);?> From: <?php echo form_input($tueOpenTime);?> Till: <?php echo form_input($tueCloseTime);?><br />
-  </p>
-  <p>
-    <label for="wedOpenTime">Wednesday:</label><br />
-    Open? <?php echo form_checkbox($wedOpen);?> From: <?php echo form_input($wedOpenTime);?> Till: <?php echo form_input($wedCloseTime);?><br />
-  </p>
-  <p>
-    <label for="thuOpenTime">Thursday:</label><br />
-    Open? <?php echo form_checkbox($thuOpen);?> From: <?php echo form_input($thuOpenTime);?> Till: <?php echo form_input($thuCloseTime);?><br />
-  </p>
-  <p>
-    <label for="friOpenTime">Friday:</label><br />
-    Open? <?php echo form_checkbox($friOpen);?> From: <?php echo form_input($friOpenTime);?> Till: <?php echo form_input($friCloseTime);?><br />
-  </p>
-  <p>
-    <label for="satOpenTime">Saturday:</label><br />
-    Open? <?php echo form_checkbox($satOpen);?> From: <?php echo form_input($satOpenTime);?> Till: <?php echo form_input($satCloseTime);?><br />
-  </p>
-  <p>
-    <label for="sunOpenTime">Sunday:</label><br />
-    Open? <?php echo form_checkbox($sunOpen);?> From: <?php echo form_input($sunOpenTime);?> Till: <?php echo form_input($sunCloseTime);?><br />
-  </p>
+	<h2>Opening Times:</h2>
+	<table>
+		<tr><td></td><td>Open</td><td>From</td><td>Till</td></tr>
+		<tr>
+			<td><label for="monOpenTime">Monday:</label></td>
+			<td><?php echo form_checkbox($monOpen);?></td>
+			<td><?php echo form_input($monOpenTime);?></td>
+			<td><?php echo form_input($monCloseTime);?></td>
+		</tr>
+		<tr>
+			<td><label for="tueOpenTime">Tuesday:</label></td>
+			<td><?php echo form_checkbox($tueOpen);?></td>
+			<td><?php echo form_input($tueOpenTime);?></td>
+			<td><?php echo form_input($tueCloseTime);?></td>
+		</tr>
+		<tr>
+			<td><label for="wedOpenTime">Wednesday:</label></td>
+			<td><?php echo form_checkbox($wedOpen);?></td>
+			<td><?php echo form_input($wedOpenTime);?></td>
+			<td><?php echo form_input($wedCloseTime);?></td>
+		</tr>
+		<tr>
+			<td><label for="thuOpenTime">Thursday:</label></td>
+			<td><?php echo form_checkbox($thuOpen);?></td>
+			<td><?php echo form_input($thuOpenTime);?></td>
+			<td><?php echo form_input($thuCloseTime);?></td>
+		</tr>
+		<tr>
+			<td><label for="friOpenTime">Friday:</label></td>
+			<td><?php echo form_checkbox($friOpen);?></td>
+			<td><?php echo form_input($friOpenTime);?></td>
+			<td><?php echo form_input($friCloseTime);?></td>
+		</tr>
+		<tr>
+			<td><label for="satOpenTime">Saturday:</label></td>
+			<td><?php echo form_checkbox($satOpen);?></td>
+			<td><?php echo form_input($satOpenTime);?></td>
+			<td><?php echo form_input($satCloseTime);?></td>
+		</tr>
+		<tr>
+			<td><label for="sunOpenTime">Sunday:</label></td>
+			<td><?php echo form_checkbox($sunOpen);?></td>
+			<td><?php echo form_input($sunOpenTime);?></td>
+			<td><?php echo form_input($sunCloseTime);?></td>
+		</tr>
 
   <h2>Website Appearance:</h2>
   <p>
@@ -80,6 +96,9 @@ $('#headerColour, #backgroundColour').ColorPicker({
 }).bind('keyup', function(){
 	$(this).ColorPickerSetColor(this.value);
 });
+
+$('input.time').timepicker();
+
 </script>
 
 <!-- /#main -->
