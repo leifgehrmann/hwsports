@@ -71,7 +71,7 @@
                     <a href="/tms/users"><li class="last-child users <?=($page=="users" ? 'selected' : '')?>">Users</li></a>
                 </ul>
                 <ul>
-                    <a href="/tms/appearance"><li class="appearance <?=($page=="appearance" ? 'selected' : '')?>">Appearance</li></a>
+                    <!--<a href="/tms/appearance"><li class="appearance <?=($page=="appearance" ? 'selected' : '')?>">Appearance</li></a>-->
                     <a href="/tms/settings"><li class="last-child settings <?=($page=="settings" ? 'selected' : '')?>">Settings</li></a>
                 </ul>
             </div>
