@@ -2,18 +2,12 @@
 	
 <? if(!empty($message)){ ?>
   <div id="infoMessage"><?php echo $message;?></div>
-<? } 
-
-
-  print_r($tournaments);
-?>
-
-
+<? } ?>
 
 <h2>View / Edit Existing Tournament:</h2>
 <select id="tournamentSelect">
 	<? foreach($tournaments as $tournament) { 
-		echo "<option value='{$tournament['tournamentID']}'>Hello</option>\n";
+		echo "<option value='{$tournament['tournamentID']}'>{$tournament['name']}</option>\n";
 	 } ?>
 </select>
 <button id="viewEditTournament">Proceed</button>
