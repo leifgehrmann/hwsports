@@ -54,13 +54,20 @@
 				}
 			],
 			"events": {
-				"onCreate": function (json, data) {
-					alert( "New venue created." );
+				"onInitCreate": function ( settings, json ) {
+					$('.DTE_Body_Content').append("<div id='mapcontainer'></div>");
+					$('#mapcontainer').append($('#venuemap'));
+					$('#venuemap').show();
+					mapInitialize();
+					var existingLat = editor.get('lat');
+					var existingLng = editor.get('lng');
+					if(existingLat.length != 0) {
+						var existingVenuePosition = new google.maps.LatLng(existingLat,existingLng);
+						centre_marker.setPosition(existingVenuePosition);
+						map.setCenter(existingVenuePosition);
+					}
 				},
-				"onEdit": function (json, data) {
-					alert( "Edit complete." );
-				},
-				"onOpen": function ( settings, json ) {
+				"onInitEdit": function ( settings, json ) {
 					$('.DTE_Body_Content').append("<div id='mapcontainer'></div>");
 					$('#mapcontainer').append($('#venuemap'));
 					$('#venuemap').show();
