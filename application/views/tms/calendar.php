@@ -6,6 +6,7 @@
 	<li>Standard bookings are coloured as <span style="color:rgb(123, 209, 72);font-weight:bold;">brown</span>.</li>
 </ul>
 <p>Click the matches/tournaments for more information.</p>
+<p>Drag a match to change the start date/time, or stretch it from the bottom to change it's length.</p>
 
 <div id='calendar'></div>
 

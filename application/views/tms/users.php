@@ -1,1 +1,3 @@
-This is the users. It is nothing. Nor is your face.
+This page is still under development.<br />
+<br />
+<? print_r($users) ?>

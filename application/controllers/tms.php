@@ -185,6 +185,9 @@ class Tms extends MY_Controller {
 	{
 		$this->data['title'] = "Groups";
 		$this->data['page'] = "groups";
+		
+		$this->data['groups'] = $this->ion_auth->groups();
+		
 		$this->load->view('tms/header',$this->data);
 		$this->load->view('tms/groups',$this->data);
 		$this->load->view('tms/footer',$this->data);
@@ -193,6 +196,9 @@ class Tms extends MY_Controller {
 	{
 		$this->data['title'] = "Users";
 		$this->data['page'] = "users";
+		
+		$this->data['users'] = $this->ion_auth->users();
+		
 		$this->load->view('tms/header',$this->data);
 		$this->load->view('tms/users',$this->data);
 		$this->load->view('tms/footer',$this->data);
