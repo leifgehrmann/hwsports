@@ -217,9 +217,65 @@ class Tms extends MY_Controller {
 	{
 		$this->data['title'] = "Settings";
 		$this->data['page'] = "settings";
-		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/settings',$this->data);
-		$this->load->view('tms/footer',$this->data);
+			
+		$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
+		$this->form_validation->set_rules('shortName', 'Short Name', 'required|xss_clean');
+		$this->form_validation->set_rules('address', 'Address', 'required|xss_clean');
+		$this->form_validation->set_rules('headerColour', 'Header Colour', 'required|xss_clean');
+		$this->form_validation->set_rules('backgroundColour', 'Background Colour', 'required|xss_clean');
+		$this->form_validation->set_rules('footerText', 'Footer Text', 'required|xss_clean');
+		
+		
+		if ($this->form_validation->run() == true) {
+			// Successful creation, show success message
+			$this->session->set_flashdata('message', print_r($_POST,1) );
+			redirect("/", 'refresh');
+		} else {
+			//display the create user form
+			//set the flash data error message if there is one
+			$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message') );
+
+			$this->data['name'] = array(
+				'name'  => 'name',
+				'id'    => 'name',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('name'),
+			);
+			$this->data['shortName'] = array(
+				'name'  => 'shortName',
+				'id'    => 'shortName',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('shortName'),
+			);
+			$this->data['address'] = array(
+				'name'  => 'address',
+				'id'    => 'address',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('address'),
+			);
+			$this->data['headerColour'] = array(
+				'name'  => 'headerColour',
+				'id'    => 'headerColour',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('headerColour'),
+			);
+			$this->data['backgroundColour'] = array(
+				'name'  => 'backgroundColour',
+				'id'    => 'backgroundColour',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('backgroundColour'),
+			);
+			$this->data['footerText'] = array(
+				'name'  => 'footerText',
+				'id'    => 'footerText',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('footerText'),
+			);
+
+			$this->load->view('tms/header',$this->data);
+			$this->load->view('tms/settings', $this->data);
+			$this->load->view('tms/footer',$this->data);
+		}
 	}
 
 }
