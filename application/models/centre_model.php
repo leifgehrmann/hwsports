@@ -42,7 +42,7 @@ class Centre_model extends CI_Model {
 	public function get_centre($centreID)
 	{
 		
-		$fieldsQuery = $this->db->query("SELECT key FROM centreData WHERE centreID = ".$this->db->escape($centreID) );
+		$fieldsQuery = $this->db->query("SELECT `key` FROM `centreData` WHERE `centreID` = ".$this->db->escape($centreID) );
 		$fields = $fieldsQuery->result_array();
 		
 		$dataQueryString = "SELECT ";
