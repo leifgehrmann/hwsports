@@ -740,11 +740,11 @@ class Auth extends MY_Controller {
 		$this->load->view('sis/footer',$this->data);
 	}
 
-	function delete_user()
+	function delete_user($deleteid)
 	{
-		$user = $this->ion_auth->user()->row();
+		$user = $this->ion_auth->user($deleteid)->row();
 
-		if ($this->ion_auth->delete_user($user->id))
+		if ($this->ion_auth->delete_user($deleteid))
 		{
 			// Remove session cookies for logged in user, eliminate zombie problems
 			$this->ion_auth->logout();
