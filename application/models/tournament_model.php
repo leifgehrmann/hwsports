@@ -77,21 +77,26 @@ class Tournament_model extends CI_Model {
 		
 		$this->db->query("INSERT INTO tournaments (centreID) VALUES ({$this->data['centre']['centreID']})");
 		$tournamentID = $this->db->insert_id();
-
-		$insertDataArray = array();
-		foreach($data as $key=>$value) {
-			$insertDataArray[] = array(
-				'tournamentID' => $tournamentID,
-				'key' => $key,
-				'value' => $value
-			);
-		}
-		if ($this->db->insert_batch('tournamentData',$insertDataArray)) {
-			// db success
-			$this->db->trans_complete();
-			return $tournamentID;
+		if($tournamentID) {
+			
+			$insertDataArray = array();
+			foreach($data as $key=>$value) {
+				$insertDataArray[] = array(
+					'tournamentID' => $tournamentID,
+					'key' => $key,
+					'value' => $value
+				);
+			}
+			if ($this->db->insert_batch('tournamentData',$insertDataArray)) {
+				// db success
+				$this->db->trans_complete();
+				return $tournamentID;
+			} else {
+				// db fail
+				print_r($this->db->last_query()); die();
+				return -1;
+			}
 		} else {
-			// db fail
 			return -1;
 		}
 	}
