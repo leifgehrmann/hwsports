@@ -116,7 +116,7 @@ class Tms extends MY_Controller {
 		$this->load->view('tms/footer',$this->data);
 	}
 	
-	public function tournament($id)
+	public function tournament($tournamentID)
 	{
 		$this->data['title'] = "Tournament";
 		$this->data['page'] = "tournament";
