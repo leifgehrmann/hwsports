@@ -476,7 +476,7 @@ body .ui-datepicker .ui-datepicker-title{
 	font-size: 14px;
 }
 
-#settingsForm input.time, #settingsForm input.colorpicker {
+#settingsForm input.time, #settingsForm input.colorpickerinput {
 	width: 100px;
 	padding: 5px;
 }

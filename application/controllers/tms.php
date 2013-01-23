@@ -292,6 +292,7 @@ class Tms extends MY_Controller {
 				'id'    => 'headerColour',
 				'type'  => 'text',
 				'style' => 'background-color: #'.(isset($this->data['centre']['headerColour']) ? $this->data['centre']['headerColour'] : 'FFFFFF'),
+				'class' => 'colorpickerinput',
 				'value' => $this->form_validation->set_value('headerColour',(isset($this->data['centre']['headerColour']) ? $this->data['centre']['headerColour'] : '') )
 			);
 			$this->data['backgroundColour'] = array(
@@ -299,6 +300,7 @@ class Tms extends MY_Controller {
 				'id'    => 'backgroundColour',
 				'type'  => 'text',
 				'style' => 'background-color: #'.(isset($this->data['centre']['backgroundColour']) ? $this->data['centre']['backgroundColour'] : 'FFFFFF'),
+				'class' => 'colorpickerinput',
 				'value' => $this->form_validation->set_value('backgroundColour',(isset($this->data['centre']['backgroundColour']) ? $this->data['centre']['backgroundColour'] : '') )
 			);
 			$this->data['footerText'] = array(
