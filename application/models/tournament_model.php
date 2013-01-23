@@ -60,7 +60,7 @@ class Tournament_model extends CI_Model {
 		}
 		$dataQueryString .= "FROM tournamentData WHERE tournamentID = ".$this->db->escape($tournamentID);
 		$dataQuery = $this->db->query($dataQueryString);
-		$output = array_merge(array("tournamentID"=>$tournamentID), $dataQuery->row_array());
+		$output = array_merge(array("tournamentID"=>$tournamentID), $dataQuery->result_array());
 		return $output;
 	}
 
