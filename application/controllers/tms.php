@@ -203,7 +203,7 @@ class Tms extends MY_Controller {
 			foreach($query->result_array() as $userDataRow) {
 				$users
 					[$userkey]
-					[$userDataRow['key']] = $userDataRow['value'];
+					->$userDataRow['key'] = $userDataRow['value'];
 				if($userDataRow['key'] == 'centreID') {
 					$query = $this->db->query("SELECT `value` FROM `centreData` WHERE `key` = 'name' AND `centreID` = {$userDataRow['value']}");
 					$users
