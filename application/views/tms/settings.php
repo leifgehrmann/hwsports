@@ -35,6 +35,43 @@
     <label for="footerText">Footer Text:</label><br />
     <?php echo form_input($footerText);?>
   </p>
+  
+  <h2>Opening Times:</h2>
+  <p>
+    <label for="monOpenTime">Monday:</label><br />
+    Open? <?php echo form_checkbox($monOpen);?><br />
+    From: <?php echo form_input($monOpenTime);?> Till: <?php echo form_input($monCloseTime);?><br />
+  </p>
+  <p>
+    <label for="tueOpenTime">Tuesday:</label><br />
+    Open? <?php echo form_checkbox($tueOpen);?><br />
+    From: <?php echo form_input($tueOpenTime);?> Till: <?php echo form_input($tueCloseTime);?><br />
+  </p>
+  <p>
+    <label for="wedOpenTime">Wednesday:</label><br />
+    Open? <?php echo form_checkbox($wedOpen);?><br />
+    From: <?php echo form_input($wedOpenTime);?> Till: <?php echo form_input($wedCloseTime);?><br />
+  </p>
+  <p>
+    <label for="thuOpenTime">Thursday:</label><br />
+    Open? <?php echo form_checkbox($thuOpen);?><br />
+    From: <?php echo form_input($thuOpenTime);?> Till: <?php echo form_input($thuCloseTime);?><br />
+  </p>
+  <p>
+    <label for="friOpenTime">Friday:</label><br />
+    Open? <?php echo form_checkbox($friOpen);?><br />
+    From: <?php echo form_input($friOpenTime);?> Till: <?php echo form_input($friCloseTime);?><br />
+  </p>
+  <p>
+    <label for="satOpenTime">Saturday:</label><br />
+    Open? <?php echo form_checkbox($satOpen);?><br />
+    From: <?php echo form_input($satOpenTime);?> Till: <?php echo form_input($satCloseTime);?><br />
+  </p>
+  <p>
+    <label for="sunOpenTime">Sunday:</label><br />
+    Open? <?php echo form_checkbox($sunOpen);?><br />
+    From: <?php echo form_input($sunOpenTime);?> Till: <?php echo form_input($sunCloseTime);?><br />
+  </p>
 
     
   <p><?php echo form_submit('submit', 'Submit Changes');?></p>

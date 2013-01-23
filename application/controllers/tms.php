@@ -225,6 +225,27 @@ class Tms extends MY_Controller {
 		$this->form_validation->set_rules('backgroundColour', 'Background Colour', 'required|xss_clean');
 		$this->form_validation->set_rules('footerText', 'Footer Text', 'required|xss_clean');
 		
+		$this->form_validation->set_rules('monOpenTime', 'monday Open Time', 'required|xss_clean');
+		$this->form_validation->set_rules('monCloseTime', 'monday Close Time', 'required|xss_clean');
+		
+		$this->form_validation->set_rules('tueOpenTime', 'tueday Open Time', 'required|xss_clean');
+		$this->form_validation->set_rules('tueCloseTime', 'tueday Close Time', 'required|xss_clean');
+		
+		$this->form_validation->set_rules('wedOpenTime', 'wedday Open Time', 'required|xss_clean');
+		$this->form_validation->set_rules('wedCloseTime', 'wedday Close Time', 'required|xss_clean');
+		
+		$this->form_validation->set_rules('thuOpenTime', 'thuday Open Time', 'required|xss_clean');
+		$this->form_validation->set_rules('thuCloseTime', 'thuday Close Time', 'required|xss_clean');
+		
+		$this->form_validation->set_rules('friOpenTime', 'friday Open Time', 'required|xss_clean');
+		$this->form_validation->set_rules('friCloseTime', 'friday Close Time', 'required|xss_clean');
+		
+		$this->form_validation->set_rules('satOpenTime', 'satday Open Time', 'required|xss_clean');
+		$this->form_validation->set_rules('satCloseTime', 'satday Close Time', 'required|xss_clean');
+		
+		$this->form_validation->set_rules('sunOpenTime', 'sunday Open Time', 'required|xss_clean');
+		$this->form_validation->set_rules('sunCloseTime', 'sunday Close Time', 'required|xss_clean');
+		
 		if ($this->form_validation->run() == true) {
 			if($this->centre_model->update_centre($this->data['centre']['centreID'],$_POST ) ) {
 				// Successful update, show success message
@@ -273,6 +294,147 @@ class Tms extends MY_Controller {
 				'id'    => 'footerText',
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('footerText',(isset($this->data['centre']['footerText']) ? $this->data['centre']['footerText'] : '') )
+			);
+			
+			
+			$this->data['monOpen'] = array(
+				'name'  => 'monOpen',
+				'id'    => 'monOpen',
+				'type'  => 'checkbox',
+				'value' => '1',
+				($this->data['centre']['monOpen'] ? 'checked' : 'notchecked') => 'checked'
+			);
+			$this->data['monOpenTime'] = array(
+				'name'  => 'monOpenTime',
+				'id'    => 'monOpenTime',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('monOpenTime',(isset($this->data['centre']['monOpenTime']) ? $this->data['centre']['monOpenTime'] : '') )
+			);
+			$this->data['monCloseTime'] = array(
+				'name'  => 'monCloseTime',
+				'id'    => 'monCloseTime',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('monCloseTime',(isset($this->data['centre']['monCloseTime']) ? $this->data['centre']['monCloseTime'] : '') )
+			);
+
+			$this->data['tueOpen'] = array(
+				'name'  => 'tueOpen',
+				'id'    => 'tueOpen',
+				'type'  => 'checkbox',
+				'value' => '1',
+				($this->data['centre']['tueOpen'] ? 'checked' : 'notchecked') => 'checked'
+			);
+			$this->data['tueOpenTime'] = array(
+				'name'  => 'tueOpenTime',
+				'id'    => 'tueOpenTime',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('tueOpenTime',(isset($this->data['centre']['tueOpenTime']) ? $this->data['centre']['tueOpenTime'] : '') )
+			);
+			$this->data['tueCloseTime'] = array(
+				'name'  => 'tueCloseTime',
+				'id'    => 'tueCloseTime',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('tueCloseTime',(isset($this->data['centre']['tueCloseTime']) ? $this->data['centre']['tueCloseTime'] : '') )
+			);
+
+			$this->data['wedOpen'] = array(
+				'name'  => 'wedOpen',
+				'id'    => 'wedOpen',
+				'type'  => 'checkbox',
+				'value' => '1',
+				($this->data['centre']['wedOpen'] ? 'checked' : 'notchecked') => 'checked'
+			);
+			$this->data['wedOpenTime'] = array(
+				'name'  => 'wedOpenTime',
+				'id'    => 'wedOpenTime',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('wedOpenTime',(isset($this->data['centre']['wedOpenTime']) ? $this->data['centre']['wedOpenTime'] : '') )
+			);
+			$this->data['wedCloseTime'] = array(
+				'name'  => 'wedCloseTime',
+				'id'    => 'wedCloseTime',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('wedCloseTime',(isset($this->data['centre']['wedCloseTime']) ? $this->data['centre']['wedCloseTime'] : '') )
+			);
+
+			$this->data['thuOpen'] = array(
+				'name'  => 'thuOpen',
+				'id'    => 'thuOpen',
+				'type'  => 'checkbox',
+				'value' => '1',
+				($this->data['centre']['thuOpen'] ? 'checked' : 'notchecked') => 'checked'
+			);
+			$this->data['thuOpenTime'] = array(
+				'name'  => 'thuOpenTime',
+				'id'    => 'thuOpenTime',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('thuOpenTime',(isset($this->data['centre']['thuOpenTime']) ? $this->data['centre']['thuOpenTime'] : '') )
+			);
+			$this->data['thuCloseTime'] = array(
+				'name'  => 'thuCloseTime',
+				'id'    => 'thuCloseTime',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('thuCloseTime',(isset($this->data['centre']['thuCloseTime']) ? $this->data['centre']['thuCloseTime'] : '') )
+			);
+
+			$this->data['friOpen'] = array(
+				'name'  => 'friOpen',
+				'id'    => 'friOpen',
+				'type'  => 'checkbox',
+				'value' => '1',
+				($this->data['centre']['friOpen'] ? 'checked' : 'notchecked') => 'checked'
+			);
+			$this->data['friOpenTime'] = array(
+				'name'  => 'friOpenTime',
+				'id'    => 'friOpenTime',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('friOpenTime',(isset($this->data['centre']['friOpenTime']) ? $this->data['centre']['friOpenTime'] : '') )
+			);
+			$this->data['friCloseTime'] = array(
+				'name'  => 'friCloseTime',
+				'id'    => 'friCloseTime',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('friCloseTime',(isset($this->data['centre']['friCloseTime']) ? $this->data['centre']['friCloseTime'] : '') )
+			);
+
+			$this->data['satOpen'] = array(
+				'name'  => 'satOpen',
+				'id'    => 'satOpen',
+				'type'  => 'checkbox',
+				'value' => '1',
+				($this->data['centre']['satOpen'] ? 'checked' : 'notchecked') => 'checked'
+			);
+			$this->data['satOpenTime'] = array(
+				'name'  => 'satOpenTime',
+				'id'    => 'satOpenTime',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('satOpenTime',(isset($this->data['centre']['satOpenTime']) ? $this->data['centre']['satOpenTime'] : '') )
+			);
+			$this->data['satCloseTime'] = array(
+				'name'  => 'satCloseTime',
+				'id'    => 'satCloseTime',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('satCloseTime',(isset($this->data['centre']['satCloseTime']) ? $this->data['centre']['satCloseTime'] : '') )
+			);
+
+			$this->data['sunOpen'] = array(
+				'name'  => 'sunOpen',
+				'id'    => 'sunOpen',
+				'type'  => 'checkbox',
+				'value' => '1',
+				($this->data['centre']['sunOpen'] ? 'checked' : 'notchecked') => 'checked'
+			);
+			$this->data['sunOpenTime'] = array(
+				'name'  => 'sunOpenTime',
+				'id'    => 'sunOpenTime',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('sunOpenTime',(isset($this->data['centre']['sunOpenTime']) ? $this->data['centre']['sunOpenTime'] : '') )
+			);
+			$this->data['sunCloseTime'] = array(
+				'name'  => 'sunCloseTime',
+				'id'    => 'sunCloseTime',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('sunCloseTime',(isset($this->data['centre']['sunCloseTime']) ? $this->data['centre']['sunCloseTime'] : '') )
 			);
 
 			$this->load->view('tms/header',$this->data);
