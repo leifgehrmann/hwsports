@@ -1,5 +1,5 @@
 body {
-	background: #E7EEF9;
+	background: #<?=$centre['backgroundColor']?>;
 }
 
 .company-logo {
@@ -19,7 +19,7 @@ body {
 }
 
 #header{
-	background: #00468C;
+	background: #<?=$centre['headerColor']?>;
 	height:100px;
 	background-image:url('/img/hwsports/header.png');
 }
@@ -161,7 +161,7 @@ body {
 	background:#FEFEFE;
 }
 #content a {
-	color: #00468C;
+	color: #<?=$centre['headerColor']?>;
 	text-decoration: underline;
 }
 
@@ -184,12 +184,12 @@ body {
 
 #content h1 {
 	font-size: 26px;
-	color: #00468C; 
+	color: #<?=$centre['headerColor']?>; 
 }
 
 #content h2 {
 	font-size: 16px;
-	color: #00468C; 
+	color: #<?=$centre['headerColor']?>; 
 }
 
 #content h3 {
@@ -216,7 +216,7 @@ body {
 #content .news-header {
 	display:block;
 	font-size: 18px;
-	color: #00468C;
+	color: #<?=$centre['headerColor']?>;
 	clear: both;
 	font-weight:bold;
 }
