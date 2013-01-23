@@ -90,6 +90,7 @@
 $('#headerColour, #backgroundColour').ColorPicker({
 	onSubmit: function(hsb, hex, rgb, el) {
 		$(el).val(hex);
+		$(el).attr('background-color',hex);
 		$(el).ColorPickerHide();
 	},
 	onBeforeShow: function () {
