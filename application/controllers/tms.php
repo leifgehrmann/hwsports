@@ -44,6 +44,39 @@ class Tms extends MY_Controller {
 	{
 		$this->data['title'] = "Tournaments";
 		$this->data['page'] = "tournaments";
+		
+		$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
+		$this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
+		
+		if ($this->form_validation->run() == true) {
+			$newdata = $_POST;
+			
+			if($this->centre_model->insert_tournament($newdata) ) {
+				// Successful update, show success message
+				$this->session->set_flashdata('message',  'Successfully Created Tournament.');
+			} else {
+				$this->session->set_flashdata('message',  'Failed. Please contact Infusion Systems.');
+			}
+			redirect("/tms/settings", 'refresh');
+		} else {
+			//display the create user form
+			//set the flash data error message if there is one
+			$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message') );
+			
+			$this->data['name'] = array(
+				'name'  => 'name',
+				'id'    => 'name',
+				'type'  => 'text',
+				'value' => ''
+			);
+			$this->data['description'] = array(
+				'name'  => 'description',
+				'id'    => 'description',
+				'type'  => 'text',
+				'value' => ''
+			);
+		}
+		
 		$this->load->view('tms/header',$this->data);
 		$this->load->view('tms/tournaments',$this->data);
 		$this->load->view('tms/footer',$this->data);

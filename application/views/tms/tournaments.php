@@ -11,6 +11,9 @@
 	<label for="name">Name:</label><br />
 		<?php echo form_input($name);?>
 	</p>
+	<label for="description">Description:</label><br />
+		<?php echo form_input($description);?>
+	</p>
 
 	<p><?php echo form_submit('submit', 'Create');?></p>
     
