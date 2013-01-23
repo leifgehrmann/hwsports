@@ -475,3 +475,8 @@ body .ui-datepicker td{
 body .ui-datepicker .ui-datepicker-title{
 	font-size: 14px;
 }
+
+#settingsForm input.time {
+	width: 100px;
+	padding: 5px;
+}

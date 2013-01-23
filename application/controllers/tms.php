@@ -247,9 +247,19 @@ class Tms extends MY_Controller {
 		$this->form_validation->set_rules('sunCloseTime', 'sunday Close Time', 'required|xss_clean');
 		
 		if ($this->form_validation->run() == true) {
-			if($this->centre_model->update_centre($this->data['centre']['centreID'],$_POST ) ) {
+			$newdata = $_POST;
+			// If checkbox is unticked, it returns no value - this means FALSE
+			if(!isset($newdata['monOpen'])) $newdata['monOpen'] = 0;
+			if(!isset($newdata['tueOpen'])) $newdata['tueOpen'] = 0;
+			if(!isset($newdata['wedOpen'])) $newdata['wedOpen'] = 0;
+			if(!isset($newdata['thuOpen'])) $newdata['thuOpen'] = 0;
+			if(!isset($newdata['friOpen'])) $newdata['friOpen'] = 0;
+			if(!isset($newdata['satOpen'])) $newdata['satOpen'] = 0;
+			if(!isset($newdata['sunOpen'])) $newdata['sunOpen'] = 0;
+			
+			if($this->centre_model->update_centre($this->data['centre']['centreID'],$newdata ) ) {
 				// Successful update, show success message
-				$this->session->set_flashdata('message',  print_r($_POST,1).'Successfully Updated');
+				$this->session->set_flashdata('message',  'Successfully Updated');
 			} else {
 				$this->session->set_flashdata('message',  'Failed. Please contact Infusion Systems.');
 			}
@@ -308,12 +318,14 @@ class Tms extends MY_Controller {
 				'name'  => 'monOpenTime',
 				'id'    => 'monOpenTime',
 				'type'  => 'text',
+				'class'  => 'time',
 				'value' => $this->form_validation->set_value('monOpenTime',(isset($this->data['centre']['monOpenTime']) ? $this->data['centre']['monOpenTime'] : '') )
 			);
 			$this->data['monCloseTime'] = array(
 				'name'  => 'monCloseTime',
 				'id'    => 'monCloseTime',
 				'type'  => 'text',
+				'class'  => 'time',
 				'value' => $this->form_validation->set_value('monCloseTime',(isset($this->data['centre']['monCloseTime']) ? $this->data['centre']['monCloseTime'] : '') )
 			);
 
@@ -328,12 +340,14 @@ class Tms extends MY_Controller {
 				'name'  => 'tueOpenTime',
 				'id'    => 'tueOpenTime',
 				'type'  => 'text',
+				'class'  => 'time',
 				'value' => $this->form_validation->set_value('tueOpenTime',(isset($this->data['centre']['tueOpenTime']) ? $this->data['centre']['tueOpenTime'] : '') )
 			);
 			$this->data['tueCloseTime'] = array(
 				'name'  => 'tueCloseTime',
 				'id'    => 'tueCloseTime',
 				'type'  => 'text',
+				'class'  => 'time',
 				'value' => $this->form_validation->set_value('tueCloseTime',(isset($this->data['centre']['tueCloseTime']) ? $this->data['centre']['tueCloseTime'] : '') )
 			);
 
@@ -348,12 +362,14 @@ class Tms extends MY_Controller {
 				'name'  => 'wedOpenTime',
 				'id'    => 'wedOpenTime',
 				'type'  => 'text',
+				'class'  => 'time',
 				'value' => $this->form_validation->set_value('wedOpenTime',(isset($this->data['centre']['wedOpenTime']) ? $this->data['centre']['wedOpenTime'] : '') )
 			);
 			$this->data['wedCloseTime'] = array(
 				'name'  => 'wedCloseTime',
 				'id'    => 'wedCloseTime',
 				'type'  => 'text',
+				'class'  => 'time',
 				'value' => $this->form_validation->set_value('wedCloseTime',(isset($this->data['centre']['wedCloseTime']) ? $this->data['centre']['wedCloseTime'] : '') )
 			);
 
@@ -368,12 +384,14 @@ class Tms extends MY_Controller {
 				'name'  => 'thuOpenTime',
 				'id'    => 'thuOpenTime',
 				'type'  => 'text',
+				'class'  => 'time',
 				'value' => $this->form_validation->set_value('thuOpenTime',(isset($this->data['centre']['thuOpenTime']) ? $this->data['centre']['thuOpenTime'] : '') )
 			);
 			$this->data['thuCloseTime'] = array(
 				'name'  => 'thuCloseTime',
 				'id'    => 'thuCloseTime',
 				'type'  => 'text',
+				'class'  => 'time',
 				'value' => $this->form_validation->set_value('thuCloseTime',(isset($this->data['centre']['thuCloseTime']) ? $this->data['centre']['thuCloseTime'] : '') )
 			);
 
@@ -388,12 +406,14 @@ class Tms extends MY_Controller {
 				'name'  => 'friOpenTime',
 				'id'    => 'friOpenTime',
 				'type'  => 'text',
+				'class'  => 'time',
 				'value' => $this->form_validation->set_value('friOpenTime',(isset($this->data['centre']['friOpenTime']) ? $this->data['centre']['friOpenTime'] : '') )
 			);
 			$this->data['friCloseTime'] = array(
 				'name'  => 'friCloseTime',
 				'id'    => 'friCloseTime',
 				'type'  => 'text',
+				'class'  => 'time',
 				'value' => $this->form_validation->set_value('friCloseTime',(isset($this->data['centre']['friCloseTime']) ? $this->data['centre']['friCloseTime'] : '') )
 			);
 
@@ -408,12 +428,14 @@ class Tms extends MY_Controller {
 				'name'  => 'satOpenTime',
 				'id'    => 'satOpenTime',
 				'type'  => 'text',
+				'class'  => 'time',
 				'value' => $this->form_validation->set_value('satOpenTime',(isset($this->data['centre']['satOpenTime']) ? $this->data['centre']['satOpenTime'] : '') )
 			);
 			$this->data['satCloseTime'] = array(
 				'name'  => 'satCloseTime',
 				'id'    => 'satCloseTime',
 				'type'  => 'text',
+				'class'  => 'time',
 				'value' => $this->form_validation->set_value('satCloseTime',(isset($this->data['centre']['satCloseTime']) ? $this->data['centre']['satCloseTime'] : '') )
 			);
 
@@ -428,12 +450,14 @@ class Tms extends MY_Controller {
 				'name'  => 'sunOpenTime',
 				'id'    => 'sunOpenTime',
 				'type'  => 'text',
+				'class'  => 'time',
 				'value' => $this->form_validation->set_value('sunOpenTime',(isset($this->data['centre']['sunOpenTime']) ? $this->data['centre']['sunOpenTime'] : '') )
 			);
 			$this->data['sunCloseTime'] = array(
 				'name'  => 'sunCloseTime',
 				'id'    => 'sunCloseTime',
 				'type'  => 'text',
+				'class'  => 'time',
 				'value' => $this->form_validation->set_value('sunCloseTime',(isset($this->data['centre']['sunCloseTime']) ? $this->data['centre']['sunCloseTime'] : '') )
 			);
 
