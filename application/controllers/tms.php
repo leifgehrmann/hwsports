@@ -249,7 +249,7 @@ class Tms extends MY_Controller {
 		if ($this->form_validation->run() == true) {
 			if($this->centre_model->update_centre($this->data['centre']['centreID'],$_POST ) ) {
 				// Successful update, show success message
-				$this->session->set_flashdata('message',  'Successfully Updated');
+				$this->session->set_flashdata('message',  print_r($_POST,1).'Successfully Updated');
 			} else {
 				$this->session->set_flashdata('message',  'Failed. Please contact Infusion Systems.');
 			}
