@@ -205,7 +205,7 @@ class Tms extends MY_Controller {
 				if($userDataRow['key'] == 'centreID') {
 					$query = $this->db->query("SELECT `value` FROM `centreData` WHERE `key` = 'name' AND `centreID` = {$userDataRow['value']}");
 					$nameResult = $query->result_array();
-					$users[$userkey]['centreName'] = $nameResult[0]['value'];
+					$users[$userkey]['centreName'] = $nameResult;
 				}
 			}
 		}
