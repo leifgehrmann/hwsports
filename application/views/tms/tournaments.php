@@ -53,8 +53,8 @@
 
 <script type="text/javascript">
 	$('.date').datepicker();
-	$('#tournamentSelect option').click( function() {
-		document.location.href='/tms/tournament/' + $(this).value();
+	$('#viewEditTournament').click( function() {
+		document.location.href='/tms/tournament/' + $("#tournamentSelect option:selected").value();
 	});
 </script>
 
