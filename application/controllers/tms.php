@@ -197,17 +197,22 @@ class Tms extends MY_Controller {
 		$this->data['title'] = "Users";
 		$this->data['page'] = "users";
 		
-		$this->data['users'] = $this->ion_auth->users()->result();
-		foreach($this->data['users'] as $userkey => $user) {
+		$users = $this->ion_auth->users()->result();
+		foreach($users as $userkey => $user) {
 			$query = $this->db->query("SELECT `key`,`value` FROM `userData` WHERE `userID` = '{$user->id}'");
 			foreach($query->result_array() as $userDataRow) {
-				$this->data['users'][$userkey][$userDataRow['key']] = $userDataRow['value'];
+				$users
+					[$userkey]
+					[$userDataRow['key']] = $userDataRow['value'];
 				if($userDataRow['key'] == 'centreID') {
 					$query = $this->db->query("SELECT `value` FROM `centreData` WHERE `key` = 'name' AND `centreID` = {$userDataRow['value']}");
-					$this->data['users'][$userkey]['centreName'] = $query->row_array()->name;
+					$users
+					[$userkey]
+					['centreName'] = $query->row_array()->name;
 				}
 			}
 		}
+		$this->data['users'] = $users;
 		
 		$this->load->view('tms/header',$this->data);
 		$this->load->view('tms/users',$this->data);
