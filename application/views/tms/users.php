@@ -1,5 +1,7 @@
 This page is still under development.<br />
 <br />
+<? print_r($users); /*
+
 <? foreach($users as $user) { ?>
 <div>
 	User ID: <? print_r($user) ?> (<a href="auth/delete_user/">Delete?</a>)<br>
@@ -9,4 +11,4 @@ This page is still under development.<br />
 	Phone: <?=$user['phone']?><br>
 	Email: <?=$user['email']?><br>
 </div>
-<? } ?>
+<? } */?>
