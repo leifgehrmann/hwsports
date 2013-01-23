@@ -125,6 +125,7 @@ class Tms extends MY_Controller {
 		
 		if( $this->tournament_model->tournament_exists($id) ) {
 			$tournament = $this->tournament_model->get_tournament($id);
+			$this->data['tournamentID'] = $id;
 						
 			$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
 			$this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
