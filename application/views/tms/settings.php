@@ -26,7 +26,7 @@
   
 	<h2>Opening Times:</h2>
 	<table>
-		<tr><td></td><td>Open</td><td>From</td><td>Till</td></tr>
+		<tr><td></td><td></td><td>From</td><td>Till</td></tr>
 		<tr>
 			<td><label for="monOpenTime">Monday:</label></td>
 			<td><?php echo form_checkbox($monOpen);?></td>
