@@ -53,6 +53,8 @@ class Tms extends MY_Controller {
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
 			
+			echo "<pre>"; print_r($newdata); echo "</pre>"; die();
+			
 			$tournamentID = $this->tournament_model->insert_tournament($newdata);
 			if($tournamentID > -1) {
 				// Successful update, show success message
