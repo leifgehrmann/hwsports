@@ -115,6 +115,15 @@ class Tms extends MY_Controller {
 		$this->load->view('tms/tournaments',$this->data);
 		$this->load->view('tms/footer',$this->data);
 	}
+	
+	public function tournament($id)
+	{
+		$this->data['title'] = "Tournament";
+		$this->data['page'] = "tournament";
+		
+		$this->load->model('tournament_model');
+		$this->data['tournament'] = $this->tournament_model->get_tournament($id);
+	}
 	public function venues($action='portal')
 	{
 		$this->data['title'] = "Venues";
