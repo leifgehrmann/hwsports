@@ -81,8 +81,8 @@ class Tournament_model extends CI_Model {
 		$insertDataArray = array();
 		foreach($data as $key=>$value) {
 			$insertDataArray[] = array(
-				'tournamentID' => $this->db->escape($tournamentID),
-				'key' => $this->db->escape($key),
+				'tournamentID' => $tournamentID,
+				'key' => $key,
 				'value' => $this->db->escape($value)
 			);
 		}
