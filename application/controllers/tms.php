@@ -59,7 +59,7 @@ class Tms extends MY_Controller {
 			} else {
 				$this->session->set_flashdata('message',  'Failed. Please contact Infusion Systems.');
 			}
-			redirect("/tms/settings", 'refresh');
+			redirect("/tms/tournaments", 'refresh');
 		} else {
 			//display the create user form
 			//set the flash data error message if there is one
@@ -77,6 +77,8 @@ class Tms extends MY_Controller {
 				'type'  => 'text',
 				'value' => ''
 			);
+			
+			$this->data['tournaments'] = $this->tournament_model->get_tournaments();
 		}
 		
 		$this->load->view('tms/header',$this->data);
