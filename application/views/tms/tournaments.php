@@ -8,7 +8,7 @@
 <h2>View / Edit Existing Tournament:</h2>
 <select id="tournamentSelect">
 	<? foreach($tournaments as $tournament) { 
-		echo "<option value='{$tournament['tournamentID']}'>{$tournament['name']}</option>\n";
+		echo "<option value='{$tournament['tournamentID']}'>Hello</option>\n";
 	 } ?>
 </select>
 <button id="viewEditTournament">Proceed</button>

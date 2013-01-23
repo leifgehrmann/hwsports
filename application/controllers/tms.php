@@ -65,6 +65,8 @@ class Tms extends MY_Controller {
 			//display the create user form
 			//set the flash data error message if there is one
 			$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message') );
+		
+			$this->data['tournaments'] = $this->tournament_model->get_tournaments();
 			
 			$this->data['name'] = array(
 				'name'  => 'name',
@@ -107,7 +109,6 @@ class Tms extends MY_Controller {
 				'value' => ''
 			);
 			
-			$this->data['tournaments'] = $this->tournament_model->get_tournaments();
 		}
 		
 		$this->load->view('tms/header',$this->data);
