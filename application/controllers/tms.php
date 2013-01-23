@@ -197,7 +197,7 @@ class Tms extends MY_Controller {
 		$this->data['title'] = "Users";
 		$this->data['page'] = "users";
 		
-		$this->data['users'] = $this->ion_auth->users();
+		$this->data['users'] = $this->ion_auth->users()->result();
 		
 		$this->load->view('tms/header',$this->data);
 		$this->load->view('tms/users',$this->data);
