@@ -54,31 +54,20 @@
 				}
 			],
 			"events": {
-				"onInitCreate": function ( settings, json ) {
-					$('#mapcontainer').append($('#venuemap'));
-					$('#venuemap').show();
-					var existingLat = editor.get('lat');
-					var existingLng = editor.get('lng');
-					if(existingLat.length != 0) {
-						var existingVenuePosition = new google.maps.LatLng(existingLat,existingLng);
-						centre_marker.setPosition(existingVenuePosition);
-						map.setCenter(existingVenuePosition);
-					}
-				},
-				"onInitEdit": function ( settings, json ) {
-					$('#mapcontainer').append($('#venuemap'));
-					$('#venuemap').show();
-					var existingLat = editor.get('lat');
-					var existingLng = editor.get('lng');
-					if(existingLat.length != 0) {
-						var existingVenuePosition = new google.maps.LatLng(existingLat,existingLng);
-						centre_marker.setPosition(existingVenuePosition);
-						map.setCenter(existingVenuePosition);
-					}
-				},
 				"onOpen": function ( settings, json ) {
-					$('.DTE_Body_Content').append("<div id='mapcontainer'></div>");
-					mapInitialize();
+					if($('.DTE_Header_Content').text() != 'Delete') {
+						$('.DTE_Body_Content').append("<div id='mapcontainer'></div>");
+						$('#mapcontainer').append($('#venuemap'));
+						$('#venuemap').show();
+						mapInitialize();
+						var existingLat = editor.get('lat');
+						var existingLng = editor.get('lng');
+						if(existingLat.length != 0) {
+							var existingVenuePosition = new google.maps.LatLng(existingLat,existingLng);
+							centre_marker.setPosition(existingVenuePosition);
+							map.setCenter(existingVenuePosition);
+						}
+					}
 				}
 			}
 		} );
