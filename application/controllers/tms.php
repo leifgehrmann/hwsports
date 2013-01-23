@@ -186,7 +186,10 @@ class Tms extends MY_Controller {
 				);
 				
 			}
-				
+			
+			$this->load->view('tms/header',$this->data);
+			$this->load->view('tms/tournament',$this->data);
+			$this->load->view('tms/footer',$this->data);
 				
 		} else {
 			$this->session->set_flashdata('message',  "Tournament ID $id does not exist.");
