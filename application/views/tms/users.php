@@ -1,5 +1,5 @@
 This page is still under development.<br />
-<br />
+<br /><pre>
 <? print_r($users); /*
 
 <? foreach($users as $user) { ?>
@@ -11,4 +11,4 @@ This page is still under development.<br />
 	Phone: <?=$user['phone']?><br>
 	Email: <?=$user['email']?><br>
 </div>
-<? } */?>
+<? } */?></pre>
