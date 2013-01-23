@@ -213,12 +213,12 @@ class Tms extends MY_Controller {
 		$this->load->view('tms/tickets',$this->data);
 		$this->load->view('tms/footer',$this->data);
 	}
-	public function reports()
+	public function settings()
 	{
-		$this->data['title'] = "Reports";
-		$this->data['page'] = "reports";
+		$this->data['title'] = "Settings";
+		$this->data['page'] = "settings";
 		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/reports',$this->data);
+		$this->load->view('tms/settings',$this->data);
 		$this->load->view('tms/footer',$this->data);
 	}
 

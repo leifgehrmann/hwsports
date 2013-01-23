@@ -30,7 +30,7 @@ class MY_Controller extends CI_Controller {
 			$query = $this->db->query("SELECT " .
 				"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
 				"MAX(CASE WHEN `key`='address' THEN value END ) AS address, " .
-				"MAX(CASE WHEN `key`='legalText' THEN value END ) AS legalText, " .
+				"MAX(CASE WHEN `key`='footerText' THEN value END ) AS footerText, " .
 				"MAX(CASE WHEN `key`='shortName' THEN value END ) AS shortName " .
 				"FROM centreData WHERE centreID = {$this->data['centre']['id']}"
 			);
