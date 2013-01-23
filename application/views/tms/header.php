@@ -15,10 +15,11 @@
 		<link rel='stylesheet' href='/css/dataTables.tabletools.css'>		
 		<link rel='stylesheet' href='/css/dataTables.editor.css'>		
 		<link rel='stylesheet' href='/css/dataTables.ColVis.css'>		
-		<link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css" />
+		<link rel="stylesheet" media="screen" type="text/css" href="/css/colorpicker.css" />
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="/vendor/jquery-1.8.1.min.js"><\/script>')</script>
         <script src="/scripts/fullcalendar/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/jquery-ui.min.js"></script>
         <script src="/scripts/fullcalendar/fullcalendar.js"></script>
 		<script src="/scripts/datatables/jquery-ui-timepicker-addon.js"></script>
 		<script src="/scripts/datatables/jquery.dataTables.min.js"></script>
