@@ -7,32 +7,32 @@
 <?php echo form_open("tms/settings");?>
   	
   <p>
-    <label for="name">Name:</label>
+    <label for="name">Name:</label><br />
     <?php echo form_input($name);?>
   </p>
 
   <p>
-    <label for="shortName">Short Name:</label>
+    <label for="shortName">Short Name:</label><br />
     <?php echo form_input($shortName);?>
   </p>
 
   <p>
-    <label for="address">Address:</label>
+    <label for="address">Address:</label><br />
     <?php echo form_input($address);?>
   </p>
   
   <p>
-    <label for="headerColour">Header Colour:</label>
+    <label for="headerColour">Header Colour:</label><br />
     <?php echo form_input($headerColour);?>
   </p>
   
   <p>
-    <label for="backgroundColour">Background Colour:</label>
+    <label for="backgroundColour">Background Colour:</label><br />
     <?php echo form_input($backgroundColour);?>
   </p>
   
   <p>
-    <label for="footerText">Footer Text:</label>
+    <label for="footerText">Footer Text:</label><br />
     <?php echo form_input($footerText);?>
   </p>
 
