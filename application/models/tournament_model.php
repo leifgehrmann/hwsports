@@ -86,7 +86,6 @@ class Tournament_model extends CI_Model {
 				'value' => $value
 			);
 		}
-		print_r($insertDataArray); die();
 		if ($this->db->insert_batch('tournamentData',$insertDataArray)) {
 			// db success
 			$this->db->trans_complete();
