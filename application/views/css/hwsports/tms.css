@@ -245,6 +245,7 @@ body {
 	width: 500px;
 	height: 200px;
 	margin: 20px auto;
+	display: none;
 }
 
 #content td, #content th {
