@@ -5,7 +5,7 @@
 <? } ?>
 
 
-<?php echo form_open("tms/tournament", array('id' => 'tournamentForm'));?>
+<?php echo form_open("tms/tournament/{$tournamentID}", array('id' => 'tournamentForm'));?>
   	
 	<h2>Tournament Details:</h2>
 	<p>
