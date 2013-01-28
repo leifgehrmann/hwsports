@@ -9,7 +9,7 @@
 <p>Drag a match to change the start date/time, or stretch it from the bottom to change it's length.</p>
 
 <div id='calendar'></div>
-
+<script type='text/javascript' src='/scripts/fullcalendar/_loader.js'></script>
 <script type='text/javascript'>
 	$(document).ready(function() {
 		$('#calendar').fullCalendar({
