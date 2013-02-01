@@ -231,53 +231,6 @@ class Tms extends MY_Controller {
 		$this->load->view('tms/footer',$this->data);
 	}
 
-
-
-
-	public function altVenues(){
-
-		$this->load->library('table');
-		$this->load->model('venues_model');
-
-		// Get data for all venues.
-		$this->data['venues'] = $this->venues_model->get_venues($this->data['centre']['centreID']);
-
-		//set the flash data error message if there is one
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		
-		// query google maps api for lat / lng of sports centre
-		$address = urlencode($this->data['centre']['address']);
-		$url = "http://maps.google.com/maps/api/geocode/json?address=$address&sensor=false&region=uk";
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-		$json = curl_exec($ch);
-		curl_close($ch);
-		$apiData = json_decode($json);
-		
-		//$this->data['apiData'] = $json;
-		$lat = $apiData->results[0]->geometry->location->lat;
-		$lng = $apiData->results[0]->geometry->location->lng;
-
-		// Perhaps this isn't necessary anymore....
-		// Create the form
-		$this->data['createLatLng'] = array('lat' => $lat, 'lng' => $lng);
-		$this->data['createName'] = array('name' => 'name');
-		$this->data['createDescription'] = array('name' => 'description');
-		$this->data['createDirections'] = array('name' => 'directions');
-
-		// Display the page.
-		$this->data['title'] = "Venues";
-		$this->data['page']  = "venues";
-		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/altvenues',$this->data);
-		$this->load->view('tms/footer',$this->data);
-	}
-
-
 	public function venue($venueID)
 	{
 		$this->load->library('table');
@@ -292,9 +245,6 @@ class Tms extends MY_Controller {
 		$this->load->view('tms/venue',$this->data);
 		$this->load->view('tms/footer',$this->data);
 	}
-
-
-
 
 	public function sports()
 	{

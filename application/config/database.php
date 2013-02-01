@@ -64,6 +64,9 @@ $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
+$db->sql("SET character_set_client=utf8");
+$db->sql("SET character_set_connection=utf8");
+$db->sql("SET character_set_results=utf8");
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
