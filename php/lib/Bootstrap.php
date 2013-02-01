@@ -55,6 +55,8 @@ spl_autoload_register( function ($class) {
 //   Database connection it globally available
 //
 $db = new Database( $sql_details );
+
+// Leif was here :)
 $db->sql("SET character_set_client=utf8");
 $db->sql("SET character_set_connection=utf8");
 $db->sql("SET character_set_results=utf8");
