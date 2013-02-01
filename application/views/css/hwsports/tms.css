@@ -2,6 +2,14 @@ body {
 	background:#FFF;
 }
 
+/***************************************
+****************************************
+****************************************
+				Header
+****************************************
+****************************************
+***************************************/
+
 #header{
 	min-height:60px;
 	height:auto;
@@ -67,6 +75,26 @@ body {
 	padding-top:7px;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************
+****************************************
+****************************************
+				Menu
+****************************************
+****************************************
+***************************************/
 
 #menu ul {
 	list-style-type: none;
@@ -139,6 +167,21 @@ body {
 
 
 
+
+
+
+
+
+
+
+/***************************************
+****************************************
+****************************************
+		General TMS interface
+****************************************
+****************************************
+***************************************/
+
 #content{
 	float: left;
 	width:70%;
@@ -209,8 +252,6 @@ body {
 #content td, #content th {
 	text-align: left;
 }
-
-
 #content button {
 	margin-right: 5px;
 	margin-bottom: 5px;
@@ -234,6 +275,25 @@ body {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************
+****************************************
+****************************************
+		Widget Specific Styles
+****************************************
+****************************************
+***************************************/
 
 #venuemap {
 	width: 500px !important;
@@ -262,7 +322,7 @@ body {
 
 
 
-
+/*
 #content .jTPS tfoot .pagination .pageSelector:hover {
         border: 1px solid #<?=$centre['headerColour']?>;
 }
@@ -303,7 +363,7 @@ body {
 }
 #content .jTPS tbody td {
         border-bottom: 1px solid #C8C8C8;
-}
+}*/
 
 
 
@@ -319,6 +379,13 @@ body {
 
 
 
+/***************************************
+****************************************
+****************************************
+			DataTable CSS
+****************************************
+****************************************
+***************************************/
 
 #content button.DTTT_button, #content div.DTTT_button, #content a.DTTT_button {
 	text-decoration: none;
@@ -361,7 +428,6 @@ body .DTED_Lightbox_Content{
 body .DTED_Lightbox_Content button{
 	border-radius: 0px !important;
 }
-
 #content .dataTables_filter input {
 	padding:6px;
 	width:auto;	
@@ -371,6 +437,25 @@ body .DTED_Lightbox_Content button{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************
+****************************************
+****************************************
+		Full Calendar CSS custom
+****************************************
+****************************************
+***************************************/
 
 #content .fc-state-default .fc-button-effect span {
 	border-width: 0px;
@@ -431,7 +516,28 @@ body .DTED_Lightbox_Content button{
 }
 
 
-/* css for timepicker */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************
+****************************************
+****************************************
+			Time Picker
+****************************************
+****************************************
+***************************************/
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
 .ui-timepicker-div dl { text-align: left; }
 .ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
@@ -490,3 +596,27 @@ body .ui-datepicker .ui-datepicker-title{
 	max-height: 100px;
 	overflow: auto;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************
+****************************************
+****************************************
+		Page Specific Styling
+****************************************
+****************************************
+***************************************/
+
+.page-calendar .filter-category-tournaments:after{ content: 'Tournaments'; }
+.page-calendar .filter-category-venues:after{ content: 'Venues'; }
+.page-calendar .filter-category-sports:after{ content: 'Sports'; }

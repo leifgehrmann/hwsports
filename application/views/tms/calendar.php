@@ -7,7 +7,13 @@
 </ul>
 <p>Click the matches/tournaments for more information.</p>
 <p>Drag a match to change the start date/time, or stretch it from the bottom to change it's length.</p>
-
+<div class="filter-category">
+	<h2>Filter Category</h2>
+	<p>Select a category to filter the calendar results.</p>
+	<input type="radio" name="filter" value="tournaments" class="filter-category-tournaments">
+	<input type="radio" name="filter" value="venues" class="filter-category-venues">
+	<input type="radio" name="filter" value="sports" class="filter-category-sports">
+</div>
 <div id='calendar'></div>
 <script type='text/javascript' src='/scripts/fullcalendar/_loader.js'></script>
 <script type='text/javascript'>
