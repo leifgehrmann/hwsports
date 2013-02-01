@@ -21,12 +21,12 @@
         <script src="/scripts/fullcalendar/jquery-ui-1.9.2.custom.min.js"></script>
 		<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/jquery-ui.min.js"></script>
         <script src="/scripts/fullcalendar/fullcalendar.js"></script>
-		<script src="/scripts/datatables/jquery-ui-timepicker-addon.js"></script>
-		<script src="/scripts/datatables/jquery.dataTables.min.js"></script>
-		<script src="/scripts/datatables/dataTables.tabletools.min.js"></script>
-		<script src="/scripts/datatables/dataTables.editor.min.js"></script>
-		<script src="/scripts/datatables/dataTables.ColReorderWithResize.js"></script>
-		<script src="/scripts/datatables/dataTables.ColVis.js"></script>
+		<script charset="utf-8" src="/scripts/datatables/jquery-ui-timepicker-addon.js"></script>
+		<script charset="utf-8" src="/scripts/datatables/jquery.dataTables.min.js"></script>
+		<script charset="utf-8" src="/scripts/datatables/dataTables.tabletools.min.js"></script>
+		<script charset="utf-8" src="/scripts/datatables/dataTables.editor.min.js"></script>
+		<script charset="utf-8" src="/scripts/datatables/dataTables.ColReorderWithResize.js"></script>
+		<script charset="utf-8" src="/scripts/datatables/dataTables.ColVis.js"></script>
 		<script src="/scripts/colorpicker/colorpicker.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
     </head>

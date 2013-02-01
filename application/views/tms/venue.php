@@ -4,7 +4,6 @@
 	$fields = array("name","description","directions");
 	$labels = array("Venue Name","Description","Directions");
 	$types = array("text","textfield","textfield");
-	$types = array("text","textfield","textfield");
 	$widths = array("15%","40%","20%");
 
 	echo "<table>";
@@ -38,20 +37,22 @@
 
 <div id='calendar'></div>
 
+<script type='text/javascript' src='/scripts/fullcalendar/_loader.js'></script>
 <script type='text/javascript'>
 	function changed(fieldname){
-		input = $("#form-"+fieldname);
+		var input = $("#form-"+fieldname);
 		if(input.val()!=input.attr('oldvalue'))
 			$("#edit-"+fieldname).css("visibility", "visible");
 	}
 	function cancel(fieldname){
-		input = $("#form-"+fieldname);
+		var input = $("#form-"+fieldname);
 		input.val(input.attr('oldvalue'));
 		$("#edit-"+fieldname).css("visibility", "hidden");
 	}
 	function update(fieldname){
 		var form_data = {};
-		form_data[fieldname] = $("#form-"+fieldname).val();
+		var input = $("#form-"+fieldname);
+		form_data[fieldname] = input.val();
 		jQuery.ajax({
 			url: "/db_venues/update_venue/<?=$this->data['venue']['venueID']?>",
 			type: 'POST',
@@ -60,8 +61,10 @@
 			success: function(msg) {
 				if(msg['success']){
 					$("#edit-"+fieldname).css("visibility", "hidden");
+					input.attr('oldvalue',input);
+					// To update the content of the page to make sense.
 					if(fieldname=="name"){
-						$("#title-name").html($("#form-"+fieldname).val());
+						$("#title-name").html(input.val());
 					}
 				} else {
 					alert("Could not update the field. Please contact support.");
@@ -79,6 +82,56 @@
 			},
 			events: '/db_calendar/getVenueMatches/<?=$this->data["venue"]["venueID"]?>',
 			editable: true
+		});
+		
+	});
+</script>
+<script type='text/javascript'>
+	$(document).ready(function() {
+		$('#calendar').fullCalendar({
+			firstDay: '1',
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			events: '/db_calendar/getAllMatches/',
+			editable: true,
+			eventResize: function(match,dayDelta,minuteDelta,revertFunc) {
+				console.log(match);
+				var minutesDelta = ((dayDelta*1440)+minuteDelta)*60;
+				var request = $.ajax({
+					type: "POST",
+					url: '/db_calendar/changeMatchEnd',
+					data: { 'minutesDelta': minutesDelta, 'id': match.data.id }
+				});
+ 
+				request.done(function(msg) {
+				 alert( msg );
+				});
+				 
+				request.fail(function(jqXHR, textStatus) {
+				  alert( "Request failed: " + textStatus );
+				});
+			},
+			eventDrop: function(match,dayDelta,minuteDelta,allDay,revertFunc) {
+				console.log(match);
+				var minutesDelta = ((dayDelta*1440)+minuteDelta)*60;
+				alert(minutesDelta);
+				var request = $.ajax({
+					type: "POST",
+					url: '/db_calendar/changeMatchStart',
+					data: { 'minutesDelta': minutesDelta, 'id': match.data.id }
+				});
+ 
+				request.done(function(msg) {
+				 alert( msg );
+				});
+				 
+				request.fail(function(jqXHR, textStatus) {
+				  alert( "Request failed: " + textStatus );
+				});
+			}
 		});
 		
 	});
