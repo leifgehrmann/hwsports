@@ -616,8 +616,8 @@ body .ui-datepicker .ui-datepicker-title{
 ****************************************
 ****************************************
 ***************************************/
-.page-calendar input[type="checkbox"] { height:30px; }
-.page-calendar input:after{ padding-left: 33px; }
-.page-calendar .filter-tournament:after{ content: 'Tournament'; }
-.page-calendar .filter-venue:after{ content: 'Venue'; }
-.page-calendar .filter-sport:after{ content: 'Sport'; }
+#content .page-calendar input[type="checkbox"] { height:20px; width: 140px; }
+#content .page-calendar input:after{ padding-left: 33px;  }
+#content .page-calendar .filter-tournament:after{ content: 'Tournament'; }
+#content .page-calendar .filter-venue:after{ content: 'Venue'; }
+#content .page-calendar .filter-sport:after{ content: 'Sport'; }
