@@ -619,6 +619,7 @@ body .ui-datepicker .ui-datepicker-title{
 .page-calendar input[type="radio"] {
 	width:20px;
 	height:20px;
+	padding-right: 20px;
 }
 .page-calendar .filter-category-tournaments:after{ content: 'Tournaments'; }
 .page-calendar .filter-category-venues:after{ content: 'Venues'; }
