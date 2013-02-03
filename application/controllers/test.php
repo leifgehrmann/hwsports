@@ -29,7 +29,7 @@ class Test extends MY_Controller {
 		$this->load->view('data', $this->data);
 	}
 
-	public function get_matches(){
+	public function get_matches($centreID){
 		$output = $this->matches_model->get_matches($centreID);
 		$this->data['data'] =  print_r($output,1);
 		header('Content-Type: application/json');
