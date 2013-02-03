@@ -149,7 +149,7 @@ class Tms extends MY_Controller {
 				//set the flash data error message if there is one
 				$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message') );
 				
-				$this->data['name'] = $tournament['name'];
+				$this->data['tournament']['name'] = $tournament['name'];
 			
 				$this->data['name'] = array(
 					'name'  => 'name',
