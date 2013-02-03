@@ -19,7 +19,8 @@ class Db_Calendar extends MY_Controller {
 			$this->data['data'][] = array(
 				'data' => array(
 					'id' => $match['matchID'],
-					'tournamentID' => $match['tournamentID']
+					'tournamentID' => $match['tournamentID'],
+					'venueID' => $match['venueID']
 				),
 				'title' => $match['name'],
 				'start' => $match['startTime'],
@@ -34,13 +35,15 @@ class Db_Calendar extends MY_Controller {
 		$this->load->view('data',$this->data);
 	}
 	public function getVenueMatches($venueID){
-		$matches = $this->matches_model->get_matches($this->data['centre']['centreID']);
+		$matches = $this->matches_model->get_venue_matches($this->data['centre']['centreID']);
 		$this->data['data'] = array();		
 		foreach($matches as $match) {
 			if($match['venueID']==14){
 				$this->data['data'][] = array(
 					'data' => array(
-						'id' => $match['matchID']
+						'id' => $match['matchID'],
+						'tournamentID' => $match['tournamentID'],
+						'venueID' => $match['venueID']
 					),
 					'title' => $match['name'],
 					'start' => $match['startTime'],
