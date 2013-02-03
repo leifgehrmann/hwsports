@@ -72,11 +72,11 @@ class Tms extends MY_Controller {
 		
 			$this->data['sports'] = array();
 			foreach( $this->sports_model->get_sport_categories() as $sportCategoryID => $sportCategoryData ) {
-				$this->data['sports'][$sportCategoryData['name']] = array();
+				$this->data['sports'][$sportCategoryData['name']] = array("null" => "Please select a sport");
 			}
 			
 			foreach( $this->sports_model->get_sports($this->data['centre']['centreID']) as $sport) {
-				$this->data['sports'][$sport['sportCategory']['name']][$sport['name']] = $sport['sportID'];
+				$this->data['sports'][$sport['sportCategory']['name']][$sport['sportID']] = $sport['name'];
 			}
 			
 			$this->data['name'] = array(
