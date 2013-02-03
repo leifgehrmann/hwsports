@@ -19,8 +19,7 @@ class Db_Calendar extends MY_Controller {
 			$this->data['data'][] = array(
 				'data' => array(
 					'id' => $match['matchID'],
-					'tournamentID' => $match['tournamentID'],
-					'venueID' => $match['venueID'],
+					'tournamentID' => $match['tournamentID']
 				),
 				'title' => $match['name'],
 				'start' => $match['startTime'],

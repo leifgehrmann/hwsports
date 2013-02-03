@@ -35,6 +35,23 @@ class Matches_model extends CI_Model {
 	}
 
 	/**
+	 * Returns a 2d array of match data
+	 *  
+	 * @return array
+	 **/
+	public function get_venue_matches($venueID, $fields=array("name","startTime","endTime","description","tournamentID"))
+	{
+		$output = array();
+		$queryString = "SELECT matchID, venues.venueID FROM matches LEFT JOIN venues ON matches.venueID = $venueID WHERE venues.venueID = ".$this->db->escape($venueID);
+		$queryData = $this->db->query($queryString);
+		$data = $queryData->result_array();
+		foreach($data as $match) {
+			$output[] = $this->get_match($match['matchID'],$fields);
+		}
+		return $output;
+	}
+
+	/**
 	 * Returns an array of data from a specific match
 	 *  
 	 * @return array
