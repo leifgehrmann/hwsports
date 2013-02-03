@@ -66,6 +66,32 @@ class Sports_model extends CI_Model {
 		return $output;
 	}
 
+	public function get_sport_category($sportCategoryID)
+	{
+		$fields = array();
+		$fieldsQuery = $this->db->query("SELECT `key` FROM `sportCategoryData` WHERE `sportCategoryID` = ".$this->db->escape($sportCategoryID) );
+		$fieldsResult = $fieldsQuery->result_array();
+		foreach($fieldsResult as $fieldResult) {
+			$fields[] = $fieldResult['key'];
+		}
+
+		$dataQueryString = "SELECT ";
+		$i = 0;
+		$len = count($fields);
+		foreach($fields as $field) {
+			$dataQueryString .= "MAX(CASE WHEN `key`=".$this->db->escape($field)." THEN value END ) AS ".$this->db->escape($field);
+			if($i<$len-1)
+				$dataQueryString .= ", ";
+			else
+				$dataQueryString .= " ";
+			$i++;
+		}
+		$dataQueryString .= "FROM sportCategoryData WHERE sportCategoryID = ".$this->db->escape($sportCategoryID);
+		$dataQuery = $this->db->query($dataQueryString);
+		$output = array_merge(array("venueID"=>$sportCategoryID), $dataQuery->row_array());
+		return $output;
+	}
+
 	/**
 	 * Creates a sport with data.
 	 * returns the sportID of the new sport if it was
