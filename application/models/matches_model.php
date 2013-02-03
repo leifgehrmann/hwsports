@@ -22,7 +22,7 @@ class Matches_model extends CI_Model {
 	 *  
 	 * @return array
 	 **/
-	public function get_centre_matches($centreID)
+	public function get_matches($centreID)
 	{
 		$output = array();
 		$queryString = "SELECT matchID FROM matches LEFT JOIN venues ON matches.venueID = venues.venueID WHERE venues.centreID = ".$this->db->escape($centreID);
@@ -58,29 +58,37 @@ class Matches_model extends CI_Model {
 	 **/
 	public function get_match($matchID)
 	{
+		/* Return the fields that can be discovered within this match */
 		$fields = array();
-		$fieldsQuery = $this->db->query("SELECT `key` FROM `matchData` WHERE `matchID` = ".$this->db->escape($matchID) );
+		$fieldsString = "SELECT `key` FROM `matchData` WHERE `matchID` = ".$this->db->escape($matchID);
+		$fieldsQuery = $this->db->query($fieldsString);
 		$fieldsResult = $fieldsQuery->result_array();
 		foreach($fieldsResult as $fieldResult) {
 			$fields[] = $fieldResult['key'];
 		}
 
-		$queryString = "SELECT matchID, venues.venueID FROM matches LEFT JOIN venues ON matches.venueID = $venueID WHERE venues.venueID = ".$this->db->escape($venueID);
-		$queryData = $this->db->query($queryString);
-		$dataQueryString = "SELECT ";
+		/* Query the ids that are associated with this match */
+		$relational = array();
+		$relationalString = "SELECT matchID, sportID, venueID FROM matches WHERE matchID = ".$this->db->escape($matchID);
+		$relationalQuery = $this->db->query($relationalQueryString);
+		$relationalResult = $relationalQuery->result_array();
+
+		/* Fetch the data */
+		$dataString = "SELECT ";
 		$i = 0;
 		$len = count($fields);
 		foreach($fields as $field) {
-			$dataQueryString .= "MAX(CASE WHEN `key`=".$this->db->escape($field)." THEN value END ) AS ".$this->db->escape($field);
+			$dataString .= "MAX(CASE WHEN `key`=".$this->db->escape($field)." THEN value END ) AS ".$this->db->escape($field);
 			if($i<$len-1)
-				$dataQueryString .= ", ";
+				$dataString .= ", ";
 			else
-				$dataQueryString .= " ";
+				$dataString .= " ";
 			$i++;
 		}
-		$dataQueryString .= "FROM matchData WHERE matchID = ".$this->db->escape($matchID);
-		$dataQuery = $this->db->query($dataQueryString);
-		$output = array_merge(array("matchID"=>$matchID), $dataQuery->row_array());
+		$dataString .= "FROM matchData WHERE matchID = ".$this->db->escape($matchID);
+		$dataQuery = $this->db->query($dataString);
+		$dataResult = $dataQuery->result_array();
+		$output = array_merge($relationalResult, $dataResult);
 		return $output;
 	}
 
