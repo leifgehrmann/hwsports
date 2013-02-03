@@ -9,14 +9,14 @@
         <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
         <link href="/css/main.css" rel="stylesheet" type="text/css">
         <link href="/css/tms.css" rel="stylesheet" type="text/css">
-		<link rel='stylesheet' href='http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/themes/eggplant/jquery-ui.css'>
+		<link rel='stylesheet' href='css/hwsports/smoothness/jquery-ui-1.10.0.custom.min.css'>
 		<link rel='stylesheet' href='/css/jquery.dataTables.css'>		
 		<link rel='stylesheet' href='/css/dataTables.tabletools.css'>		
 		<link rel='stylesheet' href='/css/dataTables.editor.css'>		
-		<link rel='stylesheet' href='/css/dataTables.ColVis.css'>		
+		<link rel='stylesheet' href='/css/dataTables.ColVis.css'>
 		<link rel="stylesheet" media="screen" type="text/css" href="/css/colorpicker.css" />
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-		<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/jquery-ui.min.js"></script>
+		<script src="/scripts/jquery-ui-1.10.0.custom.min.js"></script>
 		<script charset="utf-8" src="/scripts/datatables/jquery-ui-timepicker-addon.js"></script>
 		<script charset="utf-8" src="/scripts/datatables/jquery.dataTables.min.js"></script>
 		<script charset="utf-8" src="/scripts/datatables/dataTables.tabletools.min.js"></script>
