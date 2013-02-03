@@ -33,7 +33,7 @@ class Db_Calendar extends MY_Controller {
 		$this->load->view('data',$this->data);
 	}
 	public function getVenueMatches($venueID){
-		$matches = $this->matches_model->get_venue_matches($this->data['centre']['centreID']);
+		$matches = $this->matches_model->get_venue_matches($venueID);
 		$this->data['data'] = array();		
 		foreach($matches as $match) {
 			if($match['venueID']==14){
