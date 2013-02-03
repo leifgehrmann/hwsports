@@ -13,7 +13,7 @@ class Db_Calendar extends MY_Controller {
 	// Input:
 	//	* 
 	public function getAllMatches() {
-		$matches = $this->matches_model->get_centre_matches($this->data['centre']['centreID']);
+		$matches = $this->matches_model->get_matches($this->data['centre']['centreID']);
 		$this->data['data'] = array();		
 		foreach($matches as $match) {
 			$this->data['data'][] = array(
