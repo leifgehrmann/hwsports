@@ -18,9 +18,7 @@ class Db_Calendar extends MY_Controller {
 		foreach($matches as $match) {
 			$this->data['data'][] = array(
 				'data' => array(
-					'id' => $match['matchID'],
-					'tournamentID' => $match['tournamentID'],
-					'venueID' => $match['venueID']
+					'id' => $match['matchID']
 				),
 				'title' => $match['name'],
 				'start' => $match['startTime'],
@@ -41,9 +39,7 @@ class Db_Calendar extends MY_Controller {
 			if($match['venueID']==14){
 				$this->data['data'][] = array(
 					'data' => array(
-						'id' => $match['matchID'],
-						'tournamentID' => $match['tournamentID'],
-						'venueID' => $match['venueID']
+						'id' => $match['matchID']
 					),
 					'title' => $match['name'],
 					'start' => $match['startTime'],
