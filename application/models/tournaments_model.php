@@ -47,6 +47,12 @@ class Tournaments_model extends CI_Model {
 			$fields[] = $fieldResult['key'];
 		}
 		
+		/* Query the ids that are associated with this match */
+		$relational = array();
+		$relationalString = "SELECT sportID FROM tournaments WHERE tournamentID = ".$this->db->escape($tournamentID);
+		$relationalQuery = $this->db->query($relationalString);
+		$relationalResult = $relationalQuery->result_array();
+		
 		$dataQueryString = "SELECT ";
 		$i = 0;
 		$len = count($fields);
@@ -61,6 +67,7 @@ class Tournaments_model extends CI_Model {
 		$dataQueryString .= "FROM tournamentData WHERE tournamentID = ".$this->db->escape($tournamentID);
 		$dataQuery = $this->db->query($dataQueryString);
 		$output = array_merge(array("tournamentID"=>$tournamentID), $dataQuery->row_array());
+		$output['sportID'] = $relationalResult[0]['sportID'];
 		return $output;
 	}
 
@@ -73,9 +80,13 @@ class Tournaments_model extends CI_Model {
 	 **/
 	public function insert_tournament($data)
 	{	
+		$sportID = $data['sportID'];
+		unset($data['sportID']);
+		
+		
 		$this->db->trans_start();
 		
-		$this->db->query("INSERT INTO tournaments (centreID) VALUES ({$this->data['centre']['centreID']})");
+		$this->db->query("INSERT INTO tournaments (centreID,sportID) VALUES ({$this->data['centre']['centreID']},$sportID)");
 		$tournamentID = $this->db->insert_id();
 		if($tournamentID) {
 			
