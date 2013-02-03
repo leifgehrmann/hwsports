@@ -162,7 +162,7 @@ class Tms extends MY_Controller {
 				
 				$this->data['tournament']['name'] = $tournament['name'];
 				$sport = $this->sports_model->get_sport( $tournament['sportID'] );
-				$this->data['tournament']['sport'] = $sport['name'];
+				$this->data['sport'] = $sport['name'];
 			
 				$this->data['name'] = array(
 					'name'  => 'name',
