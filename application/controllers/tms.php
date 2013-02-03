@@ -45,7 +45,7 @@ class Tms extends MY_Controller {
 		$this->data['title'] = "Tournaments";
 		$this->data['page'] = "tournaments";
 		
-		$this->load->model('tournament_model');
+		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
 		
 		$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
@@ -55,7 +55,7 @@ class Tms extends MY_Controller {
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
 			
-			$tournamentID = $this->tournament_model->insert_tournament($newdata);
+			$tournamentID = $this->tournaments_model->insert_tournament($newdata);
 			if($tournamentID > -1) {
 				// Successful update, show success message
 				$this->session->set_flashdata('message',  'Successfully Created Tournament.');
@@ -68,8 +68,16 @@ class Tms extends MY_Controller {
 			//set the flash data error message if there is one
 			$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message') );
 		
-			$this->data['tournaments'] = $this->tournament_model->get_tournaments($this->data['centre']['centreID']);
-			$this->data['sports'] = $this->sports_model->get_sports($this->data['centre']['centreID']);
+			$this->data['tournaments'] = $this->tournaments_model->get_tournaments($this->data['centre']['centreID']);
+		
+			$this->data['sports'] = array();
+			foreach( $this->sports_model->get_sport_categories() as $sportCategoryID => $sportCategoryData ) {
+				$this->data['sports'][$sportCategoryData['name']] = array();
+			}
+			
+			foreach( $this->sports_model->get_sports($this->data['centre']['centreID']) as $sport) {
+				$this->data['sports'][$sport['sportCategory']['name']][$sport['name']] = $sport['sportID'];
+			}
 			
 			$this->data['name'] = array(
 				'name'  => 'name',
@@ -124,10 +132,10 @@ class Tms extends MY_Controller {
 		$this->data['title'] = "Tournament";
 		$this->data['page'] = "tournament";
 		
-		$this->load->model('tournament_model');
+		$this->load->model('tournaments_model');
 		
-		if( $this->tournament_model->tournament_exists($tournamentID) ) {
-			$tournament = $this->tournament_model->get_tournament($tournamentID);
+		if( $this->tournaments_model->tournament_exists($tournamentID) ) {
+			$tournament = $this->tournaments_model->get_tournament($tournamentID);
 			$this->data['tournamentID'] = $tournamentID;
 						
 			$this->form_validation->set_rules('name', 'Name', 'required');
@@ -140,7 +148,7 @@ class Tms extends MY_Controller {
 			if ($this->form_validation->run() == true) {
 				$newdata = $_POST;
 				
-				$this->tournament_model->update_tournament($tournamentID, $newdata);
+				$this->tournaments_model->update_tournament($tournamentID, $newdata);
 				if($tournamentID > -1) {
 					// Successful update, show success message
 					$this->session->set_flashdata('message',  'Successfully Updated Tournament.');
