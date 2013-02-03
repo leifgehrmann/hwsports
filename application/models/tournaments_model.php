@@ -1,5 +1,5 @@
 <?php
-class Tournament_model extends CI_Model {
+class Tournaments_model extends CI_Model {
 
 	/**
 	 * $centreID is int(11)
