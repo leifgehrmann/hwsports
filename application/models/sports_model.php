@@ -49,6 +49,12 @@ class Sports_model extends CI_Model {
 			$fields[] = $fieldResult['key'];
 		}
 
+		/* Query the ids that are associated with this match */
+		$relational = array();
+		$relationalString = "SELECT sportCategoryID FROM sports WHERE sportID = ".$this->db->escape($sportID);
+		$relationalQuery = $this->db->query($relationalQueryString);
+		$relationalResult = $relationalQuery->result_array();
+
 		$dataQueryString = "SELECT ";
 		$i = 0;
 		$len = count($fields);
@@ -63,6 +69,7 @@ class Sports_model extends CI_Model {
 		$dataQueryString .= "FROM sportData WHERE sportID = ".$this->db->escape($sportID);
 		$dataQuery = $this->db->query($dataQueryString);
 		$output = array_merge(array("venueID"=>$sportID), $dataQuery->row_array());
+		$output['sportsCategory'] = get_sport_category($relationalResult['sportCategoryID']);
 		return $output;
 	}
 
