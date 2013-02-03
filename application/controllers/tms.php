@@ -46,9 +46,11 @@ class Tms extends MY_Controller {
 		$this->data['page'] = "tournaments";
 		
 		$this->load->model('tournament_model');
+		$this->load->model('sports_model');
 		
 		$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
 		$this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
+		$this->form_validation->set_rules('sport', 'Sport', 'required|xss_clean');
 		
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
@@ -66,7 +68,8 @@ class Tms extends MY_Controller {
 			//set the flash data error message if there is one
 			$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message') );
 		
-			$this->data['tournaments'] = $this->tournament_model->get_tournaments();
+			$this->data['tournaments'] = $this->tournament_model->get_tournaments($this->data['centre']['centreID']);
+			$this->data['sports'] = $this->sports_model->get_sports($this->data['centre']['centreID']);
 			
 			$this->data['name'] = array(
 				'name'  => 'name',

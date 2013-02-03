@@ -626,3 +626,21 @@ input.colorpickerinput {
 #content .page-calendar .filter-tournament:after{ content: 'Tournament'; }
 #content .page-calendar .filter-venue:after{ content: 'Venue'; }
 #content .page-calendar .filter-sport:after{ content: 'Sport'; }
+
+
+#tournamentsForm input#tournamentStart {
+	width: 15%;
+}
+#tournamentsForm input#tournamentEnd {
+	width: 15%;
+}
+#tournamentsForm input#registrationStart {
+	width: 15%;
+}
+#tournamentsForm input#registrationEnd {
+	width: 15%;
+}
+#tournamentsForm select {
+	height: 40px;
+	width: 80%;
+}

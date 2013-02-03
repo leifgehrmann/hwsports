@@ -22,10 +22,10 @@ class Tournament_model extends CI_Model {
 	 *  
 	 * @return array
 	 **/
-	public function get_tournaments()
+	public function get_tournaments($centreID)
 	{
 		$output = array();
-		$queryString = "SELECT DISTINCT tournamentID FROM tournamentData";
+		$queryString = "SELECT tournamentID FROM tournaments WHERE centreID = ".$this->db->escape($centreID);;
 		$queryData = $this->db->query($queryString);
 		$data = $queryData->result_array();
 		foreach($data as $tournament) {
