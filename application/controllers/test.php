@@ -7,7 +7,7 @@ class Test extends MY_Controller {
 	    $this->load->model('sports_model');
 	}
 	public function get_sport_category($sportID){
-		$output = $this->sports_model->get_sport_category($this->data['centre']['centreID']);
+		$output = $this->sports_model->get_sport_categories();
 		$this->data['data'] =  json_encode($output);
 		header('Content-Type: application/json');
 		$this->load->view('data', $this->data);
