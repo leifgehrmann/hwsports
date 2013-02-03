@@ -177,7 +177,10 @@ class Sis extends MY_Controller {
 		//set the flash data error message if there is one
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		
-		$this->data['tournaments'] = $this->tournaments_model->get_tournaments($this->data['centre']['centreID']);
+		$this->data['tournaments'] = array();
+		foreach( $this->tournaments_model->get_tournaments($this->data['centre']['centreID']) as $tournament ) {
+			$this->data['tournaments'][ $tournament['name'] ] = $tournament['id'];
+		}
 		
 		$this->data['title'] = "Signup";
 		$this->data['page'] = "signup";
