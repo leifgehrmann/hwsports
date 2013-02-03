@@ -16,6 +16,7 @@ class Test extends MY_Controller {
 	public function get_sport($sportID){
 		$output = $this->sports_model->get_sport($sportID);
 		$this->data['data'] =  json_encode($output);
+		$this->data['data'] =  print_r($output,1);
 		header('Content-Type: application/json');
 		$this->load->view('data', $this->data);
 	}
