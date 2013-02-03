@@ -69,7 +69,7 @@ class Sports_model extends CI_Model {
 		$dataQueryString .= "FROM sportData WHERE sportID = ".$this->db->escape($sportID);
 		$dataQuery = $this->db->query($dataQueryString);
 		$output = array_merge(array("venueID"=>$sportID), $dataQuery->row_array());
-		$output['sportsCategory'] = $this->get_sport_category($relationalResult['sportCategoryID']);
+		$output['sportsCategory'] = $this->get_sport_category($relationalResult[0]['sportCategoryID']);
 		return $output;
 	}
 
