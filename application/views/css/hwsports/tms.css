@@ -582,7 +582,11 @@ body .ui-datepicker td{
 body .ui-datepicker .ui-datepicker-title{
 	font-size: 14px;
 }
-
+input.colorpickerinput {
+	font-size:14px;
+	text-shadow:0px 0px 4px #000000;
+	color:#FFF;
+}
 #settingsForm input.time, #settingsForm input.colorpickerinput {
 	width: 100px;
 	padding: 5px;
@@ -617,6 +621,7 @@ body .ui-datepicker .ui-datepicker-title{
 ****************************************
 ***************************************/
 #content .page-calendar input[type="checkbox"] { height:20px; width: 140px; }
+#content .page-calendar input[type="select"] { height:20px; width: 140px; clear: right;}
 #content .page-calendar input:after{ padding-left: 33px;  }
 #content .page-calendar .filter-tournament:after{ content: 'Tournament'; }
 #content .page-calendar .filter-venue:after{ content: 'Venue'; }

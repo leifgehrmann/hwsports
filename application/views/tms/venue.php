@@ -72,7 +72,7 @@
 			}
 		});
 	}
-	$(document).ready(function() {
+	/*$(document).ready(function() {
 		$('#calendar').fullCalendar({
 			firstDay: '1',
 			header: {
@@ -84,7 +84,7 @@
 			editable: true
 		});
 		
-	});
+	});*/
 </script>
 <script type='text/javascript'>
 	$(document).ready(function() {
@@ -95,7 +95,7 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			events: '/db_calendar/getAllMatches/',
+			events: '/db_calendar/getVenueMatches/<?=$this->data["venue"]["venueID"]?>',
 			editable: true,
 			eventResize: function(match,dayDelta,minuteDelta,revertFunc) {
 				console.log(match);

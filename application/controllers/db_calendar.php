@@ -29,10 +29,30 @@ class Db_Calendar extends MY_Controller {
 			);
 		}
 		$this->data['data'] = json_encode($this->data['data']);
+		header('Content-Type: application/json');
 		$this->load->view('data',$this->data);
 	}
 	public function getVenueMatches($venueID){
-
+		$matches = $this->matches_model->get_matches($this->data['centre']['centreID']);
+		$this->data['data'] = array();		
+		foreach($matches as $match) {
+			if($match[]){
+				$this->data['data'][] = array(
+					'data' => array(
+						'id' => $match['matchID']
+					),
+					'title' => $match['name'],
+					'start' => $match['startTime'],
+					'end' => $match['endTime'],
+					'url' => "/tms/match/".$match['matchID'],
+					'allDay' => false,
+					'color' => '#2966C7'
+				);
+			}
+		}
+		$this->data['data'] = json_encode($this->data['data']);
+		header('Content-Type: application/json');
+		$this->load->view('data',$this->data);
 	}
 	public function getTournamentMatches($tournamentID){
 		// Should return registration periods
@@ -44,6 +64,7 @@ class Db_Calendar extends MY_Controller {
 		$newStartTime = $oldStartTime+$_POST['minutesDelta'];
 		$updateResult = $this->matches_model->update_match($_POST['id'],array('startTime'=>$newStartTime));
 		$this->data['data'] = ($updateResult ? "Success!" : "False!");
+		header('Content-Type: application/json');
 		$this->load->view('data',$this->data);
 	}
 
@@ -53,6 +74,7 @@ class Db_Calendar extends MY_Controller {
 		$newEndTime = $oldEndTime+$_POST['minutesDelta'];
 		$updateResult = $this->matches_model->update_match($_POST['id'],array('endTime'=>$newEndTime));
 		$this->data['data'] = ($updateResult ? "Success!" : "False!");
+		header('Content-Type: application/json');
 		$this->load->view('data',$this->data);
 	}
 	
