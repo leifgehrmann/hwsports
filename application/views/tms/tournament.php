@@ -18,7 +18,7 @@
 	</p>
 	<p>
 		<label for="sport">Sport:</label><br />
-		<?php echo form_dropdown('sport', $sports); ?>
+		<?php echo $sport; ?>
 	</p>
 	<label for="tournamentStart">Start Date:</label> <?php echo form_input($tournamentStart);?> <label for="tournamentEnd">End Date:</label> <?php echo form_input($tournamentEnd);?>
 	<br />
