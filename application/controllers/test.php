@@ -12,4 +12,11 @@ class Test extends MY_Controller {
 		header('Content-Type: application/json');
 		$this->load->view('data', $this->data);
 	}
+
+	public function get_sport($sportID){
+		$output = $this->sports_model->get_sport($sportID);
+		$this->data['data'] =  json_encode($output);
+		header('Content-Type: application/json');
+		$this->load->view('data', $this->data);
+	}
 }
