@@ -36,19 +36,17 @@ class Db_Calendar extends MY_Controller {
 		$matches = $this->matches_model->get_venue_matches($venueID);
 		$this->data['data'] = array();		
 		foreach($matches as $match) {
-			if($match['venueID']==14){
-				$this->data['data'][] = array(
-					'data' => array(
-						'id' => $match['matchID']
-					),
-					'title' => $match['name'],
-					'start' => $match['startTime'],
-					'end' => $match['endTime'],
-					'url' => "/tms/match/".$match['matchID'],
-					'allDay' => false,
-					'color' => '#2966C7'
-				);
-			}
+			$this->data['data'][] = array(
+				'data' => array(
+					'id' => $match['matchID']
+				),
+				'title' => $match['name'],
+				'start' => $match['startTime'],
+				'end' => $match['endTime'],
+				'url' => "/tms/match/".$match['matchID'],
+				'allDay' => false,
+				'color' => '#2966C7'
+			);
 		}
 		$this->data['data'] = json_encode($this->data['data']);
 		$this->load->view('data',$this->data);
