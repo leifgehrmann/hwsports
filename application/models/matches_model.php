@@ -22,14 +22,14 @@ class Matches_model extends CI_Model {
 	 *  
 	 * @return array
 	 **/
-	public function get_matches($centreID, $fields=array("name","startTime","endTime","description","tournamentID"))
+	public function get_matches($centreID)
 	{
 		$output = array();
-		$queryString = "SELECT matchID, venues.venueID FROM matches LEFT JOIN venues ON matches.venueID = venues.venueID WHERE venues.centreID = ".$this->db->escape($centreID);
+		$queryString = "SELECT matchID FROM matches LEFT JOIN venues ON matches.venueID = venues.venueID WHERE venues.centreID = ".$this->db->escape($centreID);
 		$queryData = $this->db->query($queryString);
 		$data = $queryData->result_array();
 		foreach($data as $match) {
-			$output[] = $this->get_match($match['matchID'],$fields);
+			$output[] = $this->get_match($match['matchID']);
 		}
 		return $output;
 	}
@@ -39,14 +39,14 @@ class Matches_model extends CI_Model {
 	 *  
 	 * @return array
 	 **/
-	public function get_venue_matches($venueID, $fields=array("name","startTime","endTime","description","tournamentID"))
+	public function get_venue_matches($venueID)
 	{
 		$output = array();
 		$queryString = "SELECT matchID, venues.venueID FROM matches LEFT JOIN venues ON matches.venueID = $venueID WHERE venues.venueID = ".$this->db->escape($venueID);
 		$queryData = $this->db->query($queryString);
 		$data = $queryData->result_array();
 		foreach($data as $match) {
-			$output[] = $this->get_match($match['matchID'],$fields);
+			$output[] = $this->get_match($match['matchID']);
 		}
 		return $output;
 	}
@@ -56,8 +56,17 @@ class Matches_model extends CI_Model {
 	 *  
 	 * @return array
 	 **/
-	public function get_match($matchID, $fields=array("name","startTime","endTime","description","tournamentID"))
+	public function get_match($matchID)
 	{
+		$fields = array();
+		$fieldsQuery = $this->db->query("SELECT `key` FROM `sportData` WHERE `sportID` = ".$this->db->escape($sportID) );
+		$fieldsResult = $fieldsQuery->result_array();
+		foreach($fieldsResult as $fieldResult) {
+			$fields[] = $fieldResult['key'];
+		}
+
+		$queryString = "SELECT matchID, venues.venueID FROM matches LEFT JOIN venues ON matches.venueID = $venueID WHERE venues.venueID = ".$this->db->escape($venueID);
+		$queryData = $this->db->query($queryString);
 		$dataQueryString = "SELECT ";
 		$i = 0;
 		$len = count($fields);
