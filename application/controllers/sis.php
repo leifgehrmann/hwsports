@@ -168,6 +168,20 @@ class Sis extends MY_Controller {
 		$this->load->view('sis/account',$this->data);
 		$this->load->view('sis/footer',$this->data);
 	}
+	
+	public function signup()
+	{
+		//set the flash data error message if there is one
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		
+		
+		$this->data['title'] = "Signup";
+		$this->data['page'] = "signup";
+		$this->load->view('sis/header',$this->data);
+		$this->load->view('sis/signup',$this->data);
+		$this->load->view('sis/footer',$this->data);
+	}
+	
 	public function info()
 	{
 		// Page title
