@@ -25,7 +25,7 @@ class Matches_model extends CI_Model {
 	public function get_matches($centreID)
 	{
 		$output = array();
-		$queryString = "SELECT matchID FROM matches WHERE centreID = ".$this->db->escape($centreID);
+		$queryString = "SELECT matchID FROM matches LEFT JOIN venues ON matches.venueID = venues.venueID WHERE venues.centreID = ".$this->db->escape($centreID);
 		$queryData = $this->db->query($queryString);
 		$data = $queryData->result_array();
 		foreach($data as $match) {
