@@ -77,7 +77,7 @@ class Sports_model extends CI_Model {
 	public function get_sport_categories()
 	{
 		$output = array();
-		$queryString = "SELECT DISTINCT sportCategoryID FROM sportsCategoryData";
+		$queryString = "SELECT DISTINCT sportCategoryID FROM sportCategoryData";
 		$queryData = $this->db->query($queryString);
 		$data = $queryData->result_array();
 		foreach($data as $sportCategory) {
