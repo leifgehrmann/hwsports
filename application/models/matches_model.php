@@ -22,7 +22,7 @@ class Matches_model extends CI_Model {
 	 *  
 	 * @return array
 	 **/
-	public function get_matches($centreID, $fields=array("name","startTime","endTime","description","tournamentID"))
+	public function get_matches($centreID, $fields=array("name","startTime","endTime","description","tournamentID","venueID"))
 	{
 		$output = array();
 		$queryString = "SELECT matchID FROM matches LEFT JOIN venues ON matches.venueID = venues.venueID WHERE venues.centreID = ".$this->db->escape($centreID);
@@ -39,7 +39,7 @@ class Matches_model extends CI_Model {
 	 *  
 	 * @return array
 	 **/
-	public function get_match($matchID, $fields=array("name","startTime","endTime","description","tournamentID"))
+	public function get_match($matchID, $fields=array("name","startTime","endTime","description","tournamentID","venueID"))
 	{
 		$dataQueryString = "SELECT ";
 		$i = 0;
