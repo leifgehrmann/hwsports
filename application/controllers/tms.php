@@ -68,8 +68,7 @@ class Tms extends MY_Controller {
 			$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message') );
 		
 			$this->data['tournaments'] = $this->tournament_model->get_tournaments();
-			//$this->data['sports'] = $this->sport_model->get_sports();
-			$this->data['sports'] = array( "Sport 1" => 12, "Sport 2" => 33 );
+			$this->data['sports'] = $this->sports_model->get_sports();
 			
 			$this->data['name'] = array(
 				'name'  => 'name',
