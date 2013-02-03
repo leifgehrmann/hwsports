@@ -54,7 +54,7 @@ class Tms extends MY_Controller {
 		
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
-			@unset($newdata['submit']);
+			unset($newdata['submit']);
 			
 			$tournamentID = $this->tournaments_model->insert_tournament($newdata);
 			if($tournamentID > -1) {
