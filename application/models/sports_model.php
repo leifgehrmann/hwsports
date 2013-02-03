@@ -81,7 +81,7 @@ class Sports_model extends CI_Model {
 		$queryData = $this->db->query($queryString);
 		$data = $queryData->result_array();
 		foreach($data as $sportCategory) {
-			$output[] = $this->get_sport_category($sportCategory['sportCategoryID']);
+			$output[$sportCategory['sportCategoryID']] = $this->get_sport_category($sportCategory['sportCategoryID']);
 		}
 		return $output;
 	}
