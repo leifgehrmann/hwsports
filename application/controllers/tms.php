@@ -131,6 +131,7 @@ class Tms extends MY_Controller {
 		$this->data['page'] = "tournament";
 		
 		$this->load->model('tournaments_model');
+		$this->load->model('sports_model');
 		
 		if( $this->tournaments_model->tournament_exists($tournamentID) ) {
 			$tournament = $this->tournaments_model->get_tournament($tournamentID);
@@ -159,6 +160,8 @@ class Tms extends MY_Controller {
 				$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message') );
 				
 				$this->data['tournament']['name'] = $tournament['name'];
+				$sport = $this->sports_model->get_sport( $tournament['sportID'] );
+				$this->data['tournament']['sport'] = $sport['name'];
 			
 				$this->data['name'] = array(
 					'name'  => 'name',
