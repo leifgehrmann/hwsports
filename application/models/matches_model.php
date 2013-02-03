@@ -88,7 +88,7 @@ class Matches_model extends CI_Model {
 		$dataString .= "FROM matchData WHERE matchID = ".$this->db->escape($matchID);
 		$dataQuery = $this->db->query($dataString);
 		$dataResult = $dataQuery->result_array();
-		$output = array_merge(array("matchID"=>$matchID), $relationalResult, $dataResult);
+		$output = array_merge(array("matchID"=>$matchID), $relationalResult[0], $dataResult[0]);
 		return $output;
 	}
 
