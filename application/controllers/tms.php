@@ -46,6 +46,7 @@ class Tms extends MY_Controller {
 		$this->data['page'] = "tournaments";
 		
 		$this->load->model('tournament_model');
+		$this->load->model('sports_model');
 		
 		$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
 		$this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
