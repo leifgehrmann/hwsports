@@ -74,6 +74,18 @@ class Sports_model extends CI_Model {
 		return $output;
 	}
 
+	public function get_sport_categories()
+	{
+		$output = array();
+		$queryString = "SELECT sportCategoryID FROM sportsCategory";
+		$queryData = $this->db->query($queryString);
+		$data = $queryData->result_array();
+		foreach($data as $sportCategory) {
+			$output[] = $this->get_sport_category($sportCategory['sportCategoryID']);
+		}
+		return $output;
+	}
+
 	public function get_sport_category($sportCategoryID)
 	{
 		$fields = array();
