@@ -140,7 +140,7 @@ class Tms extends MY_Controller {
 				$this->tournament_model->update_tournament($tournamentID, $newdata);
 				if($tournamentID > -1) {
 					// Successful update, show success message
-					$this->session->set_flashdata('message',  'Successfully Created Tournament.');
+					$this->session->set_flashdata('message',  'Successfully Updated Tournament.');
 				} else {
 					$this->session->set_flashdata('message',  'Failed. Please contact Infusion Systems.');
 				}
@@ -148,6 +148,8 @@ class Tms extends MY_Controller {
 			} else {
 				//set the flash data error message if there is one
 				$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message') );
+				
+				$this->data['tournament']['name'] = $tournament['name'];
 			
 				$this->data['name'] = array(
 					'name'  => 'name',

@@ -1,4 +1,4 @@
-<h1><a href="/tms/tournaments/">Tournaments</a> &#9656; <span id="title-name"><?=$this->data["tournament"]["name"]?></span></h1>
+<h1><a href="/tms/tournaments/">Tournaments</a> &#9656; <span id="title-name"><?=$tournament["name"]?></span></h1>
 	
 <? if(!empty($message)){ ?>
   <div id="infoMessage"><?php echo $message;?></div>
