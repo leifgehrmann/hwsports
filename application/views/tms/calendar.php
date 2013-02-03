@@ -25,6 +25,7 @@
 	$(document).ready(function() {
 		$('#calendar').fullCalendar({
 			firstDay: '1',
+			contentHeight: 590,
 			header: {
 				left: 'prev,next today',
 				center: 'title',
@@ -33,7 +34,7 @@
 			events: '/db_calendar/getAllMatches/',
 			editable: true,
 			eventResize: function(match,dayDelta,minuteDelta,revertFunc) {
-				console.log(match);
+				//console.log(match);
 				var minutesDelta = ((dayDelta*1440)+minuteDelta)*60;
 				var request = $.ajax({
 					type: "POST",
@@ -42,7 +43,7 @@
 				});
  
 				request.done(function(msg) {
-				 alert( msg );
+				 //alert( msg );
 				});
 				 
 				request.fail(function(jqXHR, textStatus) {
@@ -50,9 +51,9 @@
 				});
 			},
 			eventDrop: function(match,dayDelta,minuteDelta,allDay,revertFunc) {
-				console.log(match);
+				//console.log(match);
 				var minutesDelta = ((dayDelta*1440)+minuteDelta)*60;
-				alert(minutesDelta);
+				//alert(minutesDelta);
 				var request = $.ajax({
 					type: "POST",
 					url: '/db_calendar/changeMatchStart',
@@ -60,7 +61,7 @@
 				});
  
 				request.done(function(msg) {
-				 alert( msg );
+				 //alert( msg );
 				});
 				 
 				request.fail(function(jqXHR, textStatus) {
