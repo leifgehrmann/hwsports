@@ -80,8 +80,8 @@ class Tournaments_model extends CI_Model {
 	 **/
 	public function insert_tournament($data)
 	{	
-		$sportID = $data['sportID'];
-		unset($data['sportID']);
+		$sportID = $data['sport'];
+		unset($data['sport']);
 		
 		
 		$this->db->trans_start();
