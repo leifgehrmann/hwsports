@@ -171,10 +171,13 @@ class Sis extends MY_Controller {
 	
 	public function signup()
 	{
+		$this->load->model('tournaments_model');
+		$this->load->model('sports_model');
+		
 		//set the flash data error message if there is one
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		
-			$this->data['tournaments'] = $this->tournaments_model->get_tournaments($this->data['centre']['centreID']);
+		$this->data['tournaments'] = $this->tournaments_model->get_tournaments($this->data['centre']['centreID']);
 		
 		$this->data['title'] = "Signup";
 		$this->data['page'] = "signup";
