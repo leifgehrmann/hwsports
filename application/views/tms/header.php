@@ -9,7 +9,7 @@
         <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
         <link href="/css/main.css" rel="stylesheet" type="text/css">
         <link href="/css/tms.css" rel="stylesheet" type="text/css">
-		<link rel='stylesheet' href='/css/smoothness/jquery-ui-1.10.0.custom.min.css'>
+		<link rel='stylesheet' href='/scripts/smoothness/jquery-ui-1.10.0.custom.min.css'>
 		<link rel='stylesheet' href='/css/jquery.dataTables.css'>		
 		<link rel='stylesheet' href='/css/dataTables.tabletools.css'>		
 		<link rel='stylesheet' href='/css/dataTables.editor.css'>		
