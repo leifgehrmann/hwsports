@@ -52,7 +52,7 @@ class Sports_model extends CI_Model {
 		/* Query the ids that are associated with this match */
 		$relational = array();
 		$relationalString = "SELECT sportCategoryID FROM sports WHERE sportID = ".$this->db->escape($sportID);
-		$relationalQuery = $this->db->query($relationalQueryString);
+		$relationalQuery = $this->db->query($relationalString);
 		$relationalResult = $relationalQuery->result_array();
 
 		$dataQueryString = "SELECT ";
