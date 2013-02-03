@@ -628,16 +628,16 @@ input.colorpickerinput {
 #content .page-calendar .filter-sport:after{ content: 'Sport'; }
 
 
-#tournamentsForm input#tournamentStart {
+input#tournamentStart {
 	width: 15%;
 }
-#tournamentsForm input#tournamentEnd {
+input#tournamentEnd {
 	width: 15%;
 }
-#tournamentsForm input#registrationStart {
+input#registrationStart {
 	width: 15%;
 }
-#tournamentsForm input#registrationEnd {
+input#registrationEnd {
 	width: 15%;
 }
 #tournamentsForm select {
