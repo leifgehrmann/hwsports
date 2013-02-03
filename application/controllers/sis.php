@@ -179,7 +179,7 @@ class Sis extends MY_Controller {
 		
 		$this->data['tournaments'] = array();
 		foreach( $this->tournaments_model->get_tournaments($this->data['centre']['centreID']) as $tournament ) {
-			$this->data['tournaments'][ $tournament['name'] ] = $tournament['id'];
+			$this->data['tournaments'][ $tournament['name'] ] = $tournament['tournamentID'];
 		}
 		
 		$this->data['title'] = "Signup";
