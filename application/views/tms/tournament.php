@@ -12,31 +12,18 @@
 		<label for="name">Name:</label><br />
 		<?php echo form_input($name);?>
 	</p>
+	<p>
 		<label for="description">Description:</label><br />
 		<?php echo form_input($description);?>
 	</p>
+	<p>
+		<label for="sport">Sport:</label><br />
+		<?php echo form_dropdown('sport', $sports); ?>
+	</p>
+	<label for="tournamentStart">Start Date:</label> <?php echo form_input($tournamentStart);?> <label for="tournamentEnd">End Date:</label> <?php echo form_input($tournamentEnd);?>
 	<br />
-	<table>
-		<tr>
-			<td><label for="registrationStart">Registration Start:</label></td>
-			<td><?php echo form_input($registrationStart);?></td>
-		</tr>
-		<tr>
-			<td><label for="registrationEnd">Registration End:</label></td>
-			<td><?php echo form_input($registrationEnd);?></td>
-		</tr>
-	</table>
-	<br />
-	<table>
-		<tr>
-			<td><label for="tournamentStart">Tournament Start:</label></td>
-			<td><?php echo form_input($tournamentStart);?></td>
-		</tr>
-		<tr>
-			<td><label for="tournamentEnd">Tournament End:</label></td>
-			<td><?php echo form_input($tournamentEnd);?></td>
-		</tr>
-	</table>
+	<h3>Competitor Registration Period:</h3>
+	<label for="registrationStart">Start Date:</label> <?php echo form_input($registrationStart);?> <label for="registrationEnd">End Date:</label><?php echo form_input($registrationEnd);?> <br />
 	
 	<p><?php echo form_submit('submit', 'Update');?></p>
     
