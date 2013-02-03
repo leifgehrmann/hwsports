@@ -30,7 +30,7 @@ class Sports_model extends CI_Model {
 		$queryData = $this->db->query($queryString);
 		$data = $queryData->result_array();
 		foreach($data as $sport) {
-			$output[] = $this->get_venue($sport['sportID']);
+			$output[] = $this->get_sport($sport['sportID']);
 		}
 		return $output;
 	}
