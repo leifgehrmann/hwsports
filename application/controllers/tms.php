@@ -220,6 +220,21 @@ class Tms extends MY_Controller {
 			redirect("/tms/tournaments", 'refresh');
 		}
 	}
+	
+	
+	public function delete-tournament($tournamentID)
+	{
+		$this->load->model('tournaments_model');
+
+		if($this->tournaments_model->delete_tournament($tournamentID) ) {
+			// Successful delete, show success message
+			$this->session->set_flashdata('message',  'Successfully Deleted Tournament.');
+		} else {
+			$this->session->set_flashdata('message',  'Failed. Please contact Infusion Systems.');
+		}
+		redirect("/tms/tournaments", 'refresh');
+	}
+
 	public function venues($action='portal')
 	{
 		$this->data['title'] = "Venues";

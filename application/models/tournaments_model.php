@@ -137,4 +137,19 @@ class Tournaments_model extends CI_Model {
 			return false;
 		}
 	}
+
+	/**
+	 * Deletes a tournament with data.
+	 *
+	 * @return boolean
+	 **/
+	public function delete_tournament($tournamentID){
+		if($this->tournament_exists($tournamentID)){
+			$this->db->query("DELETE FROM tournamentData WHERE tournamentID = $tournamentID");
+			$this->db->query("DELETE FROM tournaments WHERE tournamentID = $tournamentID");
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

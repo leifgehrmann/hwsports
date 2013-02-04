@@ -17,16 +17,16 @@
 		<?php echo form_input($description);?>
 	</p>
 	<p>
-		<label for="sport">Sport:</label><br />
-		<?php echo $sport; ?>
+		<label for="sport">Sport:</label>
+		<span class="tournamentSport"><?php echo $sport; ?></span>
 	</p>
 	<label for="tournamentStart">Start Date:</label> <?php echo form_input($tournamentStart);?> <label for="tournamentEnd">End Date:</label> <?php echo form_input($tournamentEnd);?>
 	<br />
 	<h3>Competitor Registration Period:</h3>
 	<label for="registrationStart">Start Date:</label> <?php echo form_input($registrationStart);?> <label for="registrationEnd">End Date:</label><?php echo form_input($registrationEnd);?> <br />
-	
+	<br />
 	<p><?php echo form_submit('submit', 'Update');?></p>
-    
+    <p><a href="/tms/delete-tournament/15" class="deleteTournament">Delete</a></p>
 <?php echo form_close();?>
 
 <script type="text/javascript">
