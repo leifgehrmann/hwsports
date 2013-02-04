@@ -51,8 +51,12 @@ class Sis extends MY_Controller {
 			$venue = $this->venues_model->get_venue( $match['venueID'] );
 			$matches[$key]['venue'] = $venue['name'];
 			
-			$tournament = $this->tournaments_model->get_tournament( $match['tournamentID'] );
-			$matches[$key]['tournament'] = $tournament['name'];
+			if($this->tournaments_model->tournament_exists( $match['tournamentID'] )) {
+				$tournament = $this->tournaments_model->get_tournament( $match['tournamentID'] );
+				$matches[$key]['tournament'] = $tournament['name'];
+			} else {
+				$matches[$key]['tournament'] = "None";
+			}
 			
 			$matches[$key]['date'] = date("F jS, Y",$match['startTime']);
 			
