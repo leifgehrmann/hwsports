@@ -23,7 +23,7 @@ class Db_Calendar extends MY_Controller {
 				'title' => $match['name'],
 				'start' => $match['startTime'],
 				'end' => $match['endTime'],
-				'url' => "/tms/match/".$match['matchID'],
+				'url' => "../match/".$match['matchID'],
 				'allDay' => false,
 				'color' => '#2966C7'
 			);
@@ -43,7 +43,7 @@ class Db_Calendar extends MY_Controller {
 				'title' => $match['name'],
 				'start' => $match['startTime'],
 				'end' => $match['endTime'],
-				'url' => "/tms/match/".$match['matchID'],
+				'url' => "../match/".$match['matchID'],
 				'allDay' => false,
 				'color' => '#2966C7'
 			);
@@ -52,7 +52,24 @@ class Db_Calendar extends MY_Controller {
 		$this->load->view('data',$this->data);
 	}
 	public function getTournamentMatches($tournamentID){
-		// Should return registration periods
+		$matches = $this->matches_model->get_matches($this->data['centre']['centreID']);
+		$this->data['data'] = array();		
+		foreach($matches as $match) {
+			$this->data['data'][] = array(
+				'data' => array(
+					'id' => $match['matchID']
+				),
+				'title' => $match['name'],
+				'start' => $match['startTime'],
+				'end' => $match['endTime'],
+				'url' => "../match/".$match['matchID'],
+				'allDay' => false,
+				'color' => '#2966C7'
+			);
+		}
+		$this->data['data'] = json_encode($this->data['data']);
+		header('Content-Type: application/json');
+		$this->load->view('data',$this->data);
 	}
 
 	public function changeMatchStart() {

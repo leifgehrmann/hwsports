@@ -30,43 +30,8 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			events: '/db_calendar/getAllMatches/',
-			editable: true,
-			eventResize: function(match,dayDelta,minuteDelta,revertFunc) {
-				//console.log(match);
-				var minutesDelta = ((dayDelta*1440)+minuteDelta)*60;
-				var request = $.ajax({
-					type: "POST",
-					url: '/db_calendar/changeMatchEnd',
-					data: { 'minutesDelta': minutesDelta, 'id': match.data.id }
-				});
- 
-				request.done(function(msg) {
-				 //alert( msg );
-				});
-				 
-				request.fail(function(jqXHR, textStatus) {
-				  alert( "Request failed: " + textStatus );
-				});
-			},
-			eventDrop: function(match,dayDelta,minuteDelta,allDay,revertFunc) {
-				//console.log(match);
-				var minutesDelta = ((dayDelta*1440)+minuteDelta)*60;
-				//alert(minutesDelta);
-				var request = $.ajax({
-					type: "POST",
-					url: '/db_calendar/changeMatchStart',
-					data: { 'minutesDelta': minutesDelta, 'id': match.data.id }
-				});
- 
-				request.done(function(msg) {
-				 //alert( msg );
-				});
-				 
-				request.fail(function(jqXHR, textStatus) {
-				  alert( "Request failed: " + textStatus );
-				});
-			}
+			events: '/db_calendar/getTournamentMatches/',
+			editable: false
 		});
 		
 	});
