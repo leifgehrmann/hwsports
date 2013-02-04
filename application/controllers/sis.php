@@ -117,33 +117,34 @@ class Sis extends MY_Controller {
 
 	public function tournament($tournamentID)
 	{
-
-		/* We want to get:
-			- tournament name
-			- tournament start date (to get the year)
-			- tournament description
-			- tournament end date
-			- List of all games
-				- game name
-				- game 
-			- matches
-				- match name
-				- match day
-				- match time start
-				- match duration
-				- 
-		*/
 		$this->load->library('table');
-		// Page title
-		$this->data['title'] = "$tournamentID value";
-		$this->data['page'] = "tournament";
-		$this->data['tournamentID'] = $tournamentID;
-
-
-
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('sis/tournament',$this->data);
-		$this->load->view('sis/footer',$this->data);
+		$this->load->model('tournaments_model');
+		$this->load->model('sports_model');
+		
+		if( $this->tournaments_model->tournament_exists($tournamentID) ) {
+			$tournament = $this->tournaments_model->get_tournament($tournamentID);
+			$this->data['tournament'] = $tournament;
+			$sport = $this->sports_model->get_sport( $tournament['sportID'] );
+			$this->data['tournament']['sport'] = $sport['name'];
+			
+			$this->data['tournamentTable'] = array(
+				array('<span class="bold">Name:</span>',$tournament['name']),
+				array('<span class="bold">Description:</span>',$tournament['description']),
+				array('<span class="bold">Sport:</span>',$tournament['sport']),
+				array('<span class="bold">Start Date:</span>',$tournament['tournamentStart']),
+				array('<span class="bold">End Date:</span>',$tournament['tournamentEnd']),
+			);
+			
+			// Page title
+			$this->data['title'] = $tournament['name'];
+			$this->data['page'] = "tournament";
+			$this->load->view('sis/header',$this->data);
+			$this->load->view('sis/tournament',$this->data);
+			$this->load->view('sis/footer',$this->data);
+		} else {
+			$this->session->set_flashdata('message',  "Tournament ID $id does not exist.");
+			redirect("/sis/tournaments", 'refresh');
+		}
 	}
 	public function ticketsinfo()
 	{

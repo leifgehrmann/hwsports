@@ -142,12 +142,13 @@ class Tms extends MY_Controller {
 			$tournament = $this->tournaments_model->get_tournament($tournamentID);
 			$this->data['tournamentID'] = $tournamentID;
 						
-			$this->form_validation->set_rules('name', 'Name', 'required');
-			$this->form_validation->set_rules('description', 'Description', 'required');
-			$this->form_validation->set_rules('registrationStart', 'registrationStart', 'required');
-			$this->form_validation->set_rules('registrationEnd', 'registrationEnd', 'required');
-			$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required');
-			$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required');
+			$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
+			$this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
+			$this->form_validation->set_rules('sport', 'Sport', 'required|xss_clean');
+			$this->form_validation->set_rules('registrationStart', 'registrationStart', 'required|xss_clean|callback_dateformat_check');
+			$this->form_validation->set_rules('registrationEnd', 'registrationEnd', 'required|xss_clean|callback_dateformat_check');
+			$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_dateformat_check');
+			$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_dateformat_check');			
 			
 			if ($this->form_validation->run() == true) {
 				$newdata = $_POST;
