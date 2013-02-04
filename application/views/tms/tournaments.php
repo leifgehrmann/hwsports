@@ -6,9 +6,13 @@
 
 <h2>View / Edit Existing Tournament:</h2>
 <div id="tournamentSelect">
-	<? foreach($tournaments as $tournament) { 
-		echo "<a href='/tms/tournament/{$tournament['tournamentID']}'>{$tournament['name']}</a><br />\n";
-	 } ?>
+	<? if(count($tournaments)>0) {
+		foreach($tournaments as $tournament) { 
+			echo "<a href='/tms/tournament/{$tournament['tournamentID']}'>{$tournament['name']}</a><br />\n";
+		}
+	   } else {
+			echo "No tournaments exist yet.";
+	   } ?>
 </div>
 <br />
 <br />
