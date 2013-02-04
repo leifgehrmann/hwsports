@@ -14,7 +14,7 @@ class Sports_model extends CI_Model {
 						"EXISTS(SELECT 1 FROM sports WHERE sportID = ".$this->db->escape($sportID).") AS `exists`";
 		$queryData = $this->db->query($queryString);
 		$output = $queryData->row_array();
-		return $output;
+		return $output['exists'];
 	}
 
 	/**

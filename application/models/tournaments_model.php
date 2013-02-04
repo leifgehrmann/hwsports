@@ -14,8 +14,7 @@ class Tournaments_model extends CI_Model {
 						"EXISTS(SELECT 1 FROM tournamentData WHERE tournamentID = ".$this->db->escape($tournamentID).") AS `exists`";
 		$queryData = $this->db->query($queryString);
 		$output = $queryData->row_array();
-		print_r($output); die();
-		return $output;
+		return $output['exists'];
 	}
 
 	/**

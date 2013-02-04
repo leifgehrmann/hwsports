@@ -14,7 +14,7 @@ class Centre_model extends CI_Model {
 						"EXISTS(SELECT 1 FROM centreData WHERE centreID = ".$this->db->escape($centreID).") AS `exists`";
 		$queryData = $this->db->query($queryString);
 		$output = $queryData->row_array();
-		return $output;
+		return $output['exists'];
 	}
 
 	/**

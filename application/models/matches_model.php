@@ -14,7 +14,7 @@ class Matches_model extends CI_Model {
 						"EXISTS(SELECT 1 FROM matches WHERE matchID = ".$this->db->escape($matchID).") AS `exists`";
 		$queryData = $this->db->query($queryString);
 		$output = $queryData->row_array();
-		return $output;
+		return $output['exists'];
 	}
 
 	/**
