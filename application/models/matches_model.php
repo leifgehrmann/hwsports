@@ -86,7 +86,7 @@ class Matches_model extends CI_Model {
 
 		/* Query the ids that are associated with this match */
 		$relational = array();
-		$relationalString = "SELECT matchID, sportID, venueID FROM matches WHERE matchID = ".$this->db->escape($matchID);
+		$relationalString = "SELECT matchID, sportID, venueID, tournamentID FROM matches WHERE matchID = ".$this->db->escape($matchID);
 		$relationalQuery = $this->db->query($relationalString);
 		$relationalResult = $relationalQuery->result_array();
 
