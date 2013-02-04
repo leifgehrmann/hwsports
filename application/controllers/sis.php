@@ -75,10 +75,6 @@ class Sis extends MY_Controller {
 	{
 		$this->load->library('table');
 		
-		$this->data['title'] = "$matchID value";
-		$this->data['page'] = "match";
-		$this->data['matchID'] = $matchID;
-				
 		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
 		$this->load->model('venues_model');
@@ -116,14 +112,17 @@ class Sis extends MY_Controller {
 				array('<span class="bold">Start Time:</span>',$match['startTime']),
 				array('<span class="bold">End Time:</span>',$match['endTime']),
 			);
+			
+			$this->data['title'] = $match['name'];
+			$this->data['page'] = "match";
+			
+			$this->load->view('sis/header',$this->data);
+			$this->load->view('sis/match',$this->data);
+			$this->load->view('sis/footer',$this->data);
 		} else {
 			$this->session->set_flashdata('message',  "Match ID $id does not exist.");
 			redirect("/sis/tournaments", 'refresh');
 		}
-
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('sis/match',$this->data);
-		$this->load->view('sis/footer',$this->data);
 	}
 
 	public function tournaments()
