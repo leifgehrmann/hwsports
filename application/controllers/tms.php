@@ -222,7 +222,7 @@ class Tms extends MY_Controller {
 	}
 	
 	
-	public function delete-tournament($tournamentID)
+	public function delete_tournament($tournamentID)
 	{
 		$this->load->model('tournaments_model');
 
