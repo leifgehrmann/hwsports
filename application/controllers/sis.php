@@ -37,6 +37,31 @@ class Sis extends MY_Controller {
 		// Page title
 		$this->data['title'] = "Matches";
 		$this->data['page'] = "matches";
+				
+		$this->load->model('tournaments_model');
+		$this->load->model('sports_model');
+		$this->load->model('matches_model');
+		$this->load->model('venues_model');
+		
+		$matches = $this->matches_model->get_matches($this->data['centre']['centreID']);
+		foreach($matches as $key => $match) {
+			$sport = $this->sports_model->get_sport( $match['sportID'] );
+			$matches[$key]['sport'] = $sport['name'];
+			
+			$venue = $this->venues_model->get_venue( $match['venueID'] );
+			$matches[$key]['venue'] = $venue['name'];
+			
+			$tournament = $this->tournaments_model->get_tournament( $match['tournamentID'] );
+			$matches[$key]['tournament'] = $tournament['name'];
+			
+			$matches[$key]['date'] = date("F jS, Y",$match['startTime']);
+			
+			$matches[$key]['startTime'] = date("H:i",$match['startTime']);
+			$matches[$key]['endTime'] = date("H:i",$match['endTime']);
+		}
+
+		$this->data['matches'] = $matches;
+		
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('sis/matches',$this->data);
 		$this->load->view('sis/footer',$this->data);
