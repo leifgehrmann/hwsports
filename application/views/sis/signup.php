@@ -24,10 +24,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$( "#accordion" ).accordion();
+		var accordionReference = $("#accordion").accordion();
 		
 		$("#role").change(function() {
-			$('#accordion').accordion('activate', $(this).val() );
+			accordionReference.changeAccordion('activate', $(this).val() );
 		});
 	});
 </script>
