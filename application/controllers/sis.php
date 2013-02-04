@@ -205,21 +205,23 @@ class Sis extends MY_Controller {
 		$this->load->view('sis/footer',$this->data);
 	}
 	
-	public function signup()
+	public function signup($tournamentID)
 	{
 		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
 		
-		//set the flash data error message if there is one
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		
-		$this->data['tournaments'] = $this->tournaments_model->get_tournaments($this->data['centre']['centreID']);
-		
-		$this->data['title'] = "Signup";
-		$this->data['page'] = "signup";
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('sis/signup',$this->data);
-		$this->load->view('sis/footer',$this->data);
+		if( $this->tournaments_model->tournament_exists($tournamentID) ) {
+			$this->data['tournament'] = $this->tournaments_model->get_tournament($tournamentID);
+						
+			$this->data['title'] = "Signup";
+			$this->data['page'] = "signup";
+			$this->load->view('sis/header',$this->data);
+			$this->load->view('sis/signup',$this->data);
+			$this->load->view('sis/footer',$this->data);
+		} else {
+			$this->session->set_flashdata('message',  "Tournament ID $id does not exist.");
+			redirect("/sis/tournaments", 'refresh');
+		}
 	}
 	
 	public function info()
