@@ -33,10 +33,10 @@ class Db_Calendar extends MY_Controller {
 		$this->load->view('data',$this->data);
 	}
 	public function getAllMatchesTMS() {
-		getAllMatches("/tms/match/");
+		$this->getAllMatches("/tms/match/");
 	}
 	public function getAllMatchesSIS() {
-		getAllMatches("/sis/match/");
+		$this->getAllMatches("/sis/match/");
 	}
 
 	public function getVenueMatches($venueID){
