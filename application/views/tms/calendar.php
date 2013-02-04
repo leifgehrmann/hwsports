@@ -31,7 +31,7 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			events: '/db_calendar/getAllMatches/',
+			events: '/db_calendar/getAllMatches/%2F',
 			editable: true,
 			eventResize: function(match,dayDelta,minuteDelta,revertFunc) {
 				//console.log(match);
