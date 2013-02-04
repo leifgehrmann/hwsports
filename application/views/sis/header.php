@@ -9,10 +9,8 @@
         <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
         <link href="/css/main.css" rel="stylesheet" type="text/css">
         <link href="/css/sis.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" type="text/css" href="/scripts/fullcalendar/fullcalendar.css" />
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
-        <script type="text/javascript" src="/scripts/fullcalendar/fullcalendar.js"></script>
     </head>
     <!--[if lt IE 7]>      <body class="page-<?=$page?> lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
     <!--[if IE 7]>         <body class="page-<?=$page?> lt-ie9 lt-ie8"> <![endif]-->
