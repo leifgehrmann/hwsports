@@ -1,7 +1,7 @@
 <h1><a href="/tms/tournaments/">Tournaments</a> &#9656; <span id="title-name"><?=$tournament["name"]?></span></h1>
 	
 <? if(!empty($message)){ ?>
-  <div id="infoMessage"><?php $message;?></div>
+  <div id="infoMessage"><?=$message;?></div>
 <? } ?>
 
 
