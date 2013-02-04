@@ -125,6 +125,11 @@ class Sis extends MY_Controller {
 			$tournament = $this->tournaments_model->get_tournament($tournamentID);
 			$this->data['tournament'] = $tournament;
 			$sport = $this->sports_model->get_sport( $tournament['sportID'] );
+
+			$registrationStartDate = DateTime::createFromFormat('d/m/Y', $tournament['registrationStart']);
+			$registrationEndDate = DateTime::createFromFormat('d/m/Y', $tournament['registrationEnd']);
+			$today = new DateTime();
+			$this->data['registrationOpen'] = ( ($registrationStartDate < $today) && ($today < $registrationEndDate) );
 			
 			$this->data['tournamentTable'] = array(
 				array('<span class="bold">Name:</span>',$tournament['name']),

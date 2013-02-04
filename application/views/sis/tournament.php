@@ -8,8 +8,12 @@
 	$this->table->set_template($tmpl);
 
 	echo $this->table->generate($tournamentTable);
-?>
-<div class="tournament-signup-button"><?=( ($registrationStartDate < $today) && ($today < $registrationEndDate) ? "<a href='/sis/signup/$tournamentID' class='tournamentSignupButton'>Sign Up Now!</a>" : "" )?></div>
+
+	if ( $registrationOpen ) { ?>
+		<div class="tournament-signup-button">
+			<a href='/sis/signup/$tournamentID' class='tournamentSignupButton'>Sign Up Now!</a>
+		</div>
+	<? } ?>
 <h2>Calendar</h2>
 <p>Click the entries for details on individual matches</p>
 
