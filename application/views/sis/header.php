@@ -9,7 +9,17 @@
         <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
         <link href="/css/main.css" rel="stylesheet" type="text/css">
         <link href="/css/sis.css" rel="stylesheet" type="text/css">
-        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+		<link rel='stylesheet' href='/scripts/smoothness/jquery-ui-1.10.0.custom.min.css'>
+		<link rel='stylesheet' href='/css/jquery.dataTables.css'>		
+		<link rel='stylesheet' href='/css/dataTables.tabletools.css'>		
+		<link rel='stylesheet' href='/css/dataTables.ColVis.css'>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+		<script src="/scripts/jquery-ui-1.10.0.custom.min.js"></script>
+		<script charset="utf-8" src="/scripts/datatables/jquery-ui-timepicker-addon.js"></script>
+		<script charset="utf-8" src="/scripts/datatables/jquery.dataTables.min.js"></script>
+		<script charset="utf-8" src="/scripts/datatables/dataTables.tabletools.min.js"></script>
+		<script charset="utf-8" src="/scripts/datatables/dataTables.ColReorderWithResize.js"></script>
+		<script charset="utf-8" src="/scripts/datatables/dataTables.ColVis.js"></script>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
     </head>
     <!--[if lt IE 7]>      <body class="page-<?=$page?> lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
