@@ -105,6 +105,11 @@ class Sis extends MY_Controller {
 		// Page title
 		$this->data['title'] = "Tournaments";
 		$this->data['page'] = "tournaments";
+		
+		$this->load->model('tournaments_model');
+		
+		$this->data['tournaments'] = $this->tournaments_model->get_tournaments($this->data['centre']['centreID']);
+		
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('sis/tournaments',$this->data);
 		$this->load->view('sis/footer',$this->data);
@@ -178,8 +183,6 @@ class Sis extends MY_Controller {
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		
 		$this->data['tournaments'] = $this->tournaments_model->get_tournaments($this->data['centre']['centreID']);
-		$dateFormat="%d/%m/%Y";
-		// $strf=strftime($format, $timestamp); format time 
 		
 		$this->data['title'] = "Signup";
 		$this->data['page'] = "signup";

@@ -611,17 +611,25 @@ class Tms extends MY_Controller {
 		}
 	}
 
-	public function dateformat_check($strDate,$format=array("d","m","y"),$ex="/") { 
-		$valid = false; 
-		$this->form_validation->set_message('username_check', 'The %s field can not be the word "test"');
+	public function dateformat_check($strDate,$format=array("d","m","y"),$ex="/") {
 		if(is_array($format) && count($format) == 3 && count(explode($ex,$strDate))==3) { 
 			$date = array_combine($format,explode($ex,$strDate)); 
 			if(intval($date['m']) && intval($date['d']) && intval($date['y'])) {
 				$m = $date['m']; $d = $date['d']; $y = $date['y']; 
-				$valid = checkdate($m,$d,$y); 
-			} 
-		} 
-		return $valid;
+				if( checkdate($m,$d,$y) ) {
+					return TRUE;
+				} else {				
+					$this->form_validation->set_message('dateformat_check', 'The %s field must contain a valid numerical date"');
+					return FALSE;
+				}
+			} else {
+				$this->form_validation->set_message('dateformat_check', 'The %s field must contain a valid numerical date"');
+				return FALSE;
+			}
+		} else {
+			$this->form_validation->set_message('dateformat_check', 'The %s field must have all three elements of a date"');
+			return FALSE;
+		}
 	}
 
 }
