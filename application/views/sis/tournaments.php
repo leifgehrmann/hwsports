@@ -2,26 +2,17 @@
 
 <div class="tournaments-list">
 	<h3>2013</h3>
-	<a href="/sis/tournament/2" class="tournament-item">
-		<div class="tournament-name">2013 Heriot Watt Tournament</div>
-		<div class="tournament-date-start">7th January, 2013</div>
-		<div class="tournament-date-end">12th January, 2013</div>
+	<? foreach($tournaments as $tournament) { 
+		$registrationStartDate = DateTime::createFromFormat('d/m/Y', $tournament['registrationStart']);
+		$registrationEndDate = DateTime::createFromFormat('d/m/Y', $tournament['registrationEnd']);
+		$today = new DateTime();
+	?>
+	<a href="/sis/tournament/<?=$tournament['tournamentID']?>" class="tournament-item">
+		<div class="tournament-name"><?=$tournament['name']?></div>
+		<div class="tournament-date-start"><?=$tournament['tournamentStart']?></div>
+		<div class="tournament-date-end"><?=$tournament['tournamentEnd']?></div>
+		<div class="tournament-registration-status"><?=( $registrationStartDate < $today > $registrationEndDate ? "Registration open!" : "Registration closed" )?></div>
 	</a>
-	<h3>2012</h3>
-	<a href="/sis/tournament/2" class="tournament-item">
-		<div class="tournament-name">Wattball Tournament</div>
-		<div class="tournament-date-start">7th January, 2012</div>
-		<div class="tournament-date-end">12th January, 2012</div>
-	</a>
-	<a href="/sis/tournament/2" class="tournament-item">
-		<div class="tournament-name">Rugby Tournament</div>
-		<div class="tournament-date-start">7th January, 2012</div>
-		<div class="tournament-date-end">12th January, 2012</div>
-	</a>
-	<a href="/sis/tournament/2" class="tournament-item">
-		<div class="tournament-name">Marathon Tournament</div>
-		<div class="tournament-date-start">7th January, 2012</div>
-		<div class="tournament-date-end">12th January, 2012</div>
-	</a>
-	<a href="/sis/tournament/2" class="tournament-button-prev">Previous Tournaments</a>
+	<? } ?>
+	<a href="/sis/tournaments-history" class="tournament-button-prev">Previous Tournaments</a>
 </div>

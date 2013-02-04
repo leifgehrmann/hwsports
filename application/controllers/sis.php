@@ -101,7 +101,7 @@ class Sis extends MY_Controller {
 				- tournament start date (to get the year)
 				- tournament description?
 		*/
-
+		
 		// Page title
 		$this->data['title'] = "Tournaments";
 		$this->data['page'] = "tournaments";
@@ -177,10 +177,9 @@ class Sis extends MY_Controller {
 		//set the flash data error message if there is one
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		
-		$this->data['tournaments'] = array();
-		foreach( $this->tournaments_model->get_tournaments($this->data['centre']['centreID']) as $tournament ) {
-			$this->data['tournaments'][ $tournament['tournamentID'] ] = $tournament['name'];
-		}
+		$this->data['tournaments'] = $this->tournaments_model->get_tournaments($this->data['centre']['centreID']);
+		$dateFormat="%d/%m/%Y";
+		// $strf=strftime($format, $timestamp); format time 
 		
 		$this->data['title'] = "Signup";
 		$this->data['page'] = "signup";

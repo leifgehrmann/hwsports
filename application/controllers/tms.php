@@ -51,6 +51,10 @@ class Tms extends MY_Controller {
 		$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
 		$this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
 		$this->form_validation->set_rules('sport', 'Sport', 'required|xss_clean');
+		$this->form_validation->set_rules('registrationStart', 'registrationStart', 'required|xss_clean|callback_dateformat_check');
+		$this->form_validation->set_rules('registrationEnd', 'registrationEnd', 'required|xss_clean|callback_dateformat_check');
+		$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_dateformat_check');
+		$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_dateformat_check');
 		
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
@@ -607,5 +611,17 @@ class Tms extends MY_Controller {
 		}
 	}
 
-}
+	public function dateformat_check($strDate,$format=array("d","m","y"),$ex="/") { 
+		$valid = false; 
+		$this->form_validation->set_message('username_check', 'The %s field can not be the word "test"');
+		if(is_array($format) && count($format) == 3 && count(explode($ex,$strDate))==3) { 
+			$date = array_combine($format,explode($ex,$strDate)); 
+			if(intval($date['m']) && intval($date['d']) && intval($date['y'])) {
+				$m = $date['m']; $d = $date['d']; $y = $date['y']; 
+				$valid = checkdate($m,$d,$y); 
+			} 
+		} 
+		return $valid;
+	}
 
+}
