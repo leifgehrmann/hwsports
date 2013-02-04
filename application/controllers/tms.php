@@ -611,7 +611,9 @@ class Tms extends MY_Controller {
 		}
 	}
 
-	public function dateformat_check($strDate,$format=array("d","m","y"),$ex="/") {
+	public function dateformat_check($strDate) {
+		$format=array("d","m","y");
+		$ex="/";
 		if(count(explode($ex,$strDate))==3) { 
 			$date = array_combine($format,explode($ex,$strDate)); 
 			if(intval($date['m']) && intval($date['d']) && intval($date['y'])) {
