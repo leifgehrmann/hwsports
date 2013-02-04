@@ -125,12 +125,11 @@ class Sis extends MY_Controller {
 			$tournament = $this->tournaments_model->get_tournament($tournamentID);
 			$this->data['tournament'] = $tournament;
 			$sport = $this->sports_model->get_sport( $tournament['sportID'] );
-			$this->data['tournament']['sport'] = $sport['name'];
 			
 			$this->data['tournamentTable'] = array(
 				array('<span class="bold">Name:</span>',$tournament['name']),
 				array('<span class="bold">Description:</span>',$tournament['description']),
-				array('<span class="bold">Sport:</span>',$tournament['sport']),
+				array('<span class="bold">Sport:</span>',$sport['name']),
 				array('<span class="bold">Start Date:</span>',$tournament['tournamentStart']),
 				array('<span class="bold">End Date:</span>',$tournament['tournamentEnd']),
 			);
