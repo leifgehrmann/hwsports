@@ -104,6 +104,8 @@ class Sis extends MY_Controller {
 			$match['startTime'] = date("H:i",$match['startTime']);
 			$match['endTime'] = date("H:i",$match['endTime']);
 			
+			$this->data['match'] = $match;
+			
 			$this->data['matchTable'] = array(
 				array('<span class="bold">Name:</span>',$match['name']),
 				array('<span class="bold">Description:</span>',$match['description']),
