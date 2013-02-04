@@ -73,64 +73,59 @@ class Sis extends MY_Controller {
 
 	public function match($matchID)
 	{
-
-		/* We want to get:
-			- match name
-			- which game is it part of?
-			- which tournament is it part of?
-			- Where is it?
-			- The results of this match?
-			- When does the match begin
-			- when long is the match?
-			- who is playing in this match
-			- what type of sport is this first of all?
-		*/
 		$this->load->library('table');
-		// Page title
+		
 		$this->data['title'] = "$matchID value";
 		$this->data['page'] = "match";
 		$this->data['matchID'] = $matchID;
+				
+		$this->load->model('tournaments_model');
+		$this->load->model('sports_model');
+		$this->load->model('venues_model');
+		$this->load->model('matches_model');
+		
+		if( $this->matches_model->match_exists($matchID) ) {
+			$match = $this->matches_model->get_match($matchID);
+			
+			$sport = $this->sports_model->get_sport( $match['sportID'] );
+			$match['sport'] = $sport['name'];
+			
+			$venue = $this->venues_model->get_venue( $match['venueID'] );
+			$match['venue'] = $venue['name'];
+			
+			if($this->tournaments_model->tournament_exists( $match['tournamentID'] )) {
+				$tournament = $this->tournaments_model->get_tournament( $match['tournamentID'] );
+				$match['tournament'] = $tournament['name'];
+			} else {
+				$match['tournament'] = "None";
+			}
+			
+			$match['date'] = date("F jS, Y",$match['startTime']);
+			$match['startTime'] = date("H:i",$match['startTime']);
+			$match['endTime'] = date("H:i",$match['endTime']);
+			
+			$this->data['matchTable'] = array(
+				array('<span class="bold">Name:</span>',$match['name']),
+				array('<span class="bold">Description:</span>',$match['description']),
+				array('<span class="bold">Sport:</span>',$match['sport']),
+				array('<span class="bold">Venue:</span>',$match['venue']),
+				array('<span class="bold">Tournament:</span>',$match['tournament']),
+				array('<span class="bold">Date:</span>',$match['date']),
+				array('<span class="bold">Start Time:</span>',$match['startTime']),
+				array('<span class="bold">End Time:</span>',$match['endTime']),
+			);
+		} else {
+			$this->session->set_flashdata('message',  "Match ID $id does not exist.");
+			redirect("/sis/tournaments", 'refresh');
+		}
 
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('sis/match',$this->data);
 		$this->load->view('sis/footer',$this->data);
 	}
 
-	public function game($gameID)
-	{
-
-		/* We want to get:
-			- match name
-			- which game is it part of?
-			- which tournament is it part of?
-			- Where is it?
-			- The results of this match?
-			- When does the match begin
-			- when long is the match?
-			- who is playing in this match
-			- what type of sport is this first of all?
-		*/
-		$this->load->library('table');
-		// Page title
-		$this->data['title'] = "$gameID value";
-		$this->data['page'] = "game";
-		$this->data['gameID'] = $gameID;
-
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('sis/game',$this->data);
-		$this->load->view('sis/footer',$this->data);
-	}
-
 	public function tournaments()
 	{
-
-		/* We want to get:
-			- List of all the tournaments
-				- tournament name
-				- tournament start date (to get the year)
-				- tournament description?
-		*/
-		
 		// Page title
 		$this->data['title'] = "Tournaments";
 		$this->data['page'] = "tournaments";
