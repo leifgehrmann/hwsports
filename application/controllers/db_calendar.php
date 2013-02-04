@@ -52,8 +52,8 @@ class Db_Calendar extends MY_Controller {
 		$this->load->view('data',$this->data);
 	}
 	public function getTournamentMatches($tournamentID){
-		$matches = $this->matches_model->get_matches($this->data['centre']['centreID']);
-		$this->data['data'] = array();		
+		$matches = $this->matches_model->get_tournament_matches($tournamentID);
+		$this->data['data'] = array();
 		foreach($matches as $match) {
 			$this->data['data'][] = array(
 				'data' => array(
