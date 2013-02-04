@@ -16,7 +16,12 @@
 		</div>
 		<h3>Enter personal details:</h3>
 		<div id="stage2">
-			<textarea id="address" name="address"></textarea>
+			Address: <br />
+			<textarea id="address" name="address"></textarea><br />
+			<br />
+			Emergency Contact:<br />
+			 Name: <input type="text" name="emergencyName"></input><br />
+			 Number: <input type="text" name="emergencyNumber"></input>
 		</div>	
 	</div>
 	
