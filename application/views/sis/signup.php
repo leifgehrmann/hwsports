@@ -7,6 +7,7 @@
 	<div id="stage1">
 		Select role: 
 		<select id="role" name="role">
+			<option></option>
 			<option value='1'>Single Player</option>
 			<option value='2'>Team Leader</option>
 			<option value='3'>Umpire</option>
