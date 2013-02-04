@@ -12,7 +12,7 @@ class Db_Calendar extends MY_Controller {
 
 	// Input:
 	//	* 
-	public function getAllMatches() {
+	private function getAllMatches($url) {
 		$matches = $this->matches_model->get_matches($this->data['centre']['centreID']);
 		$this->data['data'] = array();		
 		foreach($matches as $match) {
@@ -23,7 +23,7 @@ class Db_Calendar extends MY_Controller {
 				'title' => $match['name'],
 				'start' => $match['startTime'],
 				'end' => $match['endTime'],
-				'url' => "../match/".$match['matchID'],
+				'url' => $url.$match['matchID'],
 				'allDay' => false,
 				'color' => '#2966C7'
 			);
@@ -32,6 +32,13 @@ class Db_Calendar extends MY_Controller {
 		header('Content-Type: application/json');
 		$this->load->view('data',$this->data);
 	}
+	public function getAllMatchesTMS() {
+		getAllMatches("/tms/match/");
+	}
+	public function getAllMatchesSIS() {
+		getAllMatches("/sis/match/");
+	}
+
 	public function getVenueMatches($venueID){
 		$matches = $this->matches_model->get_venue_matches($venueID);
 		$this->data['data'] = array();		
