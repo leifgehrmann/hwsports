@@ -273,8 +273,9 @@ body {
 #content .match-time {
 	color: #444;
 }
-#content .match-game:before       { content: 'Sport: '; font-weight:bold; }
+#content .match-sport:before       { content: 'Sport: '; font-weight:bold; }
 #content .match-tournament:before { content: 'Tournament: '; font-weight:bold; }
+#content .match-date:before       { content: 'Date: '; font-weight:bold;      }
 #content .match-time:before       { content: 'Time: '; font-weight:bold;      }
 #content .match-venue:before      { content: 'Venue: '; font-weight:bold;       }
 #content .match-button-next, #content .match-button-prev {

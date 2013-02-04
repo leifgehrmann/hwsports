@@ -6,7 +6,7 @@
 	<? foreach($matches as $match) { ?>
 	<a href="/sis/match/<?=$match['matchID']?>" class="match-item">
 		<div class="match-name"><?=$match['name']?></div>
-		<div class="match-game"><?=$match['sport']?></div>
+		<div class="match-sport"><?=$match['sport']?></div>
 		<div class="match-tournament"><?=$match['tournament']?></div>
 		<div class="match-venue"><?=$match['venue']?></div>
 		<div class="match-date"><?=$match['date']?></div>
