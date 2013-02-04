@@ -11,7 +11,7 @@
 		<div class="tournament-name"><?=$tournament['name']?></div>
 		<div class="tournament-date-start"><?=$tournament['tournamentStart']?></div>
 		<div class="tournament-date-end"><?=$tournament['tournamentEnd']?></div>
-		<div class="tournament-registration-status"><?=( ($registrationStartDate < $today) && ($today < $registrationEndDate) ? "Registration open!" : "Registration closed" )?></div>
+		<div class="tournament-registration-status">Registration: <?=( ($registrationStartDate < $today) && ($today < $registrationEndDate) ? "<span class='registrationOpen'>Open!</span>" : "<span class='registrationClosed'>Closed</span>" )?></div>
 	</a>
 	<? } ?>
 	<a href="/sis/tournaments-history" class="tournament-button-prev">Previous Tournaments</a>
