@@ -621,11 +621,11 @@ class Tms extends MY_Controller {
 				if( checkdate($m,$d,$y) ) {
 					return TRUE;
 				} else {				
-					$this->form_validation->set_message('dateformat_check', 'The %s field must contain a valid numerical date"');
+					$this->form_validation->set_message('dateformat_check', 'The %s field must contain a date within realistic range. Provided: '.$d.' / '.$m.' / '.$y);
 					return FALSE;
 				}
 			} else {
-				$this->form_validation->set_message('dateformat_check', 'The %s field must contain a valid numerical date"');
+				$this->form_validation->set_message('dateformat_check', 'The %s field must contain a valid numerical date. Provided: '.print_r($date,1) );
 				return FALSE;
 			}
 		} else {
