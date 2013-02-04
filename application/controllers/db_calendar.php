@@ -12,7 +12,8 @@ class Db_Calendar extends MY_Controller {
 
 	// Input:
 	//	* 
-	public function getAllMatches() {
+	public function getAllMatches($url) {
+		$url = urldecode($url);
 		$matches = $this->matches_model->get_matches($this->data['centre']['centreID']);
 		$this->data['data'] = array();		
 		foreach($matches as $match) {
@@ -23,7 +24,7 @@ class Db_Calendar extends MY_Controller {
 				'title' => $match['name'],
 				'start' => $match['startTime'],
 				'end' => $match['endTime'],
-				'url' => "../match/".$match['matchID'],
+				'url' => $url.$match['matchID'],
 				'allDay' => false,
 				'color' => '#2966C7'
 			);
@@ -32,7 +33,8 @@ class Db_Calendar extends MY_Controller {
 		header('Content-Type: application/json');
 		$this->load->view('data',$this->data);
 	}
-	public function getVenueMatches($venueID){
+	public function getVenueMatches($url,$venueID){
+		$url = urldecode($url);
 		$matches = $this->matches_model->get_venue_matches($venueID);
 		$this->data['data'] = array();		
 		foreach($matches as $match) {
@@ -43,7 +45,7 @@ class Db_Calendar extends MY_Controller {
 				'title' => $match['name'],
 				'start' => $match['startTime'],
 				'end' => $match['endTime'],
-				'url' => "../match/".$match['matchID'],
+				'url' => $url.$match['matchID'],
 				'allDay' => false,
 				'color' => '#2966C7'
 			);
@@ -51,7 +53,8 @@ class Db_Calendar extends MY_Controller {
 		$this->data['data'] = json_encode($this->data['data']);
 		$this->load->view('data',$this->data);
 	}
-	public function getTournamentMatches($tournamentID){
+	public function getTournamentMatches($url,$tournamentID){
+		$url = urldecode($url);
 		$matches = $this->matches_model->get_tournament_matches($tournamentID);
 		$this->data['data'] = array();
 		foreach($matches as $match) {
@@ -62,7 +65,7 @@ class Db_Calendar extends MY_Controller {
 				'title' => $match['name'],
 				'start' => $match['startTime'],
 				'end' => $match['endTime'],
-				'url' => "../match/".$match['matchID'],
+				'url' => $url.$match['matchID'],
 				'allDay' => false,
 				'color' => '#2966C7'
 			);
