@@ -27,7 +27,7 @@
 		var accordionReference = $("#accordion").accordion();
 		
 		$("#role").change(function() {
-			accordionReference.changeAccordion('activate', $(this).val() );
+			accordionReference.accordion('option', 'active', $(this).val() );
 		});
 	});
 </script>
