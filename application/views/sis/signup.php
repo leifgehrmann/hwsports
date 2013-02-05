@@ -4,6 +4,9 @@
 <? } ?>
 
 	<h2>Sign Up for <?=$tournament['name']?>:</h2>
+	
+	<pre><? print_r($tournament) ?></pre>
+	
 	<div id="accordion">
 		<h3>Select role:</h3>
 		<div id="stage1">
