@@ -5,7 +5,7 @@
 
 	<h2>Sign Up for <?=$tournament['name']?>:</h2>
 	
-	<form action="/sis/signup" method="POST">
+	<form action="/sis/signup/<?=$tournamentID?>" method="POST">
 	
 	<h3 id="actionHeading">Select role:</h3>
 	<? foreach($roles as $roleID => $role) { ?>
@@ -26,11 +26,13 @@
 				<? } ?>
 			</div>	
 			<? } ?>
+			<h3 class="sectionHeading" id="sectionHeading-submit">Submit Form</h3>
+			<div class="sectionBody" id="sectionBody-submit">
+				<input type="submit" value="Sign Up!" class="submitButton" />
+			</div>
 		</div>
 		
 	<? } ?>
-	
-	<input type="submit" value="Submit" id="submit" style="display: none" />
 	
 <!-- /#main -->
 
