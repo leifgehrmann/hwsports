@@ -34,9 +34,11 @@
 	$(document).ready(function() {
 		$(".roleButton").click(function(){
 			var roleID = $(this).attr('id').substr(10);
-			$(".roleButton").hide("fast");
-			$("#actionHeading").text("Complete form:");
+			$(".roleButton").hide();
+			$("#actionHeading").hide();
 
+			console.log("#roleSections-"+roleID);
+			console.log(  $("#roleSections-"+roleID)  );
 			$("#roleSections-"+roleID).show("fast");
 			$("#roleSections-"+roleID).accordion();
 			return false;
