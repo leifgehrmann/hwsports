@@ -33,14 +33,12 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(".roleButton").click(function(){
-			var roleID = $(this).attr('id').substr(10);
+			var roleID = $(this).attr('id').substr(11);
 			$(".roleButton").hide();
 			$("#actionHeading").hide();
 
-			console.log("#roleSections-"+roleID);
-			console.log(  $("#roleSections-"+roleID)  );
-			$("#roleSections-"+roleID).show("fast");
 			$("#roleSections-"+roleID).accordion();
+			$("#roleSections-"+roleID).show("fast");
 			return false;
 		});
 	});
