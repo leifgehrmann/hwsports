@@ -40,8 +40,9 @@
 	$(document).ready(function() {
 		$(".roleButton").click(function(){
 			var roleID = $(this).attr('id').substr(11);
-			$(".roleButton").hide();
-			$("#actionHeading").hide();
+			$(".roleButton").remove();
+			$("#actionHeading").remove();
+			$('.roleSections').not("#roleSections-"+roleID).remove();
 
 			$("#roleSections-"+roleID).show("fast");
 			$("#roleSections-"+roleID).accordion();
