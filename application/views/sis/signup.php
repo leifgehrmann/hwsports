@@ -65,12 +65,12 @@
 				var currentActiveSection = $("#roleSections-"+roleID).accordion( "option", "active" );
 				$("#roleSections-"+roleID).accordion( "option", "active", currentActiveSection+1 );
 				return false;
-			}
+			});
 			$(".backButton").click(function(){
 				var currentActiveSection = $("#roleSections-"+roleID).accordion( "option", "active" );
 				$("#roleSections-"+roleID).accordion( "option", "active", currentActiveSection-1 );
 				return false;
-			}
+			});
 			return false;
 		});
 		
