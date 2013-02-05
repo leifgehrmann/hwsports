@@ -71,7 +71,8 @@
 			});
 			
 			$("#roleSections-"+roleID).on( "accordionactivate", function( event, ui ) {
-				$("input[type=text]", ui.newPanel).focus();
+				console.log(ui);
+				$(":text", ui.newPanel).focus();
 			});
 			return false;
 		});
