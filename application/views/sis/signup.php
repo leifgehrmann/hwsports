@@ -37,8 +37,8 @@
 			$(".roleButton").hide();
 			$("#actionHeading").hide();
 
+			$("#roleSections-"+roleID).show("slow");
 			$("#roleSections-"+roleID).accordion();
-			$("#roleSections-"+roleID).show("fast");
 			return false;
 		});
 	});
