@@ -14,15 +14,7 @@
 		<div class="roleSections" id="roleSections-<?=$roleID?>" style="display: none">
 			<? 	$sectionCount = 0;
 				foreach($role['inputSections'] as $sectionID => $section) { 
-					$sectionCount++;
-					if( $sectionCount == 1 ) {
-						echo "<div class='navButtons'><a href='#' class='nextButton'>Next</a></div>";
-					} elseif( $sectionCount == count( $role['inputSections'] ) ) {
-						echo "<div class='navButtons'><a href='#' class='backButton'>Back</a></div>";
-					} else {
-						echo "<div class='navButtons'><a href='#' class='nextButton'>Next</a><a href='#' class='backButton'>Back</a></div>";
-					}
-			?>
+					$sectionCount++; ?>
 			<h3 class="sectionHeading" id="sectionHeading-<?=$sectionID?>"><?=$section['label']?></h3>
 			<div class="sectionBody" id="sectionBody-<?=$sectionID?>">
 				<? foreach($section['inputs'] as $inputID => $input) { ?>
@@ -33,7 +25,14 @@
 						case "checkbox": ?> <input type="checkbox" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>" value="1"></input><br /> <? break; 
 				} ?>
 				<br />
-				<? } ?>
+				<? } 
+				if( $sectionCount == 1 ) {
+					echo "<div class='navButtons'><a href='#' class='nextButton'>Next</a></div>";
+				} elseif( $sectionCount == count( $role['inputSections'] ) ) {
+					echo "<div class='navButtons'><a href='#' class='backButton'>Back</a></div>";
+				} else {
+					echo "<div class='navButtons'><a href='#' class='nextButton'>Next</a><a href='#' class='backButton'>Back</a></div>";
+				} ?>
 			</div>	
 			<? } ?>
 			<h3 class="sectionHeading" id="sectionHeading-submit">Submit Form</h3>
