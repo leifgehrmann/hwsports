@@ -69,6 +69,10 @@
 				$("#roleSections-"+roleID).accordion( "option", "active", currentActiveSection-1 );
 				return false;
 			});
+			
+			$("#roleSections-"+roleID).on( "accordionactivate", function( event, ui ) {
+				ui.newPanel.$("input[type=text]").focus();
+			});
 			return false;
 		});
 		
