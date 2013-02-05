@@ -28,8 +28,6 @@
 				<? } 
 				if( $sectionCount == 1 ) {
 					echo "<div class='navButtons'><a href='#' class='nextButton'>Next</a></div>";
-				} elseif( $sectionCount == count( $role['inputSections'] ) ) {
-					echo "<div class='navButtons'><a href='#' class='backButton'>Back</a></div>";
 				} else {
 					echo "<div class='navButtons'><a href='#' class='backButton'>Back</a> <a href='#' class='nextButton'>Next</a></div>";
 				} ?>
@@ -38,6 +36,7 @@
 			<h3 class="sectionHeading" id="sectionHeading-submit">Submit Form</h3>
 			<div class="sectionBody" id="sectionBody-submit">
 				<input type="submit" value="Sign Up!" class="submitButton" />
+				<div class='navButtons'><a href='#' class='backButton'>Back</a></div>
 			</div>
 		</div>
 		
