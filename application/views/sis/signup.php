@@ -15,7 +15,7 @@
 			<div class="sectionBody" id="sectionBody-<?=$sectionID?>">
 				<? foreach($section['inputs'] as $inputID => $input) { ?>
 				<?=$input['formLabel']?><br />
-				<? switch( $input['formLabel'] ) {
+				<? switch( $input['inputType'] ) {
 						case "textarea": ?> <textarea id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></textarea><br /> <? break; 
 						case "text": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break; 
 						case "checkbox": ?> <input type="checkbox" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>" value="1"></input><br /> <? break; 
