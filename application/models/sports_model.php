@@ -140,7 +140,7 @@ class Sports_model extends CI_Model {
 				$sections[ $roleInputSectionResult['sportCategoryRoleInputSectionID'] ] = array (
 					'label' => $roleInputSectionResult['label'],
 					'inputs' => $inputs
-				};
+				);
 			}
 			
 			// Add role to output
