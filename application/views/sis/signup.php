@@ -72,6 +72,13 @@
 			return false;
 		});
 		
+		// make anchors follow the same UX experience as input buttons - pressing spacebar clicks them
+		$("a").die("keypress").live("keypress", function(e) {
+			if (e.which == 32) {
+				$(this).trigger("click");
+				e.preventDefault();
+			}
+		});
 		
 		// If only one role exists, click it - no point wasting the user's time
 		if( $(".roleButton").length == 1 ) {
