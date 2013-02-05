@@ -49,5 +49,10 @@
 			$("#submit").show();
 			return false;
 		});
+		
+		// If only one role exists, click it - no point wasting the user's time
+		if( $(".roleButton").length == 1 ) {
+			$(".roleButton").click();
+		}
 	});
 </script>
