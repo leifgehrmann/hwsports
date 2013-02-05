@@ -207,6 +207,9 @@ class Sis extends MY_Controller {
 	
 	public function signup($tournamentID)
 	{
+		if(!empty($_POST) ) {
+			print_r($_POST); die();
+		}
 		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
 		
