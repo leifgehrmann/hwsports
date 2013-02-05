@@ -134,7 +134,7 @@ class Sports_model extends CI_Model {
 						'keyName' => $roleInput['keyName'],
 						'inputType' => $roleInput['inputType'],
 						'formLabel' => $roleInput['formLabel']
-					};
+					);
 				}
 					
 				$sections[ $roleInputSectionResult['sportCategoryRoleInputSectionID'] ] = array (
