@@ -5,6 +5,8 @@
 
 	<h2>Sign Up for <?=$tournament['name']?>:</h2>
 	
+	<form action="/sis/signup" method="POST">
+	
 	<h3 id="actionHeading">Select role:</h3>
 	<? foreach($roles as $roleID => $role) { ?>
 		<a href="" class="roleButton" id="roleButton-<?=$roleID?>"><?=$role['name']?></a>
@@ -28,6 +30,8 @@
 		
 	<? } ?>
 	
+	<input type="submit" value="Submit" id="submit" style="display: none" />
+	
 <!-- /#main -->
 
 <script type="text/javascript">
@@ -37,8 +41,9 @@
 			$(".roleButton").hide();
 			$("#actionHeading").hide();
 
-			$("#roleSections-"+roleID).show("slow");
+			$("#roleSections-"+roleID).show("fast");
 			$("#roleSections-"+roleID).accordion();
+			$("#submit").show();
 			return false;
 		});
 	});
