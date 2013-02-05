@@ -144,7 +144,7 @@ class Sports_model extends CI_Model {
 			}
 			
 			// Add role to output
-			$output[] = array (
+			$output[$roleResult['sportCategoryRoleID']] = array (
 				'name' => $roleResult['sportCategoryRoleName'],
 				'inputSections' => $sections
 			);

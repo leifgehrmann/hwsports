@@ -5,37 +5,40 @@
 
 	<h2>Sign Up for <?=$tournament['name']?>:</h2>
 	
-	<pre><? print_r($roles) ?></pre>
-	
-	<div id="accordion">
-		<h3>Select role:</h3>
-		<div id="stage1">
-			<select id="role" name="role">
-				<option></option>
-				<option value='1'>Single Player</option>
-				<option value='2'>Team Leader</option>
-				<option value='3'>Umpire</option>
-			</select>
+	<h3 id="actionHeading">Select role:</h3>
+	<? foreach($roles as $roleID => $role) { ?>
+		<a href="" class="roleButton" id="roleButton-<?=$roleID?>"><?=$role['name']?></a>
+		
+		<div class="roleSections" id="roleSections-<?=$roleID?>" style="display: none">
+			<? foreach($role['inputSections'] as $sectionID => $section) { ?>
+			<h3 class="sectionHeading" id="sectionHeading-<?=$sectionID?>"><?=$section['label']?></h3>
+			<div class="sectionBody" id="sectionBody-<?=$sectionID?>">
+				<? foreach($section['inputs'] as $inputID => $input) { ?>
+				<?=$input['formLabel']?><br />
+				<? switch( $input['formLabel'] ) {
+						case "textarea": ?> <textarea id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></textarea><br /> <? break; 
+						case "text": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break; 
+						case "checkbox": ?> <input type="checkbox" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>" value="1"></input><br /> <? break; 
+				} ?>
+				<br />
+				<? } ?>
+			</div>	
 		</div>
-		<h3>Enter personal details:</h3>
-		<div id="stage2">
-			Address: <br />
-			<textarea id="address" name="address"></textarea><br />
-			<br />
-			Emergency Contact:<br />
-			 Name: <input type="text" name="emergencyName"></input><br />
-			 Number: <input type="text" name="emergencyNumber"></input>
-		</div>	
-	</div>
+		
+	<? } ?>
 	
 <!-- /#main -->
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		var accordionReference = $("#accordion").accordion();
-		
-		$("#role").change(function() {
-			accordionReference.accordion('option', 'active', 1 );
+		$(".roleButton").click(function(){
+			var roleID = $(this).attr('id').substr(10);
+			$(".roleButton").hide("fast");
+			$("#actionHeading").text("Complete form:");
+
+			$("#roleSections-"+roleID).show("fast");
+			$("#roleSections-"+roleID).accordion();
+			return false;
 		});
 	});
 </script>
