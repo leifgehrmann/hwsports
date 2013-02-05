@@ -5,7 +5,7 @@
 
 	<h2>Sign Up for <?=$tournament['name']?>:</h2>
 	
-	<pre><? print_r($tournament) ?></pre>
+	<pre><? print_r($roles) ?></pre>
 	
 	<div id="accordion">
 		<h3>Select role:</h3>
