@@ -12,7 +12,17 @@
 		<a href="" class="roleButton" id="roleButton-<?=$roleID?>"><?=$role['name']?></a>
 		
 		<div class="roleSections" id="roleSections-<?=$roleID?>" style="display: none">
-			<? foreach($role['inputSections'] as $sectionID => $section) { ?>
+			<? 	$sectionCount = 0;
+				foreach($role['inputSections'] as $sectionID => $section) { 
+					$sectionCount++;
+					if( $sectionCount == 1 ) {
+						echo "<div class='navButtons'><a href='#' class='nextButton'>Next</a></div>";
+					} elseif( $sectionCount == count( $role['inputSections'] ) ) {
+						echo "<div class='navButtons'><a href='#' class='backButton'>Back</a></div>";
+					} else {
+						echo "<div class='navButtons'><a href='#' class='nextButton'>Next</a><a href='#' class='backButton'>Back</a></div>";
+					}
+			?>
 			<h3 class="sectionHeading" id="sectionHeading-<?=$sectionID?>"><?=$section['label']?></h3>
 			<div class="sectionBody" id="sectionBody-<?=$sectionID?>">
 				<? foreach($section['inputs'] as $inputID => $input) { ?>
@@ -45,10 +55,25 @@
 			$('.roleSections').not("#roleSections-"+roleID).remove();
 
 			$("#roleSections-"+roleID).show("fast");
-			$("#roleSections-"+roleID).accordion();
+			$("#roleSections-"+roleID).accordion({ 
+				heightStyle: "content"
+			});
 			$("#submit").show();
+			
+				
+			$(".nextButton").click(function(){
+				var currentActiveSection = $("#roleSections-"+roleID).accordion( "option", "active" );
+				$("#roleSections-"+roleID).accordion( "option", "active", currentActiveSection+1 );
+				return false;
+			}
+			$(".backButton").click(function(){
+				var currentActiveSection = $("#roleSections-"+roleID).accordion( "option", "active" );
+				$("#roleSections-"+roleID).accordion( "option", "active", currentActiveSection-1 );
+				return false;
+			}
 			return false;
 		});
+		
 		
 		// If only one role exists, click it - no point wasting the user's time
 		if( $(".roleButton").length == 1 ) {
