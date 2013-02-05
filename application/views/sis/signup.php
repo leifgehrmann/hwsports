@@ -72,7 +72,7 @@
 			
 			$("#roleSections-"+roleID).on( "accordionactivate", function( event, ui ) {
 				console.log(ui);
-				$(":text", ui.newPanel).focus();
+				$(":text", ui.newPanel).first().focus();
 			});
 			return false;
 		});
