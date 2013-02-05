@@ -31,7 +31,7 @@
 				} elseif( $sectionCount == count( $role['inputSections'] ) ) {
 					echo "<div class='navButtons'><a href='#' class='backButton'>Back</a></div>";
 				} else {
-					echo "<div class='navButtons'><a href='#' class='nextButton'>Next</a><a href='#' class='backButton'>Back</a></div>";
+					echo "<div class='navButtons'><a href='#' class='backButton'>Back</a> <a href='#' class='nextButton'>Next</a></div>";
 				} ?>
 			</div>	
 			<? } ?>
