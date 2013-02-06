@@ -63,13 +63,6 @@ class Db_Calendar extends MY_Controller {
 
 		$this->data['data'] = array();
 
-		/*$this->data['data'][] = array(
-				'centreID' => $centreID
-			);
-		$this->data['data'][] = array(
-				'tournamentIDs' => $tournamentIDs
-			);*/
-
 		// We select all the tournaments with the appropriate sport.
 		if($tournamentIDs=="all"){ // If we want all tournaments
 			$tournamentsAll = $this->tournaments_model->get_tournaments($centreID);
@@ -214,10 +207,10 @@ class Db_Calendar extends MY_Controller {
 		$this->getEvents($query);
 	}
 	public function getAllTournamentsTMS() {
-		$this->getAllTournaments("/tms/match/","/tms/tournament/","/tms/tournament/",true);
+		$this->getAllTournaments("/tms/match/","/tms/tournament/","/tms/tournament/",false);
 	}
 	public function getAllTournamentsSIS() {
-		$this->getAllTournaments("/sis/match/","/sis/tournament/","/sis/signup/",false);
+		$this->getAllTournaments("/sis/match/","/sis/tournament/","/sis/signup/",true);
 	}
 	public function getAllMatchesTMS() {
 		$this->getAllMatches("/tms/match/");
@@ -227,9 +220,9 @@ class Db_Calendar extends MY_Controller {
 	}
 	public function getVenueMatchesTMS($venueID){
 		$query = array();
-		$query['tournamentIDs'] = "none";
-		$query['venueIDs'] 				= array($venueID);
-		$query['matchUrl']				= "/tms/match/";
+		$query['tournamentIDs']		= "none";
+		$query['venueIDs']			= array($venueID);
+		$query['matchUrl']			= "/tms/match/";
 		$this->getEvents($query);
 	}
 	public function getTournamentMatches($tournamentID){

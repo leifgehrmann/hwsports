@@ -95,7 +95,7 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			events: '/db_calendar/getVenueMatches/<?=$this->data["venue"]["venueID"]?>',
+			events: '/db_calendar/getVenueMatchesTMS/<?=$this->data["venue"]["venueID"]?>',
 			editable: true,
 			eventResize: function(match,dayDelta,minuteDelta,revertFunc) {
 				console.log(match);
