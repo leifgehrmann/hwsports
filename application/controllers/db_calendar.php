@@ -206,7 +206,7 @@ class Db_Calendar extends MY_Controller {
 		$query['tournamentUrl'] = $url;
 		$this->getEvents($this->data['centre']['centreID'],$query);
 	}
-	public function getAllTournaments($matchUrl,$tournamentUrl,registrationUrl) {
+	public function getAllTournaments($matchUrl,$tournamentUrl,$registrationUrl) {
 		$query = array();
 		$query['tournamentUrl']		= $tournamentUrl;
 		$query['matchUrl']			= $matchUrl;
