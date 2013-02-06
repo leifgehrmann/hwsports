@@ -114,7 +114,7 @@ class Db_Calendar extends MY_Controller {
 		} else { // If we only want particular matches
 			foreach ($matchIDs as $matchID ){
 				$match = $this->matches_model->get_match($matchID);
-				if($sportIDs!="all") // If we want only a particular sport
+				if($sportIDs=="all") // If we want only a particular sport
 					$matches[] = $match;
 				else
 					if(in_array($match['sportID'],$sportIDs))

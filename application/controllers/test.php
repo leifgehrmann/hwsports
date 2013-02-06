@@ -28,6 +28,12 @@ class Test extends MY_Controller {
 		header('Content-Type: application/json');
 		$this->load->view('data', $this->data);
 	}
+	public function get_tournaments($centreID){
+		$output = $this->tournaments_model->get_tournaments($centreID);
+		$this->data['data'] =  print_r($output,1);
+		header('Content-Type: application/json');
+		$this->load->view('data', $this->data);
+	}
 
 	public function get_matches($centreID){
 		$output = $this->matches_model->get_matches($centreID);
