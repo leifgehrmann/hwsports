@@ -204,14 +204,14 @@ class Db_Calendar extends MY_Controller {
 		$query = array();
 		$query['tournamentIDs'] = "none";
 		$query['tournamentUrl'] = $url;
-		$this->getEvents($this->data['centre']['centreID'],$query);
+		$this->getEvents($query);
 	}
 	public function getAllTournaments($matchUrl,$tournamentUrl,$registrationUrl) {
 		$query = array();
 		$query['tournamentUrl']		= $tournamentUrl;
 		$query['matchUrl']			= $matchUrl;
 		$query['registrationUrl']	= $registrationUrl;
-		$this->getAllTournaments($query);
+		$this->getEvents($query);
 	}
 	public function getAllTournamentsTMS() {
 		$this->getAllTournaments("/tms/match/","/tms/tournament/","/tms/tournament/");
