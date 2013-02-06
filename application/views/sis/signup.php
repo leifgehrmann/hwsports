@@ -57,7 +57,7 @@
 			});
 			$("#submit").show();
 			
-				
+			// functionality of next/back buttons - open new section	
 			$(".nextButton").click(function(){
 				var currentActiveSection = $("#roleSections-"+roleID).accordion( "option", "active" );
 				$("#roleSections-"+roleID).accordion( "option", "active", currentActiveSection+1 );
@@ -69,9 +69,19 @@
 				return false;
 			});
 			
+			
+			$(".addTeamMember").click(function(){
+				alert("Hurr Durr Team Member Added");
+				return false;
+			});
+			
+			
+			
+			
+			// put cursor in first input inside newly opened section for usability
 			$("#roleSections-"+roleID).on( "accordionactivate", function( event, ui ) {
 				console.log(ui);
-				$(":text", ui.newPanel).first().focus();
+				$("input", ui.newPanel).first().focus();
 			});
 			return false;
 		});
