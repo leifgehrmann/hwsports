@@ -103,12 +103,11 @@ class Db_Calendar extends MY_Controller {
 				$this->data['data'][] = array(
 						'sportIDs' => $sportIDs
 			);
-				if($sportIDs!="all") // If we want only a particular sport
+				if($sportIDs=="all") // If we want only a particular sport
+					$matches[] = $match;
+				else
 					if(in_array($match['sportID'],$sportIDs))
 						$matches[] = $match;
-				else{
-					$matches[] = $match;
-				}
 			}
 		} else if($matchIDs=="none") {
 
