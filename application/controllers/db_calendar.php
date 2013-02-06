@@ -143,13 +143,15 @@ class Db_Calendar extends MY_Controller {
 		}
 		// Inserting all the tournament periods
 		foreach($tournaments as $tournament) {
+			$tournamentStart	= DateTime::createFromFormat('d/m/Y', $tournament['tournamentStart']);
+			$tournamentEnd		= DateTime::createFromFormat('d/m/Y', $tournament['tournamentEnd']);
 			$this->data['data'][] = array(
 				'data' => array(
 					'id' => "1000000".$tournament['tournamentID']
 				),
 				'title' => $tournament['name'],
-				'start' => $tournament['tournamentStart'],
-				'end' => $tournament['tournamentEnd'],
+				'start' => $tournamentStart->format("U"),
+				'end' => $tournamentEnd->format("U"),
 				'url' => $tournamentUrl.$tournament['tournamentID'],
 				'allDay' => true,
 				'color' => $tournamentColour
@@ -158,13 +160,15 @@ class Db_Calendar extends MY_Controller {
 		// Inserting all the registration periods
 		if($showRegistration)
 			foreach($tournaments as $tournament) {
+				$registrationStart	= DateTime::createFromFormat('d/m/Y', $tournament['registrationStart']);
+				$registrationEnd	= DateTime::createFromFormat('d/m/Y', $tournament['registrationEnd']);
 				$this->data['data'][] = array(
 					'data' => array(
 						'id' => "2000000".$tournament['tournamentID']
 					),
 					'title' => $tournament['name']." Registration Period",
-					'start' => $tournament['registrationStart'],
-					'end' => $tournament['registrationEnd'],
+					'start' => $registrationStart->format("U"),
+					'end' => $registrationEnd->format("U"),
 					'url' => $registrationUrl.$tournament['tournamentID'],
 					'allDay' => true,
 					'color' => $registrationColour
