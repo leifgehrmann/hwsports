@@ -145,7 +145,7 @@ class Db_Calendar extends MY_Controller {
 		foreach($tournaments as $tournament) {
 			$this->data['data'][] = array(
 				'data' => array(
-					'id' => $tournament['tournamentID'] + 100000
+					'id' => (string)($tournament['tournamentID'] + 100000)
 				),
 				'title' => $tournament['name'],
 				'start' => $tournament['tournamentStart'],
@@ -160,7 +160,7 @@ class Db_Calendar extends MY_Controller {
 			foreach($tournaments as $tournament) {
 				$this->data['data'][] = array(
 					'data' => array(
-						'id' => $tournament['tournamentID'] + 200000
+						'id' => (string)($tournament['tournamentID'] + 200000)
 					),
 					'title' => $tournament['name']." Registration Period",
 					'start' => $tournament['registrationStart'],
