@@ -60,19 +60,19 @@ class Db_Calendar extends MY_Controller {
 
 		$this->data['data'] = array();
 
-		$this->data['data'][] = array(
+		/*$this->data['data'][] = array(
 				'centreID' => $centreID
 			);
 		$this->data['data'][] = array(
 				'tournamentIDs' => $tournamentIDs
-			);
+			);*/
 
 		// We select all the tournaments with the appropriate sport.
 		if($tournamentIDs=="all"){ // If we want all tournaments
 			$tournamentsAll = $this->tournaments_model->get_tournaments($centreID);
-			$this->data['data'][] = array(
+			/*$this->data['data'][] = array(
 				'tournamentsAll' => $tournamentsAll
-			);
+			);*/
 			foreach ($tournamentsAll as $tournament )
 				if($sportIDs=="all") // If we want only a particular sport
 					$tournaments[] = $tournament;
@@ -99,13 +99,13 @@ class Db_Calendar extends MY_Controller {
 				$matchesAll = $this->matches_model->get_tournament_matches($centreID);
 			else 
 				$matchesAll = $this->matches_model->get_matches($centreID);
-			$this->data['data'][] = array(
+			/*$this->data['data'][] = array(
 				'matchesAll' => $matchesAll
-			);
+			);*/
 			foreach ($matchesAll as $match ){
-				$this->data['data'][] = array(
+				/*$this->data['data'][] = array(
 						'sportIDs' => $sportIDs
-			);
+			);*/
 				if($sportIDs=="all") // If we want only a particular sport
 					$matches[] = $match;
 				else
@@ -167,7 +167,7 @@ class Db_Calendar extends MY_Controller {
 					'color' => $registrationColour
 				);
 			}
-		$this->data['data'][] = array(
+		/*$this->data['data'][] = array(
 			'query' => $query
 			);
 		$this->data['data'][] = array(
@@ -175,7 +175,7 @@ class Db_Calendar extends MY_Controller {
 			);
 		$this->data['data'][] = array(
 			'matches' => $matches
-			);
+			);*/
 
 		$this->data['data'] = json_encode($this->data['data']);
 		header('Content-Type: application/json');
@@ -201,6 +201,11 @@ class Db_Calendar extends MY_Controller {
 		$query = array();
 		$query['tournamentIDs'] = "none";
 		$query['tournamentUrl'] = $url;
+		$this->getEvents($this->data['centre']['centreID'],$query);
+	}
+	public function getAllTournaments() {
+		$query = array();
+		$query['tournamentUrl'] = "/tms/match/";
 		$this->getEvents($this->data['centre']['centreID'],$query);
 	}
 	public function getAllMatchesTMS() {
