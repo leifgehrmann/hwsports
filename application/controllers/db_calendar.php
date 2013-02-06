@@ -145,7 +145,7 @@ class Db_Calendar extends MY_Controller {
 				'allDay' => false,
 				'color' => $matchColour
 			);
-			if(isset($url))
+			if(isset($matchUrl))
 				$event['url'] = $matchUrl.$match['matchID'];
 			$this->data['data'][] = $event;
 		}
@@ -163,7 +163,7 @@ class Db_Calendar extends MY_Controller {
 				'allDay' => true,
 				'color' => $tournamentColour
 			);
-			if(isset($url))
+			if(isset($tournamentUrl))
 				$event['url'] = $tournamentUrl.$tournament['tournamentID'];
 			$this->data['data'][] = $event;
 		}
@@ -182,7 +182,7 @@ class Db_Calendar extends MY_Controller {
 					'allDay' => true,
 					'color' => $registrationColour
 				);
-				if(isset($url))
+				if(isset($registrationUrl))
 					$event['url'] = $registrationUrl.$tournament['tournamentID'];
 				$this->data['data'][] = $event;
 			}
