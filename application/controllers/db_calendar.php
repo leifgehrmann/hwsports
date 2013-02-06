@@ -58,6 +58,8 @@ class Db_Calendar extends MY_Controller {
 		$tournaments 		= array();
 		$matches 			= array();
 
+		$this->data['data'] = array();
+
 		$this->data['data'][] = array(
 				'centreID' => $centreID
 			);
@@ -116,7 +118,6 @@ class Db_Calendar extends MY_Controller {
 			}
 		}
 
-		$this->data['data'] = array();
 		foreach($matches as $match) {
 			$this->data['data'][] = array(
 				'data' => array(
