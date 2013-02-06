@@ -149,7 +149,15 @@ class Db_Calendar extends MY_Controller {
 					'color' => $registrationColour
 				);
 			}
-
+		$this->data['data'][] = array(
+			'query' => $query
+			);
+		$this->data['data'][] = array(
+			'tournaments' => $tournaments
+			);
+		$this->data['data'][] = array(
+			'matches' => $matches
+			);
 
 		$this->data['data'] = json_encode($this->data['data']);
 		header('Content-Type: application/json');
