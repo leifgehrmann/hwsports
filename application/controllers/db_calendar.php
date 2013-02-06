@@ -61,6 +61,9 @@ class Db_Calendar extends MY_Controller {
 		// We select all the tournaments with the appropriate sport.
 		if($tournamentIDs=="all"){ // If we want all tournaments
 			$tournamentsAll = $this->tournaments_model->get_tournaments($centreID);
+			$this->data['data'][] = array(
+				'tournamentsAll' => $tournamentsAll
+			);
 			foreach ($tournamentsAll as $tournament )
 					if($sportIDs!="all") // If we want only a particular sport
 						if(in_array($tournament['sportID'],$sportIDs))
@@ -87,6 +90,9 @@ class Db_Calendar extends MY_Controller {
 				$matchesAll = $this->matches_model->get_tournament_matches($centreID);
 			else 
 				$matchesAll = $this->matches_model->get_matches($centreID);
+			$this->data['data'][] = array(
+				'matchesAll' => $matchesAll
+			);
 			foreach ($matchesAll as $match )
 				if($sportIDs!="all") // If we want only a particular sport
 					if(in_array($match['sportID'],$sportIDs))
