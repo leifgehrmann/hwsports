@@ -5,7 +5,7 @@
 
 	<h2>Sign Up for <?=$tournament['name']?>:</h2>
 	
-	<form action="/sis/signup/<?=$tournamentID?>" method="POST">
+	<form action="/sis/signup/<?=$tournamentID?>" id="signupForm" method="POST">
 	
 	<h3 id="actionHeading">Select role:</h3>
 	<? foreach($roles as $roleID => $role) { ?>
@@ -23,6 +23,7 @@
 						case "textarea": ?> <textarea id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></textarea><br /> <? break; 
 						case "text": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break; 
 						case "checkbox": ?> <input type="checkbox" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>" value="1"></input><br /> <? break; 
+						case "teamMembers": ?> <a href="#" class="addTeamMember">Add</a> <? break; 
 				} ?>
 				<br />
 				<? } 
@@ -33,14 +34,12 @@
 				} ?>
 			</div>	
 			<? } ?>
-			<h3 class="sectionHeading" id="sectionHeading-submit">Submit Form</h3>
-			<div class="sectionBody" id="sectionBody-submit">
-				<input type="submit" value="Sign Up!" class="submitButton" />
-				<div class='navButtons'><a href='#' class='backButton'>Back</a></div>
-			</div>
+			<h3 class="sectionHeading" id="sectionHeading-submit">Sign Up!</h3>
 		</div>
 		
 	<? } ?>
+	
+	</form>
 	
 <!-- /#main -->
 
@@ -74,6 +73,10 @@
 				console.log(ui);
 				$(":text", ui.newPanel).first().focus();
 			});
+			return false;
+		});
+		$("#sectionHeading-submit").click(function(){
+			$("#signupForm").submit();
 			return false;
 		});
 		
