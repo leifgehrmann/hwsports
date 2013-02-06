@@ -162,7 +162,7 @@ class Db_Calendar extends MY_Controller {
 					'data' => array(
 						'id' => $tournament['tournamentID'] + 200000
 					),
-					'title' => $tournament['name'],
+					'title' => $tournament['name']." Registration Period",
 					'start' => $tournament['registrationStart'],
 					'end' => $tournament['registrationEnd'],
 					'url' => $registrationUrl.$tournament['tournamentID'],
