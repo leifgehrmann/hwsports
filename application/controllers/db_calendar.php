@@ -101,7 +101,7 @@ class Db_Calendar extends MY_Controller {
 			);
 			foreach ($matchesAll as $match ){
 				$this->data['data'][] = array(
-						'ANGERYdsfskdnf' => "BING"
+						'sportIDs' => $sportIDs
 			);
 				if($sportIDs!="all") // If we want only a particular sport
 					if(in_array($match['sportID'],$sportIDs))
