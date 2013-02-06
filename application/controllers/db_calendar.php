@@ -38,21 +38,21 @@ class Db_Calendar extends MY_Controller {
 		$registrationColour			= '#00FF00';
 		$matchColour				= '#2966C7';
 
-		if(array_key_exists('matchUrl',$query)
+		if(array_key_exists('matchUrl',$query))
 			$matchUrl 					= $query['matchUrl'];
-		if(array_key_exists('tournamentUrl',$query)
+		if(array_key_exists('tournamentUrl',$query))
 			$tournamentUrl 				= $query['tournamentUrl'];
-		if(array_key_exists('registrationUrl',$query)
+		if(array_key_exists('registrationUrl',$query))
 			$registrationUrl			= $query['registrationUrl'];
-		if(array_key_exists('matchIDs',$query)
+		if(array_key_exists('matchIDs',$query))
 			$matchIDs 					= $query['matchIDs'];
-		if(array_key_exists('tournamentIDs',$query)
+		if(array_key_exists('tournamentIDs',$query))
 			$tournamentIDs 				= $query['tournamentIDs'];
-		if(array_key_exists('sportIDs',$query)
+		if(array_key_exists('sportIDs',$query))
 			$sportIDs 					= $query['sportIDs'];
-		if(array_key_exists('showRegistration',$query)
+		if(array_key_exists('showRegistration',$query))
 			$showRegistration 			= $query['showRegistration'];
-		if(array_key_exists('showTournamentMatchesOnly',$query)
+		if(array_key_exists('showTournamentMatchesOnly',$query))
 			$showTournamentMatchesOnly 	= $query['showTournamentMatchesOnly'];
 
 		$tournaments 		= array();
@@ -175,7 +175,7 @@ class Db_Calendar extends MY_Controller {
 		$query = array();
 		$query['tournamentIDs'] = "none";
 		$query['tournamentUrl'] = $url;
-		getEvents($query);
+		$this->getEvents($query);
 	}
 	public function getAllMatchesTMS() {
 		$this->getAllMatches("/tms/match/");
