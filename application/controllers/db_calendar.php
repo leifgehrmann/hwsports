@@ -175,7 +175,7 @@ class Db_Calendar extends MY_Controller {
 		$query = array();
 		$query['tournamentIDs'] = "none";
 		$query['tournamentUrl'] = $url;
-		$this->getEvents($query);
+		$this->getEvents($this->data['centre']['centreID'],$query);
 	}
 	public function getAllMatchesTMS() {
 		$this->getAllMatches("/tms/match/");
