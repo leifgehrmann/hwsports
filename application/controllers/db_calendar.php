@@ -165,7 +165,7 @@ class Db_Calendar extends MY_Controller {
 					'title' => $tournament['name']+" Registration Period",
 					'start' => $tournament['registrationStart'],
 					'end' => $tournament['registrationEnd'],
-					'url' => $registrationtUrl.$tournament['tournamentID'],
+					'url' => $registrationUrl.$tournament['tournamentID'],
 					'allDay' => true,
 					'color' => $registrationColour
 				);
