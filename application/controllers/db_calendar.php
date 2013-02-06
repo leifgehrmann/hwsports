@@ -23,8 +23,9 @@ class Db_Calendar extends MY_Controller {
 		* sportIDs
 		* centreID
 	*/
-	private function getEvents($centreID,$query) {
+	private function getEvents($query) {
 
+		$centreID					= $this->data['centre']['centreID'];
 		$matchUrl					= false;
 		$tournamentUrl				= false;
 		$registrationUrl			= false;
@@ -38,6 +39,8 @@ class Db_Calendar extends MY_Controller {
 		$registrationColour			= '#00FF00';
 		$matchColour				= '#2966C7';
 
+		if(array_key_exists('centreID',$query))
+			$centreID 					= $query['centreID'];
 		if(array_key_exists('matchUrl',$query))
 			$matchUrl 					= $query['matchUrl'];
 		if(array_key_exists('tournamentUrl',$query))
@@ -203,10 +206,18 @@ class Db_Calendar extends MY_Controller {
 		$query['tournamentUrl'] = $url;
 		$this->getEvents($this->data['centre']['centreID'],$query);
 	}
-	public function getAllTournaments() {
+	public function getAllTournaments($matchUrl,$tournamentUrl,registrationUrl) {
 		$query = array();
-		$query['tournamentUrl'] = "/tms/match/";
-		$this->getEvents($this->data['centre']['centreID'],$query);
+		$query['tournamentUrl']		= $tournamentUrl;
+		$query['matchUrl']			= $matchUrl;
+		$query['registrationUrl']	= $registrationUrl;
+		$this->getAllTournaments($query);
+	}
+	public function getAllTournamentsTMS() {
+		$this->getAllTournaments("/tms/match/","/tms/tournament/","/tms/tournament/");
+	}
+	public function getAllTournamentsSIS() {
+		$this->getAllTournaments("/sis/match/","/sis/tournament/","/sis/signup/");
 	}
 	public function getAllMatchesTMS() {
 		$this->getAllMatches("/tms/match/");

@@ -20,7 +20,7 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			events: '/db_calendar/getAllMatchesSIS/',
+			events: '/db_calendar/getAllTournamentsSIS/',
 			editable: false
 		});
 		
