@@ -64,7 +64,7 @@ class Db_Calendar extends MY_Controller {
 				'centreID' => $centreID
 			);
 		$this->data['data'][] = array(
-				'tournamentsAll' => $this->tournaments_model->get_tournaments($centreID);
+				'tournamentsAll' => $this->tournaments_model->get_tournaments($centreID)
 			);
 
 		// We select all the tournaments with the appropriate sport.
