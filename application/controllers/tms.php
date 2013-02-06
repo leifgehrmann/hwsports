@@ -144,7 +144,6 @@ class Tms extends MY_Controller {
 						
 			$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
 			$this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
-			$this->form_validation->set_rules('sport', 'Sport', 'required|xss_clean');
 			$this->form_validation->set_rules('registrationStart', 'registrationStart', 'required|xss_clean|callback_dateformat_check');
 			$this->form_validation->set_rules('registrationEnd', 'registrationEnd', 'required|xss_clean|callback_dateformat_check');
 			$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_dateformat_check');
