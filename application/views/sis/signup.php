@@ -23,7 +23,7 @@
 						case "textarea": ?> <textarea id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></textarea><br /> <? break; 
 						case "text": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break; 
 						case "checkbox": ?> <input type="checkbox" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>" value="1"></input><br /> <? break; 
-						case "teamMembers": ?> <a href="#" class="addTeamMember">Add</a> <? break; 
+						case "teamMembers": ?> <a href="#" class="addTeamMember">Add Team Member</a> <? break; 
 				} ?>
 				<br />
 				<? } 
