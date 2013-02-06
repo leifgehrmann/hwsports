@@ -210,7 +210,7 @@ class Db_Calendar extends MY_Controller {
 		$query['tournamentUrl']				= $tournamentUrl;
 		$query['matchUrl']					= $matchUrl;
 		$query['registrationUrl']			= $registrationUrl;
-		$query['showTournamentMatchesOnly']	= $showOnlyTournamentMatches;
+		$query['showTournamentMatchesOnly']	= $showTournamentMatchesOnly;
 		$this->getEvents($query);
 	}
 	public function getAllTournamentsTMS() {
