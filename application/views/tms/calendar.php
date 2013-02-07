@@ -31,7 +31,7 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			events: '/db_calendar/getAllTournamentsTMS/',
+			events: '/db_calendar/getAllEventsTMS/',
 			editable: true,
 			eventResize: function(match,dayDelta,minuteDelta,revertFunc) {
 				//console.log(match);
