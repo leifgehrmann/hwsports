@@ -329,8 +329,8 @@ class Db_Calendar extends MY_Controller {
 
 	public function changeMatchStart() {
 
-		/*$id;
-		$type;
+		$id 	= null;
+		$type	= null;
 		$updateResult;
 
 		if(!isset($_POST['id'])){
@@ -340,11 +340,18 @@ class Db_Calendar extends MY_Controller {
 			if(strrpos($val,"match-")!=-1)				list($type,$id) = explode("-",$val);
 			else if(strrpos($val,"tournament-")!=-1)	list($type,$id) = explode("-",$val);
 			else if(strrpos($val,"registration-")!=-1)	list($type,$id) = explode("-",$val);
+			else $this->data['data'] = "Error: valid type and id not defined";
 
 			switch ($type) {
 				// In this case we deal with unix timestamps
 				case "match":
-					
+					$matchData = $this->matches_model->get_match($id);
+					$oldStartTime		= $matchData['startTime'];
+					$oldEndTime			= $matchData['endTime'];
+					$data = array();
+					$data['startTime']	= $oldStartTime	+	$_POST['minutesDelta'];
+					$data['endTime']	= $oldEndTime	+	$_POST['minutesDelta'];
+					$updateResult = $this->matches_model->update_match($id,array('startTime'=>$newStartTime));
 					break;
 				// In this case we deal with d/m/Y
 				case "tournament":
@@ -354,18 +361,25 @@ class Db_Calendar extends MY_Controller {
 				case "registration":
 					
 					break;
+				case default:
+					break;
 			}
 		}
 
-		$this->data['data'] = ($updateResult ? "Success!" : "False!");
-		$this->load->view('data',$this->data);*/
+		if(isset($updated))
+			$this->data['data'] = (
+				$updateResult ? 
+				"Updated ".$type." ".$id : 
+				"Error updating ".$type." ".$id
+			);
+		$this->load->view('data',$this->data);
 
-		$matchData = $this->matches_model->get_match($_POST['id']);
+		/*$matchData = $this->matches_model->get_match($_POST['id']);
 		$oldStartTime = $matchData['startTime'];
 		$newStartTime = $oldStartTime+$_POST['minutesDelta'];
 		$updateResult = $this->matches_model->update_match($_POST['id'],array('startTime'=>$newStartTime));
 		$this->data['data'] = ($updateResult ? "Success!" : "False!");
-		$this->load->view('data',$this->data);
+		$this->load->view('data',$this->data);*/
 	}
 
 	public function changeMatchEnd() {
