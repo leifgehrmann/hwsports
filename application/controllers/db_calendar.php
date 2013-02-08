@@ -351,7 +351,7 @@ class Db_Calendar extends MY_Controller {
 					$data = array();
 					$data['startTime']	= $oldStartTime	+	$_POST['minutesDelta'];
 					$data['endTime']	= $oldEndTime	+	$_POST['minutesDelta'];
-					$updateResult = $this->matches_model->update_match($id,array('startTime'=>$newStartTime));
+					$updateResult = $this->matches_model->update_match($id,$data);
 					break;
 				// In this case we deal with d/m/Y
 				case "tournament":

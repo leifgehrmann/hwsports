@@ -1,0 +1,419 @@
+body {
+	font-family: 'Roboto', sans-serif;
+	background-image: url('lines.png');
+	color: #333333;
+}
+
+body * {
+	line-height: 20px;
+	opacity: 0.99;
+	display:block;
+	padding: 0px;
+	margin: 0px;
+}
+
+/**
+
+
+		Website Structure CSS
+
+
+*/
+
+#header {
+	width: 100%;
+	display: block;
+	margin: auto auto;
+	margin-bottom: 20px;
+}
+#header-block {
+	width: 880px;
+	height: 160px;
+	margin: auto auto;
+
+	background-image: url('blocks.png'), url('abstract.png');
+	background-image: url('abstract.png');
+}
+#container-middle {
+	overflow: visible;
+	width: 880px;
+	margin: auto auto;
+	margin-bottom: 100px;
+}
+#menu {
+	float: left;
+	width: 160px;
+	margin-right: 10px;
+
+	background-image: url('blocks.png');
+}
+#content {
+	margin-left: 10px;
+	float: left;
+	width: 700px;
+
+	background-image: url('blocks.png');
+}
+#footer {
+	clear:both;
+	width:880px;
+	margin: auto auto;
+	background-image: url('blocks.png');
+}
+
+
+
+/**
+
+
+		Header CSS
+
+
+*/
+
+#header { background: #0D44A2; }
+#header:hover { background: #3F68BB; }
+#header { font-weight: 700; text-decoration: none; color: #FFF; }
+#header-title { 	position:relative; top:57px; font-size:40px; }
+#header-subtitle {	position:relative; top:83px; font-size:20px; }
+
+#header {
+	transition: background .1s;
+	-moz-transition: background .1s; /* Firefox 4 */
+	-webkit-transition: background .1s; /* Safari and Chrome */
+	-o-transition: background .1s; /* Opera */
+}
+
+
+
+
+
+/**
+
+
+		Menu CSS
+
+
+*/
+
+#menu ul {
+	margin-bottom:40px;
+}
+#menu a {
+	font-size:20px;
+	color: inherit;
+	text-decoration:none;
+}
+#menu li {
+	margin-left:30px;
+	list-style:none;
+	height: 60px;
+	position:relative;
+	/*top:3px;*/
+}
+#menu div.icon {
+	position:relative;
+	/*top:17px;*/
+	top:20px;
+	left:-30px;
+	display: block;
+}
+
+#menu a:hover { color: #0D42A8; }
+#menu a.selected {
+	color: #0D42A8;
+	font-weight:700;
+}
+#menu a.selected:hover {
+	color: #0D42A8;
+	font-weight:700;
+}
+#menu a.selected div { background-position: 0px 0px; }
+#menu a{
+	transition: color .1s;
+	-moz-transition: color .1s; /* Firefox 4 */
+	-webkit-transition: color .1s; /* Safari and Chrome */
+	-o-transition: color .1s; /* Opera */
+}
+
+#menu a:hover div {
+	background-position: 0px 0px;
+}
+
+
+
+
+/**
+
+
+		Content CSS
+
+
+*/
+
+/*#content {
+	letter-spacing: -4px;
+}*/
+
+#content h1 {
+	font-size: 30px;
+	line-height: 40px;
+	position:relative;
+	top: 8pt;
+	margin-bottom:20px;
+}
+#content h2 {
+	font-size: 20px;
+	line-height: 20px;
+	position:relative;
+	top: 2pt;
+	margin-bottom:20px;
+}
+#content h3 {
+	font-size: 18px;
+	line-height: 20px;
+	position:relative;
+	top: 3pt;
+	margin-bottom:20px;
+}
+#content p {
+	font-size: 16px;
+	line-height: 20px;
+	position:relative;
+	top: 4pt;
+	margin-bottom:20px;
+}
+#content p a, #content h1 a, #content h2 a, #content h3 a, #content p i, #content p b, #content p em {
+	display: inline-block;
+}
+#content p.indent 	{ text-indent:20px; }
+#content p.indent a, #content h1.indent a, #content h2.indent a, #content h3.indent a { text-indent: 0px; }
+#content p.newline,#content h1.newline,#content h2.newline,#content h3.newline { margin-bottom:40px; }
+
+/*
+	Form Elements
+*/
+
+#content input[type='text'] {
+	line-height: 40px;
+	font-size: 16px;
+	font-family: inherit;
+	display: inline-block; 
+	height: 20px;
+	padding: 10px;
+	margin: 0px;
+	border: none;
+	background: #FFFFFF;
+	box-shadow: inset 0px 0px 1px rgba(0,0,0,0.6), inset 0px 1px 2px rgba(0,0,0,0.6);
+}
+
+#content textarea {
+	line-height: 20px;
+	font-size: 16px;
+	font-family: inherit;
+
+	border: none;
+	display: inline-block; 
+	padding: 10px;
+	background: #FFFFFF;
+	box-shadow: inset 0px 0px 1px rgba(0,0,0,0.6), inset 0px 1px 2px rgba(0,0,0,0.6), inset 0px 0px 1px rgba(0,0,0,0.6);
+	min-height: 80px;
+}
+
+#content textarea.h200 { height: 200px; }
+#content textarea.h300 { height: 300px; }
+#content textarea.h400 { height: 400px; }
+#content textarea.h500 { height: 500px; }
+
+/*
+	Tables
+*/
+#content table {
+	display: inline-block; 
+	padding: 10px;
+	background: #EEEEEE;
+}
+#content tr {
+	display: table-row; 
+}
+#content th {
+	text-align: left;
+}
+#content td, #content th {
+	font-size: 16px;
+	position: relative;
+	top: 4pt;
+	line-height: 20px;
+	padding: 10px;
+	display: table-cell; 
+}
+#content table.full { width: 700px; }
+#content table.threefourth { width: 520px; }
+#content table.half { width: 340px; }
+#content table.fourth { width: 160px; }
+
+/*
+	Leif's Custom widget div, which is a simple information box that can
+	be used for news, tournament, match items on the pages.
+*/
+#content div.widget {
+	background: #EEEEEE;
+	display:inline-block;
+	margin-bottom: 20px;
+}
+#content div.widget.full {
+	display:block;
+	width: 700px;
+}
+#content div.widget.threefourth, #content div.widget.half, #content div.widget.fourth {
+	margin-right:-4px;
+	display: inline-block;
+	vertical-align: top;
+}
+#content div.widget.threefourth { width: 520px; }
+#content div.widget.half { width: 340px; }
+#content div.widget.fourth { width: 160px; }
+#content div.widget.half:nth-of-type(2n) {
+	margin-left: 20px;
+}
+
+#content div.widget-title {
+	width: 100%;
+	word-wrap:break-word;
+	padding:10px;
+	padding-left:0px;
+	padding-right:0px;
+	font-size: 20px;
+	line-height: 40px;
+	background: #333333;
+	color: #EEEEEE;
+	letter-spacing:-4px;
+	transition: opacity .1s;
+	-moz-transition: opacity .1s;
+	-webkit-transition: opacity .1s;
+	-o-transition: opacity .1s;
+}
+#content div.widget-title div {
+	/*font-size:20px;*/
+	/*float: left;*/
+	/*overflow: hidden;*/
+	letter-spacing: 0px;
+	display: inline-block;
+	margin-right:-4px;
+}
+#content div.widget-title:hover {
+	opacity:0.9;
+}
+#content div.widget-title-left { width:20px; display: inline-block; vertical-align:middle; }
+#content div.half div.widget-title-centre { width:220px; display: inline-block; vertical-align:middle; margin-right:-4px;}
+#content div.full div.widget-title-centre { width:580px; display: inline-block; vertical-align:middle; margin-right:-4px;}
+#content div.threefourth div.widget-title-centre { width:400px; display: inline-block; vertical-align:middle; margin-right:-0px;}
+#content div.fourth div.widget-title-centre { width:40px; display: inline-block; vertical-align:middle; margin-right:-0px;}
+#content div.widget-title-right { width:20px; overflow: hidden; display: inline-block; vertical-align:middle; margin-right:-0px; }
+#content div.widget-title-right.icon { margin-left: 20px; margin-right: 20px; position:relative; top:-2px; }
+#content div.widget-title-left.icon { margin-left: 20px; margin-right: 20px; position:relative; top:-2px;}
+#content div.widget-body {
+	padding:20px;
+	background: #EEEEEE;
+	overflow: hidden;
+}
+
+
+/*
+	Leif's Custom button inline block, which can have nice icons inside
+*/
+#content .button {
+	text-decoration: none;
+	color: #FFF;
+	line-height: 40px;
+	/*padding: 10px;*/
+	padding-left: 20px;
+	padding-right: 20px;
+	display:inline-block;
+	background:#81A800;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	box-shadow: 0px 0px 1px rgba(0,0,0,0.4), inset 0px 0px 1px rgba(0,0,0,1);
+	transition: background .1s, box-shadow .1s;
+	-moz-transition: background .1s;
+	-webkit-transition: background .1s, box-shadow .1s;
+	-o-transition: background .1s;
+}
+#content .button:hover {
+	box-shadow: 0px 0px 1px rgba(0,0,0,0.4), inset 0px 0px 1px rgba(0,0,0,1);
+}
+#content .button .icon {
+	position: relative;
+	top:5px;
+}
+
+#content .button.normal 		{ color: inherit; background:#EEEEEE; box-shadow: 0px 0px 0px rgba(0,0,0,1), inset 0px 0px 1px rgba(0,0,0,1); }
+#content .button.normal:hover 	{ color: inherit; background:#FFFFFF; box-shadow: 0px 0px 1px rgba(0,0,0,1), inset 0px 0px 1px rgba(0,0,0,0.4); }
+#content .button.blue 			{ color: #FFFFFF; background:#0D42A8; }
+#content .button.blue:hover 	{ color: #FFFFFF; background:#3F68BB; }
+#content .button.green 			{ color: #FFFFFF; background:#81A800; }
+#content .button.green:hover 	{ color: #FFFFFF; background:#9ABB00; }
+#content .button.red 			{ color: #FFFFFF; background:#D13B00; }
+#content .button.red:hover		{ color: #FFFFFF; background:#F64600; }
+
+#content .right .button { margin-left: 20px; }
+#content .left .button { margin-right: 20px; }
+
+
+/**
+
+
+		Footer CSS
+
+
+*/
+
+#footer {
+	padding-top:40px;
+	padding-bottom:40px;
+	border-top: 1px solid #EEEEEE;
+}
+
+
+
+/*
+
+	Icon parameters
+*/
+div.icon {
+	width: 20px;
+	height: 20px;
+	background-image: url('icons.png');
+	display: inline-block;
+}
+
+div.icon.block-black-light 	{background-position: -40px -20px;}
+div.icon.block-black-medium 	{background-position: -20px -20px;}
+div.icon.block-black-dark 	{background-position: 0px -20px;}
+
+div.icon.block-blue-light 	{background-position: -40px 0px;}
+div.icon.block-blue-medium 	{background-position: -20px 0px;}
+div.icon.block-blue-dark 		{background-position: 0px 0px;}
+
+div.icon.block-white		 	{background-position: -60px -20px;}
+div.icon.arrow-right-white		 	{background-position: -140px -20px;}
+
+div.icon.arrow-right-black-light 	{background-position: -120px -20px;}
+div.icon.arrow-right-black-gray 	{background-position: -100px -20px;}
+div.icon.arrow-right-black-dark 	{background-position: -80px -20px;}
+
+div.icon.arrow-right-blue-light 	{background-position: -120px 0px;}
+div.icon.arrow-right-blue-medium 	{background-position: -100px 0px;}
+div.icon.arrow-right-blue-dark 		{background-position:  -80px 0px;}
+
+div.icon.dalek-black 		{background-position:  -280px 0px;}
+div.icon.dalek-white 		{background-position:  -280px -20px;}
+
+div.icon.margin-left { margin-left: 20px; }
+div.icon.margin-right { margin-right: 20px; }
+
+.text-align-left {text-align:left;}
+.text-align-right {text-align:right;}
+.right {float: right;}
+.left {float: left;}
