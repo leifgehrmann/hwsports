@@ -197,6 +197,27 @@ script {
 	background-position: 0px 0px;
 }
 
+#menu div.icon.homepage 		{background-position: 0px -80px;}
+#menu div.icon.calendar 		{background-position: 0px -100px;}
+#menu div.icon.tournaments 		{background-position: 0px -120px;}
+#menu div.icon.matches 			{background-position: 0px -140px;}
+#menu div.icon.tickets 			{background-position: 0px -160px;}
+#menu div.icon.help 			{background-position: 0px -180px;}
+#menu div.icon.account 			{background-position: 0px -200px;}
+#menu div.icon.signin 			{background-position: 0px -220px;}
+#menu div.icon.signout 			{background-position: 0px -240px;}
+#menu div.icon.register 		{background-position: 0px -260px;}
+
+#menu a:hover div.icon.homepage 	,#menu a.selected div.icon.homepage 	{background-position: -20px -80px;}
+#menu a:hover div.icon.calendar 	,#menu a.selected div.icon.calendar		{background-position: -20px -100px;}
+#menu a:hover div.icon.tournaments 	,#menu a.selected div.icon.tournaments	{background-position: -20px -120px;}
+#menu a:hover div.icon.matches 		,#menu a.selected div.icon.matches		{background-position: -20px -140px;}
+#menu a:hover div.icon.tickets 		,#menu a.selected div.icon.tickets		{background-position: -20px -160px;}
+#menu a:hover div.icon.help 		,#menu a.selected div.icon.help			{background-position: -20px -180px;}
+#menu a:hover div.icon.account 		,#menu a.selected div.icon.account		{background-position: -20px -200px;}
+#menu a:hover div.icon.signin 		,#menu a.selected div.icon.signin		{background-position: -20px -220px;}
+#menu a:hover div.icon.signout 		,#menu a.selected div.icon.signout		{background-position: -20px -240px;}
+#menu a:hover div.icon.register 	,#menu a.selected div.icon.register		{background-position: -20px -260px;}
 
 
 
@@ -296,18 +317,9 @@ script {
 	display: block;
 }
 #content select {
-	/*line-height: 40px;*/
 	font-size: 16px;
 	font-family: inherit;
 	display: inline-block;
-	/*height: 40px;*/
-	/*padding: 10px;*/
-	/*padding-left: 20px;*/
-	/*padding-right: 20px;*/
-	/*margin: 0px;*/
-	/*border: none;*/
-	/*background: #FFFFFF;*/
-	/*box-shadow: inset 0px 0px 1px rgba(0,0,0,0.6), inset 0px 1px 2px rgba(0,0,0,0.6);*/
 }
 #content textarea {
 	line-height: 20px;
@@ -615,7 +627,39 @@ script {
 	background: #EEE;
 }
 #footer-block {
-	
+	letter-spacing:-4px;
+	vertical-align: top;
+}
+#footer-legal {
+	letter-spacing: 0px;
+	width:340px;
+	display: inline-block;
+	position: relative;
+	top:5px;
+	vertical-align: top;
+}
+#footer-links {
+	letter-spacing: 0px;
+	vertical-align: middle;
+	width:340px;
+	display: inline-block;
+	margin-left: 20px;
+	position: relative;
+	top:5px;
+}
+#footer-powered {
+	vertical-align: middle;
+	margin-left: 20px;
+	display: inline-block;
+	width:160px;
+}
+#footer-powered .company-logo{
+	margin: auto auto;
+	vertical-align: middle;
+	width:99px;
+	height:33px;
+	background-image:url('http://infusionsports.co.uk/img/hwsports/logo/is.medium.png');
+	opacity: 0.8;
 }
 
 
@@ -631,16 +675,16 @@ div.icon {
 	display: inline-block;
 }
 
-div.icon.block-black-light 	{background-position: -40px -20px;}
+div.icon.block-black-light 		{background-position: -40px -20px;}
 div.icon.block-black-medium 	{background-position: -20px -20px;}
-div.icon.block-black-dark 	{background-position: 0px -20px;}
+div.icon.block-black-dark 		{background-position: 0px -20px;}
 
-div.icon.block-blue-light 	{background-position: -40px 0px;}
-div.icon.block-blue-medium 	{background-position: -20px 0px;}
+div.icon.block-blue-light 		{background-position: -40px 0px;}
+div.icon.block-blue-medium 		{background-position: -20px 0px;}
 div.icon.block-blue-dark 		{background-position: 0px 0px;}
 
 div.icon.block-white		 	{background-position: -60px -20px;}
-div.icon.arrow-right-white		 	{background-position: -140px -20px;}
+div.icon.arrow-right-white			{background-position: -140px -20px;}
 
 div.icon.arrow-right-black-light 	{background-position: -120px -20px;}
 div.icon.arrow-right-black-gray 	{background-position: -100px -20px;}
