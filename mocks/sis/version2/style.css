@@ -1,16 +1,29 @@
 body {
 	font-family: 'Roboto', sans-serif;
-	background-image: url('lines.png');
+	background: #EEE;
 	color: #333333;
 }
 
 body * {
 	line-height: 20px;
-	opacity: 0.99;
-	display:block;
 	padding: 0px;
 	margin: 0px;
 }
+
+script {
+	display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 /**
 
@@ -24,42 +37,60 @@ body * {
 	width: 100%;
 	display: block;
 	margin: auto auto;
-	margin-bottom: 20px;
 }
 #header-block {
 	width: 880px;
 	height: 160px;
 	margin: auto auto;
-
-	background-image: url('blocks.png'), url('abstract.png');
-	background-image: url('abstract.png');
 }
-#container-middle {
-	overflow: visible;
+#middle {
+	padding-top:20px;
+	padding-bottom:20px;
+	width:100%;
+	overflow: hidden;
+}
+#middle-block {
+	overflow: hidden;
 	width: 880px;
 	margin: auto auto;
-	margin-bottom: 100px;
 }
 #menu {
 	float: left;
 	width: 160px;
 	margin-right: 10px;
-
-	background-image: url('blocks.png');
 }
 #content {
 	margin-left: 10px;
 	float: left;
 	width: 700px;
-
-	background-image: url('blocks.png');
 }
 #footer {
 	clear:both;
+	margin: auto auto;
+	width: 100%;
+	display: block;
+}
+#footer-block {
+
+	clear:both;
 	width:880px;
 	margin: auto auto;
-	background-image: url('blocks.png');
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -71,18 +102,44 @@ body * {
 
 */
 
-#header { background: #0D44A2; }
-#header:hover { background: #3F68BB; }
-#header { font-weight: 700; text-decoration: none; color: #FFF; }
-#header-title { 	position:relative; top:57px; font-size:40px; }
-#header-subtitle {	position:relative; top:83px; font-size:20px; }
-
+#header 			{ background: #0D44A2; }
+#header:hover 		{ background: #3F68BB; }
+#header 			{ font-weight: 700; text-decoration: none; color: #FFF; }
+#header-block 		{ background-image: url('abstract.png'); }
+#header-title 		{ position:relative; top:57px; font-size:40px; }
+#header-subtitle 	{ position:relative; top:83px; font-size:20px; }
 #header {
 	transition: background .1s;
 	-moz-transition: background .1s; /* Firefox 4 */
 	-webkit-transition: background .1s; /* Safari and Chrome */
 	-o-transition: background .1s; /* Opera */
 }
+
+
+
+
+
+
+
+
+
+/**
+
+
+		Middle CSS
+
+
+*/
+
+#middle 		{ background: #FFF; }
+
+
+
+
+
+
+
+
 
 
 
@@ -143,6 +200,19 @@ body * {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
 
 
@@ -150,10 +220,6 @@ body * {
 
 
 */
-
-/*#content {
-	letter-spacing: -4px;
-}*/
 
 #content h1 {
 	font-size: 30px;
@@ -186,19 +252,39 @@ body * {
 #content p a, #content h1 a, #content h2 a, #content h3 a, #content p i, #content p b, #content p em {
 	display: inline-block;
 }
+#content p a, #content h1 a, #content h2 a, #content h3 a {
+	color: #0D42A8;
+}
+#content p a:visited, #content h1 a:visited, #content h2 a:visited, #content h3 a:visited {
+	color: #3F68BB;
+}
 #content p.indent 	{ text-indent:20px; }
 #content p.indent a, #content h1.indent a, #content h2.indent a, #content h3.indent a { text-indent: 0px; }
 #content p.newline,#content h1.newline,#content h2.newline,#content h3.newline { margin-bottom:40px; }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 	Form Elements
 */
-
 #content input[type='text'] {
 	line-height: 40px;
 	font-size: 16px;
 	font-family: inherit;
-	display: inline-block; 
+	display: inline-block;
 	height: 20px;
 	padding: 10px;
 	margin: 0px;
@@ -206,7 +292,23 @@ body * {
 	background: #FFFFFF;
 	box-shadow: inset 0px 0px 1px rgba(0,0,0,0.6), inset 0px 1px 2px rgba(0,0,0,0.6);
 }
-
+#content label{
+	display: block;
+}
+#content select {
+	/*line-height: 40px;*/
+	font-size: 16px;
+	font-family: inherit;
+	display: inline-block;
+	/*height: 40px;*/
+	/*padding: 10px;*/
+	/*padding-left: 20px;*/
+	/*padding-right: 20px;*/
+	/*margin: 0px;*/
+	/*border: none;*/
+	/*background: #FFFFFF;*/
+	/*box-shadow: inset 0px 0px 1px rgba(0,0,0,0.6), inset 0px 1px 2px rgba(0,0,0,0.6);*/
+}
 #content textarea {
 	line-height: 20px;
 	font-size: 16px;
@@ -219,38 +321,162 @@ body * {
 	box-shadow: inset 0px 0px 1px rgba(0,0,0,0.6), inset 0px 1px 2px rgba(0,0,0,0.6), inset 0px 0px 1px rgba(0,0,0,0.6);
 	min-height: 80px;
 }
-
 #content textarea.h200 { height: 200px; }
 #content textarea.h300 { height: 300px; }
 #content textarea.h400 { height: 400px; }
 #content textarea.h500 { height: 500px; }
 
+
+
+
+
+
+
+/*
+	Jquery Action headings and crap
+*/
+#content .ui-widget{
+	font-size: inherit;
+	font-family: inherit;
+}
+#content .ui-widget-content {
+	padding: 20px;
+	background: #EEE;
+}
+#content .ui-corner-all, #content .ui-corner-top, #content .ui-corner-right, #content .ui-corner-tr{
+	border-radius: 0px;
+}
+#content .ui-state-active, #content .ui-widget-content .ui-state-active, #content .ui-widget-header .ui-state-active{
+	border: none;
+}
+#content .ui-state-default, #content .ui-widget-content .ui-state-default, #content .ui-widget-header .ui-state-default{
+	border: none;	
+}
+#content h3.sectionHeading{
+	padding: 40px;
+	padding-top:10px;
+	padding-bottom:10px;
+	margin-bottom: 0px;
+	color: #EEE;
+	line-height: 20px;
+	background: #333333;
+}
+
+
+
+
+
+
+
+
+
+
+/**
+	FULL CALENDAR
+**/
+
+#content .fc-header {
+	margin-top:20px;
+}
+#content .fc .fc-border-separate{
+	border-collapse: collapse;
+}
+
+#content .fc div.fc-view-month th.fc-widget-header {
+	padding: 10px;
+}
+#content .fc table.fc-agenda-days th.fc-widget-header{
+	padding: 5px;
+}
+
+#content .fc div.fc-view-agendaDays th.fc-agenda-axis {
+	padding-right: 20px;
+}
+#content .fc div.fc-view-agendaWeek th.fc-agenda-axis {
+	padding-right: 10px;
+	text-align: right;
+	/*line-height:40px;*/
+}
+#content .fc div.fc-view-agendaDay th.fc-agenda-axis {
+	padding-right: 10px;
+	text-align: right;
+	/*line-height:40px;*/
+}
+
+#content .fc td, #content .fc th {
+	padding: inherit;
+	position: inherit;
+}
+
+#content .fc table {
+	background: none;
+	padding: inherit;
+}
+.fc .fc-event-skin {
+	background: #333;
+	border: none;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	box-sizing: border-box;
+}
+.fc .fc-grid .fc-event-time{
+	
+}
+.fc .fc-event-content, .fc .fc-event-title {
+	word-wrap:break-word;
+	overflow: hidden;
+}
+.fc .fc-event-skin .fc-event-skin {
+	padding: 4px;
+	background: none;
+}
+
+
+
+
+
+
+
+
+
+
 /*
 	Tables
 */
-#content table {
-	display: inline-block; 
-	padding: 10px;
-	background: #EEEEEE;
-}
-#content tr {
-	display: table-row; 
-}
+#content table 				{ display: table;}
+#content tbody 				{ display: table-row-group; }
+#content thead 				{ display: table-header-group; }
+#content tr 				{ display: table-row; }
+#content td, #content th 	{ display: table-cell; }
 #content th {
 	text-align: left;
 }
+#content table {
+	background: #EEEEEE;
+}
+
 #content td, #content th {
 	font-size: 16px;
 	position: relative;
 	top: 4pt;
-	line-height: 20px;
-	padding: 10px;
-	display: table-cell; 
+	line-height: 40px;
+	padding: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
-#content table.full { width: 700px; }
-#content table.threefourth { width: 520px; }
-#content table.half { width: 340px; }
-#content table.fourth { width: 160px; }
+#content table.full 		{ width: 700px; }
+#content table.threefourth 	{ width: 520px; }
+#content table.half 		{ width: 340px; }
+#content table.fourth 		{ width: 160px; }
+
+
+
+
+
+
+
+
 
 /*
 	Leif's Custom widget div, which is a simple information box that can
@@ -273,7 +499,7 @@ body * {
 #content div.widget.threefourth { width: 520px; }
 #content div.widget.half { width: 340px; }
 #content div.widget.fourth { width: 160px; }
-#content div.widget.half:nth-of-type(2n) {
+#content div.half:nth-of-type(even) {
 	margin-left: 20px;
 }
 
@@ -320,17 +546,30 @@ body * {
 
 
 /*
+	Leif's custom messaging system
+*/
+#content .message{
+	padding: 20px;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	margin-bottom: 20px;
+}
+#content .message.message-information { background: #D0DAEE; color: #0D42A8; box-shadow: inset 0px 0px 1px #0D42A8; }
+#content .message.message-success { background: #E4EDCD; color: #7BA800; box-shadow: inset 0px 0px 1px #7BA800; }
+#content .message.message-error { background: #FFDFBF; color: #D93600; box-shadow: inset 0px 0px 1px #D93600; }
+#content .message.message-warning { background: #FFDFBF; color: #D93600; box-shadow: inset 0px 0px 1px #D93600; }
+
+/*
 	Leif's Custom button inline block, which can have nice icons inside
 */
 #content .button {
+	background:#EEE;
 	text-decoration: none;
-	color: #FFF;
 	line-height: 40px;
-	/*padding: 10px;*/
 	padding-left: 20px;
 	padding-right: 20px;
 	display:inline-block;
-	background:#81A800;
 	border-radius: 2px;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
@@ -348,6 +587,7 @@ body * {
 	top:5px;
 }
 
+#content .button:hover 			{ color: inherit; background:#FFFFFF; box-shadow: 0px 0px 1px rgba(0,0,0,1), inset 0px 0px 1px rgba(0,0,0,0.4); }
 #content .button.normal 		{ color: inherit; background:#EEEEEE; box-shadow: 0px 0px 0px rgba(0,0,0,1), inset 0px 0px 1px rgba(0,0,0,1); }
 #content .button.normal:hover 	{ color: inherit; background:#FFFFFF; box-shadow: 0px 0px 1px rgba(0,0,0,1), inset 0px 0px 1px rgba(0,0,0,0.4); }
 #content .button.blue 			{ color: #FFFFFF; background:#0D42A8; }
@@ -372,7 +612,10 @@ body * {
 #footer {
 	padding-top:40px;
 	padding-bottom:40px;
-	border-top: 1px solid #EEEEEE;
+	background: #EEE;
+}
+#footer-block {
+	
 }
 
 
@@ -417,3 +660,12 @@ div.icon.margin-right { margin-right: 20px; }
 .text-align-right {text-align:right;}
 .right {float: right;}
 .left {float: left;}
+.margin-left { margin-left: 20px; }
+.margin-right { margin-right: 20px; }
+
+
+
+
+
+
+
