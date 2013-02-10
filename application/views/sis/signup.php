@@ -84,7 +84,7 @@
 					console.log("we're in the onComplete function of a fancybox!");
 					
 					//bind the submit of our new form
-					$('.fancyform form')").submit(function(e){
+					$('.fancyform form').submit(function(e){
 						e.preventDefault();
 						
 						console.log("we're in the submit function of a fancyform!");
