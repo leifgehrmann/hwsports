@@ -10,11 +10,11 @@ var tags;
 
 startload();
 
-css('main.css');
-css('common/common.css');
-css('basic/basic.css');
-css('agenda/agenda.css');
-cssprint('common/print.css');
+css('/css/fullcalendar/main.css');
+css('/css/fullcalendar/common.css');
+css('/css/fullcalendar/basic.css');
+css('/css/fullcalendar/agenda.css');
+cssprint('/css/fullcalendar/print.css');
 
 if (debug && (!window.console || !window.console.log)) {
 	jslib('../tests/lib/firebug-lite/firebug-lite-compressed.js');
