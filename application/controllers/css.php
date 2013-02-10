@@ -12,10 +12,10 @@ class Css extends MY_Controller {
 		unset( $segments[$key] );
 		
 		// get normal string path to file from URI segments
-		$file_path = implode("/",$segments);
+		$path = implode("/",$segments);
 		
 		// get path info
-		$path_parts = pathinfo($file_path);
+		$path_parts = pathinfo($path);
 		$file_name  = $path_parts['basename'];
 		$file_ext   = $path_parts['extension'];
 		
