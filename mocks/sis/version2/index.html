@@ -56,7 +56,17 @@
 					$(this).css('margin-bottom',(20-($(this).height()%20))+'px');
 				});
 				$( 'img' ).each(function() {
-					$(this).css('padding-bottom',(15-($(this).outerHeight(true)%20))+'px');
+					$(this).load(function() {
+						// alert($(this).prop('tagName'));
+						$(this).css('margin-bottom',(15-($(this).outerHeight(true)%20))+'px');
+						// alert("margin:"+$(this).css('margin-bottom'));
+					});
+					//alert((15-($(this).outerHeight(true)%20)));
+					/*setTimeout( function() {
+						alert("outer height "+$(this).prop('tagName'));
+						alert("outer height "+x.outerHeight(true));
+					}, 5000);*/
+					//alert($(this));
 				});
 			});
 			$( 'div:animated' ).each(function(){
@@ -101,10 +111,10 @@
 
 
 						<div id="block-1">
-						<div class="message message-information"><b>Some Information!</b></div>
-						<div class="message message-success"><b>Successfully Added Something!!</b></div>
-						<div class="message message-error"><p><b>Error!</b></p><p>So and So did not work, Sorry... :(</p></div>
-						<div class="message message-warning"><p><b>Warning!</b></p><p>So and So did not work, Sorry... :(</p></div>
+						<div class="message message-information"><div class="icon margin-right"></div><h3>Information</h3><p>You have successfully logged out.</p></div>
+						<div class="message message-success"><div class="icon margin-right"></div><h3>Success</h3></div>
+						<div class="message message-error"><div class="icon margin-right"></div><h3>Error</h3><p>So and So did not work, Sorry... :(</p></div>
+						<div class="message message-warning"><div class="icon margin-right"></div><h3>Warning</h3><p>So and So did not work, Sorry... :(</p></div>
 						</div>
 
 
@@ -120,7 +130,7 @@
 
 						<div id="block-2">
 						<h1>Tournaments</h1>
-						<h1>Tournaments<div class="icon subsection margin-right margin-left"></div>Wattball 2013</h1>
+						<h1><a href="#">Tournaments</a><div class="icon subsection margin-right margin-left"></div>Wattball 2013</h1>
 						<p class="indent">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed felis felis, tristique at interdum et, dapibus ut ligula. Vestibulum mi neque, laoreet a egestas sit amet, lacinia quis nisi. Nunc enim mi, aliquet vel gravida a, fermentum vel augue. Donec mi dolor, consectetur id aliquam non, posuere eget ante. Nam vel elit et justo egestas interdum. Quisque feugiat feugiat purus, sit amet commodo turpis tincidunt pretium. Suspendisse volutpat, tellus nec aliquam <a href="/">fermentum</a>, libero velit placerat purus, vitae dignissim risus massa et nisl. Mauris congue feugiat erat, nec tempus felis tincidunt et. Sed ultrices urna sodales est rutrum in elementum arcu commodo. Cras id risus a dolor varius ultrices. Suspendisse potenti. Curabitur vestibulum mi sit amet sapien vulputate faucibus.</p>
 						<h1>&quot;Sed ipsum nulla, hendrerit ac suscipit at, bibendum sed lacus. In et mauris et eros imperdiet vestibulum. Nam dapibus vestibulum neque, non pharetra dolor tincidunt ac. In hac habitasse platea dictumst. Aliquam erat volutpat.&quot;</h1>
 						<p class="indent">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed felis felis, tristique at interdum et, dapibus ut ligula. Vestibulum mi neque, laoreet a egestas sit amet, lacinia quis nisi. Nunc enim mi, aliquet vel gravida a, fermentum vel augue. Donec mi dolor, consectetur id aliquam non, posuere eget ante. Nam vel elit et justo egestas interdum. Quisque feugiat feugiat purus, sit amet commodo turpis tincidunt pretium. Suspendisse volutpat, tellus nec aliquam <a href="/">fermentum</a>, libero velit placerat purus, vitae dignissim risus massa et nisl. Mauris congue feugiat erat, nec tempus felis tincidunt et. Sed ultrices urna sodales est rutrum in elementum arcu commodo. Cras id risus a dolor varius ultrices. Suspendisse potenti. Curabitur vestibulum mi sit amet sapien vulputate faucibus.</p>
@@ -232,6 +242,12 @@
 							</div>
 						</div>
 						<p><a href="#" class="button green">I'm a button, all alone... </a></p>
+						<p>
+							<input type="submit" class="green" value="Test">
+							<input type="submit" class="red" value="Heck">
+							<input type="submit" class="blue" value="Blue">
+							<input type="submit" class="normal" value="Normal">
+						</p>
 						<div class="widget full">
 							<a href="">
 								<div class="widget-title">
@@ -249,7 +265,7 @@
 								<h3>Running with a ball, sometimes kicking it. (ノಠ益ಠ)ノ彡┻━┻ This would be the description of the tournament</h3>
 								<p>Running with a ball, sometimes <a href="test">kicking it</a>. This would be the description of the tournament</p>
 								<div class="right">
-									<a href="#" class="button normal"><div class="icon load margin-right"></div>More Information</a>
+									<a href="#" class="button normal"><!--<div class="icon load margin-right"></div>-->More Information</a>
 									<a href="#" class="button red"><div class="icon dalek-white margin-right"></div>EXTERMINATE!</a>
 								</div>
 							</div>
@@ -354,9 +370,9 @@
 						<div id="block-5">
 						<form action="/sis/signup/18" id="signupForm" method="POST">
 							<h3 id="actionHeading">Select role:</h3>
-							<a href="#" class="roleButton button blue" id="roleButton-1">Umpire</a>
-							<a href="#" class="roleButton button blue" id="roleButton-2">Team Leader</a>
-
+							<p><a href="#" class="roleButton button blue" id="roleButton-1">Umpire</a>
+							<a href="#" class="roleButton button blue" id="roleButton-2">Team Leader</a></p>
+							<p>Just doing another line test</p>
 							<div class="roleSections" id="roleSections-1" style="display: none">
 								<h3 class="sectionHeading" id="sectionHeading-1">Personal Details</h3>
 								<div class="sectionBody" id="sectionBody-1">
@@ -471,7 +487,7 @@
 
 						<div id="block-6">
 						<div id='calendar'></div>
-						<script src='../../../application/views/js/hwsports/fullcalendar/_loader.js'></script>
+						<script src='/js/fullcalendar/_loader.js'></script>
 						<script>
 							$(document).ready(function(){
 								var date = new Date();

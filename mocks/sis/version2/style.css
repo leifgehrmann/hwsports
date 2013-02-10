@@ -367,10 +367,24 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover {
 	padding-top:10px;
 	padding-bottom:10px;
 	margin-bottom: 0px;
+	margin-top: 0px;
 	color: #EEE;
-	line-height: 20px;
+	line-height: 40px;
 	background: #333333;
+	position: relative;
+	top: 0px;
 }
+
+#content h3.sectionHeading:hover{
+	opacity: 0.8;
+}
+
+#content div.sectionBody{
+	border-radius: 0px;
+	border: none;
+}
+
+#content #sectionHeading-submit
 
 
 
@@ -499,6 +513,8 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover {
 }
 #content table {
 	background: #EEEEEE;
+	border-bottom: solid 20px #EEEEEE;
+	margin-bottom: 20px;
 }
 
 #content td, #content th {
@@ -595,20 +611,29 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover {
 */
 #content .message{
 	padding: 20px;
+	padding-top: 20px;
+	padding-bottom: 0px;
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	margin-bottom: 20px;
+	overflow:hidden;
 }
 #content .message.message-information { background: #D0DAEE; color: #0D42A8; box-shadow: inset 0px 0px 1px #0D42A8; }
 #content .message.message-success { background: #E4EDCD; color: #7BA800; box-shadow: inset 0px 0px 1px #7BA800; }
 #content .message.message-error { background: #FFDFBF; color: #D93600; box-shadow: inset 0px 0px 1px #D93600; }
 #content .message.message-warning { background: #FFDFBF; color: #D93600; box-shadow: inset 0px 0px 1px #D93600; }
 
+#content .message .icon {
+	float: left;
+}
+
 /*
 	Leif's Custom button inline block, which can have nice icons inside
 */
-a.button {
+a.button, input[type='submit'] {
+	/*font-family: inherit;*/
+	border: none;
 	background:#EEE;
 	text-decoration: none;
 	line-height: 20px;
@@ -631,31 +656,33 @@ a.button * {
 	-webkit-transition: opacity .1s;
 	-o-transition: opacity .1s;*/
 }
-a.button				{ color: #333333; background:#FFFFFF; box-shadow: 0px 1px 1px rgba(0,0,0,0.8), inset 0px 0px 1px rgba(0,0,0,1); }
-a.button:hover			{ color: #333333; background:#FFFFFF; box-shadow: 0px 1px 1px rgba(0,0,0,0.8), inset 0px 0px 1px rgba(0,0,0,1); }
-a.button:active			{ color: #333333; background:#EEEEEE; box-shadow: 0px 1px 1px rgba(0,0,0,0.4), inset 0px 1px 4px rgba(0,0,0,1); }
-a.button:active * 		{ color: #333333; opacity: 0.5; }
+a.button				, input[type='submit']				{ color: #333333; background:#FFFFFF; box-shadow: 0px 1px 1px rgba(0,0,0,0.8), inset 0px 0px 1px rgba(0,0,0,1); }
+a.button:hover			, input[type='submit']:hover		{ color: #333333; background:#FFFFFF; box-shadow: 0px 1px 1px rgba(0,0,0,0.8), inset 0px 0px 1px rgba(0,0,0,1); }
+a.button:active			, input[type='submit']:active		{ color: #333333; background:#EEEEEE; box-shadow: 0px 1px 1px rgba(0,0,0,0.4), inset 0px 1px 4px rgba(0,0,0,1); }
+a.button:active * 		, input[type='submit']:active *		{ color: #333333; opacity: 0.5; }
 
-a.button.normal 		{ color: #333333; background:#EEEEEE; }
-a.button.normal:hover 	{ color: #333333; background:#FFFFFF; }
-a.button.normal:active 	{ color: #333333; background:#EEEEEE; }
+a.button.normal 		, input[type='submit'].normal		{ color: #333333; background:#EEEEEE; }
+a.button.normal:hover 	, input[type='submit'].normal:hover	{ color: #333333; background:#FFFFFF; }
+a.button.normal:active 	, input[type='submit'].normal:active{ color: #333333; background:#EEEEEE; }
 
-a.button.blue			{ color: #FFFFFF; background:#0D42A8; }
-a.button.blue:hover		{ color: #FFFFFF; background:#3F68BB; }
-a.button.blue:active	{ color: #D1DAF2; background:#0D42A8; }
+a.button.blue			, input[type='submit'].blue			{ color: #FFFFFF; background:#0D42A8; }
+a.button.blue:hover		, input[type='submit'].blue:hover	{ color: #FFFFFF; background:#3F68BB; }
+a.button.blue:active	, input[type='submit'].blue:active	{ color: #D1DAF2; background:#0D42A8; }
 
-a.button.green			{ color: #FFFFFF; background:#81A800; }
-a.button.green:hover 	{ color: #FFFFFF; background:#9ABB00; }
-a.button.green:active	{ color: #E6EDC5; background:#81A800; }
+a.button.green			, input[type='submit'].green		{ color: #FFFFFF; background:#81A800; }
+a.button.green:hover 	, input[type='submit'].green:hover	{ color: #FFFFFF; background:#9ABB00; }
+a.button.green:active	, input[type='submit'].green:active	{ color: #E6EDC5; background:#81A800; }
 
-a.button.red			{ color: #FFFFFF; background:#D13B00; }
-a.button.red:hover		{ color: #FFFFFF; background:#F64600; }
-a.button.red:active		{ color: #FBE1B6; background:#D13B00; }
+a.button.red			, input[type='submit'].red			{ color: #FFFFFF; background:#D13B00; }
+a.button.red:hover		, input[type='submit'].red:hover	{ color: #FFFFFF; background:#F64600; }
+a.button.red:active		, input[type='submit'].red:active	{ color: #FBE1B6; background:#D13B00; }
 
-.button .icon {
+p a.button, p input[type='submit'] {
 	position: relative;
-	top:5px;
+	top:-5px;
 }
+
+a.button .icon { margin-bottom: -5px; }
 
 .right .button { margin-left: 20px; }
 .left .button { margin-right: 20px; }
@@ -800,8 +827,20 @@ div.icon.arrow-right-blue-dark 		{background-position:  -80px 0px;}
 div.icon.dalek-black 		{background-position:  -560px -20px;}
 div.icon.dalek-white 		{background-position:  -580px -20px;}
 
+.message-information div.icon 	{background-position: -440px -20px;}
+.message-error div.icon 		{background-position: -440px -40px;}
+.message-success div.icon 		{background-position: -440px -60px;}
+.message-warning div.icon 		{background-position: -440px -80px;}
+
 div.icon.margin-left { margin-left: 20px; }
 div.icon.margin-right { margin-right: 20px; }
+div.icon {
+	/*vertical-align: top;*/
+	/*overflow: visible;*/
+	/*position: relative;*/
+	/*top: 30px;*/
+	/*box-shadow: 0px 1px 1px rgba(0,0,0,0.8), inset 0px 0px 1px rgba(0,0,0,1);*/
+}
 
 .text-align-left {text-align:left;}
 .text-align-right {text-align:right;}
