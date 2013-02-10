@@ -18,7 +18,7 @@
 		<script charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         <script charset="utf-8" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
 		<script charset="utf-8" src="/scripts/jquery-ui-1.10.0.custom.min.js"></script>
-		<script charset="utf-8" src="/scripts/fancybox/fancybox.pack.js"></script>
+		<script charset="utf-8" src="/scripts/fancybox/jquery.fancybox.pack.js"></script>
 		<script charset="utf-8" src="/scripts/datatables/jquery-ui-timepicker-addon.js"></script>
 		<script charset="utf-8" src="/scripts/datatables/jquery.dataTables.min.js"></script>
 		<script charset="utf-8" src="/scripts/datatables/dataTables.tabletools.min.js"></script>
