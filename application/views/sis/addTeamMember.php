@@ -1,8 +1,6 @@
 <div class="fancyform">
   <? if(!empty($success)) { ?>
-		
 		<script type="text/javascript">
-			//close form, show added member as 
 			$('a.addTeamMember').before('<p class="teamMember"><?=$user['first_name'].' '.$user['last_name']?> (ID: <span class="teamMemberID"><?=$user['id']?></span>)</p>');
 			$.fancybox.close();
 		</script>
