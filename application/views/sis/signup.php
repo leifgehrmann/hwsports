@@ -76,7 +76,7 @@
 			
 			//open up form to take team member details
 			$(".addTeamMember").fancybox({
-				afterLoad:function (){			
+				beforeShow:function (){			
 					//grab this function so that we can pass it back to
 					//`onComplete` of the new fancybox we're going to create
 					var func = arguments.callee;
@@ -88,7 +88,7 @@
 						alert( $('.fancyform input[type=submit]').text() );
 						
 						return false; 
-					})
+					});
 					/*
 					$('.fancyform form').submit(function(e){
 						e.preventDefault();
