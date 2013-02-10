@@ -81,19 +81,22 @@
 					//`onComplete` of the new fancybox we're going to create
 					var func = arguments.callee;
 
+					console.log("we're in the onComplete function of a fancybox!");
+					
 					//bind the submit of our new form
 					$('.fancyform form').submit(function(){
-					//this is strictly cosmetic
-					$.fancybox.showActivity();
+						console.log("we're in the submit function of a fancyform!");
+						//this is strictly cosmetic
+						$.fancybox.showActivity();
 
-					var data = $(this).serialize();
-					var url = $(this).attr('action')
+						var data = $(this).serialize();
+						var url = $(this).attr('action')
 
-					//post to the server and when we get a response, 
-					//draw a new fancybox, and run this function on completion
-					//so that we can bind the form and create a new fancybox on submit
-					$.post(url, data, function(msg){$.fancybox({content:msg,onComplete:func})});
-					return false;
+						//post to the server and when we get a response, 
+						//draw a new fancybox, and run this function on completion
+						//so that we can bind the form and create a new fancybox on submit
+						$.post(url, data, function(msg){$.fancybox({content:msg,onComplete:func})});
+						return false;
 					});
 				}
 			});
