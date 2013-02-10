@@ -34,9 +34,6 @@ class Assets extends MY_Controller {
 				if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= filemtime($file)) {
 					header('HTTP/1.0 304 Not Modified');
 				}
-				
-				ob_clean();
-				flush();
 				readfile($file);
 				exit;
 			} // else silently fail
