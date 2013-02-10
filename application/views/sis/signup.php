@@ -34,7 +34,7 @@
 						} ?>
 					</div>	
 			<? } ?>
-			<button class="sectionHeading" id="sectionHeading-submit">Complete Sign Up Process</button>
+			<h3 class="sectionHeading" id="sectionHeading-submit">Complete Sign Up Process</h3>
 		</div>
 		
 	<? } ?>
