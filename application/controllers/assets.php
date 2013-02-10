@@ -24,19 +24,37 @@ class Assets extends MY_Controller {
         $ctype = isset($content_types[$file_ext]) ? $content_types[$file_ext] : $ctype_default;
 		$this->output->set_header("Content-Type: $ctype");
 		
+		// Caching can be strictly controlled here, or varied dynamically
+		function readBinaryFile($file) {
+			if (file_exists($file)) {
+				header("Content-Type: $ctype");
+				header('Content-Length: ' . filesize($file));
+				$headers = apache_request_headers();
+				// tells browsers not to reload unless it's been 10 minutes since the file was last checked
+				if(isset($headers['If-Modified-Since'])) {
+				  if(strtotime($headers['If-Modified-Since']) < time() - 600) {
+					header('HTTP/1.1 304 Not Modified');
+					exit;
+				  }
+				}
+				
+				ob_clean();
+				flush();
+				readfile($file);
+				exit;
+			} // else silently fail
+		}
+		
 		if( $file_ext == "css" ) {
-			$this->load->view("css/{$this->data['slug']}/$path",$this->data);
+			$this->load->view("css/{$this->data['slug']}/$path",$this->data);	
 		} elseif( $file_ext == "js" ) {
 			$this->load->view("js/{$this->data['slug']}/$path",$this->data);
 		} elseif( $file_ext == "png" || $file_ext == "jpg" || $file_ext == "jpeg" || $file_ext == "gif" ) {
 			// This is a binary image so read the file directly from the img folder after sending the header - don't load it as a view
-			header("Content-Type: $ctype");
-			readfile("/home/sports/public_html/application/views/img/{$this->data['slug']}/{$path}");
+			readBinaryFile("/home/sports/public_html/application/views/img/{$this->data['slug']}/{$path}");
 		} else {
 			// This isn't js, css or an image based on it's extension so try and load it from a random folder based on it's extension?
-			header("Content-Type: $ctype");
-			readfile("/home/sports/public_html/application/views/{$file_ext}/{$this->data['slug']}/{$path}");
-			die();
+			readBinaryFile("/home/sports/public_html/application/views/{$file_ext}/{$this->data['slug']}/{$path}");
 		}
 	}
 }
