@@ -1,5 +1,5 @@
 <div class="fancyform">
-  <? if($success) { ?>
+  <? if(!empty($success)) { ?>
 		<div id="infoMessage"><?php $success;?></div>
   <? } else { ?>
 		<h1>Add New Team Member</h1>
