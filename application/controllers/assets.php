@@ -31,11 +31,9 @@ class Assets extends MY_Controller {
 				header("Content-Type: $ctype");
 				header('Content-Length: ' . filesize($file));
 				$headers = apache_request_headers();
-				// tells browsers not to reload unless it's been 10 minutes since the file was last checked
-				if(isset($headers['If-Modified-Since'])) {
-				  if(strtotime($headers['If-Modified-Since']) < time() - 600) {
-					header('HTTP/1.1 304 Not Modified');
-				  }
+				// tells browsers not to reload unless file has been changed since last cache date
+				if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= filemtime($file)) {
+					header('HTTP/1.0 304 Not Modified');
 				}
 				
 				ob_clean();
