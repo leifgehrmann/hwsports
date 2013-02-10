@@ -33,8 +33,8 @@
 							echo "<div class='navButtons'><a href='#' class='backButton'>Back</a> <a href='#' class='nextButton'>Next</a></div>";
 						} ?>
 					</div>	
-					<button class="sectionHeading" id="sectionHeading-submit">Complete Sign Up Process</button>
 			<? } ?>
+			<button class="sectionHeading" id="sectionHeading-submit">Complete Sign Up Process</button>
 		</div>
 		
 	<? } ?>
