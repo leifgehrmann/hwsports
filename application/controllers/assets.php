@@ -1,6 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Assets extends MY_Controller {
+	
+	$file_ext;
 
 	public function load()
 	{
@@ -24,9 +26,10 @@ class Assets extends MY_Controller {
 		$this->output->set_header("Content-Type: {$content_types[$file_ext]}");
 		
 		// Caching can be strictly controlled here, or varied dynamically
-		function readBinaryFile($file,$type) {
+		function readBinaryFile($file) {
+			global $file_ext;
 			if (file_exists($file)) {
-				header("Content-Type: $type");
+				header("Content-Type: {$content_types[$file_ext]}");
 				
 				// time (in seconds) to cache
 				$expires = 3600*10; // 24 hours
