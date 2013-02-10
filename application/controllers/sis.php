@@ -251,7 +251,7 @@ class Sis extends MY_Controller {
 				'phone'      => $this->input->post('phone')
 			);
 			
-			$password = generatePassword();
+			$password = $this->generatePassword();
 		}
 		
 		// Validate input data
