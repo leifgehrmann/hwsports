@@ -70,6 +70,15 @@
 			});
 			//functionality of submit button
 			$("#sectionHeading-submit").unbind("click").unbind("dblclick").bind("click dblclick", (function () {
+				//get all team member IDs in CSV to submit
+				$(".addTeamMember").after(
+					"<input type='hidden' name='teamMemberIDs' id='teamMemberIDs' value='" + 
+					$('.teamMemberID').map(function() {
+						return $(this).text();
+					}).get().join(",") + 
+					"' />" 
+				);
+			
 				$("#signupForm").submit();
 				return false;
 			}));
