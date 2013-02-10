@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
         <title><?=$title?> | <?=$centre['shortName']?> Sports</title>
-        <link rel="icon" type="image/png" href="/img/<?=$slug?>/logo/sis.fav.16.png" />
+        <link rel="icon" type="image/png" href="/img/logo/sis.fav.16.png" />
         <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
         <link href="/css/main.css" rel="stylesheet" type="text/css">
         <link href="/css/sis.css" rel="stylesheet" type="text/css">
@@ -17,13 +17,13 @@
 		<link rel='stylesheet' href='/css/dataTables.ColVis.css'>
 		<script charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         <script charset="utf-8" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
-		<script charset="utf-8" src="/scripts/jquery-ui-1.10.0.custom.min.js"></script>
-		<script charset="utf-8" src="/scripts/fancybox/jquery.fancybox.pack.js"></script>
-		<script charset="utf-8" src="/scripts/datatables/jquery-ui-timepicker-addon.js"></script>
-		<script charset="utf-8" src="/scripts/datatables/jquery.dataTables.min.js"></script>
-		<script charset="utf-8" src="/scripts/datatables/dataTables.tabletools.min.js"></script>
-		<script charset="utf-8" src="/scripts/datatables/dataTables.ColReorderWithResize.js"></script>
-		<script charset="utf-8" src="/scripts/datatables/dataTables.ColVis.js"></script>
+		<script charset="utf-8" src="/js/jquery-ui-1.10.0.custom.min.js"></script>
+		<script charset="utf-8" src="/js/fancybox/jquery.fancybox.pack.js"></script>
+		<script charset="utf-8" src="/js/datatables/jquery-ui-timepicker-addon.js"></script>
+		<script charset="utf-8" src="/js/datatables/jquery.dataTables.min.js"></script>
+		<script charset="utf-8" src="/js/datatables/dataTables.tabletools.min.js"></script>
+		<script charset="utf-8" src="/js/datatables/dataTables.ColReorderWithResize.js"></script>
+		<script charset="utf-8" src="/js/datatables/dataTables.ColVis.js"></script>
     </head>
     <!--[if lt IE 7]>      <body class="page-<?=$page?> lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
     <!--[if IE 7]>         <body class="page-<?=$page?> lt-ie9 lt-ie8"> <![endif]-->

@@ -2,27 +2,49 @@
 	
 	$(document).ready(function() {
 		editor = new $.fn.dataTable.Editor( {
-			"ajaxUrl": "/php/sports.php",
-			"domTable": "#sports",
+			"ajaxUrl": "/php/matches.php",
+			"domTable": "#matches",
 			"fields": [ {
-					"label": "Sport ID",
-					"name": "sportID",
-					"type": "hidden"
-				}, {
 					"label": "Centre ID",
 					"name": "centreID",
 					"default": $('#centreID').text(),
 					"type": "hidden"
 				}, {
+					"label": "ID",
+					"name": "matchID",
+					"type": "hidden"
+				}, {
+					"label": "Sport",
+					"name": "sportID",
+					"type": "select"
+				}, {
+					"label": "Venue",
+					"name": "venueID",
+					"type": "select"
+				}, {
+					"label": "Tournament",
+					"name": "tournamentID",
+					"type": "hidden"
+				}, {
 					"label": "Name",
 					"name": "name"
 				}, {
+					"label": "Start Time",
+					"name": "startTime",
+					"type": "datetime",
+					"dateFormat": "dd/mm/yy",
+					"timeFormat": "HH:mm",
+					"separator": " @ "
+				}, {
+					"label": "End Time",
+					"name": "endTime",
+					"type": "datetime",
+					"dateFormat": "dd/mm/yy",
+					"timeFormat": "HH:mm",
+					"separator": " @ "
+				}, {
 					"label": "Description",
 					"name": "description"
-				}, {
-					"label": "Category",
-					"name": "sportCategoryID",
-					"type": "select"
 				}
 			],
 			"events": {
@@ -35,25 +57,28 @@
 			}
 		} );
 
-		$('#sports').dataTable( {
+		$('#matches').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
-			"sAjaxSource": "/php/sports.php",
+			"sAjaxSource": "/php/matches.php",
 			"aoColumns": [
-				{ "mData": "sportID" },
 				{ "mData": "centreID" },
+				{ "mData": "matchID" },
+				{ "mData": "sportName" },
+				{ "mData": "venueName" },
+				{ 
+					"mData": "tournamentName",
+					"sDefaultContent": ""
+				},
 				{ "mData": "name" },
-				{ "mData": "description" },
-				{ 	
-					"mData": "sportCategoryName",
-					"sDefaultContent": "" 
-				}
+				{ "mData": "startTime" },
+				{ "mData": "endTime" },
+				{ "mData": "description" }
 			],
 			"aoColumnDefs": [
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 1 ] } 
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] }
             ],
 			"oTableTools": {
-				"sSwfPath": "/scripts/datatables/copy_csv_xls_pdf.swf",
+				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
 				"sRowSelect": "multi",
 				"aButtons": [
 					{ "sExtends": "editor_create", "editor": editor },
@@ -81,7 +106,8 @@
 				]
 			},
 			"fnInitComplete": function ( settings, json ) {
-				editor.field('sportCategoryID').update( json.sportCategoryData );
+				editor.field('sportID').update( json.sportData );
+				editor.field('venueID').update( json.venueData );
 			}
 		} );
 
