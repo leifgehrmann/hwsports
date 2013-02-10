@@ -34,7 +34,6 @@ class Assets extends MY_Controller {
 				if(isset($headers['If-Modified-Since'])) {
 				  if(strtotime($headers['If-Modified-Since']) < time() - 600) {
 					header('HTTP/1.1 304 Not Modified');
-					exit;
 				  }
 				}
 				
