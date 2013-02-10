@@ -26,6 +26,7 @@ class Assets extends MY_Controller {
 		
 		// Caching can be strictly controlled here, or varied dynamically
 		function readBinaryFile($file) {
+			global $ctype;
 			if (file_exists($file)) {
 				header("Content-Type: $ctype");
 				header('Content-Length: ' . filesize($file));
