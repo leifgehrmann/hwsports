@@ -82,7 +82,7 @@
 					var func = arguments.callee;
 
 					console.log("we're in the onComplete function of a fancybox!");
-					console.log( $('.fancyform') );
+					alert( $('.fancyform input[type=submit]') );
 					
 					//bind the submit of our new form
 					//$('.fancyform form').unbind('submit');
