@@ -26,7 +26,7 @@
 						$('#container *').css('opacity',"0.90");
 					} else {
 						$('body').css('background-image',"none");
-						$('#container *').css('opacity',"inherit");
+						$('#container *').css('opacity',"");
 					}
 					b=!b;
 				} else if(event.which == 49) {
@@ -120,7 +120,7 @@
 
 						<div id="block-2">
 						<h1>Tournaments</h1>
-						<h1>Tournaments<div class="icon arrow-right-black-dark margin-right margin-left"></div>Wattball 2013</h1>
+						<h1>Tournaments<div class="icon subsection margin-right margin-left"></div>Wattball 2013</h1>
 						<p class="indent">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed felis felis, tristique at interdum et, dapibus ut ligula. Vestibulum mi neque, laoreet a egestas sit amet, lacinia quis nisi. Nunc enim mi, aliquet vel gravida a, fermentum vel augue. Donec mi dolor, consectetur id aliquam non, posuere eget ante. Nam vel elit et justo egestas interdum. Quisque feugiat feugiat purus, sit amet commodo turpis tincidunt pretium. Suspendisse volutpat, tellus nec aliquam <a href="/">fermentum</a>, libero velit placerat purus, vitae dignissim risus massa et nisl. Mauris congue feugiat erat, nec tempus felis tincidunt et. Sed ultrices urna sodales est rutrum in elementum arcu commodo. Cras id risus a dolor varius ultrices. Suspendisse potenti. Curabitur vestibulum mi sit amet sapien vulputate faucibus.</p>
 						<h1>&quot;Sed ipsum nulla, hendrerit ac suscipit at, bibendum sed lacus. In et mauris et eros imperdiet vestibulum. Nam dapibus vestibulum neque, non pharetra dolor tincidunt ac. In hac habitasse platea dictumst. Aliquam erat volutpat.&quot;</h1>
 						<p class="indent">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed felis felis, tristique at interdum et, dapibus ut ligula. Vestibulum mi neque, laoreet a egestas sit amet, lacinia quis nisi. Nunc enim mi, aliquet vel gravida a, fermentum vel augue. Donec mi dolor, consectetur id aliquam non, posuere eget ante. Nam vel elit et justo egestas interdum. Quisque feugiat feugiat purus, sit amet commodo turpis tincidunt pretium. Suspendisse volutpat, tellus nec aliquam <a href="/">fermentum</a>, libero velit placerat purus, vitae dignissim risus massa et nisl. Mauris congue feugiat erat, nec tempus felis tincidunt et. Sed ultrices urna sodales est rutrum in elementum arcu commodo. Cras id risus a dolor varius ultrices. Suspendisse potenti. Curabitur vestibulum mi sit amet sapien vulputate faucibus.</p>
@@ -160,9 +160,9 @@
 						<div class="widget half">
 							<a href="">
 								<div class="widget-title">
-									<div class="widget-title-left icon block-black-light"></div>
+									<div class="widget-title-left icon sport-wattball"></div>
 									<div class="widget-title-centre">Wattball Tournament</div>
-									<div class="widget-title-right icon arrow-right-black-light"></div>
+									<div class="widget-title-right icon chevron"></div>
 								</div>
 							</a>
 							<div class="widget-body">
@@ -174,9 +174,9 @@
 						<div class="widget half">
 							<a href="">
 								<div class="widget-title">
-									<div class="widget-title-left icon block-black-light"></div>
+									<div class="widget-title-left icon sport-hurdling"></div>
 									<div class="widget-title-centre">Men's Hurdling Tournament Extravaganza</div>
-									<div class="widget-title-right icon arrow-right-black-light"></div>
+									<div class="widget-title-right icon chevron"></div>
 								</div>
 							</a>
 							<div class="widget-body">
@@ -191,9 +191,9 @@
 						<div class="widget half">
 							<a href="">
 								<div class="widget-title">
-									<div class="widget-title-left icon block-black-light"></div>
+									<div class="widget-title-left icon news"></div>
 									<div class="widget-title-centre">ThisShouldHopefullyWordWrap</div>
-									<div class="widget-title-right icon arrow-right-black-light"></div>
+									<div class="widget-title-right icon load"></div>
 								</div>
 							</a>
 							<div class="widget-body">
@@ -206,9 +206,9 @@
 						<div class="widget half">
 							<a href="">
 								<div class="widget-title">
-									<div class="widget-title-left icon block-black-light"></div>
+									<div class="widget-title-left icon news"></div>
 									<div class="widget-title-centre">Some other thing that is cool</div>
-									<div class="widget-title-right icon arrow-right-black-light"></div>
+									<div class="widget-title-right icon chevron"></div>
 								</div>
 							</a>
 							<div class="widget-body">
@@ -234,9 +234,9 @@
 						<div class="widget full">
 							<a href="">
 								<div class="widget-title">
-									<div class="widget-title-left icon block-black-light"></div>
+									<div class="widget-title-left icon news"></div>
 									<div class="widget-title-centre">A news article about something that happened</div>
-									<div class="widget-title-right icon arrow-right-black-light"></div>
+									<div class="widget-title-right icon chevron"></div>
 								</div>
 							</a>
 							<div class="widget-body">
@@ -248,7 +248,7 @@
 								<h3>Running with a ball, sometimes kicking it. (ノಠ益ಠ)ノ彡┻━┻ This would be the description of the tournament</h3>
 								<p>Running with a ball, sometimes <a href="test">kicking it</a>. This would be the description of the tournament</p>
 								<div class="right">
-									<a href="/" class="button normal">More Information</a>
+									<a href="/" class="button normal"><div class="icon load margin-right"></div>More Information</a>
 									<a href="/" class="button red"><div class="icon dalek-white margin-right"></div>EXTERMINATE!</a>
 								</div>
 							</div>
@@ -489,64 +489,73 @@
 									events: [
 										{
 											title: 'All Day Event',
-											start: new Date(y, m, 1)
-										},
-										{
-											title: 'Long Event',
-											start: new Date(y, m, d-5),
-											end: new Date(y, m, d-2)
-										},
-										{
-											title: 'Long Event',
-											start: new Date(y, m, d-5),
-											end: new Date(y, m, d-2)
+											start: new Date(y, m, 1),
+											className: 'match'
 										},
 										{
 											title: 'Long Event',
 											start: new Date(y, m, d-5),
 											end: new Date(y, m, d-2),
-											className: 'wakakaka'
+											className: 'registration'
 										},
 										{
 											title: 'Long Event',
 											start: new Date(y, m, d-5),
-											end: new Date(y, m, d-2)
+											end: new Date(y, m, d-2),
+											className: 'registration'
+										},
+										{
+											title: 'Long Event',
+											start: new Date(y, m, d-5),
+											end: new Date(y, m, d-2),
+											className: 'match wakaka'
+										},
+										{
+											title: 'Long Event',
+											start: new Date(y, m, d-5),
+											end: new Date(y, m, d-2),
+											className: 'match'
 										},
 										{
 											id: 999,
 											title: 'Repeating Event',
 											start: new Date(y, m, d-3, 16, 0),
 											allDay: false,
-											url: '#'
+											className: 'match'
 										},
 										{
 											id: 999,
 											title: 'IjustWanderHowLongItWillTake',
 											start: new Date(y, m, d+4, 16, 0),
-											allDay: false
+											allDay: false,
+											className: 'match'
 										},
 										{
 											title: 'Meeting With Joe',
 											start: new Date(y, m, d, 10, 45),
-											allDay: false
+											allDay: false,
+											className: 'match'
 										},
 										{
 											title: 'Lunch',
 											start: new Date(y, m, d, 12, 0),
 											end: new Date(y, m, d, 14, 0),
-											allDay: false
+											allDay: false,
+											className: 'match'
 										},
 										{
 											title: 'Birthday Party',
 											start: new Date(y, m, d+1, 19, 0),
 											end: new Date(y, m, d+1, 22, 30),
-											allDay: false
+											allDay: false,
+											className: 'tournament'
 										},
 										{
 											title: 'Click for Google',
 											start: new Date(y, m, 28),
 											end: new Date(y, m, 29),
-											url: 'http://google.com/'
+											url: 'http://google.com/',
+											className: 'match'
 										}
 									]
 								});
@@ -572,8 +581,10 @@
 				<div id="footer-block">
 					<div id="footer-legal">
 						<h3>Contact Us</h3>
-						<p>&copy; Heriot-Watt University, Edinburgh, Scotland, UK EH14 4AS</p>
-						<p>Tel: +44 (0) 131 449 5111, Scottish registered charity number: SC000278</p>
+						<p>&copy; Heriot-Watt University</p>
+						<p>Edinburgh, Scotland, UK EH14 4AS</p>
+						<p>Tel: +44 (0) 131 449 5111</p>
+						<p>Scottish registered charity number: SC000278</p>
 					</div>
 					<div id="footer-links">
 						<h3>Links</h3>
@@ -584,7 +595,9 @@
 						<p><a href="#">About InfusionSports</a></p>
 					</div>
 					<div id="footer-powered">
-						<a href="http://www.infusionsystems.co.uk"><div class="company-logo"></div>
+						<h3>Powered By</h3>
+						<p><a href="http://www.infusionsports.co.uk"><div class="product-logo"></div></a></p>
+						<p><a href="http://www.infusionsystems.co.uk"><div class="company-logo"></div></a></p>
 					</div>
 				</div>
 			</div>
