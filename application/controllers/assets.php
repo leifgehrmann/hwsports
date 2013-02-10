@@ -27,7 +27,7 @@ class Assets extends MY_Controller {
 		// Caching can be strictly controlled here, or varied dynamically
 		function readBinaryFile($file) {
 			if (file_exists($file)) {
-				header("Content-Type: {$_GLOBALS['ctype']}");
+				header("Content-Type: {$GLOBALS['ctype']}");
 				// tells browsers not to reload unless file has been changed since last cache date
 				if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= filemtime($file)) {
 					header('HTTP/1.0 304 Not Modified');
