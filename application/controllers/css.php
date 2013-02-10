@@ -16,6 +16,7 @@ class Css extends MY_Controller {
 			$this->output->set_header("Content-Type: text/css");
 			$this->load->view("css/{$this->data['slug']}/$path",$this->data);
 		} else {
+			echo $path;
 			readfile("{$this->data['slug']}/$path");
 		}
 	}
