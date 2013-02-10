@@ -8,7 +8,8 @@ class Css extends MY_Controller {
 		$segments = $this->uri->segment_array();
 		
 		// get rid of "css" from path
-		unset( array_search("css",$segments) );
+		$key = array_search("css",$segments);
+		unset( $key );
 		$path = implode("/",$segments);
 		
 		if( strpos($path,".css" !== false) ) {
