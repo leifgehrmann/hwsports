@@ -253,7 +253,7 @@ class Sis extends MY_Controller {
 		}
 		
 		// Validate input data
-		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data))
+		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data)) {
 			// Successful team member creation, show success message
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
 		} else {
