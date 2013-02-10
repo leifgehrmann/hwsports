@@ -38,8 +38,9 @@
 |
 */
 
-$route['js/(:any)'] = "js/index/$1";
-$route['css/(:any)'] = "css/index";
+$route['js/(:any)'] = "assets/load";
+$route['css/(:any)'] = "assets/load";
+$route['img/(:any)'] = "assets/load";
 $route['default_controller'] = ($_SERVER['HTTP_HOST']=="infusionsports.co.uk" ? "product" : "sis");
 $route['404_override'] = '';
 
