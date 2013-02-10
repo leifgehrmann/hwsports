@@ -9,7 +9,7 @@
 			  <div id="infoMessage"><?php echo $message;?></div>
 		<? } ?>
 
-		<?php echo form_open("auth/register");?>
+		<?php echo form_open("sis/addTeamMember");?>
 
 			  <p>
 					First Name: <br />
