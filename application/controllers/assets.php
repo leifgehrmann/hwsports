@@ -8,8 +8,7 @@ class Assets extends MY_Controller {
 		$segments = $this->uri->segment_array();
 		
 		// get rid of "css" from path
-		$key = array_search("css",$segments);
-		unset( $segments[$key] );
+		unset( $segments[1] );
 		
 		// get normal string path to file from URI segments
 		$path = implode("/",$segments);
