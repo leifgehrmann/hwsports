@@ -79,7 +79,7 @@
 					"</input>" 
 				);
 			
-				$("#signupForm").submit();
+				//$("#signupForm").submit();
 				return false;
 			}));
 			
