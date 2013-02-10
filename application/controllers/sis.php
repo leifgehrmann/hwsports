@@ -309,4 +309,5 @@ class Sis extends MY_Controller {
 		$this->load->view('sis/footer',$this->data);
 	}
 
-}-
+}
+?>
