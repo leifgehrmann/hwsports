@@ -435,9 +435,9 @@ class Auth extends MY_Controller {
 
 		if ($this->form_validation->run() == true)
 		{
-			$username = $email    = $this->input->post('email');
+			$username = $email = $this->input->post('email');
 			$password = $this->input->post('password');
-			$centreID = $this->session->userdata('centreID');
+			$centreID = $this->data['centre']['centreID']
 
 			$additional_data = array(
 				'centreID' => $centreID,
@@ -454,6 +454,78 @@ class Auth extends MY_Controller {
 		}
 		else
 		{
+			//display the create user form
+			//set the flash data error message if there is one
+			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
+
+			$this->data['first_name'] = array(
+				'name'  => 'first_name',
+				'id'    => 'first_name',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('first_name'),
+			);
+			$this->data['last_name'] = array(
+				'name'  => 'last_name',
+				'id'    => 'last_name',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('last_name'),
+			);
+			$this->data['email'] = array(
+				'name'  => 'email',
+				'id'    => 'email',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('email'),
+			);
+			$this->data['phone'] = array(
+				'name'  => 'phone',
+				'id'    => 'phone',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('phone'),
+			);
+			$this->data['password'] = array(
+				'name'  => 'password',
+				'id'    => 'password',
+				'type'  => 'password',
+				'value' => $this->form_validation->set_value('password'),
+			);
+			$this->data['password_confirm'] = array(
+				'name'  => 'password_confirm',
+				'id'    => 'password_confirm',
+				'type'  => 'password',
+				'value' => $this->form_validation->set_value('password_confirm'),
+			);
+
+			$this->load->view('sis/header',$this->data);
+			$this->load->view('auth/register', $this->data);
+			$this->load->view('sis/footer',$this->data);
+		}
+	}
+
+	//create a new team member user account
+	function register_team_member()
+	{
+		//validate form input
+		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
+		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
+		$this->form_validation->set_rules('phone', 'Phone', 'required|xss_clean|min_length[8]|max_length[13]');
+		
+		if ($this->form_validation->run() == true)
+		{
+			$username = $email    = $this->input->post('email');
+			$centreID = $this->data['centre']['centreID'];
+
+			$additional_data = array(
+				'centreID' => $centreID,
+				'firstName' => $this->input->post('first_name'),
+				'lastName'  => $this->input->post('last_name'),
+				'phone'      => $this->input->post('phone')
+			);
+		}
+		if ($this->ion_auth->register($username, $password, $email, $additional_data) ) {
+			// Successful team member creation, show success message
+			$this->session->set_flashdata('message', $this->ion_auth->messages());
+		} else {
 			//display the create user form
 			//set the flash data error message if there is one
 			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
