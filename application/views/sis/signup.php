@@ -83,6 +83,14 @@
 
 					console.log("we're in the onComplete function of a fancybox!");
 					
+					
+					//bind the submit of our new form
+					$('.fancyform form').unbind('submit').bind("submit", function() { 
+						alert( $('.fancyform input[type=submit]').text() );
+						
+						return false; 
+					});
+					/*
 					//bind the submit of our new form
 					$('.fancyform form').unbind('submit').bind("submit", function() {
 						console.log("we're in the submit function of a fancyform!");
@@ -102,6 +110,7 @@
 						
 						return false; 
 					});
+					*/
 				}
 			});
 			
