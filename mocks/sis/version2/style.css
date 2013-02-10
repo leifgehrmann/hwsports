@@ -268,10 +268,13 @@ body * {
 #content p a, #content h1 a, #content h2 a, #content h3 a, #content p i, #content p b, #content p em {
 	display: inline-block; *display: inline; zoom: 1;
 }
-#content p a, #content h1 a, #content h2 a, #content h3 a {
+p a, h1 a, h2 a, h3 a {
 	color: #0D42A8;
 }
-#content p a:visited, #content h1 a:visited, #content h2 a:visited, #content h3 a:visited {
+p a:hover, h1 a:hover, h2 a:hover, h3 a:hover {
+	color: #4165C8;
+}
+ p a:visited, h1 a:visited, h2 a:visited, h3 a:visited {
 	color: #3F68BB;
 }
 #content p.indent 	{ text-indent:20px; }
@@ -605,42 +608,57 @@ body * {
 /*
 	Leif's Custom button inline block, which can have nice icons inside
 */
-#content .button {
+a.button {
 	background:#EEE;
 	text-decoration: none;
-	line-height: 40px;
+	line-height: 20px;
+	padding-top:10px;
+	padding-bottom:10px;
 	padding-left: 20px;
 	padding-right: 20px;
 	display:inline-block;
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
-	box-shadow: 0px 0px 1px rgba(0,0,0,0.4), inset 0px 0px 1px rgba(0,0,0,1);
-	transition: background .1s, box-shadow .1s;
-	-moz-transition: background .1s;
+	/*transition: background .1s, box-shadow .1s;
+	-moz-transition: background .1s, box-shadow .1s;
 	-webkit-transition: background .1s, box-shadow .1s;
-	-o-transition: background .1s;
+	-o-transition: background .1s, box-shadow .1s;*/
 }
-#content .button:hover {
-	box-shadow: 0px 0px 1px rgba(0,0,0,0.4), inset 0px 0px 1px rgba(0,0,0,1);
+a.button * {
+	/*transition: opacity .1s;
+	-moz-transition: opacity .1s;
+	-webkit-transition: opacity .1s;
+	-o-transition: opacity .1s;*/
 }
-#content .button .icon {
+a.button				{ color: #333333; background:#FFFFFF; box-shadow: 0px 1px 1px rgba(0,0,0,0.8), inset 0px 0px 1px rgba(0,0,0,1); }
+a.button:hover			{ color: #333333; background:#FFFFFF; box-shadow: 0px 1px 1px rgba(0,0,0,0.8), inset 0px 0px 1px rgba(0,0,0,1); }
+a.button:active			{ color: #333333; background:#EEEEEE; box-shadow: 0px 1px 1px rgba(0,0,0,0.4), inset 0px 1px 4px rgba(0,0,0,1); }
+a.button:active * 		{ color: #333333; opacity: 0.5; }
+
+a.button.normal 		{ color: #333333; background:#EEEEEE; }
+a.button.normal:hover 	{ color: #333333; background:#FFFFFF; }
+a.button.normal:active 	{ color: #333333; background:#EEEEEE; }
+
+a.button.blue			{ color: #FFFFFF; background:#0D42A8; }
+a.button.blue:hover		{ color: #FFFFFF; background:#3F68BB; }
+a.button.blue:active	{ color: #D1DAF2; background:#0D42A8; }
+
+a.button.green			{ color: #FFFFFF; background:#81A800; }
+a.button.green:hover 	{ color: #FFFFFF; background:#9ABB00; }
+a.button.green:active	{ color: #E6EDC5; background:#81A800; }
+
+a.button.red			{ color: #FFFFFF; background:#D13B00; }
+a.button.red:hover		{ color: #FFFFFF; background:#F64600; }
+a.button.red:active		{ color: #FBE1B6; background:#D13B00; }
+
+.button .icon {
 	position: relative;
 	top:5px;
 }
 
-#content .button:hover 			{ color: inherit; background:#FFFFFF; box-shadow: 0px 0px 1px rgba(0,0,0,1), inset 0px 0px 1px rgba(0,0,0,0.4); }
-#content .button.normal 		{ color: inherit; background:#EEEEEE; box-shadow: 0px 0px 0px rgba(0,0,0,1), inset 0px 0px 1px rgba(0,0,0,1); }
-#content .button.normal:hover 	{ color: inherit; background:#FFFFFF; box-shadow: 0px 0px 1px rgba(0,0,0,1), inset 0px 0px 1px rgba(0,0,0,0.4); }
-#content .button.blue 			{ color: #FFFFFF; background:#0D42A8; }
-#content .button.blue:hover 	{ color: #FFFFFF; background:#3F68BB; }
-#content .button.green 			{ color: #FFFFFF; background:#81A800; }
-#content .button.green:hover 	{ color: #FFFFFF; background:#9ABB00; }
-#content .button.red 			{ color: #FFFFFF; background:#D13B00; }
-#content .button.red:hover		{ color: #FFFFFF; background:#F64600; }
-
-#content .right .button { margin-left: 20px; }
-#content .left .button { margin-right: 20px; }
+.right .button { margin-left: 20px; }
+.left .button { margin-right: 20px; }
 
 
 /**
@@ -705,20 +723,12 @@ body * {
 	margin-bottom: 10px;
 }
 #footer-powered .company-logo{
-<<<<<<< HEAD
 	width:100px;
 	height:40px;
 	background-image:url('icons.png');
 	background-position: -460px -20px;
 }
 #footer-powered div:hover{
-=======
-	margin: auto auto;
-	vertical-align: middle;
-	width:99px;
-	height:33px;
-	background-image:url('http://infusionsports.co.uk/img/logo/is.medium.png');
->>>>>>> 278cea468895cdbc1655a39905d4adfc620405a0
 	opacity: 0.8;
 }
 
