@@ -205,13 +205,15 @@ class Sis extends MY_Controller {
 		$this->load->view('sis/footer',$this->data);
 	}
 	
+	// sign up for tournament
 	public function signup($tournamentID)
 	{
-		if(!empty($_POST) ) {
-			echo "<pre>".print_r($_POST,1)."</pre>"; die();
-		}
 		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
+		
+		if( $this->input->post() ) {
+			echo "<pre>".print_r($_POST,1)."</pre>"; die();
+		}
 		
 		if( $this->tournaments_model->tournament_exists($tournamentID) ) {
 			$this->data['tournamentID'] = $tournamentID;

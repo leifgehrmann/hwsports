@@ -31,6 +31,10 @@ class Assets extends MY_Controller {
 		// get rid of "css" from path
 		unset( $segments[1] );
 		
+		// test for vendor string in js
+		$vendor = ( $segments[2] == "vendor" );
+		if($vendor) unset($segments[2]);
+		
 		// get normal string path to file from URI segments
 		$path = implode("/",$segments);
 		
@@ -50,7 +54,8 @@ class Assets extends MY_Controller {
 			$this->load->view("css/{$this->data['slug']}/$path",$this->data);	
 			//$this->output->cache(60); // cache css for 1 hour
 		} elseif( $file_ext == "js" ) {
-			$this->load->view("js/{$this->data['slug']}/$path",$this->data);
+			if($vendor) $this->load->view("js/vendor/$path",$this->data);
+			else $this->load->view("js/{$this->data['slug']}/$path",$this->data);
 			$this->output->cache(60*24); // cache js for 24 hours
 		} elseif( $file_ext == "png" || $file_ext == "jpg" || $file_ext == "jpeg" || $file_ext == "gif" ) {
 			// This is a binary image so read the file directly from the img folder after sending the header - don't load it as a view

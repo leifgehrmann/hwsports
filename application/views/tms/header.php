@@ -17,14 +17,14 @@
 		<link rel="stylesheet" media="screen" type="text/css" href="/css/colorpicker.css" />
 		<script charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 		<script charset="utf-8" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
-		<script charset="utf-8" src="/js/jquery-ui-1.10.0.custom.min.js"></script>
-		<script charset="utf-8" src="/js/datatables/jquery-ui-timepicker-addon.js"></script>
-		<script charset="utf-8" src="/js/datatables/jquery.dataTables.min.js"></script>
-		<script charset="utf-8" src="/js/datatables/dataTables.tabletools.min.js"></script>
-		<script charset="utf-8" src="/js/datatables/dataTables.editor.min.js"></script>
-		<script charset="utf-8" src="/js/datatables/dataTables.ColReorderWithResize.js"></script>
-		<script charset="utf-8" src="/js/datatables/dataTables.ColVis.js"></script>
-		<script charset="utf-8" src="/js/colorpicker/colorpicker.js"></script>
+		<script charset="utf-8" src="/js/vendor/jquery/jquery-ui-1.10.0.custom.min.js"></script>
+		<script charset="utf-8" src="/js/vendor/jquery/jquery-ui-timepicker-addon.js"></script>
+		<script charset="utf-8" src="/js/vendor/datatables/jquery.dataTables.min.js"></script>
+		<script charset="utf-8" src="/js/vendor/datatables/dataTables.tabletools.min.js"></script>
+		<script charset="utf-8" src="/js/vendor/datatables/dataTables.editor.min.js"></script>
+		<script charset="utf-8" src="/js/vendor/datatables/dataTables.ColReorderWithResize.js"></script>
+		<script charset="utf-8" src="/js/vendor/datatables/dataTables.ColVis.js"></script>
+		<script charset="utf-8" src="/js/vendor/colorpicker/colorpicker.js"></script>
     </head>
     <!--[if lt IE 7]>      <body class="page-<?=$page?> lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
     <!--[if IE 7]>         <body class="page-<?=$page?> lt-ie9 lt-ie8"> <![endif]-->
