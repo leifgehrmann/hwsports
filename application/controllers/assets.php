@@ -46,11 +46,11 @@ class Assets extends MY_Controller {
 		if( $file_ext == "css" ) {
 			$this->output->set_header("Content-Type: $ctype");
 			$this->load->view("css/{$this->data['slug']}/$path",$this->data);	
-			$this->output->cache(60); // cache css for 1 hour
+			//$this->output->cache(60); // cache css for 1 hour
 		} elseif( $file_ext == "js" ) {
 			$this->output->set_header("Content-Type: $ctype");
 			$this->load->view("js/{$this->data['slug']}/$path",$this->data);
-			$this->output->cache(60*24); // cache js for 24 hours
+			//$this->output->cache(60*24); // cache js for 24 hours
 		} elseif( $file_ext == "png" || $file_ext == "jpg" || $file_ext == "jpeg" || $file_ext == "gif" ) {
 			// This is a binary image so read the file directly from the img folder after sending the header - don't load it as a view
 			readBinaryFile("/home/sports/public_html/application/views/img/{$this->data['slug']}/{$path}",$ctype);
