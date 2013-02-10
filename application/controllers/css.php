@@ -12,7 +12,7 @@ class Css extends MY_Controller {
 		unset( $segments[$key] );
 		$path = implode("/",$segments);
 		
-		if( strpos($path,".css" !== false) ) {
+		if( strpos($path,".css") !== false ) {
 			$this->output->set_header("Content-Type: text/css");
 			$this->load->view("css/{$this->data['slug']}/$path",$this->data);
 		} else {
