@@ -86,6 +86,8 @@
 					
 					//bind the submit of our new form
 					$('.fancyform form').unbind('submit').bind("submit", function() {
+						//shiny
+						$.fancybox.showLoading();
 
 						var data = $(this).serialize();
 						var url = $(this).attr('action')
