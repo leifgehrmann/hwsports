@@ -1,12 +1,17 @@
 <div class="fancyform">
   <? if(!empty($success)) { ?>
-		<div id="infoMessage"><?=$success;?></div>
+		
+		<script type="text/javascript">
+			//close form, show added member as 
+			$('a.addTeamMember').before('<p class="teamMember"><?=$user['first_name'].' '.$user['last_name']?> (ID: <span class="teamMemberID"><?=$user['id']?></span>)</p>');
+			$.fancybox.close();
+		</script>
   <? } else { ?>
 		<h1>Add New Team Member</h1>
 		<p>Please enter the member's details below.</p>
 
 		<? if(!empty($message)){ ?>
-			  <div id="infoMessage"><?php echo $message;?></div>
+			  <div id="infoMessage"><?=$message;?></div>
 		<? } ?>
 
 		<?php echo form_open("/sis/addTeamMember");?>

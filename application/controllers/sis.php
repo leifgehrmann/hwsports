@@ -239,8 +239,10 @@ class Sis extends MY_Controller {
 		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
 		$this->form_validation->set_rules('phone', 'Phone', 'required|xss_clean|min_length[8]|max_length[13]');
 		
+		$id = false;
+		
 		// Set up input data
-		if ( $this->input->post() ) {
+		if ( $this->form_validation->run() ) {
 			$username = $email = $this->input->post('email');
 			$centreID = $this->data['centre']['centreID'];
 
@@ -252,10 +254,14 @@ class Sis extends MY_Controller {
 			);
 			
 			$password = $this->generatePassword();
+			
+			$id = $this->ion_auth->register($username, $password, $email, $additional_data);
+			$this->data['user'] = $additional_data;
+			$this->data['user']['id'] = $id;
 		}
 		
-		// Validate input data
-		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data)) {
+		// Registration success
+		if ($id != false) {
 			// Successful team member creation, show success message
 			$this->data['success'] = $this->ion_auth->messages()." Generated Password: $password";
 			$this->load->view('sis/addTeamMember',$this->data);
