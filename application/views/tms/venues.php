@@ -25,4 +25,4 @@
 </div>
 
 <!-- /#main -->
-<script src="/js/datatables/venues.js"></script>
+<script src="/js/vendor/datatables/venues.js"></script>

@@ -17,9 +17,9 @@
 		<link rel='stylesheet' href='/css/dataTables.ColVis.css'>
 		<script charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         <script charset="utf-8" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
-		<script charset="utf-8" src="/js/jquery-ui-1.10.0.custom.min.js"></script>
-		<script charset="utf-8" src="/js/fancybox/jquery.fancybox.pack.js"></script>
-		<script charset="utf-8" src="/js/datatables/jquery-ui-timepicker-addon.js"></script>
+		<script charset="utf-8" src="/js/vendor/jquery/jquery-ui-1.10.0.custom.min.js"></script>
+		<script charset="utf-8" src="/js/vendor/jquery/jquery-ui-timepicker-addon.js"></script>
+		<script charset="utf-8" src="/js/vendor/fancybox/jquery.fancybox.pack.js"></script>
 		<script charset="utf-8" src="/js/datatables/jquery.dataTables.min.js"></script>
 		<script charset="utf-8" src="/js/datatables/dataTables.tabletools.min.js"></script>
 		<script charset="utf-8" src="/js/datatables/dataTables.ColReorderWithResize.js"></script>

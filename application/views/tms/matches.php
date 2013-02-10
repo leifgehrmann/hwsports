@@ -20,4 +20,4 @@
 	<div id="centreID" style="display:none;"><?=$centre['centreID']?></div>
 </div><!-- /#main -->
 
-<script src="/js/datatables/matches.js"></script>
+<script src="/js/vendor/datatables/matches.js"></script>
