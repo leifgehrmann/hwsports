@@ -28,7 +28,6 @@ class Assets extends MY_Controller {
 			if (file_exists($file)) {
 				header("Content-Type: $type");
 				
-				
 				// time (in seconds) to cache
 				$expires = 3600*10; // 24 hours
 				header("Pragma: public");
@@ -46,8 +45,10 @@ class Assets extends MY_Controller {
 		}
 		
 		if( $file_ext == "css" ) {
+			$this->output->cache(60); // cache css for 1 hour
 			$this->load->view("css/{$this->data['slug']}/$path",$this->data);	
 		} elseif( $file_ext == "js" ) {
+			$this->output->cache(60*24); // cache js for 24 hours
 			$this->load->view("js/{$this->data['slug']}/$path",$this->data);
 		} elseif( $file_ext == "png" || $file_ext == "jpg" || $file_ext == "jpeg" || $file_ext == "gif" ) {
 			// This is a binary image so read the file directly from the img folder after sending the header - don't load it as a view
