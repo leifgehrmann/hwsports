@@ -34,8 +34,8 @@
 				} ?>
 			</div>	
 			<? } ?>
-			<button class="sectionHeading" id="sectionHeading-submit">Sign Up!</button>
 		</div>
+		<button id="sectionHeading-submit">Sign Up!</button>
 		
 	<? } ?>
 	
