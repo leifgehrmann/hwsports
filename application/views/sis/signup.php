@@ -82,10 +82,13 @@
 					var func = arguments.callee;
 
 					console.log("we're in the onComplete function of a fancybox!");
-					alert( $('.fancyform input[type=submit]') );
 					
 					//bind the submit of our new form
-					//$('.fancyform form').unbind('submit');
+					$('.fancyform form').unbind('submit').bind("submit", function() { 
+						alert( $('.fancyform input[type=submit]').text() );
+						
+						return false; 
+					})
 					/*
 					$('.fancyform form').submit(function(e){
 						e.preventDefault();
