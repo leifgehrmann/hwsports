@@ -1,4 +1,4 @@
-<div class="yourFancyBoxClass">
+<div class="fancyform">
   <? if($success) { ?>
 		<div id="infoMessage"><?php $success;?></div>
   <? } else { ?>
