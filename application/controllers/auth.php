@@ -435,9 +435,9 @@ class Auth extends MY_Controller {
 
 		if ($this->form_validation->run() == true)
 		{
-			$username = $email    = $this->input->post('email');
+			$username = $email = $this->input->post('email');
 			$password = $this->input->post('password');
-			$centreID = $this->session->userdata('centreID');
+			$centreID = $this->data['centre']['centreID']
 
 			$additional_data = array(
 				'centreID' => $centreID,

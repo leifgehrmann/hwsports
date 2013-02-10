@@ -229,6 +229,76 @@ class Sis extends MY_Controller {
 		}
 	}
 	
+	
+	//create a new team member user account
+	function addTeamMember()
+	{
+		// Set up form validation rules 
+		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
+		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
+		$this->form_validation->set_rules('phone', 'Phone', 'required|xss_clean|min_length[8]|max_length[13]');
+		
+		$id = false;
+		
+		// Set up input data
+		if ( $this->form_validation->run() ) {
+			$username = $email = $this->input->post('email');
+			$centreID = $this->data['centre']['centreID'];
+
+			$additional_data = array(
+				'centreID' => $centreID,
+				'firstName' => $this->input->post('first_name'),
+				'lastName'  => $this->input->post('last_name'),
+				'phone'      => $this->input->post('phone')
+			);
+			
+			$password = $this->generatePassword();
+			
+			$id = $this->ion_auth->register($username, $password, $email, $additional_data);
+			$this->data['user'] = $additional_data;
+			$this->data['user']['id'] = $id;
+		}
+		
+		// Registration success
+		if ($id != false) {
+			// Successful team member creation, show success message
+			$this->data['success'] = $this->ion_auth->messages()." Generated Password: $password";
+			$this->load->view('sis/addTeamMember',$this->data);
+		} else {
+			//display the add team member form
+			//set the flash data error message if there is one
+			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
+
+			$this->data['first_name'] = array(
+				'name'  => 'first_name',
+				'id'    => 'first_name',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('first_name'),
+			);
+			$this->data['last_name'] = array(
+				'name'  => 'last_name',
+				'id'    => 'last_name',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('last_name'),
+			);
+			$this->data['email'] = array(
+				'name'  => 'email',
+				'id'    => 'email',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('email'),
+			);
+			$this->data['phone'] = array(
+				'name'  => 'phone',
+				'id'    => 'phone',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('phone'),
+			);
+
+			$this->load->view('sis/addTeamMember',$this->data);
+		}
+	}	
+	
 	public function info()
 	{
 		// Page title
@@ -248,4 +318,33 @@ class Sis extends MY_Controller {
 		$this->load->view('sis/footer',$this->data);
 	}
 
+	public function generatePassword($length = 9, $available_sets = 'lud')
+	{
+		$sets = array();
+		if(strpos($available_sets, 'l') !== false)
+			$sets[] = 'abcdefghjkmnpqrstuvwxyz';
+		if(strpos($available_sets, 'u') !== false)
+			$sets[] = 'ABCDEFGHJKMNPQRSTUVWXYZ';
+		if(strpos($available_sets, 'd') !== false)
+			$sets[] = '23456789';
+		if(strpos($available_sets, 's') !== false)
+			$sets[] = '!@#$%&*?';
+
+		$all = '';
+		$password = '';
+		foreach($sets as $set)
+		{
+			$password .= $set[array_rand(str_split($set))];
+			$all .= $set;
+		}
+
+		$all = str_split($all);
+		for($i = 0; $i < $length - count($sets); $i++)
+			$password .= $all[array_rand($all)];
+
+		$password = str_shuffle($password);
+
+		return $password;
+	}
 }
+?>

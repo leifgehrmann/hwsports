@@ -5,26 +5,26 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
         <title><?=$title?> | Tournament Management System</title>
-        <link rel="icon" type="image/png" href="/img/<?=$slug?>/logo/tms.fav.16.png" />
-        <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
-        <link href="/css/main.css" rel="stylesheet" type="text/css">
-        <link href="/css/tms.css" rel="stylesheet" type="text/css">
-		<link rel='stylesheet' href='/scripts/smoothness/jquery-ui-1.10.0.custom.min.css'>
+        <link rel="icon" type="image/png" href="/img/logo/tms.fav.16.png" />
+        <link rel="stylesheet" href="/css/normalize.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/tms.css">
+		<link rel='stylesheet' href='/css/jquery-ui-1.10.0.custom.min.css'>
 		<link rel='stylesheet' href='/css/jquery.dataTables.css'>		
 		<link rel='stylesheet' href='/css/dataTables.tabletools.css'>		
 		<link rel='stylesheet' href='/css/dataTables.editor.css'>		
 		<link rel='stylesheet' href='/css/dataTables.ColVis.css'>
 		<link rel="stylesheet" media="screen" type="text/css" href="/css/colorpicker.css" />
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-		<script src="/scripts/jquery-ui-1.10.0.custom.min.js"></script>
-		<script charset="utf-8" src="/scripts/datatables/jquery-ui-timepicker-addon.js"></script>
-		<script charset="utf-8" src="/scripts/datatables/jquery.dataTables.min.js"></script>
-		<script charset="utf-8" src="/scripts/datatables/dataTables.tabletools.min.js"></script>
-		<script charset="utf-8" src="/scripts/datatables/dataTables.editor.min.js"></script>
-		<script charset="utf-8" src="/scripts/datatables/dataTables.ColReorderWithResize.js"></script>
-		<script charset="utf-8" src="/scripts/datatables/dataTables.ColVis.js"></script>
-		<script src="/scripts/colorpicker/colorpicker.js"></script>
-		<script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+		<script charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+		<script charset="utf-8" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
+		<script charset="utf-8" src="/js/jquery-ui-1.10.0.custom.min.js"></script>
+		<script charset="utf-8" src="/js/datatables/jquery-ui-timepicker-addon.js"></script>
+		<script charset="utf-8" src="/js/datatables/jquery.dataTables.min.js"></script>
+		<script charset="utf-8" src="/js/datatables/dataTables.tabletools.min.js"></script>
+		<script charset="utf-8" src="/js/datatables/dataTables.editor.min.js"></script>
+		<script charset="utf-8" src="/js/datatables/dataTables.ColReorderWithResize.js"></script>
+		<script charset="utf-8" src="/js/datatables/dataTables.ColVis.js"></script>
+		<script charset="utf-8" src="/js/colorpicker/colorpicker.js"></script>
     </head>
     <!--[if lt IE 7]>      <body class="page-<?=$page?> lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
     <!--[if IE 7]>         <body class="page-<?=$page?> lt-ie9 lt-ie8"> <![endif]-->

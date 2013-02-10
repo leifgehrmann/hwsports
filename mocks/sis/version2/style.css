@@ -705,12 +705,20 @@ body * {
 	margin-bottom: 10px;
 }
 #footer-powered .company-logo{
+<<<<<<< HEAD
 	width:100px;
 	height:40px;
 	background-image:url('icons.png');
 	background-position: -460px -20px;
 }
 #footer-powered div:hover{
+=======
+	margin: auto auto;
+	vertical-align: middle;
+	width:99px;
+	height:33px;
+	background-image:url('http://infusionsports.co.uk/img/logo/is.medium.png');
+>>>>>>> 278cea468895cdbc1655a39905d4adfc620405a0
 	opacity: 0.8;
 }
 

@@ -9,7 +9,7 @@
 
 <div id='calendar'></div>
 
-<script type='text/javascript' src='/scripts/fullcalendar/_loader.js'></script>
+<script type='text/javascript' src='/js/fullcalendar/_loader.js'></script>
 <script type='text/javascript'>
 	$(document).ready(function() {
 		$('#calendar').fullCalendar({
