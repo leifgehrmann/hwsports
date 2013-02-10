@@ -7,7 +7,7 @@ body {
 	display: inline-block;
 	width:99px;
 	height:33px;
-	background-image:url('/img/hwsports/logo/is.medium.png');
+	background-image:url('/img/logo/is.medium.png');
 }
 
 #container {
@@ -21,7 +21,7 @@ body {
 #header{
 	background: #<?=$centre['headerColour']?>;
 	height:100px;
-	background-image:url('/img/hwsports/header.png');
+	background-image:url('/img/header.png');
 }
 
 #header #user-bar a {
@@ -103,19 +103,19 @@ body {
 	background-position: 20px 12px;
 }
 
-#menu li.login			{ background-image: url('/img/hwsports/icons/login.14.png'); }
-#menu li.logout 		{ background-image: url('/img/hwsports/icons/logout.14.png'); }
-#menu li.home	 		{ background-image: url('/img/hwsports/icons/home.14.png'); }
-#menu li.whatson 		{ background-image: url('/img/hwsports/icons/match.14.png'); }
-#menu li.matches 		{ background-image: url('/img/hwsports/icons/match.14.png'); }
-#menu li.calendar 		{ background-image: url('/img/hwsports/icons/calendar.14.png'); }
-#menu li.tournaments 	{ background-image: url('/img/hwsports/icons/tournament.14.png'); }
-#menu li.register 		{ background-image: url('/img/hwsports/icons/register.14.png'); }
-#menu li.ticketsinfo	{ background-image: url('/img/hwsports/icons/ticket.14.png'); }
-#menu li.signup 		{ background-image: url('/img/hwsports/icons/signup.14.png'); }
-#menu li.account 		{ background-image: url('/img/hwsports/icons/user.14.png'); }
-#menu li.info 			{ background-image: url('/img/hwsports/icons/info.14.png'); }
-#menu li.help 			{ background-image: url('/img/hwsports/icons/help.14.png'); }
+#menu li.login			{ background-image: url('/img/icons/login.14.png'); }
+#menu li.logout 		{ background-image: url('/img/icons/logout.14.png'); }
+#menu li.home	 		{ background-image: url('/img/icons/home.14.png'); }
+#menu li.whatson 		{ background-image: url('/img/icons/match.14.png'); }
+#menu li.matches 		{ background-image: url('/img/icons/match.14.png'); }
+#menu li.calendar 		{ background-image: url('/img/icons/calendar.14.png'); }
+#menu li.tournaments 	{ background-image: url('/img/icons/tournament.14.png'); }
+#menu li.register 		{ background-image: url('/img/icons/register.14.png'); }
+#menu li.ticketsinfo	{ background-image: url('/img/icons/ticket.14.png'); }
+#menu li.signup 		{ background-image: url('/img/icons/signup.14.png'); }
+#menu li.account 		{ background-image: url('/img/icons/user.14.png'); }
+#menu li.info 			{ background-image: url('/img/icons/info.14.png'); }
+#menu li.help 			{ background-image: url('/img/icons/help.14.png'); }
 
 
 
@@ -369,10 +369,10 @@ body {
 	margin-bottom:20px;
 	background-size: 100%;
 }
-.page-account #content a.tickets div.icon { background-image: url('/img/hwsports/icons/ticket.64.png'); }
-.page-account #content a.signup  div.icon { background-image: url('/img/hwsports/icons/signup.64.png'); }
-.page-account #content a.details div.icon { background-image: url('/img/hwsports/icons/details.64.png'); }
-.page-account #content a.tms     div.icon { background-image: url('/img/hwsports/icons/tms.64.png'); }
+.page-account #content a.tickets div.icon { background-image: url('/img/icons/ticket.64.png'); }
+.page-account #content a.signup  div.icon { background-image: url('/img/icons/signup.64.png'); }
+.page-account #content a.details div.icon { background-image: url('/img/icons/details.64.png'); }
+.page-account #content a.tms     div.icon { background-image: url('/img/icons/tms.64.png'); }
 
 
 
@@ -420,7 +420,7 @@ body {
 	display: inline-block;
 	width:99px;
 	height:33px;
-	background-image:url('/img/hwsports/logo/is.medium.png');
+	background-image:url('/img/logo/is.medium.png');
 	opacity: 0.8;
 }
 
