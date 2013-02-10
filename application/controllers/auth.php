@@ -437,7 +437,7 @@ class Auth extends MY_Controller {
 		{
 			$username = $email = $this->input->post('email');
 			$password = $this->input->post('password');
-			$centreID = $this->data['centre']['centreID']
+			$centreID = $this->data['centre']['centreID'];
 
 			$additional_data = array(
 				'centreID' => $centreID,
