@@ -76,7 +76,7 @@
 			
 			//open up form to take team member details
 			$(".addTeamMember").fancybox({
-				onComplete:function (){					
+				afterLoad:function (){			
 					//grab this function so that we can pass it back to
 					//`onComplete` of the new fancybox we're going to create
 					var func = arguments.callee;
@@ -95,7 +95,7 @@
 						//post to the server and when we get a response, 
 						//draw a new fancybox, and run this function on completion
 						//so that we can bind the form and create a new fancybox on submit
-						$.post(url, data, function(msg){$.fancybox({content:msg,onComplete:func})});
+						$.post(url, data, function(msg){$.fancybox({content:msg,afterLoad:func})});
 						return false;
 					});
 				}
