@@ -95,7 +95,7 @@
 						//post to the server and when we get a response, 
 						//draw a new fancybox, and run this function on completion
 						//so that we can bind the form and create a new fancybox on submit
-						$.post(url, data, function(msg){$.fancybox({content:msg,afterLoad:func})});
+						//$.post(url, data, function(msg){$.fancybox({content:msg,afterLoad:func})});
 						return false;
 					});
 				}
