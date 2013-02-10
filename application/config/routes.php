@@ -39,7 +39,7 @@
 */
 
 $route['js/(:any)'] = "js/index/$1";
-$route['css/(:any)'] = "css/index/$1";
+$route['css/(:any)'] = "css/index";
 $route['default_controller'] = ($_SERVER['HTTP_HOST']=="infusionsports.co.uk" ? "product" : "sis");
 $route['404_override'] = '';
 
