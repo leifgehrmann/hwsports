@@ -99,12 +99,12 @@ function endload() {
 
 
 function css(file) {
-	tags.push("<link rel='stylesheet' type='text/css' href='" + prefix + file + "' />");
+	tags.push("<link rel='stylesheet' type='text/css' href='" + file + "' />");
 }
 
 
 function cssprint(file) {
-	tags.push("<link rel='stylesheet' type='text/css' href='" + prefix + file + "' media='print' />");
+	tags.push("<link rel='stylesheet' type='text/css' href='" + file + "' media='print' />");
 }
 
 
