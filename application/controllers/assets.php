@@ -27,10 +27,19 @@ class Assets extends MY_Controller {
 		function readBinaryFile($file,$type) {
 			if (file_exists($file)) {
 				header("Content-Type: $type");
-				// tells browsers not to reload unless file has been changed since last cache date
+				
+				
+				// time (in seconds) to cache
+				$expires = 3600*10; // 24 hours
+				header("Pragma: public");
+				header("Cache-Control: maxage=".$expires);
+				header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
+				
+				// tells browsers hich support this header not to reload unless file has been changed since last load date
 				if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= filemtime($file)) {
 					header('HTTP/1.0 304 Not Modified');
 				}
+				
 				readfile($file);
 				exit;
 			} // else silently fail
