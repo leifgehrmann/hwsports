@@ -233,6 +233,13 @@ class Sis extends MY_Controller {
 	//create a new team member user account
 	function addTeamMember()
 	{
+		if( $this->input->post() ) {
+			$this->data['success'] = true;
+		} else {
+			$this->data['success'] = false;
+			$this->data['form'] = "This is a form";
+		}
+		
 		$this->load->view('sis/addTeamMember',$this->data);
 		return;
 	
