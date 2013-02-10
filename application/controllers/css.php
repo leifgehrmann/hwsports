@@ -5,7 +5,7 @@ class Css extends MY_Controller {
 	public function index()
 	{
 		// get path segments as interpreted by CI routing
-		$segments = $this->uri->rsegment_array();
+		$segments = $this->uri->segment_array();
 		
 		print_r($segments); die();
 		
