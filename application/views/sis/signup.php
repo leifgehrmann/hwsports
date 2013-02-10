@@ -94,8 +94,7 @@
 						//draw a new fancybox, and run this function on completion
 						//so that we can bind the form and create a new fancybox on submit
 						$.post(url, data, function(msg){
-							alert(msg);
-							//$.fancybox({content:msg,beforeShow:func});
+							$.fancybox({content:msg,beforeShow:func});
 						});
 						
 						return false; 
