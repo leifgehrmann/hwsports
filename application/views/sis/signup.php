@@ -90,15 +90,6 @@
 						var data = $(this).serialize();
 						var url = $(this).attr('action')
 						
-						alert( $('.fancyform input[type=submit]').text() );
-						
-						return false; 
-					});
-					/*
-					//bind the submit of our new form
-					$('.fancyform form').unbind('submit').bind("submit", function() {
-						console.log("we're in the submit function of a fancyform!");
-
 						//post to the server and when we get a response, 
 						//draw a new fancybox, and run this function on completion
 						//so that we can bind the form and create a new fancybox on submit
@@ -109,7 +100,6 @@
 						
 						return false; 
 					});
-					*/
 				}
 			});
 			
