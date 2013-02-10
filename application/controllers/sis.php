@@ -255,7 +255,8 @@ class Sis extends MY_Controller {
 		// Validate input data
 		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data)) {
 			// Successful team member creation, show success message
-			$this->session->set_flashdata('message', $this->ion_auth->messages());
+			$this->session->set_flashdata('success', $this->ion_auth->messages());
+			$this->load->view('sis/addTeamMember',$this->data);
 		} else {
 			//display the add team member form
 			//set the flash data error message if there is one

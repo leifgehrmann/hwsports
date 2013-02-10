@@ -1,12 +1,38 @@
 <div class="yourFancyBoxClass">
   <? if($success) { ?>
-    <h2>Form was submitted!</h2>
-	<? if(!empty($message)){ ?>
-	  <div id="infoMessage"><?php $message;?></div>
-	<? } ?>
+		<div id="infoMessage"><?php $success;?></div>
   <? } else { ?>
-    <form action="/sis/addTeamMember" method="POST">
-      <?=$form?>
-    </form>
+		<h1>Add New Team Member</h1>
+		<p>Please enter the member's details below.</p>
+
+		<? if(!empty($message)){ ?>
+			  <div id="infoMessage"><?php echo $message;?></div>
+		<? } ?>
+
+		<?php echo form_open("auth/register");?>
+
+			  <p>
+					First Name: <br />
+					<?php echo form_input($first_name);?>
+			  </p>
+
+			  <p>
+					Last Name: <br />
+					<?php echo form_input($last_name);?>
+			  </p>
+
+			  <p>
+					Email: <br />
+					<?php echo form_input($email);?>
+			  </p>
+
+			  <p>
+					Phone: <br />
+					<?php echo form_input($phone);?>
+			  </p>
+
+			  <p><?php echo form_submit('submit', 'Create Team Member');?></p>
+
+		<?php echo form_close();?>
    <? } ?>
 </div>
