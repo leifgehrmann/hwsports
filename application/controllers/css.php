@@ -9,7 +9,7 @@ class Css extends MY_Controller {
 		
 		// get rid of "css" from path
 		$key = array_search("css",$segments);
-		unset( $key );
+		unset( $segments[$key] );
 		$path = implode("/",$segments);
 		
 		if( strpos($path,".css" !== false) ) {
@@ -17,7 +17,7 @@ class Css extends MY_Controller {
 			$this->load->view("css/{$this->data['slug']}/$path",$this->data);
 		} else {
 			echo $path;
-			readfile("{$this->data['slug']}/$path");
+			readfile("css/{$this->data['slug']}/$path");
 		}
 	}
 }
