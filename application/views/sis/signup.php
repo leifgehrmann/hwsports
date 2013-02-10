@@ -23,7 +23,7 @@
 								case "textarea": ?> <textarea id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></textarea><br /> <? break; 
 								case "text": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break; 
 								case "checkbox": ?> <input type="checkbox" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>" value="1"></input><br /> <? break; 
-								case "teamMembers": ?> <a href="#" class="addTeamMember">Add Team Member</a> <? break; 
+								case "teamMembers": ?> <a href="/sis/addTeamMember" class="addTeamMember fancybox.ajax">Add Team Member</a> <? break;
 						} ?>
 						<br />
 						<? } 
@@ -74,14 +74,8 @@
 				return false;
 			}));
 			
-			
-			$(".addTeamMember").click(function(){
-				alert("Hurr Durr Team Member Added");
-				return false;
-			});
-			
-			
-			
+			//open up form to take team member details
+			$(".addTeamMember").fancybox({type: 'ajax'});
 			
 			// put cursor in first input inside newly opened section for usability
 			$("#roleSections-"+roleID).on( "accordionactivate", function( event, ui ) {
