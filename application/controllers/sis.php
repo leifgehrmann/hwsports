@@ -233,25 +233,15 @@ class Sis extends MY_Controller {
 	//create a new team member user account
 	function addTeamMember()
 	{
-		if( $this->input->post() ) {
-			$this->data['success'] = true;
-		} else {
-			$this->data['success'] = false;
-			$this->data['form'] = "This is a form";
-		}
-		
-		$this->load->view('sis/addTeamMember',$this->data);
-		return;
-	
-		//validate form input
+		// Set up form validation rules 
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
 		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
 		$this->form_validation->set_rules('phone', 'Phone', 'required|xss_clean|min_length[8]|max_length[13]');
 		
-		if ($this->form_validation->run() == true)
-		{
-			$username = $email    = $this->input->post('email');
+		// Set up input data
+		if ( $this->input->post() ) {
+			$username = $email = $this->input->post('email');
 			$centreID = $this->data['centre']['centreID'];
 
 			$additional_data = array(
@@ -261,11 +251,13 @@ class Sis extends MY_Controller {
 				'phone'      => $this->input->post('phone')
 			);
 		}
-		if ($this->ion_auth->register($username, $password, $email, $additional_data) ) {
+		
+		// Validate input data
+		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data))
 			// Successful team member creation, show success message
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
 		} else {
-			//display the create user form
+			//display the add team member form
 			//set the flash data error message if there is one
 			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
 
@@ -293,18 +285,6 @@ class Sis extends MY_Controller {
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('phone'),
 			);
-			$this->data['password'] = array(
-				'name'  => 'password',
-				'id'    => 'password',
-				'type'  => 'password',
-				'value' => $this->form_validation->set_value('password'),
-			);
-			$this->data['password_confirm'] = array(
-				'name'  => 'password_confirm',
-				'id'    => 'password_confirm',
-				'type'  => 'password',
-				'value' => $this->form_validation->set_value('password_confirm'),
-			);
 
 			$this->load->view('sis/addTeamMember',$this->data);
 		}
@@ -329,4 +309,4 @@ class Sis extends MY_Controller {
 		$this->load->view('sis/footer',$this->data);
 	}
 
-}
+}-
