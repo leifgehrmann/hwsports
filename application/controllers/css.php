@@ -7,10 +7,8 @@ class Css extends MY_Controller {
 		// get path segments as interpreted by CI routing
 		$segments = $this->uri->segment_array();
 		
-		print_r($segments); die();
-		
 		// get rid of "css" from path
-		unset($segments[0]);
+		unset( array_search("css",$segments) );
 		$path = implode("/",$segments);
 		
 		if( strpos($path,".css" !== false) ) {
