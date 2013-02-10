@@ -84,7 +84,9 @@
 					console.log("we're in the onComplete function of a fancybox!");
 					
 					//bind the submit of our new form
-					$('.fancyform form').submit(function(){
+					$('.fancyform form')").submit(function(e){
+						e.preventDefault();
+						
 						console.log("we're in the submit function of a fancyform!");
 						//this is strictly cosmetic
 						$.fancybox.showActivity();
@@ -96,7 +98,6 @@
 						//draw a new fancybox, and run this function on completion
 						//so that we can bind the form and create a new fancybox on submit
 						//$.post(url, data, function(msg){$.fancybox({content:msg,afterLoad:func})});
-						return false;
 					});
 				}
 			});
