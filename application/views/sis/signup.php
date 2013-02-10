@@ -84,27 +84,21 @@
 					console.log("we're in the onComplete function of a fancybox!");
 					
 					//bind the submit of our new form
-					$('.fancyform form').unbind('submit').bind("submit", function() { 
-						alert( $('.fancyform input[type=submit]').text() );
-						
-						return false; 
-					});
-					/*
-					$('.fancyform form').submit(function(e){
-						e.preventDefault();
-						
+					$('.fancyform form').unbind('submit').bind("submit", function() {
 						console.log("we're in the submit function of a fancyform!");
 						//this is strictly cosmetic
-						//$.fancybox.showActivity();
+						$.fancybox.showActivity();
 
-						//var data = $(this).serialize();
-						//var url = $(this).attr('action')
+						var data = $(this).serialize();
+						var url = $(this).attr('action')
 
 						//post to the server and when we get a response, 
 						//draw a new fancybox, and run this function on completion
 						//so that we can bind the form and create a new fancybox on submit
-						//$.post(url, data, function(msg){$.fancybox({content:msg,afterLoad:func})});
-					});*/
+						$.post(url, data, function(msg){$.fancybox({content:msg,afterLoad:func})});
+						
+						return false; 
+					});
 				}
 			});
 			
