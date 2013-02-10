@@ -85,7 +85,13 @@
 					
 					
 					//bind the submit of our new form
-					$('.fancyform form').unbind('submit').bind("submit", function() { 
+					$('.fancyform form').unbind('submit').bind("submit", function() {
+						//this is strictly cosmetic
+						$.fancybox.showActivity();
+
+						var data = $(this).serialize();
+						var url = $(this).attr('action')
+						
 						alert( $('.fancyform input[type=submit]').text() );
 						
 						return false; 
@@ -94,11 +100,6 @@
 					//bind the submit of our new form
 					$('.fancyform form').unbind('submit').bind("submit", function() {
 						console.log("we're in the submit function of a fancyform!");
-						//this is strictly cosmetic
-						$.fancybox.showActivity();
-
-						var data = $(this).serialize();
-						var url = $(this).attr('action')
 
 						//post to the server and when we get a response, 
 						//draw a new fancybox, and run this function on completion
