@@ -11,9 +11,9 @@
 		<link rel="stylesheet" type="text/css" href="/css/vendor/normalize/normalize.min.css">
 		<link rel="stylesheet" type="text/css" href="/css/vendor/jquery-ui/jquery-ui-1.10.0.custom.min.css">
 		<link rel="stylesheet" type="text/css" href="/css/vendor/fancybox/jquery.fancybox.css">
-		<link rel="stylesheet" type="text/css" href="/css/vendor/dataTables/jquery.dataTables.css">		
-		<link rel="stylesheet" type="text/css" href="/css/vendor/dataTables/dataTables.tabletools.css">
-		<link rel="stylesheet" type="text/css" href="/css/vendor/dataTables/dataTables.ColVis.css">
+		<link rel="stylesheet" type="text/css" href="/css/vendor/datatables/jquery.dataTables.css">		
+		<link rel="stylesheet" type="text/css" href="/css/vendor/datatables/dataTables.tabletools.css">
+		<link rel="stylesheet" type="text/css" href="/css/vendor/datatables/dataTables.ColVis.css">
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,700,300">
 
 		<!-- Website styling -->
@@ -21,15 +21,16 @@
 		<link rel="stylesheet" type="text/css" href="/css/sis.css">
 
 		<!-- Vendor scripts -->
-		<script charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-		<script charset="utf-8" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
-		<script charset="utf-8" src="/js/vendor/jquery/jquery-ui-1.10.0.custom.min.js"></script>
-		<script charset="utf-8" src="/js/vendor/jquery/jquery-ui-timepicker-addon.js"></script>
-		<script charset="utf-8" src="/js/vendor/fancybox/jquery.fancybox.pack.js"></script>
-		<script charset="utf-8" src="/js/vendor/datatables/jquery.dataTables.min.js"></script>
-		<script charset="utf-8" src="/js/vendor/datatables/dataTables.tabletools.min.js"></script>
-		<script charset="utf-8" src="/js/vendor/datatables/dataTables.ColReorderWithResize.js"></script>
-		<script charset="utf-8" src="/js/vendor/datatables/dataTables.ColVis.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+		<script src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
+		<script src="/js/vendor/jquery/jquery-ui-1.10.0.custom.min.js"></script>
+		<script src="/js/vendor/jquery/jquery-ui-timepicker-addon.js"></script>
+		<script src="/js/vendor/fancybox/jquery.fancybox.pack.js"></script>
+		<script src="/js/vendor/datatables/jquery.dataTables.min.js"></script>
+		<script src="/js/vendor/datatables/dataTables.tabletools.min.js"></script>
+		<script src="/js/vendor/datatables/dataTables.ColReorderWithResize.js"></script>
+		<script src="/js/vendor/datatables/dataTables.ColVis.js"></script>
+		<script src='/js/vendor/fullcalendar/_loader.js'></script>
 
 		<script>
 			$(document).ready(function() {

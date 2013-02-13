@@ -198,7 +198,7 @@ body * {
 #menu div.icon.homepage 		{background-position: -20px -200px;}
 #menu div.icon.calendar 		{background-position: -20px -220px;}
 #menu div.icon.tournaments 		{background-position: -20px -240px;}
-#menu div.icon.matches 			{background-position: -20px -260px;}
+#menu .matches div.icon 		{background-position: -20px -260px;}
 #menu div.icon.tickets 			{background-position: -20px -280px;}
 #menu div.icon.help 			{background-position: -20px -300px;}
 #menu div.icon.account 			{background-position: -20px -320px;}
@@ -206,16 +206,16 @@ body * {
 #menu div.icon.signout 			{background-position: -20px -360px;}
 #menu div.icon.register 		{background-position: -20px -380px;}
 
-#menu a:hover div.icon.homepage 	,#menu a.selected div.icon.homepage 	{background-position: -40px -200px;}
-#menu a:hover div.icon.calendar 	,#menu a.selected div.icon.calendar		{background-position: -40px -220px;}
-#menu a:hover div.icon.tournaments 	,#menu a.selected div.icon.tournaments	{background-position: -40px -240px;}
-#menu a:hover div.icon.matches 		,#menu a.selected div.icon.matches		{background-position: -40px -260px;}
-#menu a:hover div.icon.tickets 		,#menu a.selected div.icon.tickets		{background-position: -40px -280px;}
-#menu a:hover div.icon.help 		,#menu a.selected div.icon.help			{background-position: -40px -300px;}
-#menu a:hover div.icon.account 		,#menu a.selected div.icon.account		{background-position: -40px -320px;}
-#menu a:hover div.icon.signin 		,#menu a.selected div.icon.signin		{background-position: -40px -340px;}
-#menu a:hover div.icon.signout 		,#menu a.selected div.icon.signout		{background-position: -40px -360px;}
-#menu a:hover div.icon.register 	,#menu a.selected div.icon.register		{background-position: -40px -380px;}
+#menu a.homepage:hover 		div.icon 	,#menu a.homepage.selected div.icon.homepage 	{background-position: -40px -200px;}
+#menu a.calendar:hover 		div.icon 	,#menu a.calendar.selected div.icon.calendar		{background-position: -40px -220px;}
+#menu a.tournaments:hover 	div.icon 	,#menu a.tournaments.selected div.icon.tournaments	{background-position: -40px -240px;}
+#menu a:hover .matches		div.icon 	,#menu a.selected .matches div.icon.matches		{background-position: -40px -260px;}
+#menu a.tickets:hover 		div.icon 	,#menu a.selected div.icon.tickets		{background-position: -40px -280px;}
+#menu a.help:hover 			div.icon 	,#menu a.selected div.icon.help			{background-position: -40px -300px;}
+#menu a.account:hover 		div.icon 	,#menu a.selected div.icon.account		{background-position: -40px -320px;}
+#menu a.signin:hover 		div.icon 	,#menu a.selected div.icon.signin		{background-position: -40px -340px;}
+#menu a.signout:hover 		div.icon 	,#menu a.selected div.icon.signout		{background-position: -40px -360px;}
+#menu a.register:hover		div.icon 	,#menu a.selected div.icon.register		{background-position: -40px -380px;}
 
 
 

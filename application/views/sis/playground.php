@@ -402,7 +402,6 @@ $("a").die("keypress").live("keypress",function(e){
 
 <div id="block-6">
 	<div id='calendar'></div>
-	<script src='/js/fullcalendar/_loader.js'></script>
 	<script>
 	$(document).ready(function(){
 		var date = new Date();
