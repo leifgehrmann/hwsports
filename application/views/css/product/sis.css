@@ -13,7 +13,7 @@ body {
 #header{
 	background: #1E303A;
 	height:150px;
-	background-image:url('/img/product/header.png');
+	background-image:url('/img/header.png');
 }
 
 #header #user-bar a {
@@ -93,9 +93,9 @@ body {
 	background-position: 20px 12px;
 }
 
-#menu li.home     		{ background-image: url(/img/product/icons/home.14.png); }
-#menu li.screenshots 	{ background-image: url(/img/product/icons/screenshots.14.png); }
-#menu li.signup 		{ background-image: url(/img/product/icons/signup.14.png); }
+#menu li.home     		{ background-image: url(/img/icons/home.14.png); }
+#menu li.screenshots 	{ background-image: url(/img/icons/screenshots.14.png); }
+#menu li.signup 		{ background-image: url(/img/icons/signup.14.png); }
 
 
 
@@ -194,6 +194,6 @@ body {
 	display: inline-block;
 	width:99px;
 	height:33px;
-	background-image:url('/img/product/logo/is.medium.png');
+	background-image:url('/img/logo/is.medium.png');
 	opacity: 0.8;
 }

@@ -24,15 +24,140 @@
 		<script charset="utf-8" src="/js/vendor/datatables/dataTables.tabletools.min.js"></script>
 		<script charset="utf-8" src="/js/vendor/datatables/dataTables.ColReorderWithResize.js"></script>
 		<script charset="utf-8" src="/js/vendor/datatables/dataTables.ColVis.js"></script>
+
+		<script>
+			$(document).ready(function() {
+				$( '.widget-title' ).each(function() {
+					$(this).height(Math.round($(this).height()/20)*20);
+				});
+				$( '.fc .fc-header' ).each(function() {
+					$(this).css('margin-bottom',(20-($(this).height()%20))+'px');
+				});
+				$( 'img' ).each(function() {
+					$(this).load(function() {
+						// alert($(this).prop('tagName'));
+						$(this).css('margin-bottom',(15-($(this).outerHeight(true)%20))+'px');
+						// alert("margin:"+$(this).css('margin-bottom'));
+					});
+					//alert((15-($(this).outerHeight(true)%20)));
+					/*setTimeout( function() {
+						alert("outer height "+$(this).prop('tagName'));
+						alert("outer height "+x.outerHeight(true));
+					}, 5000);*/
+					//alert($(this));
+				});
+			});
+			$( 'div:animated' ).each(function(){
+				$(this).height(Math.round($(this).height()/20)*20);
+				alert($(this).height());
+			});
+		</script>
 	</head>
 	<!--[if lt IE 7]>      <body class="page-<?=$page?> lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 	<!--[if IE 7]>         <body class="page-<?=$page?> lt-ie9 lt-ie8"> <![endif]-->
 	<!--[if IE 8]>         <body class="page-<?=$page?> lt-ie9"> <![endif]-->
 	<!--[if gt IE 8]><!--> <body class="page-<?=$page?>"> <!--<![endif]-->
-    <!--[if lt IE 7]>
-        <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
-        <![endif]-->
-        <body>
+	<!--[if lt IE 7]>
+		<p class="chromeframe">
+			You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+	<![endif]-->
+	<body>
+		<div id="container">
+			<a id="header" href="/" alt="Return to Homepage" title="Return to Homepage">
+				<div id="header-block">
+					<div id="header-title">Riccarton Tournaments</div>
+					<div id="header-subtitle">Centre for Sport &amp; Exercise</div>
+				</div>
+			</a>
+			<div id="middle">
+				<div id="middle-block">
+					<div id="menu">
+						<ul>
+							<a 
+								href="/" 
+								title="Return to the Homepage" 
+								class="homepage <?=($page=="sishome" ? 'selected' : '')?>"
+							>
+								<li><div class="icon"></div>Homepage</li>
+							</a>
+							<a
+								href="/sis/calendar" 
+								title="View upcoming tournaments and events on the calendar"
+								class="calendar <?=($page=="calendar" ? 'selected' : '')?>"
+							>
+								<li><div class="icon"></div>Calendar</li>
+							</a>
+							<a 
+								href="/sis/tournaments" 
+								title="List of all tournaments"
+								class="tournaments <?=($page=="tournaments" ? 'selected' : '')?>"
+							>
+								<li><div class="icon"></div>Tournaments</li>
+							</a>
+							<a 
+								href="/sis/matches" 
+								title="List of most recent matches"
+								class="matches <?=($page=="matches" ? 'selected' : '')?>"
+							>
+								<li><div class="icon"></div>Matches</li>
+							</a>
+							<a 
+								href="/sis/ticketsinfo" 
+								title="Ticket information"
+								class="tickets <?=($page=="ticketsinfo" ? 'selected' : '')?>"
+							>
+								<li><div class="icon"></div>Tickets</li>
+							</a>
+							<a 
+								href="/sis/help"
+								title="Help"
+								class="help <?=($page=="help" ? 'selected' : '')?>"
+							>
+								<li><div class="icon"></div>Help</li>
+							</a>
+						</ul>
+						<? if(!$this->ion_auth->logged_in()){ ?>
+						<ul>
+							<a 
+								href="/auth/register" 
+								title="Register an account"
+								class="register <?=($page=="register" ? 'selected' : '')?>"
+							>
+								<li><div class="icon"></div>Register</li>
+							</a>
+							<a 
+								href="/auth/login" 
+								title="Sign into an account"
+								class="signin <?=($page=="login" ? 'selected' : '')?>"
+							>
+								<li><div class="icon"></div>Sign In</li>
+							</a>
+						</ul>
+						<? } else { ?>
+						<ul class="menu-user">
+	        				<a 
+	        					href="/sis/account"
+	        					title="View account details"
+	        					class="account <?=($page=="account" ? 'selected' : '')?>"
+	        				>
+	        					<li><div class="icon"></div>Account</li>
+	        				</a>
+	        				<a 
+	        					href="/auth/logout"
+	        					class="signout <?=($page=="login" ? 'selected' : '')?>"
+	        				>
+	        					<li><div class="icon"></div>Sign Out</li>
+	        				</a>
+	        			</ul>
+						<? } ?>
+					</div>
+					<div id="content">
+
+
+
+
+
+        <!--<body>
         	<div id="container">
         		<a href="/"><div id="header"></div></a>
         		<div id="menu">
@@ -57,4 +182,4 @@
         			</ul>
         			<? } ?>
         		</div>
-        		<div id="content">
+        		<div id="content">-->
