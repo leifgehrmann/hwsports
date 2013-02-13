@@ -44,12 +44,12 @@
 					console.log((15-($(this).outerHeight(true)%20))+'px');
 					// alert("margin:"+$(this).css('margin-bottom'));
 				});
-				$('.widget-title').ready(function(){
+				$('.widget-title').each(function(){
 				//$("html").on("ready", ".widget-title", function(){
 					console.log("resizing widget title");
 					$(this).height(Math.round($(this).height()/20)*20);
 				});
-				$('.fc .fc-header').ready(function(){
+				$('.fc .fc-header').each(function(){
 				//$("html").on("ready", ".fc .fc-header", function(){
 					console.log("resizing fullcalendar element");
 					$(this).css('margin-bottom',(20-($(this).height()%20))+'px');
