@@ -491,13 +491,6 @@ $("a").die("keypress").live("keypress",function(e){
 			]
 		});
 
-$( '.fc .fc-header' ).each(function() {
-	$(this).css('margin-bottom',20-$(this).height()%20+'px');
-});
-$( '.fc .fc-content' ).each(function() {
-	$(this).css('margin-bottom',20-$(this).height()%20+'px');
-});
-
 });
 </script>
 </div>

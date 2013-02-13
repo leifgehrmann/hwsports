@@ -242,7 +242,7 @@ class Assets extends MY_Controller {
 			} else {
 				$this->load->view("js/{$this->data['slug']}/$path",$this->data);
 			}
-			$this->output->cache(60*24); // cache js for 24 hours
+			//$this->output->cache(60*24); // cache js for 24 hours
 
 		} elseif( 	$file_ext == "png" || 
 					$file_ext == "jpg" || 

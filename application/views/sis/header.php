@@ -34,13 +34,26 @@
 
 		<script>
 			$(document).ready(function() {
-				$( '.widget-title' ).each(function() {
+				$("html").on("ready", "img", function(){
+					$(this).load(function() {
+						// alert($(this).prop('tagName'));
+						console.log($(this).outerHeight(true)+'px');
+						$(this).css('margin-bottom',(15-($(this).outerHeight(true)%20))+'px');
+						console.log($(this).outerHeight(true)+'px');
+						console.log((15-($(this).outerHeight(true)%20))+'px');
+						// alert("margin:"+$(this).css('margin-bottom'));
+					});
+				});
+				$("html").on("ready", ".widget-title", function(){
 					$(this).height(Math.round($(this).height()/20)*20);
 				});
-				$( '.fc .fc-header' ).each(function() {
+				$("html").on("ready", ".fc .fc-header", function(){
 					$(this).css('margin-bottom',(20-($(this).height()%20))+'px');
 				});
-				$( 'img' ).each(function() {
+				$("html").on("ready", ".fc .fc-content", function(){
+					$(this).css('margin-bottom',(20-($(this).height()%20))+'px');
+				});
+				/*$( 'img' ).each(function() {
 					$(this).load(function() {
 						// alert($(this).prop('tagName'));
 						$(this).css('margin-bottom',(15-($(this).outerHeight(true)%20))+'px');
@@ -50,13 +63,15 @@
 					/*setTimeout( function() {
 						alert("outer height "+$(this).prop('tagName'));
 						alert("outer height "+x.outerHeight(true));
-					}, 5000);*/
+					}, 5000);
 					//alert($(this));
+				});*/
+				/*$( '.fc .fc-header' ).each(function() {
+					$(this).css('margin-bottom',20-$(this).height()%20+'px');
 				});
-			});
-			$( 'div:animated' ).each(function(){
-				$(this).height(Math.round($(this).height()/20)*20);
-				alert($(this).height());
+				$( '.fc .fc-content' ).each(function() {
+					$(this).css('margin-bottom',20-$(this).height()%20+'px');
+				});*/
 			});
 
 			var b = false;
