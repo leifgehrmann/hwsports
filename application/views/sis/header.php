@@ -35,7 +35,7 @@
 		<script>
 			$(document).ready(function() {
 				console.log("This works");
-				$("html").on("load", "img", function(){
+				$('img').load(function(){
 					// alert($(this).prop('tagName'));
 					console.log("resizing image");
 					console.log($(this).outerHeight(true)+'px');
@@ -44,11 +44,13 @@
 					console.log((15-($(this).outerHeight(true)%20))+'px');
 					// alert("margin:"+$(this).css('margin-bottom'));
 				});
-				$("html").on("ready", ".widget-title", function(){
+				$('.widget-title').ready(function(){
+				//$("html").on("ready", ".widget-title", function(){
 					console.log("resizing widget title");
 					$(this).height(Math.round($(this).height()/20)*20);
 				});
-				$("html").on("ready", ".fc .fc-header", function(){
+				$('.fc .fc-header').ready(function(){
+				//$("html").on("ready", ".fc .fc-header", function(){
 					console.log("resizing fullcalendar element");
 					$(this).css('margin-bottom',(20-($(this).height()%20))+'px');
 				});
