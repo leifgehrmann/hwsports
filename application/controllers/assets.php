@@ -229,14 +229,14 @@ class Assets extends MY_Controller {
 		$this->ctype = $content_types[$file_ext];
 		$this->output->set_header("Content-Type: {$this->ctype}");
 
-		// If the file is css, we insert the slug to the path
 		if( $file_ext == "css" ) {
+			// If the file is css, we insert the slug to the path
 			$this->load->view("css/{$this->data['slug']}/$path",$this->data);	
 			//$this->output->cache(60); // cache css for 1 hour
 
-		// If the file is js, we insert the slug to the path ONLY if the value
-		// vendor doesn't exist in the segments.
 		} elseif( $file_ext == "js" ) {
+			// If the file is js, we insert the slug to the path ONLY if the
+			// string "vendor" doesn't exist in the the second segment.
 			if($vendor) {
 				$this->load->view("js/vendor/$path",$this->data);
 			} else {
@@ -244,7 +244,6 @@ class Assets extends MY_Controller {
 			}
 			$this->output->cache(60*24); // cache js for 24 hours
 
-		// If the file is an image, we go to the appropriate directory.
 		} elseif( 	$file_ext == "png" || 
 					$file_ext == "jpg" || 
 					$file_ext == "jpeg" || 
@@ -252,10 +251,11 @@ class Assets extends MY_Controller {
 			) {
 			// This is a binary image so read the file directly from the img 
 			// folder after sending the header - don't load it as a view
-			$this->readBinaryFile("/home/sports/public_html/application/views/img/{$this->data['slug']}/{$path}");
+			$this->readBinaryFile(FCPATH.APPPATH."views/img/{$this->data['slug']}/{$path}");
 		} else {
-			// This isn't js, css or an image based on it's extension so try and load it from a random folder based on it's extension?
-			$this->readBinaryFile("/home/sports/public_html/application/views/{$file_ext}/{$this->data['slug']}/{$path}");
+			// This isn't js, css or an image based on it's extension so try and
+			// load it from a random folder based on it's extension?
+			$this->readBinaryFile(FCPATH.APPPATH."views/{$file_ext}/{$this->data['slug']}/{$path}");
 		}
 	}
 }
