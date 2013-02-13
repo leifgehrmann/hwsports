@@ -41,4 +41,11 @@ class Test extends MY_Controller {
 		header('Content-Type: application/json');
 		$this->load->view('data', $this->data);
 	}
+
+	public function test_constants(){
+		$output = {APPPATH,SYSDIR}
+		$this->data['data'] =  print_r($output,1);
+		header('Content-Type: text/plain');
+		$this->load->view('data', $this->data);
+	}
 }
