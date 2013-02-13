@@ -246,6 +246,7 @@ body * {
 	position:relative;
 	top: 8pt;
 	margin-bottom:20px;
+	color: #0D44A2;
 }
 #content h2 {
 	font-size: 20px;
@@ -286,7 +287,7 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover {
 
 #content ul, #content dl, #content ol {
 	position: relative;
-	top: 4px;
+	top: 5px;
 	margin-left:40px;
 }
 #content dt { font-weight: bold; }
@@ -312,7 +313,7 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover {
 }
 #content figcaption {
 	position: relative;
-	top: 4px;
+	top: 5px;
 }
 #content figure {
 	margin-bottom:20px;
@@ -335,7 +336,7 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover {
 /*
 	Form Elements
 */
-#content input[type='text'] {
+#content input[type='text'], #content input:not([type]) {
 	line-height: 40px;
 	font-size: 16px;
 	font-family: inherit;
@@ -812,7 +813,7 @@ div.widget-title div.icon.sport-hurdling {background-position: -380px -220px;}
 div.widget-title div.icon.chevron 		 {background-position: -120px -60px;}
 div.widget-title div.icon.news			 {background-position: -160px -280px;}
 
-h1 div.icon.subsection {background-position: -80px -80px;}
+h1 div.icon.subsection {background-position: -20px -80px;}
 
 .button div.icon.load {
 	-webkit-animation: play-black .8s steps(8) infinite;
