@@ -5,25 +5,24 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
         <title><?=$title?> | <?=$centre['shortName']?> Sports</title>
-        <link rel="icon" type="image/png" href="/img/logo/sis.fav.16.png" />
-        <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
-        <link href="/css/main.css" rel="stylesheet" type="text/css">
-        <link href="/css/sis.css" rel="stylesheet" type="text/css">
-		<link rel='stylesheet' href='/css/jquery-ui-1.10.0.custom.min.css'>
-		<link rel='stylesheet' href='/css/jquery.fancybox.css'>
-		<link rel='stylesheet' href='/css/jquery.dataTables.css'>		
-		<link rel='stylesheet' href='/css/dataTables.tabletools.css'>		
-		<link rel='stylesheet' href='/css/dataTables.ColVis.css'>
-		<link rel='stylesheet' href='/css/dataTables.ColVis.css'>
+        <link rel='icon' type="image/png" href="/img/favicon/sis.png" />
+        <link rel='stylesheet' type='text/css' href='/css/client/main.css'>
+        <link rel='stylesheet' type='text/css' href='/css/client/sis.css'>
+        <link rel='stylesheet' type='text/css' href='/css/vendor/normalize/normalize.min.css'>
+		<link rel='stylesheet' type='text/css' href='/css/vendor/jquery-ui/jquery-ui-1.10.0.custom.min.css'>
+		<link rel='stylesheet' type='text/css' href='/css/vendor/fancybox/jquery.fancybox.css'>
+		<link rel='stylesheet' type='text/css' href='/css/vendor/dataTables/jquery.dataTables.css'>		
+		<link rel='stylesheet' type='text/css' href='/css/vendor/dataTables/dataTables.tabletools.css'>		
+		<link rel='stylesheet' type='text/css' href='/css/vendor/dataTables/dataTables.ColVis.css'>
 		<script charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         <script charset="utf-8" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
 		<script charset="utf-8" src="/js/vendor/jquery/jquery-ui-1.10.0.custom.min.js"></script>
 		<script charset="utf-8" src="/js/vendor/jquery/jquery-ui-timepicker-addon.js"></script>
 		<script charset="utf-8" src="/js/vendor/fancybox/jquery.fancybox.pack.js"></script>
-		<script charset="utf-8" src="/js/datatables/jquery.dataTables.min.js"></script>
-		<script charset="utf-8" src="/js/datatables/dataTables.tabletools.min.js"></script>
-		<script charset="utf-8" src="/js/datatables/dataTables.ColReorderWithResize.js"></script>
-		<script charset="utf-8" src="/js/datatables/dataTables.ColVis.js"></script>
+		<script charset="utf-8" src="/js/vendor/datatables/jquery.dataTables.min.js"></script>
+		<script charset="utf-8" src="/js/vendor/datatables/dataTables.tabletools.min.js"></script>
+		<script charset="utf-8" src="/js/vendor/datatables/dataTables.ColReorderWithResize.js"></script>
+		<script charset="utf-8" src="/js/vendor/datatables/dataTables.ColVis.js"></script>
     </head>
     <!--[if lt IE 7]>      <body class="page-<?=$page?> lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
     <!--[if IE 7]>         <body class="page-<?=$page?> lt-ie9 lt-ie8"> <![endif]-->

@@ -5,15 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
         <title><?=$title?> | Tournament Management System</title>
-        <link rel="icon" type="image/png" href="/img/logo/tms.fav.16.png" />
-        <link rel="stylesheet" href="/css/normalize.min.css">
-        <link rel="stylesheet" href="/css/main.css">
-        <link rel="stylesheet" href="/css/tms.css">
-		<link rel='stylesheet' href='/css/jquery-ui-1.10.0.custom.min.css'>
-		<link rel='stylesheet' href='/css/jquery.dataTables.css'>		
-		<link rel='stylesheet' href='/css/dataTables.tabletools.css'>		
-		<link rel='stylesheet' href='/css/dataTables.editor.css'>		
-		<link rel='stylesheet' href='/css/dataTables.ColVis.css'>
+        <link rel="icon" type="image/png" href="/img/favicon/tms.png" />
+        <link rel="stylesheet" type="text/css" href="/css/client/main.css">
+        <link rel="stylesheet" type="text/css" href="/css/client/tms.css">
+        <link rel="stylesheet" type="text/css" href="/css/vendor/normalize/normalize.min.css">
+		<link rel='stylesheet' type="text/css" href='/css/jquery-ui-1.10.0.custom.min.css'>
+		<link rel='stylesheet' type="text/css" href='/css/jquery.dataTables.css'>		
+		<link rel='stylesheet' type="text/css" href='/css/dataTables.tabletools.css'>		
+		<link rel='stylesheet' type="text/css" href='/css/dataTables.editor.css'>		
+		<link rel='stylesheet' type="text/css" href='/css/dataTables.ColVis.css'>
 		<link rel="stylesheet" media="screen" type="text/css" href="/css/colorpicker.css" />
 		<script charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 		<script charset="utf-8" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
