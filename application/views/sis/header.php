@@ -39,9 +39,9 @@
 					// alert($(this).prop('tagName'));
 					console.log("resizing image");
 					console.log($(this).outerHeight(true)+'px');
-					$(this).css('margin-bottom',(15-($(this).outerHeight(true)%20))+'px');
+					$(this).css('margin-bottom',(20-($(this).outerHeight(true)%20))+'px');
 					console.log($(this).outerHeight(true)+'px');
-					console.log((15-($(this).outerHeight(true)%20))+'px');
+					console.log((20-($(this).outerHeight(true)%20))+'px');
 					// alert("margin:"+$(this).css('margin-bottom'));
 				});
 				$('.widget-title').each(function(){
