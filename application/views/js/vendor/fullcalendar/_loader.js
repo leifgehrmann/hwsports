@@ -10,11 +10,11 @@ var tags;
 
 startload();
 
-css('/css/fullcalendar/main.css');
-css('/css/fullcalendar/common.css');
-css('/css/fullcalendar/basic.css');
-css('/css/fullcalendar/agenda.css');
-cssprint('/css/fullcalendar/print.css');
+css('/css/vendor/fullcalendar/main.css');
+css('/css/vendor/fullcalendar/common.css');
+css('/css/vendor/fullcalendar/basic.css');
+css('/css/vendor/fullcalendar/agenda.css');
+cssprint('/css/vendor/fullcalendar/print.css');
 
 if (debug && (!window.console || !window.console.log)) {
 	jslib('../tests/lib/firebug-lite/firebug-lite-compressed.js');

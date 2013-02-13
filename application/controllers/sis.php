@@ -301,26 +301,29 @@ class Sis extends MY_Controller {
 		}
 	}	
 	
-	public function info()
-	{
-		// Page title
+	public function info() {
 		$this->data['title'] = "About Us";
 		$this->data['page'] = "info";
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('sis/info',$this->data);
 		$this->load->view('sis/footer',$this->data);
 	}
-	public function help()
-	{
-		// Page title
+	public function help() {
 		$this->data['title'] = "Help";
 		$this->data['page'] = "help";
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('sis/help',$this->data);
 		$this->load->view('sis/footer',$this->data);
 	}
+	public function playground() {
+		$this->data['title'] = "Branding Playground";
+		$this->data['page'] = "playground";
+		$this->load->view('sis/header',$this->data);
+		$this->load->view('sis/playground',$this->data);
+		$this->load->view('sis/footer',$this->data);
+	}
 
-	public function generatePassword($length = 9, $available_sets = 'lud')
+	private function generatePassword($length = 9, $available_sets = 'lud')
 	{
 		$sets = array();
 		if(strpos($available_sets, 'l') !== false)

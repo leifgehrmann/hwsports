@@ -30,7 +30,7 @@ body {
 	float:left;
 	width:48px;
 	height:35px;
-	background-image:url('/img/logo/tms.medium.png');
+	background-image:url('/img/x-please-delete-me-soon/logo/tms.medium.png');
 }
 
 #header #title-bar .name{
@@ -142,20 +142,20 @@ body {
 	border-bottom: 1px solid #C8C8C8; 
 }
 
-#menu li.home				{ background-image: url('/img/icons/home.14.png'); }
-#menu li.calendar			{ background-image: url('/img/icons/calendar.14.png'); }
-#menu li.tournaments 		{ background-image: url('/img/icons/tournament.14.png'); }
-#menu li.matches 			{ background-image: url('/img/icons/match.14.png'); }
-#menu li.venues 			{ background-image: url('/img/icons/venue.14.png'); }
-#menu li.sports 			{ background-image: url('/img/icons/sport.14.png'); }
-#menu li.groups 			{ background-image: url('/img/icons/group.14.png'); }
-#menu li.users 				{ background-image: url('/img/icons/user.14.png'); }
-#menu li.news 				{ background-image: url('/img/icons/news.14.png'); }
-#menu li.tickets 			{ background-image: url('/img/icons/tickets.14.png'); }
-#menu li.reports 			{ background-image: url('/img/icons/report.14.png'); }
-#menu li.appearance 		{ background-image: url('/img/icons/appearance.14.png'); }
-#menu li.settings 			{ background-image: url('/img/icons/settings.14.png'); }
-#menu li.personal-settings	{ background-image: url('/img/icons/personal-settings.14.png'); }
+#menu li.home				{ background-image: url('/img/x-please-delete-me-soon/icons/home.14.png'); }
+#menu li.calendar			{ background-image: url('/img/x-please-delete-me-soon/icons/calendar.14.png'); }
+#menu li.tournaments 		{ background-image: url('/img/x-please-delete-me-soon/icons/tournament.14.png'); }
+#menu li.matches 			{ background-image: url('/img/x-please-delete-me-soon/icons/match.14.png'); }
+#menu li.venues 			{ background-image: url('/img/x-please-delete-me-soon/icons/venue.14.png'); }
+#menu li.sports 			{ background-image: url('/img/x-please-delete-me-soon/icons/sport.14.png'); }
+#menu li.groups 			{ background-image: url('/img/x-please-delete-me-soon/icons/group.14.png'); }
+#menu li.users 				{ background-image: url('/img/x-please-delete-me-soon/icons/user.14.png'); }
+#menu li.news 				{ background-image: url('/img/x-please-delete-me-soon/icons/news.14.png'); }
+#menu li.tickets 			{ background-image: url('/img/x-please-delete-me-soon/icons/tickets.14.png'); }
+#menu li.reports 			{ background-image: url('/img/x-please-delete-me-soon/icons/report.14.png'); }
+#menu li.appearance 		{ background-image: url('/img/x-please-delete-me-soon/icons/appearance.14.png'); }
+#menu li.settings 			{ background-image: url('/img/x-please-delete-me-soon/icons/settings.14.png'); }
+#menu li.personal-settings	{ background-image: url('/img/x-please-delete-me-soon/icons/personal-settings.14.png'); }
 
 
 

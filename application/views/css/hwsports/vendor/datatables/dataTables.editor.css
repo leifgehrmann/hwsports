@@ -10,7 +10,7 @@ div.DTE_Processing_Indicator {
 	right: 13px;
 	height: 32px;
 	width: 32px;
-	background: url('/img/datatables/ajax-loader.gif') no-repeat top left;
+	background: url('/img/vendor/datatables/ajax-loader.gif') no-repeat top left;
 	display: none;
 	z-index: 20;
 }
@@ -266,7 +266,7 @@ div.DTED_Lightbox_Close {
 	right: -15px;
 	width: 30px;
 	height: 30px;
-	background: url('/img/datatables/close.png') no-repeat top left;
+	background: url('/img/vendor/datatables/close.png') no-repeat top left;
 	cursor: pointer;
 	*cursor: hand;
 	z-index: 12;
@@ -310,7 +310,7 @@ div.DTED_Envelope_ShadowLeft {
 	left: 0;
 	width: 50%;
 	height: 9px;
-	background: url('/img/datatables/shadow_left.png') no-repeat top left;
+	background: url('/img/vendor/datatables/shadow_left.png') no-repeat top left;
 	z-index: 10;
 }
 
@@ -320,7 +320,7 @@ div.DTED_Envelope_ShadowRight {
 	right: 0;
 	width: 50%;
 	height: 9px;
-	background: url('/img/datatables/shadow_right.png') no-repeat top right;
+	background: url('/img/vendor/datatables/shadow_right.png') no-repeat top right;
 	z-index: 10;
 }
 
