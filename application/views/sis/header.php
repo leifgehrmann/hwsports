@@ -46,11 +46,11 @@
 					console.log("resizing widget title");
 					$(this).height(Math.round($(this).height()/20)*20);
 				});
-				$('.fc .fc-header').each(function(){
+				$('.fc-header').each(function(){
 					console.log("resizing fullcalendar element");
 					$(this).css('margin-bottom',(20-($(this).height()%20))+'px');
 				});
-				$('.fc .fc-content').each(function(){
+				$('.fc-content').each(function(){
 					console.log("resizing fullcalendar element");
 					$(this).css('margin-bottom',(20-($(this).height()%20))+'px');
 				});
