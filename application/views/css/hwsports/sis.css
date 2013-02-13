@@ -284,6 +284,39 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover {
 #content p.indent a, #content h1.indent a, #content h2.indent a, #content h3.indent a { text-indent: 0px; }
 #content p.newline,#content h1.newline,#content h2.newline,#content h3.newline { margin-bottom:40px; }
 
+#content li, #content dl, #content ol {
+	position: relative;
+	top: 4px;
+	margin-left:40px;
+}
+#content dt { font-weight: bold; }
+#content q:before 	{ content: '"'; }
+#content q:after 	{content: '"'; }
+#content blockquote {
+	position: relative;
+	top: 4px;
+	margin-left: 20px;
+	padding-left: 20px;
+	border-left: solid 20px #EEE;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+#content address {
+	position: relative;
+	top: 4px;
+}
+#content pre {
+	position: relative;
+	top: 4px;
+}
+#content figcaption {
+	position: relative;
+	top: 4px;
+}
+#content figure {
+	margin-bottom:20px;
+}
 
 
 
