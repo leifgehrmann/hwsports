@@ -36,47 +36,24 @@
 			$(document).ready(function() {
 				console.log("This works");
 				$('img').load(function(){
-					// alert($(this).prop('tagName'));
 					console.log("resizing image");
 					console.log($(this).outerHeight(true)+'px');
 					$(this).css('margin-bottom',(20-($(this).outerHeight(true)%20))+'px');
 					console.log($(this).outerHeight(true)+'px');
 					console.log((20-($(this).outerHeight(true)%20))+'px');
-					// alert("margin:"+$(this).css('margin-bottom'));
 				});
 				$('.widget-title').each(function(){
-				//$("html").on("ready", ".widget-title", function(){
 					console.log("resizing widget title");
 					$(this).height(Math.round($(this).height()/20)*20);
 				});
 				$('.fc .fc-header').each(function(){
-				//$("html").on("ready", ".fc .fc-header", function(){
 					console.log("resizing fullcalendar element");
 					$(this).css('margin-bottom',(20-($(this).height()%20))+'px');
 				});
-				$("html").on("ready", ".fc .fc-content", function(){
+				$('.fc .fc-content').each(function(){
 					console.log("resizing fullcalendar element");
 					$(this).css('margin-bottom',(20-($(this).height()%20))+'px');
 				});
-				/*$( 'img' ).each(function() {
-					$(this).load(function() {
-						// alert($(this).prop('tagName'));
-						$(this).css('margin-bottom',(15-($(this).outerHeight(true)%20))+'px');
-						// alert("margin:"+$(this).css('margin-bottom'));
-					});
-					//alert((15-($(this).outerHeight(true)%20)));
-					/*setTimeout( function() {
-						alert("outer height "+$(this).prop('tagName'));
-						alert("outer height "+x.outerHeight(true));
-					}, 5000);
-					//alert($(this));
-				});*/
-				/*$( '.fc .fc-header' ).each(function() {
-					$(this).css('margin-bottom',20-$(this).height()%20+'px');
-				});
-				$( '.fc .fc-content' ).each(function() {
-					$(this).css('margin-bottom',20-$(this).height()%20+'px');
-				});*/
 			});
 
 			var b = false;
