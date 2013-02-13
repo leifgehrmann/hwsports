@@ -229,8 +229,6 @@ class Assets extends MY_Controller {
 		$this->ctype = $content_types[$file_ext];
 		$this->output->set_header("Content-Type: {$this->ctype}");
 
-		$
-
 		// If the file is css, we insert the slug to the path
 		if( $file_ext == "css" ) {
 			$this->load->view("css/{$this->data['slug']}/$path",$this->data);	

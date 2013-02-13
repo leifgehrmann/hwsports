@@ -43,7 +43,7 @@ class Test extends MY_Controller {
 	}
 
 	public function test_constants(){
-		$output = array(APPPATH,SYSDIR);
+		$output = array(APPPATH,SYSDIR,BASEPATH,ENVIRONMENT,SELF,FCPATH,EXT);
 		$this->data['data'] =  print_r($output,1);
 		header('Content-Type: text/plain');
 		$this->load->view('data', $this->data);
