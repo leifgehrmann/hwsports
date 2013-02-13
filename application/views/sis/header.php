@@ -6,8 +6,8 @@
 		<meta name="description" content="">
 		<title><?=$title?> | <?=$centre['shortName']?> Sports</title>
 		<link rel='icon' type="image/png" href="/img/favicon/sis.png" />
-		<link rel="stylesheet" type="text/css" href="/css/client/main.css">
-		<link rel="stylesheet" type="text/css" href="/css/client/sis.css">
+		<link rel="stylesheet" type="text/css" href="/css/main.css">
+		<link rel="stylesheet" type="text/css" href="/css/sis.css">
 		<link rel="stylesheet" type="text/css" href="/css/vendor/normalize/normalize.min.css">
 		<link rel="stylesheet" type="text/css" href="/css/vendor/jquery-ui/jquery-ui-1.10.0.custom.min.css">
 		<link rel="stylesheet" type="text/css" href="/css/vendor/fancybox/jquery.fancybox.css">

@@ -6,8 +6,8 @@
         <meta name="description" content="">
         <title><?=$title?> | Tournament Management System</title>
         <link rel="icon" type="image/png" href="/img/favicon/tms.png" />
-        <link rel="stylesheet" type="text/css" href="/css/client/main.css">
-        <link rel="stylesheet" type="text/css" href="/css/client/tms.css">
+        <link rel="stylesheet" type="text/css" href="/css/main.css">
+        <link rel="stylesheet" type="text/css" href="/css/tms.css">
         <link rel="stylesheet" type="text/css" href="/css/vendor/normalize/normalize.min.css">
 		<link rel='stylesheet' type="text/css" href="/css/vendor/jquery-ui/jquery-ui-1.10.0.custom.min.css">
 		<link rel='stylesheet' type="text/css" href="/css/vendor/datatables/jquery.dataTables.css">
