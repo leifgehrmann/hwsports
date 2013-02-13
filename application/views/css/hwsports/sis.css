@@ -103,7 +103,7 @@ body * {
 #header 			{ background: #0D44A2; }
 #header:hover 		{ background: #3F68BB; }
 #header 			{ font-weight: 700; text-decoration: none; color: #FFF; }
-#header-block 		{ background-image: url('abstract.png'); }
+#header-block 		{ background-image: url('/img/header/header.png'); }
 #header-title 		{ position:relative; top:57px; font-size:40px; }
 #header-subtitle 	{ position:relative; top:83px; font-size:20px; }
 #header {
@@ -747,14 +747,14 @@ a.button .icon { margin-bottom: -5px; }
 #footer-powered .product-logo{
 	width:100px;
 	height:40px;
-	background-image:url('icons.png');
+	background-image:url('/img/icons/icons.png');
 	background-position: -460px -60px;
 	margin-bottom: 10px;
 }
 #footer-powered .company-logo{
 	width:100px;
 	height:40px;
-	background-image:url('icons.png');
+	background-image:url('/img/icons/icons.png');
 	background-position: -460px -20px;
 }
 #footer-powered div:hover{
@@ -770,7 +770,7 @@ a.button .icon { margin-bottom: -5px; }
 div.icon {
 	width: 20px;
 	height: 20px;
-	background-image: url('icons.png');
+	background-image: url('/img/icons/icons.png');
 	display: inline-block; *display: inline; zoom: 1;
 }
 

@@ -1,18 +1,6 @@
 <script>
-	var b = false;
 	$('html').keyup(function(event) {
-		if (event.which == 65) {
-			if(!b){
-				$('body').css('background-image',"url('lines.png'), url('blocks.png')");
-				$('body').css('background-repeat',"repeat, repeat-y");
-				$('body').css('background-position',"center top, center top");
-				$('#container *').css('opacity',"0.90");
-			} else {
-				$('body').css('background-image',"none");
-				$('#container *').css('opacity',"");
-			}
-			b=!b;
-		} else if(event.which == 49) {
+		if(event.which == 49) {
 			$('#block-1').toggle();
 		} else if(event.which == 50) {
 			$('#block-2').toggle();

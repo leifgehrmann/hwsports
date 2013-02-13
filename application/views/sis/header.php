@@ -6,8 +6,8 @@
 		<meta name="description" content="">
 		<title><?=$title?> | <?=$centre['shortName']?> Sports</title>
 		<link rel='icon' type="image/png" href="/img/favicon/sis.png" />
-		<link rel="stylesheet" type="text/css" href="/css/main.css">
-		<link rel="stylesheet" type="text/css" href="/css/sis.css">
+
+		<!-- Vendor component styling -->
 		<link rel="stylesheet" type="text/css" href="/css/vendor/normalize/normalize.min.css">
 		<link rel="stylesheet" type="text/css" href="/css/vendor/jquery-ui/jquery-ui-1.10.0.custom.min.css">
 		<link rel="stylesheet" type="text/css" href="/css/vendor/fancybox/jquery.fancybox.css">
@@ -15,6 +15,12 @@
 		<link rel="stylesheet" type="text/css" href="/css/vendor/dataTables/dataTables.tabletools.css">
 		<link rel="stylesheet" type="text/css" href="/css/vendor/dataTables/dataTables.ColVis.css">
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,700,300">
+
+		<!-- Website styling -->
+		<link rel="stylesheet" type="text/css" href="/css/main.css">
+		<link rel="stylesheet" type="text/css" href="/css/sis.css">
+
+		<!-- Vendor scripts -->
 		<script charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 		<script charset="utf-8" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
 		<script charset="utf-8" src="/js/vendor/jquery/jquery-ui-1.10.0.custom.min.js"></script>
@@ -50,6 +56,22 @@
 			$( 'div:animated' ).each(function(){
 				$(this).height(Math.round($(this).height()/20)*20);
 				alert($(this).height());
+			});
+
+			var b = false;
+			$('html').keypress(function(event) {
+				if (event.which == 8364) {
+					if(!b){
+						$('body').css('background-image',"url('/img/typography/baseline.png'), url('/img/typography/columns.png')");
+						$('body').css('background-repeat',"repeat, repeat-y");
+						$('body').css('background-position',"center top, center top");
+						$('#container *').css('opacity',"0.90");
+					} else {
+						$('body').css('background-image',"none");
+						$('#container *').css('opacity',"");
+					}
+					b=!b;
+				}
 			});
 		</script>
 	</head>
