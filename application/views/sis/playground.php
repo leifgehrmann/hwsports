@@ -51,14 +51,68 @@
 	<p class="indent">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed felis felis, tristique at interdum et, dapibus ut ligula. Vestibulum mi neque, laoreet a egestas sit amet, lacinia quis nisi. Nunc enim mi, aliquet vel gravida a, fermentum vel augue. Donec mi dolor, consectetur id aliquam non, posuere eget ante. Nam vel elit et justo egestas interdum. Quisque feugiat feugiat purus, sit amet commodo turpis tincidunt pretium. Suspendisse volutpat, tellus nec aliquam <a href="/">fermentum</a>, libero velit placerat purus, vitae dignissim risus massa et nisl. Mauris congue feugiat erat, nec tempus felis tincidunt et. Sed ultrices urna sodales est rutrum in elementum arcu commodo. Cras id risus a dolor varius ultrices. Suspendisse potenti. Curabitur vestibulum mi sit amet sapien vulputate faucibus.</p>
 	<img width="100%" src="http://images.veerle.duoh.com/uploads/design-article-images/Otl-Aicher.png">
 	<h3>Select role:</h3>
-	<h3>ed ipsum nulla, hendrerit ac suscipit at, bibendum sed lacus. In et mauris et eros imperdiet vestibulum. Nam dapibus vestibulum neque, non pharetra dolor tincidunt ac. In hac habitasse platea dictumst. Aliquam erat volutpat.</h3>
+	<h3>
+		Ed ipsum nulla, hendrerit ac suscipit at, bibendum sed lacus. In et mauris et eros imperdiet vestibulum. Nam dapibus vestibulum neque, non pharetra dolor tincidunt ac. In hac habitasse platea dictumst. Aliquam erat volutpat.
+	</h3>
 	<h3>Select role:</h3>
-	<p class="indent">Sed ipsum nulla, hendrerit ac suscipit at, bibendum sed lacus. In et mauris et eros imperdiet vestibulum. Nam dapibus vestibulum neque, non pharetra dolor tincidunt ac. In hac habitasse platea dictumst. Aliquam erat volutpat. Etiam lobortis aliquet risus quis porta. Maecenas in arcu eu orci laoreet mollis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi suscipit dapibus nulla, non venenatis sapien viverra vitae. Nullam tincidunt lectus mauris. Nam tincidunt imperdiet commodo. In egestas tellus hendrerit augue rhoncus aliquam. Donec quis libero at felis tristique egestas. Sed eu mauris nisi, a consectetur mi.</p>
+	<p class="indent">
+		Sed ipsum nulla, hendrerit ac suscipit at, bibendum sed lacus. In et mauris et eros imperdiet vestibulum. Nam dapibus vestibulum neque, non pharetra dolor tincidunt ac. In hac habitasse platea dictumst. Aliquam erat volutpat. Etiam lobortis aliquet risus quis porta. Maecenas in arcu eu orci laoreet mollis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi suscipit dapibus nulla, non venenatis sapien viverra vitae. Nullam tincidunt lectus mauris. Nam tincidunt imperdiet commodo. In egestas tellus hendrerit augue rhoncus aliquam. Donec quis libero at felis tristique egestas. Sed eu mauris nisi, a consectetur mi.
+	</p>
 	<h2>2014</h2>
-	<h2>Sed ipsum nulla, hendrerit ac suscipit at, bibendum sed lacus. In et mauris et eros imperdiet vestibulum. Nam dapibus vestibulum neque, non pharetra dolor tincidunt ac. In hac habitasse platea dictumst. Aliquam erat volutpat.</h2>
+	<h2>
+		Sed ipsum nulla, hendrerit ac suscipit at, bibendum sed lacus. In et mauris et eros imperdiet vestibulum. Nam dapibus vestibulum neque, non pharetra dolor tincidunt ac. In hac habitasse platea dictumst. Aliquam erat volutpat.
+	</h2>
+	<figure>
+		<img src="http://cloud.bench.li/images/original/21294.jpg" alt="Schedule for olympics" width="50%">
+		<figcaption>Fig.1 - Otl Aicher 1972 Munich Olympics Poster - Timetable</figcaption>
+	</figure>
 	<h2>2014</h2>
 	<h2>2014</h2>
-	<p class="indent">Sed ipsum nulla, hendrerit ac suscipit at, bibendum sed lacus. In et mauris et eros imperdiet vestibulum. Nam dapibus vestibulum neque, non pharetra dolor tincidunt ac. In hac habitasse platea dictumst. Aliquam erat volutpat. Etiam lobortis aliquet risus quis porta. Maecenas in arcu eu orci laoreet mollis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi suscipit dapibus nulla, non venenatis sapien viverra vitae. Nullam tincidunt lectus mauris. Nam tincidunt imperdiet commodo. In egestas tellus hendrerit augue rhoncus aliquam. Donec quis libero at felis tristique egestas. Sed eu mauris nisi, a consectetur mi.</p>
+	<p class="indent">
+		Sed ipsum nulla, hendrerit ac suscipit at, bibendum sed lacus. In et mauris et eros imperdiet vestibulum. Nam dapibus vestibulum neque, non pharetra dolor tincidunt ac. In hac habitasse platea dictumst. Aliquam erat volutpat. Etiam lobortis aliquet risus quis porta. Maecenas in arcu eu orci laoreet mollis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi suscipit dapibus nulla, non venenatis sapien viverra vitae. Nullam tincidunt lectus mauris. Nam tincidunt imperdiet commodo. In egestas tellus hendrerit augue rhoncus aliquam. Donec quis libero at felis tristique egestas. Sed eu mauris nisi, a consectetur mi.
+	</p>
+	<ul>
+		<li>A, you're adorable</li>
+		<li>B, you're so beautiful</li>
+		<li>C, you're cutie full of charms.</li>
+	</ul>
+	<ol>
+		<li>D, you're a darling</li>
+		<li>E, you're exiting and</li>
+		<li>F, you're a feather in my arms.</li>
+	</ol>
+	<dl>
+		<dt>G</dt>
+		<dd>you look good to me</dd>
+		<dt>H</dt>
+		<dd>you're so heavenly</dd>
+		<dt>I</dt>
+		<dd>you're the one I idolize.</dd>
+	</dl>
+	<p>
+		Did you know that <abbr title="PHP Hypertext Preprocessor">PHP</abbr> is an abbreviation of "PHP hypertext Preprocessor"? This experssion also evaluates to PHP hypertext Preprocessor hypertext Preprocessor. Additionally, do you know what the difference between an abbbreviation and an acronym is? An acronym is something you say as a word, like <acronym title="As Soon As Possible">ASAP</acronym>, <acronym title="North Atlantic Treaty Organization">NATO</acronym> or <acronym title="National Aeronautics and Space Administration">NASA</acronym>.
+	</p>
+	<p>
+		Lets test out our html tags here: <b>bold</b>, <em>emphasis</em>, <i>italics</i>, <s>incorrect text</s>, super<sup>script</sup>, sub<sub>script</sub> <q>A quote</q>
+	</p>
+	<blockquote cite="http://www.worldwildlife.org/who/index.html">
+		For 50 years, WWF has been protecting the future of nature. The world’s leading conservation organization, WWF works in 100 countries and is supported by 1.2 million members in the United States and close to 5 million globally.
+	</blockquote>
+	<address>
+		Written by <a href="mailto:webmaster@example.com">Jon Doe</a>.<br> 
+		Visit us at:<br>
+		Example.com<br>
+		Box 564, Disneyland<br>
+		USA
+	</address>
+	<pre>
+		Some Stuff
+
+		Some more stuff, 
+
+		I wonder if this does anything interesting.
+	</pre>
+</p>
 	<h2 class="newline">2013</h2>
 </div>
 
