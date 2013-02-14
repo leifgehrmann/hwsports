@@ -33,9 +33,9 @@ class Db_Calendar extends MY_Controller {
 		$tournamentEditable			= null;		// Should the tournament period be editable?
 		$registrationEditable		= null;		// Should the registration period be editable?
 		$matchEditable				= null;		// Should the match be editable?
-		$tournamentColour			= 'rgb(123, 209,  72)'; // Colour of tournament periods
+		/*$tournamentColour			= 'rgb(123, 209,  72)'; // Colour of tournament periods
 		$registrationColour			= 'rgb(250,  87,  60)'; // Colour of registration periods
-		$matchColour				= '#2966C7';			// Colour of matches.
+		$matchColour				= '#2966C7';			// Colour of matches.*/
 
 		if(array_key_exists('centreID',$query))
 			$centreID 					= $query['centreID'];
@@ -149,7 +149,7 @@ class Db_Calendar extends MY_Controller {
 				'start' => $match['startTime'],
 				'end' => $match['endTime'],
 				'allDay' => false,
-				'color' => $matchColour
+				'className' => 'match'
 			);
 			if(isset($matchUrl))
 				$event['url'] = $matchUrl.$match['matchID'];
@@ -174,7 +174,7 @@ class Db_Calendar extends MY_Controller {
 					'start' => $tournamentStart->format("U"),
 					'end' => $tournamentEnd->format("U"),
 					'allDay' => true,
-					'color' => $tournamentColour
+					'className' => 'tournament'
 				);
 				if(isset($tournamentUrl))
 					$event['url'] = $tournamentUrl.$tournament['tournamentID'];
@@ -199,7 +199,7 @@ class Db_Calendar extends MY_Controller {
 					'start' => $registrationStart->format("U"),
 					'end' => $registrationEnd->format("U"),
 					'allDay' => true,
-					'color' => $registrationColour
+					'className' => 'registration'
 				);
 				if(isset($registrationUrl))
 					$event['url'] = $registrationUrl.$tournament['tournamentID'];

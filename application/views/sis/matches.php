@@ -14,7 +14,7 @@
 			<p><b>Date:</b> <?=$match['date']?></p>
 			<p><b>Duration:</b> <?=$match['startTime']?> - <?=$match['endTime']?></p>
 			<p><b>Venue:</b> <?=$match['venue']?></p>
-			<a href='/sis/match/<?=$match['matchID']?>' class='button right normal'>More Information</a>
+			<a href='/sis/match/<?=$match['matchID']?>' class='button right normal'>Details</a>
 		</div>
 	</div>
 	<? } ?>
