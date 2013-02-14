@@ -361,7 +361,7 @@ class Db_Calendar extends MY_Controller {
 				case "registration":
 					
 					break;
-				case default:
+				default:
 					break;
 			}
 		}
