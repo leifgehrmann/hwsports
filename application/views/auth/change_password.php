@@ -10,11 +10,11 @@
 
 <table>
 	<tr>
-		<td>Old Password:<td>
+		<td>Old Password:</td>
 		<td><?php echo form_input($old_password);?></td>
 	</tr>
 	<tr>
-		<td>New Password (at least <?php echo $min_password_length;?> characters long):</td>
+		<td>New Password: <br/>(at least <?php echo $min_password_length;?> characters long)</td>
 		<td><?php echo form_input($new_password);?></td>
 	</tr>
 	<tr>
@@ -23,7 +23,7 @@
 	</tr>
 	<tr>
 		<td><?php echo form_input($user_id);?></td>
-		<td><?php echo form_submit('submit', 'Change');?></td>
+		<td><?php echo form_submit('submit', 'Change Password');?></td>
 	</tr>
 </table>
 
