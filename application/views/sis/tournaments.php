@@ -6,7 +6,7 @@
 // particular year arrays.
 $yearTournaments = array();
 foreach($tournaments as $tournament) {
-	$date = DateTime::createFromFormat('d/m/Y', $tournament['tournamentStart'])
+	$date = DateTime::createFromFormat('d/m/Y', $tournament['tournamentStart']);
 	$year = date_format($date,'Y');
 	$yearTournaments[$year][] = $tournament;
 }
