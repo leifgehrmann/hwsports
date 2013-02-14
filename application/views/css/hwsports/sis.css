@@ -558,7 +558,7 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #4165C8; }
 #content div.widget-title div {
 	letter-spacing: 0px;
 	display: inline-block; *display: inline; zoom: 1;
-	/*margin-right:-4px;*/
+	margin-right:-4px;
 }
 
 #content a div.widget-title-centre { text-decoration: underline; }
@@ -577,15 +577,17 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #4165C8; }
 	overflow: hidden;
 }
 
-#content a div.widget-title-left.icon { background-position: -120px -60px; }
-
 #content a div.widget-title-right.icon { background-position: -120px -60px; }
-#content a:hover div.widget-title-right {
-	left:20px;
-}
+#content a:hover div.widget-title-right { left:20px; }
 
-#content div.widget.welcome-message div.widget-title-left.icon { background-position: -60px -200px; }
+#content div.widget.news 			div.widget-title-left.icon { background-position: -160px -280px; }
+#content div.widget.tournament 		div.widget-title-left.icon { background-position: -60px  -240px; }
+#content div.widget.match 			div.widget-title-left.icon { background-position: -60px  -260px; }
+#content div.widget.welcome-message div.widget-title-left.icon { background-position: -60px  -200px; }
+#content div.widget.subscribe 		div.widget-title-left.icon { background-position: -60px  -380px; }
+
 #content div.widget.welcome-message div.widget-title { background: #0D44A2; }
+#content div.widget.subscribe 		div.widget-title { background: #0D44A2; }
 
 
 
