@@ -556,6 +556,7 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #4165C8; }
 	-o-transition: opacity .1s;
 }
 #content div.widget-title div {
+	vertical-align: middle;
 	letter-spacing: 0px;
 	display: inline-block; *display: inline; zoom: 1;
 	margin-right:-4px;
