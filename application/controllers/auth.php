@@ -140,7 +140,7 @@ class Auth extends MY_Controller {
 		{
 			//display the form
 			//set the flash data error message if there is one
-			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message_error');
+			$this->data['message_error'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message_error');
 
 			$this->data['min_password_length'] = $this->config->item('min_password_length', 'ion_auth');
 			$this->data['old_password'] = array(
@@ -183,11 +183,13 @@ class Auth extends MY_Controller {
 			{
 				//if the password was successfully changed
 				$this->session->set_flashdata('message_success', $this->ion_auth->messages());
+				$this->data['message_success'] = $this->ion_auth->messages();
 				redirect('auth/change_password', 'refresh');
 			}
 			else
 			{
 				$this->session->set_flashdata('message_error', $this->ion_auth->errors());
+				$this->data['message_error'] = $this->ion_auth->errors();
 				redirect('auth/change_password', 'refresh');
 			}
 		}
