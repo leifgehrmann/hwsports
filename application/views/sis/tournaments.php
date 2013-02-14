@@ -22,7 +22,7 @@ foreach($yearTournaments as $year){
 <h1>Tournaments</h1>
 
 <div class="tournaments-list">
-	<? foreach($yearTournaments as $year=>$tournaments) { ?>
+	<? print_r($yearTournaments);foreach($yearTournaments as $year=>$tournaments) { ?>
 		<h2><?=$year?></h2>
 		<div>
 		<? foreach($tournaments as $tournament) { 
