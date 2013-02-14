@@ -1,8 +1,11 @@
 <h1>Matches</h1>
 
+
+This should be replaced with a static table of matches, preferably from datatables.
+
 <div class="matches-upcoming">
 	<? foreach($matches as $match) { ?>
-	<div class="widget half">
+	<div class="widget half match">
 		<a href="/sis/match/<?=$match['matchID']?>">
 			<div class="widget-title">
 				<div class="widget-title-left icon sportname-<?=$match['sport']?> sportid-<?=$match['sportID']?>"></div>
