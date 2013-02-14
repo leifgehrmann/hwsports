@@ -3,7 +3,7 @@
 			</div>
 			<div id="footer">
 				<div id="footer-block">
-					<div id="footer-legal">
+					<div id="footer-contact">
 						<h1>Contact Us</h1>
 						<p>&copy; Heriot-Watt University</p>
 						<p>Edinburgh, Scotland, UK EH14 4AS</p>
