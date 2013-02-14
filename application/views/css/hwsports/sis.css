@@ -625,7 +625,7 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover {
 	display: inline-block; *display: inline; zoom: 1;
 	margin-right:-4px;
 }
-#content div.widget-title:hover {
+#content a div.widget-title:hover {
 	opacity:0.9;
 }
 #content div.widget-title-left { width:20px; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; }
