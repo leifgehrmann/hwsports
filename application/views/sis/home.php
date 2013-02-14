@@ -27,7 +27,7 @@
 			<form method="POST" action="/subscribe/">
 				<p><b>Want to keep up with sport tournament news?</b></p>
 				<p>Enter in your email below to get any updates we post on the site.</p>
-				<input type="text" placeholder="Your email..." name="email" style="margin-bottom:20px;"/>
+				<input type="text" placeholder="Your email..." name="email"/>
 				<input type="submit" value="Subscribe" class="green" name="Subscribe"/>
 			</form>
 		</div>

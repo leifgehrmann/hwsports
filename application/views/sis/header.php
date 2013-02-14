@@ -147,10 +147,10 @@
 							</a>
 							<a 
 								href="/auth/login" 
-								title="Sign into an account"
-								class="signin <?=($page=="login" ? 'selected' : '')?>"
+								title="Log into an account"
+								class="login <?=($page=="login" ? 'selected' : '')?>"
 							>
-								<li><div class="icon"></div>Sign In</li>
+								<li><div class="icon"></div>Log In</li>
 							</a>
 						</ul>
 						<? } else { ?>
@@ -164,9 +164,10 @@
 	        				</a>
 	        				<a 
 	        					href="/auth/logout"
-	        					class="signout <?=($page=="login" ? 'selected' : '')?>"
+	        					title="Log out of this account"
+	        					class="logout <?=($page=="login" ? 'selected' : '')?>"
 	        				>
-	        					<li><div class="icon"></div>Sign Out</li>
+	        					<li><div class="icon"></div>Log Out</li>
 	        				</a>
 	        			</ul>
 						<? } ?>
