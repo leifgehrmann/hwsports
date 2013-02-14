@@ -199,11 +199,11 @@ body * {
 #menu .calendar div.icon 		{background-position: -20px -220px;}
 #menu .tournaments div.icon 	{background-position: -20px -240px;}
 #menu .matches div.icon 		{background-position: -20px -260px;}
-#menu .tickets div.icon 			{background-position: -20px -280px;}
+#menu .tickets div.icon 		{background-position: -20px -280px;}
 #menu .help div.icon 			{background-position: -20px -300px;}
-#menu .account div.icon 			{background-position: -20px -320px;}
-#menu .signin div.icon 			{background-position: -20px -340px;}
-#menu .signout div.icon 			{background-position: -20px -360px;}
+#menu .account div.icon 		{background-position: -20px -320px;}
+#menu .login div.icon 			{background-position: -20px -340px;}
+#menu .logout div.icon 			{background-position: -20px -360px;}
 #menu .register div.icon 		{background-position: -20px -380px;}
 
 #menu a.homepage:hover 		div.icon 	,#menu a.homepage.selected div.icon 	{background-position: -40px -200px;}
@@ -213,8 +213,8 @@ body * {
 #menu a.tickets:hover 		div.icon 	,#menu a.tickets.selected div.icon		{background-position: -40px -280px;}
 #menu a.help:hover 			div.icon 	,#menu a.help.selected div.icon			{background-position: -40px -300px;}
 #menu a.account:hover 		div.icon 	,#menu a.account.selected div.icon		{background-position: -40px -320px;}
-#menu a.signin:hover 		div.icon 	,#menu a.signin.selected div.icon		{background-position: -40px -340px;}
-#menu a.signout:hover 		div.icon 	,#menu a.signout.selected div.icon		{background-position: -40px -360px;}
+#menu a.login:hover 		div.icon 	,#menu a.login.selected div.icon		{background-position: -40px -340px;}
+#menu a.logout:hover 		div.icon 	,#menu a.logout.selected div.icon		{background-position: -40px -360px;}
 #menu a.register:hover		div.icon 	,#menu a.register.selected div.icon		{background-position: -40px -380px;}
 
 

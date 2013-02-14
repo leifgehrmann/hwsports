@@ -14,7 +14,7 @@
 		</div>
 		<div class="widget-body">
 			<p>On this website you can get the latest information about tournament events occuring on campus. This includes the calendar, scores of the matches, and winners of tournaments. You can also register here to purchase tickets and sign up for sports events.</p>
-			<a href="/sis/help" class="button blue"/>
+			<a href="/sis/help" class="button blue">More Information</a>
 		</div>
 	</div>
 	<div class="widget half">
