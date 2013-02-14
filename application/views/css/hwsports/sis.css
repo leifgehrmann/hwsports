@@ -669,7 +669,7 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover {
 	Leif's Custom button inline block, which can have nice icons inside
 */
 a.button, input[type='submit'] {
-	/*font-family: inherit;*/
+	font-family: 'Roboto', sans-serif;
 	border: none;
 	background:#EEE;
 	text-decoration: none;
@@ -822,7 +822,11 @@ div.widget-title div.icon.news			 {background-position: -160px -280px;}
 div.widget-title div.icon.home			 {background-position: -60px -200px;}
 div.widget-title div.icon.signup		 {background-position: -60px -380px;}
 
-h1 div.icon.subsection {background-position: -20px -80px;}
+h1 div.icon.subsection {
+	background-position: -20px -80px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
 
 .button div.icon.load {
 	-webkit-animation: play-black .8s steps(8) infinite;

@@ -1,4 +1,4 @@
-<h1>Register a User Account</h1>
+<h1>Register an Account</h1>
 <p>Please enter your details below to create an account.</p>
 
 <? if(!empty($message)){ ?><div class="message message-information"><div class="icon margin-right"></div><h3>Information</h3><p><?php echo $message;?></p></div><? } ?>
@@ -27,7 +27,7 @@
 		<td><?php echo form_input($phone);?></td>
 	</tr>
 	<tr>
-		<td>Password:</td>
+		<td>Password:<br/>(at least <?php echo $min_password_length;?> characters long)</td>
 		<td><?php echo form_input($password);?></td>
 	</tr>
 	<tr>
