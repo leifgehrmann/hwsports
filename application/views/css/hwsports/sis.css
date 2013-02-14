@@ -812,15 +812,17 @@ div.icon {
 	display: inline-block; *display: inline; zoom: 1;
 }
 
-div.widget-title div.icon.sport-wattball {background-position: -320px -220px;}
-div.widget-title div.icon.sport-hurdling {background-position: -380px -220px;}
-div.widget-title div.icon.square 		 {background-position: -120px -20px;}
-div.widget-title div.icon.circle 		 {background-position: -120px -40px;}
-div.widget-title div.icon.chevron 		 {background-position: -120px -60px;}
-div.widget-title div.icon.right-arrow 	 {background-position: -120px -80px;}
-div.widget-title div.icon.news			 {background-position: -160px -280px;}
-div.widget-title div.icon.home			 {background-position: -60px -200px;}
-div.widget-title div.icon.signup		 {background-position: -60px -380px;}
+div.widget-title div.icon.sport-wattball,
+div.widget-title div.icon.sport-8 		{background-position: -320px -220px;}
+div.widget-title div.icon.sport-hurdling,
+div.widget-title div.icon.sport-10 		{background-position: -380px -220px;}
+div.widget-title div.icon.square 		{background-position: -120px -20px;}
+div.widget-title div.icon.circle 		{background-position: -120px -40px;}
+div.widget-title div.icon.chevron 		{background-position: -120px -60px;}
+div.widget-title div.icon.right-arrow 	{background-position: -120px -80px;}
+div.widget-title div.icon.news			{background-position: -160px -280px;}
+div.widget-title div.icon.home			{background-position: -60px -200px;}
+div.widget-title div.icon.signup		{background-position: -60px -380px;}
 
 h1 div.icon.subsection {
 	background-position: -20px -80px;

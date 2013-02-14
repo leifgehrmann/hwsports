@@ -9,7 +9,7 @@ foreach($tournaments as $tournament) {
 	$year = DateTime::createFromFormat('Y', $tournament['tournamentStart']);
 	$yearTournaments[$year][] = $tournament;
 }
-function compareTournamentTime($a1, $a2) {
+function compareTournamentTime($a, $b) {
 	return strtotime($a["tournamentStart"]) - strtotime($b["tournamentStart"]);
 }
 
@@ -59,5 +59,5 @@ foreach($yearTournaments as $year){
 			<div class="tournament-registration-status"><span style="font-weight: bold">Registration:</span> <?=( ($registrationStartDate < $today) && ($today < $registrationEndDate) ? "<span class='registrationOpen'>Open!</span>" : "<span class='registrationClosed'>Closed</span>" )?></div>
 		</a>
 		<? } ?>-->
-	<a href="/sis/tournaments_history" class="tournament-button-prev">Previous Tournaments</a>
+	<!--<a href="/sis/tournaments_history" class="tournament-button-prev">Previous Tournaments</a>-->
 </div>
