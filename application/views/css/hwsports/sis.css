@@ -507,18 +507,18 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #4165C8; }
 */
 #content div.widget {
 	background: #EEEEEE;
-	display:inline-block;
+	display: inline-block; *display: inline; zoom: 1;
 	margin-bottom: 20px;
+	vertical-align: top;
+	margin-right:-4px;
 }
-#content div.widget.full, 
+/*#content div.widget.full, 
 #content div.widget.threefourth, 
 #content div.widget.half, 
 #content div.widget.fourth {
 	margin-right:-4px;
-	display: inline-block; *display: inline; zoom: 1;
-	vertical-align: top;
-}
-#content div.full 			{ width: 700px; }
+}*/
+#content div.full 			{ width: 700px; } /* 160 + 20 + 160 + 20 + 160 + 20 + 160 */
 #content div.threefourth 	{ width: 520px; } /* 160 + 20 + 160 + 20 + 160 */
 #content div.half 			{ width: 340px; } /* 160 + 20 + 160 */
 #content div.fourth 		{ width: 160px; } /* 160 */
@@ -526,7 +526,6 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #4165C8; }
 /* These are the icons widths, so these are slightly redundant */
 #content div.widget-title-left,
 #content div.widget-title-right	{
-	background: #F0F;
 	width:20px;
 } 
 
@@ -559,26 +558,43 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #4165C8; }
 #content div.widget-title div {
 	letter-spacing: 0px;
 	display: inline-block; *display: inline; zoom: 1;
-	margin-right:-4px;
+	/*margin-right:-4px;*/
 }
 
-#content a div.widget-title * { text-decoration: underline; }
+#content a div.widget-title-centre { text-decoration: underline; }
 #content a div.widget-title:hover { opacity:0.9; }
 
-#content div.widget-title-right.icon { margin-left: 20px; margin-right: 20px; position:relative; top:-2px; }
-#content div.widget-title-left.icon { margin-left: 20px; margin-right: 20px; position:relative; top:-2px;}
+#content div.widget-title-right.icon,
+#content div.widget-title-left.icon {
+	margin-left: 20px;
+	margin-right: 20px;
+	position:relative;
+	top:3px;
+}
 #content div.widget-body {
 	padding:20px;
 	background: #EEEEEE;
 	overflow: hidden;
 }
 
-#content a div.widget-title-right.icon {
-	background-position: -120px -60px;
-}
-#content a:hover div.widget-title-right.icon {
+#content a div.widget-title-left.icon { background-position: -120px -60px; }
+
+#content a div.widget-title-right.icon { background-position: -120px -60px; }
+#content a:hover div.widget-title-right {
 	left:20px;
 }
+
+#content div.widget.welcome-message div.widget-title-left.icon { background-position: -60px -200px; }
+#content div.widget.welcome-message div.widget-title { background: #0D44A2; }
+
+
+
+
+
+
+
+
+
 
 
 /*
