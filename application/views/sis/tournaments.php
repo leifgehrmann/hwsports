@@ -34,7 +34,7 @@ foreach($yearTournaments as $year){
 			<div class="widget half">
 				<a href="/sis/tournament/<?=$tournament['tournamentID']?>">
 					<div class="widget-title">
-						<div class="widget-title-left icon sport-<?=$tournament['sportID']?>"></div>
+						<div class="widget-title-left icon sportid-<?=$tournament['sportID']?>"></div>
 						<div class="widget-title-centre"><?=$tournament['name']?></div>
 						<div class="widget-title-right icon chevron"></div>
 					</div>
