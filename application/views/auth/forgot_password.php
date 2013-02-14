@@ -1,4 +1,4 @@
-<h1><a href="/auth/login">Log In</a><div class="icon subsection">Forgot Password</h1>
+<h1><a href="/auth/login">Log In</a><div class="icon subsection"></div>Forgot Password</h1>
 <p>Please enter your email address so we can send you an email to reset your password.</p>
 
 <? if(!empty($message)){ ?><div class="message message-information"><div class="icon margin-right"></div><h3>Information</h3><p><?php echo $message;?></p></div><? } ?>
