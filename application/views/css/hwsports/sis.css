@@ -562,17 +562,9 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #4165C8; }
 	margin-right:-4px;
 }
 
-#content div.widget-title-centre, {
-	display: inline-block; *display: inline; zoom: 1;
-	vertical-align:middle;
-	margin-right: -4px;
-	display: inline-block; *display: inline; zoom: 1; vertical-align:middle;
-}
-
-#content a div.widget-title { text-decoration: underline; }
+#content a div.widget-title * { text-decoration: underline; }
 #content a div.widget-title:hover { opacity:0.9; }
-/*#content div.widget-title-left { width:20px; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; }
-#content div.widget-title-right { width:20px; overflow: hidden; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; margin-right:-0px; }*/
+
 #content div.widget-title-right.icon { margin-left: 20px; margin-right: 20px; position:relative; top:-2px; }
 #content div.widget-title-left.icon { margin-left: 20px; margin-right: 20px; position:relative; top:-2px;}
 #content div.widget-body {
@@ -582,7 +574,7 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #4165C8; }
 }
 
 #content a div.widget-title-right.icon {
-	background-position: -20px -380px;
+	background-position: -120px -60px;
 }
 #content a:hover div.widget-title-right.icon {
 	left:20px;
