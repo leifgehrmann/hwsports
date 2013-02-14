@@ -337,7 +337,7 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover {
 /*
 	Form Elements
 */
-#content input[type='text'], #content input:not([type]) {
+#content input[type='text'], #content input[type='password'], #content input:not([type]) {
 	line-height: 40px;
 	font-size: 16px;
 	font-family: inherit;

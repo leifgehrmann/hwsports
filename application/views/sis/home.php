@@ -4,49 +4,36 @@
 <? if(!empty($message_error)){ ?><div class="message message-error"><div class="icon margin-right"></div><h3>Error</h3><p><?php echo $message_error;?></p></div><? } ?>
 <? if(!empty($message_warning)){ ?><div class="message message-warning"><div class="icon margin-right"></div><h3>Warning</h3><p><?php echo $message_warning;?></p></div><? } ?>
 
+<h1>Welcome to Riccarton Tournaments</h1>
 <div>
 	<div class="widget half">
-		<a href="#newsarticle">
-			<div class="widget-title">
-				<div class="widget-title-left icon home"></div>
-				<div class="widget-title-centre">Riccarton Tournaments</div>
-				<div class="widget-title-right icon"></div>
-			</div>
-		</a>
+		<div class="widget-title">
+			<div class="widget-title-left icon home"></div>
+			<div class="widget-title-centre">Riccarton Tournaments</div>
+			<div class="widget-title-right icon"></div>
+		</div>
 		<div class="widget-body">
-			<p>Welcome to the Riccarton Sports Tournament Homepage!</p>
 			<p>On this website you can get the latest information about tournament events occuring on campus. This includes the calendar, scores of the matches, and winners of tournaments. You can also register here to purchase tickets and sign up for sports events.</p>
 		</div>
 	</div>
 	<div class="widget half">
-		<a href="#newsarticle">
-			<div class="widget-title">
-				<div class="widget-title-left icon signup"></div>
-				<div class="widget-title-centre">Subscribe!</div>
-				<div class="widget-title-right icon"></div>
-			</div>
-		</a>
+		<div class="widget-title">
+			<div class="widget-title-left icon signup"></div>
+			<div class="widget-title-centre">Subscribe!</div>
+			<div class="widget-title-right icon"></div>
+		</div>
 		<div class="widget-body">
 			<form method="POST" action="/subscribe/">
-				<p>Want to keep up with sport tournament news?</p>
+				<p><b>Want to keep up with sport tournament news?</b></p>
 				<p>Enter in your email below to get any updates we post on the site.</p>
-				<input type="text" placeholder="Your email..." name="email" width="40%"/>
-				<input type="submit" value="Subscribe" name="Subscribe" width="40%"/>
+				<input type="text" placeholder="Your email..." name="email" style="margin-bottom:20px;"/>
+				<input type="submit" value="Subscribe" class="green" name="Subscribe"/>
 			</form>
 		</div>
 	</div>
 </div>
 
-<h2>News</h2>
-
-<div class="subscribe-item">
-	<form method="POST" action="/subscribe/">
-		<p>Want to keep up with sport tournament news?</p>
-		<p>Enter in your email below to get any updates we post on the site.</p>
-		<input type="text" placeholder="Your email..." name="email" width="40%"/>
-		<input type="submit" value="Subscribe" name="Subscribe" width="40%"/>
-	</form>
-</div>
+<h1>News</h1>
 <div class="widget full">
 	<a href="#newsarticle">
 		<div class="widget-title">
