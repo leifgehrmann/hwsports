@@ -9,8 +9,12 @@ foreach($tournaments as $tournament) {
 	$year = DateTime::createFromFormat('Y', $tournament['tournamentStart']);
 	$yearTournaments[$year][] = $tournament;
 }
+function compareTournamentTime($a1, $a2) {
+	return strtotime($a["tournamentStart"]) - strtotime($b["tournamentStart"]);
+}
+
 foreach($yearTournaments as $year){
-	usort($year, function($a1, $a2) {return strtotime($a["tournamentStart"]) - strtotime($b["tournamentStart"]);});
+	usort($year, "compareTournamentTime");
 }
 
 ?>
@@ -29,7 +33,7 @@ foreach($yearTournaments as $year){
 			<div class="widget half">
 				<a href="/sis/tournament/<?=$tournament['tournamentID']?>">
 					<div class="widget-title">
-						<div class="widget-title-left icon sport-<?=$sportID?>"></div>
+						<div class="widget-title-left icon sport-<?=$tournament['sportID']?>"></div>
 						<div class="widget-title-centre"><?=$tournament['name']?></div>
 						<div class="widget-title-right icon chevron"></div>
 					</div>
@@ -37,7 +41,7 @@ foreach($yearTournaments as $year){
 				<div class="widget-body">
 					<p><b>Duration:</b> <?=$tournament['tournamentStart']?> - <?=$tournament['tournamentEnd']?></p>
 					<p>Running with a ball, sometimes kicking it. This would be the description of the tournament</p>
-					<?=( ($registrationStartDate < $today) && ($today < $registrationEndDate) ? "<a href='/sis/signup/{$tournament['tournamentID']}' class='button green'>Sign up!</a>" : "" )?>
+					<?=( ($registrationStartDate < $today) && ($today < $registrationEndDate) ? "<a href='/sis/signup/{$tournament['tournamentID']}' class='button right green'>Sign up!</a>" : "" )?>
 				</div>
 			</div>
 		<? } ?>
