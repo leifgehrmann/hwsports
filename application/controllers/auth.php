@@ -183,17 +183,14 @@ class Auth extends MY_Controller {
 			{
 				//if the password was successfully changed
 				$this->session->set_flashdata('message_success', $this->ion_auth->messages());
-				$this->data['message_success'] = $this->ion_auth->messages();
+				redirect('sis/account', 'refresh');
 			}
 			else
 			{
 				$this->session->set_flashdata('message_error', $this->ion_auth->errors());
-				$this->data['message_error'] = $this->ion_auth->errors();
+				redirect('auth/change_password', 'refresh');
 			}
 		}
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('auth/change_password', $this->data);
-		$this->load->view('sis/footer',$this->data);
 	}
 
 	//forgot password
