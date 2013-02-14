@@ -1,4 +1,4 @@
-<h1><a href="/sis/account">Account</a><div class="icon subsection">Change Password</h1>
+<h1><a href="/sis/account">Account</a><div class="icon subsection"></div>Change Password</h1>
 
 <? if(!empty($message)){ ?><div class="message message-information"><div class="icon margin-right"></div><h3>Information</h3><p><?php echo $message;?></p></div><? } ?>
 <? if(!empty($message_information)){ ?><div class="message message-information"><div class="icon margin-right"></div><h3>Information</h3><p><?php echo $message_information;?></p></div><? } ?>
@@ -14,7 +14,7 @@
 		<td><?php echo form_input($old_password);?></td>
 	</tr>
 	<tr>
-		<td>New Password: <br/>(at least <?php echo $min_password_length;?> characters long)</td>
+		<td>New Password:</td>
 		<td><?php echo form_input($new_password);?></td>
 	</tr>
 	<tr>

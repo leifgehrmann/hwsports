@@ -27,7 +27,7 @@
 		<td><?php echo form_input($phone);?></td>
 	</tr>
 	<tr>
-		<td>Password:<br/>(at least <?php echo $min_password_length;?> characters long)</td>
+		<td>Password:</td>
 		<td><?php echo form_input($password);?></td>
 	</tr>
 	<tr>
