@@ -4,7 +4,7 @@
 // year and placed into groups of the year. we
 // do this by putting all the tournaments into
 // particular year arrays.
-$yearTournaments = array()
+$yearTournaments = array();
 foreach($tournaments as $tournament) { 
 	$year = DateTime::createFromFormat('Y', $tournament['tournamentStart']);
 	$yearTournaments[$year][] = $tournament;
