@@ -510,18 +510,32 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #4165C8; }
 	display:inline-block;
 	margin-bottom: 20px;
 }
-#content div.widget.full {
-	display:block;
-	width: 700px;
-}
-#content div.widget.threefourth, #content div.widget.half, #content div.widget.fourth {
+#content div.widget.full, 
+#content div.widget.threefourth, 
+#content div.widget.half, 
+#content div.widget.fourth {
 	margin-right:-4px;
 	display: inline-block; *display: inline; zoom: 1;
 	vertical-align: top;
 }
-#content div.widget.threefourth { width: 520px; }
-#content div.widget.half { width: 340px; }
-#content div.widget.fourth { width: 160px; }
+#content div.full 			{ width: 700px; }
+#content div.threefourth 	{ width: 520px; } /* 160 + 20 + 160 + 20 + 160 */
+#content div.half 			{ width: 340px; } /* 160 + 20 + 160 */
+#content div.fourth 		{ width: 160px; } /* 160 */
+
+/* These are the icons widths, so these are slightly redundant */
+#content div.widget-title-left,
+#content div.widget-title-right	{
+	background: #F0F;
+	width:20px;
+} 
+
+/* This is assuming widget-title-centre is surrounded by icons */
+#content div.full 			div.widget-title-centre { width:580px; } /* 700 - 20*2 - 20*4 */
+#content div.threefourth 	div.widget-title-centre { width:400px; } /* 520 - 20*2 - 20*4 */
+#content div.half 			div.widget-title-centre { width:220px; } /* 340 - 20*2 - 20*4 */
+#content div.fourth 		div.widget-title-centre { width: 40px; } /* 160 - 20*2 - 20*4 */
+
 #content div.half:nth-of-type(even) {
 	margin-left: 20px;
 }
@@ -547,15 +561,18 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #4165C8; }
 	display: inline-block; *display: inline; zoom: 1;
 	margin-right:-4px;
 }
-#content a div.widget-title:hover {
-	opacity:0.9;
+
+#content div.widget-title-centre, {
+	display: inline-block; *display: inline; zoom: 1;
+	vertical-align:middle;
+	margin-right: -4px;
+	display: inline-block; *display: inline; zoom: 1; vertical-align:middle;
 }
-#content div.widget-title-left { width:20px; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; }
-#content div.half div.widget-title-centre { width:220px; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; margin-right:-4px;}
-#content div.full div.widget-title-centre { width:580px; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; margin-right:-4px;}
-#content div.threefourth div.widget-title-centre { width:400px; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; margin-right:-0px;}
-#content div.fourth div.widget-title-centre { width:40px; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; margin-right:-0px;}
-#content div.widget-title-right { width:20px; overflow: hidden; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; margin-right:-0px; }
+
+#content a div.widget-title { text-decoration: underline; }
+#content a div.widget-title:hover { opacity:0.9; }
+/*#content div.widget-title-left { width:20px; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; }
+#content div.widget-title-right { width:20px; overflow: hidden; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; margin-right:-0px; }*/
 #content div.widget-title-right.icon { margin-left: 20px; margin-right: 20px; position:relative; top:-2px; }
 #content div.widget-title-left.icon { margin-left: 20px; margin-right: 20px; position:relative; top:-2px;}
 #content div.widget-body {
