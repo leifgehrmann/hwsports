@@ -289,6 +289,7 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover {
 	position: relative;
 	top: 5px;
 	margin-left:40px;
+	margin-bottom:20px;
 }
 #content dt { font-weight: bold; }
 #content q:before 	{ content: '"'; }
@@ -805,13 +806,20 @@ div.icon {
 	width: 20px;
 	height: 20px;
 	background-image: url('/img/icons/icons.png');
+	background-position: 20px 20px;
+	background-repeat: no-repeat;
 	display: inline-block; *display: inline; zoom: 1;
 }
 
 div.widget-title div.icon.sport-wattball {background-position: -320px -220px;}
 div.widget-title div.icon.sport-hurdling {background-position: -380px -220px;}
+div.widget-title div.icon.square 		 {background-position: -120px -20px;}
+div.widget-title div.icon.circle 		 {background-position: -120px -40px;}
 div.widget-title div.icon.chevron 		 {background-position: -120px -60px;}
+div.widget-title div.icon.right-arrow 	 {background-position: -120px -80px;}
 div.widget-title div.icon.news			 {background-position: -160px -280px;}
+div.widget-title div.icon.home			 {background-position: -60px -200px;}
+div.widget-title div.icon.signup		 {background-position: -60px -380px;}
 
 h1 div.icon.subsection {background-position: -20px -80px;}
 
