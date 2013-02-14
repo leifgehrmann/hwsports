@@ -23,57 +23,32 @@ body * {
 
 
 
-/**
+/**************************************\
 
+			General Structure
+				
+\***************************************/
 
-		Website Structure CSS
-
-
-*/
-
-#header {
-	width: 100%;
-	display: block;
-	margin: auto auto;
-}
-#header-block {
+#header-block, #middle-block, #footer-block {
 	width: 880px;
-	height: 160px;
 	margin: auto auto;
 }
+#header { display: block; }
+#header-block { height: 160px; }
 #middle {
 	padding-top:20px;
 	padding-bottom:20px;
-	width:100%;
-	overflow: hidden;
 }
-#middle-block {
-	overflow: hidden;
-	width: 880px;
-	margin: auto auto;
-}
+#middle-block { overflow: hidden; }
 #menu {
 	float: left;
 	width: 160px;
-	margin-right: 10px;
+	margin-right: 20px;
 }
 #content {
-	margin-left: 10px;
 	float: left;
 	width: 700px;
 }
-#footer {
-	clear:both;
-	margin: auto auto;
-	width: 100%;
-	display: block;
-}
-#footer-block {
-
-	clear:both;
-	width:880px;
-	margin: auto auto;
-}
 
 
 
@@ -92,13 +67,11 @@ body * {
 
 
 
-/**
+/***************************************\
 
-
-		Header CSS
-
-
-*/
+				Header
+				
+\***************************************/
 
 #header 			{ background: #0D44A2; }
 #header:hover 		{ background: #3F68BB; }
@@ -121,13 +94,11 @@ body * {
 
 
 
-/**
+/***************************************\
 
-
-		Middle CSS
-
-
-*/
+				Middle
+				
+\***************************************/
 
 #middle 		{ background: #FFF; }
 
@@ -143,79 +114,58 @@ body * {
 
 
 
-/**
+/***************************************\
 
+				Menu
 
-		Menu CSS
+\***************************************/
 
-
-*/
-
-#menu ul {
-	margin-bottom:40px;
-}
-#menu a {
-	font-size:20px;
-	color: inherit;
-	text-decoration:none;
-}
+#menu ul { margin-bottom:40px; }
 #menu li {
 	margin-left:30px;
 	list-style:none;
 	height: 60px;
 	position:relative;
-	/*top:3px;*/
 }
+
+#menu a {
+	font-size:20px;
+	color: inherit;
+	text-decoration:none;
+}
+#menu a:hover,
+#menu a.selected,
+#menu a.selected:hover { color: #0D42A8; }
+#menu a.selected,
+#menu a.selected:hover { font-weight:700; }
+
 #menu div.icon {
 	position:relative;
-	/*top:17px;*/
 	top:20px;
 	left:-30px;
 	display: block;
 }
+#menu .homepage 			div.icon 	{background-position: -20px -200px;}
+#menu .calendar 			div.icon 	{background-position: -20px -220px;}
+#menu .tournaments 			div.icon 	{background-position: -20px -240px;}
+#menu .matches 				div.icon 	{background-position: -20px -260px;}
+#menu .tickets 				div.icon 	{background-position: -20px -280px;}
+#menu .help 				div.icon 	{background-position: -20px -300px;}
+#menu .account 				div.icon 	{background-position: -20px -320px;}
+#menu .login 				div.icon 	{background-position: -20px -340px;}
+#menu .logout 				div.icon 	{background-position: -20px -360px;}
+#menu .register 			div.icon 	{background-position: -20px -380px;}
 
-#menu a:hover { color: #0D42A8; }
-#menu a.selected {
-	color: #0D42A8;
-	font-weight:700;
-}
-#menu a.selected:hover {
-	color: #0D42A8;
-	font-weight:700;
-}
-#menu a.selected div { background-position: 0px 0px; }
-#menu a{
-	transition: color .1s;
-	-moz-transition: color .1s; /* Firefox 4 */
-	-webkit-transition: color .1s; /* Safari and Chrome */
-	-o-transition: color .1s; /* Opera */
-}
-
-#menu a:hover div {
-	background-position: 0px 0px;
-}
-
-#menu .homepage div.icon 		{background-position: -20px -200px;}
-#menu .calendar div.icon 		{background-position: -20px -220px;}
-#menu .tournaments div.icon 	{background-position: -20px -240px;}
-#menu .matches div.icon 		{background-position: -20px -260px;}
-#menu .tickets div.icon 		{background-position: -20px -280px;}
-#menu .help div.icon 			{background-position: -20px -300px;}
-#menu .account div.icon 		{background-position: -20px -320px;}
-#menu .login div.icon 			{background-position: -20px -340px;}
-#menu .logout div.icon 			{background-position: -20px -360px;}
-#menu .register div.icon 		{background-position: -20px -380px;}
-
-#menu a.homepage:hover 		div.icon 	,#menu a.homepage.selected div.icon 	{background-position: -40px -200px;}
-#menu a.calendar:hover 		div.icon 	,#menu a.calendar.selected div.icon		{background-position: -40px -220px;}
-#menu a.tournaments:hover 	div.icon 	,#menu a.tournaments.selected div.icon	{background-position: -40px -240px;}
-#menu a.matches:hover		div.icon 	,#menu a.matches.selected div.icon		{background-position: -40px -260px;}
-#menu a.tickets:hover 		div.icon 	,#menu a.tickets.selected div.icon		{background-position: -40px -280px;}
-#menu a.help:hover 			div.icon 	,#menu a.help.selected div.icon			{background-position: -40px -300px;}
-#menu a.account:hover 		div.icon 	,#menu a.account.selected div.icon		{background-position: -40px -320px;}
-#menu a.login:hover 		div.icon 	,#menu a.login.selected div.icon		{background-position: -40px -340px;}
-#menu a.logout:hover 		div.icon 	,#menu a.logout.selected div.icon		{background-position: -40px -360px;}
-#menu a.register:hover		div.icon 	,#menu a.register.selected div.icon		{background-position: -40px -380px;}
+#menu a.homepage:hover 		div.icon 	,#menu a.selected.homepage 		div.icon 	{background-position: -40px -200px;}
+#menu a.calendar:hover 		div.icon 	,#menu a.selected.calendar 		div.icon	{background-position: -40px -220px;}
+#menu a.tournaments:hover 	div.icon 	,#menu a.selected.tournaments 	div.icon	{background-position: -40px -240px;}
+#menu a.matches:hover		div.icon 	,#menu a.selected.matches 		div.icon	{background-position: -40px -260px;}
+#menu a.tickets:hover 		div.icon 	,#menu a.selected.tickets 		div.icon	{background-position: -40px -280px;}
+#menu a.help:hover 			div.icon 	,#menu a.selected.help 			div.icon	{background-position: -40px -300px;}
+#menu a.account:hover 		div.icon 	,#menu a.selected.account 		div.icon	{background-position: -40px -320px;}
+#menu a.login:hover 		div.icon 	,#menu a.selected.login 		div.icon	{background-position: -40px -340px;}
+#menu a.logout:hover 		div.icon 	,#menu a.selected.logout		div.icon	{background-position: -40px -360px;}
+#menu a.register:hover		div.icon 	,#menu a.selected.register		div.icon	{background-position: -40px -380px;}
 
 
 
@@ -239,48 +189,24 @@ body * {
 
 
 */
+h1, h2, h3, p {
+	position:relative;
+	margin-bottom:20px;
+}
+h1 			{ line-height: 40px; }
+h2, h3, p 	{ line-height: 20px; }
+h1 { font-size: 30px; top: 8pt; }
+h2 { font-size: 20px; top: 2pt; }
+h3 { font-size: 18px; top: 3pt; }
+p  { font-size: 16px; top: 4pt; }
 
-#content h1 {
-	font-size: 30px;
-	line-height: 40px;
-	position:relative;
-	top: 8pt;
-	margin-bottom:20px;
-	color: #0D44A2;
-}
-#content h2 {
-	font-size: 20px;
-	line-height: 20px;
-	position:relative;
-	top: 2pt;
-	margin-bottom:20px;
-}
-#content h3 {
-	font-size: 18px;
-	line-height: 20px;
-	position:relative;
-	top: 3pt;
-	margin-bottom:20px;
-}
-#content p {
-	font-size: 16px;
-	line-height: 20px;
-	position:relative;
-	top: 4pt;
-	margin-bottom:20px;
-}
-#content p a, #content h1 a, #content h2 a, #content h3 a, #content p i, #content p b, #content p em {
+h1 a, h2 a, h3 a, p a { color: #0D42A8; }
+p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #4165C8; }
+
+#content h1 { color: #0D44A2; }
+/*#content p a, #content h1 a, #content h2 a, #content h3 a, #content p i, #content p b, #content p em {
 	display: inline-block; *display: inline; zoom: 1;
-}
-p a, h1 a, h2 a, h3 a {
-	color: #0D42A8;
-}
-p a:hover, h1 a:hover, h2 a:hover, h3 a:hover {
-	color: #4165C8;
-}
- p a:visited, h1 a:visited, h2 a:visited, h3 a:visited {
-	color: #3F68BB;
-}
+}*/
 #content p.indent 	{ text-indent:20px; }
 #content p.indent a, #content h1.indent a, #content h2.indent a, #content h3.indent a { text-indent: 0px; }
 #content p.newline,#content h1.newline,#content h2.newline,#content h3.newline { margin-bottom:40px; }
@@ -830,7 +756,7 @@ h1 div.icon.subsection {
 	margin-right: 20px;
 }
 
-.button div.icon.load {
+div.icon.load {
 	-webkit-animation: play-black .8s steps(8) infinite;
        -moz-animation: play-black .8s steps(8) infinite;
         -ms-animation: play-black .8s steps(8) infinite;
