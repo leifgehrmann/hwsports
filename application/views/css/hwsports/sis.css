@@ -764,8 +764,8 @@ a.button, input[type='submit'] {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 }
-a.button				, input[type='submit']				{ color: #333333; background:#FFFFFF; box-shadow: 0px 1px 1px rgba(0,0,0,0.8), inset 0px 0px 1px rgba(0,0,0,1); }
-a.button:hover			, input[type='submit']:hover		{ color: #333333; background:#FFFFFF; box-shadow: 0px 1px 1px rgba(0,0,0,0.8), inset 0px 0px 1px rgba(0,0,0,1); }
+a.button				, input[type='submit']				{ color: #333333; background:#FFFFFF; box-shadow: 0px 1px 2px rgba(0,0,0,1.0), inset 0px 0px 1px rgba(0,0,0,1); }
+a.button:hover			, input[type='submit']:hover		{ color: #333333; background:#FFFFFF; box-shadow: 0px 1px 2px rgba(0,0,0,1.0), inset 0px 0px 1px rgba(0,0,0,1); }
 a.button:active			, input[type='submit']:active		{ color: #333333; background:#EEEEEE; box-shadow: 0px 1px 1px rgba(0,0,0,0.4), inset 0px 1px 4px rgba(0,0,0,1); }
 a.button:active * 		, input[type='submit']:active *		{ color: #333333; opacity: 0.5; }
 
