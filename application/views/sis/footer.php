@@ -20,8 +20,8 @@
 					</div>
 					<div id="footer-powered">
 						<h1>Powered By</h1>
-						<p><a href="http://www.infusionsports.co.uk"><div class="product-logo"></div></a></p>
-						<p><a href="http://www.infusionsystems.co.uk"><div class="company-logo"></div></a></p>
+						<a href="http://www.infusionsports.co.uk"><div class="product-logo"></div></a>
+						<a href="http://www.infusionsystems.co.uk"><div class="company-logo"></div></a>
 					</div>
 				</div>
 			</div>

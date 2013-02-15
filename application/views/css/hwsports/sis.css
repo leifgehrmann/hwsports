@@ -712,7 +712,7 @@ a.button .icon { margin-bottom: -5px; }
 #footer-links, #footer-powered 	{ margin-left: 20px; }
 
 #footer a 		{ color: inherit; }
-#footer a:hover { opacity: 0.8; }
+#footer a:hover { opacity: 0.8; cursor:pointer; }
 #footer h1 {
 	font-size: 20px;
 	margin-bottom: 20px;
