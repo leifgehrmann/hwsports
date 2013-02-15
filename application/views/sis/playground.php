@@ -48,11 +48,11 @@
 				</div>
 			</div>
 		</div>
-		<h1>News</h1>
+		<h1>Announcements</h1>
 		<table class="full">
 			<tr>
 				<td style="width:40%">
-					<h2><div class="icon subscribe margin-right"></div>Subscribe to our news!</h2>
+					<h2><div class="icon subscribe margin-right"></div>Subscribe to our announcements!</h2>
 					<p>Enter in your email below to get any updates we post on the site.</p>
 				</td>
 				<td style="width:60%">
@@ -63,7 +63,7 @@
 				</td>
 			</tr>
 		</table>
-		<div class="widget full news">
+		<div class="widget full announcement">
 			<a href="#newsarticle">
 				<div class="widget-title">
 					<div class="widget-title-left icon"></div>
@@ -85,7 +85,7 @@
 			</div>
 		</div>
 		<div>
-			<div class="widget half news">
+			<div class="widget half announcement">
 				<a href="#newsarticle">
 					<div class="widget-title">
 						<div class="widget-title-left icon"></div>
@@ -102,7 +102,7 @@
 					<a href="#newsarticle" class="button right normal">View Announcement</a>
 				</div>
 			</div>
-			<div class="widget half news">
+			<div class="widget half announcement">
 				<a href="#newsarticle">
 					<div class="widget-title">
 						<div class="widget-title-left icon"></div>
@@ -123,7 +123,8 @@
 				</div>
 			</div>
 		</div>
-		<table class="full news">
+		<h1>Complete List of Announcements</h1>
+		<table class="full announcements">
 			<thead>
 				<tr>
 					<th>Date</th>
@@ -164,7 +165,7 @@
 				</tr>
 				<tr>
 					<td>2009/01/02</td>
-					<td>This is intentionally annoying. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed felis felis, tristique at interdum et, dapibus ut ligula. Vestibulum mi neque, laoreet a egestas sit amet, lacinia quis nisi. Nunc enim mi, aliquet vel gravida a, fermentum vel augue. Donec mi dolor, consectetur id aliquam non, posuere eget ante.</td>
+					<td>Mr Bojangles</td>
 					<td><a href="#newsarticle">View Announcement</a></td>
 				</tr>
 			</tbody>
