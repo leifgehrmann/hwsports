@@ -54,7 +54,7 @@
 				</td>
 				<td style="width:60%">
 					<form method="POST" action="/subscribe/">
-						<input style="margin-right:20px" placeholder="Your email..." name="email"><br/>
+						<input style="margin-right:20px" placeholder="Your email..." name="email">
 						<input type="submit" value="Subscribe" class="green" name="Subscribe">
 					</form>
 				</td>
