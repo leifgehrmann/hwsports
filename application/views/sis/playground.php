@@ -22,6 +22,9 @@
 			$('#block-9').toggle();
 		}
 	});
+	$(document).ready(function(){
+		$('table .news').dataTable();
+	});
 </script>
 
 
@@ -78,7 +81,7 @@
 				</ul>
 				<p>If you have already made an account, be sure to check into your account and sign up for the games you want to participate in.</p>
 				<p>If you want to create a team in the Wattball tournament, you only need one member to bla bla bla.</p>
-				<a href="#newsarticle" class="button right normal">Permalink</a>
+				<a href="#newsarticle" class="button right normal">View Announcement</a>
 			</div>
 		</div>
 		<div>
@@ -96,7 +99,7 @@
 						tournaments. Before you can participate directly, it would be best to register
 						now.
 					</p>
-					<a href="#newsarticle" class="button right normal">Permalink</a>
+					<a href="#newsarticle" class="button right normal">View Announcement</a>
 				</div>
 			</div>
 			<div class="widget half news">
@@ -116,10 +119,22 @@
 						fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
 						culpa qui officia deserunt mollit anim id est laborum.
 					</p>
-					<a href="#newsarticle" class="button right normal">Permalink</a>
+					<a href="#newsarticle" class="button right normal">View Announcement</a>
 				</div>
 			</div>
 		</div>
+		<table class="full news">
+			<tr>
+				<td><div class="icon"></div></td>
+				<td>Information about upcoming tournaments</td>
+				<td><a href="#newsarticle">View Announcement</a><div class="margin-left icon chevron"></td>
+			</tr>
+			<tr>
+				<td><div class="icon"></div></td>
+				<td>Sign up for basketball</td>
+				<td><a href="#newsarticle">View Announcement</a><div class="margin-left icon chevron"></div></td>
+			</tr>
+		</table>
 	</div>
 </div>
 
