@@ -655,8 +655,10 @@ $("a").die("keypress").live("keypress",function(e){
 
 <div id="block-7">
 	<h1>Icons</h1>
-	<div class="icon dalek-white"></div>
-	<div class="icon dalek-black"></div>
+	<p>
+		<span class="icon dalek-white"></span>
+		<span class="icon dalek-black"></span>
+	</p>
 	<div class="icon block-black-light"></div>
 	<div class="icon block-black-medium"></div>
 	<div class="icon block-black-dark"></div>

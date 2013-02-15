@@ -224,7 +224,7 @@ textarea {
 
 \***************************************/
 
-#menu ul { margin-left:0px 0px 0px 40px; }
+#menu ul { margin: 0px; }
 #menu li {
 	margin-left:30px;
 	list-style:none;
@@ -249,27 +249,27 @@ textarea {
 	left:-30px;
 	display: block;
 }
-#menu .homepage 			div.icon 	{background-position: -20px -200px;}
-#menu .calendar 			div.icon 	{background-position: -20px -220px;}
-#menu .tournaments 			div.icon 	{background-position: -20px -240px;}
-#menu .matches 				div.icon 	{background-position: -20px -260px;}
-#menu .tickets 				div.icon 	{background-position: -20px -280px;}
-#menu .help 				div.icon 	{background-position: -20px -300px;}
-#menu .account 				div.icon 	{background-position: -20px -320px;}
-#menu .login 				div.icon 	{background-position: -20px -340px;}
-#menu .logout 				div.icon 	{background-position: -20px -360px;}
-#menu .register 			div.icon 	{background-position: -20px -380px;}
+#menu .homepage 			div.icon 	{ background-position: -20px -200px; }
+#menu .calendar 			div.icon 	{ background-position: -20px -220px; }
+#menu .tournaments 			div.icon 	{ background-position: -20px -240px; }
+#menu .matches 				div.icon 	{ background-position: -20px -260px; }
+#menu .tickets 				div.icon 	{ background-position: -20px -280px; }
+#menu .help 				div.icon 	{ background-position: -20px -300px; }
+#menu .account 				div.icon 	{ background-position: -20px -320px; }
+#menu .login 				div.icon 	{ background-position: -20px -340px; }
+#menu .logout 				div.icon 	{ background-position: -20px -360px; }
+#menu .register 			div.icon 	{ background-position: -20px -380px; }
 
-#menu a.homepage:hover 		div.icon 	,#menu a.selected.homepage 		div.icon 	{background-position: -40px -200px;}
-#menu a.calendar:hover 		div.icon 	,#menu a.selected.calendar 		div.icon	{background-position: -40px -220px;}
-#menu a.tournaments:hover 	div.icon 	,#menu a.selected.tournaments 	div.icon	{background-position: -40px -240px;}
-#menu a.matches:hover		div.icon 	,#menu a.selected.matches 		div.icon	{background-position: -40px -260px;}
-#menu a.tickets:hover 		div.icon 	,#menu a.selected.tickets 		div.icon	{background-position: -40px -280px;}
-#menu a.help:hover 			div.icon 	,#menu a.selected.help 			div.icon	{background-position: -40px -300px;}
-#menu a.account:hover 		div.icon 	,#menu a.selected.account 		div.icon	{background-position: -40px -320px;}
-#menu a.login:hover 		div.icon 	,#menu a.selected.login 		div.icon	{background-position: -40px -340px;}
-#menu a.logout:hover 		div.icon 	,#menu a.selected.logout		div.icon	{background-position: -40px -360px;}
-#menu a.register:hover		div.icon 	,#menu a.selected.register		div.icon	{background-position: -40px -380px;}
+#menu a.homepage:hover 		div.icon 	,#menu a.selected.homepage 		div.icon 	{ background-position: -40px -200px; }
+#menu a.calendar:hover 		div.icon 	,#menu a.selected.calendar 		div.icon	{ background-position: -40px -220px; }
+#menu a.tournaments:hover 	div.icon 	,#menu a.selected.tournaments 	div.icon	{ background-position: -40px -240px; }
+#menu a.matches:hover		div.icon 	,#menu a.selected.matches 		div.icon	{ background-position: -40px -260px; }
+#menu a.tickets:hover 		div.icon 	,#menu a.selected.tickets 		div.icon	{ background-position: -40px -280px; }
+#menu a.help:hover 			div.icon 	,#menu a.selected.help 			div.icon	{ background-position: -40px -300px; }
+#menu a.account:hover 		div.icon 	,#menu a.selected.account 		div.icon	{ background-position: -40px -320px; }
+#menu a.login:hover 		div.icon 	,#menu a.selected.login 		div.icon	{ background-position: -40px -340px; }
+#menu a.logout:hover 		div.icon 	,#menu a.selected.logout		div.icon	{ background-position: -40px -360px; }
+#menu a.register:hover		div.icon 	,#menu a.selected.register		div.icon	{ background-position: -40px -380px; }
 
 
 
@@ -612,7 +612,7 @@ textarea {
 #content div.widget-title {
 	width: 100%;
 	word-wrap:break-word;
-	padding: 10px 0px 0px 10px;
+	padding: 10px 0px;
 	font-size: 20px;
 	line-height: 40px;
 	background: #333333;
@@ -647,7 +647,13 @@ textarea {
 }
 
 #content a div.widget-title-right.icon { background-position: -120px -60px; }
-/*#content a:hover div.widget-title-right { left:20px; }*/
+#content a div.widget-title-right {
+	transition: left .1s;
+	-moz-transition: left .1s;
+	-webkit-transition: left .1s;
+	-o-transition: left .1s;
+}
+#content a:hover div.widget-title-right { left:20px; }
 
 div.widget.news 			div.widget-title-left.icon { background-position: -160px -280px; }
 div.widget.tournament 		div.widget-title-left.icon { background-position: -60px  -240px; }
@@ -688,7 +694,7 @@ div.widget-title div.icon.sportid-10 		{background-position: -380px -220px;}
 
 .message{
 	overflow:hidden;
-	padding: 20px 20px 20px 0px;
+	padding: 20px 20px 0px 20px;
 	margin-bottom: 20px;
 	border-radius: 			4px;
 	-webkit-border-radius: 	4px;
