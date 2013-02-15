@@ -884,6 +884,9 @@ div.widget-title div.icon.load {
 @-o-keyframes 		play-white	{ from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
 @keyframes 			play-white	{ from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
 
+.match.sportname-wattball div.icon 	{ background-position:  -320px -200px; }
+.match.sportname-hurdling div.icon 	{ background-position:  -380px -200px; }
+
 div.icon.subscribe 				{background-position:   -20px -380px;}
 div.icon.announcement 			{background-position:  -120px -280px;}
 

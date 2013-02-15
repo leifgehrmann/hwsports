@@ -1,7 +1,7 @@
 <h1>Matches</h1>
 <p>Filter the matches using the form below, or browse the </p>
 <form>
-	<table>
+	<table class="full">
 		<tr>
 			<td>View: </td>
 			<td>
@@ -39,15 +39,9 @@
 		</tr>
 		<tr>
 			<td></td>
-			<td>
-				<select name="tournamentID">
-					<option value="19">Wattball 2013</option>
-					<option value="23">Men's Hurdling 2013</option>
-					<option value="23">Women's Hurdling 2013</option>
-				</select>
-			</td>
 			<td></td>
-			<td><input type="submit" value="Filter" class="green" name="Filter"></td>
+			<td></td>
+			<td><input type="submit" value="Filter" class="green" name="Filter Matches"></td>
 		</tr>
 	</table>
 </form>
@@ -73,7 +67,7 @@ $(document).ready(function(){
 			<td><div class="icon"></div></td>
 			<td><?=$match['date']?></td>
 			<td><?=$match['startTime']?></td>
-			<td>Information about upcoming tournaments</td>
+			<td><?=$match['name']?></td>
 			<td><?=$match['venue']?></td>
 			<td><a href="/sis/match/<?=$match['matchID']?>">View Details</a></td>
 		</tr>
