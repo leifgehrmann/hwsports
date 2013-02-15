@@ -82,6 +82,7 @@ $(document).ready(function(){
 </table>
 <!--
 <div class="matches-upcoming">
+	<? foreach($matches as $match) { ?>
 	<div class="widget half match">
 		<a href="/sis/match/<?=$match['matchID']?>">
 			<div class="widget-title">
