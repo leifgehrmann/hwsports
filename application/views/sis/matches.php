@@ -56,6 +56,7 @@ $(document).ready(function(){
 			<th></th>
 			<th>Date</th>
 			<th>Start</th>
+			<th>End</th>
 			<th>Title</th>
 			<th>Venue</th>
 			<th></th>
@@ -67,6 +68,7 @@ $(document).ready(function(){
 			<td><div class="icon"></div></td>
 			<td><?=$match['date']?></td>
 			<td><?=$match['startTime']?></td>
+			<td><?=$match['endTime']?></td>
 			<td><?=$match['name']?></td>
 			<td><?=$match['venue']?></td>
 			<td><a href="/sis/match/<?=$match['matchID']?>">View Details</a></td>

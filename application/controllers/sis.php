@@ -58,7 +58,7 @@ class Sis extends MY_Controller {
 				$matches[$key]['tournament'] = "None";
 			}
 			
-			$matches[$key]['date'] = date("F jS, Y",$match['startTime']);
+			$matches[$key]['date'] = date("Y/m/d",$match['startTime']);
 			
 			$matches[$key]['startTime'] = date("H:i",$match['startTime']);
 			$matches[$key]['endTime'] = date("H:i",$match['endTime']);
