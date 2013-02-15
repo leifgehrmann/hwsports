@@ -1,4 +1,10 @@
-body {
+/***************************************\
+
+			Page Wide Styling
+				
+\***************************************/
+
+/*body {
 	background: #<?=$centre['backgroundColour']?>;
 }*/
 body {
@@ -59,6 +65,30 @@ figcaption {
 	position: relative;
 	top: 5px;
 }
+
+/***************************************\
+
+			Table Styling
+				
+\***************************************/
+table {
+	background: #EEEEEE;
+	margin-bottom: 20px;
+}
+td, th {
+	font-size: 16px;
+	position: relative;
+	top: 4pt;
+	line-height: 40px;
+	padding: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+th { text-align: left; }
+table.full 			{ width: 700px; }
+table.threefourth 	{ width: 520px; }
+table.half 			{ width: 340px; }
+table.fourth 		{ width: 160px; }
 
 /***************************************\
 
@@ -194,7 +224,7 @@ textarea {
 
 \***************************************/
 
-#menu ul { margin-bottom:40px; }
+#menu ul { margin-left:0px 0px 0px 40px; }
 #menu li {
 	margin-left:30px;
 	list-style:none;
@@ -347,6 +377,20 @@ textarea {
 #footer-powered .product-logo{ background-position: -460px -60px; }
 #footer-powered .company-logo{ background-position: -460px -20px; }
 #footer-powered div:hover{ opacity: 0.8; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -525,35 +569,7 @@ textarea {
 
 
 
-/*
-	Tables
-*/
-/*#content table 				{ display: table;}*/
-/*#content tbody 				{ display: table-row-group; }*/
-/*#content thead 				{ display: table-header-group; }*/
-/*#content tr 				{ display: table-row; }*/
-/*#content td, #content th 	{ display: table-cell; }*/
-#content th {
-	text-align: left;
-}
-#content table {
-	background: #EEEEEE;
-	margin-bottom: 20px;
-}
 
-#content td, #content th {
-	font-size: 16px;
-	position: relative;
-	top: 4pt;
-	line-height: 40px;
-	padding: 20px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-}
-#content table.full 		{ width: 700px; }
-#content table.threefourth 	{ width: 520px; }
-#content table.half 		{ width: 340px; }
-#content table.fourth 		{ width: 160px; }
 
 
 
@@ -574,12 +590,6 @@ textarea {
 	vertical-align: top;
 	margin-right:-4px;
 }
-/*#content div.widget.full, 
-#content div.widget.threefourth, 
-#content div.widget.half, 
-#content div.widget.fourth {
-	margin-right:-4px;
-}*/
 #content div.full 			{ width: 700px; } /* 160 + 20 + 160 + 20 + 160 + 20 + 160 */
 #content div.threefourth 	{ width: 520px; } /* 160 + 20 + 160 + 20 + 160 */
 #content div.half 			{ width: 340px; } /* 160 + 20 + 160 */
@@ -597,16 +607,12 @@ textarea {
 #content div.half 			div.widget-title-centre { width:220px; } /* 340 - 20*2 - 20*4 */
 #content div.fourth 		div.widget-title-centre { width: 40px; } /* 160 - 20*2 - 20*4 */
 
-#content div.half:nth-of-type(even) {
-	margin-left: 20px;
-}
+#content div.half:nth-of-type(even) { margin-left: 20px; }
 
 #content div.widget-title {
 	width: 100%;
 	word-wrap:break-word;
-	padding:10px;
-	padding-left:0px;
-	padding-right:0px;
+	padding: 10px 0px 0px 10px;
 	font-size: 20px;
 	line-height: 40px;
 	background: #333333;
@@ -641,18 +647,21 @@ textarea {
 }
 
 #content a div.widget-title-right.icon { background-position: -120px -60px; }
-#content a:hover div.widget-title-right { left:20px; }
+/*#content a:hover div.widget-title-right { left:20px; }*/
 
-#content div.widget.news 			div.widget-title-left.icon { background-position: -160px -280px; }
-#content div.widget.tournament 		div.widget-title-left.icon { background-position: -60px  -240px; }
-#content div.widget.match 			div.widget-title-left.icon { background-position: -60px  -260px; }
-#content div.widget.welcome-message div.widget-title-left.icon { background-position: -60px  -200px; }
-#content div.widget.subscribe 		div.widget-title-left.icon { background-position: -60px  -380px; }
+div.widget.news 			div.widget-title-left.icon { background-position: -160px -280px; }
+div.widget.tournament 		div.widget-title-left.icon { background-position: -60px  -240px; }
+div.widget.match 			div.widget-title-left.icon { background-position: -60px  -260px; }
+div.widget.welcome-message div.widget-title-left.icon { background-position: -60px  -200px; }
+div.widget.subscribe 		div.widget-title-left.icon { background-position: -60px  -380px; }
 
-#content div.widget.welcome-message div.widget-title { background: #0D44A2; }
-#content div.widget.subscribe 		div.widget-title { background: #D93600; }
+div.widget.welcome-message div.widget-title { background: #0D44A2; }
+div.widget.subscribe 		div.widget-title { background: #D93600; }
 
-
+div.widget-title div.icon.sportname-wattball,
+div.widget-title div.icon.sportid-8 		{background-position: -320px -220px;}
+div.widget-title div.icon.sportname-hurdling,
+div.widget-title div.icon.sportid-10 		{background-position: -380px -220px;}
 
 
 
@@ -793,10 +802,11 @@ a.button .icon { margin-bottom: -5px; }
 
 
 
-/*
+/***************************************\
 
-	Icon parameters
-*/
+				Icons
+				
+\***************************************/
 div.icon {
 	width: 20px;
 	height: 20px;
@@ -805,18 +815,6 @@ div.icon {
 	background-repeat: no-repeat;
 	display: inline-block; *display: inline; zoom: 1;
 }
-
-/*div.widget-title div.icon.sportname-wattball,
-div.widget-title div.icon.sportid-8 		{background-position: -320px -220px;}
-div.widget-title div.icon.sportname-hurdling,
-div.widget-title div.icon.sportid-10 		{background-position: -380px -220px;}
-div.widget-title div.icon.square 		{background-position: -120px -20px;}
-div.widget-title div.icon.circle 		{background-position: -120px -40px;}
-div.widget-title div.icon.chevron 		{background-position: -120px -60px;}
-div.widget-title div.icon.right-arrow 	{background-position: -120px -80px;}
-div.widget-title div.icon.news			{background-position: -160px -280px;}
-div.widget-title div.icon.home			{background-position: -60px -200px;}
-div.widget-title div.icon.signup		{background-position: -60px -380px;}*/
 
 div.icon.load {
 	-webkit-animation: play-black .8s steps(8) infinite;
@@ -866,20 +864,8 @@ div.icon.arrow-right-blue-dark 		{background-position:  -80px 0px;}
 div.icon.dalek-black 		{background-position:  -560px -20px;}
 div.icon.dalek-white 		{background-position:  -580px -20px;}
 
-div.icon.margin-left { margin-left: 20px; }
-div.icon.margin-right { margin-right: 20px; }
-div.icon {
-	/*vertical-align: top;*/
-	/*overflow: visible;*/
-	/*position: relative;*/
-	/*top: 30px;*/
-	/*box-shadow: 0px 1px 1px rgba(0,0,0,0.8), inset 0px 0px 1px rgba(0,0,0,1);*/
-}
-
 .text-align-left {text-align:left;}
 .text-align-right {text-align:right;}
-.right {float: right;}
-.left {float: left;}
 .margin-left { margin-left: 20px; }
 .margin-right { margin-right: 20px; }
 
