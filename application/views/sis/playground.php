@@ -48,31 +48,18 @@
 		<h1>News</h1>
 		<table class="full">
 			<tr>
-				<td>
-					<p><b>Subscribe to our news!</b></p>
+				<td style="width:40%">
+					<h2><div class="icon subscribe margin-right"></div>Subscribe to our news!</h2>
 					<p>Enter in your email below to get any updates we post on the site.</p>
 				</td>
-				<td>
+				<td style="width:60%">
 					<form method="POST" action="/subscribe/">
-						<input class="margin-left" placeholder="Your email..." name="email">
+						<input style="margin-right:20px" placeholder="Your email..." name="email"><br/>
 						<input type="submit" value="Subscribe" class="green" name="Subscribe">
 					</form>
 				</td>
 			</tr>
 		</table>
-		<div class="widget full subscribe">
-				<div class="widget-title">
-					<div class="widget-title-left icon"></div>
-					<div class="widget-title-centre">Subscribe to our news!</div>
-					<div class="widget-title-right icon"></div>
-				</div>
-				<div class="widget-body">
-					<form method="POST" action="/subscribe/">
-						<input placeholder="Your email..." name="email">
-						<input type="submit" value="Subscribe" class="green" name="Subscribe">
-					</form>
-				</div>
-			</div>
 		<div class="widget full news">
 			<a href="#newsarticle">
 				<div class="widget-title">
@@ -83,6 +70,7 @@
 			</a>
 			<div class="widget-body">
 				<p><b>Published:</b> 14/02/2013 ~ 13:20</p>
+				<img src="http://upload.wikimedia.org/wikipedia/commons/a/ab/Hurdling_Kraenzlein.png" width="100%"/>
 				<p>Want to participate in the Heriot Watt Tournament, well now you can register on this website! We are offering the following sports this year.</p>
 				<ul>
 					<li>Heriot Hurdling (Men &amp; Womens)</li>

@@ -658,7 +658,7 @@ a div.widget-title-right {
 	-o-transition: left opacity .1s;
 }
 
-a:hover div.widget-title-right.icon { -webkit-animation: imove .5s infinite; }
+a:hover div.widget-title-right.icon { -webkit-animation: imove .5s; }
 @-webkit-keyframes imove {
 	0% 		{ left:   0px; 	opacity: 1; }
 	49% 	{ left:  20px; 	opacity: 0; }
@@ -858,6 +858,8 @@ div.widget-title div.icon.load {
 @-ms-keyframes 		play-white	{ from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
 @-o-keyframes 		play-white	{ from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
 @keyframes 			play-white	{ from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
+
+div.icon.subscribe 				{background-position:  -20px -380px;}
 
 div.icon.block-black-light 		{background-position: -40px -20px;}
 div.icon.block-black-medium 	{background-position: -20px -20px;}
