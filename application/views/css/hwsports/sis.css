@@ -96,6 +96,8 @@ table.fourth 		{ width: 160px; }
 				
 \***************************************/
 
+form table { padding-bottom: 20px }
+
 input, select, textarea {
 	font-family: inherit;
 	display: inline-block; *display: inline; zoom: 1;
@@ -224,7 +226,7 @@ textarea {
 
 \***************************************/
 
-#menu ul { margin: 0px; }
+#menu ul { margin: 0px 0px 40px 0px; }
 #menu li {
 	margin-left:30px;
 	list-style:none;
@@ -614,11 +616,12 @@ div.fourth 			div.widget-title-centre { width: 40px; } /* 160 - 20*2 - 20*4 */
 div.half:nth-of-type(even) { margin-left: 20px; }
 
 div.widget-title {
+	text-decoration: none;
+	font-size: 20px;
+	line-height: 40px;
 	width: 100%;
 	word-wrap:break-word;
 	padding: 10px 0px;
-	font-size: 20px;
-	line-height: 40px;
 	background: #333333;
 	color: #EEEEEE;
 	letter-spacing:-4px;
