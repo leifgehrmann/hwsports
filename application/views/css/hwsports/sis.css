@@ -658,12 +658,12 @@ a div.widget-title-right {
 	-o-transition: left opacity .1s;
 }
 
-div.widget-title-right.icon { -webkit-animation: imove .5s infinite; }
+a:hover div.widget-title-right.icon { -webkit-animation: imove .5s infinite; }
 @-webkit-keyframes imove {
-	0% 		{ left: 0px; 	opacity: 1; }
-	49% 	{ left: 20px; 	opacity: 0; }
-	51% 	{ left: -20px; 	opacity: 0; }
-	100% 	{ left: 0px; 	opacity: 1; }
+	0% 		{ left:   0px; 	opacity: 1; }
+	49% 	{ left:  20px; 	opacity: 0; }
+	51% 	{ left: -60px; 	opacity: 0; }
+	100% 	{ left:   0px; 	opacity: 1; }
 }
 
 div.widget.news 			div.widget-title-left.icon { background-position: -160px -280px; }

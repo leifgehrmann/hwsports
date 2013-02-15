@@ -46,6 +46,20 @@
 			</div>
 		</div>
 		<h1>News</h1>
+		<table class="full">
+			<tr>
+				<td>
+					<p><b>Subscribe to our news!</b></p>
+					<p>Enter in your email below to get any updates we post on the site.</p>
+				</td>
+				<td>
+					<form method="POST" action="/subscribe/">
+						<input class="margin-left" placeholder="Your email..." name="email">
+						<input type="submit" value="Subscribe" class="green" name="Subscribe">
+					</form>
+				</td>
+			</tr>
+		</table>
 		<div class="widget full subscribe">
 				<div class="widget-title">
 					<div class="widget-title-left icon"></div>
