@@ -133,23 +133,38 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>12/02/2012</td>
+					<td>2012/02/12</td>
 					<td>Information about upcoming tournaments</td>
 					<td><a href="#newsarticle">View Announcement</a></td>
 				</tr>
 				<tr>
-					<td>12/01/2012</td>
+					<td>2012/01/16</td>
 					<td>Sign up for basketball</td>
 					<td><a href="#newsarticle">View Announcement</a></td>
 				</tr>
 				<tr>
-					<td>12/12/2011</td>
+					<td>2011/12/23</td>
 					<td>Bring it all back to you</td>
 					<td><a href="#newsarticle">View Announcement</a></td>
 				</tr>
 				<tr>
-					<td>31/12/2011</td>
+					<td>2011/12/31</td>
 					<td>Magical Transistor Radio</td>
+					<td><a href="#newsarticle">View Announcement</a></td>
+				</tr>
+				<tr>
+					<td>2010/11/24</td>
+					<td>Duck Ellington</td>
+					<td><a href="#newsarticle">View Announcement</a></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Friendships, Relationships, and all those other ships.</td>
+					<td><a href="#newsarticle">View Announcement</a></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>This is intentionally annoying. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed felis felis, tristique at interdum et, dapibus ut ligula. Vestibulum mi neque, laoreet a egestas sit amet, lacinia quis nisi. Nunc enim mi, aliquet vel gravida a, fermentum vel augue. Donec mi dolor, consectetur id aliquam non, posuere eget ante.</td>
 					<td><a href="#newsarticle">View Announcement</a></td>
 				</tr>
 			</tbody>
