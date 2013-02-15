@@ -143,13 +143,6 @@
 					<td><a href="#newsarticle">View Announcement</a></td>
 				</tr>
 			</tbody>
-			<tfoot>
-				<tr>
-					<th></th>
-					<th>Announcement Title</th>
-					<th></th>
-				</tr>
-			</tfoot>
 		</table>
 	</div>
 </div>
