@@ -586,8 +586,8 @@ textarea {
 }
 .dataTables_wrapper table.dataTable td {
 	padding: 0px 10px;
+	line-height: 20px;
 }
-
 .dataTables_wrapper table td, .dataTables_wrapper table th {
 	top: 0px;
 }

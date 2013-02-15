@@ -158,12 +158,12 @@
 					<td><a href="#newsarticle">View Announcement</a></td>
 				</tr>
 				<tr>
-					<td></td>
+					<td>2010/13/42</td>
 					<td>Friendships, Relationships, and all those other ships.</td>
 					<td><a href="#newsarticle">View Announcement</a></td>
 				</tr>
 				<tr>
-					<td></td>
+					<td>2009/01/02</td>
 					<td>This is intentionally annoying. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed felis felis, tristique at interdum et, dapibus ut ligula. Vestibulum mi neque, laoreet a egestas sit amet, lacinia quis nisi. Nunc enim mi, aliquet vel gravida a, fermentum vel augue. Donec mi dolor, consectetur id aliquam non, posuere eget ante.</td>
 					<td><a href="#newsarticle">View Announcement</a></td>
 				</tr>
