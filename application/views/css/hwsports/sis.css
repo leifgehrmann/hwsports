@@ -609,7 +609,7 @@ textarea {
 
 /*
 	Leif's Custom widget div, which is a simple information box that can
-	be used for news, tournament, match items on the pages.
+	be used for announcements, tournament, match items on the pages.
 */
 div.widget {
 	background: #EEEEEE;
@@ -691,7 +691,7 @@ a:hover div.widget-title-right.icon { -webkit-animation: imove .5s; }
 	100% 	{ left:   0px; 	opacity: 1; }
 }
 
-div.widget.news 			div.widget-title-left.icon { background-position: -160px -280px; }
+div.widget.announcement 	div.widget-title-left.icon { background-position: -160px -280px; }
 div.widget.tournament 		div.widget-title-left.icon { background-position: -60px  -240px; }
 div.widget.match 			div.widget-title-left.icon { background-position: -60px  -260px; }
 div.widget.welcome-message 	div.widget-title-left.icon { background-position: -60px  -200px; }
@@ -885,7 +885,7 @@ div.widget-title div.icon.load {
 @keyframes 			play-white	{ from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
 
 div.icon.subscribe 				{background-position:   -20px -380px;}
-div.icon.news 					{background-position:  -120px -280px;}
+div.icon.announcement 			{background-position:  -120px -280px;}
 
 div.icon.block-black-light 		{background-position: -40px -20px;}
 div.icon.block-black-medium 	{background-position: -20px -20px;}

@@ -23,7 +23,7 @@
 		}
 	});
 	$(document).ready(function(){
-		$('table.news').dataTable();
+		$('table.announcements').dataTable();
 	});
 </script>
 
@@ -51,8 +51,10 @@
 		<h1>Announcements</h1>
 		<table class="full">
 			<tr>
+				<td colspan"2"><h2><div class="icon subscribe margin-right"></div>Subscribe to our announcements!</h2></td>
+			</tr>
+			<tr>
 				<td style="width:40%">
-					<h2><div class="icon subscribe margin-right"></div>Subscribe to our announcements!</h2>
 					<p>Enter in your email below to get any updates we post on the site.</p>
 				</td>
 				<td style="width:60%">
