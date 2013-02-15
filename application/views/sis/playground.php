@@ -33,22 +33,35 @@
 	<div id="content">
 		<div>
 			<div class="widget full welcome-message">
-				<div class="widget-title" style="height: 40px;">
+				<div class="widget-title">
 					<div class="widget-title-left icon"></div>
 					<div class="widget-title-centre">Welcome to Riccarton Tournaments</div>
 					<div class="widget-title-right icon"></div>
 				</div>
 				<div class="widget-body">
-					<img style="float: right;width:40%;padding-left:20px;" src="http://www.hw.ac.uk/img/football-800x450.jpg" />
+					<img style="float:right;width:40%;padding-left:20px;" src="http://www.hw.ac.uk/img/football-800x450.jpg" />
 					<p>On this website you can get the latest information about tournament events occuring on campus. This includes the calendar, scores of the matches, and winners of tournaments. You can also register here to purchase tickets and sign up for sports events.</p>
 					<a href="sis/help" class="button blue">More Information</a>
 				</div>
 			</div>
 		</div>
 		<h1>News</h1>
+		<div class="widget full subscribe">
+				<div class="widget-title">
+					<div class="widget-title-left icon"></div>
+					<div class="widget-title-centre">Subscribe to our news!</div>
+					<div class="widget-title-right icon"></div>
+				</div>
+				<div class="widget-body">
+					<form method="POST" action="/subscribe/">
+						<input placeholder="Your email..." name="email">
+						<input type="submit" value="Subscribe" class="green" name="Subscribe">
+					</form>
+				</div>
+			</div>
 		<div class="widget full news">
 			<a href="#newsarticle">
-				<div class="widget-title" style="height: 40px;">
+				<div class="widget-title">
 					<div class="widget-title-left icon"></div>
 					<div class="widget-title-centre">Register now!</div>
 					<div class="widget-title-right icon"></div>
@@ -69,7 +82,7 @@
 		<div>
 			<div class="widget half news">
 				<a href="#newsarticle">
-					<div class="widget-title" style="height: 40px;">
+					<div class="widget-title">
 						<div class="widget-title-left icon"></div>
 						<div class="widget-title-centre">2013 Tournaments announced!</div>
 						<div class="widget-title-right icon"></div>
@@ -86,7 +99,7 @@
 			</div>
 			<div class="widget half news">
 				<a href="#newsarticle">
-					<div class="widget-title" style="height: 40px;">
+					<div class="widget-title">
 						<div class="widget-title-left icon"></div>
 						<div class="widget-title-centre">Congratulations to the winners!</div>
 						<div class="widget-title-right icon"></div>
@@ -102,21 +115,6 @@
 						culpa qui officia deserunt mollit anim id est laborum.
 					</p>
 					<a href="#newsarticle" class="button right normal">Permalink</a>
-				</div>
-			</div>
-			<div class="widget half subscribe">
-				<div class="widget-title" style="height: 40px;">
-					<div class="widget-title-left icon"></div>
-					<div class="widget-title-centre">Subscribe!</div>
-					<div class="widget-title-right icon"></div>
-				</div>
-				<div class="widget-body">
-					<form method="POST" action="/subscribe/">
-						<p><b>Want to keep up with sport tournament news?</b></p>
-						<p>Enter in your email below to get any updates we post on the site.</p>
-						<input placeholder="Your email..." name="email">
-						<input type="submit" value="Subscribe" class="green" name="Subscribe">
-					</form>
 				</div>
 			</div>
 		</div>
