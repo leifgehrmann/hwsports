@@ -545,16 +545,32 @@
         </tfoot>
 		</table>
 		<table class="full news">
-			<tr>
-				<td><div class="icon"></div></td>
-				<td>Information about upcoming tournaments</td>
-				<td><a href="#newsarticle">View Announcement</a><div class="margin-left icon chevron"></td>
-			</tr>
-			<tr>
-				<td><div class="icon"></div></td>
-				<td>Sign up for basketball</td>
-				<td><a href="#newsarticle">View Announcement</a><div class="margin-left icon chevron"></div></td>
-			</tr>
+			<thead>
+				<tr>
+					<th></th>
+					<th>Announcement Title</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><div class="icon"></div></td>
+					<td>Information about upcoming tournaments</td>
+					<td><a href="#newsarticle">View Announcement</a><div class="margin-left icon chevron"></td>
+				</tr>
+				<tr>
+					<td><div class="icon"></div></td>
+					<td>Sign up for basketball</td>
+					<td><a href="#newsarticle">View Announcement</a><div class="margin-left icon chevron"></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th></th>
+					<th>Announcement Title</th>
+					<th></th>
+				</tr>
+			</tfoot>
 		</table>
 	</div>
 </div>
