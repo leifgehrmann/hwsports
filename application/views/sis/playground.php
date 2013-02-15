@@ -216,7 +216,8 @@
 		I wonder if this does anything interesting.
 	</pre>
 </p>
-	<h2 class="newline">2013</h2>
+	<h2>2013</h2>
+	<br/>
 </div>
 
 

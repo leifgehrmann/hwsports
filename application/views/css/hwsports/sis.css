@@ -30,9 +30,72 @@ h1 { font-size: 30px; top: 8pt; }
 h2 { font-size: 20px; top: 2pt; }
 h3 { font-size: 18px; top: 3pt; }
 p  { font-size: 16px; top: 4pt; }
+p.indent 	{ text-indent:20px; }
 
 h1 a, h2 a, h3 a, p a { color: #0D42A8; }
 p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #4165C8; }
+
+/* Lists, dictionaries */
+ul, dl, ol {
+	position: relative;
+	top: 5px;
+	margin-left:40px;
+}
+dt { font-weight: bold; }
+
+/* inline quotes, blocks, figures, addresses */
+q:before 	{ content: '"'; }
+q:after 	{ content: '"'; }
+
+figure, blockquote {
+	margin-bottom:20px;
+}
+
+address, blockquote, pre {
+	position: relative;
+	top: 4px;
+}
+figcaption {
+	position: relative;
+	top: 5px;
+}
+
+/***************************************\
+
+			Form Styling
+				
+\***************************************/
+
+input, select, textarea {
+	font-family: inherit;
+	display: inline-block; *display: inline; zoom: 1;
+	font-size: 16px;
+}
+input, textarea {
+	background: #FFFFFF;
+	padding: 10px;
+	border: none;
+}
+/* All single line text inputs */
+input[type='text'],
+input[type='password'],
+input:not([type]) {
+	line-height: 40px;
+	height: 20px;
+	margin: 0px;
+	box-shadow: inset 0px 0px 1px rgba(0,0,0,0.6), 
+				inset 0px 1px 2px rgba(0,0,0,0.6);
+}
+label {
+	display: block;
+}
+textarea {
+	line-height: 20px;
+	min-height: 80px;
+	box-shadow: inset 0px 0px 1px rgba(0,0,0,0.6), 
+				inset 0px 1px 2px rgba(0,0,0,0.6), 
+				inset 0px 0px 1px rgba(0,0,0,0.6);
+}
 
 /***************************************\
 
@@ -195,52 +258,22 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #4165C8; }
 
 /***************************************\
 
-			Content Structure
+			Content typography
+	
+	Most of it is already covered above
+	in General Typography.
 				
 \***************************************/
 
 #content h1 { color: #0D44A2; }
-/*#content p a, #content h1 a, #content h2 a, #content h3 a, #content p i, #content p b, #content p em {
-	display: inline-block; *display: inline; zoom: 1;
-}*/
-p.indent 	{ text-indent:20px; }
-/*p.indent a, h1.indent a, h2.indent a, #content h3.indent a { text-indent: 0px; }*/
-p.newline, h1.newline, h2.newline, h3.newline { margin-bottom:40px; }
 
-#content ul, #content dl, #content ol {
-	position: relative;
-	top: 5px;
-	margin-left:40px;
-	margin-bottom:20px;
-}
-#content dt { font-weight: bold; }
-#content q:before 	{ content: '"'; }
-#content q:after 	{content: '"'; }
 #content blockquote {
-	position: relative;
-	top: 4px;
 	margin-left: 20px;
 	padding-left: 20px;
 	border-left: solid 20px #EEE;
-	margin-bottom: 20px;
 	padding-bottom: 20px;
 	padding-top: 20px;
 }
-#content address {
-	position: relative;
-	top: 4px;
-}
-#content pre {
-	position: relative;
-	top: 4px;
-}
-#content figcaption {
-	position: relative;
-	top: 5px;
-}
-#content figure {
-	margin-bottom:20px;
-}
 
 
 
@@ -256,45 +289,7 @@ p.newline, h1.newline, h2.newline, h3.newline { margin-bottom:40px; }
 
 
 
-/*
-	Form Elements
-*/
-#content input[type='text'], #content input[type='password'], #content input:not([type]) {
-	line-height: 40px;
-	font-size: 16px;
-	font-family: inherit;
-	display: inline-block; *display: inline; zoom: 1;
-	height: 20px;
-	padding: 10px;
-	margin: 0px;
-	border: none;
-	background: #FFFFFF;
-	box-shadow: inset 0px 0px 1px rgba(0,0,0,0.6), inset 0px 1px 2px rgba(0,0,0,0.6);
-}
-#content label{
-	display: block;
-}
-#content select {
-	font-size: 16px;
-	font-family: inherit;
-	display: inline-block; *display: inline; zoom: 1;
-}
-#content textarea {
-	line-height: 20px;
-	font-size: 16px;
-	font-family: inherit;
 
-	border: none;
-	display: inline-block; *display: inline; zoom: 1;
-	padding: 10px;
-	background: #FFFFFF;
-	box-shadow: inset 0px 0px 1px rgba(0,0,0,0.6), inset 0px 1px 2px rgba(0,0,0,0.6), inset 0px 0px 1px rgba(0,0,0,0.6);
-	min-height: 80px;
-}
-#content textarea.h200 { height: 200px; }
-#content textarea.h300 { height: 300px; }
-#content textarea.h400 { height: 400px; }
-#content textarea.h500 { height: 500px; }
 
 
 
