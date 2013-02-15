@@ -862,7 +862,8 @@ div.widget-title div.icon.load {
 @-o-keyframes 		play-white	{ from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
 @keyframes 			play-white	{ from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
 
-div.icon.subscribe 				{background-position:  -20px -380px;}
+div.icon.subscribe 				{background-position:   -20px -380px;}
+div.icon.news 					{background-position:  -120px -280px;}
 
 div.icon.block-black-light 		{background-position: -40px -20px;}
 div.icon.block-black-medium 	{background-position: -20px -20px;}
