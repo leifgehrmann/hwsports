@@ -652,12 +652,18 @@ div.widget-body {
 
 a div.widget-title-right.icon { background-position: -120px -60px; }
 a div.widget-title-right {
-	transition: left .1s;
-	-moz-transition: left .1s;
-	-webkit-transition: left .1s;
-	-o-transition: left .1s;
+	transition: left opacity .1s;
+	-moz-transition: left opacity .1s;
+	-webkit-transition: left opacity .1s;
+	-o-transition: left opacity .1s;
 }
-a:hover div.widget-title-right { left:20px; }
+a:hover div.widget-title-right { animation: chevron_move .5s; }
+@keyframes chevron_move {
+	0% 		{ left: 0px; 	opacity: 1; }
+	49% 	{ left: 20px; 	opacity: 0; }
+	51% 	{ left: -20px; 	opacity: 0; }
+	100% 	{ left: 0px; 	opacity: 1; }
+}
 
 div.widget.news 			div.widget-title-left.icon { background-position: -160px -280px; }
 div.widget.tournament 		div.widget-title-left.icon { background-position: -60px  -240px; }
