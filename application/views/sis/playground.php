@@ -655,24 +655,24 @@ $("a").die("keypress").live("keypress",function(e){
 
 <div id="block-7">
 	<h1>Icons</h1>
-	<p>
-		<span class="icon dalek-white"></span>
-		<span class="icon dalek-black"></span>
-	</p>
-	<div class="icon block-black-light"></div>
-	<div class="icon block-black-medium"></div>
-	<div class="icon block-black-dark"></div>
-	<div class="icon block-blue-light"></div>
-	<div class="icon block-blue-medium"></div>
-	<div class="icon block-blue-dark"></div>
-	<div class="icon block-white"></div>
-	<div class="icon block-blue-medium"></div>
-	<div class="icon arrow-right-white"></div>
-	<div class="icon chevron"></div>
-	<div class="icon arrow-right-black-light"></div>
-	<div class="icon arrow-right-black-gray"></div>
-	<div class="icon arrow-right-black-dark"></div>
-	<div class="icon arrow-right-blue-light"></div>
-	<div class="icon arrow-right-blue-gray"></div>
-	<div class="icon arrow-right-blue-dark"></div>
+	<h3>
+		<div class="icon dalek-white"></div>
+		<div class="icon dalek-black"></div>
+		<div class="icon block-black-light"></div>
+		<div class="icon block-black-medium"></div>
+		<div class="icon block-black-dark"></div>
+		<div class="icon block-blue-light"></div>
+		<div class="icon block-blue-medium"></div>
+		<div class="icon block-blue-dark"></div>
+		<div class="icon block-white"></div>
+		<div class="icon block-blue-medium"></div>
+		<div class="icon arrow-right-white"></div>
+		<div class="icon chevron"></div>
+		<div class="icon arrow-right-black-light"></div>
+		<div class="icon arrow-right-black-gray"></div>
+		<div class="icon arrow-right-black-dark"></div>
+		<div class="icon arrow-right-blue-light"></div>
+		<div class="icon arrow-right-blue-gray"></div>
+		<div class="icon arrow-right-blue-dark"></div>
+	</h3>
 </div>

@@ -32,10 +32,10 @@ h1, h2, h3, p {
 }
 h1 			{ line-height: 40px; }
 h2, h3, p 	{ line-height: 20px; }
-h1 { font-size: 30px; top: 8pt; }
-h2 { font-size: 20px; top: 2pt; }
-h3 { font-size: 18px; top: 3pt; }
-p  { font-size: 16px; top: 4pt; }
+h1 { font-size: 30px; top: 10px; }
+h2 { font-size: 20px; top: 3px; }
+h3 { font-size: 18px; top: 4px; }
+p  { font-size: 16px; top: 5px; }
 p.indent 	{ text-indent:20px; }
 
 h1 a, h2 a, h3 a, p a { color: #0D42A8; }
@@ -230,6 +230,7 @@ textarea {
 	list-style:none;
 	height: 60px;
 	position:relative;
+	top: -5px;
 }
 
 #menu a {
@@ -301,7 +302,11 @@ textarea {
 	margin-left: 20px;
 	margin-right: 20px;
 }
-
+#content h3 div.icon, #content h2 div.icon {
+	position: relative;
+	top:-4px;
+	margin-bottom:-4px;
+}
 #content blockquote {
 	margin-left: 20px;
 	padding-left: 20px;
@@ -336,7 +341,6 @@ textarea {
 \***************************************/
 
 #footer {
-	padding-top:40px;
 	padding-bottom:40px;
 	background: #EEE;
 }
