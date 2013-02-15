@@ -651,13 +651,13 @@ div.widget-body {
 }
 
 a div.widget-title-right.icon { background-position: -120px -60px; }
-a div.widget-title-right {
+/*a div.widget-title-right {
 	transition: left opacity .1s;
 	-moz-transition: left opacity .1s;
 	-webkit-transition: left opacity .1s;
-	-o-transition: left opacity .1s;
+	-o-transition: left opacity .1s;*/
 }
-a:hover div.widget-title-right { animation: chevron_move .5s; }
+a:hover div.widget-title-right.icon { animation: chevron_move .5s infinite; }
 @keyframes chevron_move {
 	0% 		{ left: 0px; 	opacity: 1; }
 	49% 	{ left: 20px; 	opacity: 0; }
