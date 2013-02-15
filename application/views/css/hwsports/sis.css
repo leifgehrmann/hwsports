@@ -1,4 +1,4 @@
-/*body {
+body {
 	background: #<?=$centre['backgroundColour']?>;
 }*/
 body {
@@ -258,7 +258,7 @@ textarea {
 
 /***************************************\
 
-			Content typography
+			Content Styling
 	
 	Most of it is already covered above
 	in General Typography.
@@ -266,6 +266,11 @@ textarea {
 \***************************************/
 
 #content h1 { color: #0D44A2; }
+#content h1 div.icon.subsection {
+	background-position: -20px -80px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
 
 #content blockquote {
 	margin-left: 20px;
@@ -276,6 +281,72 @@ textarea {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************\
+
+			Footer Styling
+				
+\***************************************/
+
+#footer {
+	padding-top:40px;
+	padding-bottom:40px;
+	background: #EEE;
+}
+#footer-block {
+	letter-spacing:-4px;
+	vertical-align: top;
+}
+
+#footer-contact, #footer-links 	{ width:340px; } /* 160 + 20 + 160 */
+#footer-powered 				{ width:160px; } /* 160 */
+
+#footer-powered, #footer-contact, #footer-links {
+	display: inline-block; *display: inline; zoom: 1;
+	vertical-align: top;
+	letter-spacing: 0px;
+	position: relative;
+	top:5px;
+}
+#footer-links, #footer-powered 	{ margin-left: 20px; }
+
+#footer a 		{ color: inherit; }
+#footer a:hover { opacity: 0.8; cursor:pointer; }
+#footer h1 {
+	font-size: 20px;
+	margin-bottom: 20px;
+	position: relative;
+	top: 8px;
+}
+#footer p {
+	margin: 0px;
+}
+#footer-powered .product-logo, #footer-powered .company-logo {
+	width:100px;
+	height:40px;
+	background-image:url('/img/icons/icons.png');
+	margin-bottom: 10px;
+}
+#footer-powered .product-logo{ background-position: -460px -60px; }
+#footer-powered .company-logo{ background-position: -460px -20px; }
+#footer-powered div:hover{ opacity: 0.8; }
 
 
 
@@ -457,11 +528,11 @@ textarea {
 /*
 	Tables
 */
-#content table 				{ display: table;}
-#content tbody 				{ display: table-row-group; }
-#content thead 				{ display: table-header-group; }
-#content tr 				{ display: table-row; }
-#content td, #content th 	{ display: table-cell; }
+/*#content table 				{ display: table;}*/
+/*#content tbody 				{ display: table-row-group; }*/
+/*#content thead 				{ display: table-header-group; }*/
+/*#content tr 				{ display: table-row; }*/
+/*#content td, #content th 	{ display: table-cell; }*/
 #content th {
 	text-align: left;
 }
@@ -579,7 +650,7 @@ textarea {
 #content div.widget.subscribe 		div.widget-title-left.icon { background-position: -60px  -380px; }
 
 #content div.widget.welcome-message div.widget-title { background: #0D44A2; }
-#content div.widget.subscribe 		div.widget-title { background: #0D44A2; }
+#content div.widget.subscribe 		div.widget-title { background: #D93600; }
 
 
 
@@ -591,31 +662,67 @@ textarea {
 
 
 
-/*
-	Leif's custom messaging system
-*/
-#content .message{
-	padding: 20px;
-	padding-top: 20px;
-	padding-bottom: 0px;
-	border-radius: 4px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	margin-bottom: 20px;
+
+
+
+
+
+/***************************************\
+
+			Messaging system
+
+	These are the divs that appear
+	at the top of the page if something
+	important happens.
+				
+\***************************************/
+
+.message{
 	overflow:hidden;
-}
-#content .message.message-information { background: #D0DAEE; color: #0D42A8; box-shadow: inset 0px 0px 1px #0D42A8; }
-#content .message.message-success { background: #E4EDCD; color: #7BA800; box-shadow: inset 0px 0px 1px #7BA800; }
-#content .message.message-error { background: #FFDFBF; color: #D93600; box-shadow: inset 0px 0px 1px #D93600; }
-#content .message.message-warning { background: #FFDFBF; color: #D93600; box-shadow: inset 0px 0px 1px #D93600; }
-
-#content .message .icon {
-	float: left;
+	padding: 20px 20px 20px 0px;
+	margin-bottom: 20px;
+	border-radius: 			4px;
+	-webkit-border-radius: 	4px;
+	-moz-border-radius: 	4px;
 }
 
-/*
-	Leif's Custom button inline block, which can have nice icons inside
-*/
+.message.message-information 	{ background: #D0DAEE; color: #0D42A8; box-shadow: inset 0px 0px 1px #0D42A8; }
+.message.message-success 		{ background: #E4EDCD; color: #7BA800; box-shadow: inset 0px 0px 1px #7BA800; }
+.message.message-error 			{ background: #FFDFBF; color: #D93600; box-shadow: inset 0px 0px 1px #D93600; }
+.message.message-warning 		{ background: #FFDFBF; color: #D93600; box-shadow: inset 0px 0px 1px #D93600; }
+
+/* The icons that appear within the message */
+.message 				div.icon 	{ float: left; }
+.message 				div.icon 	{ background-position: -440px -20px; }
+.message-information 	div.icon 	{ background-position: -440px -20px; }
+.message-error 			div.icon 	{ background-position: -440px -40px; }
+.message-success 		div.icon 	{ background-position: -440px -60px; }
+.message-warning 		div.icon 	{ background-position: -440px -80px; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************\
+
+			Large Buttons
+				
+\***************************************/
 a.button, input[type='submit'] {
 	font-family: 'Roboto', sans-serif;
 	border: none;
@@ -672,56 +779,6 @@ a.button .icon { margin-bottom: -5px; }
 
 
 
-/**
-
-
-		Footer CSS
-
-
-*/
-
-#footer {
-	padding-top:40px;
-	padding-bottom:40px;
-	background: #EEE;
-}
-#footer-block {
-	letter-spacing:-4px;
-	vertical-align: top;
-}
-
-#footer-contact, #footer-links 	{ width:340px; } /* 160 + 20 + 160 */
-#footer-powered 				{ width:160px; } /* 160 */
-
-#footer-powered, #footer-contact, #footer-links {
-	display: inline-block; *display: inline; zoom: 1;
-	vertical-align: top;
-	letter-spacing: 0px;
-	position: relative;
-	top:5px;
-}
-#footer-links, #footer-powered 	{ margin-left: 20px; }
-
-#footer a 		{ color: inherit; }
-#footer a:hover { opacity: 0.8; cursor:pointer; }
-#footer h1 {
-	font-size: 20px;
-	margin-bottom: 20px;
-	position: relative;
-	top: 8px;
-}
-#footer p {
-	margin: 0px;
-}
-#footer-powered .product-logo, #footer-powered .company-logo {
-	width:100px;
-	height:40px;
-	background-image:url('/img/icons/icons.png');
-	margin-bottom: 10px;
-}
-#footer-powered .product-logo{ background-position: -460px -60px; }
-#footer-powered .company-logo{ background-position: -460px -20px; }
-/*#footer-powered div:hover{ opacity: 0.8; }*/
 
 
 
@@ -749,7 +806,7 @@ div.icon {
 	display: inline-block; *display: inline; zoom: 1;
 }
 
-div.widget-title div.icon.sportname-wattball,
+/*div.widget-title div.icon.sportname-wattball,
 div.widget-title div.icon.sportid-8 		{background-position: -320px -220px;}
 div.widget-title div.icon.sportname-hurdling,
 div.widget-title div.icon.sportid-10 		{background-position: -380px -220px;}
@@ -759,13 +816,7 @@ div.widget-title div.icon.chevron 		{background-position: -120px -60px;}
 div.widget-title div.icon.right-arrow 	{background-position: -120px -80px;}
 div.widget-title div.icon.news			{background-position: -160px -280px;}
 div.widget-title div.icon.home			{background-position: -60px -200px;}
-div.widget-title div.icon.signup		{background-position: -60px -380px;}
-
-h1 div.icon.subsection {
-	background-position: -20px -80px;
-	margin-left: 20px;
-	margin-right: 20px;
-}
+div.widget-title div.icon.signup		{background-position: -60px -380px;}*/
 
 div.icon.load {
 	-webkit-animation: play-black .8s steps(8) infinite;
@@ -815,11 +866,6 @@ div.icon.arrow-right-blue-dark 		{background-position:  -80px 0px;}
 div.icon.dalek-black 		{background-position:  -560px -20px;}
 div.icon.dalek-white 		{background-position:  -580px -20px;}
 
-.message-information div.icon 	{background-position: -440px -20px;}
-.message-error div.icon 		{background-position: -440px -40px;}
-.message-success div.icon 		{background-position: -440px -60px;}
-.message-warning div.icon 		{background-position: -440px -80px;}
-
 div.icon.margin-left { margin-left: 20px; }
 div.icon.margin-right { margin-right: 20px; }
 div.icon {
@@ -864,4 +910,4 @@ div.icon {
 	margin-top: 2px;
 	padding: .5em .5em .5em .7em;
 	padding-left: 2.2em;
-}*/
+}
