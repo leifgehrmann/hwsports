@@ -96,7 +96,7 @@ table.fourth 		{ width: 160px; }
 				
 \***************************************/
 
-form table { padding-bottom: 20px }
+form table { border-bottom: solid 20px #EEE; }
 
 input, select, textarea {
 	font-family: inherit;
