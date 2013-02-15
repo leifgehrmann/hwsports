@@ -48,10 +48,10 @@
 				</div>
 			</div>
 		</div>
-		<h1>Announcements</h1>
+		<h1>Announcements <a href="#announcements-list">(Full List)</a></h1>
 		<table class="full">
 			<tr>
-				<td colspan"2"><h2><div class="icon subscribe margin-right"></div>Subscribe to our announcements!</h2></td>
+				<td colspan="2"><h2><div class="icon subscribe margin-right"></div>Subscribe to our announcements!</h2></td>
 			</tr>
 			<tr>
 				<td style="width:40%">
@@ -125,7 +125,7 @@
 				</div>
 			</div>
 		</div>
-		<h1>Complete List of Announcements</h1>
+		<a id="announcement-list"></a><h2>Complete List of Announcements</h2>
 		<table class="full announcements">
 			<thead>
 				<tr>
