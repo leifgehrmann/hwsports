@@ -55,6 +55,10 @@ class Auth extends MY_Controller {
 		$this->data['title'] = "Login";
 		$this->data['page'] = "login";
 
+		if ($this->agent->is_referral()) {
+			$this->session->set_userdata('login_referrer', $this->agent->referrer());
+		}
+		
 		//validate form input
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
@@ -74,7 +78,9 @@ class Auth extends MY_Controller {
 				/*if($this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin')){
 					redirect('/tms', 'refresh');
 				} else {*/
-					redirect('/sis/account', 'refresh');
+				
+					// Login success, take them back to the page they were on before the login
+					redirect($this->session->userdata('login_referrer'), 'refresh');
 				//}
 			}
 			else
