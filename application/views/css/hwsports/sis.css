@@ -697,14 +697,17 @@ div.widget.tournament 		div.widget-title-left.icon { background-position: -60px 
 div.widget.match 			div.widget-title-left.icon { background-position: -60px  -260px; }
 div.widget.welcome-message 	div.widget-title-left.icon { background-position: -60px  -200px; }
 div.widget.subscribe 		div.widget-title-left.icon { background-position: -60px  -380px; }
+div.widget.profile 			div.widget-title-left.icon { background-position: -60px  -320px; }
+div.widget.signup 			div.widget-title-left.icon { background-position: -60px  -380px; }
+div.widget.tickets 			div.widget-title-left.icon { background-position: -160px -340px; }
 
 div.widget.welcome-message 	div.widget-title { background: #0D44A2; }
 div.widget.subscribe 		div.widget-title { background: #D93600; }
 
-div.widget-title div.icon.sportname-wattball,
-div.widget-title div.icon.sportid-8 		{background-position: -320px -220px;}
-div.widget-title div.icon.sportname-hurdling,
-div.widget-title div.icon.sportid-10 		{background-position: -380px -220px;}
+div.widget.tournament.sportname-wattball 	div.widget-title-left.icon,
+div.widget.tournament.sportid-8 			div.widget-title-left.icon 		{ background-position: -320px -220px; }
+div.widget.tournament.sportname-hurdling 	div.widget-title-left.icon,
+div.widget.tournament.sportid-10 			div.widget-title-left.icon 		{ background-position: -380px -220px; }
 
 
 
