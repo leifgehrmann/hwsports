@@ -241,8 +241,8 @@ class Db_Calendar extends MY_Controller {
 	public function getAllEventsTMS() {
 		$query = array();
 		// We specify where the urls go
-		$query['tournamentUrl']		= "/tms/match/";
-		$query['matchUrl']			= "/tms/tournament/";
+		$query['tournamentUrl']		= "/tms/tournament/";
+		$query['matchUrl']			= "/tms/match/";
 		$query['registrationUrl']	= "/tms/tournament/";
 		$this->getEvents($query);
 	}
@@ -252,8 +252,8 @@ class Db_Calendar extends MY_Controller {
 	public function getAllTournamentEventsSIS() {
 		$query = array();
 		// We specify where the urls go
-		$query['tournamentUrl']		= "/sis/match/";
-		$query['matchUrl']			= "/sis/tournament/";
+		$query['tournamentUrl']		= "/sis/tournament/";
+		$query['matchUrl']			= "/sis/match/";
 		$query['registrationUrl']	= "/sis/signup/";
 		// We also only show tournament matches
 		$query['showTournamentMatchesOnly']	= true;

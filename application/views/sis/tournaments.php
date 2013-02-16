@@ -44,24 +44,15 @@ foreach($yearTournaments as $year){
 					<p>Running with a ball, sometimes kicking it. This would be the description of the tournament</p>
 					<div class="right">
 						<a href='/sis/tournament/<?=$tournament['tournamentID']?>' class='button normal'>Details</a>
-						<?=( ($registrationStartDate < $today) && ($today < $registrationEndDate) ? "<a href='/sis/signup/{$tournament['tournamentID']}' class='button green'>Sign up!</a>" : "" )?>
+						<? if($this->ion_auth->logged_in()){ ?>
+							<?=( ($registrationStartDate < $today) && ($today < $registrationEndDate) ? "<a href='/sis/signup/{$tournament['tournamentID']}' class='button green'>Sign up!</a>" : "" )?>
+						<? } else { ?>
+							<?=( ($registrationStartDate < $today) && ($today < $registrationEndDate) ? "<a href='/auth/register/' class='button green'>Sign up!</a>" : "" )?>
+						<? } ?>
 					</div>
 				</div>
 			</div>
 		<? } ?>
 		</div>
 	<? } ?>
-	<!--<? foreach($tournaments as $tournament) { 
-		$registrationStartDate = DateTime::createFromFormat('d/m/Y', $tournament['registrationStart']);
-		$registrationEndDate = DateTime::createFromFormat('d/m/Y', $tournament['registrationEnd']);
-		$today = new DateTime();
-		?>
-		<a href="/sis/tournament/<?=$tournament['tournamentID']?>" class="tournament-item">
-			<div class="tournament-name"><?=$tournament['name']?></div>
-			<div class="tournament-date-start"><?=$tournament['tournamentStart']?></div>
-			<div class="tournament-date-end"><?=$tournament['tournamentEnd']?></div>
-			<div class="tournament-registration-status"><span style="font-weight: bold">Registration:</span> <?=( ($registrationStartDate < $today) && ($today < $registrationEndDate) ? "<span class='registrationOpen'>Open!</span>" : "<span class='registrationClosed'>Closed</span>" )?></div>
-		</a>
-		<? } ?>-->
-	<!--<a href="/sis/tournaments_history" class="tournament-button-prev">Previous Tournaments</a>-->
 </div>
