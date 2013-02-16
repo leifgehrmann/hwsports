@@ -46,6 +46,7 @@ ul, dl, ol {
 	position: relative;
 	top: 5px;
 	margin-left:40px;
+	margin-bottom:20px;
 }
 dt { font-weight: bold; }
 

@@ -20,20 +20,25 @@
 					$sectionCount++; ?>
 					<h3 class="sectionHeading" id="sectionHeading-<?=$sectionID?>"><?=$section['label']?></h3>
 					<div class="sectionBody" id="sectionBody-<?=$sectionID?>">
+						<table>
 						<? foreach($section['inputs'] as $inputID => $input) { ?>
-						<?=$input['formLabel']?><br />
-						<? switch( $input['inputType'] ) {
-								case "textarea": ?> <textarea id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></textarea><br /> <? break; 
-								case "text": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break; 
-								case "checkbox": ?> <input type="checkbox" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>" value="1"></input><br /> <? break; 
-								case "teamMembers": ?> <a href="/sis/addTeamMember" class="addTeamMember fancybox.ajax">Add Team Member</a> <? break;
-						} ?>
-						<br />
-						<? } 
-						if( $sectionCount == 1 ) {
-							echo "<div class='navButtons'><a href='#' class='nextButton'>Next</a></div>";
+							<tr>
+								<td><?=$input['formLabel']?></td>
+								<td>
+									<? switch( $input['inputType'] ) {
+										case "textarea": ?> <textarea id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></textarea><br /> <? break; 
+										case "text": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break; 
+										case "checkbox": ?> <input type="checkbox" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>" value="1"></input><br /> <? break; 
+										case "teamMembers": ?> <a href="/sis/addTeamMember" class="addTeamMember fancybox.ajax">Add Team Member</a> <? break;
+									} ?>
+								</td>
+							</tr>
+						<? } ?> 
+						</table>
+						<?if( $sectionCount == 1 ) {
+							echo "<div class='navButtons'><a href='#' class='button nextButton normal'>Next</a></div>";
 						} else {
-							echo "<div class='navButtons'><a href='#' class='backButton'>Back</a> <a href='#' class='nextButton'>Next</a></div>";
+							echo "<div class='navButtons'><a href='#' class='button backButton normal'>Back</a> <a href='#' class='nextButton'>Next</a></div>";
 						} ?>
 					</div>	
 			<? } ?>
