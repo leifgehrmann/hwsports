@@ -704,10 +704,10 @@ div.widget.tickets 			div.widget-title-left.icon { background-position: -160px -
 div.widget.welcome-message 	div.widget-title { background: #0D44A2; }
 div.widget.subscribe 		div.widget-title { background: #D93600; }
 
-div.widget.tournament.sportname-wattball 	div.widget-title-left.icon,
-div.widget.tournament.sportid-8 			div.widget-title-left.icon 		{ background-position: -320px -220px; }
+div.widget.tournament.sportCategoryID-18 	div.widget-title-left.icon,
+div.widget.tournament.sportID-8 			div.widget-title-left.icon 		{ background-position: -320px -220px; }
 div.widget.tournament.sportname-hurdling 	div.widget-title-left.icon,
-div.widget.tournament.sportid-10 			div.widget-title-left.icon 		{ background-position: -380px -220px; }
+div.widget.tournament.sportID-10 			div.widget-title-left.icon 		{ background-position: -380px -220px; }
 
 
 

@@ -64,7 +64,7 @@ $(document).ready(function(){
 	</thead>
 	<tbody>
 		<? foreach($matches as $match) { ?>
-		<tr class="match sportname-<?=$match['sport']?> sportid-<?=$match['sportID']?>">
+		<tr class="match sportCategoryID-<?=$match['sportCategoryID']?> sportID-<?=$match['sportID']?>">
 			<td><div class="icon"></div></td>
 			<td><?=$match['date']?></td>
 			<td><?=$match['startTime']?></td>

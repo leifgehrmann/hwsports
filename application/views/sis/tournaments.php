@@ -31,7 +31,7 @@ foreach($yearTournaments as $year){
 			$registrationEndDate = DateTime::createFromFormat('d/m/Y', $tournament['registrationEnd']);
 			$today = new DateTime();
 		?>
-			<div class="widget half tournament sportname-<?=$tournament['sport']?> sportid-<?=$tournament['sportID']?>">
+			<div class="widget half tournament sportCategoryID-<?=$tournament['sportCategoryID']?> sportID-<?=$tournament['sportID']?>">
 				<a href="/sis/tournament/<?=$tournament['tournamentID']?>">
 					<div class="widget-title">
 						<div class="widget-title-left icon"></div>

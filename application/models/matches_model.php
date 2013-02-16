@@ -105,6 +105,11 @@ class Matches_model extends CI_Model {
 		$dataString .= "FROM matchData WHERE matchID = ".$this->db->escape($matchID);
 		$dataQuery = $this->db->query($dataString);
 		$dataResult = $dataQuery->result_array();
+
+		/* Fetch Sport Data */
+		$this->load->model('sports_model');
+		$relationalResult[0] = array_merge($relationalResult[0], $this->sports_model->get_sport($relationalResult[0]['sportID']));
+
 		$output = array_merge(array("matchID"=>$matchID), $relationalResult[0], $dataResult[0]);
 		return $output;
 	}
