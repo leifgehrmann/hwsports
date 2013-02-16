@@ -31,3 +31,5 @@
 <?php echo form_close();?>
 
 <p><a href="forgot_password">Forgot your password?</a></p>
+
+<p><a href="/auth/register">Don't have an account? Click here to register.</a></p>

@@ -208,6 +208,12 @@ class Sis extends MY_Controller {
 	// sign up for tournament
 	public function signup($tournamentID)
 	{
+		if( !$this->ion_auth->logged_in() ){
+			$this->session->set_flashdata('message',  "You must be logged in to sign up for a tournament.");
+			redirect('/auth/login','refresh'); 
+		}
+	
+		
 		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
 		
