@@ -35,8 +35,8 @@
 			<p><b>2012/04/12</b> Ticket</p>
 			<p><b>2012/04/13</b> Ticket</p>
 			<p><b>2012/04/14</b> Ticket</p>
-			<a href="/sis/userTickets" class="button right normal">View All Tickets</a>
-			<a href="/sis/tickets" class="button right green">Buy Tickets</a>
+			<a href="/sis/userTickets" class="button margin-right normal">View All Tickets</a>
+			<a href="/sis/tickets" class="button green">Buy Tickets</a>
 		</div>
 	</div>
 	<div class="widget half participation">
@@ -62,8 +62,7 @@
 			</div>
 		</a>
 		<div class="widget-body">
-			<p>Enter the tournament Management System portal</p>
-			<a href="/tms" class="button right normal">Sign up for Tournaments</a>
+			<a href="/tms" class="button right normal">Enter the tournament Management System portal</a>
 		</div>
 	</div>
 	<? } ?>
