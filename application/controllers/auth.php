@@ -52,6 +52,7 @@ class Auth extends MY_Controller {
 	//log the user in
 	function login()
 	{
+			$this->session->set_flashdata('message_warning',  "You must be logged in to sign up for a tournament: Please log in below:");
 		$this->data['title'] = "Login";
 		$this->data['page'] = "login";
 
