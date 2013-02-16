@@ -41,7 +41,6 @@ foreach($yearTournaments as $year){
 				</a>
 				<div class="widget-body">
 					<p><b>Duration:</b> <?=$tournament['tournamentStart']?> - <?=$tournament['tournamentEnd']?></p>
-					<p>Running with a ball, sometimes kicking it. This would be the description of the tournament</p>
 					<div class="right">
 						<a href='/sis/tournament/<?=$tournament['tournamentID']?>' class='button normal'>Details</a>
 						<? if($this->ion_auth->logged_in()){ ?>
