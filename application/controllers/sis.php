@@ -209,7 +209,7 @@ class Sis extends MY_Controller {
 	public function signup($tournamentID)
 	{
 		if( !$this->ion_auth->logged_in() ){
-			$this->session->set_flashdata('warning',  "You must be logged in to sign up for a tournament: Please log in below:");
+			$this->session->set_flashdata('message_warning',  "You must be logged in to sign up for a tournament: Please log in below:");
 			redirect('/auth/login','refresh'); 
 		}
 	
