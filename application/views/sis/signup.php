@@ -38,7 +38,7 @@
 						<?if( $sectionCount == 1 ) {
 							echo "<div class='navButtons'><a href='#' class='button nextButton normal'>Next</a></div>";
 						} else {
-							echo "<div class='navButtons'><a href='#' class='button backButton normal'>Back</a> <a href='#' class='nextButton'>Next</a></div>";
+							echo "<div class='navButtons'><a href='#' class='button backButton normal'>Back</a> <a href='#' class='button nextButton normal'>Next</a></div>";
 						} ?>
 					</div>	
 			<? } ?>
