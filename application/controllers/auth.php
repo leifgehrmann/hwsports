@@ -52,7 +52,6 @@ class Auth extends MY_Controller {
 	//log the user in
 	function login()
 	{
-			$this->session->set_flashdata('message_warning',  "You must be logged in to sign up for a tournament: Please log in below:");
 		$this->data['title'] = "Login";
 		$this->data['page'] = "login";
 
@@ -90,7 +89,11 @@ class Auth extends MY_Controller {
 		{
 			//the user is not logging in so display the login page
 			//set the flash data error message if there is one
-			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+			$this->data['message'] = $this->session->flashdata('message');
+			$this->data['message_information'] = $this->session->flashdata('message_information');
+			$this->data['message_success'] = $this->session->flashdata('message_success');
+			$this->data['message_warning'] = $this->session->flashdata('message_warning');
+			$this->data['message_error'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message_error');
 
 			$this->data['identity'] = array('name' => 'identity',
 				'id' => 'identity',
