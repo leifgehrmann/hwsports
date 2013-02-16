@@ -1,5 +1,5 @@
 <h1>Matches</h1>
-<p>Filter the matches using the form below, or browse the </p>
+<p>Filter the matches using the form below.</p>
 <form>
 	<table class="full">
 		<tr>
