@@ -55,7 +55,8 @@ class Auth extends MY_Controller {
 		$this->data['title'] = "Login";
 		$this->data['page'] = "login";
 
-		if ($this->agent->is_referral()) {
+		$this->load->library('user_agent');
+		if ($this->agent->is_referral() && ($this->session->userdata('login_referrer') == FALSE) ) {
 			$this->session->set_userdata('login_referrer', $this->agent->referrer());
 		}
 		
