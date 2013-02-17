@@ -13,8 +13,8 @@
 	<? } ?>
 
 	<?php echo form_open("/sis/addTeamMember");?>
-	<table class="standardInputs">
-		<tbody>
+	<table>
+		<tbody class="standardInputs">
 			<tr>
 				<td>First Name:</td>
 				<td><?php echo form_input($first_name);?></td>
@@ -37,6 +37,9 @@
 			</tr>
 		</tbody>
 		<tbody class="extraInputs">
+			<tr>
+				<td>Emergency Contact Details:</td>
+			</tr>
 		<? foreach($extraInputs as $input) { ?>
 			<tr>
 				<td><?=$input['formLabel']?></td>
