@@ -30,7 +30,7 @@
 										case "textarea": ?> <textarea id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></textarea><br /> <? break;
 										case "text": case "phone": case "email": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break;
 										case "checkbox": ?> <input type="checkbox" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>" value="1"></input><br /> <? break; 
-										case "teamMembers": ?> <a href="/sis/addTeamMember/<?=$tournamentID?>/<?=$sectionID?>" class="addTeamMember fancybox.ajax">Add Team Member</a> <? break;
+										case "teamMembers": ?> <a href="/sis/addTeamMember/<?=$tournamentID?>/<?=$sectionID?>" class="button green addTeamMember fancybox.ajax">Add Player (Create New Account)</a> <a href="/sis/addTeamMember/<?=$tournamentID?>/<?=$sectionID?>" class="button blue addTeamMember fancybox.ajax">Add Player (Existing Account)</a><? break;
 									} ?>
 								</td>
 							</tr>

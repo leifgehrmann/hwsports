@@ -270,9 +270,14 @@ class Sis extends MY_Controller {
 					$this->form_validation->set_rules($tminput['keyName'], $tminput['formLabel'], 'required|valid_email');
 				break;
 				default: 
-					$this->form_validation->set_rules($tminput['keyName'], $tminput['formLabel'], 'required');
+					$this->form_validation->set_rules($tminput['keyName'], $tminput['formLabel'], 'required|xss_clean');
 			}
 		}
+		// Set up validation for standard inputs
+		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
+		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
+		$this->form_validation->set_rules('phone', 'Phone', 'required|xss_clean|min_length[8]|max_length[13]');
 		
 		// This variable will contain ID of newly created user if this function succeeds
 		$newUserID = false;
@@ -287,7 +292,7 @@ class Sis extends MY_Controller {
 				'firstName' => $this->input->post('first_name'),
 				'lastName'  => $this->input->post('last_name'),
 				'phone'      => $this->input->post('phone'),
-				'adress'      => $this->input->post('address')
+				'address'      => $this->input->post('address')
 			);
 			
 			
@@ -312,32 +317,35 @@ class Sis extends MY_Controller {
 				'name'  => 'first_name',
 				'id'    => 'first_name',
 				'type'  => 'text',
+				'required' => '',
 				'value' => $this->form_validation->set_value('first_name'),
 			);
 			$this->data['last_name'] = array(
 				'name'  => 'last_name',
 				'id'    => 'last_name',
 				'type'  => 'text',
+				'required' => '',
 				'value' => $this->form_validation->set_value('last_name'),
 			);
 			$this->data['email'] = array(
 				'name'  => 'email',
 				'id'    => 'email',
-				'type'  => 'text',
+				'type'  => 'email',
+				'required' => '',
 				'value' => $this->form_validation->set_value('email'),
 			);
 			$this->data['phone'] = array(
 				'name'  => 'phone',
 				'id'    => 'phone',
-				'type'  => 'text',
+				'type'  => 'tel',
+				'required' => '',
 				'value' => $this->form_validation->set_value('phone'),
 			);
 			$this->data['address'] = array(
 				'name'  => 'address',
 				'id'    => 'address',
 				'type'  => 'text',
-				'cols'   => '20',
-				'rows'   => '4',
+				'required' => '',
 				'value' => $this->form_validation->set_value('address'),
 			);
 			
@@ -353,6 +361,7 @@ class Sis extends MY_Controller {
 					'name'  => $tminput['keyName'],
 					'id'    => $tminput['keyName'],
 					'type'  => $type,
+					'required' => '',
 					'inputType'  => $tminput['inputType'],
 					'formLabel'  => $tminput['formLabel'],
 					'value' => $this->form_validation->set_value($tminput['keyName']),

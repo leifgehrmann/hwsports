@@ -26,8 +26,6 @@
 			<tr>
 				<td>Email: </td>
 				<td><?php echo form_input($email);?></td>
-				<td rowspan="2">Address: </td>
-				<td rowspan="2"><?php echo form_textarea($address);?></td>
 			</tr>
 			<tr>
 				<td>Phone: </td>
@@ -37,9 +35,6 @@
 			</tr>
 		</tbody>
 		<tbody class="extraInputs">
-			<tr>
-				<td>Emergency Contact Details:</td>
-			</tr>
 		<? foreach($extraInputs as $input) { ?>
 			<tr>
 				<td><?=$input['formLabel']?></td>
