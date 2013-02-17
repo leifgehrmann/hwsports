@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="description" content="">
-		<title><?=$title?> | <?=$centre['shortName']?> Sports</title>
+		<title><?=$title?> | <?=$centre['publicTitle']?></title>
 		<link rel='icon' type="image/png" href="/img/favicon/sis.png" />
 
 		<!-- Vendor component styling -->
@@ -34,24 +34,24 @@
 
 		<script>
 			$(document).ready(function() {
-				console.log("This works");
+				// console.log("This works");
 				$('img').load(function(){
-					console.log("resizing image");
-					console.log($(this).outerHeight(true)+'px');
+					// console.log("resizing image");
+					// console.log($(this).outerHeight(true)+'px');
 					$(this).css('margin-bottom',(20-($(this).outerHeight(true)%20))+'px');
-					console.log($(this).outerHeight(true)+'px');
-					console.log((20-($(this).outerHeight(true)%20))+'px');
+					// console.log($(this).outerHeight(true)+'px');
+					// console.log((20-($(this).outerHeight(true)%20))+'px');
 				});
 				$('.widget-title').each(function(){
-					console.log("resizing widget title");
+					//console.log("resizing widget title");
 					$(this).height(Math.round($(this).height()/20)*20);
 				});
 				$('.fc-header').each(function(){
-					console.log("resizing fullcalendar element");
+					//console.log("resizing fullcalendar element");
 					$(this).css('margin-bottom',(20-($(this).height()%20))+'px');
 				});
 				$('.fc-content').each(function(){
-					console.log("resizing fullcalendar element");
+					//console.log("resizing fullcalendar element");
 					$(this).css('margin-bottom',(20-($(this).height()%20))+'px');
 				});
 			});
@@ -79,14 +79,15 @@
 	<!--[if gt IE 8]><!--> <body class="page-<?=$page?>"> <!--<![endif]-->
 	<!--[if lt IE 7]>
 		<p class="chromeframe">
-			You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+			You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.
+		</p>
 	<![endif]-->
 	<body>
 		<div id="container">
 			<a id="header" href="/" alt="Return to Homepage" title="Return to Homepage">
 				<div id="header-block">
-					<div id="header-title">Riccarton Tournaments</div>
-					<div id="header-subtitle">Centre for Sport &amp; Exercise</div>
+					<div id="header-title"><?=$centre['publicTitle']?></div>
+					<div id="header-subtitle"><?=$centre['publicSubtitle']?></div>
 				</div>
 			</a>
 			<div id="middle">
@@ -173,34 +174,3 @@
 						<? } ?>
 					</div>
 					<div id="content">
-
-
-
-
-
-        <!--<body>
-        	<div id="container">
-        		<a href="/"><div id="header"></div></a>
-        		<div id="menu">
-        			<ul class="menu-default">
-        				<a href="/"><li class="home <?=($page=="sishome" ? 'selected' : '')?>">Homepage</li></a>
-        				<a href="/sis/calendar"><li class="calendar <?=($page=="calendar" ? 'selected' : '')?>">Calendar</li></a>
-        				<a href="/sis/matches"><li class="matches <?=($page=="matches" ? 'selected' : '')?>">Matches</li></a>
-        				<a href="/sis/tournaments"><li class="tournaments <?=($page=="tournaments" ? 'selected' : '')?>">Tournaments</li></a>
-        				<a href="/sis/ticketsinfo"><li class="ticketsinfo <?=($page=="ticketsinfo" ? 'selected' : '')?>">Tickets</li></a>
-        				<a href="/sis/info"><li class="info <?=($page=="info" ? 'selected' : '')?>">About Us</li></a>
-        				<a href="/sis/help"><li class="help <?=($page=="help" ? 'selected' : '')?>">Help</li></a>
-        			</ul>
-        			<? if(!$this->ion_auth->logged_in()){ ?>
-        			<ul class="menu-user">
-        				<a href="/auth/register"><li class="register <?=($page=="register" ? 'selected' : '')?>">Register</li></a>
-        				<a href="/auth/login"><li class="login <?=($page=="login" ? 'selected' : '')?>">Login</li></a>
-        			</ul>
-        			<? } else { ?>
-        			<ul class="menu-user">
-        				<a href="/sis/account"><li class="account <?=($page=="account" ? 'selected' : '')?>">Account</li></a>
-        				<a href="/auth/logout"><li class="logout">Logout</li></a>
-        			</ul>
-        			<? } ?>
-        		</div>
-        		<div id="content">-->

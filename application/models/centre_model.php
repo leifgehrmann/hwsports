@@ -22,14 +22,14 @@ class Centre_model extends CI_Model {
 	 *  
 	 * @return array
 	 **/
-	public function get_centres($centreID, $fields=array("name","shortName","address","headerColour","backgroundColour","footerText"))
+	public function get_centres($centreID)
 	{
 		$output = array();
 		$queryString = "SELECT DISTINCT centreID FROM centreData";
 		$queryData = $this->db->query($queryString);
 		$data = $queryData->result_array();
 		foreach($data as $centre) {
-			$output[] = $this->get_centre($centre['centreID'],$fields);
+			$output[] = $this->get_centre($centre['centreID']);
 		}
 		return $output;
 	}

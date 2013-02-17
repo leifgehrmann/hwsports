@@ -257,6 +257,13 @@ class Sis extends MY_Controller {
 		
 		// Set up form validation rules 
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
+<<<<<<< HEAD
+=======
+		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
+		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
+		$this->form_validation->set_rules('phone', 'Phone', 'required|xss_clean|min_length[8]|max_length[13]');
+		$this->form_validation->set_rules('adress', 'Address', 'required|xss_clean');
+>>>>>>> 7bd6e6d91bde18dbf2f27180d718ab5f0409a252
 		
 		$id = false;
 		
@@ -269,7 +276,8 @@ class Sis extends MY_Controller {
 				'centreID' => $centreID,
 				'firstName' => $this->input->post('first_name'),
 				'lastName'  => $this->input->post('last_name'),
-				'phone'      => $this->input->post('phone')
+				'phone'      => $this->input->post('phone'),
+				'adress'      => $this->input->post('address')
 			);
 			
 			
@@ -313,6 +321,14 @@ class Sis extends MY_Controller {
 				'id'    => 'phone',
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('phone'),
+			);
+			$this->data['address'] = array(
+				'name'  => 'address',
+				'id'    => 'address',
+				'type'  => 'text',
+				'cols'   => '20',
+				'rows'   => '4',
+				'value' => $this->form_validation->set_value('address'),
 			);
 
 			$this->load->view('sis/addTeamMember',$this->data);

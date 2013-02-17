@@ -8,6 +8,13 @@ class Test extends MY_Controller {
 	    $this->load->model('tournaments_model');
 	    $this->load->model('matches_model');
 	}
+	public function get_sport_category_roles($sportID){
+		$output = $this->sports_model->get_sport_category_roles($sportID);
+		$this->data['data'] =  print_r($output,1);
+		header('Content-Type: application/json');
+		$this->load->view('data', $this->data);
+	}
+
 	public function get_sport_category($sportID){
 		$output = $this->sports_model->get_sport_categories();
 		$this->data['data'] =  print_r($output,1);
