@@ -428,9 +428,9 @@ class Sis extends MY_Controller {
 				'type' => 'password',
 			);
 
-			//$this->load->view('sis/header',$this->data);
+			$this->load->view('sis/header',$this->data);
 			$this->load->view('sis/teamMemberLogin', $this->data);
-			//$this->load->view('sis/footer',$this->data);
+			$this->load->view('sis/footer',$this->data);
 		//}
 	}
 	
