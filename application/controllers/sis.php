@@ -368,6 +368,11 @@ class Sis extends MY_Controller {
 	//create a new team member user account
 	function addLoginTeamMember($tournamentID,$sectionID)
 	{	
+		$this->load->model('tournaments_model');
+		$this->load->model('sports_model');
+		$this->data['tournamentID'] = $tournamentID;
+		$this->data['sectionID'] = $sectionID;
+		
 		//validate form input
 		/*$this->form_validation->set_rules('identity', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
