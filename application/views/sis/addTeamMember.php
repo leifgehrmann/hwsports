@@ -17,18 +17,22 @@
 		<tr>
 			<td>First Name:</td>
 			<td><?php echo form_input($first_name);?></td>
-		</tr>
-		<tr>
 			<td>Last Name: </td>
 			<td><?php echo form_input($last_name);?></td>
 		</tr>
 		<tr>
-			<td>Email: </td>
-			<td><?php echo form_input($email);?></td>
 		</tr>
 		<tr>
-			<td>Phone: </td>>
+			<td>Email: </td>
+			<td><?php echo form_input($email);?></td>
+			<td rowspan="2">Address: </td>
+			<td rowspan="2"><?php echo form_input($adress);?></td>
+		</tr>
+		<tr>
+			<td>Phone: </td>
 			<td><?php echo form_input($phone);?></td>
+		</tr>
+		<tr>
 		</tr>
 	</table>
 	<p><?php echo form_submit('submit', 'Create Team Member');?></p>
