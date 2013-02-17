@@ -61,7 +61,7 @@ class Users_model extends CI_Model {
 			else
 				$dataQueryString .= " ";
 			$i++;
-		}q3
+		}
 		$dataQueryString .= "FROM userData WHERE userID = ".$this->db->escape($userID);
 		$dataQuery = $this->db->query($dataQueryString);
 		$output = array_merge(array("userID"=>$userID), $dataQuery->row_array());
