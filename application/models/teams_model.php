@@ -48,7 +48,7 @@ class Teams_model extends CI_Model {
 		$queryData = $this->db->query($queryString);
 		$data = $queryData->result_array();
 		foreach($data as $team) {
-			$output[] = $this->get_sport($team['teamID']);
+			$output[] = $this->get_team($team['teamID']);
 		}
 		return $output;
 	}
@@ -86,8 +86,6 @@ class Teams_model extends CI_Model {
 		// So someone should add that in later.
 
 		$output = array_merge(array("teamID"=>$teamID), $dataQuery->row_array());
-		$output['teamID'] = $relationalResult[0]['teamID'];
-		$output['team'] = $this->get_sport_category($relationalResult[0]['teamID']);
 		return $output;
 	}
 
