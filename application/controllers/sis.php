@@ -292,7 +292,7 @@ class Sis extends MY_Controller {
 				'firstName' => $this->input->post('first_name'),
 				'lastName'  => $this->input->post('last_name'),
 				'phone'      => $this->input->post('phone'),
-				'adress'      => $this->input->post('address')
+				'address'      => $this->input->post('address')
 			);
 			
 			
