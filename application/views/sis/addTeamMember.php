@@ -12,7 +12,7 @@
 	<div id="infoMessage"><?=$message;?></div>
 	<? } ?>
 
-	<?php echo form_open("/sis/addTeamMember");?>
+	<?php echo form_open("/sis/addTeamMember/$tournamentID/$sectionID");?>
 	<table>
 		<tbody class="standardInputs">
 			<tr>

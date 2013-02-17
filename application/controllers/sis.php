@@ -244,6 +244,9 @@ class Sis extends MY_Controller {
 		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
 		$this->data['tournamentID'] = $tournamentID;
+		$this->data['sectionID'] = $sectionID;
+		
+		
 		$this->data['tournament'] = $tournament = $this->tournaments_model->get_tournament($tournamentID);
 		$sectionInputs = $this->sports_model->get_sport_category_role_input_section_inputs($sectionID);
 		$teamMemberInputs = array(); 
