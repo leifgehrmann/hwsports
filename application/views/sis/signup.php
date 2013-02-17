@@ -9,8 +9,10 @@
 	<form action="/sis/signup/<?=$tournamentID?>" id="signupForm" method="POST">
 	
 	<h3 id="actionHeading">Select role:</h3>
-	<? foreach($roles as $roleID => $role) { ?>
-		<a href="" class="roleButton" id="roleButton-<?=$roleID?>"><?=$role['name']?></a>
+	<? $counter = 1;
+		foreach($roles as $roleID => $role) { 
+			$counter++; ?>
+		<a href="" class="roleButton button <?=($counter%2 ? 'green' : 'red')?>" id="roleButton-<?=$roleID?>"><?=$role['name']?></a>
 		
 		<div class="roleSections" id="roleSections-<?=$roleID?>" style="display: none">
 			<? 	$sectionCount = 0;
