@@ -19,17 +19,16 @@
 					<h3 class="sectionHeading" id="sectionHeading-<?=$sectionID?>"><?=$section['label']?></h3>
 					<div class="sectionBody" id="sectionBody-<?=$sectionID?>">
 						<table>
-						<? foreach($section['inputs'] as $inputID => $input) { ?>
+						<? foreach($section['inputs'] as $inputID => $input) { 
+								if(strpos('tm-',$input['inputType']) !== false) continue; ?>
 							<tr>
 								<td><?=$input['formLabel']?></td>
 								<td>
-									<?=$input['inputType']?>
 									<? switch( $input['inputType'] ) {
 										case "textarea": ?> <textarea id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></textarea><br /> <? break;
 										case "text": case "phone": case "email": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break;
 										case "checkbox": ?> <input type="checkbox" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>" value="1"></input><br /> <? break; 
 										case "teamMembers": ?> <a href="/sis/addTeamMember/<?=$tournamentID?>" class="addTeamMember fancybox.ajax">Add Team Member</a> <? break;
-										default;
 									} ?>
 								</td>
 							</tr>
