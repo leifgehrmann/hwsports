@@ -37,7 +37,7 @@
 			</tr>
 		</tbody>
 		<tbody class="extraInputs">
-		<? foreach($extraInputs as $input) { print_r($input); continue; ?>
+		<? foreach($extraInputs as $input) { ?>
 			<tr>
 				<td><?=$input['formLabel']?></td>
 				<td>
