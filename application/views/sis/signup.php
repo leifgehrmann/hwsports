@@ -9,8 +9,10 @@
 	<form action="/sis/signup/<?=$tournamentID?>" id="signupForm" method="POST">
 	
 	<h3 id="actionHeading">Select role:</h3>
-	<? foreach($roles as $roleID => $role) { ?>
-		<a href="" class="roleButton" id="roleButton-<?=$roleID?>"><?=$role['name']?></a>
+	<? $counter = 1;
+		foreach($roles as $roleID => $role) { 
+			$counter++; ?>
+		<a href="" class="roleButton button <?=($counter%2 ? 'green' : 'red')?>" id="roleButton-<?=$roleID?>"><?=$role['name']?></a>
 		
 		<div class="roleSections" id="roleSections-<?=$roleID?>" style="display: none">
 			<? 	$sectionCount = 0;
@@ -19,15 +21,16 @@
 					<h3 class="sectionHeading" id="sectionHeading-<?=$sectionID?>"><?=$section['label']?></h3>
 					<div class="sectionBody" id="sectionBody-<?=$sectionID?>">
 						<table>
-						<? foreach($section['inputs'] as $inputID => $input) { ?>
+						<? foreach($section['inputs'] as $inputID => $input) { 
+								if(strpos($input['inputType'],'tm-') !== false) continue; ?>
 							<tr>
 								<td><?=$input['formLabel']?></td>
 								<td>
 									<? switch( $input['inputType'] ) {
-										case "textarea": ?> <textarea id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></textarea><br /> <? break; 
-										case "text": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break; 
+										case "textarea": ?> <textarea id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></textarea><br /> <? break;
+										case "text": case "phone": case "email": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break;
 										case "checkbox": ?> <input type="checkbox" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>" value="1"></input><br /> <? break; 
-										case "teamMembers": ?> <a href="/sis/addTeamMember" class="addTeamMember fancybox.ajax">Add Team Member</a> <? break;
+										case "teamMembers": ?> <a href="/sis/addTeamMember/<?=$tournamentID?>/<?=$sectionID?>" class="addTeamMember fancybox.ajax">Add Team Member</a> <? break;
 									} ?>
 								</td>
 							</tr>
@@ -41,6 +44,7 @@
 					</div>	
 			<? } ?>
 			<h3 class="sectionHeading" id="sectionHeading-submit">Complete Sign Up Process</h3>
+			<input type="hidden" name="role" value="<?=$roleID?>"></input>
 		</div>
 		
 	<? } ?>

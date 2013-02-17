@@ -152,6 +152,24 @@ class Sports_model extends CI_Model {
 		
 		return $output;
 	}
+	
+	public function get_sport_category_role_input_section_inputs($sportCategoryRoleInputSectionID)
+	{
+		$output = array();
+		// Get inputs for this section
+		$roleInputsQuery = $this->db->query("SELECT sportCategoryRoleInputID,keyName,inputType,formLabel FROM `sportCategoryRoleInputs` WHERE `sportCategoryRoleInputSectionID` = ".$this->db->escape( $sportCategoryRoleInputSectionID )." ORDER BY position ASC" );
+		$roleInputsResult = $roleInputsQuery->result_array();
+		$inputs = array();
+		foreach($roleInputsResult as $roleInput) {
+			$inputs[ $roleInput['sportCategoryRoleInputID'] ] = array (
+				'keyName' => $roleInput['keyName'],
+				'inputType' => $roleInput['inputType'],
+				'formLabel' => $roleInput['formLabel']
+			);
+		}
+		
+		return $inputs;
+	}
 
 	/**
 	 * Creates a sport with data.
