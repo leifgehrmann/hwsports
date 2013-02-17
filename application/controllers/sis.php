@@ -372,6 +372,59 @@ class Sis extends MY_Controller {
 		}
 	}	
 	
+	//create a new team member user account
+	function addLoginTeamMember($tournamentID,$sectionID)
+	{
+		//validate form input
+		$this->form_validation->set_rules('identity', 'Identity', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+
+		if ($this->form_validation->run() == true) {
+			$identity = $this->input->post('identity');
+			$password = $this->input->post('password');
+			$this->identity_column = $this->config->item('identity', 'ion_auth');
+			$query = $this->db->select($this->identity_column . ', username, email, id, password, active, last_login')
+		                  ->where($this->identity_column, $this->db->escape_str($identity))
+		                  ->limit(1)
+		                  ->get($this->tables['users']);
+			if ($query->num_rows() !== 1) {
+				// not valid user email
+				echo 'Invalid user email'; return;
+			}
+			// Valid email, now let's check the password
+			if ( $this->hash_password_db($user->id, $password) === TRUE) {
+				//valid account - show them details and let them add as member
+				$user = $query->row();
+				print_r($user); return;
+				
+			} else {
+				echo 'Invalid user password'; return;
+			}
+		} else {
+			//the user is not logging in so display the login page
+			$this->data['message'] = $this->session->flashdata('message');
+			$this->data['message_information'] = $this->session->flashdata('message_information');
+			$this->data['message_success'] = $this->session->flashdata('message_success');
+			$this->data['message_warning'] = $this->session->flashdata('message_warning');
+			$this->data['message_error'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message_error');
+
+			$this->data['identity'] = array('name' => 'identity',
+				'id' => 'identity',
+				'type' => 'text',
+				'value' => $this->form_validation->set_value('identity'),
+			);
+			$this->data['password'] = array('name' => 'password',
+				'id' => 'password',
+				'type' => 'password',
+			);
+
+			$this->load->view('sis/header',$this->data);
+			$this->load->view('sis/teamMemberLogin', $this->data);
+			$this->load->view('sis/footer',$this->data);
+		}
+		
+	}	
+	
 	public function info() {
 		$this->data['title'] = "About Us";
 		$this->data['page'] = "info";
