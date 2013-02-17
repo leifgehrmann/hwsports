@@ -341,13 +341,6 @@ class Sis extends MY_Controller {
 				'required' => '',
 				'value' => $this->form_validation->set_value('phone'),
 			);
-			$this->data['address'] = array(
-				'name'  => 'address',
-				'id'    => 'address',
-				'type'  => 'text',
-				'required' => '',
-				'value' => $this->form_validation->set_value('address'),
-			);
 			
 			// Add extra inputs as required by sport category
 			foreach($teamMemberInputs as $tminput) {				
@@ -380,25 +373,41 @@ class Sis extends MY_Controller {
 		$this->form_validation->set_rules('password', 'Password', 'required');
 
 		if ($this->form_validation->run() == true) {
-			$identity = $this->input->post('identity');
-			$password = $this->input->post('password');
-			$this->identity_column = $this->config->item('identity', 'ion_auth');
-			$query = $this->db->select($this->identity_column . ', username, email, id, password, active, last_login')
-		                  ->where($this->identity_column, $this->db->escape_str($identity))
-		                  ->limit(1)
-		                  ->get($this->tables['users']);
-			if ($query->num_rows() !== 1) {
-				// not valid user email
-				echo 'Invalid user email'; return;
-			}
-			// Valid email, now let's check the password
-			if ( $this->hash_password_db($user->id, $password) === TRUE) {
-				//valid account - show them details and let them add as member
-				$user = $query->row();
-				print_r($user); return;
+			if ( $this->ion_auth->account_check($this->input->post('identity'), $this->input->post('password')) ) {
+				// log in details valid
+				$this->data['first_name'] = array(
+					'name'  => 'first_name',
+					'id'    => 'first_name',
+					'type'  => 'text',
+					'required' => '',
+					'value' => $this->form_validation->set_value('first_name'),
+				);
+				$this->data['last_name'] = array(
+					'name'  => 'last_name',
+					'id'    => 'last_name',
+					'type'  => 'text',
+					'required' => '',
+					'value' => $this->form_validation->set_value('last_name'),
+				);
+				$this->data['email'] = array(
+					'name'  => 'email',
+					'id'    => 'email',
+					'type'  => 'email',
+					'required' => '',
+					'value' => $this->form_validation->set_value('email'),
+				);
+				$this->data['phone'] = array(
+					'name'  => 'phone',
+					'id'    => 'phone',
+					'type'  => 'tel',
+					'required' => '',
+					'value' => $this->form_validation->set_value('phone'),
+				);
+				$this->data['extraInputs'] = array();
 				
-			} else {
-				echo 'Invalid user password'; return;
+				$this->load->view('sis/header',$this->data);
+				$this->load->view('sis/addTeamMember', $this->data);
+				$this->load->view('sis/footer',$this->data);
 			}
 		} else {
 			//the user is not logging in so display the login page
