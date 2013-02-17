@@ -246,6 +246,7 @@ class Sis extends MY_Controller {
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
 		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
 		$this->form_validation->set_rules('phone', 'Phone', 'required|xss_clean|min_length[8]|max_length[13]');
+		$this->form_validation->set_rules('adress', 'Address', 'required|xss_clean');
 		
 		$id = false;
 		
@@ -258,7 +259,8 @@ class Sis extends MY_Controller {
 				'centreID' => $centreID,
 				'firstName' => $this->input->post('first_name'),
 				'lastName'  => $this->input->post('last_name'),
-				'phone'      => $this->input->post('phone')
+				'phone'      => $this->input->post('phone'),
+				'adress'      => $this->input->post('address')
 			);
 			
 			$password = $this->generatePassword();
@@ -301,6 +303,12 @@ class Sis extends MY_Controller {
 				'id'    => 'phone',
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('phone'),
+			);
+			$this->data['address'] = array(
+				'name'  => 'address',
+				'id'    => 'address',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('address'),
 			);
 
 			$this->load->view('sis/addTeamMember',$this->data);
