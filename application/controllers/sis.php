@@ -270,7 +270,7 @@ class Sis extends MY_Controller {
 					$this->form_validation->set_rules($tminput['keyName'], $tminput['formLabel'], 'required|valid_email');
 				break;
 				default: 
-					$this->form_validation->set_rules($tminput['keyName'], $tminput['formLabel'], 'required');
+					$this->form_validation->set_rules($tminput['keyName'], $tminput['formLabel'], 'required|xss_clean');
 			}
 		}
 		// Set up validation for standard inputs
