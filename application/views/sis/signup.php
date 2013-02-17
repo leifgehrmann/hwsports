@@ -13,7 +13,6 @@
 		<a href="" class="roleButton" id="roleButton-<?=$roleID?>"><?=$role['name']?></a>
 		
 		<div class="roleSections" id="roleSections-<?=$roleID?>" style="display: none">
-			<input type="hidden" name="role" value="<?=$roleID?>"></input>
 			<? 	$sectionCount = 0;
 				foreach($role['inputSections'] as $sectionID => $section) { 
 					$sectionCount++; ?>
@@ -42,6 +41,7 @@
 					</div>	
 			<? } ?>
 			<h3 class="sectionHeading" id="sectionHeading-submit">Complete Sign Up Process</h3>
+			<input type="hidden" name="role" value="<?=$roleID?>"></input>
 		</div>
 		
 	<? } ?>
