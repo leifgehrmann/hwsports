@@ -343,11 +343,16 @@ class Sis extends MY_Controller {
 			
 			// Add extra inputs as required by sport category
 			foreach($teamMemberInputs as $tminput) {				
+				switch($tminput['inputType']) {
+					case "phone": $type = 'tel'; break;
+					default: $type = $tminput['inputType'];
+				}
+			
 				$this->data['extraInputs'][ $tminput['keyName'] ] = array(
 					'keyName'  => $tminput['keyName'],
 					'name'  => $tminput['keyName'],
 					'id'    => $tminput['keyName'],
-					'type'  => $tminput['inputType'],
+					'type'  => $type,
 					'inputType'  => $tminput['inputType'],
 					'formLabel'  => $tminput['formLabel'],
 					'value' => $this->form_validation->set_value($tminput['keyName']),
