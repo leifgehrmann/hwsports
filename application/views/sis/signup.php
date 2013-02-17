@@ -13,6 +13,7 @@
 		<a href="" class="roleButton" id="roleButton-<?=$roleID?>"><?=$role['name']?></a>
 		
 		<div class="roleSections" id="roleSections-<?=$roleID?>" style="display: none">
+			<input type="hidden" name="role" value="<?=$roleID?>"></input>
 			<? 	$sectionCount = 0;
 				foreach($role['inputSections'] as $sectionID => $section) { 
 					$sectionCount++; ?>
@@ -24,10 +25,10 @@
 								<td><?=$input['formLabel']?></td>
 								<td>
 									<? switch( $input['inputType'] ) {
-										case "textarea": ?> <textarea id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></textarea><br /> <? break; 
-										case "text": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break; 
+										case "textarea": ?> <textarea id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></textarea><br /> <? break;
+										case "text": case "phone": case "email": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break;
 										case "checkbox": ?> <input type="checkbox" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>" value="1"></input><br /> <? break; 
-										case "teamMembers": ?> <a href="/sis/addTeamMember" class="addTeamMember fancybox.ajax">Add Team Member</a> <? break;
+										case "teamMembers": ?> <a href="/sis/addTeamMember/<?=$tournamentID?>" class="addTeamMember fancybox.ajax">Add Team Member</a> <? break;
 									} ?>
 								</td>
 							</tr>

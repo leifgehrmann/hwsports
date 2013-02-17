@@ -239,13 +239,24 @@ class Sis extends MY_Controller {
 	
 	
 	//create a new team member user account
-	function addTeamMember()
+	function addTeamMember($tournamentID)
 	{
+		$this->load->model('tournaments_model');
+		$this->load->model('sports_model');
+		$this->data['tournamentID'] = $tournamentID;
+		$this->data['tournament'] = $tournament = $this->tournaments_model->get_tournament($tournamentID);
+		$roles = $this->sports_model->get_sport_category_roles($tournament['sportCategoryID']);
+		$teamMemberInputs = array();
+		foreach($role['inputSections'] as $sectionID => $section) { 
+			foreach($section['inputs'] as $inputID => $input) {
+				if($input['inputType'] == "teamMemberInput") {
+					$teamMemberInputs[] = $input;
+				}
+			}
+		}
+		
 		// Set up form validation rules 
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
-		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
-		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
-		$this->form_validation->set_rules('phone', 'Phone', 'required|xss_clean|min_length[8]|max_length[13]');
 		
 		$id = false;
 		
@@ -260,6 +271,7 @@ class Sis extends MY_Controller {
 				'lastName'  => $this->input->post('last_name'),
 				'phone'      => $this->input->post('phone')
 			);
+			
 			
 			$password = $this->generatePassword();
 			
