@@ -249,20 +249,32 @@ class Sis extends MY_Controller {
 		$teamMemberInputs = array();
 		foreach($role['inputSections'] as $sectionID => $section) { 
 			foreach($section['inputs'] as $inputID => $input) {
-				if($input['inputType'] == "teamMemberInput") {
+				if(strpos('tm-',$input['inputType']) === 0) {
+					$input['inputType'] = substr($input['inputType'],2);
 					$teamMemberInputs[] = $input;
 				}
 			}
 		}
 		
-		// Set up form validation rules 
-		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
-		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
-		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
-		$this->form_validation->set_rules('phone', 'Phone', 'required|xss_clean|min_length[8]|max_length[13]');
-		$this->form_validation->set_rules('adress', 'Address', 'required|xss_clean');
+		// Set up form validation rules for any input type
+		foreach($teamMemberInputs as $tminput) {
+			switch($tminput['inputType']) {
+				case "text":
+					$this->form_validation->set_rules($tminput['keyName'], $tminput['formLabel'], 'required|xss_clean');
+				break;
+				case "phone":
+					$this->form_validation->set_rules($tminput['keyName'], $tminput['formLabel'], 'required|xss_clean|min_length[8]|max_length[13]');
+				break;
+				case "email":
+					$this->form_validation->set_rules($tminput['keyName'], $tminput['formLabel'], 'required|valid_email');
+				break;
+				default: 
+					$this->form_validation->set_rules($tminput['keyName'], $tminput['formLabel'], 'required');
+			}
+		}
 		
-		$id = false;
+		// This variable will contain ID of newly created user if this function succeeds
+		$newUserID = false;
 		
 		// Set up input data
 		if ( $this->form_validation->run() ) {
@@ -280,13 +292,13 @@ class Sis extends MY_Controller {
 			
 			$password = $this->generatePassword();
 			
-			$id = $this->ion_auth->register($username, $password, $email, $additional_data);
+			$newUserID = $this->ion_auth->register($username, $password, $email, $additional_data);
 			$this->data['user'] = $additional_data;
-			$this->data['user']['id'] = $id;
+			$this->data['user']['id'] = $newUserID;
 		}
 		
 		// Registration success
-		if ($id != false) {
+		if ($newUserID != false) {
 			// Successful team member creation, show success message
 			$this->data['success'] = $this->ion_auth->messages()." Generated Password: $password";
 			$this->load->view('sis/addTeamMember',$this->data);
@@ -327,6 +339,16 @@ class Sis extends MY_Controller {
 				'rows'   => '4',
 				'value' => $this->form_validation->set_value('address'),
 			);
+			
+			// Add extra inputs as required by sport category
+			foreach($teamMemberInputs as $tminput) {				
+				$this->data['extraInputs'][ $tminput['keyName'] ] = array(
+					'name'  => $tminput['keyName'],
+					'id'    => $tminput['keyName'],
+					'type'  => $tminput['inputType'],
+					'value' => $this->form_validation->set_value($tminput['keyName']),
+				);
+			}
 
 			$this->load->view('sis/addTeamMember',$this->data);
 		}
