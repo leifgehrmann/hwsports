@@ -13,7 +13,7 @@
 	<? } ?>
 
 	<?php echo form_open("/sis/addTeamMember");?>
-	<table>
+	<table class="standardInputs">
 		<tbody>
 			<tr>
 				<td>First Name:</td>

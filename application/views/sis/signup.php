@@ -28,6 +28,7 @@
 										case "text": case "phone": case "email": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break;
 										case "checkbox": ?> <input type="checkbox" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>" value="1"></input><br /> <? break; 
 										case "teamMembers": ?> <a href="/sis/addTeamMember/<?=$tournamentID?>" class="addTeamMember fancybox.ajax">Add Team Member</a> <? break;
+										default;
 									} ?>
 								</td>
 							</tr>

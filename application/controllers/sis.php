@@ -247,11 +247,13 @@ class Sis extends MY_Controller {
 		$this->data['tournament'] = $tournament = $this->tournaments_model->get_tournament($tournamentID);
 		$roles = $this->sports_model->get_sport_category_roles($tournament['sportCategoryID']);
 		$teamMemberInputs = array();
-		foreach($role['inputSections'] as $sectionID => $section) { 
-			foreach($section['inputs'] as $inputID => $input) {
-				if(strpos('tm-',$input['inputType']) === 0) {
-					$input['inputType'] = substr($input['inputType'],2);
-					$teamMemberInputs[] = $input;
+		foreach($roles as $roleID => $role) {
+			foreach($role['inputSections'] as $sectionID => $section) { 
+				foreach($section['inputs'] as $inputID => $input) {
+					if(strpos('tm-',$input['inputType']) === 0) {
+						$input['inputType'] = substr($input['inputType'],2);
+						$teamMemberInputs[] = $input;
+					}
 				}
 			}
 		}
