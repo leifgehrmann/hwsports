@@ -312,32 +312,35 @@ class Sis extends MY_Controller {
 				'name'  => 'first_name',
 				'id'    => 'first_name',
 				'type'  => 'text',
+				'required' => '',
 				'value' => $this->form_validation->set_value('first_name'),
 			);
 			$this->data['last_name'] = array(
 				'name'  => 'last_name',
 				'id'    => 'last_name',
 				'type'  => 'text',
+				'required' => '',
 				'value' => $this->form_validation->set_value('last_name'),
 			);
 			$this->data['email'] = array(
 				'name'  => 'email',
 				'id'    => 'email',
 				'type'  => 'email',
+				'required' => '',
 				'value' => $this->form_validation->set_value('email'),
 			);
 			$this->data['phone'] = array(
 				'name'  => 'phone',
 				'id'    => 'phone',
 				'type'  => 'tel',
+				'required' => '',
 				'value' => $this->form_validation->set_value('phone'),
 			);
 			$this->data['address'] = array(
 				'name'  => 'address',
 				'id'    => 'address',
 				'type'  => 'text',
-				'cols'   => '20',
-				'rows'   => '4',
+				'required' => '',
 				'value' => $this->form_validation->set_value('address'),
 			);
 			
@@ -353,6 +356,7 @@ class Sis extends MY_Controller {
 					'name'  => $tminput['keyName'],
 					'id'    => $tminput['keyName'],
 					'type'  => $type,
+					'required' => '',
 					'inputType'  => $tminput['inputType'],
 					'formLabel'  => $tminput['formLabel'],
 					'value' => $this->form_validation->set_value($tminput['keyName']),
