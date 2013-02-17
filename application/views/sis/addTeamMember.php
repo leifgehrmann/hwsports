@@ -37,9 +37,6 @@
 			</tr>
 		</tbody>
 		<tbody class="extraInputs">
-			<tr>
-				<td>Emergency Contact Details:</td>
-			</tr>
 		<? foreach($extraInputs as $input) { ?>
 			<tr>
 				<td><?=$input['formLabel']?></td>
