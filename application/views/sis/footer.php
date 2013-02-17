@@ -13,7 +13,7 @@
 					<div id="footer-links">
 						<h1>Links</h1>
 						<? $lines = explode("\n",$centre['publicFooterLinks']);
-						for($i=0;$i<count($lines)/2;$i+=2){?>
+						for($i=0;$i<count($lines)/2;$i++){?>
 						<p><a href="<?=$lines[$i*2]?>"><?=$lines[$i*2+1]?></a></p>
 						<? } ?>
 					</div>
