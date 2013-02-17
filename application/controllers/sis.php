@@ -374,10 +374,10 @@ class Sis extends MY_Controller {
 		$this->data['sectionID'] = $sectionID;
 		
 		//validate form input
-		/*$this->form_validation->set_rules('identity', 'Identity', 'required');
+		$this->form_validation->set_rules('identity', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
-		*/
-		//if ($this->form_validation->run() == true) {
+		
+		if ($this->form_validation->run() == true) {
 			/*if ( $this->ion_auth->account_check($this->input->post('identity'), $this->input->post('password')) ) {
 				// log in details valid
 				$this->data['first_name'] = array(
@@ -414,14 +414,13 @@ class Sis extends MY_Controller {
 				$this->load->view('sis/addTeamMember', $this->data);
 				$this->load->view('sis/footer',$this->data);
 			}*/
-		//} else {
+		} else {
 			//the user is not logging in so display the login page
-		/*	$this->data['message'] = $this->session->flashdata('message');
+			$this->data['message'] = $this->session->flashdata('message');
 			$this->data['message_information'] = $this->session->flashdata('message_information');
 			$this->data['message_success'] = $this->session->flashdata('message_success');
 			$this->data['message_warning'] = $this->session->flashdata('message_warning');
 			$this->data['message_error'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message_error');
-*/
 			
 			$this->data['identity'] = array('name' => 'identity',
 				'id' => 'identity',
@@ -434,7 +433,7 @@ class Sis extends MY_Controller {
 			);
 
 			$this->load->view('sis/teamMemberLogin', $this->data);
-		//}
+		}
 	}
 	
 	public function info() {
