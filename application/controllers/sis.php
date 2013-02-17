@@ -257,13 +257,10 @@ class Sis extends MY_Controller {
 		
 		// Set up form validation rules 
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
-<<<<<<< HEAD
-=======
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
 		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
 		$this->form_validation->set_rules('phone', 'Phone', 'required|xss_clean|min_length[8]|max_length[13]');
 		$this->form_validation->set_rules('adress', 'Address', 'required|xss_clean');
->>>>>>> 7bd6e6d91bde18dbf2f27180d718ab5f0409a252
 		
 		$id = false;
 		
