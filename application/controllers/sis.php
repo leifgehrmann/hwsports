@@ -345,6 +345,7 @@ class Sis extends MY_Controller {
 			// Add extra inputs as required by sport category
 			foreach($teamMemberInputs as $tminput) {				
 				$this->data['extraInputs'][ $tminput['keyName'] ] = array(
+					'keyName'  => $tminput['keyName'],
 					'name'  => $tminput['keyName'],
 					'id'    => $tminput['keyName'],
 					'type'  => $tminput['inputType'],
