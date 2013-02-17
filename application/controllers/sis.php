@@ -250,7 +250,7 @@ class Sis extends MY_Controller {
 		foreach($roles as $roleID => $role) {
 			foreach($role['inputSections'] as $sectionID => $section) { 
 				foreach($section['inputs'] as $inputID => $input) {
-					if(strpos('tm-',$input['inputType']) === 0) {
+					if(strpos($input['inputType'],'tm-') === 0) {
 						$input['inputType'] = substr($input['inputType'],2);
 						$teamMemberInputs[] = $input;
 					}

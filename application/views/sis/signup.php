@@ -20,7 +20,7 @@
 					<div class="sectionBody" id="sectionBody-<?=$sectionID?>">
 						<table>
 						<? foreach($section['inputs'] as $inputID => $input) { 
-								if(strpos('tm-',$input['inputType']) !== false) continue; ?>
+								if(strpos($input['inputType'],'tm-') !== false) continue; ?>
 							<tr>
 								<td><?=$input['formLabel']?></td>
 								<td>
