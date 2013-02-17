@@ -7,7 +7,7 @@
 						<h1>Contact Us</h1>
 						<? 
 						$lines = explode("\n",$centre['publicTitle']);
-						for($lines as $line){?>
+						foreach($lines as $line){?>
 						<p><?=$line?></p>
 						<? } ?>
 					</div>
