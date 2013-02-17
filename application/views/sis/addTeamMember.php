@@ -26,8 +26,6 @@
 			<tr>
 				<td>Email: </td>
 				<td><?php echo form_input($email);?></td>
-				<td rowspan="2">Address: </td>
-				<td rowspan="2"><?php echo form_textarea($address);?></td>
 			</tr>
 			<tr>
 				<td>Phone: </td>
