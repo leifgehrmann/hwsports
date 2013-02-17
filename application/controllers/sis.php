@@ -417,7 +417,7 @@ class Sis extends MY_Controller {
 			$this->data['message_warning'] = $this->session->flashdata('message_warning');
 			$this->data['message_error'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message_error');
 */
-			
+			/*
 			$this->data['identity'] = array('name' => 'identity',
 				'id' => 'identity',
 				'type' => 'text',
@@ -426,11 +426,11 @@ class Sis extends MY_Controller {
 			$this->data['password'] = array('name' => 'password',
 				'id' => 'password',
 				'type' => 'password',
-			);
+			);*/
 
-			$this->load->view('sis/header',$this->data);
+			//$this->load->view('sis/header',$this->data);
 			$this->load->view('sis/teamMemberLogin', $this->data);
-			$this->load->view('sis/footer',$this->data);
+			//$this->load->view('sis/footer',$this->data);
 		//}
 	}
 	
