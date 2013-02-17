@@ -11,7 +11,7 @@ class Users_model extends CI_Model {
 		return $output['exists'];
 	}
 
-	public function get_all_users($centreID)
+	public function get_users($centreID)
 	{
 		// To find out if a user is associated with the centre...
 
@@ -30,7 +30,7 @@ class Users_model extends CI_Model {
 		return $output;
 	}
 
-	public function get_tournament_users($tournamentID)
+	/*public function get_tournament_users($tournamentID)
 	{
 		$output = array();
 		$queryString = "SELECT userID FROM users WHERE centreID = ".$this->db->escape($centreID);
@@ -40,7 +40,7 @@ class Users_model extends CI_Model {
 			$output[] = $this->get_user($user['userID']);
 		}
 		return $output;
-	}
+	}*/
 
 	public function get_user($userID)
 	{
