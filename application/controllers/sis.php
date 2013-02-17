@@ -309,7 +309,7 @@ class Sis extends MY_Controller {
 				'id'    => 'address',
 				'type'  => 'text',
 				'cols'   => '20',
-				'rows'   => '5',
+				'rows'   => '4',
 				'value' => $this->form_validation->set_value('address'),
 			);
 
