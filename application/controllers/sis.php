@@ -323,13 +323,13 @@ class Sis extends MY_Controller {
 			$this->data['email'] = array(
 				'name'  => 'email',
 				'id'    => 'email',
-				'type'  => 'text',
+				'type'  => 'email',
 				'value' => $this->form_validation->set_value('email'),
 			);
 			$this->data['phone'] = array(
 				'name'  => 'phone',
 				'id'    => 'phone',
-				'type'  => 'text',
+				'type'  => 'tel',
 				'value' => $this->form_validation->set_value('phone'),
 			);
 			$this->data['address'] = array(
