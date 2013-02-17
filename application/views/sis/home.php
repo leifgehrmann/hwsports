@@ -16,7 +16,6 @@
 		<a href="sis/help" class="button blue">More Information</a>
 	</div>
 </div>
-<h1>Announcements (<a href="#announcement-list">Full List</a>)</h1>
 <table class="full">
 	<tr>
 		<td colspan="2"><h2><div class="icon subscribe margin-right"></div>Subscribe to our announcements!</h2></td>
@@ -33,6 +32,7 @@
 		</td>
 	</tr>
 </table>
+<h1>Announcements (<a href="#announcement-list">Full List</a>)</h1>
 <div class="widget full announcement">
 	<a href="#newsarticle">
 		<div class="widget-title">
