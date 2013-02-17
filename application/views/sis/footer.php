@@ -5,14 +5,14 @@
 				<div id="footer-block">
 					<div id="footer-contact">
 						<h1>Contact Us</h1>
-						<? $lines = explode("\n",$centre['publicFooterContact']);
+						<? $lines = explode("\\n",$centre['publicFooterContact']);
 						foreach($lines as $line){?>
 						<p><?=$line?></p>
 						<? } ?>
 					</div>
 					<div id="footer-links">
 						<h1>Links</h1>
-						<? $lines = explode("\n",$centre['publicFooterLinks']);
+						<? $lines = explode("\\n",$centre['publicFooterLinks']);
 						for($i=0;$i<count($lines)/2;$i++){?>
 						<p><a href="<?=$lines[$i*2]?>"><?=$lines[$i*2+1]?></a></p>
 						<? } ?>
