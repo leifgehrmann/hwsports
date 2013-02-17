@@ -23,6 +23,7 @@
 							<tr>
 								<td><?=$input['formLabel']?></td>
 								<td>
+									<?=$input['inputType']?>
 									<? switch( $input['inputType'] ) {
 										case "textarea": ?> <textarea id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></textarea><br /> <? break;
 										case "text": case "phone": case "email": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break;
