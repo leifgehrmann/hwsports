@@ -84,8 +84,15 @@ class Teams_model extends CI_Model {
 
 		// We would also like to get all the users from the team.
 		// So someone should add that in later.
+		$users = array();
+		$usersQuery = $this->db->query("SELECT `userID` FROM `teamsUsers` WHERE `teamID` = ".$this->db->escape($teamID) );
+		$usersResult = $usersQuery->result_array();
+		foreach($usersResult as $userResult) {
+			$users[] = $fieldResult['key'];
+		}
 
 		$output = array_merge(array("teamID"=>$teamID), $dataQuery->row_array());
+		$output['users'] = $users
 		return $output;
 	}
 
