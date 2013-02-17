@@ -273,6 +273,11 @@ class Sis extends MY_Controller {
 					$this->form_validation->set_rules($tminput['keyName'], $tminput['formLabel'], 'required');
 			}
 		}
+		// Set up validation for standard inputs
+		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
+		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
+		$this->form_validation->set_rules('phone', 'Phone', 'required|xss_clean|min_length[8]|max_length[13]');
 		
 		// This variable will contain ID of newly created user if this function succeeds
 		$newUserID = false;
