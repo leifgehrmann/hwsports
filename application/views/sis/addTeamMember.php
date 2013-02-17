@@ -42,9 +42,15 @@
 				<td><?=$input['formLabel']?></td>
 				<td>
 					<? switch( $input['inputType'] ) {
-						case "textarea": ?> <textarea id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></textarea><br /> <? break;
-						case "text": case "phone": case "email": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break;
-						case "checkbox": ?> <input type="checkbox" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>" value="1"></input><br /> <? break;
+						case "textarea": 
+							echo form_textarea($input);
+						break;
+						case "text": case "phone": case "email": 
+							echo form_input($input); 
+						break;
+						case "checkbox": 
+							echo form_checkbox($input);
+						break;
 					} ?>
 				</td>
 			</tr>
