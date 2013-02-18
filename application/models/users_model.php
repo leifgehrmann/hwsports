@@ -68,7 +68,7 @@ class Users_model extends CI_Model {
 		$this->load->model('ion_auth_model');
 		$ionUser = $this->ion_auth_model->user($userID);
 		print_r($ionUser); die();
-		$output = array_merge(array("userID"=>$userID,"email"=>$ionUser->email), $dataQuery->row_array());
+		$output = array_merge(array("userID"=>$userID), $dataQuery->row_array());
 		return $output;
 	}
 
