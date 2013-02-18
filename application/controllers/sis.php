@@ -367,7 +367,7 @@ class Sis extends MY_Controller {
 				);
 			}
 
-			$this->data['updateUser'] = $user;
+			$this->data['updateUser'] = $newUserID;
 			$this->load->view('sis/addTeamMember',$this->data);
 		}
 	}	
@@ -396,10 +396,10 @@ class Sis extends MY_Controller {
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		
 		if ($this->form_validation->run() == true) {
-			$user = $this->ion_auth->account_check($this->input->post('identity'), $this->input->post('password'));
-			if ( $user !== false ) {
+			$userID = $this->ion_auth->account_check($this->input->post('identity'), $this->input->post('password'));
+			if ( $userID !== false ) {
 				// log in details valid, get user data
-				$user = $this->users_model->get_user($user);
+				$user = $this->users_model->get_user($userID);
 				$this->data['first_name'] = array(
 					'name'  => 'first_name',
 					'id'    => 'first_name',
@@ -448,7 +448,7 @@ class Sis extends MY_Controller {
 					);
 				}
 				
-				$this->data['updateUser'] = $user;
+				$this->data['updateUser'] = $userID;
 				
 				$this->load->view('sis/addTeamMember', $this->data);
 			} else {
