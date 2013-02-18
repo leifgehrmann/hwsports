@@ -445,6 +445,11 @@ class Sis extends MY_Controller {
 				$this->load->view('data', $this->data);
 			}
 		} else {
+			$this->session->set_flashdata('message_error','Incorrect login details, please try again!');
+			showLogin();
+		}
+		
+		function showLogin() {
 			//the user is not logging in so display the login page
 			$this->data['message'] = $this->session->flashdata('message');
 			$this->data['message_information'] = $this->session->flashdata('message_information');
