@@ -52,6 +52,7 @@ class Test extends MY_Controller {
 		$this->display($output);
 	}
 	public function update_user($userID,$dataJSON){
+		$dataJSON = urldecode($dataJSON);
 		$data = json_decode($dataJSON);
 		$output = $this->users_model->update_user($userID,$data);
 		$this->display($output);
