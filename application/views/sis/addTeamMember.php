@@ -55,6 +55,7 @@
 		<? } ?> 
 		</tbody>
 	</table>
+	<?php echo form_hidden('updateUser', $updateUser);?>
 	<p><?php echo form_submit('submit', 'Create Team Member');?></p>
 
 	<?php echo form_close();?>
