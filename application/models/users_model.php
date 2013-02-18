@@ -64,7 +64,10 @@ class Users_model extends CI_Model {
 		}
 		$dataQueryString .= "FROM userData WHERE userID = ".$this->db->escape($userID);
 		$dataQuery = $this->db->query($dataQueryString);
-		$output = array_merge(array("userID"=>$userID), $dataQuery->row_array());
+		
+		$this->load->model('ion_auth_model');
+		$ionUser = $this->ion_auth_model->user($userID);
+		$output = array_merge(array("userID"=>$userID,"email"=>$ionUser['email']), $dataQuery->row_array());
 		return $output;
 	}
 
