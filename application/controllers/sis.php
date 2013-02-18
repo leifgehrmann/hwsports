@@ -392,7 +392,7 @@ class Sis extends MY_Controller {
 			$user = $this->ion_auth->account_check($this->input->post('identity'), $this->input->post('password'));
 			if ( $user !== false ) {
 				// log in details valid, get user data
-				$user = $this->sports_model->get_user($user);
+				$user = $this->users_model->get_user($user);
 				$this->data['first_name'] = array(
 					'name'  => 'first_name',
 					'id'    => 'first_name',
