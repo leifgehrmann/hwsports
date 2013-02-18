@@ -421,7 +421,7 @@ class Sis extends MY_Controller {
 				);
 								
 				// Add extra inputs as required by sport category
-				foreach($teamMemberInputs as $tminput) {				
+				foreach($teamMemberInputs as $tminput) {
 					switch($tminput['inputType']) {
 						case "phone": $type = 'tel'; break;
 						default: $type = $tminput['inputType'];
@@ -440,6 +440,9 @@ class Sis extends MY_Controller {
 				}
 				
 				$this->load->view('sis/addTeamMember', $this->data);
+			} else {
+				$this->data['data'] = "User dump: ".print_r($user,1);
+				$this->load->view('data', $this->data);
 			}
 		} else {
 			//the user is not logging in so display the login page
