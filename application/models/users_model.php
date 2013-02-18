@@ -71,6 +71,9 @@ class Users_model extends CI_Model {
 	
 	public function update_user($userID, $data)
 	{
+		error_log(var_export($userID, true));
+		error_log(var_export($data, true));
+		
 		$this->db->trans_start();
 		if($this->user_exists($userID)){
 			foreach($data as $key=>$value) {
