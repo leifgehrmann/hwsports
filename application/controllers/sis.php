@@ -313,6 +313,7 @@ class Sis extends MY_Controller {
 		if ($newUserID != false) {
 			// Successful team member creation, show success message
 			$this->data['success'] = $this->ion_auth->messages()." Generated Password: $password";
+			$this->data['updateUser'] = false;
 			$this->load->view('sis/addTeamMember',$this->data);
 		} else {
 			//display the add team member form
@@ -367,6 +368,7 @@ class Sis extends MY_Controller {
 				);
 			}
 
+			$this->data['updateUser'] = $user;
 			$this->load->view('sis/addTeamMember',$this->data);
 		}
 	}	
