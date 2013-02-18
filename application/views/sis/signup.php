@@ -30,7 +30,7 @@
 										case "textarea": ?> <textarea id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></textarea><br /> <? break;
 										case "text": case "phone": case "email": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break;
 										case "checkbox": ?> <input type="checkbox" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>" value="1"></input><br /> <? break; 
-										case "teamMembers": ?> <a href="/sis/addTeamMember/<?=$tournamentID?>/<?=$sectionID?>" class="button green addTeamMember fancybox.ajax">Add Player<br />(Create New Account)</a> <a href="/sis/addLoginTeamMember/<?=$tournamentID?>/<?=$sectionID?>" class="button blue addTeamMember fancybox.ajax">Add Player<br />(Existing Account)</a><? break;
+										case "teamMembers": ?> <a href="/sis/addTeamMember/<?=$tournamentID?>/<?=$sectionID?>" class="button green addTeamMember fancybox.ajax">Add Player<br />(Create New Account)</a> <a href="/sis/addLoginTeamMember/<?=$tournamentID?>/<?=$sectionID?>" class="button blue addTeamMember addLoginTeamMember fancybox.ajax">Add Player<br />(Existing Account)</a><? break;
 									} ?>
 								</td>
 							</tr>
@@ -54,24 +54,7 @@
 <!-- /#main -->
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		var fancyformLoad = function() {
-			//shiny
-			$.fancybox.showLoading();
-
-			var data = $(this).serialize();
-			var url = $(this).attr('action')
-			
-			//post to the server and when we get a response, 
-			//draw a new fancybox, and run this function on completion
-			//so that we can bind the form and create a new fancybox on submit
-			$.post(url, data, function(msg){
-				$.fancybox({content:msg,beforeShow:func});
-			});
-			
-			return false; 
-		};
-	
+	$(document).ready(function() {	
 		$(".roleButton").click(function(){
 			var roleID = $(this).attr('id').substr(11);
 			$(".roleButton").remove();
@@ -117,11 +100,23 @@
 					//`onComplete` of the new fancybox we're going to create
 					var func = arguments.callee;
 
-					console.log("we're in the onComplete function of a fancybox!");
-					
-					
 					//bind the submit of our new form
-					$('.fancyform form').unbind('submit').bind("submit", fancyformLoad);
+					$('.fancyform form').unbind('submit').bind("submit", function() {
+						//shiny
+						$.fancybox.showLoading();
+
+						var data = $(this).serialize();
+						var url = $(this).attr('action')
+						
+						//post to the server and when we get a response, 
+						//draw a new fancybox, and run this function on completion
+						//so that we can bind the form and create a new fancybox on submit
+						$.post(url, data, function(msg){
+							$.fancybox({content:msg,beforeShow:func});
+						});
+						
+						return false; 
+					});
 				}
 			});
 			

@@ -463,7 +463,10 @@ class Sis extends MY_Controller {
 				$this->load->view('sis/addTeamMember', $this->data);
 			} else {
 				$this->session->set_flashdata('message_error','Incorrect login details, please try again!');
-				$this->showLogin();
+				$this->data['data'] = "<script type='text/javascript'>
+					$('a.addLoginTeamMember').click();
+				</script>";
+				$this->load->view('data',$this->data);
 			}
 		} else {
 			$this->showLogin();
