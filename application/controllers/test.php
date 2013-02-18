@@ -49,7 +49,7 @@ class Test extends MY_Controller {
 	
 	public function user_exists($userID){
 		$output = $this->users_model->user_exists($userID);
-		$this->display($output);
+		$this->display(var_export($output, true));
 	}
 
 	public function test_constants(){
