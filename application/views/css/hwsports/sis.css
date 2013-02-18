@@ -715,7 +715,9 @@ div.widget.welcome-message 	div.widget-title-left.icon { background-position: -6
 div.widget.subscribe 		div.widget-title-left.icon { background-position: -60px  -380px; }
 div.widget.profile 			div.widget-title-left.icon { background-position: -60px  -320px; }
 div.widget.signup 			div.widget-title-left.icon { background-position: -60px  -380px; }
-div.widget.tickets 			div.widget-title-left.icon { background-position: -160px -340px; }
+div.widget.tickets 			div.widget-title-left.icon { background-position: -60px  -280px; }
+div.widget.participation	div.widget-title-left.icon { background-position: -60px  -240px; }
+div.widget.tms				div.widget-title-left.icon { background-position: -160px -160px; }
 
 div.widget.welcome-message 	div.widget-title { background: #0D44A2; }
 div.widget.subscribe 		div.widget-title { background: #D93600; }
