@@ -297,7 +297,7 @@ class Sis extends MY_Controller {
 			);
 			
 			if( $this->input->post('updateUser') ) {
-				$newUserID = $this->users_model->update_user($this->input->post('updateUser'),$additional_data);
+				$updateUserResponse = $this->users_model->update_user($this->input->post('updateUser'),$additional_data);
 				$this->data['user'] = $additional_data;
 				$this->data['user']['id'] = $newUserID;
 			} else {
@@ -312,6 +312,11 @@ class Sis extends MY_Controller {
 		if ($newUserID != false) {
 			// Successful team member creation, show success message
 			$this->data['success'] = $this->ion_auth->messages()." Generated Password: $password";
+			$this->data['updateUser'] = false;
+			$this->load->view('sis/addTeamMember',$this->data);
+		} elseif ($updateUserResponse != false) {
+			// Successful team member creation, show success message
+			$this->data['success'] = "Updated user: ".$updateUserResponse;
 			$this->data['updateUser'] = false;
 			$this->load->view('sis/addTeamMember',$this->data);
 		} else {
