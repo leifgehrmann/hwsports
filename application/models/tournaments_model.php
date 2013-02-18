@@ -157,4 +157,30 @@ class Tournaments_model extends CI_Model {
 			return false;
 		}
 	}
+
+
+
+
+
+
+
+
+
+
+
+	/**
+	 * returns a boolean if the user is in a tournament
+	 *
+	 * @return boolean
+	 **/
+	public function user_in_tournament($userID, $tournamentID){
+		// determine if tournamentID if is a team sport
+		
+		// If it is a team sport, we need to check if...
+			// for all teams in the teams CSV
+				// does the usersTeam contain $userID $teamID
+		// else
+			// for all atheletes in the atheletes CSV
+				// does the user exist with the particular ID?
+	}
 }
