@@ -243,6 +243,7 @@ class Sis extends MY_Controller {
 	{
 		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
+		$this->load->model('users_model');
 		$this->data['tournamentID'] = $tournamentID;
 		$this->data['sectionID'] = $sectionID;
 		
@@ -295,12 +296,17 @@ class Sis extends MY_Controller {
 				'address'      => $this->input->post('address')
 			);
 			
-			
 			$password = $this->generatePassword();
 			
-			$newUserID = $this->ion_auth->register($username, $password, $email, $additional_data);
-			$this->data['user'] = $additional_data;
-			$this->data['user']['id'] = $newUserID;
+			if( $this->input->post('updateUser') ) {
+				$this->users_model->update_user($this->input->post('updateUser'),$additional_data);
+				$this->data['user'] = $additional_data;
+				$this->data['user']['id'] = $newUserID;
+			} else {				
+				$newUserID = $this->ion_auth->register($username, $password, $email, $additional_data);
+				$this->data['user'] = $additional_data;
+				$this->data['user']['id'] = $newUserID;
+			}
 		}
 		
 		// Registration success
@@ -441,8 +447,11 @@ class Sis extends MY_Controller {
 					);
 				}
 				
+				$this->data['updateUser'] = $user;
+				
 				$this->load->view('sis/addTeamMember', $this->data);
 			} else {
+				// Do the equivalent of redirecting, but from within a fancyform
 				$this->session->set_flashdata('message_error','Incorrect login details, please try again!');
 				$this->data['data'] = "<script type='text/javascript'>
 					$('a.addLoginTeamMember').click();

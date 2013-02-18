@@ -68,7 +68,7 @@ class Users_model extends CI_Model {
 		$output = array_merge(array("userID"=>$userID), $dataQuery->row_array());
 		return $output;
 	}
-
+	
 	public function update_user($userID, $data)
 	{
 		$this->db->trans_start();
