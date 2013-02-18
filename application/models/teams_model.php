@@ -92,7 +92,7 @@ class Teams_model extends CI_Model {
 		}
 
 		$output = array_merge(array("teamID"=>$teamID), $dataQuery->row_array());
-		$output['users'] = $users
+		$output['users'] = $users;
 		return $output;
 	}
 
