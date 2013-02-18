@@ -368,47 +368,87 @@ class Sis extends MY_Controller {
 	//create a new team member user account
 	function addLoginTeamMember($tournamentID,$sectionID)
 	{	
+		$this->load->model('tournaments_model');
+		$this->load->model('sports_model');
+		$this->load->model('users_model');
+		$this->data['tournamentID'] = $tournamentID;
+		$this->data['sectionID'] = $sectionID;
+		
+		$this->data['tournament'] = $tournament = $this->tournaments_model->get_tournament($tournamentID);
+		$sectionInputs = $this->sports_model->get_sport_category_role_input_section_inputs($sectionID);
+		$teamMemberInputs = array(); 
+		foreach($sectionInputs as $inputID => $input) {
+			if(strpos($input['inputType'],'tm-') === 0) {
+				$input['inputType'] = substr($input['inputType'],3);
+				$teamMemberInputs[] = $input;
+			}
+		}
+		
 		//validate form input
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
-
+		
 		if ($this->form_validation->run() == true) {
-			//if ( $this->ion_auth->account_check($this->input->post('identity'), $this->input->post('password')) ) {
-				// log in details valid
+			$user = $this->ion_auth->account_check($this->input->post('identity'), $this->input->post('password'));
+			if ( $user !== false ) {
+				// log in details valid, get user data
+				$user = $this->users_model->get_user($user);
 				$this->data['first_name'] = array(
 					'name'  => 'first_name',
 					'id'    => 'first_name',
 					'type'  => 'text',
 					'required' => '',
-					'value' => $this->form_validation->set_value('first_name')
+					'value' => (isset($user['firstName']) ? $user['firstName'] : '')
 				);
 				$this->data['last_name'] = array(
 					'name'  => 'last_name',
 					'id'    => 'last_name',
 					'type'  => 'text',
 					'required' => '',
-					'value' => $this->form_validation->set_value('last_name')
+					'value' => (isset($user['lastName']) ? $user['lastName'] : '')
 				);
 				$this->data['email'] = array(
 					'name'  => 'email',
 					'id'    => 'email',
 					'type'  => 'email',
 					'required' => '',
-					'value' => $this->form_validation->set_value('email')
+					'value' => $this->input->post('identity')
 				);
 				$this->data['phone'] = array(
 					'name'  => 'phone',
 					'id'    => 'phone',
 					'type'  => 'tel',
 					'required' => '',
-					'value' => $this->form_validation->set_value('phone')
+					'value' => (isset($user['phone']) ? $user['phone'] : '')
 				);
-				$this->data['extraInputs'] = array();
+								
+				// Add extra inputs as required by sport category
+				foreach($teamMemberInputs as $tminput) {
+					switch($tminput['inputType']) {
+						case "phone": $type = 'tel'; break;
+						default: $type = $tminput['inputType'];
+					}
 				
-				$this->load->view('sis/header',$this->data);
+					$this->data['extraInputs'][ $tminput['keyName'] ] = array(
+						'keyName'  => $tminput['keyName'],
+						'name'  => $tminput['keyName'],
+						'id'    => $tminput['keyName'],
+						'type'  => $type,
+						'required' => '',
+						'inputType'  => $tminput['inputType'],
+						'formLabel'  => $tminput['formLabel'],
+						'value' => (isset($user[$tminput['keyName']]) ? $user[$tminput['keyName']] : '')
+					);
+				}
+				
 				$this->load->view('sis/addTeamMember', $this->data);
-				$this->load->view('sis/footer',$this->data);
-		//	}
+			} else {
+				$this->session->set_flashdata('message_error','Incorrect login details, please try again!');
+				$this->data['data'] = "<script type='text/javascript'>
+					$('a.addLoginTeamMember').click();
+				</script>";
+				$this->load->view('data',$this->data);
+			}
 		} else {
 			//the user is not logging in so display the login page
 			$this->data['message'] = $this->session->flashdata('message');
@@ -416,20 +456,17 @@ class Sis extends MY_Controller {
 			$this->data['message_success'] = $this->session->flashdata('message_success');
 			$this->data['message_warning'] = $this->session->flashdata('message_warning');
 			$this->data['message_error'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message_error');
-
+			
 			$this->data['identity'] = array('name' => 'identity',
 				'id' => 'identity',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('identity')
+				'type' => 'text'
 			);
 			$this->data['password'] = array('name' => 'password',
 				'id' => 'password',
 				'type' => 'password'
 			);
 
-			$this->load->view('sis/header',$this->data);
 			$this->load->view('sis/teamMemberLogin', $this->data);
-			$this->load->view('sis/footer',$this->data);
 		}
 	}
 	

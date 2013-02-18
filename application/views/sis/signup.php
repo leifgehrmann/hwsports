@@ -30,7 +30,7 @@
 										case "textarea": ?> <textarea id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></textarea><br /> <? break;
 										case "text": case "phone": case "email": ?> <input type="text" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>"></input><br /> <? break;
 										case "checkbox": ?> <input type="checkbox" id="<?=$input['keyName']?>" name="<?=$input['keyName']?>" value="1"></input><br /> <? break; 
-										case "teamMembers": ?> <a href="/sis/addTeamMember/<?=$tournamentID?>/<?=$sectionID?>" class="button green addTeamMember fancybox.ajax">Add Player<br />(Create New Account)</a> <a href="/sis/addLoginTeamMember/<?=$tournamentID?>/<?=$sectionID?>" class="button blue addTeamMember fancybox.ajax">Add Player<br />(Existing Account)</a><? break;
+										case "teamMembers": ?> <a href="/sis/addTeamMember/<?=$tournamentID?>/<?=$sectionID?>" class="button green addTeamMember fancybox.ajax">Add Player<br />(Create New Account)</a> <a href="/sis/addLoginTeamMember/<?=$tournamentID?>/<?=$sectionID?>" class="button blue addTeamMember addLoginTeamMember fancybox.ajax">Add Player<br />(Existing Account)</a><? break;
 									} ?>
 								</td>
 							</tr>
@@ -54,7 +54,7 @@
 <!-- /#main -->
 
 <script type="text/javascript">
-	$(document).ready(function() {
+	$(document).ready(function() {	
 		$(".roleButton").click(function(){
 			var roleID = $(this).attr('id').substr(11);
 			$(".roleButton").remove();
@@ -100,9 +100,6 @@
 					//`onComplete` of the new fancybox we're going to create
 					var func = arguments.callee;
 
-					console.log("we're in the onComplete function of a fancybox!");
-					
-					
 					//bind the submit of our new form
 					$('.fancyform form').unbind('submit').bind("submit", function() {
 						//shiny
