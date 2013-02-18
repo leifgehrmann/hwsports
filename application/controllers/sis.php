@@ -365,6 +365,27 @@ class Sis extends MY_Controller {
 		}
 	}	
 	
+
+	function showLogin() {
+		//the user is not logging in so display the login page
+		$this->data['message'] = $this->session->flashdata('message');
+		$this->data['message_information'] = $this->session->flashdata('message_information');
+		$this->data['message_success'] = $this->session->flashdata('message_success');
+		$this->data['message_warning'] = $this->session->flashdata('message_warning');
+		$this->data['message_error'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message_error');
+		
+		$this->data['identity'] = array('name' => 'identity',
+			'id' => 'identity',
+			'type' => 'text'
+		);
+		$this->data['password'] = array('name' => 'password',
+			'id' => 'password',
+			'type' => 'password',
+		);
+
+		$this->load->view('sis/teamMemberLogin', $this->data);
+	}
+	
 	//create a new team member user account
 	function addLoginTeamMember($tournamentID,$sectionID)
 	{	
@@ -447,26 +468,6 @@ class Sis extends MY_Controller {
 		} else {
 			$this->session->set_flashdata('message_error','Incorrect login details, please try again!');
 			showLogin();
-		}
-		
-		function showLogin() {
-			//the user is not logging in so display the login page
-			$this->data['message'] = $this->session->flashdata('message');
-			$this->data['message_information'] = $this->session->flashdata('message_information');
-			$this->data['message_success'] = $this->session->flashdata('message_success');
-			$this->data['message_warning'] = $this->session->flashdata('message_warning');
-			$this->data['message_error'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message_error');
-			
-			$this->data['identity'] = array('name' => 'identity',
-				'id' => 'identity',
-				'type' => 'text'
-			);
-			$this->data['password'] = array('name' => 'password',
-				'id' => 'password',
-				'type' => 'password',
-			);
-
-			$this->load->view('sis/teamMemberLogin', $this->data);
 		}
 	}
 	
