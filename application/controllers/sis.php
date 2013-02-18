@@ -282,6 +282,7 @@ class Sis extends MY_Controller {
 		
 		// This variable will contain ID of newly created user if this function succeeds
 		$newUserID = false;
+		$updateUserResponse = false;
 		
 		// Set up input data
 		if ( $this->form_validation->run() ) {
