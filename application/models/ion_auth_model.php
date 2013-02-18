@@ -622,18 +622,15 @@ class Ion_auth_model extends CI_Model
 	 * Checks username and password - if username is valid identity and password is correct for that account, returns true. Otherwise false. 
 	 *
 	 * @return bool
-	 * @author Mathew
+	 * @author Andrew
 	 **/
 	public function account_check($username = '', $password = '')
 	{
-		$this->trigger_events('username_check');
-
 		if (empty($username) OR empty($password)) {
 			return FALSE;
 		}
 
-		$this->trigger_events('extra_where');
-						
+		$this->trigger_events('extra_where');						
 		$query = $this->db->select($this->identity_column . ', username, email, id, password, active, last_login')
 		                  ->where($this->identity_column, $this->db->escape_str($username))
 		                  ->limit(1)

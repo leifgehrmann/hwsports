@@ -441,7 +441,7 @@ class Sis extends MY_Controller {
 				
 				$this->load->view('sis/addTeamMember', $this->data);
 			} else {
-				$this->data['data'] = "User dump: ".print_r($user,1);
+				$this->data['data'] = "Account check failed with return code: $user . Inputs were: ".$this->input->post('identity')." and ".$this->input->post('password');
 				$this->load->view('data', $this->data);
 			}
 		} else {
@@ -454,8 +454,7 @@ class Sis extends MY_Controller {
 			
 			$this->data['identity'] = array('name' => 'identity',
 				'id' => 'identity',
-				'type' => 'text',
-				'value' => '',
+				'type' => 'text'
 			);
 			$this->data['password'] = array('name' => 'password',
 				'id' => 'password',
