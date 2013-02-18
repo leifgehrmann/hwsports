@@ -51,6 +51,11 @@ class Test extends MY_Controller {
 		$output = $this->users_model->user_exists($userID);
 		$this->display($output);
 	}
+	public function update_user($userID,$dataJSON){
+		$data = json_decode($dataJSON);
+		$output = $this->users_model->update_user($userID,$data);
+		$this->display($output);
+	}
 
 	public function test_constants(){
 		$output = array(APPPATH,SYSDIR,BASEPATH,ENVIRONMENT,SELF,FCPATH,EXT);
@@ -58,7 +63,7 @@ class Test extends MY_Controller {
 	}
 
 	public function display($output){
-		$this->data['data'] =  var_export($output,true);
+		$this->data['data'] = var_export($output,true);
 		header('Content-Type: text/plain');
 		$this->load->view('data', $this->data);
 	}
