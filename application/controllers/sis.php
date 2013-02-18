@@ -365,32 +365,12 @@ class Sis extends MY_Controller {
 		}
 	}	
 	
-
-	function showLogin() {
-		//the user is not logging in so display the login page
-		$this->data['message'] = $this->session->flashdata('message');
-		$this->data['message_information'] = $this->session->flashdata('message_information');
-		$this->data['message_success'] = $this->session->flashdata('message_success');
-		$this->data['message_warning'] = $this->session->flashdata('message_warning');
-		$this->data['message_error'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message_error');
-		
-		$this->data['identity'] = array('name' => 'identity',
-			'id' => 'identity',
-			'type' => 'text'
-		);
-		$this->data['password'] = array('name' => 'password',
-			'id' => 'password',
-			'type' => 'password'
-		);
-
-		$this->load->view('sis/teamMemberLogin', $this->data);
-	}
-	
 	//create a new team member user account
 	function addLoginTeamMember($tournamentID,$sectionID)
 	{	
 		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
+		$this->load->model('users_model');
 		$this->data['tournamentID'] = $tournamentID;
 		$this->data['sectionID'] = $sectionID;
 		
@@ -411,34 +391,35 @@ class Sis extends MY_Controller {
 		if ($this->form_validation->run() == true) {
 			$user = $this->ion_auth->account_check($this->input->post('identity'), $this->input->post('password'));
 			if ( $user !== false ) {
-				// log in details valid
+				// log in details valid, get user data
+				$user = $this->sports_model->get_user($user);
 				$this->data['first_name'] = array(
 					'name'  => 'first_name',
 					'id'    => 'first_name',
 					'type'  => 'text',
 					'required' => '',
-					'value' => ''
+					'value' => (isset($user['firstName']) ? $user['firstName'] : '')
 				);
 				$this->data['last_name'] = array(
 					'name'  => 'last_name',
 					'id'    => 'last_name',
 					'type'  => 'text',
 					'required' => '',
-					'value' => ''
+					'value' => (isset($user['lastName']) ? $user['lastName'] : '')
 				);
 				$this->data['email'] = array(
 					'name'  => 'email',
 					'id'    => 'email',
 					'type'  => 'email',
 					'required' => '',
-					'value' => ''
+					'value' => (isset($user['email']) ? $user['email'] : '')
 				);
 				$this->data['phone'] = array(
 					'name'  => 'phone',
 					'id'    => 'phone',
 					'type'  => 'tel',
 					'required' => '',
-					'value' => ''
+					'value' => (isset($user['phone']) ? $user['phone'] : '')
 				);
 								
 				// Add extra inputs as required by sport category
@@ -456,7 +437,7 @@ class Sis extends MY_Controller {
 						'required' => '',
 						'inputType'  => $tminput['inputType'],
 						'formLabel'  => $tminput['formLabel'],
-						'value' => ''
+						'value' => (isset($user[$tminput['keyName']]) ? $user[$tminput['keyName']] : '')
 					);
 				}
 				
@@ -469,7 +450,23 @@ class Sis extends MY_Controller {
 				$this->load->view('data',$this->data);
 			}
 		} else {
-			$this->showLogin();
+			//the user is not logging in so display the login page
+			$this->data['message'] = $this->session->flashdata('message');
+			$this->data['message_information'] = $this->session->flashdata('message_information');
+			$this->data['message_success'] = $this->session->flashdata('message_success');
+			$this->data['message_warning'] = $this->session->flashdata('message_warning');
+			$this->data['message_error'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message_error');
+			
+			$this->data['identity'] = array('name' => 'identity',
+				'id' => 'identity',
+				'type' => 'text'
+			);
+			$this->data['password'] = array('name' => 'password',
+				'id' => 'password',
+				'type' => 'password'
+			);
+
+			$this->load->view('sis/teamMemberLogin', $this->data);
 		}
 	}
 	
