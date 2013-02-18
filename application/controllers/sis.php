@@ -378,42 +378,59 @@ class Sis extends MY_Controller {
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		
 		if ($this->form_validation->run() == true) {
-			/*if ( $this->ion_auth->account_check($this->input->post('identity'), $this->input->post('password')) ) {
+			$user = $this->ion_auth->account_check($this->input->post('identity'), $this->input->post('password'));
+			if ( $user !== false ) {
 				// log in details valid
 				$this->data['first_name'] = array(
 					'name'  => 'first_name',
 					'id'    => 'first_name',
 					'type'  => 'text',
 					'required' => '',
-					'value' => $this->form_validation->set_value('first_name')
+					'value' => ''
 				);
 				$this->data['last_name'] = array(
 					'name'  => 'last_name',
 					'id'    => 'last_name',
 					'type'  => 'text',
 					'required' => '',
-					'value' => $this->form_validation->set_value('last_name')
+					'value' => ''
 				);
 				$this->data['email'] = array(
 					'name'  => 'email',
 					'id'    => 'email',
 					'type'  => 'email',
 					'required' => '',
-					'value' => $this->form_validation->set_value('email')
+					'value' => ''
 				);
 				$this->data['phone'] = array(
 					'name'  => 'phone',
 					'id'    => 'phone',
 					'type'  => 'tel',
 					'required' => '',
-					'value' => $this->form_validation->set_value('phone')
+					'value' => ''
 				);
-				$this->data['extraInputs'] = array();
+								
+				// Add extra inputs as required by sport category
+				foreach($teamMemberInputs as $tminput) {				
+					switch($tminput['inputType']) {
+						case "phone": $type = 'tel'; break;
+						default: $type = $tminput['inputType'];
+					}
 				
-				$this->load->view('sis/header',$this->data);
+					$this->data['extraInputs'][ $tminput['keyName'] ] = array(
+						'keyName'  => $tminput['keyName'],
+						'name'  => $tminput['keyName'],
+						'id'    => $tminput['keyName'],
+						'type'  => $type,
+						'required' => '',
+						'inputType'  => $tminput['inputType'],
+						'formLabel'  => $tminput['formLabel'],
+						'value' => '',
+					);
+				}
+				
 				$this->load->view('sis/addTeamMember', $this->data);
-				$this->load->view('sis/footer',$this->data);
-			}*/
+			}
 		} else {
 			//the user is not logging in so display the login page
 			$this->data['message'] = $this->session->flashdata('message');

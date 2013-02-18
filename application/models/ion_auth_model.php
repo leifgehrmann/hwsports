@@ -628,7 +628,7 @@ class Ion_auth_model extends CI_Model
 	{
 		$this->trigger_events('username_check');
 
-		if (empty($username)) {
+		if (empty($username) OR empty($password)) {
 			return FALSE;
 		}
 
@@ -639,8 +639,9 @@ class Ion_auth_model extends CI_Model
 		                  ->limit(1)
 		                  ->get($this->tables['users']);
 		if ($query->num_rows() === 1) {
+			$user = $query->row();
 			if ( $this->hash_password_db($user->id, $password) === TRUE) {
-				return TRUE;
+				return $user->id;
 			}
 		}
 		return FALSE;
