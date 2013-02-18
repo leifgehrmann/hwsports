@@ -247,7 +247,6 @@ class Sis extends MY_Controller {
 		$this->data['tournamentID'] = $tournamentID;
 		$this->data['sectionID'] = $sectionID;
 		
-		
 		$this->data['tournament'] = $tournament = $this->tournaments_model->get_tournament($tournamentID);
 		$sectionInputs = $this->sports_model->get_sport_category_role_input_section_inputs($sectionID);
 		$teamMemberInputs = array(); 
@@ -274,6 +273,7 @@ class Sis extends MY_Controller {
 					$this->form_validation->set_rules($tminput['keyName'], $tminput['formLabel'], 'required|xss_clean');
 			}
 		}
+		
 		// Set up validation for standard inputs
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
@@ -296,16 +296,15 @@ class Sis extends MY_Controller {
 				'address'      => $this->input->post('address')
 			);
 			
-			$password = $this->generatePassword();
-			
 			if( $this->input->post('updateUser') ) {
-				$this->users_model->update_user($this->input->post('updateUser'),$additional_data);
+				$newUserID = $this->users_model->update_user($this->input->post('updateUser'),$additional_data);
 				$this->data['user'] = $additional_data;
 				$this->data['user']['id'] = $newUserID;
-			} else {				
+			} else {
+				$password = $this->generatePassword();
 				$newUserID = $this->ion_auth->register($username, $password, $email, $additional_data);
-				$this->data['user'] = $additional_data;
 				$this->data['user']['id'] = $newUserID;
+				$this->data['user'] = $additional_data;
 			}
 		}
 		
