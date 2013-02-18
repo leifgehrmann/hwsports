@@ -46,6 +46,11 @@ class Test extends MY_Controller {
 		$output = $this->matches_model->get_matches($centreID);
 		$this->display($output);
 	}
+	
+	public function user_exists($userID){
+		$output = $this->users_model->user_exists($userID);
+		$this->display($output);
+	}
 
 	public function test_constants(){
 		$output = array(APPPATH,SYSDIR,BASEPATH,ENVIRONMENT,SELF,FCPATH,EXT);
