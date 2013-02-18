@@ -412,7 +412,7 @@ class Sis extends MY_Controller {
 					'id'    => 'email',
 					'type'  => 'email',
 					'required' => '',
-					'value' => (isset($user['email']) ? $user['email'] : '')
+					'value' => $this->input->post('identity')
 				);
 				$this->data['phone'] = array(
 					'name'  => 'phone',
