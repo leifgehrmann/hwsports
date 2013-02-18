@@ -380,7 +380,7 @@ class Sis extends MY_Controller {
 		);
 		$this->data['password'] = array('name' => 'password',
 			'id' => 'password',
-			'type' => 'password',
+			'type' => 'password'
 		);
 
 		$this->load->view('sis/teamMemberLogin', $this->data);
@@ -462,12 +462,11 @@ class Sis extends MY_Controller {
 				
 				$this->load->view('sis/addTeamMember', $this->data);
 			} else {
-				$this->data['data'] = "Account check failed with return code: $user . Inputs were: ".$this->input->post('identity')." and ".$this->input->post('password');
-				$this->load->view('data', $this->data);
+				$this->session->set_flashdata('message_error','Incorrect login details, please try again!');
+				$this->showLogin();
 			}
 		} else {
-			$this->session->set_flashdata('message_error','Incorrect login details, please try again!');
-			showLogin();
+			$this->showLogin();
 		}
 	}
 	
