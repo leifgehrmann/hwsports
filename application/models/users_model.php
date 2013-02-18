@@ -8,7 +8,7 @@ class Users_model extends CI_Model {
 						"EXISTS(SELECT 1 FROM users WHERE id = ".$this->db->escape($userID).") AS `exists`";
 		$queryData = $this->db->query($queryString);
 		$output = $queryData->row_array();
-		return $output['exists'];
+		return (bool)$output['exists'];
 	}
 
 	public function get_users($centreID)
