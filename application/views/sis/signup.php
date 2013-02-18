@@ -55,6 +55,23 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		var fancyformLoad = function() {
+			//shiny
+			$.fancybox.showLoading();
+
+			var data = $(this).serialize();
+			var url = $(this).attr('action')
+			
+			//post to the server and when we get a response, 
+			//draw a new fancybox, and run this function on completion
+			//so that we can bind the form and create a new fancybox on submit
+			$.post(url, data, function(msg){
+				$.fancybox({content:msg,beforeShow:func});
+			});
+			
+			return false; 
+		};
+	
 		$(".roleButton").click(function(){
 			var roleID = $(this).attr('id').substr(11);
 			$(".roleButton").remove();
@@ -104,22 +121,7 @@
 					
 					
 					//bind the submit of our new form
-					$('.fancyform form').unbind('submit').bind("submit", function() {
-						//shiny
-						$.fancybox.showLoading();
-
-						var data = $(this).serialize();
-						var url = $(this).attr('action')
-						
-						//post to the server and when we get a response, 
-						//draw a new fancybox, and run this function on completion
-						//so that we can bind the form and create a new fancybox on submit
-						$.post(url, data, function(msg){
-							$.fancybox({content:msg,beforeShow:func});
-						});
-						
-						return false; 
-					});
+					$('.fancyform form').unbind('submit').bind("submit", fancyformLoad);
 				}
 			});
 			
