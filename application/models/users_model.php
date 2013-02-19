@@ -76,8 +76,8 @@ class Users_model extends CI_Model {
 			foreach($data as $key=>$value) {
 				$escKey = $this->db->escape($key);
 				$escValue = $this->db->escape($value);
-				$dataQueryString = 	"DELETE FROM `userData` WHERE `key`=$escKey AND `userID`=$userID;
-									INSERT INTO `userData` (
+				$dataQueryString1 = "DELETE FROM `userData` WHERE `key`=$escKey AND `userID`=$userID";
+				$dataQueryString2 = "INSERT INTO `userData` (
 										`userID`,
 										`key`,
 										`value`
@@ -85,11 +85,12 @@ class Users_model extends CI_Model {
 										$userID,
 										$escKey,
 										$escValue
-									);";
-				error_log($dataQueryString);
-				$this->db->query($dataQueryString);
+									)";
+				$this->db->query($dataQueryString1);
+				error_log($this->db->last_query());
+				$this->db->query($dataQueryString2);
+				error_log($this->db->last_query());
 			}
-			error_log($this->db->last_query());
 			return $this->db->trans_complete();
 		}
 		return false;
