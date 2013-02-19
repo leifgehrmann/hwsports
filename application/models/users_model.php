@@ -71,25 +71,26 @@ class Users_model extends CI_Model {
 	
 	public function update_user($userID, $data)
 	{
-		error_log(var_export($userID, true));
-		error_log(var_export($data, true));
-		
 		$this->db->trans_start();
 		if($this->user_exists($userID)){
 			foreach($data as $key=>$value) {
 				$escKey = $this->db->escape($key);
 				$escValue = $this->db->escape($value);
-				$dataQueryString = 	"UPDATE `userData` ".
-									"SET `value`=$escValue ".
-									"WHERE `key`=$escKey ".
-									"AND `userID`=$userID";
+				$dataQueryString = 	"DELETE FROM `userData` WHERE `key`=$escKey AND `userID`=$userID;".
+									"INSERT INTO myTable(
+										`userID`,
+										`key`,
+										`value
+									) VALUES (
+										$userID,
+										$escKey,
+										$escValue
+									)";
 				$this->db->query($dataQueryString);
 			}
-			$this->db->trans_complete();
-			return true;
-		} else {
-			return false;
+			return $this->db->trans_complete();
 		}
+		return false;
 	}
 
 }
