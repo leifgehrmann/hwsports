@@ -168,8 +168,10 @@ class Teams_model extends CI_Model {
 
 		if($this->team_exists($teamID)){
 			foreach($data as $key=>$value) {
-				$escKey = $this->db->escape($key);
+				$escKey = $this->db->escape( str_replace("'", '', $key) );
 				$escValue = $this->db->escape($value);
+				error_lor("About to INSERT teamData: ".var_export($data,1));
+				
 				$dataQueryString1 = "DELETE FROM `teamData` WHERE `key`=$escKey AND `teamID`=$userID";
 				$dataQueryString2 = "INSERT INTO `teamData` (
 										`teamID`,
