@@ -250,7 +250,9 @@ class Sis extends MY_Controller {
 					}
 				}
 				
-				if(!empty($userData)) $this->users_model->update_user($currentuser->id, $userData);
+				if(!empty($userData)) {
+					$this->users_model->update_user($currentUser->id, $userData);
+				}
 				if(!empty($teamData)) {
 					$teamID = $this->teams_model->insert_team($teamData);
 					if($this->teams_model->add_team_members($teamID,$teamMembers) == false) {
