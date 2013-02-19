@@ -217,6 +217,7 @@ class Sis extends MY_Controller {
 		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
 		$this->load->model('users_model');
+		$this->load->model('teams_model');
 	
 		if( $this->tournaments_model->tournament_exists($tournamentID) ) {
 			$this->data['tournamentID'] = $tournamentID;
