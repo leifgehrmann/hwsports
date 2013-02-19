@@ -237,7 +237,7 @@ class Sis extends MY_Controller {
 					// Skip these inputs, they are processed by the addTeamMember method
 					if(strpos($roleInput['inputType'],'tm-') === 0) continue;
 					if($roleInput['keyName']=='teamMembers') {
-						$teamMembersIDs = array_map("intval", explode(",", $this->input->post('teamMemberIDs')));
+						$teamMembersIDs = array_map("intval", explode(",", $this->input->post('teamMemberIDs') ));
 					}
 					
 					// So far we only need to handle two input types, userData and teamData, but this is easily extensible
@@ -258,7 +258,7 @@ class Sis extends MY_Controller {
 				}
 				if(!empty($teamData)) {
 					$teamID = $this->teams_model->insert_team($centreID,$teamData);
-					if($this->teams_model->add_team_members($teamID,$teamMembers) == false) {
+					if($this->teams_model->add_team_members($teamID,$teamMembersIDs) == false) {
 						$this->session->set_flashdata('message',  "Adding team members failed.");
 						redirect("/sis/tournaments", 'refresh');
 					}
