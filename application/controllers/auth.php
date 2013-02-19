@@ -317,34 +317,21 @@ class Auth extends MY_Controller {
 			}
 			else
 			{
-				// do we have a valid request?
-				if ($this->_valid_csrf_nonce() === FALSE )
+				// finally change the password
+				$identity = $user->{$this->config->item('identity', 'ion_auth')};
+
+				$change = $this->ion_auth->reset_password($identity, $this->input->post('new'));
+
+				if ($change)
 				{
-
-					//something fishy might be up
-					$this->ion_auth->clear_forgotten_password_code($code);
-
-					show_error('This form post did not pass our security checks.');
-
+					//if the password was successfully changed
+					$this->session->set_flashdata('message', $this->ion_auth->messages());
+					$this->logout();
 				}
 				else
 				{
-					// finally change the password
-					$identity = $user->{$this->config->item('identity', 'ion_auth')};
-
-					$change = $this->ion_auth->reset_password($identity, $this->input->post('new'));
-
-					if ($change)
-					{
-						//if the password was successfully changed
-						$this->session->set_flashdata('message', $this->ion_auth->messages());
-						$this->logout();
-					}
-					else
-					{
-						$this->session->set_flashdata('message', $this->ion_auth->errors());
-						redirect('auth/reset_password/' . $code, 'refresh');
-					}
+					$this->session->set_flashdata('message', $this->ion_auth->errors());
+					redirect('auth/reset_password/' . $code, 'refresh');
 				}
 			}
 		}
