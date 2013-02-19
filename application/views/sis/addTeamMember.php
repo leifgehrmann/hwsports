@@ -6,7 +6,7 @@
 	</script>
 	<? } else { ?>
 	<h1>Add New Team Member</h1>
-	<p>Please enter the member's details below.</p>
+	<p><?=$updateUser? "Please fill in your missing details below": "Please enter the member's details below."?></p>
 
 	<? if(!empty($message)){ ?>
 	<div id="infoMessage"><?=$message;?></div>
