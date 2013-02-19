@@ -167,7 +167,6 @@ class Sports_model extends CI_Model {
 			// Get inputs for this section
 			$roleInputsQuery = $this->db->query("SELECT * FROM `sportCategoryRoleInputs` WHERE `sportCategoryRoleInputSectionID` = ".$this->db->escape( $roleInputSectionResult['sportCategoryRoleInputSectionID'] )." ORDER BY position ASC" );
 			$roleInputsResult = $roleInputsQuery->result_array();
-			$inputs = array();
 			foreach($roleInputsResult as $roleInput) {
 				$output[ $roleInput['sportCategoryRoleInputID'] ] = array (
 					'tableName' => $roleInput['tableName'],
