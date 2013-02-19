@@ -87,9 +87,7 @@ class Users_model extends CI_Model {
 										$escValue
 									)";
 				$this->db->query($dataQueryString1);
-				error_log($this->db->last_query());
 				$this->db->query($dataQueryString2);
-				error_log($this->db->last_query());
 			}
 			return $this->db->trans_complete();
 		}

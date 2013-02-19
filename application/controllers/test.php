@@ -51,6 +51,9 @@ class Test extends MY_Controller {
 		$output = $this->users_model->user_exists($userID);
 		$this->display($output);
 	}
+	
+	// For example: http://hwsports.co.uk/test/update_user/34/%7B%22poop%22%3A%22smells%22%7D
+	// that web address updates userData to add "poop" = "smells" to user ID 34
 	public function update_user($userID,$dataJSON){
 		$dataJSON = urldecode($dataJSON);
 		$data = json_decode($dataJSON);
