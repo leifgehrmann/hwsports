@@ -212,25 +212,28 @@ class Sis extends MY_Controller {
 			$this->session->set_flashdata('message_warning',  "You must be logged in to sign up for a tournament: Please log in below:");
 			redirect('/auth/login','refresh'); 
 		}
-	
 		
 		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
-		
-		if( $this->input->post() ) {
-			echo "<pre>".print_r($_POST,1)."</pre>"; die();
-		}
-		
+		$this->load->model('users_model');
+	
 		if( $this->tournaments_model->tournament_exists($tournamentID) ) {
 			$this->data['tournamentID'] = $tournamentID;
 			$this->data['tournament'] = $tournament = $this->tournaments_model->get_tournament($tournamentID);
-			$this->data['roles'] = $this->sports_model->get_sport_category_roles($tournament['sportCategoryID']);
-						
-			$this->data['title'] = "Signup";
-			$this->data['page'] = "signup";
-			$this->load->view('sis/header',$this->data);
-			$this->load->view('sis/signup',$this->data);
-			$this->load->view('sis/footer',$this->data);
+			$this->data['roles'] = $roles = $this->sports_model->get_sport_category_roles($tournament['sportCategoryID']);
+	
+			if( $this->input->post() ) {
+				$role = $this->input->post('role');
+				print_r($roles);
+				die();
+				
+			} else {			
+				$this->data['title'] = "Signup";
+				$this->data['page'] = "signup";
+				$this->load->view('sis/header',$this->data);
+				$this->load->view('sis/signup',$this->data);
+				$this->load->view('sis/footer',$this->data);
+			}
 		} else {
 			$this->session->set_flashdata('message',  "Tournament ID $id does not exist.");
 			redirect("/sis/tournaments", 'refresh');
