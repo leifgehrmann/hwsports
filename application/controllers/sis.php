@@ -237,8 +237,7 @@ class Sis extends MY_Controller {
 					// Skip these inputs, they are processed by the addTeamMember method
 					if(strpos($roleInput['inputType'],'tm-') === 0) continue;
 					if($roleInput['keyName']=='teamMembers') {
-						$teamMembers = explode(',',$this->input->post('teamMemberIDs'));
-						error_log(var_export($teamMembers,true));
+						$teamMembersIDs = array_map("intval", explode(",", $this->input->post('teamMemberIDs')));
 					}
 					
 					// So far we only need to handle two input types, userData and teamData, but this is easily extensible
