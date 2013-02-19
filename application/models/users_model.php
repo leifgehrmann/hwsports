@@ -77,10 +77,10 @@ class Users_model extends CI_Model {
 				$escKey = $this->db->escape($key);
 				$escValue = $this->db->escape($value);
 				$dataQueryString = 	"DELETE FROM `userData` WHERE `key`=$escKey AND `userID`=$userID;".
-									"INSERT INTO myTable(
+									"INSERT INTO `userData` (
 										`userID`,
 										`key`,
-										`value
+										`value`
 									) VALUES (
 										$userID,
 										$escKey,
