@@ -228,8 +228,8 @@ class Sis extends MY_Controller {
 			
 				$roleID = $this->input->post('role');
 				$roleInputs = $this->sports_model->get_sport_category_role_inputs($roleID);
+				print_r($roleInputs);
 				foreach($roleInputs as $roleInput) {
-					print_r($roleInput);
 					//$this->load->view('sis/signup',$this->data);
 				}
 				
