@@ -306,7 +306,7 @@ class Sis extends MY_Controller {
 			if( $userIDtoUpdate ) {
 				$updateUserResponse = $this->users_model->update_user($userIDtoUpdate,$additional_data);
 				$this->data['user'] = $additional_data;
-				$this->data['user']['id'] = $newUserID;
+				$this->data['user']['id'] = $userIDtoUpdate;
 				$this->data['user']['email'] = $email;
 				$this->data['user']['password'] = "[user specified]";
 			} else {
