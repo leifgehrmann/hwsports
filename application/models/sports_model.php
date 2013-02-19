@@ -160,7 +160,7 @@ class Sports_model extends CI_Model {
 		$output = array();
 		
 		// Get sections for this role
-		$roleInputSectionsQuery = $this->db->query("SELECT sportCategoryRoleInputSectionID,label FROM `sportCategoryRoleInputSections` WHERE `sportCategoryRoleID` = ".$this->db->escape( $roleResult['sportCategoryRoleID'] )." ORDER BY position ASC" );
+		$roleInputSectionsQuery = $this->db->query("SELECT sportCategoryRoleInputSectionID,label FROM `sportCategoryRoleInputSections` WHERE `sportCategoryRoleID` = ".$this->db->escape( $sportCategoryRoleID )." ORDER BY position ASC" );
 		$roleInputSectionsResult = $roleInputSectionsQuery->result_array();
 		$sections = array();
 		foreach($roleInputSectionsResult as $roleInputSectionResult) {
