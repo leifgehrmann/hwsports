@@ -213,6 +213,7 @@ class Sis extends MY_Controller {
 			redirect('/auth/login','refresh'); 
 		}
 		$this->data['currentUser'] = $currentUser = $this->ion_auth->user()->row();	
+		$centreID = $this->data['centre']['centreID'];
 		
 		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
@@ -256,7 +257,7 @@ class Sis extends MY_Controller {
 					$this->users_model->update_user($currentUser->id, $userData);
 				}
 				if(!empty($teamData)) {
-					$teamID = $this->teams_model->insert_team($teamData);
+					$teamID = $this->teams_model->insert_team($centreID,$teamData);
 					if($this->teams_model->add_team_members($teamID,$teamMembers) == false) {
 						$this->session->set_flashdata('message',  "Adding team members failed.");
 						redirect("/sis/tournaments", 'refresh');

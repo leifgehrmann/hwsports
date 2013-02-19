@@ -103,10 +103,10 @@ class Teams_model extends CI_Model {
 	 *  
 	 * @return int
 	 **/
-	public function insert_team($data)
+	public function insert_team($centreID,$data)
 	{	
 		// Create team, get ID
-		$this->db->query("INSERT INTO teams (centreID) VALUES ({$this->data['centre']['id']})");
+		$this->db->query("INSERT INTO teams (centreID) VALUES ({$centreID})");
 		$teamID = $this->db->insert_id();
 
 		$this->db->trans_start();
