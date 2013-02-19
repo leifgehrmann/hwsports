@@ -179,7 +179,7 @@ class Sports_model extends CI_Model {
 			}
 		}
 		
-		return $inputs;
+		return $output;
 	}
 	
 	public function get_sport_category_role_input_section_inputs($sportCategoryRoleInputSectionID)
