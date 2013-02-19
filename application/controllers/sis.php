@@ -212,6 +212,7 @@ class Sis extends MY_Controller {
 			$this->session->set_flashdata('message_warning',  "You must be logged in to sign up for a tournament: Please log in below:");
 			redirect('/auth/login','refresh'); 
 		}
+		$this->data['currentUser'] = $currentUser = $this->ion_auth->user()->row();	
 		
 		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
@@ -251,7 +252,7 @@ class Sis extends MY_Controller {
 				}
 				
 				if(!empty($userData)) {
-					$this->users_model->update_user($this->data['currentUser']->id, $userData);
+					$this->users_model->update_user($currentUser->id, $userData);
 				}
 				if(!empty($teamData)) {
 					$teamID = $this->teams_model->insert_team($teamData);
