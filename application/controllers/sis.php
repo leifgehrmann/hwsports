@@ -223,6 +223,9 @@ class Sis extends MY_Controller {
 			$this->data['roles'] = $roles = $this->sports_model->get_sport_category_roles($tournament['sportCategoryID']);
 	
 			if( $this->input->post() ) {
+				echo "<pre>";
+				print_r($_POST);
+			
 				$roleID = $this->input->post('role');
 				$roleInputs = $this->sports_model->get_sport_category_roles($roleID);
 				foreach($roleInputs as $roleInput) {
@@ -230,6 +233,7 @@ class Sis extends MY_Controller {
 					//$this->load->view('sis/signup',$this->data);
 				}
 				
+				echo "</pre>";
 			} else {			
 				$this->data['title'] = "Signup";
 				$this->data['page'] = "signup";
