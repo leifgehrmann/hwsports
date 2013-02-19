@@ -89,6 +89,7 @@ class Users_model extends CI_Model {
 				error_log($dataQueryString);
 				$this->db->query($dataQueryString);
 			}
+			error_log($this->db->last_query());
 			return $this->db->trans_complete();
 		}
 		return false;
