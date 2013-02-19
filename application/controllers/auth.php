@@ -318,7 +318,7 @@ class Auth extends MY_Controller {
 			else
 			{
 				// do we have a valid request?
-				if ($this->_valid_csrf_nonce() === FALSE || $user->id != $this->input->post('user_id'))
+				if ($this->_valid_csrf_nonce() === FALSE )
 				{
 
 					//something fishy might be up
