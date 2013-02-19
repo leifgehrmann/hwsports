@@ -222,22 +222,53 @@ class Sis extends MY_Controller {
 			$this->data['tournament'] = $tournament = $this->tournaments_model->get_tournament($tournamentID);
 			$this->data['roles'] = $roles = $this->sports_model->get_sport_category_roles($tournament['sportCategoryID']);
 	
-			if( $this->input->post() ) {
-				echo "<pre>";
-				print_r($_POST);
-			
+			if( $this->input->post() ) {			
 				$roleID = $this->input->post('role');
 				$roleInputs = $this->sports_model->get_sport_category_role_inputs($roleID);
-				print_r($roleInputs);
+				
+				$userData = array();
+				$teamData = array();
+				$teamMembers = array();
+				
 				foreach($roleInputs as $roleInput) {
-					//$this->load->view('sis/signup',$this->data);
+					// Skip these inputs, they are processed by the addTeamMember method
+					if(strpos($roleInput['inputType'],'tm-') === 0) continue;
+					if($roleInput['keyName']=='teamMembers') {
+						$teamMembers = explode($this->input->post('teamMemberIDs'));
+					}
+					
+					// So far we only need to handle two input types, userData and teamData, but this is easily extensible
+					switch($roleInput['tableName']) {
+						case "userData":
+							// grab value from post data, update userData table with correct table key
+							$userData[$roleInput['tableKeyName']] = $this->input->post($roleInput['keyName']);
+						break;
+						case "teamData":
+							// grab value from post data, add to teamData array with correct table key
+							$teamData[$roleInput['tableKeyName']] = $this->input->post($roleInput['keyName']);
+						break;
+					}
 				}
 				
-				echo "</pre>";
+				if(!empty($userData)) $this->users_model->update_user($currentuser->id, $userData);
+				if(!empty($teamData)) {
+					$teamID = $this->teams_model->insert_team($teamData);
+					if($this->teams_model->add_team_members($teamID,$teamMembers) == false) {
+						$this->session->set_flashdata('message',  "Adding team members failed.");
+						redirect("/sis/tournaments", 'refresh');
+					}
+				} else {
+					$teamID = false;
+				}
+				
+				$this->session->set_flashdata('message',  "Signup successful!");
+				redirect("/sis/tournaments", 'refresh');
+						
 			} else {			
 				$this->data['title'] = "Signup";
 				$this->data['page'] = "signup";
 				$this->load->view('sis/header',$this->data);
+				$this->load->view('sis/signup',$this->data);
 				$this->load->view('sis/footer',$this->data);
 			}
 		} else {

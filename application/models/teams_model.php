@@ -97,38 +97,66 @@ class Teams_model extends CI_Model {
 	}
 
 	/**
-	 * Creates a sport with data.
-	 * returns the sportID of the new sport if it was
+	 * Creates a team with data.
+	 * returns the teamID of the new team if it was
 	 * successful. If not, it should return -1.
 	 *  
 	 * @return int
 	 **/
-	public function insert_team($centreID, $data)
+	public function insert_team($data)
 	{	
-		$this->db->trans_start();
-
-		$this->db->query("INSERT INTO teams (teamID) VALUES (".$this->db->escape($teamID).")");
+		// Create team, get ID
+		$this->db->query("INSERT INTO teams (centreID) VALUES ({$this->data['centre']})");
 		$teamID = $this->db->insert_id();
 
+		$this->db->trans_start();
+		
 		$insertDataArray = array();
 		foreach($data as $key=>$value) {
-			$dataArray = array(
-					'teamID' => $this->db->escape($sportID),
-					'key' => $this->db->escape($key),
-					'value' => $this->db->escape($value)
-				);
-			$insertDataArray[] = $dataArray;
+			$insertDataArray[] = array(
+				'teamID' => $this->db->escape($teamID),
+				'key' => $this->db->escape($key),
+				'value' => $this->db->escape($value)
+			);
 		}
 		if ($this->db->insert_batch('teamData',$insertDataArray)) {
 			// db success
 			$this->db->trans_complete();
-			return $sportID;
+			return $teamID;
 		} else {
 			// db fail
-			return -1;
+			return false;
 		}
 	}
 
+	
+	/**
+	 * Adds users to team
+	 *  
+	 * @return bool
+	 **/
+	public function add_team_members($teamID, $userIDs)
+	{	
+		$this->db->trans_start();
+		
+		$insertDataArray = array();
+		foreach($userIDs as $userID) {
+			$insertDataArray[] = array(
+				'teamID' => $this->db->escape($teamID),
+				'userID' => $this->db->escape($userID)
+			);
+		}
+		if ($this->db->insert_batch('teamsUsers',$insertDataArray)) {
+			// db success
+			$this->db->trans_complete();
+			return true;
+		} else {
+			// db fail
+			return false;
+		}
+	}
+	
+	
 	/**
 	 * Updates a team with data.
 	 *
@@ -142,11 +170,18 @@ class Teams_model extends CI_Model {
 			foreach($data as $key=>$value) {
 				$escKey = $this->db->escape($key);
 				$escValue = $this->db->escape($value);
-				$dataQueryString = 	"UPDATE `teamData` ".
-									"SET `value`=$escValue ".
-									"WHERE `key`=$escKey ".
-									"AND `teamID`=$teamID";
-				$this->db->query($dataQueryString);
+				$dataQueryString1 = "DELETE FROM `teamData` WHERE `key`=$escKey AND `teamID`=$userID";
+				$dataQueryString2 = "INSERT INTO `teamData` (
+										`teamID`,
+										`key`,
+										`value`
+									) VALUES (
+										$teamID,
+										$escKey,
+										$escValue
+									)";
+				$this->db->query($dataQueryString1);
+				$this->db->query($dataQueryString2);
 			}
 			$this->db->trans_complete();
 			return true;
