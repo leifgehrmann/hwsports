@@ -288,6 +288,7 @@ class Sis extends MY_Controller {
 		if ( $this->form_validation->run() ) {
 			$username = $email = $this->input->post('email');
 			$centreID = $this->data['centre']['centreID'];
+			$userIDtoUpdate = $this->input->post('updateUser');
 
 			$additional_data = array(
 				'centreID' => $centreID,
@@ -296,23 +297,32 @@ class Sis extends MY_Controller {
 				'phone'      => $this->input->post('phone'),
 				'address'      => $this->input->post('address')
 			);
+				
+			// Grab input data for dynamic inputs
+			foreach($teamMemberInputs as $tminput) {
+				$additional_data[$tminput['keyName']] = $this->input->post($tminput['keyName']);
+			}
 			
-			if( $this->input->post('updateUser') ) {
-				$updateUserResponse = $this->users_model->update_user($this->input->post('updateUser'),$additional_data);
+			if( $userIDtoUpdate ) {
+				$updateUserResponse = $this->users_model->update_user($userIDtoUpdate,$additional_data);
 				$this->data['user'] = $additional_data;
 				$this->data['user']['id'] = $newUserID;
+				$this->data['user']['email'] = $email;
+				$this->data['user']['password'] = "[user specified]";
 			} else {
 				$password = $this->generatePassword();
 				$newUserID = $this->ion_auth->register($username, $password, $email, $additional_data);
-				$this->data['user']['id'] = $newUserID;
 				$this->data['user'] = $additional_data;
+				$this->data['user']['id'] = $newUserID;
+				$this->data['user']['email'] = $email;
+				$this->data['user']['password'] = $password;
 			}
 		}
 		
 		// Registration success
 		if ($newUserID != false) {
 			// Successful team member creation, show success message
-			$this->data['success'] = $this->ion_auth->messages()." Generated Password: $password";
+			$this->data['success'] = $this->ion_auth->messages();
 			$this->data['updateUser'] = false;
 			$this->load->view('sis/addTeamMember',$this->data);
 		} elseif ($updateUserResponse != false) {

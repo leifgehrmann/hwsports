@@ -1,7 +1,7 @@
 <div class="fancyform">
 	<? if(!empty($success)) { ?>
 	<script type="text/javascript">
-	$('a.addTeamMember').before('<p class="teamMember"><?=$user['firstName'].' '.$user['lastName']?> (ID: <span class="teamMemberID"><?=$user['id']?></span>)</p>');
+	$('tbody.teamMembers').append('<tr><td><?=$user['id']?></td><td><?=$user['firstName'].' '.$user['lastName']?></td><td><?=$user['email']?></td><td><?=$user['password']?></td></tr>');
 	$.fancybox.close();
 	</script>
 	<? } else { ?>
