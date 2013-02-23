@@ -101,7 +101,7 @@ body * {
 	width:40px;
 	height:40px;
 	margin-right:20px;
-	background-image:url('/img/icons/icons.png');
+	background-image:url('icons/icons.png');
 	background-position: -540px -100px;
 }
 
@@ -391,6 +391,12 @@ p a:hover, h1 a:hover, h2 a:hover, h3 a:hover {
 #content textarea.h300 { height: 300px; }
 #content textarea.h400 { height: 400px; }
 #content textarea.h500 { height: 500px; }
+
+
+
+
+
+
 
 /*
 	Jquery Action headings and crap
@@ -768,7 +774,7 @@ a.button .icon { margin-bottom: -5px; }
 	display: inline-block;
 	width:100px;
 	height:40px;
-	background-image:url('/img/icons/icons.png');
+	background-image:url('icons/icons.png');
 	background-position: -460px -20px;
 }
 
@@ -781,7 +787,7 @@ a.button .icon { margin-bottom: -5px; }
 div.icon {
 	width: 20px;
 	height: 20px;
-	background-image: url('/img/icons/icons.png');
+	background-image: url('icons/icons.png');
 	display: inline-block; *display: inline; zoom: 1;
 }
 
@@ -868,317 +874,3 @@ div.icon {
 
 
 
-
-
-
-
-
-
-
-
-/***************************************
-****************************************
-****************************************
-		Widget Specific Styles
-****************************************
-****************************************
-***************************************/
-
-#venuemap {
-	width: 500px !important;
-	height: 200px !important;
-	display: none;
-}
-
-#mapcontainer {
-	width: 500px;
-	height: 200px;
-	margin: 20px auto;
-	display: none;
-}
-
-#content td, #content th {
-	padding:10px;
-	text-align:left;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***************************************
-****************************************
-****************************************
-			DataTable CSS
-****************************************
-****************************************
-***************************************/
-
-#content button.DTTT_button, #content div.DTTT_button, #content a.DTTT_button {
-	text-decoration: none;
-	background: #eee;
-	border: 1px solid #ccc;
-	font-weight: bold;
-	box-shadow: 0px 1px 0px #ccc;
-	font-size: inherit;
-	color: #444;
-}
-#content button.DTTT_disabled, #content div.DTTT_disabled, #content a.DTTT_disabled {
-	color: #aaa !important;
-	border: 1px solid #d8d8d8 !important;
-	background: #fff !important;
-}
-
-#content table.dataTable {
-	box-shadow: 0px 0px 1px #000;
-	margin-bottom:20px;
-}
-
-#content table.dataTable thead th {
-	border-bottom: 1px solid #ccc;
-}
-
-#content table.dataTable tr.even                            { background-color: #ffffff; }
-#content table.dataTable tr.odd                             { background-color: #f8f8f8; }
-#content table.dataTable tr.DTTT_selected.even              { background-color: #e8e8ff; }
-#content table.dataTable tr.DTTT_selected.odd               { background-color: #dfdff8; }
-
-#content table.dataTable tr.even td.sorting_1               { background-color: #e8e8e8; }
-#content table.dataTable tr.odd  td.sorting_1               { background-color: #dfdfdf; }
-#content table.dataTable tr.DTTT_selected.even td.sorting_1 { background-color: #cfcfe8; }
-#content table.dataTable tr.DTTT_selected.odd  td.sorting_1 { background-color: #c8c8df; }
-
-body .DTED_Lightbox_Content{
-	border: 1px solid #000 !important;
-	border-radius:0px !important;
-}
-body .DTED_Lightbox_Content button{
-	border-radius: 0px !important;
-}
-#content .dataTables_filter input {
-	padding:6px;
-	width:auto;	
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***************************************
-****************************************
-****************************************
-		Full Calendar CSS custom
-****************************************
-****************************************
-***************************************/
-
-/*#content .fc-state-default .fc-button-effect span {
-	border-width: 0px;
-	border-style: none;
-	border-color: none;
-	background: #eee;
-}
-#content .fc-state-default, .fc-state-default .fc-button-inner {
-	border-color: #CCC;
-	box-shadow: 0px 1px 0px #CCC;
-}
-#content .fc-event {
-	text-decoration: none;
-}*/
-
-
-
-
-
-/*#footer {
-	border-top:1px solid #C8C8C8;
-	vertical-align: middle;
-	clear: both;
-	height: 35px;
-	color: #000;
-	padding: 20px;
-}
-
-#footer .info{
-	float:left;
-	width:50%;
-	opacity: 0.5;
-}
-#footer .system{
-	height: 33px;
-	float:right;
-	opacity: 0.5;
-	font-weight:bold;
-	vertical-align: middle;
-}
-
-#footer a {
-	color: #000;
-}
-
-#footer .logo{
-	vertical-align: middle;
-	display: inline-block;
-	width:99px;
-	height:33px;
-	background-image:url('/img/logo/is.medium.png');
-}
-#footer .logo:after{
-	content: ' | ';
-	position: relative;
-	top: 5px;
-	padding-left:115px;
-}
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***************************************
-****************************************
-****************************************
-			Time Picker
-****************************************
-****************************************
-***************************************/
-/*.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
-.ui-timepicker-div dl { text-align: left; }
-.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
-.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
-.ui-timepicker-div td { font-size: 90%; }
-.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
-
-.ui-timepicker-rtl{ direction: rtl; }
-.ui-timepicker-rtl dl { text-align: right; }
-.ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }
-
-body .ui-timepicker-div {
-	background: #FFF;
-	color: #000;
-	font-size: 14px;
-	font-family: sans-serif;
-}
-
-body .ui-widget-content {
-	border: 1px solid #444;
-	background: #fff;
-}
-
-body .ui-state-default,body .ui-widget-content .ui-state-default,body .ui-widget-header .ui-state-default{
-	color: #444;
-	background: #ddd;
-	border: 1px solid #aaa;
-}
-body .ui-widget-header{
-	border: 1px solid #444;
-	background: #555;
-}
-
-body .ui-datepicker th{
-	color: #000;
-	font-size: 14px;
-}
-body .ui-datepicker td{
-	font-size: 14px;
-}
-
-body .ui-datepicker .ui-datepicker-title{
-	font-size: 14px;
-}
-input.colorpickerinput {
-	font-size:14px;
-	text-shadow:0px 0px 4px #000000;
-	color:#FFF;
-}*/
-#settingsForm input.time, #settingsForm input.colorpickerinput {
-	width: 100px;
-	padding: 5px;
-}
-#settingsForm input[type="checkbox"] {
-	width: auto;
-	padding: 5px;
-}
-
-#tournamentSelect {
-	max-height: 100px;
-	overflow: auto;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***************************************
-****************************************
-****************************************
-		Page Specific Styling
-****************************************
-****************************************
-***************************************/
-/*#content .page-calendar input[type="checkbox"] { height:20px; width: 140px; }
-#content .page-calendar input[type="select"] { height:20px; width: 140px; clear: right;}
-#content .page-calendar input:after{ padding-left: 33px;  }
-#content .page-calendar .filter-tournament:after{ content: 'Tournament'; }
-#content .page-calendar .filter-venue:after{ content: 'Venue'; }
-#content .page-calendar .filter-sport:after{ content: 'Sport'; }*/
-
-
-input#tournamentStart {
-	width: 15%;
-}
-input#tournamentEnd {
-	width: 15%;
-}
-input#registrationStart {
-	width: 15%;
-}
-input#registrationEnd {
-	width: 15%;
-}
-#tournamentsForm select {
-	height: 40px;
-	width: 80%;
-}

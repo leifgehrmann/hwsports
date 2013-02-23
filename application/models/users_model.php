@@ -89,4 +89,63 @@ class Users_model extends CI_Model {
 		}
 	}
 
+	/**
+	 * returns an array of teamIDs that the user
+	 * is a part of.
+	 *
+	 * @return array
+	 **/
+	public function team_memberships($userID){
+		$output = array();
+		$queryString = 	"SELECT teamID FROM usersTeams WHERE userID = ".$this->db->escape($userID);
+		$queryData = $this->db->query($queryString);
+		$output = $queryData->result_array();
+
+		$teams = array();
+		foreach($output as $row)
+			$teams[] = $row['userID'];
+
+		return $teams;
+	}
+	/**
+	 * returns an array of tournamentIDs that the user
+	 * is a part of.
+	 *
+	 * @return array
+	 **/
+	public function tournament_memberships($userID,$centreID){
+		$tournamentIDs = array();
+
+		// Get a list of all teams that the user is associated with.
+		$teams = $this->team_memberships($userID);
+
+		// Get a list of all tournaments with the key "teams" or "athletes"
+		// defined. We will then iterate through every row checking if 
+		// the userID or teamID exist in the thing.
+
+		$tournaments = array();
+		$queryString = 	"SELECT T.tournamentID, ".
+		 				"MAX(CASE WHEN TD.`key`='teams' THEN value END ) AS teams, ".
+		 				"MAX(CASE WHEN TD.`key`='athletes' THEN value END ) AS athletes ".
+		 				"FROM tournaments AS T, tournamentData AS TD ".
+		 				"WHERE TD.tournamentID = T.tournamentID ".
+		 				"AND T.centreID = ".$this->db->escape($centreID);
+		$queryData = $this->db->query($queryString);
+		$tournaments = $queryData->result();
+
+		foreach($tournaments as $tournament) 
+			if(isset($tournaments['teams'])){
+				$tournamentTeams = explode(",",$tournaments['teams']);
+				if(!empty(array_intersect($teams, $tournamentTeams))){
+					$tournamentIDs[] = $tournamentID;
+				}
+			} else if(isset($tournaments['athletes'])){
+				$tournamentAthletes = explode(",",$tournaments['athletes']);
+				if(!empty(in_array($userID, $tournamentAthletes))){
+					$tournamentIDs[] = $tournamentID;
+				}
+			}
+		
+		return $tournamentIDs;
+	}
 }
