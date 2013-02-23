@@ -454,36 +454,6 @@
 
 
 
-/*
-	Tables
-*/
-#content table 				{ display: table;}
-#content tbody 				{ display: table-row-group; }
-#content thead 				{ display: table-header-group; }
-#content tr 				{ display: table-row; }
-#content td, #content th 	{ display: table-cell; }
-#content th {
-	text-align: left;
-}
-#content table {
-	background: #EEEEEE;
-	margin-bottom: 20px;
-}
-
-#content td, #content th {
-	font-size: 16px;
-	position: relative;
-	top: 4pt;
-	line-height: 40px;
-	padding: 20px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-}
-#content table.full 		{ width: 700px; }
-#content table.threefourth 	{ width: 520px; }
-#content table.half 		{ width: 340px; }
-#content table.fourth 		{ width: 160px; }
-
 
 
 
@@ -559,27 +529,6 @@
 }
 
 
-/*
-	Leif's custom messaging system
-*/
-#content .message{
-	padding: 20px;
-	padding-top: 20px;
-	padding-bottom: 0px;
-	border-radius: 4px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	margin-bottom: 20px;
-	overflow:hidden;
-}
-#content .message.message-information { background: #D0DAEE; color: #0D42A8; box-shadow: inset 0px 0px 1px #0D42A8; }
-#content .message.message-success { background: #E4EDCD; color: #7BA800; box-shadow: inset 0px 0px 1px #7BA800; }
-#content .message.message-error { background: #FFDFBF; color: #D93600; box-shadow: inset 0px 0px 1px #D93600; }
-#content .message.message-warning { background: #FFDFBF; color: #D93600; box-shadow: inset 0px 0px 1px #D93600; }
-
-#content .message .icon {
-	float: left;
-}
 
 /*
 	Leif's Custom button inline block, which can have nice icons inside
@@ -1072,21 +1021,3 @@ input.colorpickerinput {
 #content .page-calendar .filter-tournament:after{ content: 'Tournament'; }
 #content .page-calendar .filter-venue:after{ content: 'Venue'; }
 #content .page-calendar .filter-sport:after{ content: 'Sport'; }*/
-
-
-input#tournamentStart {
-	width: 15%;
-}
-input#tournamentEnd {
-	width: 15%;
-}
-input#registrationStart {
-	width: 15%;
-}
-input#registrationEnd {
-	width: 15%;
-}
-#tournamentsForm select {
-	height: 40px;
-	width: 80%;
-}

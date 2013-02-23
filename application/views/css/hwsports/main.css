@@ -220,6 +220,43 @@ textarea {
 
 
 
+/***************************************\
+
+            Message System
+                
+\***************************************/
+#content .message{
+    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 0px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    margin-bottom: 20px;
+    overflow:hidden;
+}
+#content .message.message-information   { background: #D0DAEE; color: #0D42A8; box-shadow: inset 0px 0px 1px #0D42A8; }
+#content .message.message-success       { background: #E4EDCD; color: #7BA800; box-shadow: inset 0px 0px 1px #7BA800; }
+#content .message.message-error         { background: #FFDFBF; color: #D93600; box-shadow: inset 0px 0px 1px #D93600; }
+#content .message.message-warning       { background: #FFDFBF; color: #D93600; box-shadow: inset 0px 0px 1px #D93600; }
+
+#content .message .icon {
+    float: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
