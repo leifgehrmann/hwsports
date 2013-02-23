@@ -368,6 +368,13 @@ class Tms extends MY_Controller {
 		$this->load->view('tms/reports',$this->data);
 		$this->load->view('tms/footer',$this->data);
 	}
+	public function playground() {
+		$this->data['title'] = "Branding Playground";
+		$this->data['page'] = "playground";
+		$this->load->view('tms/header',$this->data);
+		$this->load->view('tms/playground',$this->data);
+		$this->load->view('tms/footer',$this->data);
+	}
 	public function settings()
 	{
 		$this->data['title'] = "Settings";
