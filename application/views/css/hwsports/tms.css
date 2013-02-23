@@ -32,9 +32,9 @@
 
 
 /***************************************\
-
-				Header
-				
+										
+				Header					
+										
 \***************************************/
 
 #header #title-bar{
@@ -51,13 +51,11 @@
 	background-image:url('/img/icons/icons.png');
 	background-position: -540px -100px;
 }
-
 #header #title-bar .name{
 	font-weight: 700;
 	padding-top:10px;
 	float:left;
 }
-
 #header #user-bar {
 	vertical-align: bottom;
 	margin:10px;
@@ -66,7 +64,6 @@
 	font-size:14px;
 	color: #EEE;
 }
-
 #header #user-bar a {
 	opacity: 0.7;
 	color: #FFF;
@@ -74,7 +71,6 @@
 #header #user-bar a:hover {
 	opacity: 1.0;
 } 
-
 #header #user-bar .username{
 	font-weight: bold;
 }
@@ -84,14 +80,11 @@
 	margin-right:20px;
 	font-size:16px;
 }
-
 #header .logout{
 	color: #FFF;
 	padding-top:7px;
 }
-
-#header 			{ background: #0D44A2; }
-#header 			{ text-decoration: none; color: #FFF; }
+#header-block 			{ background: #0D44A2; text-decoration: none; color: #FFF; }
 
 
 /***************************************\
@@ -310,102 +303,7 @@
 
 
 
-/**
-	FULL CALENDAR
-**/
-#content .fc .fc-header {
-	margin-top:20px;
-}
-#content .fc .fc-border-separate{
-	border-collapse: collapse;
-}
 
-#content .fc div.fc-view-month th.fc-widget-header {
-	padding: 10px;
-}
-#content .fc table.fc-agenda-days th.fc-widget-header{
-	padding: 5px;
-}
-
-#content .fc div.fc-view-agendaDays th.fc-agenda-axis {
-	padding-right: 20px;
-}
-#content .fc div.fc-view-agendaWeek th.fc-agenda-axis {
-	padding-right: 10px;
-	text-align: right;
-	line-height:20px;
-}
-#content .fc div.fc-view-agendaDay th.fc-agenda-axis {
-	padding-right: 10px;
-	text-align: right;
-	line-height:20px;
-}
-
-#content .fc td, #content .fc th {
-	padding: inherit;
-	position: inherit;
-}
-
-#content .fc table {
-	background: none;
-	padding: inherit;
-}
-.fc .fc-event-skin {
-	opacity: none;
-	background: none;
-	border: none;
-	border-radius: 3px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	box-sizing: border-box;
-}
-#content .fc .fc-event-head .fc-event-skin {
-	padding: 0px;
-}
-#content .fc .fc-event-head {
-	margin: 0px;
-	background: none !important; 
-}
-
-.fc .fc-event .fc-event-time{
-	line-height:13px;
-	padding: 1px;
-	margin-right: 2px;
-	background: rgba(0,0,0,0.2);
-	border-radius: 3px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-}
-.fc .fc-event-content, .fc .fc-event-title {
-	word-wrap:break-word;
-	overflow: hidden;
-}
-.fc .fc-event .fc-event-content, {
-	padding: 4px;
-	background: none;
-}
-.fc .fc-grid .fc-event {
-	margin: 2px;
-	padding: 2px;
-	background: none;	
-}
-#content .fc .fc-event {
-	font-size: 12px;
-	/*padding: 2px;*/
-	box-shadow: inset 0px 1px rgba(255,255,255,0.6), 0px 1px 0px rgba(0,0,0,0.3), 0px 1px 4px rgba(0,0,0,0.6);
-}
-#content .fc .fc-event {
-	box-shadow: inset 0px 1px rgba(255,255,255,0.6), 0px 1px 0px rgba(0,0,0,0.3), 0px 1px 4px rgba(0,0,0,0.6);
-}
-#content .fc .fc-event-bg{
-	background: rgba(255,255,255,0);
-}
-#content .fc .fc-event.match				{ background: #0B40AF; }
-#content .fc .fc-event.match:hover			{ background: #4067C1; }
-#content .fc .fc-event.tournament			{ background: #81A800; }
-#content .fc .fc-event.tournament:hover		{ background: #9ABB00; }
-#content .fc .fc-event.registration			{ background: #D13B00; }
-#content .fc .fc-event.registration:hover	{ background: #F64600; }
 
 
 
