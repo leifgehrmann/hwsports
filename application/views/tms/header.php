@@ -112,7 +112,7 @@
                                     <div class="icon calendar"></div>Calendar
                                 </li>
                             </a>
-                            <a href="/tms/tournaments" title="View and create tournaments" class="<?=($page=='matches' ? 'selected' : '')?>">
+                            <a href="/tms/tournaments" title="View and create tournaments" class="<?=($page=='tournaments' ? 'selected' : '')?>">
                                 <li>
                                     <div class="icon tournaments"></div>Tournaments
                                 </li>
