@@ -51,6 +51,11 @@
 	});
 
 	$(document).ready(function() {
+
+		// Set the width of the content to be 
+		var width = $(window).width()-200-20*2;
+		$( '#content' ).width(width);
+
 		$( '.widget-title' ).each(function() {
 			$(this).height(Math.round($(this).height()/20)*20);
 		});
