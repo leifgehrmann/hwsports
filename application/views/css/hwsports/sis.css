@@ -26,22 +26,6 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /***************************************\
 
 				Header
@@ -62,13 +46,6 @@
 }
 
 
-
-
-
-
-
-
-
 /***************************************\
 
 				Middle
@@ -76,17 +53,6 @@
 \***************************************/
 
 #middle 		{ background: #FFF; }
-
-
-
-
-
-
-
-
-
-
-
 
 
 /***************************************\
@@ -142,41 +108,6 @@
 #menu a.login:hover 		div.icon 	,#menu a.selected.login 		div.icon	{ background-position: -40px -340px; }
 #menu a.logout:hover 		div.icon 	,#menu a.selected.logout		div.icon	{ background-position: -40px -360px; }
 #menu a.register:hover		div.icon 	,#menu a.selected.register		div.icon	{ background-position: -40px -380px; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /***************************************\
 

@@ -29,29 +29,11 @@
 }
 
 
+/***************************************\
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
-
-
-		Header CSS
-
-
-*/
+				Header
+				
+\***************************************/
 
 #header #title-bar{
 	display: block;
@@ -110,42 +92,21 @@
 #header 			{ text-decoration: none; color: #FFF; }
 
 
+/***************************************\
 
-
-
-
-
-
-
-/**
-
-
-		Middle CSS
-
-
-*/
+				Middle
+				
+\***************************************/
 
 #middle 		{ background: #FFF; }
 
 
+/***************************************\
 
+				Menu
 
+\***************************************/
 
-
-
-
-
-
-
-
-
-/**
-
-
-		Menu CSS
-
-
-*/
 #menu {
 	background: #EEE;
 	margin-bottom:10px;
@@ -244,6 +205,40 @@
 #menu .toggleMenuItem {
 	cursor: pointer;
 	cursor: hand;
+}
+
+/***************************************\
+
+				Footer
+				
+\***************************************/
+
+#footer {
+	background-color: #EEE;
+	vertical-align: middle;
+	clear: both;
+}
+#footer .info{
+	float:right;
+	margin-top:40px;
+	margin-bottom:40px;
+	margin-right:20px;
+}
+#footer .system{
+	float:left;
+	margin-top:40px;
+	margin-left:20px;
+}
+#footer a {
+	color: inherit;
+}
+#footer .logo{
+	vertical-align: middle;
+	display: inline-block;
+	width:100px;
+	height:40px;
+	background-image:url('/img/icons/icons.png');
+	background-position: -460px -20px;
 }
 
 
@@ -494,48 +489,6 @@
 
 
 
-
-/**
-
-
-		Footer CSS
-
-
-*/
-
-#footer {
-	background-color: #EEE;
-	vertical-align: middle;
-	clear: both;
-}
-
-#footer .info{
-	float:right;
-	margin-top:40px;
-	margin-bottom:40px;
-	margin-right:20px;
-}
-#footer .system{
-	float:left;
-	margin-top:40px;
-	margin-left:20px;
-}
-
-#footer a {
-	color: inherit;
-}
-
-#footer .logo{
-	vertical-align: middle;
-	display: inline-block;
-	width:100px;
-	height:40px;
-	background-image:url('/img/icons/icons.png');
-	background-position: -460px -20px;
-}
-
-
-
 /*
 
 	Icon parameters
@@ -616,13 +569,6 @@ div.icon {
 	/*top: 30px;*/
 	/*box-shadow: 0px 1px 1px rgba(0,0,0,0.8), inset 0px 0px 1px rgba(0,0,0,1);*/
 }
-
-.text-align-left {text-align:left;}
-.text-align-right {text-align:right;}
-.right {float: right;}
-.left {float: left;}
-.margin-left { margin-left: 20px; }
-.margin-right { margin-right: 20px; }
 
 
 
@@ -770,51 +716,6 @@ body .DTED_Lightbox_Content button{
 #content .fc-event {
 	text-decoration: none;
 }*/
-
-
-
-
-
-/*#footer {
-	border-top:1px solid #C8C8C8;
-	vertical-align: middle;
-	clear: both;
-	height: 35px;
-	color: #000;
-	padding: 20px;
-}
-
-#footer .info{
-	float:left;
-	width:50%;
-	opacity: 0.5;
-}
-#footer .system{
-	height: 33px;
-	float:right;
-	opacity: 0.5;
-	font-weight:bold;
-	vertical-align: middle;
-}
-
-#footer a {
-	color: #000;
-}
-
-#footer .logo{
-	vertical-align: middle;
-	display: inline-block;
-	width:99px;
-	height:33px;
-	background-image:url('/img/logo/is.medium.png');
-}
-#footer .logo:after{
-	content: ' | ';
-	position: relative;
-	top: 5px;
-	padding-left:115px;
-}
-*/
 
 
 
