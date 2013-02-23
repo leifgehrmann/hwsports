@@ -1,13 +1,12 @@
+/***************************************\
 
-/**
+			General Structure
+				
+\***************************************/
 
-
-		Website Structure CSS
-
-
-*/
-
-#header {
+#header, #header-block,
+#middle, #middle-block,
+#footer, #footer-block {
 	width: 100%;
 	display: block;
 	overflow: hidden;
@@ -17,13 +16,7 @@
 	height: 80px;
 }
 #middle {
-	width:100%;
-	overflow: hidden;
 	padding-bottom: 60px;
-}
-#middle-block {
-	overflow: hidden;
-	width:100%;
 }
 #menu {
 	float: left;
@@ -35,14 +28,12 @@
 	margin-right: 20px;
 	float: left;
 }
-#footer {
+/*#footer {
 	clear:both;
-	width: 100%;
-	display: block;
 }
 #footer-block {
 	clear:both;
-}
+}*/
 
 
 
@@ -529,65 +520,6 @@
 }
 
 
-
-/*
-	Leif's Custom button inline block, which can have nice icons inside
-*/
-a.button, input[type='submit'] {
-	/*font-family: inherit;*/
-	border: none;
-	background:#EEE;
-	text-decoration: none;
-	line-height: 20px;
-	padding-top:10px;
-	padding-bottom:10px;
-	padding-left: 20px;
-	padding-right: 20px;
-	display:inline-block;
-	border-radius: 4px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	/*transition: background .1s, box-shadow .1s;
-	-moz-transition: background .1s, box-shadow .1s;
-	-webkit-transition: background .1s, box-shadow .1s;
-	-o-transition: background .1s, box-shadow .1s;*/
-}
-a.button * {
-	/*transition: opacity .1s;
-	-moz-transition: opacity .1s;
-	-webkit-transition: opacity .1s;
-	-o-transition: opacity .1s;*/
-}
-a.button				, input[type='submit']				{ color: #333333; background:#FFFFFF; box-shadow: 0px 1px 1px rgba(0,0,0,0.8), inset 0px 0px 1px rgba(0,0,0,1); }
-a.button:hover			, input[type='submit']:hover		{ color: #333333; background:#FFFFFF; box-shadow: 0px 1px 1px rgba(0,0,0,0.8), inset 0px 0px 1px rgba(0,0,0,1); }
-a.button:active			, input[type='submit']:active		{ color: #333333; background:#EEEEEE; box-shadow: 0px 1px 1px rgba(0,0,0,0.4), inset 0px 1px 4px rgba(0,0,0,1); }
-a.button:active * 		, input[type='submit']:active *		{ color: #333333; opacity: 0.5; }
-
-a.button.normal 		, input[type='submit'].normal		{ color: #333333; background:#EEEEEE; }
-a.button.normal:hover 	, input[type='submit'].normal:hover	{ color: #333333; background:#FFFFFF; }
-a.button.normal:active 	, input[type='submit'].normal:active{ color: #333333; background:#EEEEEE; }
-
-a.button.blue			, input[type='submit'].blue			{ color: #FFFFFF; background:#0D42A8; }
-a.button.blue:hover		, input[type='submit'].blue:hover	{ color: #FFFFFF; background:#3F68BB; }
-a.button.blue:active	, input[type='submit'].blue:active	{ color: #D1DAF2; background:#0D42A8; }
-
-a.button.green			, input[type='submit'].green		{ color: #FFFFFF; background:#81A800; }
-a.button.green:hover 	, input[type='submit'].green:hover	{ color: #FFFFFF; background:#9ABB00; }
-a.button.green:active	, input[type='submit'].green:active	{ color: #E6EDC5; background:#81A800; }
-
-a.button.red			, input[type='submit'].red			{ color: #FFFFFF; background:#D13B00; }
-a.button.red:hover		, input[type='submit'].red:hover	{ color: #FFFFFF; background:#F64600; }
-a.button.red:active		, input[type='submit'].red:active	{ color: #FBE1B6; background:#D13B00; }
-
-p a.button, p input[type='submit'] {
-	position: relative;
-	top:-5px;
-}
-
-a.button .icon { margin-bottom: -5px; }
-
-.right .button { margin-left: 20px; }
-.left .button { margin-right: 20px; }
 
 
 /**
