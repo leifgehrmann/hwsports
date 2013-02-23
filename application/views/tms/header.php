@@ -33,7 +33,7 @@
         $('html').keyup(function(event) {
             if (event.which == 8364) {
                 if(!b){
-                    $('body').css('background-image',"url('typography/lines.png'), url('typography/blocks.png')");
+                    $('body').css('background-image',"url('/img/typography/lines.png'), url('/img/typography/blocks.png')");
                     $('body').css('background-repeat',"repeat, repeat-y");
                     $('body').css('background-position',"center top, left top");
                     $('#container *').css('opacity',"0.90");
@@ -81,11 +81,10 @@
             <div id="header-block">
                 <a href="/tms" title="Return to Dashboard" id="title-bar" class="left">
                     <div class="logo"></div>
-                    <div class="name">Riccarton Sports Management<?=$centre['staffTitle']?></div>
+                    <div class="name"><?=$centre['staffTitle']?></div>
                 </a>
                 <div id="user-bar" class="right">
-                    <a href="/sis/account/" title="View your account"><span class="username">Leif Gehrmann</span></a>
-                    <!--<a href="/sis/account/"><span class="username">Leif Gehrmann<?=$currentUser->firstName.' '.$currentUser->lastName?></span></a>-->
+                    <a href="/sis/account/"><span class="username">Leif Gehrmann<?=$currentUser->firstName.' '.$currentUser->lastName?></span></a>
                     <span class="sep">|</span>
                     <a href="/" title="Return to the public hompage"><span class="role">Public Homepage</span></a>
                     <span class="sep">|</span>
@@ -108,37 +107,37 @@
                             <li><div class="icon events"></div>Events<div class="icon close"></div></li>
                         </a>
                         <ul>
-                            <a href="/tms/calendar" title="View and filter all tournaments &amp; matches on a calendar.">
-                                <li class="<?=($page=='calendar' ? 'selected' : '')?>">
+                            <a href="/tms/calendar" title="View and filter all tournaments &amp; matches on a calendar." class="<?=($page=='calendar' ? 'selected' : '')?>">
+                                <li>
                                     <div class="icon calendar"></div>Calendar
                                 </li>
                             </a>
-                            <a href="/tms/tournaments" title="View and create tournaments">
-                                <li class="<?=($page=='matches' ? 'selected' : '')?>">
+                            <a href="/tms/tournaments" title="View and create tournaments" class="<?=($page=='matches' ? 'selected' : '')?>">
+                                <li>
                                     <div class="icon tournaments"></div>Tournaments
                                 </li>
                             </a>
-                            <a href="/tms/matches" title="View and create matches">
-                                <li class="<?=($page=='matches' ? 'selected' : '')?>">
+                            <a href="/tms/matches" title="View and create matches" class="<?=($page=='matches' ? 'selected' : '')?>">
+                                <li>
                                     <div class="icon matches"></div>Matches
                                 </li>
                             </a>
                         </ul>
 
-                        <a href="/tms/venues" title="View and create venues">
-                            <li class="<?=($page=='venues' ? 'selected' : '')?>">
+                        <a href="/tms/venues" title="View and create venues" class="<?=($page=='venues' ? 'selected' : '')?>">
+                            <li>
                                 <div class="icon venues"></div>Venues
                             </li>
                         </a>
 
-                        <a href="/tms/sports" title="View and create sports">
-                            <li class="<?=($page=='sports' ? 'selected' : '')?>">
+                        <a href="/tms/sports" title="View and create sports" class="<?=($page=='sports' ? 'selected' : '')?>">
+                            <li>
                                 <div class="icon sports"></div>Sports
                             </li>
                         </a>
 
-                        <a href="/tms/announcements" title="View and create announcements">
-                            <li class="<?=($page=='announcements' ? 'selected' : '')?>">
+                        <a href="/tms/announcements" title="View and create announcements" class="<?=($page=='announcements' ? 'selected' : '')?>">
+                            <li>
                                 <div class="icon announcements"></div>Announcements
                             </li>
                         </a>
@@ -149,34 +148,34 @@
                             </li>
                         </a>
                         <ul>
-                            <a href="/tms/ticketeditor" title="View and create tickets">
-                                <li class="<?=($page=='ticketeditor' ? 'selected' : '')?>">
+                            <a href="/tms/ticketeditor" title="View and create tickets" class="<?=($page=='ticketeditor' ? 'selected' : '')?>">
+                                <li>
                                     <div class="icon ticketeditor"></div>Editor
                                 </li>
                             </a>
-                            <a href="/tms/ticketreports" title="View ticket reports">
-                                <li class="<?=($page=='ticketreports' ? 'selected' : '')?>">
+                            <a href="/tms/ticketreports" title="View ticket reports" class="<?=($page=='ticketreports' ? 'selected' : '')?>">
+                                <li>
                                     <div class="icon ticketreports"></div>Reports
                                 </li>
                             </a>
                         </ul>
 
-                        <a class="toggleMenuItem selected <?=(($page=='users'||$page=='teams'||$page=='groups') ? 'selected' : '')?>">
+                        <a class="toggleMenuItem <?=(($page=='users'||$page=='teams'||$page=='groups') ? 'selected' : '')?>">
                             <li><div class="icon usersgroups"></div>Users &amp; Groups<div class="icon close"></div></li>
                         </a>
                         <ul>
-                            <a href="/tms/users" title="View and modify users">
-                                <li class="<?=($page=='users' ? 'selected' : '')?>">
+                            <a href="/tms/users" title="View and modify users" class="<?=($page=='users' ? 'selected' : '')?>">
+                                <li>
                                     <div class="icon users"></div>Users
                                 </li>
                             </a>
-                            <a href="/tms/teams" title="View and modify teams" class="selected <?=($page=='teams' ? 'selected' : '')?>">
+                            <a href="/tms/teams" title="View and modify teams" class="<?=($page=='teams' ? 'selected' : '')?>">
                                 <li>
                                     <div class="icon teams"></div>Teams
                                 </li>
                             </a>
-                            <a href="/tms/groups" title="View and modify groups">
-                                <li class="<?=($page=='groups' ? 'selected' : '')?>">
+                            <a href="/tms/groups" title="View and modify groups" class="<?=($page=='groups' ? 'selected' : '')?>">
+                                <li>
                                     <div class="icon groups"></div>Groups
                                 </li>
                             </a>
@@ -189,13 +188,13 @@
                             </li>
                         </a>
                         <ul>
-                            <a href="/tms/settingscentre" title="Change sports centre settings">
-                                <li class="<?=($page=='settingscentre' ? 'selected' : '')?>">
+                            <a href="/tms/settingscentre" title="Change sports centre settings" class="<?=($page=='settingscentre' ? 'selected' : '')?>">
+                                <li>
                                     <div class="icon settingscentre"></div>Centre Settings
                                 </li>
                             </a>
-                            <a href="/tms/settingsappearence" title="Change website appearence">
-                                <li class="<?=($page=='settingsappearence' ? 'selected' : '')?>">
+                            <a href="/tms/settingsappearence" title="Change website appearence" class="<?=($page=='settingsappearence' ? 'selected' : '')?>">
+                                <li>
                                     <div class="icon settingsappearence"></div>Appearence
                                 </li>
                             </a>

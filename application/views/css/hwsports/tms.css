@@ -187,6 +187,9 @@ body * {
 	background: #EEE;
 	margin-bottom:10px;
 }
+#menu ul{
+	padding: 0px;
+}
 #menu > ul{
 	margin-top:10px;
 }
@@ -744,6 +747,7 @@ a.button .icon { margin-bottom: -5px; }
 */
 
 #footer {
+	background-color: #EEE;
 	vertical-align: middle;
 	clear: both;
 }
