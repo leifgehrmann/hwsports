@@ -1,0 +1,1 @@
+<pre><?php readfile('/home/sports/public_html/error_log'); ?></pre>

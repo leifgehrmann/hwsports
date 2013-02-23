@@ -1,12 +1,12 @@
 <div class="fancyform">
 	<? if(!empty($success)) { ?>
 	<script type="text/javascript">
-	$('a.addTeamMember').before('<p class="teamMember"><?=$user['firstName'].' '.$user['lastName']?> (ID: <span class="teamMemberID"><?=$user['id']?></span>)</p>');
+	$('tbody.teamMembers').append('<tr><td class="teamMemberUserID"><?=$user['id']?></td><td><?=$user['firstName'].' '.$user['lastName']?></td><td><?=$user['email']?></td><td><?=$user['password']?></td></tr>');
 	$.fancybox.close();
 	</script>
 	<? } else { ?>
 	<h1>Add New Team Member</h1>
-	<p>Please enter the member's details below.</p>
+	<p><?=$updateUser ? "Please fill in your missing details below" : "Please enter the member's details below."?></p>
 
 	<? if(!empty($message)){ ?>
 	<div id="infoMessage"><?=$message;?></div>

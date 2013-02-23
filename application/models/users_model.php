@@ -8,7 +8,7 @@ class Users_model extends CI_Model {
 						"EXISTS(SELECT 1 FROM users WHERE id = ".$this->db->escape($userID).") AS `exists`";
 		$queryData = $this->db->query($queryString);
 		$output = $queryData->row_array();
-		return $output['exists'];
+		return (bool)$output['exists'];
 	}
 
 	public function get_users($centreID)
@@ -76,17 +76,22 @@ class Users_model extends CI_Model {
 			foreach($data as $key=>$value) {
 				$escKey = $this->db->escape($key);
 				$escValue = $this->db->escape($value);
-				$dataQueryString = 	"UPDATE `userData` ".
-									"SET `value`=$escValue ".
-									"WHERE `key`=$escKey ".
-									"AND `userID`=$userID";
-				$this->db->query($dataQueryString);
+				$dataQueryString1 = "DELETE FROM `userData` WHERE `key`=$escKey AND `userID`=$userID";
+				$dataQueryString2 = "INSERT INTO `userData` (
+										`userID`,
+										`key`,
+										`value`
+									) VALUES (
+										$userID,
+										$escKey,
+										$escValue
+									)";
+				$this->db->query($dataQueryString1);
+				$this->db->query($dataQueryString2);
 			}
-			$this->db->trans_complete();
-			return true;
-		} else {
-			return false;
+			return $this->db->trans_complete();
 		}
+		return false;
 	}
 
 	/**

@@ -46,6 +46,20 @@ class Test extends MY_Controller {
 		$output = $this->matches_model->get_matches($centreID);
 		$this->display($output);
 	}
+	
+	public function user_exists($userID){
+		$output = $this->users_model->user_exists($userID);
+		$this->display($output);
+	}
+	
+	// For example: http://hwsports.co.uk/test/update_user/34/%7B%22poop%22%3A%22smells%22%7D
+	// that web address updates userData to add "poop" = "smells" to user ID 34
+	public function update_user($userID,$dataJSON){
+		$dataJSON = urldecode($dataJSON);
+		$data = json_decode($dataJSON);
+		$output = $this->users_model->update_user($userID,$data);
+		$this->display($output);
+	}
 
 	public function test_constants(){
 		$output = array(APPPATH,SYSDIR,BASEPATH,ENVIRONMENT,SELF,FCPATH,EXT);
@@ -53,7 +67,7 @@ class Test extends MY_Controller {
 	}
 
 	public function display($output){
-		$this->data['data'] =  print_r($output,1);
+		$this->data['data'] = var_export($output,true);
 		header('Content-Type: text/plain');
 		$this->load->view('data', $this->data);
 	}

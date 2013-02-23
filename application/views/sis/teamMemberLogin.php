@@ -6,7 +6,7 @@
 	</script>
 	<? } else { ?>
 	<h1>Log In</h1>
-	<p>Please sign in with your email and password below to add your user account to this team.</p>
+	<p>Please sign in with your email and password<br />to add your user account to this team.</p>
 
 	<? if(!empty($message)){ ?><div class="message message-information"><div class="icon margin-right"></div><h3>Information</h3><p><?php echo $message;?></p></div><? } ?>
 	<? if(!empty($message_information)){ ?><div class="message message-information"><div class="icon margin-right"></div><h3>Information</h3><p><?php echo $message_information;?></p></div><? } ?>

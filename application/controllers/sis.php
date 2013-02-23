@@ -212,25 +212,70 @@ class Sis extends MY_Controller {
 			$this->session->set_flashdata('message_warning',  "You must be logged in to sign up for a tournament: Please log in below:");
 			redirect('/auth/login','refresh'); 
 		}
-	
+		$this->data['currentUser'] = $currentUser = $this->ion_auth->user()->row();	
+		$centreID = $this->data['centre']['centreID'];
 		
 		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
-		
-		if( $this->input->post() ) {
-			echo "<pre>".print_r($_POST,1)."</pre>"; die();
-		}
-		
+		$this->load->model('users_model');
+		$this->load->model('teams_model');
+	
 		if( $this->tournaments_model->tournament_exists($tournamentID) ) {
 			$this->data['tournamentID'] = $tournamentID;
 			$this->data['tournament'] = $tournament = $this->tournaments_model->get_tournament($tournamentID);
-			$this->data['roles'] = $this->sports_model->get_sport_category_roles($tournament['sportCategoryID']);
+			$this->data['roles'] = $roles = $this->sports_model->get_sport_category_roles($tournament['sportCategoryID']);
+	
+			if( $this->input->post() ) {			
+				$roleID = $this->input->post('role');
+				$roleInputs = $this->sports_model->get_sport_category_role_inputs($roleID);
+				
+				$userData = array();
+				$teamData = array();
+				$teamMembers = array();
+				
+				foreach($roleInputs as $roleInput) {
+					// Skip these inputs, they are processed by the addTeamMember method
+					if(strpos($roleInput['inputType'],'tm-') === 0) continue;
+					if($roleInput['keyName']=='teamMembers') {
+						$teamMembersIDs = array_map("intval", explode(",", $this->input->post('teamMemberIDs') ));
+					}
+					
+					// So far we only need to handle two input types, userData and teamData, but this is easily extensible
+					switch($roleInput['tableName']) {
+						case "userData":
+							// grab value from post data, update userData table with correct table key
+							$userData[$roleInput['tableKeyName']] = $this->input->post($roleInput['keyName']);
+						break;
+						case "teamData":
+							// grab value from post data, add to teamData array with correct table key
+							$teamData[$roleInput['tableKeyName']] = $this->input->post($roleInput['keyName']);
+						break;
+					}
+				}
+				
+				if(!empty($userData)) {
+					$this->users_model->update_user($currentUser->id, $userData);
+				}
+				if(!empty($teamData)) {
+					$teamID = $this->teams_model->insert_team($centreID,$teamData);
+					if($this->teams_model->add_team_members($teamID,$teamMembersIDs) == false) {
+						$this->session->set_flashdata('message',  "Adding team members failed.");
+						redirect("/sis/tournaments", 'refresh');
+					}
+				} else {
+					$teamID = false;
+				}
+				
+				$this->session->set_flashdata('message',  "Signup successful!");
+				redirect("/sis/tournaments", 'refresh');
 						
-			$this->data['title'] = "Signup";
-			$this->data['page'] = "signup";
-			$this->load->view('sis/header',$this->data);
-			$this->load->view('sis/signup',$this->data);
-			$this->load->view('sis/footer',$this->data);
+			} else {			
+				$this->data['title'] = "Signup";
+				$this->data['page'] = "signup";
+				$this->load->view('sis/header',$this->data);
+				$this->load->view('sis/signup',$this->data);
+				$this->load->view('sis/footer',$this->data);
+			}
 		} else {
 			$this->session->set_flashdata('message',  "Tournament ID $id does not exist.");
 			redirect("/sis/tournaments", 'refresh');
@@ -282,11 +327,13 @@ class Sis extends MY_Controller {
 		
 		// This variable will contain ID of newly created user if this function succeeds
 		$newUserID = false;
+		$updateUserResponse = false;
 		
 		// Set up input data
 		if ( $this->form_validation->run() ) {
 			$username = $email = $this->input->post('email');
 			$centreID = $this->data['centre']['centreID'];
+			$userIDtoUpdate = $this->input->post('updateUser');
 
 			$additional_data = array(
 				'centreID' => $centreID,
@@ -295,23 +342,37 @@ class Sis extends MY_Controller {
 				'phone'      => $this->input->post('phone'),
 				'address'      => $this->input->post('address')
 			);
+				
+			// Grab input data for dynamic inputs
+			foreach($teamMemberInputs as $tminput) {
+				$additional_data[$tminput['keyName']] = $this->input->post($tminput['keyName']);
+			}
 			
-			if( $this->input->post('updateUser') ) {
-				$newUserID = $this->users_model->update_user($this->input->post('updateUser'),$additional_data);
+			if( $userIDtoUpdate ) {
+				$updateUserResponse = $this->users_model->update_user($userIDtoUpdate,$additional_data);
 				$this->data['user'] = $additional_data;
-				$this->data['user']['id'] = $newUserID;
+				$this->data['user']['id'] = $userIDtoUpdate;
+				$this->data['user']['email'] = $email;
+				$this->data['user']['password'] = "[user specified]";
 			} else {
 				$password = $this->generatePassword();
 				$newUserID = $this->ion_auth->register($username, $password, $email, $additional_data);
-				$this->data['user']['id'] = $newUserID;
 				$this->data['user'] = $additional_data;
+				$this->data['user']['id'] = $newUserID;
+				$this->data['user']['email'] = $email;
+				$this->data['user']['password'] = $password;
 			}
 		}
 		
 		// Registration success
 		if ($newUserID != false) {
 			// Successful team member creation, show success message
-			$this->data['success'] = $this->ion_auth->messages()." Generated Password: $password";
+			$this->data['success'] = $this->ion_auth->messages();
+			$this->data['updateUser'] = false;
+			$this->load->view('sis/addTeamMember',$this->data);
+		} elseif ($updateUserResponse != false) {
+			// Successful team member creation, show success message
+			$this->data['success'] = "Updated user: ".$updateUserResponse;
 			$this->data['updateUser'] = false;
 			$this->load->view('sis/addTeamMember',$this->data);
 		} else {
