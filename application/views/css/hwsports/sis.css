@@ -158,33 +158,6 @@
 
 
 
-/***************************************\
-
-			Content Styling
-	
-	Most of it is already covered above
-	in General Typography.
-				
-\***************************************/
-
-#content h1 { color: #0D44A2; }
-#content h1 div.icon.subsection {
-	background-position: -20px -80px;
-	margin-left: 20px;
-	margin-right: 20px;
-}
-#content h3 div.icon, #content h2 div.icon {
-	position: relative;
-	top:-4px;
-	margin-bottom:-4px;
-}
-#content blockquote {
-	margin-left: 20px;
-	padding-left: 20px;
-	border-left: solid 20px #EEE;
-	padding-bottom: 20px;
-	padding-top: 20px;
-}
 
 
 
@@ -599,122 +572,6 @@ div.widget.tournament.sportID-10 			div.widget-title-left.icon 		{ background-po
 
 
 
-/***************************************\
-
-			Messaging system
-
-	These are the divs that appear
-	at the top of the page if something
-	important happens.
-				
-\***************************************/
-
-.message{
-	overflow:hidden;
-	padding: 20px 20px 0px 20px;
-	margin-bottom: 20px;
-	border-radius: 			4px;
-	-webkit-border-radius: 	4px;
-	-moz-border-radius: 	4px;
-}
-
-.message.message-information 	{ background: #D0DAEE; color: #0D42A8; box-shadow: inset 0px 0px 1px #0D42A8; }
-.message.message-success 		{ background: #E4EDCD; color: #7BA800; box-shadow: inset 0px 0px 1px #7BA800; }
-.message.message-error 			{ background: #FFDFBF; color: #D93600; box-shadow: inset 0px 0px 1px #D93600; }
-.message.message-warning 		{ background: #FFDFBF; color: #D93600; box-shadow: inset 0px 0px 1px #D93600; }
-
-/* The icons that appear within the message */
-.message 				div.icon 	{ float: left; }
-.message 				div.icon 	{ background-position: -440px -20px; }
-.message-information 	div.icon 	{ background-position: -440px -20px; }
-.message-error 			div.icon 	{ background-position: -440px -40px; }
-.message-success 		div.icon 	{ background-position: -440px -60px; }
-.message-warning 		div.icon 	{ background-position: -440px -80px; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***************************************\
-
-			Large Buttons
-				
-\***************************************/
-a.button, input[type='submit'] {
-	font-family: 'Roboto', sans-serif;
-	border: none;
-	background:#EEE;
-	text-decoration: none;
-	line-height: 20px;
-	padding-top:10px;
-	padding-bottom:10px;
-	padding-left: 20px;
-	padding-right: 20px;
-	display:inline-block;
-	border-radius: 4px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	text-align: center;
-}
-a.button				, input[type='submit']				{ color: #333333; background:#FFFFFF; box-shadow: 0px 1px 2px rgba(0,0,0,1.0), inset 0px 0px 1px rgba(0,0,0,1); }
-a.button:hover			, input[type='submit']:hover		{ color: #333333; background:#FFFFFF; box-shadow: 0px 1px 2px rgba(0,0,0,1.0), inset 0px 0px 1px rgba(0,0,0,1); }
-a.button:active			, input[type='submit']:active		{ color: #333333; background:#EEEEEE; box-shadow: 0px 1px 1px rgba(0,0,0,0.4), inset 0px 1px 4px rgba(0,0,0,1); }
-a.button:active * 		, input[type='submit']:active *		{ color: #333333; opacity: 0.5; }
-
-a.button.normal 		, input[type='submit'].normal		{ color: #333333; background:#EEEEEE; }
-a.button.normal:hover 	, input[type='submit'].normal:hover	{ color: #333333; background:#FFFFFF; }
-a.button.normal:active 	, input[type='submit'].normal:active{ color: #333333; background:#EEEEEE; }
-
-a.button.blue			, input[type='submit'].blue			{ color: #FFFFFF; background:#0D42A8; }
-a.button.blue:hover		, input[type='submit'].blue:hover	{ color: #FFFFFF; background:#3F68BB; }
-a.button.blue:active	, input[type='submit'].blue:active	{ color: #D1DAF2; background:#0D42A8; }
-
-a.button.green			, input[type='submit'].green		{ color: #FFFFFF; background:#81A800; }
-a.button.green:hover 	, input[type='submit'].green:hover	{ color: #FFFFFF; background:#9ABB00; }
-a.button.green:active	, input[type='submit'].green:active	{ color: #E6EDC5; background:#81A800; }
-
-a.button.red			, input[type='submit'].red			{ color: #FFFFFF; background:#D13B00; }
-a.button.red:hover		, input[type='submit'].red:hover	{ color: #FFFFFF; background:#F64600; }
-a.button.red:active		, input[type='submit'].red:active	{ color: #FBE1B6; background:#D13B00; }
-
-p a.button, p input[type='submit'] {
-	position: relative;
-	top:-5px;
-}
-
-a.button .icon { margin-bottom: -5px; }
-
-.right .button { margin-left: 20px; }
-.left .button { margin-right: 20px; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -794,11 +651,6 @@ div.icon.arrow-right-blue-dark 		{background-position:  -80px 0px;}
 
 div.icon.dalek-black 		{background-position:  -560px -20px;}
 div.icon.dalek-white 		{background-position:  -580px -20px;}
-
-.text-align-left {text-align:left;}
-.text-align-right {text-align:right;}
-.margin-left { margin-left: 20px; }
-.margin-right { margin-right: 20px; }
 
 
 
