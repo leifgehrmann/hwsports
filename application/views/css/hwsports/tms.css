@@ -9,6 +9,9 @@
 #footer, #footer-block {
 	width: 100%;
 	display: block;
+}
+#middle, #middle-block,
+#footer, #footer-block {
 	overflow: hidden;
 }
 #header-block {
@@ -24,7 +27,6 @@
 #content {
 	min-width: 700px;
 	margin-left: 20px;
-	margin-right: 20px;
 	float: left;
 }
 
