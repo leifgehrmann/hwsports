@@ -1,24 +1,3 @@
-body {
-	font-family: 'Roboto', sans-serif;
-	background: #EEE;
-	color: #333333;
-}
-
-body * {
-	line-height: 20px;
-	padding: 0px;
-	margin: 0px;
-}
-
-
-
-
-
-
-
-
-
-
 
 /**
 
@@ -36,7 +15,6 @@ body * {
 #header-block {
 	width:100%;
 	height: 80px;
-	margin: auto auto;
 }
 #middle {
 	width:100%;
@@ -763,6 +741,7 @@ a.button .icon { margin-bottom: -5px; }
 #footer .info{
 	float:right;
 	margin-top:40px;
+	margin-bottom:40px;
 	margin-right:20px;
 }
 #footer .system{
