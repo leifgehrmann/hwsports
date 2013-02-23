@@ -148,7 +148,7 @@ class Users_model extends CI_Model {
 			} else if(isset($tournaments['athletes'])){
 				$tournamentAthletes = explode(",",$tournaments['athletes']);
 				$intersection = in_array($userID, $tournamentAthletes);
-				if(!empty($intersection))){
+				if(!empty($intersection)){
 					$tournamentIDs[] = $tournamentID;
 				}
 			}
