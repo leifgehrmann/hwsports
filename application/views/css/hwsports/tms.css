@@ -118,6 +118,7 @@
 }
 #menu > ul{
 	margin-top:10px;
+	top: 0px;
 }
 #menu ul:nth-child(2){
 	margin-top:40px;
