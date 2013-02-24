@@ -32,57 +32,70 @@
 	<script charset="utf-8" src="/js/vendor/colorpicker/colorpicker.js"></script>
 
 	<script>
-	var b = false;
 
-	$('html').keyup(function(event) {
-		if (event.which == 65) {
-			if(!b){
-				$('body').css('background-image',"url('/img/typography/baseline.png'), url('/img/typography/columns.tms.png')");
-				$('body').css('background-repeat',"repeat, repeat-y");
-				$('body').css('background-position',"center top, left top");
-				$('#container *').css('opacity',"0.90");
-			} else {
-				$('body').css('background-image',"none");
-				$('#container *').css('opacity',"");
+		var b = false;
+		$('html').keyup(function(event) {
+			if (event.which == 65) {
+				if(!b){
+					$('body').css('background-image',"url('/img/typography/baseline.png'), url('/img/typography/columns.tms.png')");
+					$('body').css('background-repeat',"repeat, repeat-y");
+					$('body').css('background-position',"center top, left top");
+					$('#container *').css('opacity',"0.90");
+				} else {
+					$('body').css('background-image',"none");
+					$('#container *').css('opacity',"");
+				}
+				b=!b;
 			}
-			b=!b;
-		}
-	});
-
-	$(window).resize(function() {
-		var width = $(window).width()-200-20*2;
-		$( '#content' ).width(width);
-	});
-
-	$(document).ready(function() {
-
-		// Set the width of the content to be 
-		var width = $(window).width()-200-20*2;
-		$( '#content' ).width(width);
-
-		$('.widget').each(function(){
-			$(this).height(Math.round($(this).height()/20)*20);
 		});
-		$( '.widget-title' ).each(function() {
-			$(this).height(Math.round($(this).height()/20)*20);
+
+		$(window).resize(function() {
+			var width = $(window).width()-200-20*2;
+			$( '#content' ).width(width);
 		});
-		$( '.fc .fc-header' ).each(function() {
-			$(this).css('margin-bottom',(20-($(this).height()%20))+'px');
-		});
-		$( 'img' ).each(function() {
-			$(this).load(function() {
-				$(this).css('margin-bottom',(15-($(this).outerHeight(true)%20))+'px');
+
+		$(document).ready(function() {
+
+			$('img').load(function(){
+				// console.log("resizing image");
+				// console.log($(this).outerHeight(true)+'px');
+				$(this).css('margin-bottom',(20-($(this).outerHeight(true)%20))+'px');
+				// console.log($(this).outerHeight(true)+'px');
+				// console.log((20-($(this).outerHeight(true)%20))+'px');
+			});
+			$('.widget-title').each(function(){
+				//console.log("resizing widget title");
+				$(this).height(Math.round($(this).height()/20)*20);
+			});
+			$('.fc-header').each(function(){
+				//console.log("resizing fullcalendar element");
+				$(this).css('margin-bottom',(20-($(this).height()%20))+'px');
+			});
+			$('.fc-content').each(function(){
+				//console.log("resizing fullcalendar element");
+				$(this).css('margin-bottom',(20-($(this).height()%20))+'px');
+			});
+
+			// Set the width of the content to be equals
+			// to the window width minus the menu width
+			// and 20px margin.
+			var width = $(window).width()-200-20*2;
+			$( '#content' ).width(width);
+
+			// toggle the unselected menu items.
+			$('.toggleMenuItem:not(.selected)').each(function(){
+				$(this).find(".close").toggle();
+				$(this).next().toggle();
+			});
+			
+			// when a user clicks on a menu item, 
+			// toggle it's visability and the X
+			// icon (to indicate how to close it.)
+			$('.toggleMenuItem').click(function(){
+				$(this).find(".close").toggle();
+				$(this).next().slideToggle("fast");
 			});
 		});
-		$('.toggleMenuItem:not(.selected)').each(function(){
-			$(this).find(".close").toggle();
-			$(this).next().toggle();
-		});
-		$('.toggleMenuItem').click(function(){
-			$(this).find(".close").toggle();
-			$(this).next().slideToggle("fast");
-		});
-	});
 	</script>
 </head>
 <!--[if lt IE 7]>      <body class="page-<?=$page?> lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
