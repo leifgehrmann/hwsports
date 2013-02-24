@@ -41,7 +41,10 @@
 #header 			{ background: #0D44A2; }
 /*#header:hover 		{ background: #3F68BB; }*/
 #header 			{ font-weight: 700; text-decoration: none; color: #FFF; }
-#header-block 		{ background-image: url('/img/header/header.png'); }
+#header-block 		{
+	background-image: url('/img/header/header.png');
+	background-position: 20px 0px;
+}
 #header-title 		{ position:relative; top:57px; font-size:40px; }
 #header-subtitle 	{ position:relative; top:83px; font-size:20px; }
 #header {
