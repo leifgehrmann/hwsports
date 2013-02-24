@@ -6,7 +6,7 @@
 	<meta name="description" content="">
 	<title><?=$title?> | <?=$centre['staffTitle']?></title>
 	<link rel="icon" type="image/png" href="/img/favicon/tms.png" />
-	
+
 	<link rel="stylesheet" type="text/css" href="/css/vendor/normalize/normalize.min.css">
 	<link rel='stylesheet' type="text/css" href="/css/vendor/jquery-ui/jquery-ui-1.10.0.custom.min.css">
 	<link rel='stylesheet' type="text/css" href="/css/vendor/datatables/jquery.dataTables.css">
@@ -36,7 +36,7 @@
 
 	$('html').keyup(function(event) {
 		alert(event.which);
-		if (event.which == 97) {
+		if (event.which == 65) {
 			if(!b){
 				$('body').css('background-image',"url('/img/typography/baseline.png'), url('/img/typography/columns.tms.png')");
 				$('body').css('background-repeat',"repeat, repeat-y");
