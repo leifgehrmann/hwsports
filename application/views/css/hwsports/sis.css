@@ -6,7 +6,7 @@
 
 #header, #middle, #footer { width: 100%; }
 #header-block, #middle-block, #footer-block {
-	width: 920px;
+	width: 880px;
 	padding-left: 20px;
 	padding-right: 20px;
 	margin: auto auto;
