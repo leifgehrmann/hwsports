@@ -267,7 +267,6 @@ textarea {
     -webkit-border-radius:  4px;
     -moz-border-radius:     4px;
 }
-
 .message.message-information    { background: #D0DAEE; color: #0D42A8; box-shadow: inset 0px 0px 1px #0D42A8; }
 .message.message-success        { background: #E4EDCD; color: #7BA800; box-shadow: inset 0px 0px 1px #7BA800; }
 .message.message-error          { background: #FFDFBF; color: #D93600; box-shadow: inset 0px 0px 1px #D93600; }
@@ -336,9 +335,165 @@ a.button .icon { margin-bottom: -5px; }
 .right .button { margin-left: 20px; }
 .left .button { margin-right: 20px; }
 
+/***************************************\
 
+                Icons
+                
+\***************************************/
+div.icon {
+    width: 20px;
+    height: 20px;
+    background-image: url('/img/icons/icons.png');
+    background-position: 20px 20px;
+    background-repeat: no-repeat;
+    display: inline-block; *display: inline; zoom: 1;
+}
+div.icon.load {
+    -webkit-animation: play-black .8s steps(8) infinite;
+       -moz-animation: play-black .8s steps(8) infinite;
+        -ms-animation: play-black .8s steps(8) infinite;
+         -o-animation: play-black .8s steps(8) infinite;
+            animation: play-black .8s steps(8) infinite;
+}
+div.widget-title div.icon.load {
+    -webkit-animation: play-white .8s steps(8) infinite;
+       -moz-animation: play-white .8s steps(8) infinite;
+        -ms-animation: play-white .8s steps(8) infinite;
+         -o-animation: play-white .8s steps(8) infinite;
+            animation: play-white .8s steps(8) infinite;
+}
+@-webkit-keyframes  play-black  { from { background-position: -400px -20px; } to { background-position: -400px -180px; } }
+@-moz-keyframes     play-black  { from { background-position: -400px -20px; } to { background-position: -400px -180px; } }
+@-ms-keyframes      play-black  { from { background-position: -400px -20px; } to { background-position: -400px -180px; } }
+@-o-keyframes       play-black  { from { background-position: -400px -20px; } to { background-position: -400px -180px; } }
+@keyframes          play-black  { from { background-position: -400px -20px; } to { background-position: -400px -180px; } }
 
+@-webkit-keyframes  play-white  { from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
+@-moz-keyframes     play-white  { from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
+@-ms-keyframes      play-white  { from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
+@-o-keyframes       play-white  { from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
+@keyframes          play-white  { from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
 
+div.icon.subscribe              {background-position:   -20px -380px;}
+div.icon.announcement           {background-position:  -120px -280px;}
+
+div.icon.block-black-light      {background-position: -40px -20px;}
+div.icon.block-black-medium     {background-position: -20px -20px;}
+div.icon.block-black-dark       {background-position: 0px -20px;}
+
+div.icon.block-blue-light       {background-position: -40px 0px;}
+div.icon.block-blue-medium      {background-position: -20px 0px;}
+div.icon.block-blue-dark        {background-position: 0px 0px;}
+
+div.icon.block-white            {background-position: -60px -20px;}
+div.icon.arrow-right-white          {background-position: -140px -20px;}
+
+div.icon.arrow-right-black-light    {background-position: -120px -20px;}
+div.icon.arrow-right-black-gray     {background-position: -100px -20px;}
+div.icon.arrow-right-black-dark     {background-position: -80px -20px;}
+
+div.icon.arrow-right-blue-light     {background-position: -120px 0px;}
+div.icon.arrow-right-blue-medium    {background-position: -100px 0px;}
+div.icon.arrow-right-blue-dark      {background-position:  -80px 0px;}
+
+div.icon.dalek-black        {background-position:  -560px -20px;}
+div.icon.dalek-white        {background-position:  -580px -20px;}
+
+.match.sportID-8    div.icon    { background-position:  -320px -200px; }
+.match.sportID-9    div.icon    { background-position:  -380px -200px; }
+.match.sportID-10   div.icon    { background-position:  -380px -200px; }
+
+/***************************************\
+
+            Widget Div
+
+    Leif's Custom widget div, which
+    is a simple information box that
+    can be used for announcements, 
+    tournament, match items on the
+    pages.
+                
+\***************************************/
+
+div.widget {
+    background: #EEEEEE;
+    display: inline-block; *display: inline; zoom: 1;
+    margin-bottom: 20px;
+    vertical-align: top;
+    margin-right:-4px;
+}
+div.full            { width: 700px; } /* 160 + 20 + 160 + 20 + 160 + 20 + 160 */
+div.threefourth     { width: 520px; } /* 160 + 20 + 160 + 20 + 160 */
+div.half            { width: 340px; } /* 160 + 20 + 160 */
+div.fourth          { width: 160px; } /* 160 */
+
+/* These are the icons widths, so these are slightly redundant */
+div.widget-title-left,
+div.widget-title-right  {
+    width:20px;
+} 
+
+/* This is assuming widget-title-centre is surrounded by icons */
+div.full            div.widget-title-centre { width:580px; } /* 700 - 20*2 - 20*4 */
+div.threefourth     div.widget-title-centre { width:400px; } /* 520 - 20*2 - 20*4 */
+div.half            div.widget-title-centre { width:220px; } /* 340 - 20*2 - 20*4 */
+div.fourth          div.widget-title-centre { width: 40px; } /* 160 - 20*2 - 20*4 */
+
+div.half:nth-of-type(even) { margin-left: 20px; }
+
+div.widget-title {
+    text-decoration: none;
+    font-size: 20px;
+    line-height: 40px;
+    width: 100%;
+    word-wrap:break-word;
+    padding: 10px 0px;
+    background: #333333;
+    color: #EEEEEE;
+    letter-spacing:-4px;
+    transition: opacity .1s;
+    -moz-transition: opacity .1s;
+    -webkit-transition: opacity .1s;
+    -o-transition: opacity .1s;
+}
+div.widget-title div {
+    vertical-align: middle;
+    letter-spacing: 0px;
+    display: inline-block; *display: inline; zoom: 1;
+    margin-right:-4px;
+}
+
+a div.widget-title-centre { text-decoration: underline; }
+a div.widget-title:hover { opacity:0.9; }
+
+div.widget-title-right.icon,
+div.widget-title-left.icon {
+    margin-left: 20px;
+    margin-right: 20px;
+    position:relative;
+    top:-2px;
+}
+div.widget-body {
+    padding:20px;
+    background: #EEEEEE;
+    overflow: hidden;
+}
+
+a div.widget-title-right.icon { background-position: -120px -60px; }
+a div.widget-title-right {
+    transition: left opacity .1s;
+    -moz-transition: left opacity .1s;
+    -webkit-transition: left opacity .1s;
+    -o-transition: left opacity .1s;
+}
+
+a:hover div.widget-title-right.icon { -webkit-animation: imove .5s; }
+@-webkit-keyframes imove {
+    0%      { left:   0px;  opacity: 1; }
+    49%     { left:  20px;  opacity: 0; }
+    51%     { left: -60px;  opacity: 0; }
+    100%    { left:   0px;  opacity: 1; }
+}
 
 
 

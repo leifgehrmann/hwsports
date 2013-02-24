@@ -42,6 +42,10 @@
 					// console.log($(this).outerHeight(true)+'px');
 					// console.log((20-($(this).outerHeight(true)%20))+'px');
 				});
+				$('.widget').each(function(){
+					//console.log("resizing widget title");
+					$(this).height(Math.round($(this).height()/20)*20);
+				});
 				$('.widget-title').each(function(){
 					//console.log("resizing widget title");
 					$(this).height(Math.round($(this).height()/20)*20);

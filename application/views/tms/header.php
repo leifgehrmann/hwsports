@@ -60,6 +60,9 @@
 		var width = $(window).width()-200-20*2;
 		$( '#content' ).width(width);
 
+		$('.widget').each(function(){
+			$(this).height(Math.round($(this).height()/20)*20);
+		});
 		$( '.widget-title' ).each(function() {
 			$(this).height(Math.round($(this).height()/20)*20);
 		});
