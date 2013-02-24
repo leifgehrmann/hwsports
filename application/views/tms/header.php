@@ -34,9 +34,9 @@
 	var b = false;
 
 	$('html').keyup(function(event) {
-		if (event.which == 8364) {
+		if (event.which == 97) {
 			if(!b){
-				$('body').css('background-image',"url('/img/typography/lines.png'), url('/img/typography/blocks.png')");
+				$('body').css('background-image',"url('/img/typography/baseline.png'), url('/img/typography/columns.tms.png')");
 				$('body').css('background-repeat',"repeat, repeat-y");
 				$('body').css('background-position',"center top, left top");
 				$('#container *').css('opacity',"0.90");
