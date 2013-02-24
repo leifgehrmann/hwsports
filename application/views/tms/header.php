@@ -4,10 +4,8 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="description" content="">
-	<title><?=$title?> | Tournament Management System</title>
+	<title><?=$title?> | <?=$centre['staffTitle']?></title>
 	<link rel="icon" type="image/png" href="/img/favicon/tms.png" />
-	<link rel="stylesheet" type="text/css" href="/css/main.css">
-	<link rel="stylesheet" type="text/css" href="/css/tms.css">
 	<link rel="stylesheet" type="text/css" href="/css/vendor/normalize/normalize.min.css">
 	<link rel='stylesheet' type="text/css" href="/css/vendor/jquery-ui/jquery-ui-1.10.0.custom.min.css">
 	<link rel='stylesheet' type="text/css" href="/css/vendor/datatables/jquery.dataTables.css">
@@ -16,6 +14,11 @@
 	<link rel='stylesheet' type="text/css" href="/css/vendor/datatables/dataTables.ColVis.css">
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/vendor/colorpicker/colorpicker.css" />
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,700,300">
+
+	<!-- Custom styles -->
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<link rel="stylesheet" type="text/css" href="/css/tms.css">
+
 	<script charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 	<script charset="utf-8" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
 	<script charset="utf-8" src="/js/vendor/jquery/jquery-ui-1.10.0.custom.min.js"></script>
