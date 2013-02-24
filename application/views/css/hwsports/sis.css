@@ -10,11 +10,11 @@
 	padding-right: 20px;
 	margin: auto auto;
 }
-#header { 
-	display: block;
-	overflow:hidden;
+#header { display: block; }
+#header-block {
+	height: 160px;
+	overflow: hidden;
 }
-#header-block { height: 160px; }
 #middle {
 	padding-top:20px;
 	padding-bottom:20px;
