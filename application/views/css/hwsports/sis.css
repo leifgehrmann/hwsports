@@ -24,6 +24,7 @@
 #menu {
 	float: left;
 	width: 160px;
+	padding-right: 20px;
 }
 #content {
 	float: left;
