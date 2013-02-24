@@ -4,6 +4,7 @@
 				
 \***************************************/
 
+#header, #middle, #footer { width: 100%; }
 #header-block, #middle-block, #footer-block {
 	width: 920px;
 	padding-left: 20px;
