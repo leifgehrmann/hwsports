@@ -6,9 +6,11 @@
 
 #header-block, #middle-block, #footer-block {
 	width: 920px;
+	padding-left: 20px;
+	padding-right: 20px;
 	margin: auto auto;
 }
-#header { display: block; }
+#header {display: block;}
 #header-block { height: 160px; }
 #middle {
 	padding-top:20px;
@@ -18,17 +20,10 @@
 #menu {
 	float: left;
 	width: 160px;
-	margin-left: 20px;
-	margin-right: 20px;
 }
 #content {
 	float: left;
 	width: 700px;
-	margin-right: 20px;
-}
-#footer {
-	margin-left: 20px;
-	margin-right: 20px;
 }
 
 
