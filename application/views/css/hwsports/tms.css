@@ -9,13 +9,10 @@
 #footer, #footer-block {
 	width: 100%;
 	display: block;
-}
-#middle, #middle-block,
-#footer, #footer-block {
 	overflow: hidden;
 }
 #header-block {
-	height: 80px;
+	min-height: 80px;
 }
 #middle {
 	padding-bottom: 60px;
