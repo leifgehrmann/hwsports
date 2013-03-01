@@ -132,7 +132,7 @@
         						</li>
         					</a>
 
-        					<a class="toggleMenuItem <?=(($page=='calendar'||$page=='tournaments'||$page=='matches') ? 'selected' : '')?>">
+        					<a class="toggleMenuItem <?=(($page=='calendar'||$page=='tournaments'||$page=='matches'||$page=='tournament'||$page=='match') ? 'selected' : '')?>">
         						<li><div class="icon events"></div>Events<div class="icon close"></div></li>
         					</a>
         					<ul>
@@ -171,15 +171,15 @@
         						</li>
         					</a>
 
-        					<a class="toggleMenuItem <?=(($page=='ticketeditor'||$page=='ticketreport') ? 'selected' : '')?>">
+        					<a class="toggleMenuItem <?=(($page=='tickets'||$page=='ticketreport') ? 'selected' : '')?>">
         						<li>
         							<div class="icon tickets"></div>Tickets<div class="icon close"></div>
         						</li>
         					</a>
         					<ul>
-        						<a href="/tms/ticketeditor" title="View and create tickets" class="<?=($page=='ticketeditor' ? 'selected' : '')?>">
+        						<a href="/tms/tickets" title="View and create tickets" class="<?=($page=='tickets' ? 'selected' : '')?>">
         							<li>
-        								<div class="icon ticketeditor"></div>Editor
+        								<div class="icon tickets"></div>Editor
         							</li>
         						</a>
         						<a href="/tms/ticketreports" title="View ticket reports" class="<?=($page=='ticketreports' ? 'selected' : '')?>">
@@ -189,7 +189,7 @@
         						</a>
         					</ul>
 
-        					<a class="toggleMenuItem <?=(($page=='users'||$page=='teams'||$page=='groups') ? 'selected' : '')?>">
+        					<a class="toggleMenuItem <?=(($page=='users'||$page=='teams'||$page=='groups'||$page=='user'||$page=='team'||$page=='group') ? 'selected' : '')?>">
         						<li><div class="icon usersgroups"></div>Users &amp; Groups<div class="icon close"></div></li>
         					</a>
         					<ul>

@@ -307,67 +307,14 @@
 	Leif's Custom widget div, which is a simple information box that can
 	be used for news, tournament, match items on the pages.
 */
-#content div.widget {
-	background: #EEEEEE;
-	display:inline-block;
-	margin-bottom: 20px;
-}
-#content div.widget.full {
-	display:block;
-	width: 700px;
-}
-#content div.widget.threefourth, #content div.widget.half, #content div.widget.fourth {
-	margin-right:-4px;
-	display: inline-block; *display: inline; zoom: 1;
-	vertical-align: top;
-}
-#content div.widget.threefourth { width: 520px; }
-#content div.widget.half { width: 340px; }
-#content div.widget.fourth { width: 160px; }
-#content div.half:nth-of-type(even) {
-	margin-left: 20px;
-}
-
-#content div.widget-title {
-	width: 100%;
-	word-wrap:break-word;
-	padding:10px;
-	padding-left:0px;
-	padding-right:0px;
-	font-size: 20px;
-	line-height: 40px;
-	background: #333333;
-	color: #EEEEEE;
-	letter-spacing:-4px;
-	transition: opacity .1s;
-	-moz-transition: opacity .1s;
-	-webkit-transition: opacity .1s;
-	-o-transition: opacity .1s;
-}
-#content div.widget-title div {
-	/*font-size:20px;*/
-	/*float: left;*/
-	/*overflow: hidden;*/
-	letter-spacing: 0px;
-	display: inline-block; *display: inline; zoom: 1;
-	margin-right:-4px;
-}
-#content div.widget-title:hover {
-	opacity:0.9;
-}
-#content div.widget-title-left { width:20px; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; }
+/*#content div.widget-title-left { width:20px; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; }
 #content div.half div.widget-title-centre { width:220px; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; margin-right:-4px;}
 #content div.full div.widget-title-centre { width:580px; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; margin-right:-4px;}
 #content div.threefourth div.widget-title-centre { width:400px; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; margin-right:-0px;}
 #content div.fourth div.widget-title-centre { width:40px; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; margin-right:-0px;}
 #content div.widget-title-right { width:20px; overflow: hidden; display: inline-block; *display: inline; zoom: 1; vertical-align:middle; margin-right:-0px; }
 #content div.widget-title-right.icon { margin-left: 20px; margin-right: 20px; position:relative; top:-2px; }
-#content div.widget-title-left.icon { margin-left: 20px; margin-right: 20px; position:relative; top:-2px;}
-#content div.widget-body {
-	padding:20px;
-	background: #EEEEEE;
-	overflow: hidden;
-}
+#content div.widget-title-left.icon { margin-left: 20px; margin-right: 20px; position:relative; top:-2px;}*/
 
 
 

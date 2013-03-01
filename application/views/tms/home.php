@@ -1,26 +1,67 @@
 <h1>Dashboard</h1>
-<div class="widget">
-	<h2>Latest Tournaments</h2>
-	<div class="row"><p><a href="">2012 Heriot Watt</a></p><p class="subtitle">5th-12th February</p></div>
-	<div class="row"><p><a href="">2012 Rugby</a></p><p class="subtitle">5th-12th February</p></div>
-	<div class="row"><p><a href="">2012 Summer WattBall</a></p><p class="subtitle">5th-12th February</p></div>
+<div class="widget half matches">
+	<div class="widget-title">
+		<div class="widget-title-left icon"></div>
+		<div class="widget-title-centre">Latest Matches</div>
+		<div class="widget-title-right icon"></div>
+	</div>
+	<div class="widget-body">
+		<? 
+			// foreach($)
+		?>
+		<div class="match sportCategoryID-6"><div class="icon left margin-right"></div><p><a href="/tms/match/sdfkdsbfds">Team A vs Team B</a><br/><span style="display: inline-block;padding-left: 40px;">20th February &mdash; 10:28</span></p></div>
+		<div class="match sportCategoryID-7"><div class="icon left margin-right"></div><p><a href="/tms/match/dsfknds">Team B vs Team C</a><br/><span style="display: inline-block;padding-left: 40px;">20th February &mdash; 16:30</span></p></div>
+		<div class="match sportCategoryID-8"><div class="icon left margin-right"></div><p><a href="/tms/match/sdlkfsd">Heriot Hurdling - Day 1</a><br/><span style="display: inline-block;padding-left: 40px;">21st February &mdash; 19:20</span></p></div>
+		<p><a href="/tms/matches/" class="button right blue">View All Matches</a></p>
+	</div>
 </div>
-<div class="widget">
-	<h2>Upcoming Tournaments</h2>
-	<div class="row"><p><a href="">2013 Heriot Watt</a></p><p class="subtitle">5th-12th February</p></div>
-	<div class="row"><p><a href="">2014 Summer WattBall</a></p><p class="subtitle">5th-12th February</p></div>
+<div class="widget half matches">
+	<div class="widget-title">
+		<div class="widget-title-left icon"></div>
+		<div class="widget-title-centre">Upcoming Matches</div>
+		<div class="widget-title-right icon"></div>
+	</div>
+	<div class="widget-body">
+		<? 
+			// foreach($)
+		?>
+
+		<div class="match sportCategoryID-1"><div class="icon left margin-right"></div><p><a href="">Heriot Hurdling - Day 2</a><br/><span style="display: inline-block;padding-left: 40px;">21st February &mdash; 00:00</span></p></div>
+		<div class="match sportCategoryID-2"><div class="icon left margin-right"></div><p><a href="">Heriot Hurdling - Day 3</a><br/><span style="display: inline-block;padding-left: 40px;">22nd February &mdash; 00:00</span></p></div>
+		<div class="match sportCategoryID-3"><div class="icon left margin-right"></div><p><a href="">Heriot Hurdling - Day 4</a><br/><span style="display: inline-block;padding-left: 40px;">23rd February &mdash; 00:00</span></p></div>
+		<div class="match sportCategoryID-4"><div class="icon left margin-right"></div><p><a href="">Heriot Hurdling - Day 5</a><br/><span style="display: inline-block;padding-left: 40px;">24th February &mdash; 00:00</span></p></div>
+		<div class="match sportCategoryID-5"><div class="icon left margin-right"></div><p><a href="">Heriot Hurdling - Day 6</a><br/><span style="display: inline-block;padding-left: 40px;">25th February &mdash; 00:00</span></p></div>
+		<p><a href="/tms/matches/" class="button right blue">View All Matches</a></p>
+	</div>
 </div>
-<div class="widget">
-	<h2>Latest Matches / Games</h2>
-	<div class="row"><p><a href="">Team A vs Team B</a></p><p class="subtitle"><span class="green light bold" style="margin-right:10px;">WattBall</span> 20th February</p></div>
-	<div class="row"><p><a href="">Team B vs Team C</a></p><p class="subtitle"><span style="color:#468C00;font-weight:bold;margin-right:10px;">WattBall</span> 21st February</p></div>
-	<div class="row"><p><a href="">Heriot Hurdling - Day 1</a></p><p class="subtitle"><span style="color:#B25900;font-weight:bold;margin-right:10px;">Heriot Hurdling Mens</span> 20th February</p></div>
+<div class="widget half tournaments">
+	<div class="widget-title">
+		<div class="widget-title-left icon"></div>
+		<div class="widget-title-centre">Latest Tournaments</div>
+		<div class="widget-title-right icon"></div>
+	</div>
+	<div class="widget-body">
+		<? 
+			// foreach($)
+		?>
+		<div class="match sportCategoryID-9"><div class="icon left margin-right"></div><p><a href="/tms/tournament/dshjf"		>2012 Heriot Watt</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p></div>
+		<div class="match sportCategoryID-10"><div class="icon left margin-right"></div><p><a href="/tms/tournament/afjb"		>2012 Rugby</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p></div>
+		<div class="match sportCategoryID-11"><div class="icon left margin-right"></div><p><a href="/tms/tournament/sdlkfjsd"	>2012 Summer WattBall</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p></div>
+		<p><a href="/tms/tournaments/" class="button right blue">View All Tournaments</a></p>
+	</div>
 </div>
-<div class="widget">
-	<h2>Upcoming Matches / Games</h2>
-	<div class="row"><p><a href="">Heriot Hurdling - Day 2</a></p><p class="subtitle"><span style="color:#B25900;font-weight:bold;margin-right:10px;">Heriot Hurdling Womens</span> 21st February</p></div>
-	<div class="row"><p><a href="">Heriot Hurdling - Day 3</a></p><p class="subtitle"><span style="color:#B25900;font-weight:bold;margin-right:10px;">Heriot Hurdling Mens</span> 22nd February</p></div>
-	<div class="row"><p><a href="">Heriot Hurdling - Day 4</a></p><p class="subtitle"><span style="color:#B25900;font-weight:bold;margin-right:10px;">Heriot Hurdling Womens</span> 23rd February</p></div>
-	<div class="row"><p><a href="">Heriot Hurdling - Day 5</a></p><p class="subtitle"><span style="color:#B25900;font-weight:bold;margin-right:10px;">Heriot Hurdling Mens</span> 24th February</p></div>
-	<div class="row"><p><a href="">Heriot Hurdling - Day 6</a></p><p class="subtitle"><span style="color:#B25900;font-weight:bold;margin-right:10px;">Heriot Hurdling Womens</span> 25th February</p></div>
+<div class="widget half tournaments">
+	<div class="widget-title">
+		<div class="widget-title-left icon"></div>
+		<div class="widget-title-centre">Upcoming Tournaments</div>
+		<div class="widget-title-right icon"></div>
+	</div>
+	<div class="widget-body">
+		<? 
+			// foreach($)
+		?>
+		<div class="match sportCategoryID-13"><div class="icon left margin-right"></div><p><a href="/tms/tournament/flksdf">2013 Heriot Watt</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p>
+		<div class="match sportCategoryID-14"><div class="icon left margin-right"></div><p><a href="/tms/tournament/dsflkjsd">2014 Summer WattBall</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p>
+		<p><a href="/tms/tournaments/" class="button right blue">View All Tournaments</a></p>
+	</div>
 </div>
