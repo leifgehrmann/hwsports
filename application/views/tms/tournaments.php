@@ -26,12 +26,12 @@
 		<tr>
 			<td><label for="name">Name:</label></td>
 			<td><?php echo form_input($name);?></td>
-			<td rowspan="2"><label for="description">Description:</label></td>
-			<td rowspan="2"><?php echo form_textarea($description);?></td>
-		</tr>
-		<tr>
 			<td><label for="name">Sport:</label></td>
 			<td><?php echo form_dropdown('sport', $sports); ?></td>
+		</tr>
+		<tr>
+			<td><label for="description">Description:</label></td>
+			<td colspan="3"><?php echo form_textarea($description);?></td>
 		</tr>
 		<tr>
 			<td><label for="tournamentStart">Start Date:</label></td>
