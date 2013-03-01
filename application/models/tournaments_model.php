@@ -91,12 +91,7 @@ class Tournaments_model extends CI_Model {
 		$tournamentEndDate = DateTime::createFromFormat(DateTime::ISO8601, $tournament['tournamentEnd']);
 		
 		if(empty($registrationStartDate) || empty($registrationEndDate) || empty($tournamentStartDate) || empty($tournamentEndDate) ) {
-			return("ERROR: Tournament has invalid dates. Today's date is: ".$today->format(DateTime::ISO8601).".
-					Registration start date is: ".$registrationStartDate->format(DateTime::ISO8601)."
-					Registration end date is: ".$registrationEndDate->format(DateTime::ISO8601)."
-					Tournament start date is: ".$tournamentStartDate->format(DateTime::ISO8601)."
-					Tournament start date is: ".$tournamentEndDate->format(DateTime::ISO8601)."
-					Please correct the dates below.");
+			return("ERROR: Tournament has at least one invalid date. Please correct the dates below.");
 		}
 		
 		if( ($today < $registrationStartDate) && ($today < $registrationEndDate) &&
