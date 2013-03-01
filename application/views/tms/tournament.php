@@ -19,7 +19,6 @@
 
 	<? switch($tournament['status']) { 
 		case "preRegistration": ?>
-			<h3>DEBUG: <?=$tournament['status']?></h3>
 			<h3 class="tournamentStatusMessage preRegistration">This tournament has not yet opened for registration. You may change any of the details below.</h3>
 			<?=$formTop?>
 			<label for="tournamentStart">Start Date:</label> <?php echo form_input($tournamentStart);?> <label for="tournamentEnd">End Date:</label> <?php echo form_input($tournamentEnd);?>
@@ -28,7 +27,6 @@
 			<label for="registrationStart">Start Date:</label> <?php echo form_input($registrationStart);?> <label for="registrationEnd">End Date:</label><?php echo form_input($registrationEnd);?> <br />		
 		<? break; ?>
 		<? case "inRegistration": ?>
-			<h3>DEBUG: <?=$tournament['status']?></h3>
 			<h3 class="tournamentStatusMessage inRegistration">This tournament is open for registration. You may change any of the details below, or <a href="/tms/tournament-competitors/">click here</a> to view the list of registered competitors to date.</h3>
 			<?=$formTop?>
 			<label for="tournamentStart">Start Date:</label> <?php echo form_input($tournamentStart);?> <label for="tournamentEnd">End Date:</label> <?php echo form_input($tournamentEnd);?>
@@ -37,26 +35,22 @@
 			<label for="registrationEnd">End Date:</label><?php echo form_input($registrationEnd);?> <br />
 		<? break; ?>
 		<? case "postRegistration": ?>
-			<h3>DEBUG: <?=$tournament['status']?></h3>
 			<h3 class="tournamentStatusMessage postRegistration">This tournament has closed for registration. You may change any of the details below. Before matches can be scheduled, you must <a href="/tms/tournament-competitors/">click here</a> to moderate the list of competitors.</h3>
 			<?=$formTop?>
 			<label for="tournamentStart">Start Date:</label> <?php echo form_input($tournamentStart);?> <label for="tournamentEnd">End Date:</label> <?php echo form_input($tournamentEnd);?> <br />
 		<? break; ?>
 		<? case "preTournament": ?>
-			<h3>DEBUG: <?=$tournament['status']?></h3>
 			<h3 class="tournamentStatusMessage preTournament">This tournament has completed registration and scheduling and is awaiting the start date. You may change any of the details below, or <a href="/tms/tournament-competitors/">click here</a> to manage the list of competitors.</h3>
 			<?=$formTop?>
 			<label for="tournamentStart">Start Date:</label> <?php echo form_input($tournamentStart);?> <label for="tournamentEnd">End Date:</label> <?php echo form_input($tournamentEnd);?> <br />
 		<? break; ?>
 		<? case "inTournament": ?>
-			<h3>DEBUG: <?=$tournament['status']?></h3>
 			<h3 class="tournamentStatusMessage inTournament">This tournament is in progress. You may change any of the details below, or <a href="/tms/tournament-statistics/">view statistics here.</a></h3>
 			<?=$formTop?>
 			<br />
 			<label for="tournamentEnd">End Date:</label> <?php echo form_input($tournamentEnd);?> <br />
 		<? break; ?>
 		<? case "postTournament": ?>
-			<h3>DEBUG: <?=$tournament['status']?></h3>
 			<h3 class="tournamentStatusMessage postTournament">This tournament has finished. You may <a href="/tms/tournament-statistics/">view statistics here.</a></h3>
 			<h2>Tournament Details:</h2>
 			<p>
