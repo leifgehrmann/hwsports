@@ -90,13 +90,17 @@ class Tournaments_model extends CI_Model {
 		$tournamentStartDate = DateTime::createFromFormat(DATE_FORMAT, $tournament['tournamentStart']);
 		$tournamentEndDate = DateTime::createFromFormat(DATE_FORMAT, $tournament['tournamentEnd']);
 		
-		if(empty($registrationStartDate) || empty($registrationEndDate) || empty($tournamentStartDate) || empty($tournamentEndDate) ) {
-			$errorMessage = "ERROR: Tournament has at least one invalid date. Please correct the dates below. Date format: ".DATE_FORMAT;
-			$errorMessage .= "registrationStartDate: ".var_export($registrationStartDate,1);
-			$errorMessage .= "registrationEndDate: ".var_export($registrationEndDate,1);
-			$errorMessage .= "tournamentStartDate: ".var_export($tournamentStartDate,1);
-			$errorMessage .= "tournamentEndDate: ".var_export($tournamentEndDate,1);
-			return ($errorMessage);
+		if(empty($registrationStartDate)) {
+			return("ERROR: Invalid registrationStartDate. Database contains: ".$tournament['registrationStart'].", which should be in the format: ".DATE_FORMAT); 
+		}
+		if(empty($registrationEndDate)) {
+			return("ERROR: Invalid registrationEndDate. Database contains: ".$tournament['registrationEnd'].", which should be in the format: ".DATE_FORMAT); 
+		}
+		if(empty($tournamentStartDate)) {
+			return("ERROR: Invalid tournamentStartDate. Database contains: ".$tournament['tournamentStart'].", which should be in the format: ".DATE_FORMAT); 
+		}
+		if(empty($tournamentEndDate)) {
+			return("ERROR: Invalid tournamentEndDate. Database contains: ".$tournament['tournamentEnd'].", which should be in the format: ".DATE_FORMAT); 
 		}
 		
 		if( ($today < $registrationStartDate) && ($today < $registrationEndDate) &&
