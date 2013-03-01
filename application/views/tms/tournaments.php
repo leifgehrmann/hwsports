@@ -27,7 +27,7 @@
 			<td><label for="name">Name:</label></td>
 			<td><?php echo form_input($name);?></td>
 			<td rowspan="2"><label for="description">Description:</label></td>
-			<td rowspan="2"><?php echo form_input($name);?></td>
+			<td rowspan="2"><?php echo form_textarea($description);?></td>
 		</tr>
 		<tr>
 			<td><label for="name">Sport:</label></td>
@@ -49,8 +49,15 @@
 			<td><?php echo form_input($registrationStart);?></td>
 		</tr>
 		<tr>
-			<td colspan="1"></td>
-			<td><?php echo form_submit('submit', 'Create');?></td>
+			<td colspan="3"></td>
+			<?php 
+				submitStyle = array(
+					'name'  => 'submit',
+					'value' => 'Create',
+					'class' => 'green'
+				);
+
+			<td><p><?php echo form_submit('submit', 'Create');?></p></td>
 		</tr>
 	</table>
 <?php echo form_close();?>
