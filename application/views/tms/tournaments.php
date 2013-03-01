@@ -51,13 +51,13 @@
 		<tr>
 			<td colspan="3"></td>
 			<?php 
-				submitStyle = array(
+				$submitStyle = array(
 					'name'  => 'submit',
 					'value' => 'Create',
 					'class' => 'green'
 				);
-
-			<td><p><?php echo form_submit('submit', 'Create');?></p></td>
+			?>
+			<td><p><?php echo form_submit($submitStyle);?></p></td>
 		</tr>
 	</table>
 <?php echo form_close();?>
