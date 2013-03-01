@@ -37,5 +37,10 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 
+// Herp derp date times
+
+define('DATE_FORMAT' = "yyyy-mm-dd");
+define('DATE_TIME_FORMAT' = DateTime::ISO8601);
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
