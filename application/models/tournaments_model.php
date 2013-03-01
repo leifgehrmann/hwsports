@@ -87,9 +87,10 @@ class Tournaments_model extends CI_Model {
 		
 		$registrationStartDate = DateTime::createFromFormat(DateTime::ISO8601, $tournament['registrationStart']);
 		$registrationEndDate = DateTime::createFromFormat(DateTime::ISO8601, $tournament['registrationEnd']);
-		
 		$tournamentStartDate = DateTime::createFromFormat(DateTime::ISO8601, $tournament['tournamentStart']);
 		$tournamentEndDate = DateTime::createFromFormat(DateTime::ISO8601, $tournament['tournamentEnd']);
+		
+		return(print_r($tournament,1));
 		
 		if( ($today < $registrationStartDate) && ($today < $registrationEndDate) &&
 			($today < $tournamentStartDate) && ($today < $tournamentEndDate) ) {
