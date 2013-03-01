@@ -473,19 +473,19 @@ div.icon.arrow-right-black-light						{ background-position: -120px  -20px; }
 div.icon.arrow-right-black-gray							{ background-position: -100px  -20px; }
 div.icon.arrow-right-black-dark							{ background-position:  -80px  -20px; }
 
-div.icon.arrow-right-blue-light     					{ background-position: -120px    0px; }
-div.icon.arrow-right-blue-medium    					{ background-position: -100px    0px; }
-div.icon.arrow-right-blue-dark      					{ background-position:  -80px    0px; }
+div.icon.arrow-right-blue-light							{ background-position: -120px    0px; }
+div.icon.arrow-right-blue-medium						{ background-position: -100px    0px; }
+div.icon.arrow-right-blue-dark							{ background-position:  -80px    0px; }
 
-div.icon.dalek-black        							{ background-position: -560px  -20px; }
-div.icon.dalek-white        							{ background-position: -580px  -20px; }
+div.icon.dalek-black									{ background-position: -560px -540px; }
+div.icon.dalek-white									{ background-position: -580px -540px; }
 
 /* For messages */
-.message                div.icon 						{ background-position: -440px  -20px; }
-.message-information	div.icon 						{ background-position: -440px  -20px; }
-.message-error 			div.icon 						{ background-position: -440px  -40px; }
-.message-success 		div.icon 						{ background-position: -440px  -60px; }
-.message-warning 		div.icon 						{ background-position: -440px  -80px; }
+.message                div.icon 						{ background-position: -340px -200px; }
+.message-information	div.icon 						{ background-position: -340px -200px; }
+.message-success 		div.icon 						{ background-position: -340px -220px; }
+.message-error 			div.icon 						{ background-position: -360px -200px; }
+.message-warning 		div.icon 						{ background-position: -360px -220px; }
 
 /* For sport icons */
 div.widget-title div.icon.sport-wattball 				{ background-position: -320px -220px; }
@@ -762,8 +762,7 @@ a:hover div.widget-title-right.icon { -webkit-animation: imove .5s; }
     z-index: -1; 
     width:20px; 
     height:20px; 
-    background-image: url('/img/icons/icons.raw.png'); 
-    background-position: -320px -280px; 
+    background-image: url('/img/icons/icons.raw.png');
     left:0px; 
 } 
 .fc div.fc-event-inner { 
