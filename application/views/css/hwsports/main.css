@@ -646,27 +646,17 @@ div.widget-title div.icon.news			 				{ background-position: -160px -280px; }
 
 div.widget {
     background: #EEEEEE;
-    display: inline-block; *display: inline; zoom: 1;
+    float: left;
     margin-bottom: 20px;
-    vertical-align: top;
-    margin-right:-4px;
 }
 div.full            { width: 700px; } /* 160 + 20 + 160 + 20 + 160 + 20 + 160 */
 div.threefourth     { width: 520px; } /* 160 + 20 + 160 + 20 + 160 */
 div.half            { width: 340px; } /* 160 + 20 + 160 */
 div.fourth          { width: 160px; } /* 160 */
 
-div.widget.threefourth, div.widget.half, div.widget.fourth {
-    margin-right:-4px;
-    display: inline-block; *display: inline; zoom: 1;
-    vertical-align: top;
-}
-
 /* These are the icons widths, so these are slightly redundant */
 div.widget-title-left,
-div.widget-title-right  {
-    width:20px;
-} 
+div.widget-title-right  { width:20px; } 
 
 /* This is assuming widget-title-centre is surrounded by icons */
 div.full            div.widget-title-centre { width:580px; } /* 700 - 20*2 - 20*4 */
@@ -674,7 +664,10 @@ div.threefourth     div.widget-title-centre { width:400px; } /* 520 - 20*2 - 20*
 div.half            div.widget-title-centre { width:220px; } /* 340 - 20*2 - 20*4 */
 div.fourth          div.widget-title-centre { width: 40px; } /* 160 - 20*2 - 20*4 */
 
-div.half:nth-of-type(even) { margin-left: 20px; }
+div.half:nth-of-type(odd) {
+    margin-right: 20px;
+    clear: both;
+}
 
 div.widget-title {
     text-decoration: none;
