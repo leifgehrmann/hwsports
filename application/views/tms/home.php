@@ -9,9 +9,9 @@
 		<? 
 			// foreach($)
 		?>
-		<div class="icon margin-right"><p><a href="/match/sdfkdsbfds"></div>Team A vs Team B</a></p><p><span class="green light bold" style="margin-right:10px;">WattBall</span> 20th February</p>
-		<div class="icon margin-right"><p><a href="/match/dsfknds">Team B vs Team C</a></p><p><span style="color:#468C00;font-weight:bold;margin-right:10px;">WattBall</span> 21st February</p>
-		<div class="icon margin-right"><p><a href="/match/sdlkfsd">Heriot Hurdling - Day 1</a></p><p><span style="color:#B25900;font-weight:bold;margin-right:10px;">Heriot Hurdling Mens</span> 20th February</p>
+		<div class="icon left margin-right"></div><p><a href="/match/sdfkdsbfds">Team A vs Team B</a><br/>20th February &mdash; 10:28</p>
+		<div class="icon left margin-right"></div><p><a href="/match/dsfknds">Team B vs Team C</a></p><p>20th February &mdash; 16:30</p>
+		<div class="icon left margin-right"></div><p><a href="/match/sdlkfsd">Heriot Hurdling - Day 1</a></p><p>21st February &mdash; 19:20</p>
 		<p><a href="/matches/" class="button right blue">View All Matches</a></p>
 	</div>
 </div>
