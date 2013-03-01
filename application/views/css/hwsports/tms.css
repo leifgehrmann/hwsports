@@ -384,21 +384,21 @@
 ****************************************
 ***************************************/
 
-#menu div.icon.dashboard 		{ background-position:  -80px -480px; }
-#menu div.icon.events 			{ background-position:  -80px -280px; }
-#menu div.icon.venues 			{ background-position:  -80px -320px; }
-#menu div.icon.sports 			{ background-position:  -80px -540px; }
-#menu div.icon.announcements 	{ background-position:  -80px -600px; }
-#menu div.icon.tickets 			{ background-position:  -80px -340px; }
-#menu div.icon.usersgroups 		{ background-position:  -80px -400px; }
-#menu div.icon.settings 		{ background-position:  -80px -500px; }
-#menu div.icon.homepage 		{ background-position:  -80px -260px; }
-#menu div.icon.account 			{ background-position:  -80px -380px; }
-#menu div.icon.logout 			{ background-position:  -80px -440px; }
+#menu div.icon.dashboard 		{ background-position: -100px -480px; }
+#menu div.icon.events 			{ background-position: -100px -280px; }
+#menu div.icon.venues 			{ background-position: -100px -320px; }
+#menu div.icon.sports 			{ background-position: -100px -540px; }
+#menu div.icon.announcements 	{ background-position: -100px -600px; }
+#menu div.icon.tickets 			{ background-position: -100px -340px; }
+#menu div.icon.usersgroups 		{ background-position: -100px -400px; }
+#menu div.icon.settings 		{ background-position: -100px -500px; }
+#menu div.icon.homepage 		{ background-position: -100px -260px; }
+#menu div.icon.account 			{ background-position: -100px -380px; }
+#menu div.icon.logout 			{ background-position: -100px -440px; }
 #menu div.icon.close 			{ background-position: -180px -460px; }
 
-#footer .logo 					{ background-position: -560px  -20px; }
-#header #title-bar .logo 		{ background-position: -380px  -60px; }
+#header #title-bar .logo 		{ background-position: -560px  -60px; }
+#footer .logo 					{ background-position: -380px  -20px; }
 
 
 
