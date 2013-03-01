@@ -8,6 +8,9 @@ class MY_Controller extends CI_Controller {
 
         parent::__construct();
 
+		$dateFormat = "yyyy-mm-dd";
+		$dateTimeFormat = DateTime::ISO8601;
+		
 		$centreSite = TRUE;
 		switch($_SERVER['HTTP_HOST']) {
 			case "hwsports.co.uk":
