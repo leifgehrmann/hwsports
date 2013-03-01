@@ -634,8 +634,8 @@ class Tms extends MY_Controller {
 	}
 
 	public function dateformat_check($strDate) {
-		$format=array("d","m","y");
-		$ex="/";
+		$format=array("y","m","d");
+		$ex="-";
 		if(count(explode($ex,$strDate))==3) { 
 			$date = array_combine($format,explode($ex,$strDate)); 
 			if(intval($date['m']) && intval($date['d']) && intval($date['y'])) {
@@ -643,7 +643,7 @@ class Tms extends MY_Controller {
 				if( checkdate($m,$d,$y) ) {
 					return TRUE;
 				} else {				
-					$this->form_validation->set_message('dateformat_check', 'The %s field must contain a date within realistic range. Provided: '.$d.' / '.$m.' / '.$y);
+					$this->form_validation->set_message('dateformat_check', 'The %s field must contain a date within realistic range. Provided: '.$y.' - '.$m.' - '.$d);
 					return FALSE;
 				}
 			} else {

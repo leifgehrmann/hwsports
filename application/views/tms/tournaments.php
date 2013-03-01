@@ -41,9 +41,9 @@
 		</tr>
 		<tr>
 			<td><label for="registrationStart">Start Date:</label></td>
-			<td><?php echo form_input($tournamentStart);?></td>
-			<td><label for="registrationEnd">End Date:</label></td>
 			<td><?php echo form_input($registrationStart);?></td>
+			<td><label for="registrationEnd">End Date:</label></td>
+			<td><?php echo form_input($registrationEnd);?></td>
 		</tr>
 		<tr>
 			<td colspan="3"></td>
@@ -61,7 +61,7 @@
 
 <script type="text/javascript">
 	$('.date').datepicker({
-      dateFormat: "dd/mm/yy"
+      dateFormat: "yy/mm/dd"
     });
 </script>
 
