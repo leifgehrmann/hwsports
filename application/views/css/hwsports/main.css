@@ -412,7 +412,7 @@ div.icon {
     width: 20px;
     height: 20px;
     background-image: url('/img/icons/icons.png');
-    background-position: -600px -540px;
+    background-position: -20px -20px;
     background-repeat: no-repeat;
     display: inline-block; *display: inline; zoom: 1;
 }
@@ -455,8 +455,8 @@ div.widget-title div.icon.load {
 
 
 /* Many of these icons below are not going to be used */
-div.icon.subscribe 										{ background-position:  -20px -380px; }
-div.icon.announcement 									{ background-position: -120px -280px; }
+div.icon.subscribe 										{ background-position:  -20px -460px; }
+div.icon.announcement 									{ background-position:  -20px -600px; }
 
 div.icon.block-black-light 								{ background-position:  -40px  -20px; }
 div.icon.block-black-medium 							{ background-position:  -20px  -20px; }
@@ -488,10 +488,8 @@ div.icon.dalek-white									{ background-position: -580px -540px; }
 .message-warning 		div.icon 						{ background-position: -360px -220px; }
 
 /* For sport icons */
-div.widget-title div.icon.sport-wattball 				{ background-position: -320px -220px; }
-div.widget-title div.icon.sport-hurdling 				{ background-position: -380px -220px; }
 div.widget-title div.icon.chevron 		 				{ background-position: -120px  -60px; }
-div.widget-title div.icon.news							{ background-position: -160px -280px; }
+div.widget-title div.icon.announcement					{ background-position: -160px -280px; }
 
 .match.sportCategoryID-1 div.icon 						{ background-position: -560px -260px; } /* Airsports */
 .match.sportCategoryID-2 div.icon 						{ background-position: -420px -340px; } /* Archery variants */
