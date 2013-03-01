@@ -9,9 +9,9 @@
 		<? 
 			// foreach($)
 		?>
-		<div class="match sportCategoryID-6"><div class="icon left margin-right"></div><p><a href="/tms/match/sdfkdsbfds">Team A vs Team B</a><br/>20th February &mdash; 10:28</p></div>
-		<div class="match sportCategoryID-7"><div class="icon left margin-right"></div><p><a href="/tms/match/dsfknds">Team B vs Team C</a><br/>20th February &mdash; 16:30</p></div>
-		<div class="match sportCategoryID-8"><div class="icon left margin-right"></div><p><a href="/tms/match/sdlkfsd">Heriot Hurdling - Day 1</a><br/>21st February &mdash; 19:20</p></div>
+		<div class="match sportCategoryID-6"><div class="icon left margin-right"></div><p><a href="/tms/match/sdfkdsbfds">Team A vs Team B</a><br/><span style="display: inline-block;padding-left: 40px;">20th February &mdash; 10:28</span></p></div>
+		<div class="match sportCategoryID-7"><div class="icon left margin-right"></div><p><a href="/tms/match/dsfknds">Team B vs Team C</a><br/><span style="display: inline-block;padding-left: 40px;">20th February &mdash; 16:30</span></p></div>
+		<div class="match sportCategoryID-8"><div class="icon left margin-right"></div><p><a href="/tms/match/sdlkfsd">Heriot Hurdling - Day 1</a><br/><span style="display: inline-block;padding-left: 40px;">21st February &mdash; 19:20</span></p></div>
 		<p><a href="/tms/matches/" class="button right blue">View All Matches</a></p>
 	</div>
 </div>
