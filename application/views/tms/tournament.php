@@ -66,7 +66,7 @@
 			<br />
 		<? break;
 		default: ?>
-			<h3 class="tournamentStatusMessage invalidDates">Invalid tournament dates. Please ensure registration start date is before registration end date, and tournament start/end dates are after competitor registration:</h3>
+			<h3 class="tournamentStatusMessage invalidDates"><?=$tournament['status']?></h3>
 			<?=$formTop?>
 			<label for="tournamentStart">Start Date:</label> <?php echo form_input($tournamentStart);?> <label for="tournamentEnd">End Date:</label> <?php echo form_input($tournamentEnd);?>
 			<br />
