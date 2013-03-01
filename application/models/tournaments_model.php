@@ -91,7 +91,12 @@ class Tournaments_model extends CI_Model {
 		$tournamentEndDate = DateTime::createFromFormat(DateTime::ISO8601, $tournament['tournamentEnd']);
 		
 		if(empty($registrationStartDate) || empty($registrationEndDate) || empty($tournamentStartDate) || empty($tournamentEndDate) ) {
-			return("ERROR: Tournament has at least one invalid date. Please correct the dates below.");
+			$errorMessage = "ERROR: Tournament has at least one invalid date. Please correct the dates below.";
+			$errorMessage .= "registrationStartDate: ".var_export($registrationStartDate,1);
+			$errorMessage .= "registrationEndDate: ".var_export($registrationEndDate,1);
+			$errorMessage .= "tournamentStartDate: ".var_export($tournamentStartDate,1);
+			$errorMessage .= "tournamentEndDate: ".var_export($tournamentEndDate,1);
+			return ($errorMessage);
 		}
 		
 		if( ($today < $registrationStartDate) && ($today < $registrationEndDate) &&
