@@ -1,15 +1,36 @@
 <h1>Dashboard</h1>
-<div class="widget">
-	<h2>Latest Tournaments</h2>
-	<div class="row"><p><a href="">2012 Heriot Watt</a></p><p class="subtitle">5th-12th February</p></div>
-	<div class="row"><p><a href="">2012 Rugby</a></p><p class="subtitle">5th-12th February</p></div>
-	<div class="row"><p><a href="">2012 Summer WattBall</a></p><p class="subtitle">5th-12th February</p></div>
+<div class="widget half tournaments">
+	<div class="widget-title">
+		<div class="widget-title-left icon"></div>
+		<div class="widget-title-centre">Latest Tournaments</div>
+		<div class="widget-title-right icon"></div>
+	</div>
+	<div class="widget-body">
+		<? 
+			// foreach($)
+		?>
+		<p><a href="/tournament/dshjf"		>2012 Heriot Watt</a></p><p>5th-12th February</p>
+		<p><a href="/tournament/afjb"		>2012 Rugby</a></p><p>5th-12th February</p>
+		<p><a href="/tournament/sdlkfjsd"	>2012 Summer WattBall</a></p><p>5th-12th February</p>
+		<p><a href="/tournaments/" class="button right blue">View All Tournaments</a></p>
+	</div>
 </div>
-<div class="widget">
-	<h2>Upcoming Tournaments</h2>
-	<div class="row"><p><a href="">2013 Heriot Watt</a></p><p class="subtitle">5th-12th February</p></div>
-	<div class="row"><p><a href="">2014 Summer WattBall</a></p><p class="subtitle">5th-12th February</p></div>
+<div class="widget half tournaments">
+	<div class="widget-title">
+		<div class="widget-title-left icon"></div>
+		<div class="widget-title-centre">Upcoming Tournaments</div>
+		<div class="widget-title-right icon"></div>
+	</div>
+	<div class="widget-body">
+		<? 
+			// foreach($)
+		?>
+		<p><a href="/tournament/flksdf">2013 Heriot Watt</a></p><p>5th-12th February</p>
+		<p><a href="/tournament/dsflkjsd">2014 Summer WattBall</a></p><p>5th-12th February</p>
+		<p><a href="/tournaments/" class="button right blue">View All Tournaments</a></p>
+	</div>
 </div>
+
 <div class="widget">
 	<h2>Latest Matches / Games</h2>
 	<div class="row"><p><a href="">Team A vs Team B</a></p><p class="subtitle"><span class="green light bold" style="margin-right:10px;">WattBall</span> 20th February</p></div>

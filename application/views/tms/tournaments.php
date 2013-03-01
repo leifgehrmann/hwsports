@@ -18,11 +18,8 @@
 <br />
 
 <?php echo form_open("tms/tournaments", array('id' => 'tournamentsForm'));?>
-	
+	<h2>Create a New Tournament</h2>
 	<table>
-		<tr>
-			<td colspan="4"><h2>Create New Tournament:</h2></td>
-		</tr>
 		<tr>
 			<td><label for="name">Name:</label></td>
 			<td><?php echo form_input($name);?></td>
