@@ -115,7 +115,12 @@ class Tournaments_model extends CI_Model {
 			($today > $tournamentStartDate) && ($today > $tournamentEndDate) ) {
 			return("postTournament");
 		} else {
-			return("invalidDates");
+			return("ERROR: Tournament has invalid dates. Today's date is: ".$today->format('d/m/Y').".
+					Registration start date is: ".$registrationStartDate->format('d/m/Y')."
+					Registration end date is: ".$registrationEndDate->format('d/m/Y')."
+					Tournament start date is: ".$tournamentStartDate->format('d/m/Y')."
+					Tournament start date is: ".$tournamentEndDate->format('d/m/Y')."
+					Please correct the dates below.");
 		}
 	}
 	
