@@ -2,14 +2,14 @@
 <div class="widget half tournaments">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
-		<div class="widget-title-centre">Latest Tournaments</div>
+		<div class="widget-title-centre">Latest Matches / Games</div>
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
 		<? 
 			// foreach($)
 		?>
-		<p><a href="/match/sdfkdsbfds"><div class="icon"></div></div>Team A vs Team B</a></p><p><span class="green light bold" style="margin-right:10px;">WattBall</span> 20th February</p>
+		<p><a href="/match/sdfkdsbfds"><div class="icon"></div>Team A vs Team B</a></p><p><span class="green light bold" style="margin-right:10px;">WattBall</span> 20th February</p>
 		<p><a href="/match/dsfknds"><div class="icon"></div>Team B vs Team C</a></p><p><span style="color:#468C00;font-weight:bold;margin-right:10px;">WattBall</span> 21st February</p>
 		<p><a href="/match/sdlkfsd"><div class="icon"></div>Heriot Hurdling - Day 1</a></p><p><span style="color:#B25900;font-weight:bold;margin-right:10px;">Heriot Hurdling Mens</span> 20th February</p>
 		<p><a href="/matches/" class="button right blue">View All Matches</a></p>
