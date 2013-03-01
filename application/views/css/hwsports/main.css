@@ -517,6 +517,9 @@ div.widget-title div.icon.sport-hurdling 				{ background-position: -380px -220p
 div.widget-title div.icon.chevron 		 				{ background-position: -120px  -60px; }
 div.widget-title div.icon.news			 				{ background-position: -160px -280px; }
 
+/* For fullcalendar */
+.fc .tournament div.fc-event-inner.::before 			{ background-position: -40px  -300px; }
+
 
 
 
