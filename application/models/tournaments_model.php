@@ -90,9 +90,6 @@ class Tournaments_model extends CI_Model {
 		$tournamentStartDate = DateTime::createFromFormat(DateTime::ISO8601, $tournament['tournamentStart']);
 		$tournamentEndDate = DateTime::createFromFormat(DateTime::ISO8601, $tournament['tournamentEnd']);
 		
-		//return(print_r($tournament,1));
-		return(var_export($today->format(DateTime::ISO8601),1));
-		
 		if( ($today < $registrationStartDate) && ($today < $registrationEndDate) &&
 			($today < $tournamentStartDate) && ($today < $tournamentEndDate) ) {
 			return("preRegistration: Today's date is: ".$today->format(DateTime::ISO8601).".
@@ -141,6 +138,13 @@ class Tournaments_model extends CI_Model {
 		} elseif( ($today >= $registrationStartDate) && ($today >= $registrationEndDate) &&
 			($today >= $tournamentStartDate) && ($today >= $tournamentEndDate) ) {
 			return("postTournament: Today's date is: ".$today->format(DateTime::ISO8601).".
+					Registration start date is: ".$registrationStartDate->format(DateTime::ISO8601)."
+					Registration end date is: ".$registrationEndDate->format(DateTime::ISO8601)."
+					Tournament start date is: ".$tournamentStartDate->format(DateTime::ISO8601)."
+					Tournament start date is: ".$tournamentEndDate->format(DateTime::ISO8601)."
+					Please correct the dates below.");
+		} elseif(empty($registrationStartDate) || empty($registrationEndDate) || empty($tournamentStartDate) || empty($tournamentEndDate) ) {
+			return("ERROR: Tournament has invalid dates. Today's date is: ".$today->format(DateTime::ISO8601).".
 					Registration start date is: ".$registrationStartDate->format(DateTime::ISO8601)."
 					Registration end date is: ".$registrationEndDate->format(DateTime::ISO8601)."
 					Tournament start date is: ".$tournamentStartDate->format(DateTime::ISO8601)."
