@@ -35,7 +35,7 @@
 
 		var b = false;
 		$('html').keyup(function(event) {
-			if (event.which == 65) {
+			if (event.shiftKey && event.ctrlKey) {
 				if(!b){
 					$('body').css('background-image',"url('/img/typography/baseline.png'), url('/img/typography/columns.tms.png')");
 					$('body').css('background-repeat',"repeat, repeat-y");
