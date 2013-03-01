@@ -169,8 +169,8 @@ class Db_Calendar extends MY_Controller {
 		// Inserting all the tournament periods
 		if($showTournaments){
 			foreach($tournaments as $tournament) {
-				$tournamentStart	= DateTime::createFromFormat($dateFormat, $tournament['tournamentStart']);
-				$tournamentEnd		= DateTime::createFromFormat($dateFormat, $tournament['tournamentEnd']);
+				$tournamentStart	= DateTime::createFromFormat(DATE_FORMAT, $tournament['tournamentStart']);
+				$tournamentEnd		= DateTime::createFromFormat(DATE_FORMAT, $tournament['tournamentEnd']);
 				$event = array(
 					'data' => array(
 						'id' => "tournament-".$tournament['tournamentID']
@@ -197,8 +197,8 @@ class Db_Calendar extends MY_Controller {
 		// Inserting all the registration periods
 		if($showRegistrations){
 			foreach($tournaments as $tournament) {
-				$registrationStart	= DateTime::createFromFormat($dateFormat, $tournament['registrationStart']);
-				$registrationEnd	= DateTime::createFromFormat($dateFormat, $tournament['registrationEnd']);
+				$registrationStart	= DateTime::createFromFormat(DATE_FORMAT, $tournament['registrationStart']);
+				$registrationEnd	= DateTime::createFromFormat(DATE_FORMAT, $tournament['registrationEnd']);
 				$event = array(
 					'data' => array(
 						'id' => "registration-".$tournament['tournamentID']
