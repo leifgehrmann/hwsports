@@ -64,8 +64,16 @@
 				<span class='tournamentSport'><?=$tournament['sportName']?></span>
 			</p>
 			<br />
-		<? break; 
-	} ?>
+		<? break;
+		default: ?>
+			Incorrect tournament dates (tournament status: <?=$tournament['status']?>). Please correct below:
+			<?=$formTop?>
+			<label for="tournamentStart">Start Date:</label> <?php echo form_input($tournamentStart);?> <label for="tournamentEnd">End Date:</label> <?php echo form_input($tournamentEnd);?>
+			<br />
+			<h3>Competitor Registration Period:</h3>
+			<label for="registrationStart">Start Date:</label> <?php echo form_input($registrationStart);?> <label for="registrationEnd">End Date:</label><?php echo form_input($registrationEnd);?> <br />		
+		<? break; ?>	
+	<? } ?>
 	<p><?php echo form_submit('submit', 'Update');?></p>
 	<p><a href="/tms/delete_tournament/<?=$tournamentID?>" class="deleteTournament">Delete</a></p>
 <?php echo form_close();?>
