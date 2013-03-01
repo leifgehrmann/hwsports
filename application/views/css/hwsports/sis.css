@@ -85,11 +85,11 @@
 	color: inherit;
 	text-decoration:none;
 }
-#menu a:hover,
+#menu a:hover			{ color: #3F68BB; }
 #menu a.selected,
-#menu a.selected:hover { color: #0D42A8; }
+#menu a.selected:hover 	{ color: #0D42A8; }
 #menu a.selected,
-#menu a.selected:hover { font-weight:700; }
+#menu a.selected:hover 	{ font-weight:700; }
 
 #menu a {
 	transition: 		color .1s;
@@ -115,28 +115,6 @@
 #menu div.icon 							{ background-color: #333333; }
 #menu a:hover div.icon					{ background-color: #3F68BB; }
 #menu a.selected div.icon 				{ background-color: #0D42A8; }
-
-#menu .homepage 			div.icon 	{ background-position: -100px -200px; }
-#menu .calendar 			div.icon 	{ background-position: -100px -220px; }
-#menu .tournaments 			div.icon 	{ background-position: -100px -240px; }
-#menu .matches 				div.icon 	{ background-position: -100px -260px; }
-#menu .tickets 				div.icon 	{ background-position: -100px -280px; }
-#menu .help 				div.icon 	{ background-position: -100px -300px; }
-#menu .account 				div.icon 	{ background-position: -100px -320px; }
-#menu .login 				div.icon 	{ background-position: -100px -340px; }
-#menu .logout 				div.icon 	{ background-position: -100px -360px; }
-#menu .register 			div.icon 	{ background-position: -100px -380px; }
-
-/*#menu a.homepage:hover 		div.icon 	,#menu a.selected.homepage 		div.icon 	{ background-position: -40px -200px; }
-#menu a.calendar:hover 		div.icon 	,#menu a.selected.calendar 		div.icon	{ background-position: -40px -220px; }
-#menu a.tournaments:hover 	div.icon 	,#menu a.selected.tournaments 	div.icon	{ background-position: -40px -240px; }
-#menu a.matches:hover		div.icon 	,#menu a.selected.matches 		div.icon	{ background-position: -40px -260px; }
-#menu a.tickets:hover 		div.icon 	,#menu a.selected.tickets 		div.icon	{ background-position: -40px -280px; }
-#menu a.help:hover 			div.icon 	,#menu a.selected.help 			div.icon	{ background-position: -40px -300px; }
-#menu a.account:hover 		div.icon 	,#menu a.selected.account 		div.icon	{ background-position: -40px -320px; }
-#menu a.login:hover 		div.icon 	,#menu a.selected.login 		div.icon	{ background-position: -40px -340px; }
-#menu a.logout:hover 		div.icon 	,#menu a.selected.logout		div.icon	{ background-position: -40px -360px; }
-#menu a.register:hover		div.icon 	,#menu a.selected.register		div.icon	{ background-position: -40px -380px; }*/
 
 /***************************************\
 
@@ -182,8 +160,6 @@
 	background-image:url('/img/icons/icons.png');
 	margin-bottom: 10px;
 }
-#footer-powered .product-logo{ background-position: -460px -60px; }
-#footer-powered .company-logo{ background-position: -460px -20px; }
 #footer-powered div:hover{ opacity: 0.8; }
 
 
@@ -325,26 +301,10 @@
 /***************************************\
 
             Widget Div
-            Icons & Colours
 
-    Leif's Custom widget div, which
-    is a simple information box that
-    can be used for announcements, 
-    tournament, match items on the
-    pages.
+    	SIS specific content.
                 
 \***************************************/
-
-div.widget.announcement 	div.widget-title-left.icon { background-position: -160px -280px; }
-div.widget.tournament 		div.widget-title-left.icon { background-position: -60px  -240px; }
-div.widget.match 			div.widget-title-left.icon { background-position: -60px  -260px; }
-div.widget.welcome-message 	div.widget-title-left.icon { background-position: -60px  -200px; }
-div.widget.subscribe 		div.widget-title-left.icon { background-position: -60px  -380px; }
-div.widget.profile 			div.widget-title-left.icon { background-position: -60px  -320px; }
-div.widget.signup 			div.widget-title-left.icon { background-position: -60px  -380px; }
-div.widget.tickets 			div.widget-title-left.icon { background-position: -60px  -280px; }
-div.widget.participation	div.widget-title-left.icon { background-position: -60px  -240px; }
-div.widget.tms				div.widget-title-left.icon { background-position: -160px -360px; }
 
 div.widget.welcome-message 	div.widget-title { background: #0D44A2; }
 div.widget.subscribe 		div.widget-title { background: #D93600; }
@@ -353,9 +313,25 @@ div.widget.subscribe 		div.widget-title { background: #D93600; }
 
 
 
+/***************************************\
 
+				Icons
+				
+\***************************************/
 
+#menu .homepage 			div.icon 	{ background-position: -120px -260px; }
+#menu .calendar 			div.icon 	{ background-position: -120px -280px; }
+#menu .tournaments 			div.icon 	{ background-position: -120px -300px; }
+#menu .matches 				div.icon 	{ background-position: -120px -320px; }
+#menu .tickets 				div.icon 	{ background-position: -120px -340px; }
+#menu .help 				div.icon 	{ background-position: -120px -360px; }
+#menu .account 				div.icon 	{ background-position: -120px -380px; }
+#menu .login 				div.icon 	{ background-position: -120px -420px; }
+#menu .logout 				div.icon 	{ background-position: -120px -440px; }
+#menu .register 			div.icon 	{ background-position: -120px -460px; }
 
+#footer-powered .product-logo			{ background-position: -380px  -60px; }
+#footer-powered .company-logo			{ background-position: -380px  -20px; }
 
 
 

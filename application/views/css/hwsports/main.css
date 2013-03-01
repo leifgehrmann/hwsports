@@ -204,11 +204,6 @@ textarea {
                 inset 0px 1px 2px rgba(0,0,0,0.6), 
                 inset 0px 0px 1px rgba(0,0,0,0.6);
 }
-
-
-
-
-
 /***************************************\
 
             Content Styling
@@ -220,7 +215,6 @@ textarea {
 
 #content h1 { color: #0D44A2; }
 #content h1 div.icon.subsection {
-    background-position: -20px -80px;
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -236,6 +230,34 @@ textarea {
     padding-bottom: 20px;
     padding-top: 20px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -274,11 +296,31 @@ textarea {
 
 /* The icons that appear within the message */
 .message                div.icon    { float: left; }
-.message                div.icon    { background-position: -440px -20px; }
-.message-information    div.icon    { background-position: -440px -20px; }
-.message-error          div.icon    { background-position: -440px -40px; }
-.message-success        div.icon    { background-position: -440px -60px; }
-.message-warning        div.icon    { background-position: -440px -80px; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -335,6 +377,32 @@ a.button .icon { margin-bottom: -5px; }
 .right .button { margin-left: 20px; }
 .left .button { margin-right: 20px; }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /***************************************\
 
                 Icons
@@ -344,12 +412,23 @@ div.icon {
     width: 20px;
     height: 20px;
     background-image: url('/img/icons/icons.png');
-    background-position: 20px 20px;
+    background-position: -600px -540px;
     background-repeat: no-repeat;
     display: inline-block; *display: inline; zoom: 1;
 }
+
+div.icon.margin-left { margin-left: 20px; }
+div.icon.margin-right { margin-right: 20px; }
+
 div.icon.load {
     -webkit-animation: play-black .8s steps(8) infinite;
+       -moz-animation: play-black .8s steps(8) infinite;
+        -ms-animation: play-black .8s steps(8) infinite;
+         -o-animation: play-black .8s steps(8) infinite;
+            animation: play-black .8s steps(8) infinite;
+}
+.button div.icon.load {
+	-webkit-animation: play-black .8s steps(8) infinite;
        -moz-animation: play-black .8s steps(8) infinite;
         -ms-animation: play-black .8s steps(8) infinite;
          -o-animation: play-black .8s steps(8) infinite;
@@ -374,34 +453,85 @@ div.widget-title div.icon.load {
 @-o-keyframes       play-white  { from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
 @keyframes          play-white  { from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
 
-div.icon.subscribe              {background-position:   -20px -380px;}
-div.icon.announcement           {background-position:  -120px -280px;}
 
-div.icon.block-black-light      {background-position: -40px -20px;}
-div.icon.block-black-medium     {background-position: -20px -20px;}
-div.icon.block-black-dark       {background-position: 0px -20px;}
+/* Many of these icons below are not going to be used */
+div.icon.subscribe 										{ background-position:  -20px -380px; }
+div.icon.announcement 									{ background-position: -120px -280px; }
 
-div.icon.block-blue-light       {background-position: -40px 0px;}
-div.icon.block-blue-medium      {background-position: -20px 0px;}
-div.icon.block-blue-dark        {background-position: 0px 0px;}
+div.icon.block-black-light 								{ background-position:  -40px  -20px; }
+div.icon.block-black-medium 							{ background-position:  -20px  -20px; }
+div.icon.block-black-dark      							{ background-position:    0px  -20px; }
 
-div.icon.block-white            {background-position: -60px -20px;}
-div.icon.arrow-right-white          {background-position: -140px -20px;}
+div.icon.block-blue-light       						{ background-position:  -40px    0px; }
+div.icon.block-blue-medium      						{ background-position:  -20px    0px; }
+div.icon.block-blue-dark        						{ background-position:    0px    0px; }
 
-div.icon.arrow-right-black-light    {background-position: -120px -20px;}
-div.icon.arrow-right-black-gray     {background-position: -100px -20px;}
-div.icon.arrow-right-black-dark     {background-position: -80px -20px;}
+div.icon.block-white									{ background-position:  -60px  -20px; }
+div.icon.arrow-right-white								{ background-position: -140px  -20px; }
 
-div.icon.arrow-right-blue-light     {background-position: -120px 0px;}
-div.icon.arrow-right-blue-medium    {background-position: -100px 0px;}
-div.icon.arrow-right-blue-dark      {background-position:  -80px 0px;}
+div.icon.arrow-right-black-light						{ background-position: -120px  -20px; }
+div.icon.arrow-right-black-gray							{ background-position: -100px  -20px; }
+div.icon.arrow-right-black-dark							{ background-position:  -80px  -20px; }
 
-div.icon.dalek-black        {background-position:  -560px -20px;}
-div.icon.dalek-white        {background-position:  -580px -20px;}
+div.icon.arrow-right-blue-light     					{ background-position: -120px    0px; }
+div.icon.arrow-right-blue-medium    					{ background-position: -100px    0px; }
+div.icon.arrow-right-blue-dark      					{ background-position:  -80px    0px; }
 
-.match.sportID-8    div.icon    { background-position:  -320px -200px; }
-.match.sportID-9    div.icon    { background-position:  -380px -200px; }
-.match.sportID-10   div.icon    { background-position:  -380px -200px; }
+div.icon.dalek-black        							{ background-position: -560px  -20px; }
+div.icon.dalek-white        							{ background-position: -580px  -20px; }
+
+/* For messages */
+.message                div.icon 						{ background-position: -440px  -20px; }
+.message-information	div.icon 						{ background-position: -440px  -20px; }
+.message-error 			div.icon 						{ background-position: -440px  -40px; }
+.message-success 		div.icon 						{ background-position: -440px  -60px; }
+.message-warning 		div.icon 						{ background-position: -440px  -80px; }
+
+/* For sport icons */
+div.widget-title div.icon.sport-wattball 				{ background-position: -320px -220px; }
+div.widget-title div.icon.sport-hurdling 				{ background-position: -380px -220px; }
+div.widget-title div.icon.chevron 		 				{ background-position: -120px  -60px; }
+div.widget-title div.icon.news							{ background-position: -160px -280px; }
+.match.sportID-8    div.icon							{ background-position: -320px -200px; }
+.match.sportID-9    div.icon							{ background-position: -380px -200px; }
+.match.sportID-10   div.icon    						{ background-position: -380px -200px; }
+
+/* For titles*/
+#content h1 div.icon.subsection 						{ background-position:  -20px  -80px; }
+
+/* For widgets */
+a div.widget-title-right.icon 							{ background-position: -120px  -60px; }
+div.widget.announcement     div.widget-title-left.icon 	{ background-position: -40px  -600px; }
+div.widget.tournament       div.widget-title-left.icon 	{ background-position: -40px  -300px; }
+div.widget.match            div.widget-title-left.icon 	{ background-position: -40px  -320px; }
+div.widget.welcome-message  div.widget-title-left.icon 	{ background-position: -40px  -260px; }
+div.widget.subscribe        div.widget-title-left.icon 	{ background-position: -40px  -460px; }
+div.widget.profile          div.widget-title-left.icon 	{ background-position: -40px  -380px; }
+div.widget.signup           div.widget-title-left.icon 	{ background-position: -40px  -460px; }
+div.widget.tickets          div.widget-title-left.icon 	{ background-position: -40px  -340px; }
+div.widget.participation    div.widget-title-left.icon 	{ background-position: -40px  -460px; }
+div.widget.tms              div.widget-title-left.icon 	{ background-position: -40px  -480px; }
+/* Used to overide generic icons, for example show football instead of just tournament cup */
+div.widget-title div.icon.sport-wattball 				{ background-position: -320px -220px; }
+div.widget-title div.icon.sport-hurdling 				{ background-position: -380px -220px; }
+div.widget-title div.icon.chevron 		 				{ background-position: -120px  -60px; }
+div.widget-title div.icon.news			 				{ background-position: -160px -280px; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /***************************************\
 
@@ -479,7 +609,6 @@ div.widget-body {
     overflow: hidden;
 }
 
-a div.widget-title-right.icon { background-position: -120px -60px; }
 a div.widget-title-right {
     transition: left opacity .1s;
     -moz-transition: left opacity .1s;
@@ -516,23 +645,12 @@ a:hover div.widget-title-right.icon { -webkit-animation: imove .5s; }
                 
 \***************************************/
 
-#content .fc .fc-header {
-    margin-top:20px;
-}
-#content .fc .fc-border-separate{
-    border-collapse: collapse;
-}
+#content .fc .fc-header { margin-top:20px; }
+#content .fc .fc-border-separate{ border-collapse: collapse; }
+#content .fc div.fc-view-month th.fc-widget-header { padding: 10px; }
+#content .fc table.fc-agenda-days th.fc-widget-header{ padding: 5px; }
 
-#content .fc div.fc-view-month th.fc-widget-header {
-    padding: 10px;
-}
-#content .fc table.fc-agenda-days th.fc-widget-header{
-    padding: 5px;
-}
-
-#content .fc div.fc-view-agendaDays th.fc-agenda-axis {
-    padding-right: 20px;
-}
+#content .fc div.fc-view-agendaDays th.fc-agenda-axis { padding-right: 20px; }
 #content .fc div.fc-view-agendaWeek th.fc-agenda-axis {
     padding-right: 10px;
     text-align: right;
@@ -557,11 +675,52 @@ a:hover div.widget-title-right.icon { -webkit-animation: imove .5s; }
     opacity: none;
     background: none;
     border: none;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
     box-sizing: border-box;
 }
+.fc .fc-event-skin.fc-corner-left {
+	border-radius: 			3px 0px 0px 3px;
+	-webkit-border-radius: 	3px 0px 0px 3px;
+	-moz-border-radius: 	3px 0px 0px 3px;
+}
+.fc .fc-event-skin.fc-corner-right {
+	border-radius: 			0px 3px 3px 0px;
+	-webkit-border-radius: 	0px 3px 3px 0px;
+	-moz-border-radius: 	0px 3px 3px 0px;
+}
+.fc .fc-event-skin.fc-corner-top {
+	border-radius: 			3px 3px 0px 0px;
+	-webkit-border-radius: 	3px 3px 0px 0px;
+	-moz-border-radius: 	3px 3px 0px 0px;
+}
+.fc .fc-event-skin.fc-corner-top {
+	border-radius: 			0px 0px 3px 3px;
+	-webkit-border-radius: 	0px 0px 3px 3px;
+	-moz-border-radius: 	0px 0px 3px 3px;
+}
+.fc .fc-event-skin.fc-corner-left.fc-corner-right,
+.fc .fc-event-skin.fc-corner-top.fc-corner-bottom {
+	border-radius: 			3px;
+	-webkit-border-radius: 	3px;
+	-moz-border-radius: 	3px;
+}
+.fc div.fc-event-inner::before { 
+    content: ''; 
+    position: absolute; 
+    z-index: -1; 
+    width:20px; 
+    height:20px; 
+    background-image: url('/img/icons/icons.raw.png'); 
+    background-position: -320px -280px; 
+    left:0px; 
+} 
+.fc div.fc-event-inner { 
+    padding-left:20px; 
+}
+
+
 #content .fc .fc-event-head .fc-event-skin {
     padding: 0px;
 }
@@ -587,7 +746,7 @@ a:hover div.widget-title-right.icon { -webkit-animation: imove .5s; }
     padding: 4px;
     background: none;
 }
-.fc .fc-grid .fc-event {
+.fc .fc-event {
     margin: 2px;
     padding: 2px;
     background: none;   

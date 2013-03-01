@@ -49,7 +49,6 @@
 	height:40px;
 	margin-right:20px;
 	background-image:url('/img/icons/icons.png');
-	background-position: -540px -100px;
 }
 #header #title-bar .name{
 	font-weight: 700;
@@ -158,7 +157,6 @@
 	color: #0D42A8;
 	font-weight:700;
 }
-#menu a.selected div { background-position: 0px 0px; }
 #menu a {
 	transition: 		color .1s;
 	-moz-transition: 	color .1s; /* Firefox 4 */
@@ -166,22 +164,7 @@
 	-o-transition: 		color .1s; /* Opera */
 }
 
-#menu a:hover div {
-	background-position: 0px 0px;
-}
-
-#menu div.icon.dashboard 		{ background-position: -180px -360px; }
-#menu div.icon.events 			{ background-position:  -80px -220px; }
-#menu div.icon.venues 			{ background-position:  -80px -260px; }
-#menu div.icon.sports 			{ background-position: -180px -240px; }
-#menu div.icon.announcements 	{ background-position: -180px -280px; }
-#menu div.icon.tickets 			{ background-position: -180px -200px; }
-#menu div.icon.usersgroups 		{ background-position: -180px -320px; }
-#menu div.icon.settings 		{ background-position: -180px -340px; }
-#menu div.icon.homepage 		{ background-position:  -80px -200px; }
-#menu div.icon.account 			{ background-position:  -80px -320px; }
-#menu div.icon.logout 			{ background-position:  -80px -360px; }
-#menu div.icon.close 			{ background-position:  -80px -400px; float: right; margin-right:10px;}
+#menu div.icon.close			{ float: right; margin-right:10px; }
 
 #menu div.icon 							{ background-color: #333333; }
 #menu a:hover div.icon					{ background-color: #3F68BB; }
@@ -227,13 +210,12 @@
 #footer a {
 	color: inherit;
 }
-#footer .logo{
+#footer .logo {
 	vertical-align: middle;
 	display: inline-block;
 	width:100px;
 	height:40px;
 	background-image:url('/img/icons/icons.png');
-	background-position: -460px -20px;
 }
 
 
@@ -389,89 +371,34 @@
 
 
 
-/*
+/***************************************
+****************************************
+****************************************
+		TMS specific Icons
 
-	Icon parameters
-*/
-div.icon {
-	width: 20px;
-	height: 20px;
-	background-image: url('/img/icons/icons.png');
-	display: inline-block; *display: inline; zoom: 1;
-}
+		see main.css for generic
+		icons that are used on both
+		sites.
 
-div.widget-title div.icon.sport-wattball {background-position: -320px -220px;}
-div.widget-title div.icon.sport-hurdling {background-position: -380px -220px;}
-div.widget-title div.icon.chevron 		 {background-position: -120px -60px;}
-div.widget-title div.icon.news			 {background-position: -160px -280px;}
+****************************************
+****************************************
+***************************************/
 
-h1 div.icon.subsection {background-position: -80px -80px;}
+#menu div.icon.dashboard 		{ background-position: -180px -360px; }
+#menu div.icon.events 			{ background-position:  -80px -220px; }
+#menu div.icon.venues 			{ background-position:  -80px -260px; }
+#menu div.icon.sports 			{ background-position: -180px -240px; }
+#menu div.icon.announcements 	{ background-position: -180px -280px; }
+#menu div.icon.tickets 			{ background-position: -180px -200px; }
+#menu div.icon.usersgroups 		{ background-position: -180px -320px; }
+#menu div.icon.settings 		{ background-position: -180px -340px; }
+#menu div.icon.homepage 		{ background-position:  -80px -200px; }
+#menu div.icon.account 			{ background-position:  -80px -320px; }
+#menu div.icon.logout 			{ background-position:  -80px -360px; }
+#menu div.icon.close 			{ background-position:  -80px -400px; }
 
-.button div.icon.load {
-	-webkit-animation: play-black .8s steps(8) infinite;
-       -moz-animation: play-black .8s steps(8) infinite;
-        -ms-animation: play-black .8s steps(8) infinite;
-         -o-animation: play-black .8s steps(8) infinite;
-            animation: play-black .8s steps(8) infinite;
-}
-div.widget-title div.icon.load {
-	-webkit-animation: play-white .8s steps(8) infinite;
-       -moz-animation: play-white .8s steps(8) infinite;
-        -ms-animation: play-white .8s steps(8) infinite;
-         -o-animation: play-white .8s steps(8) infinite;
-            animation: play-white .8s steps(8) infinite;
-}
-@-webkit-keyframes 	play-black	{ from { background-position: -400px -20px; } to { background-position: -400px -180px; } }
-@-moz-keyframes 	play-black	{ from { background-position: -400px -20px; } to { background-position: -400px -180px; } }
-@-ms-keyframes 		play-black	{ from { background-position: -400px -20px; } to { background-position: -400px -180px; } }
-@-o-keyframes 		play-black	{ from { background-position: -400px -20px; } to { background-position: -400px -180px; } }
-@keyframes 			play-black	{ from { background-position: -400px -20px; } to { background-position: -400px -180px; } }
-
-@-webkit-keyframes 	play-white	{ from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
-@-moz-keyframes 	play-white	{ from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
-@-ms-keyframes 		play-white	{ from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
-@-o-keyframes 		play-white	{ from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
-@keyframes 			play-white	{ from { background-position: -420px -20px; } to { background-position: -420px -180px; } }
-
-div.icon.block-black-light 		{background-position: -40px -20px;}
-div.icon.block-black-medium 	{background-position: -20px -20px;}
-div.icon.block-black-dark 		{background-position: 0px -20px;}
-
-div.icon.block-blue-light 		{background-position: -40px 0px;}
-div.icon.block-blue-medium 		{background-position: -20px 0px;}
-div.icon.block-blue-dark 		{background-position: 0px 0px;}
-
-div.icon.block-white		 	{background-position: -60px -20px;}
-div.icon.arrow-right-white			{background-position: -140px -20px;}
-
-div.icon.arrow-right-black-light 	{background-position: -120px -20px;}
-div.icon.arrow-right-black-gray 	{background-position: -100px -20px;}
-div.icon.arrow-right-black-dark 	{background-position: -80px -20px;}
-
-div.icon.arrow-right-blue-light 	{background-position: -120px 0px;}
-div.icon.arrow-right-blue-medium 	{background-position: -100px 0px;}
-div.icon.arrow-right-blue-dark 		{background-position:  -80px 0px;}
-
-div.icon.dalek-black 		{background-position:  -560px -20px;}
-div.icon.dalek-white 		{background-position:  -580px -20px;}
-
-.message-information div.icon 	{background-position: -440px -20px;}
-.message-error div.icon 		{background-position: -440px -40px;}
-.message-success div.icon 		{background-position: -440px -60px;}
-.message-warning div.icon 		{background-position: -440px -80px;}
-
-div.icon.margin-left { margin-left: 20px; }
-div.icon.margin-right { margin-right: 20px; }
-div.icon {
-	/*vertical-align: top;*/
-	/*overflow: visible;*/
-	/*position: relative;*/
-	/*top: 30px;*/
-	/*box-shadow: 0px 1px 1px rgba(0,0,0,0.8), inset 0px 0px 1px rgba(0,0,0,1);*/
-}
-
-
-
+#footer .logo 					{ background-position: -460px  -20px; }
+#header #title-bar .logo 		{ background-position: -540px -100px; }
 
 
 
