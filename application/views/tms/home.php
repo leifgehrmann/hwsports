@@ -26,11 +26,11 @@
 			// foreach($)
 		?>
 
-		<div class="icon left margin-right"><p><a href="">Heriot Hurdling - Day 2</a><br/>21st February &mdash; 00:00</p>
-		<div class="icon left margin-right"><p><a href="">Heriot Hurdling - Day 3</a><br/>22nd February &mdash; 00:00</p>
-		<div class="icon left margin-right"><p><a href="">Heriot Hurdling - Day 4</a><br/>23rd February &mdash; 00:00</p>
-		<div class="icon left margin-right"><p><a href="">Heriot Hurdling - Day 5</a><br/>24th February &mdash; 00:00</p>
-		<div class="icon left margin-right"><p><a href="">Heriot Hurdling - Day 6</a><br/>25th February &mdash; 00:00</p>
+		<div class="icon left margin-right"></div><p><a href="">Heriot Hurdling - Day 2</a><br/>21st February &mdash; 00:00</p>
+		<div class="icon left margin-right"></div><p><a href="">Heriot Hurdling - Day 3</a><br/>22nd February &mdash; 00:00</p>
+		<div class="icon left margin-right"></div><p><a href="">Heriot Hurdling - Day 4</a><br/>23rd February &mdash; 00:00</p>
+		<div class="icon left margin-right"></div><p><a href="">Heriot Hurdling - Day 5</a><br/>24th February &mdash; 00:00</p>
+		<div class="icon left margin-right"></div><p><a href="">Heriot Hurdling - Day 6</a><br/>25th February &mdash; 00:00</p>
 		<p><a href="/matches/" class="button right blue">View All Matches</a></p>
 	</div>
 </div>
