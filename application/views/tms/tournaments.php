@@ -31,12 +31,6 @@
 			<td colspan="3"><?php echo form_textarea($description);?></td>
 		</tr>
 		<tr>
-			<td><label for="tournamentStart">Start Date:</label></td>
-			<td><?php echo form_input($tournamentStart);?></td>
-			<td><label for="tournamentEnd">End Date:</label></td>
-			<td><?php echo form_input($tournamentEnd);?></td>
-		</tr>
-		<tr>
 			<td colspan="4"><h3>Competitor Registration Period:</h3></td>
 		</tr>
 		<tr>
@@ -44,6 +38,15 @@
 			<td><?php echo form_input($registrationStart);?></td>
 			<td><label for="registrationEnd">End Date:</label></td>
 			<td><?php echo form_input($registrationEnd);?></td>
+		</tr>
+		<tr>
+			<td colspan="4"><h3>Match Scheduling Period:</h3></td>
+		</tr>
+		<tr>
+			<td><label for="tournamentStart">Start Date:</label></td>
+			<td><?php echo form_input($tournamentStart);?></td>
+			<td><label for="tournamentEnd">End Date:</label></td>
+			<td><?php echo form_input($tournamentEnd);?></td>
 		</tr>
 		<tr>
 			<td colspan="3"></td>
