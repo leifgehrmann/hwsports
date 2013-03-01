@@ -564,7 +564,55 @@ div.widget-title div.icon.news			 				{ background-position: -160px -280px; }
 
 /* For fullcalendar */
 .fc .tournament div.fc-event-inner::before 			{ background-position: -40px  -300px; }
+.fc .sportCategoryID-1 div.fc-event-inner::before 						{ background-position: -560px -280px; } /* Airsports */
+.fc .sportCategoryID-2 div.fc-event-inner::before 						{ background-position: -420px -360px; } /* Archery variants */
+.fc .sportCategoryID-3 div.fc-event-inner::before 						{ background-position: -560px -360px; } /* Ball-over-net games */
+.fc .sportCategoryID-4 div.fc-event-inner::before 						{ background-position: -360px -280px; } /* basketball family */
+.fc .sportCategoryID-5 div.fc-event-inner::before 						{ background-position: -440px -360px; } /* bat and ball */
+.fc .sportCategoryID-6 div.fc-event-inner::before 						{ background-position: -560px -320px; } /* boarding */
+.fc .sportCategoryID-7 div.fc-event-inner::before 						{ background-position: -360px -360px; } /* bowls */
+.fc .sportCategoryID-8 div.fc-event-inner::before 						{ background-position: -360px -360px; } /* bowling */
+.fc .sportCategoryID-9 div.fc-event-inner::before 						{ background-position: -480px -360px; } /* Catch */
+.fc .sportCategoryID-10 div.fc-event-inner::before 						{ background-position: -400px -320px; } /* Climbing */
+.fc .sportCategoryID-11 div.fc-event-inner::before 						{ background-position: -320px -360px; } /* Cycling */
+.fc .sportCategoryID-12 div.fc-event-inner::before 						{ background-position: -420px -320px; } /* Combat */
+.fc .sportCategoryID-13 div.fc-event-inner::before 						{ background-position: -600px -320px; } /* Cue */
+.fc .sportCategoryID-14 div.fc-event-inner::before 						{ background-position: -440px -320px; } /* Dance */
+.fc .sportCategoryID-15 div.fc-event-inner::before 						{ background-position: -360px -320px; } /* Equine */
+.fc .sportCategoryID-16 div.fc-event-inner::before 						{ background-position: -380px -320px; } /* Fishing */
+.fc .sportCategoryID-17 div.fc-event-inner::before 						{ background-position: -520px -320px; } /* Flying Disk */
+.fc .sportCategoryID-18 div.fc-event-inner::before 						{ background-position: -320px -280px; } /* Football Family */
+.fc .sportCategoryID-19 div.fc-event-inner::before 						{ background-position: -340px -360px; } /* Golf */
+.fc .sportCategoryID-20 div.fc-event-inner::before 						{ background-position: -580px -300px; } /* Gymnastics */
+.fc .sportCategoryID-21 div.fc-event-inner::before 						{ background-position: -340px -280px; } /* Handball */
+.fc .sportCategoryID-22 div.fc-event-inner::before 						{ background-position: -500px -320px; } /* Hunting */
+.fc .sportCategoryID-23 div.fc-event-inner::before 						{ background-position: -340px -320px; } /* Kite */
+.fc .sportCategoryID-24 div.fc-event-inner::before 						{ background-position: -560px -440px; } /* Mixed */
+.fc .sportCategoryID-25 div.fc-event-inner::before 						{ background-position: -440px -280px; } /* Swimming */
+.fc .sportCategoryID-26 div.fc-event-inner::before 						{ background-position: -580px -440px; } /* Orienterring Family */
+.fc .sportCategoryID-27 div.fc-event-inner::before 						{ background-position: -500px -280px; } /* Paddle */
+.fc .sportCategoryID-28 div.fc-event-inner::before 						{ background-position: -560px -360px; } /* Racket */
+.fc .sportCategoryID-29 div.fc-event-inner::before 						{ background-position: -460px -320px; } /* Remote Control */
+.fc .sportCategoryID-30 div.fc-event-inner::before 						{ background-position: -520px -280px; } /* Sailing */
+.fc .sportCategoryID-31 div.fc-event-inner::before 						{ background-position: -480px -340px; } /* Skiing */
+.fc .sportCategoryID-32 div.fc-event-inner::before 						{ background-position: -500px -360px; } /* Sledding */
+.fc .sportCategoryID-33 div.fc-event-inner::before 						{ background-position: -500px -320px; } /* Shooting */
+.fc .sportCategoryID-34 div.fc-event-inner::before 						{ background-position: -460px -360px; } /* Stick and Ball */
+.fc .sportCategoryID-35 div.fc-event-inner::before 						{ background-position: -400px -280px; } /* Street Sunts */
+.fc .sportCategoryID-36 div.fc-event-inner::before 						{ background-position: -540px -360px; } /* Tag */
+.fc .sportCategoryID-37 div.fc-event-inner::before 						{ background-position: -380px -360px; } /* walking */
+.fc .sportCategoryID-38 div.fc-event-inner::before 						{ background-position: -560px -360px; } /* Wall and Ball */
+.fc .sportCategoryID-39 div.fc-event-inner::before 						{ background-position: -420px -280px; } /* Water Ball */
+.fc .sportCategoryID-40 div.fc-event-inner::before 						{ background-position: -600px -280px; } /* Diving */
+.fc .sportCategoryID-41 div.fc-event-inner::before 						{ background-position: -400px -360px; } /* Weightlifting */
+.fc .sportCategoryID-42 div.fc-event-inner::before 						{ background-position: -580px -280px; } /* Land Motorsports */
+.fc .sportCategoryID-43 div.fc-event-inner::before 						{ background-position: -540px -280px; } /* Water Motorsports */
+.fc .sportCategoryID-44 div.fc-event-inner::before 						{ background-position: -600px -440px; } /* Mind Sports */
+.fc .sportCategoryID-45 div.fc-event-inner::before 						{ background-position: -560px -440px; } /* Miscellaneous */
+.fc .sportCategoryID-46 div.fc-event-inner::before 						{ background-position: -400px -280px; } /* Running */
 
+.fc .sportID-9    div.fc-event-inner::before							{ background-position: -380px -280px; } /* Men's Hurdling */
+.fc .sportID-10   div.fc-event-inner::before    						{ background-position: -380px -280px; } /* Women's Hurdling */
 
 
 
