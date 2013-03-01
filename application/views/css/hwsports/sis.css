@@ -249,42 +249,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-.dataTables_wrapper .dataTables_paginate{ height:40px; margin-top: 20px;}
-.dataTables_wrapper .dataTables_info 	{ height:40px; margin-top: 20px; }
-.dataTables_wrapper .dataTables_length 	{ height:50px; }
-.dataTables_wrapper .dataTables_filter  { height:40px; margin-bottom:20px; }
-.dataTables_wrapper table.dataTable thead th {
-	border:none;
-	padding:0px 20px 0px 20px;
-}
-.dataTables_wrapper table.dataTable td {
-	padding: 10px 10px;
-	line-height: 20px;
-}
-.dataTables_wrapper table td, .dataTables_wrapper table th {
-	top: 0px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
 .fancybox-overlay textarea {
 	width: 217px;
 	height: 50px
