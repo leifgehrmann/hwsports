@@ -61,7 +61,7 @@
 
 <script type="text/javascript">
 	$('.date').datepicker({
-      dateFormat: "dd/mm/yy"
+      dateFormat: "yy/mm/dd"
     });
 </script>
 
