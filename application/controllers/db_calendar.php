@@ -149,7 +149,12 @@ class Db_Calendar extends MY_Controller {
 				'start' => $match['startTime'],
 				'end' => $match['endTime'],
 				'allDay' => false,
-				'className' => 'match'
+				'className' => 	'match'.
+								' matchID-'.$match['matchID'].
+								' venueID-'.$match['venueID'].
+								' sportID-'.$match['sportID'].
+								' tournamentID-'.$match['tournamentID'].
+								' sportCategoryID-'.$match['sportCategoryID']
 			);
 			if(isset($matchUrl))
 				$event['url'] = $matchUrl.$match['matchID'];
@@ -174,7 +179,10 @@ class Db_Calendar extends MY_Controller {
 					'start' => $tournamentStart->format("U"),
 					'end' => $tournamentEnd->format("U"),
 					'allDay' => true,
-					'className' => 'tournament'
+					'className' => 	'tournament'.
+									' sportID-'.$tournament['sportID'].
+									' tournamentID-'.$tournament['tournamentID'].
+									' sportCategoryID-'.$tournament['sportCategoryID']
 				);
 				if(isset($tournamentUrl))
 					$event['url'] = $tournamentUrl.$tournament['tournamentID'];
@@ -199,7 +207,10 @@ class Db_Calendar extends MY_Controller {
 					'start' => $registrationStart->format("U"),
 					'end' => $registrationEnd->format("U"),
 					'allDay' => true,
-					'className' => 'registration'
+					'className' => 	'registration'.
+									' sportID-'.$tournament['sportID'].
+									' tournamentID-'.$tournament['tournamentID'].
+									' sportCategoryID-'.$tournament['sportCategoryID']
 				);
 				if(isset($registrationUrl))
 					$event['url'] = $registrationUrl.$tournament['tournamentID'];
