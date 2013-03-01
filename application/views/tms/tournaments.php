@@ -18,27 +18,41 @@
 <br />
 
 <?php echo form_open("tms/tournaments", array('id' => 'tournamentsForm'));?>
-  	
-	<h2>Create New Tournament:</h2>
-	<p>
-		<label for="name">Name:</label><br />
-		<?php echo form_input($name);?>
-	</p>
-	<p>
-		<label for="description">Description:</label><br />
-		<?php echo form_input($description);?>
-	</p>
-	<p>
-		<label for="sport">Sport:</label><br />
-		<?php echo form_dropdown('sport', $sports); ?>
-	</p>
-	<label for="tournamentStart">Start Date:</label> <?php echo form_input($tournamentStart);?> <label for="tournamentEnd">End Date:</label> <?php echo form_input($tournamentEnd);?>
-	<br />
-	<h3>Competitor Registration Period:</h3>
-	<label for="registrationStart">Start Date:</label> <?php echo form_input($registrationStart);?> <label for="registrationEnd">End Date:</label><?php echo form_input($registrationEnd);?> <br />
 	
-	<p><?php echo form_submit('submit', 'Create');?></p>
-    
+	<table>
+		<tr>
+			<td colspan="4"><h2>Create New Tournament:</h2></td>
+		</tr>
+		<tr>
+			<td><label for="name">Name:</label></td>
+			<td><?php echo form_input($name);?></td>
+			<td rowspan="2"><label for="description">Description:</label></td>
+			<td rowspan="2"><?php echo form_input($name);?></td>
+		</tr>
+		<tr>
+			<td><label for="name">Sport:</label></td>
+			<td><?php echo form_dropdown('sport', $sports); ?></td>
+		</tr>
+		<tr>
+			<td><label for="tournamentStart">Start Date:</label></td>
+			<td><?php echo form_input($tournamentStart);?></td>
+			<td><label for="tournamentEnd">End Date:</label></td>
+			<td><?php echo form_input($tournamentEnd);?></td>
+		</tr>
+		<tr>
+			<td colspan="4"><h3>Competitor Registration Period:</h3></td>
+		</tr>
+		<tr>
+			<td><label for="registrationStart">Start Date:</label></td>
+			<td><?php echo form_input($tournamentStart);?></td>
+			<td><label for="registrationEnd">End Date:</label></td>
+			<td><?php echo form_input($registrationStart);?></td>
+		</tr>
+		<tr>
+			<td colspan="1"></td>
+			<td><?php echo form_submit('submit', 'Create');?></td>
+		</tr>
+	</table>
 <?php echo form_close();?>
 
 <script type="text/javascript">
