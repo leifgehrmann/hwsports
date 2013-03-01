@@ -51,7 +51,7 @@
 			<label for="tournamentEnd">End Date:</label> <?php echo form_input($tournamentEnd);?> <br />
 		<? break; ?>
 		<? case "postTournament": ?>
-			<h3 class="tournamentStatusMessage inTournament">This tournament has finished. You may <a href="/tms/tournament-statistics/">view statistics here.</a></h3>
+			<h3 class="tournamentStatusMessage postTournament">This tournament has finished. You may <a href="/tms/tournament-statistics/">view statistics here.</a></h3>
 			<h2>Tournament Details:</h2>
 			<p>
 				<label for='name'>Name:</label><br /><?=$tournament['name']?>
@@ -66,7 +66,7 @@
 			<br />
 		<? break;
 		default: ?>
-			Incorrect tournament dates (tournament status: <?=$tournament['status']?>). Please correct below:
+			<h3 class="tournamentStatusMessage invalidDates">Invalid tournament dates. Please ensure registration start date is before registration end date, and tournament start/end dates are after competitor registration:</h3>
 			<?=$formTop?>
 			<label for="tournamentStart">Start Date:</label> <?php echo form_input($tournamentStart);?> <label for="tournamentEnd">End Date:</label> <?php echo form_input($tournamentEnd);?>
 			<br />
