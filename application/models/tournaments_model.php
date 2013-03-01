@@ -75,7 +75,50 @@ class Tournaments_model extends CI_Model {
 		$output['sportCategoryID'] = $relationalResult[0]['sportCategoryID'];
 		return $output;
 	}
-
+	
+	/**
+	 * Returns a string specifying the status of a specific tournament
+	 *  
+	 * @return string
+	 **/
+	public function get_tournament_status($tournamentID) {
+		$tournament = $this->get_tournament($tournamentID);
+		$today = new DateTime();
+		
+		$registrationStartDate = DateTime::createFromFormat('d/m/Y', $tournament['registrationStart']);
+		$registrationEndDate = DateTime::createFromFormat('d/m/Y', $tournament['registrationEnd']);
+		
+		$tournamentStartDate = DateTime::createFromFormat('d/m/Y', $tournament['tournamentStart']);
+		$tournamentEndDate = DateTime::createFromFormat('d/m/Y', $tournament['tournamentEnd']);
+		
+		if( ($today < $registrationStartDate) && ($today < $registrationEndDate) &&
+			($today < $tournamentStartDate) && ($today < $tournamentEndDate) ) {
+			return("preRegistration");
+		} elseif( ($today > $registrationStartDate) && ($today < $registrationEndDate) &&
+			($today < $tournamentStartDate) && ($today < $tournamentEndDate) ) {
+			return("inRegistration");
+		} elseif( ($today > $registrationStartDate) && ($today > $registrationEndDate) &&
+			($today < $tournamentStartDate) && ($today < $tournamentEndDate) ) {
+			
+			// If the competitor list has been moderated, we are pre-start, not post-registration: all we are waiting for is the start date, no other staff interaction is required.
+			if( isset($tournament['competitorsModerated']) && ( $tournament['competitorsModerated'] == "true" ) ) {
+				return("preTournament");
+			} 
+			// Otherwise, we are still awaiting the staff to moderate the competitor list - set competitorsModerated to false in the DB to make this clear.
+			$this->update_tournament($tournamentID,array("competitorsModerated","false"));
+			// postRegistration means we need staff to moderate the competitor list
+			return("postRegistration");
+		} elseif( ($today > $registrationStartDate) && ($today > $registrationEndDate) &&
+			($today > $tournamentStartDate) && ($today < $tournamentEndDate) ) {
+			return("inTournament");
+		} elseif( ($today > $registrationStartDate) && ($today > $registrationEndDate) &&
+			($today > $tournamentStartDate) && ($today > $tournamentEndDate) ) {
+			return("postTournament");
+		} else {
+			return("invalidDates");
+		}
+	}
+	
 	/**
 	 * Creates a tournament with data.
 	 * returns the tournamentID of the new tournament if it was

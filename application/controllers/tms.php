@@ -139,7 +139,7 @@ class Tms extends MY_Controller {
 		$this->load->model('sports_model');
 		
 		if( $this->tournaments_model->tournament_exists($tournamentID) ) {
-			$tournament = $this->tournaments_model->get_tournament($tournamentID);
+			$this->data['tournament'] = $tournament = $this->tournaments_model->get_tournament($tournamentID);
 			$this->data['tournamentID'] = $tournamentID;
 						
 			$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
@@ -164,9 +164,9 @@ class Tms extends MY_Controller {
 				//set the flash data error message if there is one
 				$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message') );
 				
-				$this->data['tournament']['name'] = $tournament['name'];
+				$this->data['tournament']['status'] = get_tournament_status($tournamentID);
 				$sport = $this->sports_model->get_sport( $tournament['sportID'] );
-				$this->data['sport'] = $sport['name'];
+				$this->data['tournament']['sportName'] = $sport['name'];
 			
 				$this->data['name'] = array(
 					'name'  => 'name',
