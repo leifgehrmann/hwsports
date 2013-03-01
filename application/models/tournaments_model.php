@@ -85,19 +85,19 @@ class Tournaments_model extends CI_Model {
 		$tournament = $this->get_tournament($tournamentID);
 		$today = new DateTime();
 		
-		$registrationStartDate = DateTime::createFromFormat('d/m/Y', $tournament['registrationStart']);
-		$registrationEndDate = DateTime::createFromFormat('d/m/Y', $tournament['registrationEnd']);
+		$registrationStartDate = DateTime::createFromFormat(DateTime::ISO8601, $tournament['registrationStart']);
+		$registrationEndDate = DateTime::createFromFormat(DateTime::ISO8601, $tournament['registrationEnd']);
 		
-		$tournamentStartDate = DateTime::createFromFormat('d/m/Y', $tournament['tournamentStart']);
-		$tournamentEndDate = DateTime::createFromFormat('d/m/Y', $tournament['tournamentEnd']);
+		$tournamentStartDate = DateTime::createFromFormat(DateTime::ISO8601, $tournament['tournamentStart']);
+		$tournamentEndDate = DateTime::createFromFormat(DateTime::ISO8601, $tournament['tournamentEnd']);
 		
 		if( ($today < $registrationStartDate) && ($today < $registrationEndDate) &&
 			($today < $tournamentStartDate) && ($today < $tournamentEndDate) ) {
 			return("preRegistration");
-		} elseif( ($today > $registrationStartDate) && ($today < $registrationEndDate) &&
+		} elseif( ($today >= $registrationStartDate) && ($today < $registrationEndDate) &&
 			($today < $tournamentStartDate) && ($today < $tournamentEndDate) ) {
 			return("inRegistration");
-		} elseif( ($today > $registrationStartDate) && ($today > $registrationEndDate) &&
+		} elseif( ($today >= $registrationStartDate) && ($today >= $registrationEndDate) &&
 			($today < $tournamentStartDate) && ($today < $tournamentEndDate) ) {
 			
 			// If the competitor list has been moderated, we are pre-start, not post-registration: all we are waiting for is the start date, no other staff interaction is required.
@@ -108,18 +108,18 @@ class Tournaments_model extends CI_Model {
 			$this->update_tournament($tournamentID,array("competitorsModerated","false"));
 			// postRegistration means we need staff to moderate the competitor list
 			return("postRegistration");
-		} elseif( ($today > $registrationStartDate) && ($today > $registrationEndDate) &&
-			($today > $tournamentStartDate) && ($today < $tournamentEndDate) ) {
+		} elseif( ($today >= $registrationStartDate) && ($today >= $registrationEndDate) &&
+			($today >= $tournamentStartDate) && ($today < $tournamentEndDate) ) {
 			return("inTournament");
-		} elseif( ($today > $registrationStartDate) && ($today > $registrationEndDate) &&
-			($today > $tournamentStartDate) && ($today > $tournamentEndDate) ) {
+		} elseif( ($today >= $registrationStartDate) && ($today >= $registrationEndDate) &&
+			($today >= $tournamentStartDate) && ($today >= $tournamentEndDate) ) {
 			return("postTournament");
 		} else {
-			return("ERROR: Tournament has invalid dates. Today's date is: ".$today->format('d/m/Y').".
-					Registration start date is: ".$registrationStartDate->format('d/m/Y')."
-					Registration end date is: ".$registrationEndDate->format('d/m/Y')."
-					Tournament start date is: ".$tournamentStartDate->format('d/m/Y')."
-					Tournament start date is: ".$tournamentEndDate->format('d/m/Y')."
+			return("ERROR: Tournament has invalid dates. Today's date is: ".$today->format(DateTime::ISO8601).".
+					Registration start date is: ".$registrationStartDate->format(DateTime::ISO8601)."
+					Registration end date is: ".$registrationEndDate->format(DateTime::ISO8601)."
+					Tournament start date is: ".$tournamentStartDate->format(DateTime::ISO8601)."
+					Tournament start date is: ".$tournamentEndDate->format(DateTime::ISO8601)."
 					Please correct the dates below.");
 		}
 	}
