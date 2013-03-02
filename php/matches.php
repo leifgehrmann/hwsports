@@ -68,8 +68,9 @@ if ( !isset($_POST['action']) ) {
 		
 		$out['aaData'][$aaDataID] = array_merge($match, $matchData);
 		$out['aaData'][$aaDataID]['centreID'] = $centreID;
-		$out['aaData'][$aaDataID]['startTime'] 	= date(PUBLIC_DATE_TIME_FORMAT,(int)$out['aaData'][$aaDataID]['startTime'])->format();
-		$out['aaData'][$aaDataID]['endTime'] 	= date(PUBLIC_DATE_TIME_FORMAT,(int)$out['aaData'][$aaDataID]['endTime']  )->format();
+
+		$out['aaData'][$aaDataID]['startTime'] 	= date(PUBLIC_DATE_TIME_FORMAT,$out['aaData'][$aaDataID]['startTime'])->format();
+		$out['aaData'][$aaDataID]['endTime'] 	= date(PUBLIC_DATE_TIME_FORMAT,$out['aaData'][$aaDataID]['endTime']  )->format();
 
 		$sportQueryString = "SELECT DISTINCT `value` FROM `sportData` WHERE `key` = 'name' AND `sportID` = '{$out['aaData'][$aaDataID]['sportID']}'";
 		$sportName = $db->sql($sportQueryString)->fetch();
