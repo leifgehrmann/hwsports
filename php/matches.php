@@ -170,8 +170,8 @@ if ( !isset($_POST['action']) ) {
 		"FROM matchData WHERE matchID = {$_POST['data']['matchID']}";
 	$matchData = $db->sql($matchDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $matchData);
-	$out['row']['startTime'] 	= date(DATE_TIME_FORMAT,$out['row']['startTime']);
-	$out['row']['endTime'] 		= date(DATE_TIME_FORMAT,$out['row']['endTime']);
+	$out['row']['startTime'] 	= DateTime::createFromFormat(DATE_TIME_FORMAT,$out['row']['startTime'])->format(PUBLIC_DATE_TIME_FORMAT);
+	$out['row']['endTime'] 		= DateTime::createFromFormat(DATE_TIME_FORMAT,$out['row']['endTime'])->format(PUBLIC_DATE_TIME_FORMAT);
 		
 	$sportCentreQueryString = "SELECT `centreID` FROM `sports` WHERE `sportID` = '{$_POST['data']['sportID']}'";
 	$sportCentre = $db->sql($sportCentreQueryString)->fetch();

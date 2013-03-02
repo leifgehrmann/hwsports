@@ -898,6 +898,9 @@ a:hover div.widget-title-right.icon { -webkit-animation: imove .5s; }
 .dataTables_wrapper table td, .dataTables_wrapper table th {
     top: 0px;
 }
+div.DTED_Lightbox_Wrapper div.DTE_Field_Type_text input {
+    padding:10px;
+}
 
 
 
