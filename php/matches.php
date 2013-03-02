@@ -1,6 +1,7 @@
 <?php
 
 // DataTables PHP library
+include( "../application/config/constants.php" );
 include( "lib/DataTables.php" );
 
 // Alias Editor classes so they are easy to use
