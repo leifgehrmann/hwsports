@@ -69,6 +69,10 @@ if ( !isset($_POST['action']) ) {
 		$out['aaData'][$aaDataID] = array_merge($match, $matchData);
 		$out['aaData'][$aaDataID]['centreID'] = $centreID;
 
+		print_r("test");
+		print_r($out['aaData'][$aaDataID]['startTime']);
+		print_r(PUBLIC_DATE_TIME_FORMAT);
+		print_r(date(PUBLIC_DATE_TIME_FORMAT,$out['aaData'][$aaDataID]['startTime']));
 		$out['aaData'][$aaDataID]['startTime'] 	= date(PUBLIC_DATE_TIME_FORMAT,$out['aaData'][$aaDataID]['startTime'])->format();
 		$out['aaData'][$aaDataID]['endTime'] 	= date(PUBLIC_DATE_TIME_FORMAT,$out['aaData'][$aaDataID]['endTime']  )->format();
 
