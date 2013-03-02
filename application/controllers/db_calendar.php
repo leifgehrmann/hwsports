@@ -141,13 +141,20 @@ class Db_Calendar extends MY_Controller {
 
 		// Inserting all the matches
 		foreach($matches as $match) {
+			$startTime	= DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['startTime']);
+			$endTime	= DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['endTime']);
+
+			// If we encounter a syntax error in the dates...
+			if(empty($startTime) || empty($endTime))
+					continue;
+
 			$event = array(
 				'data' => array(
 					'id' => "match-".$match['matchID']
 				),
 				'title' => $match['name'],
-				'start' => $match['startTime'],
-				'end' => $match['endTime'],
+				'start' => $startTime->format("U"),
+				'end' => $endTime->format("U"),
 				'allDay' => false,
 				'className' => 	'match'.
 								' matchID-'.$match['matchID'].
@@ -171,6 +178,11 @@ class Db_Calendar extends MY_Controller {
 			foreach($tournaments as $tournament) {
 				$tournamentStart	= DateTime::createFromFormat(DATE_FORMAT, $tournament['tournamentStart']);
 				$tournamentEnd		= DateTime::createFromFormat(DATE_FORMAT, $tournament['tournamentEnd']);
+
+				// If we encounter a syntax error in the dates...
+				if(empty($tournamentStart) || empty($tournamentEnd))
+					continue;
+
 				$event = array(
 					'data' => array(
 						'id' => "tournament-".$tournament['tournamentID']
@@ -199,6 +211,11 @@ class Db_Calendar extends MY_Controller {
 			foreach($tournaments as $tournament) {
 				$registrationStart	= DateTime::createFromFormat(DATE_FORMAT, $tournament['registrationStart']);
 				$registrationEnd	= DateTime::createFromFormat(DATE_FORMAT, $tournament['registrationEnd']);
+
+				// If we encounter a syntax error in the dates...
+				if(empty($registrationStart) || empty($registrationEnd))
+					continue;
+				
 				$event = array(
 					'data' => array(
 						'id' => "registration-".$tournament['tournamentID']
