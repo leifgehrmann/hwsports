@@ -69,12 +69,13 @@ if ( !isset($_POST['action']) ) {
 		$out['aaData'][$aaDataID] = array_merge($match, $matchData);
 		$out['aaData'][$aaDataID]['centreID'] = $centreID;
 
-		print_r("test");
+		/*print_r("test");
 		print_r($out['aaData'][$aaDataID]['startTime']);
 		print_r(DATE_TIME_FORMAT);
-		print_r(date(DATE_TIME_FORMAT,$out['aaData'][$aaDataID]['startTime']));
-		$out['aaData'][$aaDataID]['startTime'] 	= date(DATE_TIME_FORMAT,$out['aaData'][$aaDataID]['startTime'])->format();
-		$out['aaData'][$aaDataID]['endTime'] 	= date(DATE_TIME_FORMAT,$out['aaData'][$aaDataID]['endTime']  )->format();
+		print_r(DateTime::createFromFormat(DATE_TIME_FORMAT,$out['aaData'][$aaDataID]['startTime']));
+		print_r(DateTime::createFromFormat(DATE_TIME_FORMAT,$out['aaData'][$aaDataID]['startTime'])->format(PUBLIC_DATE_TIME_FORMAT));*/
+		$out['aaData'][$aaDataID]['startTime'] 	= DateTime::createFromFormat(DATE_TIME_FORMAT,$out['aaData'][$aaDataID]['startTime'])->format(PUBLIC_DATE_TIME_FORMAT);
+		$out['aaData'][$aaDataID]['endTime'] 	= DateTime::createFromFormat(DATE_TIME_FORMAT,$out['aaData'][$aaDataID]['endTime'])->format(PUBLIC_DATE_TIME_FORMAT);
 
 		$sportQueryString = "SELECT DISTINCT `value` FROM `sportData` WHERE `key` = 'name' AND `sportID` = '{$out['aaData'][$aaDataID]['sportID']}'";
 		$sportName = $db->sql($sportQueryString)->fetch();
@@ -102,9 +103,9 @@ if ( !isset($_POST['action']) ) {
 	$out['venueData'] = $venueData;
 	
 } elseif($_POST['action']=='create') {
-	$a = DateTime::createFromFormat(PUBLIC_DATE_FORMAT, $_POST['data']['startTime']);
+	$a = DateTime::createFromFormat(PUBLIC_DATE_TIME_FORMAT, $_POST['data']['startTime']);
 	$startTime = $a->format(DATE_TIME_FORMAT);
-	$a = DateTime::createFromFormat(PUBLIC_DATE_FORMAT, $_POST['data']['endTime']);
+	$a = DateTime::createFromFormat(PUBLIC_DATE_TIME_FORMAT, $_POST['data']['endTime']);
 	$endTime = $a->format(DATE_TIME_FORMAT);
 	/*$a = strptime($_POST['data']['startTime'], '%Y-%m-%d @ %H:%M');
 	$startTime = mktime($a['tm_hour'], $a['tm_min'], 0, $a['tm_mon']+1, $a['tm_mday'], $a['tm_year']+1900);
@@ -126,8 +127,10 @@ if ( !isset($_POST['action']) ) {
 		"FROM matchData WHERE matchID = {$matchID}";
 	$matchData = $db->sql($matchDataQueryString)->fetch();
 	$out['row'] = array_merge($out['row'], $matchData);
-	$out['row']['startTime'] = date(PUBLIC_DATE_TIME_FORMAT,$out['row']['startTime']);
-	$out['row']['endTime'] = date(PUBLIC_DATE_TIME_FORMAT,$out['row']['endTime']);
+	$out['row']['startTime'] 	= DateTime::createFromFormat(DATE_TIME_FORMAT,$out['row']['startTime'])->format(PUBLIC_DATE_TIME_FORMAT);
+	$out['row']['endTime'] 		= DateTime::createFromFormat(DATE_TIME_FORMAT,$out['row']['endTime'])->format(PUBLIC_DATE_TIME_FORMAT);
+	/*$out['row']['startTime'] = date(PUBLIC_DATE_TIME_FORMAT,$out['row']['startTime']);
+	$out['row']['endTime'] = date(PUBLIC_DATE_TIME_FORMAT,$out['row']['endTime']);*/
 	
 	$sportCentreQueryString = "SELECT `centreID` FROM `sports` WHERE `sportID` = '{$_POST['data']['sportID']}'";
 	$sportCentre = $db->sql($sportCentreQueryString)->fetch();
@@ -143,9 +146,9 @@ if ( !isset($_POST['action']) ) {
 	
 	$out['row']['tournamentName'] = "None";	
 } elseif($_POST['action']=='edit') {
-	$a = DateTime::createFromFormat(PUBLIC_DATE_FORMAT, $_POST['data']['startTime']);
+	$a = DateTime::createFromFormat(PUBLIC_DATE_TIME_FORMAT, $_POST['data']['startTime']);
 	$startTime = $a->format(DATE_TIME_FORMAT);
-	$a = DateTime::createFromFormat(PUBLIC_DATE_FORMAT, $_POST['data']['endTime']);
+	$a = DateTime::createFromFormat(PUBLIC_DATE_TIME_FORMAT, $_POST['data']['endTime']);
 	$endTime = $a->format(DATE_TIME_FORMAT);
 	/*$a = strptime($_POST['data']['startTime'], '%Y-%m-%d @ %H:%M');
 	$startTime = mktime($a['tm_hour'], $a['tm_min'], 0, $a['tm_mon']+1, $a['tm_mday'], $a['tm_year']+1900);
