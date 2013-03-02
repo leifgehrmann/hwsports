@@ -24,7 +24,7 @@ class Matches_model extends CI_Model {
 	 * @param tournamentID - the tournament we want to check
 	 * @return boolean
 	 **/
-	public function are_valid_dates_in_tournament($startTime, $endTime, $tournamentID)
+	/*public function are_valid_dates_in_tournament($startTime, $endTime, $tournamentID)
 	{
 		$this->load->model('tournaments_model');
 		$tournament = $this->tournament_model->get_tournament($tournamentID);
@@ -35,7 +35,7 @@ class Matches_model extends CI_Model {
 				($tournamentStart<$endTime) && 
 				($startTime<$tournamentEnd) && 
 				($endTime<$tournamentEnd);
-	}
+	}*/
 	/**
 	 * Returns if the match dates are valid
 	 * @param startTime - the start of the match
@@ -43,13 +43,12 @@ class Matches_model extends CI_Model {
 	 * @param matchID - the match we want to check
 	 * @return boolean
 	 **/
-	public function are_valid_dates_in_match($startTime, $endTime, matchID)
+	/*public function are_valid_dates_in_match($startTime, $endTime, matchID)
 	{	
-		$this->load->model('tournaments_model');
 		$this->load->model('matches_model');
 		$match = $this->matches_model->get_match($matchID);
 		return are_valid_match_dates($startTime, $endTime, $match['tournamentID']);
-	}
+	}*/
 	/**
 	 * Returns if the match dates are valid
 	 * @param startTime - the start of the match
