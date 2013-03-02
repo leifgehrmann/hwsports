@@ -411,7 +411,7 @@ class Db_Calendar extends MY_Controller {
 					// Add the delta to the old times
 					$data = array();
 					$data[$switch_data[$type]['startTime']]	= $oldStartTime->add(DateInterval::format($_POST['minutesDelta']))->format($switch_data[$type]['databaseFormat']);
-					$data[$switch_data[$type]['endTime']]]	= $oldEndTime->add(DateInterval::format($_POST['minutesDelta']))->format($switch_data[$type]['databaseFormat']);
+					$data[$switch_data[$type]['endTime']]	= $oldEndTime->add(DateInterval::format($_POST['minutesDelta']))->format($switch_data[$type]['databaseFormat']);
 
 					// before we commit, we should verify that the new tournament 
 					// date works
