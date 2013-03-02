@@ -96,8 +96,8 @@ if ( !isset($_POST['action']) ) {
 	$out['venueData'] = $venueData;
 	
 } elseif($_POST['action']=='create') {
-	$startTime 	= (DateTime::createFromFormat(PUBLIC_DATE_FORMAT, $_POST['data']['startTime']))->format(DATE_TIME_FORMAT);
-	$endTime 	= (DateTime::createFromFormat(PUBLIC_DATE_FORMAT, $_POST['data']['endTime']  ))->format(DATE_TIME_FORMAT);
+	$startTime 	= $(DateTime::createFromFormat(PUBLIC_DATE_FORMAT, $_POST['data']['startTime']))->format(DATE_TIME_FORMAT);
+	$endTime 	= $(DateTime::createFromFormat(PUBLIC_DATE_FORMAT, $_POST['data']['endTime']  ))->format(DATE_TIME_FORMAT);
 	/*$a = strptime($_POST['data']['startTime'], '%Y-%m-%d @ %H:%M');
 	$startTime = mktime($a['tm_hour'], $a['tm_min'], 0, $a['tm_mon']+1, $a['tm_mday'], $a['tm_year']+1900);
 	$a = strptime($_POST['data']['endTime'], '%Y-%m-%d @ %H:%M');
@@ -135,8 +135,8 @@ if ( !isset($_POST['action']) ) {
 	
 	$out['row']['tournamentName'] = "None";	
 } elseif($_POST['action']=='edit') {
-	$startTime 	= (DateTime::createFromFormat(PUBLIC_DATE_FORMAT, $_POST['data']['startTime']))->format(DATE_TIME_FORMAT);
-	$endTime 	= (DateTime::createFromFormat(PUBLIC_DATE_FORMAT, $_POST['data']['endTime']  ))->format(DATE_TIME_FORMAT);
+	$startTime 	= $(DateTime::createFromFormat(PUBLIC_DATE_FORMAT, $_POST['data']['startTime']))->format(DATE_TIME_FORMAT);
+	$endTime 	= $(DateTime::createFromFormat(PUBLIC_DATE_FORMAT, $_POST['data']['endTime']  ))->format(DATE_TIME_FORMAT);
 	/*$a = strptime($_POST['data']['startTime'], '%Y-%m-%d @ %H:%M');
 	$startTime = mktime($a['tm_hour'], $a['tm_min'], 0, $a['tm_mon']+1, $a['tm_mday'], $a['tm_year']+1900);
 	$a = strptime($_POST['data']['endTime'], '%Y-%m-%d @ %H:%M');
