@@ -32,14 +32,14 @@
 					"label": "Start Time",
 					"name": "startTime",
 					"type": "datetime",
-					"dateFormat": "dd/mm/yy",
+					"dateFormat": "yy-mm-dd",
 					"timeFormat": "HH:mm",
 					"separator": " @ "
 				}, {
 					"label": "End Time",
 					"name": "endTime",
 					"type": "datetime",
-					"dateFormat": "dd/mm/yy",
+					"dateFormat": "yy-mm-dd",
 					"timeFormat": "HH:mm",
 					"separator": " @ "
 				}, {

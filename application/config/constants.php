@@ -38,7 +38,9 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 
 // Herp derp date times
-
+define('PUBLIC_TIME_FORMAT', "H:i");
+define('PUBLIC_DATE_TIME_FORMAT', "Y-m-d @ H:i");
+define('PUBLIC_DATE_FORMAT', "Y-m-d");
 define('DATE_FORMAT', "Y-m-d");
 define('DATE_TIME_FORMAT', DateTime::ISO8601);
 
