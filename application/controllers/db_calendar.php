@@ -141,8 +141,8 @@ class Db_Calendar extends MY_Controller {
 
 		// Inserting all the matches
 		foreach($matches as $match) {
-			$startTime	= DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['startTime']);
-			$endTime	= DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['endTime']);
+			$startTime	= DateTime::createFromFormat(DATE_TIME_FORMAT, $match['startTime']);
+			$endTime	= DateTime::createFromFormat(DATE_TIME_FORMAT, $match['endTime']);
 
 			// If we encounter a syntax error in the dates...
 			if(empty($startTime) || empty($endTime))
