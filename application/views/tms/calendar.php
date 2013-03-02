@@ -43,11 +43,11 @@
 				});
  
 				request.done(function(msg) {
-				 //alert( msg );
+					//alert( msg );
 				});
 				 
 				request.fail(function(jqXHR, textStatus) {
-				  alert( "Request failed: " + textStatus );
+					alert( "Request failed: " + textStatus );
 				});
 			},
 			eventDrop: function(match,dayDelta,minuteDelta,allDay,revertFunc) {
@@ -59,16 +59,16 @@
 					url: '/db_calendar/changeMatchStart',
 					data: { 'minutesDelta': minutesDelta, 'id': match.data.id }
 				});
- 
+ 				
 				request.done(function(msg) {
-				 //alert( msg );
+					//alert( msg );
 				});
 				 
 				request.fail(function(jqXHR, textStatus) {
-				  alert( "Request failed: " + textStatus );
+					alert( "Request failed: " + textStatus );
 				});
 			}
 		});
-		
+			
 	});
 </script>

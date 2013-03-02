@@ -40,11 +40,12 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 
 // Herp derp date times
-define('PUBLIC_TIME_FORMAT', "H:i");
-define('PUBLIC_DATE_TIME_FORMAT', "Y-m-d @ H:i");
-define('PUBLIC_DATE_FORMAT', "Y-m-d");
-define('DATE_FORMAT', "Y-m-d");
-define('DATE_TIME_FORMAT', DateTime::ISO8601);
+define('PUBLIC_TIME_FORMAT', "H:i"); 				// Our time representation that should be displayed on websites
+define('PUBLIC_DATE_TIME_FORMAT', "Y-m-d @ H:i"); 	// Our datetime representation that should be displayed on websites
+define('PUBLIC_DATE_FORMAT', "Y-m-d"); 				// Our date representation that should be displayed on websites
+define('DATE_FORMAT', "Y-m-d"); 					// Our database representation for dates
+define('DATE_TIME_FORMAT', DateTime::ISO8601); 		// Our database representation for time (and date)
+define('DATE_TIME_UNIX_FORMAT', "U"); 				// This is for fullcalendar
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

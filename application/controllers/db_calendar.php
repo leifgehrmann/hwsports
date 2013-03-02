@@ -33,9 +33,6 @@ class Db_Calendar extends MY_Controller {
 		$tournamentEditable			= null;		// Should the tournament period be editable?
 		$registrationEditable		= null;		// Should the registration period be editable?
 		$matchEditable				= null;		// Should the match be editable?
-		/*$tournamentColour			= 'rgb(123, 209,  72)'; // Colour of tournament periods
-		$registrationColour			= 'rgb(250,  87,  60)'; // Colour of registration periods
-		$matchColour				= '#2966C7';			// Colour of matches.*/
 
 		if(array_key_exists('centreID',$query))
 			$centreID 					= $query['centreID'];
@@ -290,7 +287,7 @@ class Db_Calendar extends MY_Controller {
 
 	// This is for /tms/venue/$venueID
 	// Returns the matches for particular venue
-	public function getVenueMatchesTMS($venueID){
+	public function getVenueEventsTMS($venueID){
 		$query = array();
 		$query['tournamentIDs']		= "none";
 		$query['venueIDs']			= array($venueID);
@@ -319,7 +316,7 @@ class Db_Calendar extends MY_Controller {
 
 	// This is for /tms/sport/$sportID
 	// returns the matches which are associated with this particular sport
-	public function getSportMatchesTMS($sportID){
+	public function getSportEventsTMS($sportID){
 		$query = array();
 		$query['showRegistrations']	= false;
 		$query['showTournaments']	= false;
@@ -348,69 +345,107 @@ class Db_Calendar extends MY_Controller {
 	/**
 	 *
 	 *
-	 *        Method used by fullcalendar to edit between the database
+	 *        Methods used by fullcalendar to edit between the database
 	 *
 	 *
 	 */
 
-
-
-	public function changeMatchStart() {
+	public function changeEventStart() {
 
 		$id 	= null;
 		$type	= null;
+		$switch_data = 	array(
+							'match' => array(
+								'startTime' => 'startTime',
+								'endTime' => 'endTime',
+								'databaseFormat' => DATE_TIME_FORMAT
+							),
+							'tournament' => array(
+								'startTime' => 'tournamentStart',
+								'endTime' => 'tournamentEnd',
+								'databaseFormat' => DATE_FORMAT
+							),
+							'registration' => array(
+								'startTime' => 'registrationStart',
+								'endTime' => 'registrationEnd',
+								'databaseFormat' => DATE_FORMAT
+							),
+						);
 		$updateResult;
+		$updateAttempt = false;
 
 		if(!isset($_POST['id'])){
 			$this->data['data'] = "Error: id not defined";
 		} else {
+
+			// Check if everything has been defined.
 			$val = $_POST['id'];
 			if(strrpos($val,"match-")!=-1)				list($type,$id) = explode("-",$val);
 			else if(strrpos($val,"tournament-")!=-1)	list($type,$id) = explode("-",$val);
 			else if(strrpos($val,"registration-")!=-1)	list($type,$id) = explode("-",$val);
 			else $this->data['data'] = "Error: valid type and id not defined";
+			if(!is_numeric($id)){
+				$this->data['data'] = "Error: id not defined";
+				break;
+			}
+			if(!empty($id) && array_key_exists($type,$switch_data)){
+				// Fetch stuff from the database
+				$eventData;
+				switch ($type) {
+					case "match"		: $eventData = $this->matches_model->get_match($id); break;
+					case "tournament"	: $eventData = $this->tournaments_model->get_tournament($id); break;
+					case "registration"	: $eventData = $this->tournaments_model->get_tournament($id); break;
+				}
 
-			switch ($type) {
-				// In this case we deal with unix timestamps
-				case "match":
-					$matchData = $this->matches_model->get_match($id);
-					$oldStartTime		= $matchData['startTime'];
-					$oldEndTime			= $matchData['endTime'];
+				// Convert the time varaibles to datetime
+				$oldStartTime 	= DateTime::createFromFormat($switch_data[$type]['databaseFormat']	, $matchData[$switch_data[$type]['startTime']]);
+				$oldEndTime 	= DateTime::createFromFormat($switch_data[$type]['databaseFormat']	, $matchData[$switch_data[$type]['endTime']]);
+				// Verify that the values are valid
+				if( empty($oldStartTime) || empty($oldEndTime) ) {
+					$this->data['data'] = "Error: Invalid date was fetched from the database.";
+				} else if( !isset($_POST['minutesDelta']) ) {
+					$this->data['data'] = "Error: minutesDelta was not defined";
+				} else if( !is_numeric($_POST['minutesDelta']) ){
+					$this->data['data'] = "Error: minutesDelta was not numeric";
+				} else {
+					// Add the delta to the old times
 					$data = array();
-					$data['startTime']	= $oldStartTime	+	$_POST['minutesDelta'];
-					$data['endTime']	= $oldEndTime	+	$_POST['minutesDelta'];
-					$updateResult = $this->matches_model->update_match($id,$data);
-					break;
-				// In this case we deal with d/m/Y
-				case "tournament":
-					
-					break;
-				// In this case we deal with d/m/Y
-				case "registration":
-					
-					break;
-				default:
-					break;
+					$data[$switch_data[$type]['startTime']]	= $oldStartTime->add(DateInterval::format($_POST['minutesDelta']))->format($switch_data[$type]['databaseFormat']);
+					$data[$switch_data[$type]['endTime']]]	= $oldEndTime->add(DateInterval::format($_POST['minutesDelta']))->format($switch_data[$type]['databaseFormat']);
+
+					// before we commit, we should verify that the new tournament 
+					// date works
+					/*$consistent;
+					if( $type=="tournament" || $type=="registration" ){
+						switch ($type) {
+							case "match"		: $consistent = $this->tournaments_model->are_valid_tournament_dates(); break;
+							case "tournament"	: $consistent = $this->tournaments_model->are_valid_tournament_dates(); break;
+						}
+					} else {
+						$consistent = true;
+					}*/
+
+					// Update the database
+					switch ($type) {
+						case "match"		: $updateResult = $this->matches_model->update_match($id,$data); break;
+						case "tournament"	: $updateResult = $this->tournaments_model->update_tournament($id,$data); break;
+						case "registration"	: $updateResult = $this->tournaments_model->update_tournament($id,$data); break;
+					}
+					$updateAttempt = true;
+				}
 			}
 		}
-
-		if(isset($updated))
+		if($updateAttempt){
 			$this->data['data'] = (
 				$updateResult ? 
 				"Updated ".$type." ".$id : 
 				"Error updating ".$type." ".$id
 			);
+		}
 		$this->load->view('data',$this->data);
-
-		/*$matchData = $this->matches_model->get_match($_POST['id']);
-		$oldStartTime = $matchData['startTime'];
-		$newStartTime = $oldStartTime+$_POST['minutesDelta'];
-		$updateResult = $this->matches_model->update_match($_POST['id'],array('startTime'=>$newStartTime));
-		$this->data['data'] = ($updateResult ? "Success!" : "False!");
-		$this->load->view('data',$this->data);*/
 	}
 
-	public function changeMatchEnd() {
+	public function changeEventEnd() {
 		$matchData = $this->matches_model->get_match($_POST['id']);
 		$oldEndTime = $matchData['endTime'];
 		$newEndTime = $oldEndTime+$_POST['minutesDelta'];

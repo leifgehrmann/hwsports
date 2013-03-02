@@ -2,7 +2,7 @@
 class Tournaments_model extends CI_Model {
 
 	/**
-	 * $centreID is int(11)
+	 * $tournamentID is int(11)
 	 *  
 	 * @return boolean
 	 **/
@@ -15,6 +15,24 @@ class Tournaments_model extends CI_Model {
 		$queryData = $this->db->query($queryString);
 		$output = $queryData->row_array();
 		return $output['exists'];
+	}
+	/**
+	 * Verifies that the tournament dates make in the order they were written.
+	 *  
+	 * @return boolean
+	 **/
+	public function are_valid_tournament_dates(
+		$registrationStartDate, 
+		$registrationEndDate, 
+		$tournamentStartDate, 
+		$tournamentEndDate )
+	{
+		if( ($registrationStartDate < $registrationEndDate) && 
+			($registrationEndDate < $tournamentStartDate) &&
+			($tournamentStartDate < $tournamentEndDate) ) {
+			return true;
+		}
+		return false;
 	}
 
 	/**

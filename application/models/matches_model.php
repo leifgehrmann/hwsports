@@ -18,6 +18,50 @@ class Matches_model extends CI_Model {
 	}
 
 	/**
+	 * Returns if the match dates are valid
+	 * @param startTime - the start of the match
+	 * @param endTime - the end of the match
+	 * @param tournamentID - the tournament we want to check
+	 * @return boolean
+	 **/
+	public function are_valid_dates_in_tournament($startTime, $endTime, $tournamentID)
+	{
+		$this->load->model('tournaments_model');
+		$tournament = $this->tournament_model->get_tournament($tournamentID);
+		$tournamentStart 	= DateTime::createFromFormat(DATE_TIME_FORMAT,$tournament['tournamentStart']);
+		$tournamentEnd 		= DateTime::createFromFormat(DATE_TIME_FORMAT,$tournament['tournamentEnd']);
+		return 	($startTime<$endTime) && 
+				($tournamentStart<$startTime) && 
+				($tournamentStart<$endTime) && 
+				($startTime<$tournamentEnd) && 
+				($endTime<$tournamentEnd);
+	}
+	/**
+	 * Returns if the match dates are valid
+	 * @param startTime - the start of the match
+	 * @param endTime - the end of the match
+	 * @param matchID - the match we want to check
+	 * @return boolean
+	 **/
+	public function are_valid_dates_in_match($startTime, $endTime, matchID)
+	{	
+		$this->load->model('tournaments_model');
+		$this->load->model('matches_model');
+		$match = $this->matches_model->get_match($matchID);
+		return are_valid_match_dates($startTime, $endTime, $match['tournamentID']);
+	}
+	/**
+	 * Returns if the match dates are valid
+	 * @param startTime - the start of the match
+	 * @param endTime - the end of the match
+	 * @return boolean
+	 **/
+	public function are_valid_dates($startTime, $endTime)
+	{
+		return ($startTime<$endTime);
+	}
+
+	/**
 	 * Returns a 2d array of match data
 	 *  
 	 * @return array
