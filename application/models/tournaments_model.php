@@ -135,7 +135,7 @@ class Tournaments_model extends CI_Model {
 				return("preTournament");
 			} 
 			// Otherwise, we are still awaiting the staff to moderate the competitor list - set competitorsModerated to false in the DB to make this clear.
-			$this->update_tournament($tournamentID,array("competitorsModerated","false"));
+			$this->update_tournament($tournamentID,array("competitorsModerated" => "false"));
 			// postRegistration means we need staff to moderate the competitor list
 			return("postRegistration");
 		} elseif( ($today >= $registrationStartDate) && ($today >= $registrationEndDate) &&
@@ -206,6 +206,7 @@ class Tournaments_model extends CI_Model {
 
 		if($this->tournament_exists($tournamentID)){
 			foreach($data as $key=>$value) {
+				if(!is_string($key)) return false;
 				$escKey = $this->db->escape($key);
 				$escValue = $this->db->escape($value);
 				$dataQueryString = 	"UPDATE `tournamentData` ".
