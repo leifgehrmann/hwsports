@@ -664,7 +664,7 @@ class Tms extends MY_Controller {
 	}
 	
 	// Checks two correctly-formatted date strings in POST data for range sanity
-	public function daterange_check($startDateField, $endDateField) {
+	private function daterange_check($startDateField, $endDateField) {
 		// If the start field doesn't exist, check end date against today's date instead, since we want the end date to be in the future 
 		$startDate = ( ($this->input->post($startDateField)===FALSE) ? new DateTime() : DateTime::createFromFormat(DATE_FORMAT, $this->input->post($startDateField) ) );
 		$endDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post($endDateField) );
@@ -687,14 +687,14 @@ class Tms extends MY_Controller {
 					if(substr($field, -3)=="End") {
 						$endDateField = $field;
 						$startDateField = substr($field, 0, -3)."Start";
-						if(daterange_check($startDateField, $endDateField )===FALSE) {
+						if($this->daterange_check($startDateField, $endDateField )===FALSE) {
 							$this->form_validation->set_message('date_check', "Invalid date range specified: $startDateField -> $endDateField. Please ensure start dates are before end dates, and end dates are in the future.");
 							return FALSE;
 						}
 					}
 					// If we have a registration end date and a tournament start date, check tournament is starting after registration period
 					if( $field=="registrationEnd" && ($this->input->post("tournamentStart")!==FALSE) ) {
-						if(daterange_check("registrationEnd", "tournamentStart" )===FALSE) {
+						if($this->daterange_check("registrationEnd", "tournamentStart" )===FALSE) {
 							$this->form_validation->set_message('date_check', "Tournament must start after registration period has ended. Please correct the tournament start date.");
 							return FALSE;
 						}
