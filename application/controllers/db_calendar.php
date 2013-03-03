@@ -421,6 +421,15 @@ class Db_Calendar extends MY_Controller {
 						case "tournament"	: $consistent = $this->tournaments_model->are_valid_tournament_dates($newStartTime,$newEndTime,$id); break;
 						case "register"		: $consistent = $this->tournaments_model->are_valid_registration_dates($newStartTime,$newEndTime,$id); break;
 					}
+					if( $type=="tournament" || $type=="register" ){
+						$tournament = $this->tournaments_model->get_tournament($_POST['id']);
+						$this->data['data'] .= "\n".$tournament['tournamentStart'];
+						$this->data['data'] .= "\n".$tournament['tournamentEnd'];
+						$this->data['data'] .= "\n".$tournament['registrationStart'];
+						$this->data['data'] .= "\n".$tournament['registrationEnd'];
+						$this->data['data'] .= "\n".$newStartTime->format($switch_data[$type]['databaseFormat']);
+						$this->data['data'] .= "\n".$newEndTime->format($switch_data[$type]['databaseFormat']);
+					}
 
 					// Update the database
 					if($consistent){
@@ -441,10 +450,10 @@ class Db_Calendar extends MY_Controller {
 			}
 		}
 		if($updateAttempt){
-			$this->data['data'] = (
+			$this->data['data'] .= (
 				$updateResult ? 
-				"Updated ".$type." ".$id : 
-				"Error updating ".$type." ".$id
+				"\nUpdated ".$type." ".$id : 
+				"\nError updating ".$type." ".$id
 			);
 		}
 		$this->load->view('data',$this->data);
