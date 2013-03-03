@@ -48,8 +48,7 @@ class Matches_model extends CI_Model {
 	public function are_valid_dates_in_match($startTime, $endTime, $matchID)
 	{	
 		$match = $this->get_match($matchID);
-		print_r($match['tournamentID']);
-		if(is_numeric($match['tournamentID']))
+		if(!($match['tournamentID']==="0"))
 			return $this->are_valid_dates_in_tournament($startTime, $endTime, $match['tournamentID']);
 		else
 			return ($startTime<$endTime);

@@ -424,6 +424,7 @@ class Db_Calendar extends MY_Controller {
 					}
 					if( $type=="tournament" || $type=="register" ){
 						$tournament = $this->tournaments_model->get_tournament($id);
+						var_dump($tournament);
 						$this->data['data'] .= "touStartTime ".$tournament['tournamentStart']."\n";
 						$this->data['data'] .= "touEndTime   ".$tournament['tournamentEnd']."\n";
 						$this->data['data'] .= "regStartTime ".$tournament['registrationStart']."\n";
@@ -433,9 +434,6 @@ class Db_Calendar extends MY_Controller {
 					} else {
 						$match = $this->matches_model->get_match($id);
 						var_dump($match);
-						$this->data['data'] .= "tournament ID = ".$match['tournamentID']."\n";
-						if(is_numeric($match['tournamentID']))
-							$this->data['data'] .= "is numeric = ".$match['tournamentID']."\n";
 						$this->data['data'] .= "newStartTime ".$newStartTime->format($switch_data[$type]['databaseFormat'])."\n";
 						$this->data['data'] .= "newEndtime   ".$newEndTime->format($switch_data[$type]['databaseFormat'])."\n";
 					}
