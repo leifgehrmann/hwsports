@@ -35,11 +35,11 @@
 			editable: true,
 			eventResize: function(match,dayDelta,minuteDelta,revertFunc) {
 				//console.log(match);
-				var minutesDelta = ((dayDelta*1440)+minuteDelta)*60;
+				var secondsDelta = ((dayDelta*1440)+minuteDelta)*60;
 				var request = $.ajax({
 					type: "POST",
 					url: '/db_calendar/changeEventEnd',
-					data: { 'minutesDelta': minutesDelta, 'id': match.data.id }
+					data: { 'secondsDelta': secondsDelta, 'id': match.data.id }
 				});
  
 				request.done(function(msg) {
@@ -52,12 +52,12 @@
 			},
 			eventDrop: function(match,dayDelta,minuteDelta,allDay,revertFunc) {
 				//console.log(match);
-				var minutesDelta = ((dayDelta*1440)+minuteDelta)*60;
+				var secondsDelta = ((dayDelta*1440)+minuteDelta)*60;
 				//alert(minutesDelta);
 				var request = $.ajax({
 					type: "POST",
 					url: '/db_calendar/changeEventStart',
-					data: { 'minutesDelta': minutesDelta, 'id': match.data.id }
+					data: { 'secondsDelta': secondsDelta, 'id': match.data.id }
 				});
  				
 				request.done(function(msg) {

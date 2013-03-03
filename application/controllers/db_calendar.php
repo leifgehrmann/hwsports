@@ -403,15 +403,15 @@ class Db_Calendar extends MY_Controller {
 				// Verify that the values are valid
 				if( empty($oldStartTime) || empty($oldEndTime) ) {
 					$this->data['data'] = "Error: Invalid date was fetched from the database.";
-				} else if( !isset($_POST['minutesDelta']) ) {
-					$this->data['data'] = "Error: minutesDelta was not defined";
-				} else if( !is_numeric($_POST['minutesDelta']) ){
-					$this->data['data'] = "Error: minutesDelta was not numeric";
+				} else if( !isset($_POST['secondsDelta']) ) {
+					$this->data['data'] = "Error: secondsDelta was not defined";
+				} else if( !is_numeric($_POST['secondsDelta']) ){
+					$this->data['data'] = "Error: secondsDelta was not numeric";
 				} else {
 					// Add the delta to the old times
 					$data = array();
-					$data[$switch_data[$type]['startTime']]	= $oldStartTime->modify($_POST['minutesDelta']." minutes")->format($switch_data[$type]['databaseFormat']);
-					$data[$switch_data[$type]['endTime']]	= $oldEndTime->modify($_POST['minutesDelta']." minutes")->format($switch_data[$type]['databaseFormat']);
+					$data[$switch_data[$type]['startTime']]	= $oldStartTime->modify($_POST['secondsDelta']." minutes")->format($switch_data[$type]['databaseFormat']);
+					$data[$switch_data[$type]['endTime']]	= $oldEndTime->modify($_POST['secondsDelta']." minutes")->format($switch_data[$type]['databaseFormat']);
 
 					// before we commit, we should verify that the new tournament 
 					// date works
