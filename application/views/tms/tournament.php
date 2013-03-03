@@ -80,10 +80,9 @@
 <script type="text/javascript">
 	$('.date').datetimepicker( {
     dateFormat: $.datepicker.ISO_8601,
-    separator: 'T',
-    timeFormat: 'hh:mm:ssz',
-    ampm: false,
-    timezoneIso8609: true } );
+    separator: ' ',
+    timeFormat: 'hh:mm',
+    ampm: false} );
 </script>
 
 <!-- /#main -->
