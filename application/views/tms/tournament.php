@@ -78,7 +78,12 @@
 <?php echo form_close();?>
 
 <script type="text/javascript">
-	$('.date').datetimepicker({ timeFormat: 'iso8601z' });
+	$('.date').datetimepicker( {
+    dateFormat: $.datepicker.ISO_8601,
+    separator: 'T',
+    timeFormat: 'hh:mm:ssz',
+    ampm: false,
+    timezoneIso8609: true } );
 </script>
 
 <!-- /#main -->
