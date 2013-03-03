@@ -398,8 +398,8 @@ class Db_Calendar extends MY_Controller {
 				}
 
 				// Convert the time varaibles to datetime
-				$oldStartTime 	= DateTime::createFromFormat($switch_data[$type]['databaseFormat']	, $matchData[$switch_data[$type]['startTime']]);
-				$oldEndTime 	= DateTime::createFromFormat($switch_data[$type]['databaseFormat']	, $matchData[$switch_data[$type]['endTime']]);
+				$oldStartTime 	= DateTime::createFromFormat($switch_data[$type]['databaseFormat']	, $eventData[$switch_data[$type]['startTime']]);
+				$oldEndTime 	= DateTime::createFromFormat($switch_data[$type]['databaseFormat']	, $eventData[$switch_data[$type]['endTime']]);
 				// Verify that the values are valid
 				if( empty($oldStartTime) || empty($oldEndTime) ) {
 					$this->data['data'] = "Error: Invalid date was fetched from the database.";
