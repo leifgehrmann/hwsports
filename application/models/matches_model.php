@@ -45,19 +45,11 @@ class Matches_model extends CI_Model {
 	 **/
 	public function are_valid_dates_in_match($startTime, $endTime, $matchID)
 	{	
-		$this->load->model('matches_model');
-		$match = $this->matches_model->get_match($matchID);
-		return are_valid_match_dates($startTime, $endTime, $match['tournamentID']);
-	}
-	/**
-	 * Returns if the match dates are valid
-	 * @param startTime - the start of the match
-	 * @param endTime - the end of the match
-	 * @return boolean
-	 **/
-	public function are_valid_dates($startTime, $endTime)
-	{
-		return ($startTime<$endTime);
+		$match = $this->get_match($matchID);
+		if(array_key_exists('tournamentID',$match))
+			return are_valid_dates_in_tournament($startTime, $endTime, $match['tournamentID']);
+		else
+			return ($startTime<$endTime);
 	}
 
 	/**

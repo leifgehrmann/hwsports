@@ -408,22 +408,28 @@ class Db_Calendar extends MY_Controller {
 				} else if( !is_numeric($_POST['secondsDelta']) ){
 					$this->data['data'] = "Error: secondsDelta was not numeric";
 				} else {
+
 					// Add the delta to the old times
-					$data = array();
-					$data[$switch_data[$type]['startTime']]	= $oldStartTime->modify($_POST['secondsDelta']." seconds")->format($switch_data[$type]['databaseFormat']);
-					$data[$switch_data[$type]['endTime']]	= $oldEndTime->modify($_POST['secondsDelta']." seconds")->format($switch_data[$type]['databaseFormat']);
+					$newStartTime 	= $oldStartTime->modify($_POST['secondsDelta']." seconds");
+					$newEndTime 	= $oldEndTime->modify($_POST['secondsDelta']." seconds");
 
 					// before we commit, we should verify that the new tournament 
 					// date works
-					/*$consistent;
+					$consistent;
 					if( $type=="tournament" || $type=="registration" ){
 						switch ($type) {
-							case "match"		: $consistent = $this->tournaments_model->are_valid_tournament_dates(); break;
-							case "tournament"	: $consistent = $this->tournaments_model->are_valid_tournament_dates(); break;
+							case "match"		: $consistent = $this->matches_model->are_valid_dates_in_match($newStartTime,$newEndTime,$id); break;
+							case "tournament"	: $consistent = $this->tournaments_model->are_valid_tournament_dates($newStartTime,$newEndTime,$id); break;
+							case "register"		: $consistent = $this->tournaments_model->are_valid_registration_dates($newStartTime,$newEndTime,$id); break;
 						}
 					} else {
 						$consistent = true;
-					}*/
+					}
+
+					// Add the delta to the old times
+					$data = array();
+					$data[$switch_data[$type]['startTime']]	= $newStartTime->format($switch_data[$type]['databaseFormat']);
+					$data[$switch_data[$type]['endTime']]	= $newEndTime->format($switch_data[$type]['databaseFormat']);
 
 					// Update the database
 					switch ($type) {

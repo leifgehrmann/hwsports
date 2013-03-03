@@ -21,7 +21,7 @@ class Tournaments_model extends CI_Model {
 	 *  
 	 * @return boolean
 	 **/
-	public function are_valid_tournament_dates(
+	public function are_valid_dates(
 		$registrationStartDate, 
 		$registrationEndDate, 
 		$tournamentStartDate, 
@@ -32,7 +32,48 @@ class Tournaments_model extends CI_Model {
 			($tournamentStartDate < $tournamentEndDate) ) {
 			return true;
 		}
-		return false;
+		return ;
+	}
+	/**
+	 * Verifies that the tournament dates make in the order they were written.
+	 *  
+	 * @return boolean
+	 **/
+	public function are_valid_registration_dates(
+		$registrationStartDate, 
+		$registrationEndDate,
+		$tournamentID )
+	{
+		$tournament = $this->get_tournament($tournamentID);
+		$tournamentStartDate = $tournament['tournamentStart'];
+		$tournamentEndDate = $tournament['tournamentEnd'];
+		return $this->are_valid_dates(
+			$registrationStartDate,
+			$registrationEndDate,
+			$tournamentStartDate,
+			$tournamentEndDate
+		);
+	}
+	/**
+	 * Verifies that the tournament dates make in the order they were written.
+	 *  
+	 * @return boolean
+	 **/
+	public function are_valid_tournament_dates(
+		$tournamentStartDate, 
+		$tournamentEndDate,
+		$tournamentID )
+	{
+
+		$tournament = $this->get_tournament($tournamentID);
+		$registrationStartDate = $tournament['tournamentStart'];
+		$registrationEndDate = $tournament['tournamentEnd'];
+		return $this->are_valid_dates(
+			$registrationStartDate,
+			$registrationEndDate,
+			$tournamentStartDate,
+			$tournamentEndDate
+		);
 	}
 
 	/**
