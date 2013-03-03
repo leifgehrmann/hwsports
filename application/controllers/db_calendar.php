@@ -432,6 +432,7 @@ class Db_Calendar extends MY_Controller {
 						$this->data['data'] .= "newEndTime   ".$newEndTime->format($switch_data[$type]['databaseFormat'])."\n";
 					} else {
 						$match = $this->matches_model->get_match($id);
+						var_dump($match);
 						$this->data['data'] .= "tournament ID = ".$match['tournamentID']."\n";
 						if(is_numeric($match['tournamentID']))
 							$this->data['data'] .= "is numeric = ".$match['tournamentID']."\n";
