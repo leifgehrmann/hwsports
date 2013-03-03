@@ -456,6 +456,8 @@ class Db_Calendar extends MY_Controller {
 				"Updated ".$type." ".$id."\n" : 
 				"error updating ".$type." ".$id."\n"
 			);
+		} else {
+			header('HTTP', true, 400);
 		}
 		$this->load->view('data',$this->data);
 	}
