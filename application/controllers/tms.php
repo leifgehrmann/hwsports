@@ -673,26 +673,34 @@ class Tms extends MY_Controller {
 				if( checkdate($m,$d,$y) ) {
 					// Date is valid, now let's check it is part of a valid range
 					switch($field) {
-						case "registrationStart":
 						case "registrationEnd":
-							$registrationStartDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post('registrationStart') );
-							$registrationEndDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post('registrationEnd') );
-							if( $registrationStartDate < $registrationEndDate ) {
-								return TRUE; 
+							// Check if we even have a start date to test against, since sometimes we're only changing the end date because we're already past the start date
+							if($this->input->post('registrationStart')!==FALSE) {
+								$registrationStartDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post('registrationStart') );
+								$registrationEndDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post('registrationEnd') );
+								if( $registrationStartDate < $registrationEndDate ) {
+									return TRUE; 
+								} else {
+									$this->form_validation->set_message('date_check', 'The registration period must be a valid date range.');
+									return FALSE;
+								}
 							} else {
-								$this->form_validation->set_message('date_check', 'The registration period must be a valid date range.');
-								return FALSE;
+								return TRUE;
 							}
 						break;
-						case "tournamentStart":
 						case "tournamentEnd":
-							$tournamentStartDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post('tournamentStart') );
-							$tournamentEndDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post('tournamentEnd') );
-							if( $tournamentStartDate < $tournamentEndDate ) {
-								return TRUE; 
+							// Check if we even have a start date to test against, since sometimes we're only changing the end date because we're already past the start date
+							if($this->input->post('tournamentStart')!==FALSE) {
+								$tournamentStartDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post('tournamentStart') );
+								$tournamentEndDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post('tournamentEnd') );
+								if( $tournamentStartDate < $tournamentEndDate ) {
+									return TRUE; 
+								} else {
+									$this->form_validation->set_message('date_check', 'The tournament match scheduling period must be a valid date range.');
+									return FALSE;
+								}
 							} else {
-								$this->form_validation->set_message('date_check', 'The tournament match scheduling period must be a valid date range.');
-								return FALSE;
+								return TRUE;
 							}
 						break;
 						default:
