@@ -1,5 +1,4 @@
 <h1><a href="/tms/venues/">Venues</a> &#9656; <span id="title-name"><?=$this->data["venue"]["name"]?></span></h1>
-<div id='message'></div>
 <?php
 	$fields = array("name","description","directions");
 	$labels = array("Venue Name","Description","Directions");

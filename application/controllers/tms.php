@@ -63,9 +63,9 @@ class Tms extends MY_Controller {
 			$tournamentID = $this->tournaments_model->insert_tournament($newdata);
 			if($tournamentID > -1) {
 				// Successful update, show success message
-				$this->session->set_flashdata('message',  'Successfully Created Tournament.');
+				$this->session->set_flashdata('message_success',  'Successfully Created Tournament.');
 			} else {
-				$this->session->set_flashdata('message',  'Failed. Please contact Infusion Systems.');
+				$this->session->set_flashdata('message_error',  'Failed. Please contact Infusion Systems.');
 			}
 			redirect("/tms/tournament/$tournamentID", 'refresh');
 		} else {
@@ -187,9 +187,9 @@ class Tms extends MY_Controller {
 				$this->tournaments_model->update_tournament($tournamentID, $newdata);
 				if($tournamentID > -1) {
 					// Successful update, show success message
-					$this->session->set_flashdata('message',  'Successfully Updated Tournament.');
+					$this->session->set_flashdata('message_success',  'Successfully Updated Tournament.');
 				} else {
-					$this->session->set_flashdata('message',  'Failed. Please contact Infusion Systems.');
+					$this->session->set_flashdata('message_error',  'Failed. Please contact Infusion Systems.');
 				}
 				redirect("/tms/tournament/$tournamentID", 'refresh');
 			} else {
@@ -248,7 +248,7 @@ class Tms extends MY_Controller {
 			$this->load->view('tms/footer',$this->data);
 				
 		} else {
-			$this->session->set_flashdata('message',  "Tournament ID $id does not exist.");
+			$this->session->set_flashdata('message_error',  "Tournament ID $id does not exist.");
 			redirect("/tms/tournaments", 'refresh');
 		}
 	}
@@ -260,9 +260,9 @@ class Tms extends MY_Controller {
 
 		if($this->tournaments_model->delete_tournament($tournamentID) ) {
 			// Successful delete, show success message
-			$this->session->set_flashdata('message',  'Successfully Deleted Tournament.');
+			$this->session->set_flashdata('message_success',  'Successfully Deleted Tournament.');
 		} else {
-			$this->session->set_flashdata('message',  'Failed. Please contact Infusion Systems.');
+			$this->session->set_flashdata('message_error',  'Failed. Please contact Infusion Systems.');
 		}
 		redirect("/tms/tournaments", 'refresh');
 	}
@@ -453,15 +453,15 @@ class Tms extends MY_Controller {
 			
 			if($this->centre_model->update_centre($this->data['centre']['centreID'],$newdata ) ) {
 				// Successful update, show success message
-				$this->session->set_flashdata('message',  'Successfully Updated');
+				$this->session->set_flashdata('message_success',  'Successfully Updated');
 			} else {
-				$this->session->set_flashdata('message',  'Failed. Please contact Infusion Systems.');
+				$this->session->set_flashdata('message_error',  'Failed. Please contact Infusion Systems.');
 			}
 			redirect("/tms/settings", 'refresh');
 		} else {
 			//display the create user form
 			//set the flash data error message if there is one
-			$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message') );
+			$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
 			
 			$this->data['name'] = array(
 				'name'  => 'name',
