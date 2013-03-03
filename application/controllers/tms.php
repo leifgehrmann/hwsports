@@ -681,7 +681,7 @@ class Tms extends MY_Controller {
 								if( $registrationStartDate < $registrationEndDate ) {
 									return TRUE; 
 								} else {
-									$this->form_validation->set_message('date_check', 'The registration period must be a valid date range.');
+									$this->form_validation->set_message('date_check', 'The registration period must be a valid date range. Please ensure the start date is before the end date.');
 									return FALSE;
 								}
 							} else {
@@ -696,7 +696,7 @@ class Tms extends MY_Controller {
 								if( $tournamentStartDate < $tournamentEndDate ) {
 									return TRUE; 
 								} else {
-									$this->form_validation->set_message('date_check', 'The tournament match scheduling period must be a valid date range.');
+									$this->form_validation->set_message('date_check', 'The tournament match scheduling period must be a valid date range. Please ensure the start date is before the end date.');
 									return FALSE;
 								}
 							} else {
