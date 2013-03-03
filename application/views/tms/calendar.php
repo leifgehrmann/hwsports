@@ -48,7 +48,7 @@
 				 
 				request.fail(function(jqXHR, textStatus) {
 					revertFunc();
-					alert( "Request failed: " + textStatus );
+					alert( "The event could not be moved because it conflicts with current schedule." );
 				});
 			},
 			eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
@@ -67,7 +67,7 @@
 				 
 				request.fail(function(jqXHR, textStatus) {
 					revertFunc();
-					alert( "Request failed: " + textStatus );
+					alert( "The event could not be moved because it conflicts with current schedule." );
 				});
 			}
 		});

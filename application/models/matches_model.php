@@ -28,10 +28,9 @@ class Matches_model extends CI_Model {
 	{
 		$this->load->model('tournaments_model');
 		$tournament = $this->tournaments_model->get_tournament($tournamentID);
-		if(empty($tournament))
-			return false;
-		$tournamentStart 	= DateTime::createFromFormat(DATE_TIME_FORMAT,$tournament['tournamentStart']);
-		$tournamentEnd 		= DateTime::createFromFormat(DATE_TIME_FORMAT,$tournament['tournamentEnd']);
+		var_dump($tournament);
+		$tournamentStart 	= DateTime::createFromFormat(DATE_FORMAT,$tournament['tournamentStart']);
+		$tournamentEnd 		= DateTime::createFromFormat(DATE_FORMAT,$tournament['tournamentEnd']);
 		return (($startTime<$endTime) && 
 				($tournamentStart<=$startTime) && 
 				($tournamentStart<=$endTime) && 
@@ -45,11 +44,11 @@ class Matches_model extends CI_Model {
 	 * @param matchID - the match we want to check
 	 * @return boolean
 	 **/
-	public function are_valid_dates_in_match($startTime, $endTime, $matchID)
+	public function are_valid_dates($startTime, $endTime, $matchID)
 	{	
 		$match = $this->get_match($matchID);
-		print_r($match['tournamentID']);
-		if(is_numeric($match['tournamentID']))
+		var_dump($match);
+		if(!($match['tournamentID']==="0"))
 			return $this->are_valid_dates_in_tournament($startTime, $endTime, $match['tournamentID']);
 		else
 			return ($startTime<$endTime);
@@ -121,6 +120,8 @@ class Matches_model extends CI_Model {
 		foreach($fieldsResult as $fieldResult) {
 			$fields[] = $fieldResult['key'];
 		}
+		if(count($fields)==0)
+			return array();
 
 		/* Query the ids that are associated with this match */
 		$relational = array();

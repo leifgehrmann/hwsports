@@ -418,12 +418,13 @@ class Db_Calendar extends MY_Controller {
 					// date works
 					$consistent = false;
 					switch ($type) {
-						case "match"		: $consistent = $this->matches_model    ->are_valid_dates_in_match    ($newStartTime,$newEndTime,$id); break;
+						case "match"		: $consistent = $this->matches_model    ->are_valid_dates             ($newStartTime,$newEndTime,$id); break;
 						case "tournament"	: $consistent = $this->tournaments_model->are_valid_tournament_dates  ($newStartTime,$newEndTime,$id); break;
 						case "register"		: $consistent = $this->tournaments_model->are_valid_registration_dates($newStartTime,$newEndTime,$id); break;
 					}
 					if( $type=="tournament" || $type=="register" ){
 						$tournament = $this->tournaments_model->get_tournament($id);
+						var_dump($tournament);
 						$this->data['data'] .= "touStartTime ".$tournament['tournamentStart']."\n";
 						$this->data['data'] .= "touEndTime   ".$tournament['tournamentEnd']."\n";
 						$this->data['data'] .= "regStartTime ".$tournament['registrationStart']."\n";
@@ -431,15 +432,11 @@ class Db_Calendar extends MY_Controller {
 						$this->data['data'] .= "newStartTime ".$newStartTime->format($switch_data[$type]['databaseFormat'])."\n";
 						$this->data['data'] .= "newEndTime   ".$newEndTime->format($switch_data[$type]['databaseFormat'])."\n";
 					} else {
-						$match = $this->match_model->get_match($matchID);
-						$this->data['data'] .= "tournament ID = ".$match['tournamentID']."\n";
-						if(is_numeric($match['tournamentID']))
-							$this->data['data'] .= "is numeric = ".$match['tournamentID']."\n";
+						$match = $this->matches_model->get_match($id);
 						$this->data['data'] .= "newStartTime ".$newStartTime->format($switch_data[$type]['databaseFormat'])."\n";
 						$this->data['data'] .= "newEndtime   ".$newEndTime->format($switch_data[$type]['databaseFormat'])."\n";
 					}
-
-
+					
 					// Update the database
 					if($consistent){
 						// Add the delta to the old times
@@ -465,7 +462,7 @@ class Db_Calendar extends MY_Controller {
 				"error updating ".$type." ".$id."\n"
 			);
 		} else {
-			//header('HTTP', true, 400);
+			var_dump($this->data['data']);
 		}
 		$this->load->view('data',$this->data);
 	}
