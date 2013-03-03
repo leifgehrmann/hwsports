@@ -680,7 +680,7 @@ class Tms extends MY_Controller {
 							if( $registrationStartDate < $registrationEndDate ) {
 								return TRUE; 
 							} else {
-								$this->form_validation->set_message('dateformat_check', 'The registration period must be a valid date range.');
+								$this->form_validation->set_message('date_check', 'The registration period must be a valid date range.');
 								return FALSE;
 							}
 						break;
@@ -691,7 +691,7 @@ class Tms extends MY_Controller {
 							if( $tournamentStartDate < $tournamentEndDate ) {
 								return TRUE; 
 							} else {
-								$this->form_validation->set_message('dateformat_check', 'The tournament match scheduling period must be a valid date range.');
+								$this->form_validation->set_message('date_check', 'The tournament match scheduling period must be a valid date range.');
 								return FALSE;
 							}
 						break;
@@ -700,15 +700,15 @@ class Tms extends MY_Controller {
 							return TRUE;
 					}
 				} else {				
-					$this->form_validation->set_message('dateformat_check', 'The %s field must contain a date within realistic range. Provided: '.$y.' - '.$m.' - '.$d);
+					$this->form_validation->set_message('date_check', 'The %s field must contain a date within realistic range. Provided: '.$y.' - '.$m.' - '.$d);
 					return FALSE;
 				}
 			} else {
-				$this->form_validation->set_message('dateformat_check', 'The %s field must contain a valid numerical date. Provided: '.print_r($date,1) );
+				$this->form_validation->set_message('date_check', 'The %s field must contain a valid numerical date. Provided: '.print_r($date,1) );
 				return FALSE;
 			}
 		} else {
-			$this->form_validation->set_message('dateformat_check', 'The %s field must have all three elements of a date. Provided: '.print_r($strDate,1) );
+			$this->form_validation->set_message('date_check', 'The %s field must have all three elements of a date. Provided: '.print_r($strDate,1) );
 			return FALSE;
 		}
 	}
