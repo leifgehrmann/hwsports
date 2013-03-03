@@ -810,7 +810,7 @@ a:hover div.widget-title-right.icon { -webkit-animation: imove .5s; }
     z-index: -1; 
     width:20px; 
     height:20px; 
-    background-image: url('/img/icons/icons.raw.png');
+    background-image: url('/img/icons/icons.png');
     left:0px; 
 } 
 .fc div.fc-event-inner { 
