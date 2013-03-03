@@ -422,7 +422,7 @@ class Db_Calendar extends MY_Controller {
 						case "register"		: $consistent = $this->tournaments_model->are_valid_registration_dates($newStartTime,$newEndTime,$id); break;
 					}
 					if( $type=="tournament" || $type=="register" ){
-						$tournament = $this->tournaments_model->get_tournament($_POST['id']);
+						$tournament = $this->tournaments_model->get_tournament($id);
 						$this->data['data'] .= "\n".$tournament['tournamentStart'];
 						$this->data['data'] .= "\n".$tournament['tournamentEnd'];
 						$this->data['data'] .= "\n".$tournament['registrationStart'];

@@ -112,9 +112,11 @@ class Tournaments_model extends CI_Model {
 		$relationalQuery = $this->db->query($relationalString);
 		$relationalResult = $relationalQuery->result_array();
 		
-		$relationalString = "SELECT * FROM sports WHERE sportID = ".$relationalResult[0]['sportID'];
-		$relationalQuery = $this->db->query($relationalString);
-		$relationalResult = $relationalQuery->result_array();
+		if(isset($relationalResult[0]['sportID'])){
+			$relationalString = "SELECT * FROM sports WHERE sportID = ".$relationalResult[0]['sportID'];
+			$relationalQuery = $this->db->query($relationalString);
+			$relationalResult = $relationalQuery->result_array();
+		} 
 		
 		$dataQueryString = "SELECT ";
 		$i = 0;
@@ -130,8 +132,10 @@ class Tournaments_model extends CI_Model {
 		$dataQueryString .= "FROM tournamentData WHERE tournamentID = ".$this->db->escape($tournamentID);
 		$dataQuery = $this->db->query($dataQueryString);
 		$output = array_merge(array("tournamentID"=>$tournamentID), $dataQuery->row_array());
-		$output['sportID'] = $relationalResult[0]['sportID'];
-		$output['sportCategoryID'] = $relationalResult[0]['sportCategoryID'];
+		if(isset($relationalResult[0]['sportID']))
+			$output['sportID'] = $relationalResult[0]['sportID'];
+		if(isset($relationalResult[0]['sportCategoryID']))
+			$output['sportCategoryID'] = $relationalResult[0]['sportCategoryID'];
 		return $output;
 	}
 	
