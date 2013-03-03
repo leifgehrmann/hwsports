@@ -433,7 +433,6 @@ class Db_Calendar extends MY_Controller {
 						$this->data['data'] .= "newEndTime   ".$newEndTime->format($switch_data[$type]['databaseFormat'])."\n";
 					} else {
 						$match = $this->matches_model->get_match($id);
-						var_dump($match);
 						$this->data['data'] .= "newStartTime ".$newStartTime->format($switch_data[$type]['databaseFormat'])."\n";
 						$this->data['data'] .= "newEndtime   ".$newEndTime->format($switch_data[$type]['databaseFormat'])."\n";
 					}
@@ -464,6 +463,7 @@ class Db_Calendar extends MY_Controller {
 				"error updating ".$type." ".$id."\n"
 			);
 		} else {
+			var_dump($this->data['data']);
 			header('HTTP', true, 400);
 		}
 		$this->load->view('data',$this->data);
