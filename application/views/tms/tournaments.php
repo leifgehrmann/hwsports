@@ -59,11 +59,12 @@
 <?php echo form_close();?>
 
 <script type="text/javascript">
-	$('.date').datetimepicker( {
-    dateFormat: $.datepicker.ISO_8601,
-    separator: ' ',
-    timeFormat: 'hh:mm',
-    ampm: false} );
+	$('.date').datetimepicker({
+		dateFormat: $.datepicker.ISO_8601,
+		separator: ' ',
+		timeFormat: 'HH:mm',
+		ampm: false
+	});
 </script>
 
 <!-- /#main -->
