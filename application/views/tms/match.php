@@ -1,5 +1,5 @@
 <h1><a href="/tms/matches/">Matches</a> &#9656; <span id="title-name"><?=$this->data["match"]["name"]?></span></h1>
-<div id='message'></div>
+
 <?php
 	$fields = array("name","description","startTime","endTime");
 	$labels = array("Match Name","Description","StartTime","End Time");

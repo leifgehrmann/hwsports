@@ -1,9 +1,5 @@
 <h1>Centre Settings</h1>
 	
-<? if(!empty($message)){ ?>
-  <div id="infoMessage"><?php echo $message;?></div>
-<? } ?>
-
 <?php echo form_open("tms/settings", array('id' => 'settingsForm'));?>
   	
   <h2>Textual Content:</h2>
