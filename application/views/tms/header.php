@@ -33,7 +33,7 @@
 
 	<script>
 
-		var b = false;
+		/*var b = false;
 		$('html').keyup(function(event) {
 			if (event.shiftKey && event.ctrlKey) {
 				if(!b){
@@ -47,7 +47,7 @@
 				}
 				b=!b;
 			}
-		});
+		});*/
 
 		$(window).resize(function() {
 			var width = $(window).width()-200-20*2;

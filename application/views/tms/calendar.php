@@ -38,7 +38,7 @@
 				var minutesDelta = ((dayDelta*1440)+minuteDelta)*60;
 				var request = $.ajax({
 					type: "POST",
-					url: '/db_calendar/changeMatchEnd',
+					url: '/db_calendar/changeEventEnd',
 					data: { 'minutesDelta': minutesDelta, 'id': match.data.id }
 				});
  
@@ -56,7 +56,7 @@
 				//alert(minutesDelta);
 				var request = $.ajax({
 					type: "POST",
-					url: '/db_calendar/changeMatchStart',
+					url: '/db_calendar/changeEventStart',
 					data: { 'minutesDelta': minutesDelta, 'id': match.data.id }
 				});
  				
