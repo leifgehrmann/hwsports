@@ -416,28 +416,27 @@ class Db_Calendar extends MY_Controller {
 					// before we commit, we should verify that the new tournament 
 					// date works
 					$consistent;
-					if( $type=="tournament" || $type=="registration" ){
-						switch ($type) {
-							case "match"		: $consistent = $this->matches_model->are_valid_dates_in_match($newStartTime,$newEndTime,$id); break;
-							case "tournament"	: $consistent = $this->tournaments_model->are_valid_tournament_dates($newStartTime,$newEndTime,$id); break;
-							case "register"		: $consistent = $this->tournaments_model->are_valid_registration_dates($newStartTime,$newEndTime,$id); break;
-						}
-					} else {
-						$consistent = true;
+					switch ($type) {
+						case "match"		: $consistent = $this->matches_model->are_valid_dates_in_match($newStartTime,$newEndTime,$id); break;
+						case "tournament"	: $consistent = $this->tournaments_model->are_valid_tournament_dates($newStartTime,$newEndTime,$id); break;
+						case "register"		: $consistent = $this->tournaments_model->are_valid_registration_dates($newStartTime,$newEndTime,$id); break;
 					}
-
-					// Add the delta to the old times
-					$data = array();
-					$data[$switch_data[$type]['startTime']]	= $newStartTime->format($switch_data[$type]['databaseFormat']);
-					$data[$switch_data[$type]['endTime']]	= $newEndTime->format($switch_data[$type]['databaseFormat']);
 
 					// Update the database
-					switch ($type) {
-						case "match"		: $updateResult = $this->matches_model->update_match($id,$data); break;
-						case "tournament"	: $updateResult = $this->tournaments_model->update_tournament($id,$data); break;
-						case "registration"	: $updateResult = $this->tournaments_model->update_tournament($id,$data); break;
+					if($consistent){
+						// Add the delta to the old times
+						$data = array();
+						$data[$switch_data[$type]['startTime']]	= $newStartTime->format($switch_data[$type]['databaseFormat']);
+						$data[$switch_data[$type]['endTime']]	= $newEndTime->format($switch_data[$type]['databaseFormat']);
+						switch ($type) {
+							case "match"		: $updateResult = $this->matches_model->update_match($id,$data); break;
+							case "tournament"	: $updateResult = $this->tournaments_model->update_tournament($id,$data); break;
+							case "registration"	: $updateResult = $this->tournaments_model->update_tournament($id,$data); break;
+						}
+						$updateAttempt = true;
+					} else {
+						$this->data['data'] = "Error: Date arrangement is inconsistent.";
 					}
-					$updateAttempt = true;
 				}
 			}
 		}
