@@ -373,9 +373,10 @@ class Db_Calendar extends MY_Controller {
 						);
 		$updateResult;
 		$updateAttempt = false;
+		$this->data['data'] = "";
 
 		if(!isset($_POST['id'])){
-			$this->data['data'] = "Error: id not defined";
+			$this->data['data'] .= "Error: id not defined\n";
 		} else {
 
 			// Check if everything has been defined.
@@ -383,9 +384,9 @@ class Db_Calendar extends MY_Controller {
 			if(strrpos($val,"match-")!=-1)				list($type,$id) = explode("-",$val);
 			else if(strrpos($val,"tournament-")!=-1)	list($type,$id) = explode("-",$val);
 			else if(strrpos($val,"registration-")!=-1)	list($type,$id) = explode("-",$val);
-			else $this->data['data'] = "Error: valid type and id not defined";
+			else $this->data['data'] .= "Error: valid type and id not defined\n";
 			if(!is_numeric($id)){
-				$this->data['data'] = "Error: id not defined";
+				$this->data['data'] .= "Error: id not defined\n";
 				break;
 			}
 			if(!empty($id) && array_key_exists($type,$switch_data)){
@@ -402,11 +403,11 @@ class Db_Calendar extends MY_Controller {
 				$oldEndTime 	= DateTime::createFromFormat($switch_data[$type]['databaseFormat']	, $eventData[$switch_data[$type]['endTime']]);
 				// Verify that the values are valid
 				if( empty($oldStartTime) || empty($oldEndTime) ) {
-					$this->data['data'] = "Error: Invalid date was fetched from the database.";
+					$this->data['data'] .= "Error: Invalid date was fetched from the database.\n";
 				} else if( !isset($_POST['secondsDelta']) ) {
-					$this->data['data'] = "Error: secondsDelta was not defined";
+					$this->data['data'] .= "Error: secondsDelta was not defined.\n";
 				} else if( !is_numeric($_POST['secondsDelta']) ){
-					$this->data['data'] = "Error: secondsDelta was not numeric";
+					$this->data['data'] .= "Error: secondsDelta was not numeric.\n";
 				} else {
 
 					// Add the delta to the old times
@@ -423,12 +424,12 @@ class Db_Calendar extends MY_Controller {
 					}
 					if( $type=="tournament" || $type=="register" ){
 						$tournament = $this->tournaments_model->get_tournament($id);
-						$this->data['data'] .= "\n".$tournament['tournamentStart'];
-						$this->data['data'] .= "\n".$tournament['tournamentEnd'];
-						$this->data['data'] .= "\n".$tournament['registrationStart'];
-						$this->data['data'] .= "\n".$tournament['registrationEnd'];
-						$this->data['data'] .= "\n".$newStartTime->format($switch_data[$type]['databaseFormat']);
-						$this->data['data'] .= "\n".$newEndTime->format($switch_data[$type]['databaseFormat']);
+						$this->data['data'] .= $tournament['tournamentStart']."\n";
+						$this->data['data'] .= $tournament['tournamentEnd']."\n";
+						$this->data['data'] .= $tournament['registrationStart']."\n";
+						$this->data['data'] .= $tournament['registrationEnd']."\n";
+						$this->data['data'] .= $newStartTime->format($switch_data[$type]['databaseFormat'])."\n";
+						$this->data['data'] .= $newEndTime->format($switch_data[$type]['databaseFormat'])."\n";
 					}
 
 					// Update the database
@@ -444,7 +445,7 @@ class Db_Calendar extends MY_Controller {
 						}
 						$updateAttempt = true;
 					} else {
-						$this->data['data'] = "Error: Date arrangement is inconsistent.";
+						$this->data['data'] .= "Error: Date arrangement is inconsistent."."\n";
 					}
 				}
 			}
@@ -452,8 +453,8 @@ class Db_Calendar extends MY_Controller {
 		if($updateAttempt){
 			$this->data['data'] .= (
 				$updateResult ? 
-				"\nUpdated ".$type." ".$id : 
-				"\nError updating ".$type." ".$id
+				"Updated ".$type." ".$id."\n" : 
+				"error updating ".$type." ".$id."\n"
 			);
 		}
 		$this->load->view('data',$this->data);
