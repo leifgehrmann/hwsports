@@ -71,7 +71,7 @@ class Tms extends MY_Controller {
 		} else {
 			//display the create user form
 			//set the flash data error message if there is one
-			$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message') );
+			$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
 		
 			$this->data['tournaments'] = $this->tournaments_model->get_tournaments($this->data['centre']['centreID']);
 		
@@ -82,45 +82,47 @@ class Tms extends MY_Controller {
 			}
 			ksort($this->data['sports']);
 			
+			
 			$this->data['name'] = array(
 				'name'  => 'name',
 				'id'    => 'name',
 				'type'  => 'text',
-				'value' => ''
+				'value' => $this->form_validation->set_value('name')
 			);
+			
 			$this->data['description'] = array(
 				'name'  => 'description',
 				'id'    => 'description',
 				'type'  => 'text',
-				'value' => ''
+				'value' => $this->form_validation->set_value('description')
 			);
 			$this->data['registrationStart'] = array(
 				'name'  => 'registrationStart',
 				'id'    => 'registrationStart',
 				'type'  => 'text',
 				'class' => 'date',
-				'value' => ''
+				'value' => $this->form_validation->set_value('registrationStart')
 			);
 			$this->data['registrationEnd'] = array(
 				'name'  => 'registrationEnd',
 				'id'    => 'registrationEnd',
 				'type'  => 'text',
 				'class' => 'date',
-				'value' => ''
+				'value' => $this->form_validation->set_value('registrationEnd')
 			);
 			$this->data['tournamentStart'] = array(
 				'name'  => 'tournamentStart',
 				'id'    => 'tournamentStart',
 				'type'  => 'text',
 				'class' => 'date',
-				'value' => ''
+				'value' => $this->form_validation->set_value('tournamentStart')
 			);
 			$this->data['tournamentEnd'] = array(
 				'name'  => 'tournamentEnd',
 				'id'    => 'tournamentEnd',
 				'type'  => 'text',
 				'class' => 'date',
-				'value' => ''
+				'value' => $this->form_validation->set_value('tournamentEnd')
 			);
 			
 		}
@@ -192,7 +194,7 @@ class Tms extends MY_Controller {
 				redirect("/tms/tournament/$tournamentID", 'refresh');
 			} else {
 				//set the flash data error message if there is one
-				$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message') );
+				$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
 				
 				$this->data['tournament']['status'] = $this->tournaments_model->get_tournament_status($tournamentID);
 				$sport = $this->sports_model->get_sport( $tournament['sportID'] );
