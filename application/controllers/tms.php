@@ -82,45 +82,47 @@ class Tms extends MY_Controller {
 			}
 			ksort($this->data['sports']);
 			
+			
 			$this->data['name'] = array(
 				'name'  => 'name',
 				'id'    => 'name',
 				'type'  => 'text',
-				'value' => ''
+				'value' => $this->form_validation->set_value('name')
 			);
+			
 			$this->data['description'] = array(
 				'name'  => 'description',
 				'id'    => 'description',
 				'type'  => 'text',
-				'value' => ''
+				'value' => $this->form_validation->set_value('description')
 			);
 			$this->data['registrationStart'] = array(
 				'name'  => 'registrationStart',
 				'id'    => 'registrationStart',
 				'type'  => 'text',
 				'class' => 'date',
-				'value' => ''
+				'value' => $this->form_validation->set_value('registrationStart')
 			);
 			$this->data['registrationEnd'] = array(
 				'name'  => 'registrationEnd',
 				'id'    => 'registrationEnd',
 				'type'  => 'text',
 				'class' => 'date',
-				'value' => ''
+				'value' => $this->form_validation->set_value('registrationEnd')
 			);
 			$this->data['tournamentStart'] = array(
 				'name'  => 'tournamentStart',
 				'id'    => 'tournamentStart',
 				'type'  => 'text',
 				'class' => 'date',
-				'value' => ''
+				'value' => $this->form_validation->set_value('tournamentStart')
 			);
 			$this->data['tournamentEnd'] = array(
 				'name'  => 'tournamentEnd',
 				'id'    => 'tournamentEnd',
 				'type'  => 'text',
 				'class' => 'date',
-				'value' => ''
+				'value' => $this->form_validation->set_value('tournamentEnd')
 			);
 			
 		}
