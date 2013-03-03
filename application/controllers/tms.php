@@ -663,7 +663,7 @@ class Tms extends MY_Controller {
 		}
 	}
 
-	private function date_check($strDate,$field) {
+	public function date_check($strDate,$field) {
 		$format=array("y","m","d");
 		$ex="-";
 		if(count(explode($ex,$strDate))==3) { 
