@@ -45,8 +45,8 @@ class Tournaments_model extends CI_Model {
 		$tournamentID )
 	{
 		$tournament = $this->get_tournament($tournamentID);
-		$tournamentStartDate = $tournament['tournamentStart'];
-		$tournamentEndDate = $tournament['tournamentEnd'];
+		$tournamentStartDate 	= DateTime::createFromFormat(DATE_FORMAT, $tournament['tournamentStart']);
+		$tournamentEndDate 		= DateTime::createFromFormat(DATE_FORMAT, $tournament['tournamentEnd']);
 		return $this->are_valid_dates(
 			$registrationStartDate,
 			$registrationEndDate,
@@ -66,8 +66,8 @@ class Tournaments_model extends CI_Model {
 	{
 
 		$tournament = $this->get_tournament($tournamentID);
-		$registrationStartDate = $tournament['registrationStart'];
-		$registrationEndDate = $tournament['registrationEnd'];
+		$registrationStartDate 	= DateTime::createFromFormat(DATE_FORMAT, $tournament['registrationStart']);
+		$registrationEndDate 	= DateTime::createFromFormat(DATE_FORMAT, $tournament['registrationEnd']);
 		return $this->are_valid_dates(
 			$registrationStartDate,
 			$registrationEndDate,
