@@ -662,7 +662,19 @@ class Tms extends MY_Controller {
 			$this->load->view('tms/footer',$this->data);
 		}
 	}
+	
+	// Checks two correctly-formatted date strings in POST data for range sanity
+	public function daterange_check($startDateField, $endDateField) {
+		// If the start field doesn't exist, check end date against today's date instead, since we want the end date to be in the future 
+		$startDate = ( ($this->input->post($startDateField)===FALSE) ? new DateTime() : DateTime::createFromFormat(DATE_FORMAT, $this->input->post($startDateField) ) );
+		$endDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post($endDateField) );
+		if( $startDate >= $endDate ) {
+			return FALSE;
+		}
+		return TRUE;
+	}
 
+	// Callback function for form validation - checks sanity and validity of POST date strings
 	public function date_check($strDate,$field) {
 		$format=array("y","m","d");
 		$ex="-";
@@ -701,17 +713,6 @@ class Tms extends MY_Controller {
 			$this->form_validation->set_message('date_check', 'The %s field must have all three elements of a date. Provided: '.print_r($strDate,1) );
 			return FALSE;
 		}
-	}
-	
-	// Checks two correctly-formatted date strings in POST data for range sanity
-	private function daterange_check($startDateField, $endDateField) {
-		// If the start field doesn't exist, check end date against today's date instead, since we want the end date to be in the future 
-		$startDate = ( ($this->input->post($startDateField)===FALSE) ? new DateTime() : DateTime::createFromFormat(DATE_FORMAT, $this->input->post($startDateField) ) );
-		$endDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post($endDateField) );
-		if( $startDate >= $endDate ) {
-			return FALSE;
-		}
-		return TRUE;
 	}
 
 }
