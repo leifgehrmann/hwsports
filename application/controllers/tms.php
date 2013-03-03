@@ -692,8 +692,8 @@ class Tms extends MY_Controller {
 			// Sanity checks passed, assume valid date
 			return TRUE;	
 		} catch (Exception $e) {
-			//$this->form_validation->set_message('datetime_check', 'The %s field must contain a valid date in the ISO 8601 format: YYYY-MM-DDThh:mm:ssTZD (eg 1997-07-16T19:20:30+01:00) Provided: '.print_r($strDateTime,1) );
-			$this->form_validation->set_message('datetime_check', 'Exception: '.$e->getMessage().' DateTime string provided: '.var_export($strDateTime,1) );
+			$this->form_validation->set_message('datetime_check', 'The %s field must contain a valid date in the ISO 8601 format: YYYY-MM-DDThh:mm:ssTZD (eg 1997-07-16T19:20:30+01:00) Provided: '.print_r($strDateTime,1) );
+			//$this->form_validation->set_message('datetime_check', 'Exception: '.$e->getMessage().' DateTime string provided: '.var_export($strDateTime,1) );
 			return FALSE;
 		}
 	}

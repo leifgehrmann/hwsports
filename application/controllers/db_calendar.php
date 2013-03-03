@@ -351,120 +351,124 @@ class Db_Calendar extends MY_Controller {
 	 */
 
 	public function changeEventStart() {
-
-		$id 	= null;
-		$type	= null;
-		$switch_data = 	array(
-							'match' => array(
-								'startTime' => 'startTime',
-								'endTime' => 'endTime',
-								'databaseFormat' => DATE_TIME_FORMAT
-							),
-							'tournament' => array(
-								'startTime' => 'tournamentStart',
-								'endTime' => 'tournamentEnd',
-								'databaseFormat' => DATE_FORMAT
-							),
-							'registration' => array(
-								'startTime' => 'registrationStart',
-								'endTime' => 'registrationEnd',
-								'databaseFormat' => DATE_FORMAT
-							),
-						);
-		$updateResult;
-		$updateAttempt = false;
-		$this->data['data'] = "";
-
-		if(!isset($_POST['id'])){
-			$this->data['data'] .= "Error: id not defined\n";
-		} else {
-
-			// Check if everything has been defined.
-			$val = $_POST['id'];
-			if(strrpos($val,"match-")!=-1)				list($type,$id) = explode("-",$val);
-			else if(strrpos($val,"tournament-")!=-1)	list($type,$id) = explode("-",$val);
-			else if(strrpos($val,"registration-")!=-1)	list($type,$id) = explode("-",$val);
-			else $this->data['data'] .= "Error: valid type and id not defined\n";
-			if(!is_numeric($id)){
-				$this->data['data'] .= "Error: id not defined\n";
+		$eventVariableNames = array(
+			'match' => array(
+				'startTime' => 'startTime',
+				'endTime' => 'endTime'
+			),
+			'tournament' => array(
+				'startTime' => 'tournamentStart',
+				'endTime' => 'tournamentEnd'
+			),
+			'registration' => array(
+				'startTime' => 'registrationStart',
+				'endTime' => 'registrationEnd'
+			),
+		);
+		
+		// Fullcalendar's post data "id" is in the format "eventType-ID" where ID is numeric.
+		$val = $this->input->post('id');
+		$secondsDelta = $this->input->post('secondsDelta');
+		// Check if everything has been defined.
+		if( $val ) $this->badRequest("Error: ID not defined\n");
+		if( $secondsDelta && is_numeric($secondsDelta) ) $this->badRequest("Error: secondsDelta is invalid\n");
+		if( preg_match('|(match|tournament|registration)-[0-9]+|',$val) !== 1 ) $this->badRequest("Error: valid type and id not defined\n");
+		// We have a valid val string, parse it into type and id
+		list($eventType,$id) = explode("-",$val);
+		// Fetch stuff from the database
+		switch ($eventType) {
+			case "match":
+				$eventData = $this->matches_model->get_match($id);
+				if($eventData['tournamentID']!=0) {
+					$tournamentData = $this->tournament_model->get_tournament($eventData['tournamentID']);
+				}
 				break;
-			}
-			if(!empty($id) && array_key_exists($type,$switch_data)){
-				// Fetch stuff from the database
-				$eventData;
-				switch ($type) {
-					case "match"		: $eventData = $this->matches_model	   ->get_match     ($id); break;
-					case "tournament"	: $eventData = $this->tournaments_model->get_tournament($id); break;
-					case "registration"	: $eventData = $this->tournaments_model->get_tournament($id); break;
-				}
-
-				// Convert the time varaibles to datetime
-				$oldStartTime 	= DateTime::createFromFormat($switch_data[$type]['databaseFormat']	, $eventData[$switch_data[$type]['startTime']]);
-				$oldEndTime 	= DateTime::createFromFormat($switch_data[$type]['databaseFormat']	, $eventData[$switch_data[$type]['endTime']]);
-				// Verify that the values are valid
-				if( empty($oldStartTime) || empty($oldEndTime) ) {
-					$this->data['data'] .= "Error: Invalid date was fetched from the database.\n";
-				} else if( !isset($_POST['secondsDelta']) ) {
-					$this->data['data'] .= "Error: secondsDelta was not defined.\n";
-				} else if( !is_numeric($_POST['secondsDelta']) ){
-					$this->data['data'] .= "Error: secondsDelta was not numeric.\n";
-				} else {
-
-					// Add the delta to the old times
-					$newStartTime 	= $oldStartTime->modify($_POST['secondsDelta']." seconds");
-					$newEndTime 	= $oldEndTime->modify($_POST['secondsDelta']." seconds");
-
-					// before we commit, we should verify that the new tournament 
-					// date works
-					$consistent = false;
-					$validationData = new array($eventData[$switch_data[$type]['startTime']=>$newStartTime, $eventData[$switch_data[$type]['endTime']=>$newEndTime);
-					switch ($type) {
-						case "match"		: $consistent = $this->matches_model    ->are_valid_dates($validationData,$id); break;
-						case "tournament"	: $consistent = $this->tournaments_model->are_valid_dates($validationData,$id); break;
-						case "register"		: $consistent = $this->tournaments_model->are_valid_dates($validationData,$id); break;
-					}
-					if( $type=="tournament" || $type=="register" ){
-						$tournament = $this->tournaments_model->get_tournament($id);
-						var_dump($tournament);
-						$this->data['data'] .= "touStartTime ".$tournament['tournamentStart']."\n";
-						$this->data['data'] .= "touEndTime   ".$tournament['tournamentEnd']."\n";
-						$this->data['data'] .= "regStartTime ".$tournament['registrationStart']."\n";
-						$this->data['data'] .= "regEndTime   ".$tournament['registrationEnd']."\n";
-						$this->data['data'] .= "newStartTime ".$newStartTime->format($switch_data[$type]['databaseFormat'])."\n";
-						$this->data['data'] .= "newEndTime   ".$newEndTime->format($switch_data[$type]['databaseFormat'])."\n";
-					} else {
-						$match = $this->matches_model->get_match($id);
-						$this->data['data'] .= "newStartTime ".$newStartTime->format($switch_data[$type]['databaseFormat'])."\n";
-						$this->data['data'] .= "newEndtime   ".$newEndTime->format($switch_data[$type]['databaseFormat'])."\n";
-					}
-
-					// Update the database
-					if($consistent){
-						// Add the delta to the old times
-						$data = array();
-						$data[$switch_data[$type]['startTime']]	= $newStartTime->format($switch_data[$type]['databaseFormat']);
-						$data[$switch_data[$type]['endTime']]	= $newEndTime->format($switch_data[$type]['databaseFormat']);
-						switch ($type) {
-							case "match"		: $updateResult = $this->matches_model	  ->update_match	 ($id,$data); break;
-							case "tournament"	: $updateResult = $this->tournaments_model->update_tournament($id,$data); break;
-							case "registration"	: $updateResult = $this->tournaments_model->update_tournament($id,$data); break;
-						}
-						$updateAttempt = true;
-					} else {
-						$this->data['data'] .= "Error: Date arrangement is inconsistent."."\n";
-					}
-				}
-			}
+			case "tournament":
+				$eventData = $this->tournaments_model->get_tournament($id); 
+				break;
+			case "registration":
+				$eventData = $this->tournaments_model->get_tournament($id); 
+				break;
 		}
-		if($updateAttempt){
-			$this->data['data'] .= (
-				$updateResult ? 
-				"Updated ".$type." ".$id."\n" : 
-				"Error updating ".$type." ".$id."\n"
-			);
-		} else {
-			header("HTTP",true,400);
+
+		// Convert the time variables to datetime
+		try {
+			$oldStart 	= new DateTime( $eventData[$eventVariableNames[$eventType]['startTime']] );
+			$oldEnd 	= new DateTime( $eventData[$eventVariableNames[$eventType]['endTime']] );
+		} catch {
+			// Errof if the values are valid
+			$this->badRequest("Error: Invalid date was fetched from the database.\n");
 		}
+		
+		// Add the delta to the old times
+		$newStart 	= $oldStart->modify("$secondsDelta seconds");
+		$newEnd 	= $oldEnd->modify("$secondsDelta seconds");
+
+		// Validate date ranges for each of the three handled event types
+		switch ($eventType) {
+			case "match":
+				// Convert the time variables to datetime
+				try {
+					$tournamentStart = new DateTime( $tournamentData['tournamentStart'] );
+					$tournamentEnd = new DateTime( $tournamentData['tournamentEnd'] );
+				} catch {
+					// Errof if the values are valid
+					$this->badRequest("Error: Invalid tournament date was fetched from the database.\n");
+				}
+				
+				if( $newEnd < $newStart ) badRequest("Error: Match has imploded. Everybody died.");
+				if( $newStart < $tournamentStart ) badRequest("Error: Match cannot start before tournament");
+				if( $tournamentEnd < $newEnd ) badRequest("Error: Match cannot end after tournament");	
+			break;
+			case "tournament":
+				// Convert the time variables to datetime
+				try {
+					$registrationEnd = new DateTime( $eventData['registrationEnd'] );
+				} catch {
+					// Errof if the values are valid
+					$this->badRequest("Error: Invalid registration date was fetched from the database.\n");
+				}
+				
+				if( $newStart < $registrationEnd ) badRequest("Error: Tournament cannot start before registration period has finished");
+				if( $newEnd < $newStart ) badRequest("Error: Tournament has imploded. Everyone died.");
+			break;
+			case "registration":
+				// Convert the time variables to datetime
+				try {
+					$tournamentStart = new DateTime( $eventData['tournamentStart'] );
+				} catch {
+					// Errof if the values are valid
+					$this->badRequest("Error: Invalid tournament date was fetched from the database.\n");
+				}
+				
+				if( $tournamentStart < $newEnd ) badRequest("Error: Tournament cannot start before registration period has finished");
+				if( $newEnd < $newStart ) badRequest("Error: Registration period has imploded. Everyone died.");
+			break;
+		}
+		
+		// Put the new start and new end datetimes back into string format and prepare array of database elements to update
+		$data = array(
+			$eventVariableNames[$eventType]['startTime'] => $newStart->format(DateTime::ISO8601),
+			$eventVariableNames[$eventType]['endTime'] => $newEnd->format(DateTime::ISO8601)
+		);
+		
+		// Perform the update, 
+		switch($eventType) {
+			case "match": 
+				$updateResult = $this->matches_model->update_match($id,$data); 
+			break;
+			case "tournament": 
+				$updateResult = $this->tournaments_model->update_tournament($id,$data); 
+			break;
+			case "registration": 
+				$updateResult = $this->tournaments_model->update_tournament($id,$data); 
+			break;
+		}
+		
+		// For some reason, the model update failed
+		if($updateResult===FALSE) badRequest("$eventType update failed.");
+		
+		$this->data['data'] = "Updated $eventType $id \n";
 		$this->load->view('data',$this->data);
 	}
 
@@ -477,5 +481,11 @@ class Db_Calendar extends MY_Controller {
 		$this->load->view('data',$this->data);
 	}
 	
+	public function badRequest($errorString) {
+		$this->data['data'] = $errorString;
+		header("HTTP",true,400);
+		$this->load->view('data',$this->data);
+		exit;
+	}
 }
 ?>

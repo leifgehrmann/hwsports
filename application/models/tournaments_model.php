@@ -16,59 +16,6 @@ class Tournaments_model extends CI_Model {
 		$output = $queryData->row_array();
 		return $output['exists'];
 	}
-	/**
-	 * Verifies that the tournament dates make in the order they were written.
-	 *  
-	 * @return boolean
-	 **/
-	public function are_valid_dates(
-		$registrationStart, 
-		$registrationEnd, 
-		$tournamentStart, 
-		$tournamentEnd )
-	{
-		if( ($registrationStart <= $registrationEnd) && 
-			($registrationEnd   <= $tournamentStart) &&
-			($tournamentStart   <= $tournamentEnd  ) ) {
-			return true;
-		}
-		return false;
-	}
-	/**
-	 * Verifies that the tournament dates make in the order they were written.
-	 *  
-	 * @return boolean
-	 **/
-	public function are_valid_dates(
-		$tournamentDates,
-		$tournamentID )
-	{
-		// initialize variables
-		$registrationStart;
-		$registrationEnd;
-		$tournamentStart;
-		$tournamentEnd;
-
-		// Get the data for the tournament
-		$tournament = $this->get_tournament($tournamentID);
-
-		// If we find that a variable has been defined, we replace it. Else, we ignore it.
-		if( array_key_exists('registrationStart',$tournamentDates ) { $registrationStart = $tournamentDates['registrationStart'	]; }
-		else { $registrationStart 	= DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['registrationStart']); 	}
-		if( array_key_exists('registrationEnd',$tournamentDates ) 	{ $registrationEnd 	= $tournamentDates['registrationEnd'	]; }
-		else { $registrationEnd 	= DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['registrationEnd']); 		}
-		if( array_key_exists('tournamentStart',$tournamentDates ) 	{ $tournamentStart 	= $tournamentDates['tournamentStart'	]; }
-		else { $tournamentStart 	= DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['tournamentStart']); 		}
-		if( array_key_exists('tournamentEnd',$tournamentDates ) 	{ $tournamentEnd 	= $tournamentDates['tournamentEnd'		]; }
-		else { $tournamentEnd 		= DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['tournamentEnd']); 		}
-
-		return $this->are_valid_dates(
-			$registrationStart,
-			$registrationEnd,
-			$tournamentStart,
-			$tournamentEnd
-		);
-	}
 	
 	/**
 	 * Returns a 2d array of data for all tournaments
