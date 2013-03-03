@@ -684,7 +684,9 @@ class Tms extends MY_Controller {
 			}
 			// SPECIFIC CASE: tournament creation | If we have a registration end date and a tournament start date, check tournament is starting after registration period
 			if( $field=="registrationEnd" && ($this->input->post("tournamentStart")!==FALSE) ) {
-				if($this->daterange_check("registrationEnd", "tournamentStart" )===FALSE) {
+				$tournamentStart = new DateTime($this->input->post("tournamentStart"));
+				$registrationEnd = $endDate;
+				if( $tournamentStart < $registrationEnd ) {
 					$this->form_validation->set_message('datetime_check', "Tournament must start after registration period has ended. Please correct the tournament start date.");
 					return FALSE;
 				}
