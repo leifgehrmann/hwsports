@@ -1,8 +1,4 @@
 <h1>Tournament Management</h1>
-	
-<? if(!empty($message)){ ?>
-  <div id="infoMessage"><?php echo $message;?></div>
-<? } ?>
 
 <h2>View / Edit Existing Tournament:</h2>
 <div id="tournamentSelect">

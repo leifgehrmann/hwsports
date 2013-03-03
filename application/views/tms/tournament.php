@@ -1,6 +1,5 @@
 <h1><a href="/tms/tournaments/">Tournaments</a> &#9656; <span id="title-name"><?=$tournament["name"]?></span></h1>
 	
-<?=( !empty($message) ? "<div id='infoMessage'>$message</div>" : '')?>
 <?=form_open("tms/tournament/$tournamentID", array('id' => 'tournamentForm'))?>
 <? $formTop = "
 			<h2>Tournament Details:</h2>
