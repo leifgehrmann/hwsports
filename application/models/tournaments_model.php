@@ -27,12 +27,12 @@ class Tournaments_model extends CI_Model {
 		$tournamentStartDate, 
 		$tournamentEndDate )
 	{
-		if( ($registrationStartDate < $registrationEndDate) && 
-			($registrationEndDate < $tournamentStartDate) &&
-			($tournamentStartDate < $tournamentEndDate) ) {
+		if( ($registrationStartDate <= $registrationEndDate) && 
+			($registrationEndDate   <= $tournamentStartDate) &&
+			($tournamentStartDate   <= $tournamentEndDate  ) ) {
 			return true;
 		}
-		return ;
+		return false;
 	}
 	/**
 	 * Verifies that the tournament dates make in the order they were written.

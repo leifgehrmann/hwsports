@@ -415,7 +415,7 @@ class Db_Calendar extends MY_Controller {
 
 					// before we commit, we should verify that the new tournament 
 					// date works
-					$consistent;
+					$consistent = false;
 					switch ($type) {
 						case "match"		: $consistent = $this->matches_model->are_valid_dates_in_match($newStartTime,$newEndTime,$id); break;
 						case "tournament"	: $consistent = $this->tournaments_model->are_valid_tournament_dates($newStartTime,$newEndTime,$id); break;
