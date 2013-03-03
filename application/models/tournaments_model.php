@@ -66,8 +66,8 @@ class Tournaments_model extends CI_Model {
 	{
 
 		$tournament = $this->get_tournament($tournamentID);
-		$registrationStartDate = $tournament['tournamentStart'];
-		$registrationEndDate = $tournament['tournamentEnd'];
+		$registrationStartDate = $tournament['registrationStart'];
+		$registrationEndDate = $tournament['registrationEnd'];
 		return $this->are_valid_dates(
 			$registrationStartDate,
 			$registrationEndDate,
