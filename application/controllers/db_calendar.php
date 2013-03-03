@@ -417,10 +417,11 @@ class Db_Calendar extends MY_Controller {
 					// before we commit, we should verify that the new tournament 
 					// date works
 					$consistent = false;
+					$validationData = array($eventData[$switch_data[$type]['startTime']=>$newStartTime, $eventData[$switch_data[$type]['endTime']=>$newEndTime);
 					switch ($type) {
-						case "match"		: $consistent = $this->matches_model    ->are_valid_dates             ($newStartTime,$newEndTime,$id); break;
-						case "tournament"	: $consistent = $this->tournaments_model->are_valid_tournament_dates  ($newStartTime,$newEndTime,$id); break;
-						case "register"		: $consistent = $this->tournaments_model->are_valid_registration_dates($newStartTime,$newEndTime,$id); break;
+						case "match"		: $consistent = $this->matches_model    ->are_valid_dates($validationData,$id); break;
+						case "tournament"	: $consistent = $this->tournaments_model->are_valid_dates($validationData,$id); break;
+						case "register"		: $consistent = $this->tournaments_model->are_valid_dates($validationData,$id); break;
 					}
 					if( $type=="tournament" || $type=="register" ){
 						$tournament = $this->tournaments_model->get_tournament($id);
@@ -468,8 +469,8 @@ class Db_Calendar extends MY_Controller {
 	}
 
 	public function changeEventEnd() {
-		$matchData = $this->matches_model->get_match($_POST['id']);
-		$oldEndTime = $matchData['endTime'];
+		$eventData = $this->matches_model->get_match($_POST['id']);
+		$oldEndTime = $eventData['endTime'];
 		$newEndTime = $oldEndTime+$_POST['minutesDelta'];
 		$updateResult = $this->matches_model->update_match($_POST['id'],array('endTime'=>$newEndTime));
 		$this->data['data'] = ($updateResult ? "Success!" : "False!");

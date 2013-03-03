@@ -451,7 +451,9 @@ body .DTED_Lightbox_Content button{
 	width:auto;	
 }
 
-
+.message {
+	margin-top: 20px;
+}
 
 
 

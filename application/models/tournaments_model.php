@@ -22,14 +22,14 @@ class Tournaments_model extends CI_Model {
 	 * @return boolean
 	 **/
 	public function are_valid_dates(
-		$registrationStartDate, 
-		$registrationEndDate, 
-		$tournamentStartDate, 
-		$tournamentEndDate )
+		$registrationStart, 
+		$registrationEnd, 
+		$tournamentStart, 
+		$tournamentEnd )
 	{
-		if( ($registrationStartDate <= $registrationEndDate) && 
-			($registrationEndDate   <= $tournamentStartDate) &&
-			($tournamentStartDate   <= $tournamentEndDate  ) ) {
+		if( ($registrationStart <= $registrationEnd) && 
+			($registrationEnd   <= $tournamentStart) &&
+			($tournamentStart   <= $tournamentEnd  ) ) {
 			return true;
 		}
 		return false;
@@ -39,43 +39,37 @@ class Tournaments_model extends CI_Model {
 	 *  
 	 * @return boolean
 	 **/
-	public function are_valid_registration_dates(
-		$registrationStartDate, 
-		$registrationEndDate,
+	public function are_valid_dates(
+		$tournamentDates,
 		$tournamentID )
 	{
+		// initialize variables
+		$registrationStart;
+		$registrationEnd;
+		$tournamentStart;
+		$tournamentEnd;
+
+		// Get the data for the tournament
 		$tournament = $this->get_tournament($tournamentID);
-		$tournamentStartDate 	= DateTime::createFromFormat(DATE_FORMAT, $tournament['tournamentStart']);
-		$tournamentEndDate 		= DateTime::createFromFormat(DATE_FORMAT, $tournament['tournamentEnd']);
+
+		// If we find that a variable has been defined, we replace it. Else, we ignore it.
+		if( array_key_exists('registrationStart',$tournamentDates ) { $registrationStart = $tournamentDates['registrationStart'	]; }
+		else { $registrationStart 	= DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['registrationStart']); 	}
+		if( array_key_exists('registrationEnd',$tournamentDates ) 	{ $registrationEnd 	= $tournamentDates['registrationEnd'	]; }
+		else { $registrationEnd 	= DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['registrationEnd']); 		}
+		if( array_key_exists('tournamentStart',$tournamentDates ) 	{ $tournamentStart 	= $tournamentDates['tournamentStart'	]; }
+		else { $tournamentStart 	= DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['tournamentStart']); 		}
+		if( array_key_exists('tournamentEnd',$tournamentDates ) 	{ $tournamentEnd 	= $tournamentDates['tournamentEnd'		]; }
+		else { $tournamentEnd 		= DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['tournamentEnd']); 		}
+
 		return $this->are_valid_dates(
-			$registrationStartDate,
-			$registrationEndDate,
-			$tournamentStartDate,
-			$tournamentEndDate
+			$registrationStart,
+			$registrationEnd,
+			$tournamentStart,
+			$tournamentEnd
 		);
 	}
-	/**
-	 * Verifies that the tournament dates make in the order they were written.
-	 *  
-	 * @return boolean
-	 **/
-	public function are_valid_tournament_dates(
-		$tournamentStartDate, 
-		$tournamentEndDate,
-		$tournamentID )
-	{
-
-		$tournament = $this->get_tournament($tournamentID);
-		$registrationStartDate 	= DateTime::createFromFormat(DATE_FORMAT, $tournament['registrationStart']);
-		$registrationEndDate 	= DateTime::createFromFormat(DATE_FORMAT, $tournament['registrationEnd']);
-		return $this->are_valid_dates(
-			$registrationStartDate,
-			$registrationEndDate,
-			$tournamentStartDate,
-			$tournamentEndDate
-		);
-	}
-
+	
 	/**
 	 * Returns a 2d array of data for all tournaments
 	 *  

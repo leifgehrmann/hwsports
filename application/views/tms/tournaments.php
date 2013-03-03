@@ -1,6 +1,6 @@
-<h1>Tournament Management</h1>
+<h1>Tournaments</h1>
 
-<h2>View / Edit Existing Tournament:</h2>
+<h2>Existing Tournaments</h2>
 <div id="tournamentSelect">
 	<? if(count($tournaments)>0) {
 		foreach($tournaments as $tournament) { 
