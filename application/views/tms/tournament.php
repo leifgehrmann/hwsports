@@ -26,7 +26,7 @@
 			<label for="registrationStart">Start Date:</label> <?php echo form_input($registrationStart);?> <label for="registrationEnd">End Date:</label><?php echo form_input($registrationEnd);?> <br />		
 		<? break; ?>
 		<? case "inRegistration": ?>
-			<h3 class="tournamentStatusMessage inRegistration">This tournament is open for registration. You may change any of the details below, or <a href="/tms/tournament-competitors/">click here</a> to view the list of registered competitors to date.</h3>
+			<h3 class="tournamentStatusMessage inRegistration">This tournament is open for registration. You may change any of the tournament details or manage the list of competitors to date.</h3>
 			<?=$formTop?>
 			<label for="tournamentStart">Start Date:</label> <?php echo form_input($tournamentStart);?> <label for="tournamentEnd">End Date:</label> <?php echo form_input($tournamentEnd);?>
 			<br />
@@ -34,17 +34,17 @@
 			<label for="registrationEnd">End Date:</label><?php echo form_input($registrationEnd);?> <br />
 		<? break; ?>
 		<? case "postRegistration": ?>
-			<h3 class="tournamentStatusMessage postRegistration">This tournament has closed for registration. You may change any of the details below. Before matches can be scheduled, you must <a href="/tms/tournament-competitors/">click here</a> to moderate the list of competitors.</h3>
+			<h3 class="tournamentStatusMessage postRegistration">This tournament has closed for registration. You may change any of the tournament details below. Before matches can be sceduled, you must moderate the list of competitors below.</h3>
 			<?=$formTop?>
 			<label for="tournamentStart">Start Date:</label> <?php echo form_input($tournamentStart);?> <label for="tournamentEnd">End Date:</label> <?php echo form_input($tournamentEnd);?> <br />
 		<? break; ?>
 		<? case "preTournament": ?>
-			<h3 class="tournamentStatusMessage preTournament">This tournament has completed registration and scheduling and is awaiting the start date. You may change any of the details below, or <a href="/tms/tournament-competitors/">click here</a> to manage the list of competitors.</h3>
+			<h3 class="tournamentStatusMessage preTournament">This tournament has completed registration and scheduling and is awaiting the start date. You may change any of the tournament details or manage the list of competitors below.</h3>
 			<?=$formTop?>
 			<label for="tournamentStart">Start Date:</label> <?php echo form_input($tournamentStart);?> <label for="tournamentEnd">End Date:</label> <?php echo form_input($tournamentEnd);?> <br />
 		<? break; ?>
 		<? case "inTournament": ?>
-			<h3 class="tournamentStatusMessage inTournament">This tournament is in progress. You may change any of the details below, or <a href="/tms/tournament-statistics/">view statistics here.</a></h3>
+			<h3 class="tournamentStatusMessage inTournament">This tournament is in progress. You may change any of the tournament details or manage the list of competitors below, and <a href="/tms/tournament-statistics/">view statistics here.</a></h3>
 			<?=$formTop?>
 			<br />
 			<label for="tournamentEnd">End Date:</label> <?php echo form_input($tournamentEnd);?> <br />
@@ -78,9 +78,7 @@
 <?php echo form_close();?>
 
 <script type="text/javascript">
-	$('.date').datepicker({
-      dateFormat: "yy-mm-dd"
-    });
+	$('.date').datetimepicker({ timeFormat: $.timepicker.ISO_8601Z });
 </script>
 
 <!-- /#main -->

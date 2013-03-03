@@ -59,9 +59,7 @@
 <?php echo form_close();?>
 
 <script type="text/javascript">
-	$('.date').datepicker({
-      dateFormat: "yy-mm-dd"
-    });
+	$('.date').datetimepicker({ timeFormat: $.timepicker.ISO_8601Z });
 </script>
 
 <!-- /#main -->

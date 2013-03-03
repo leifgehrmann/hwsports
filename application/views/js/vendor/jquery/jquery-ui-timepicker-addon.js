@@ -105,7 +105,10 @@
 			sliderAccessArgs: null,
 			controlType: 'slider',
 			defaultValue: null,
-			parse: 'strict'
+			parse: 'strict',
+			// pre-defined formats for ISO 8601
+			ISO_8601:  'iso8601',  // YYYY-MM-DDThh:mm:ss              -> 1999-01-01T23:01:01
+			ISO_8601Z: 'iso8601z', // YYYY-MM-DDThh:mm:ss(Z|[-+]hh:mm) -> 1999-01-01T23:01:01+01:00
 		};
 		$.extend(this._defaults, this.regional['']);
 	}
@@ -222,7 +225,16 @@
 			else{ 
 				tp_inst.control = tp_inst._defaults.controlType;
 			}
-
+			
+			// If the time format is ISO 8601, override the default settings for pre-defined formats
+			if (o.timeFormat !== undefined && o.timeFormat.match(new RegExp('^'+ this.ISO_8601Z +'?$'))) {
+				tp_inst._defaults.dateFormat = $.datepicker.ISO_8601;
+				tp_inst._defaults.separator  = 'T';
+				tp_inst._defaults.timeFormat = (o.timeFormat == this.ISO_8601Z) ? 'hh:mm:ssz' : 'hh:mm:ss';
+				tp_inst._defaults.ampm = false;
+				tp_inst._defaults.timezoneIso8609 = true;
+			}
+			
 			if (tp_inst._defaults.timezoneList === null) {
 				var timezoneList = ['-1200', '-1100', '-1000', '-0930', '-0900', '-0800', '-0700', '-0600', '-0500', '-0430', '-0400', '-0330', '-0300', '-0200', '-0100', '+0000', 
 									'+0100', '+0200', '+0300', '+0330', '+0400', '+0430', '+0500', '+0530', '+0545', '+0600', '+0630', '+0700', '+0800', '+0845', '+0900', '+0930', 
