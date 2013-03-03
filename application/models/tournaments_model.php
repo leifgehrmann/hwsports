@@ -105,6 +105,8 @@ class Tournaments_model extends CI_Model {
 		foreach($fieldsResult as $fieldResult) {
 			$fields[] = $fieldResult['key'];
 		}
+		if(count($fields)==0)
+			return array();
 		
 		/* Query the ids that are associated with this match */
 		$relational = array();
