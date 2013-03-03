@@ -424,16 +424,21 @@ class Db_Calendar extends MY_Controller {
 					}
 					if( $type=="tournament" || $type=="register" ){
 						$tournament = $this->tournaments_model->get_tournament($id);
-						$this->data['data'] .= $tournament['tournamentStart']."\n";
-						$this->data['data'] .= $tournament['tournamentEnd']."\n";
-						$this->data['data'] .= $tournament['registrationStart']."\n";
-						$this->data['data'] .= $tournament['registrationEnd']."\n";
-						$this->data['data'] .= $newStartTime->format($switch_data[$type]['databaseFormat'])."\n";
-						$this->data['data'] .= $newEndTime->format($switch_data[$type]['databaseFormat'])."\n";
+						$this->data['data'] .= "touStartTime ".$tournament['tournamentStart']."\n";
+						$this->data['data'] .= "touEndTime   ".$tournament['tournamentEnd']."\n";
+						$this->data['data'] .= "regStartTime ".$tournament['registrationStart']."\n";
+						$this->data['data'] .= "regEndTime   ".$tournament['registrationEnd']."\n";
+						$this->data['data'] .= "newStartTime ".$newStartTime->format($switch_data[$type]['databaseFormat'])."\n";
+						$this->data['data'] .= "newEndTime   ".$newEndTime->format($switch_data[$type]['databaseFormat'])."\n";
 					} else {
-						$this->data['data'] .= $newStartTime->format($switch_data[$type]['databaseFormat'])."\n";
-						$this->data['data'] .= $newEndTime->format($switch_data[$type]['databaseFormat'])."\n";
+						$match = $this->get_match($matchID);
+						$this->data['data'] .= "tournament ID = ".$match['tournamentID']."\n";
+						if(is_numeric($match['tournamentID']))
+							$this->data['data'] .= "is numeric = ".$match['tournamentID']."\n";
+						$this->data['data'] .= "newStartTime ".$newStartTime->format($switch_data[$type]['databaseFormat'])."\n";
+						$this->data['data'] .= "newEndtime   ".$newEndTime->format($switch_data[$type]['databaseFormat'])."\n";
 					}
+
 
 					// Update the database
 					if($consistent){
