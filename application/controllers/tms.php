@@ -51,10 +51,10 @@ class Tms extends MY_Controller {
 		$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
 		$this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
 		$this->form_validation->set_rules('sport', 'Sport', 'required|xss_clean');
-		$this->form_validation->set_rules('registrationStart', 'registrationStart', 'required|xss_clean|callback_dateformat_check');
-		$this->form_validation->set_rules('registrationEnd', 'registrationEnd', 'required|xss_clean|callback_dateformat_check');
-		$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_dateformat_check');
-		$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_dateformat_check');
+		$this->form_validation->set_rules('registrationStart', 'registrationStart', 'required|xss_clean|callback_date_check[registrationStart]');
+		$this->form_validation->set_rules('registrationEnd', 'registrationEnd', 'required|xss_clean|callback_date_check[registrationEnd]');
+		$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_date_check[tournamentStart]');
+		$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_date_check[tournamentEnd]');
 		
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
@@ -148,34 +148,34 @@ class Tms extends MY_Controller {
 			
 			switch($tournament['status']) { 
 				case "preRegistration": 
-					$this->form_validation->set_rules('registrationStart', 'registrationStart', 'required|xss_clean|callback_dateformat_check');
-					$this->form_validation->set_rules('registrationEnd', 'registrationEnd', 'required|xss_clean|callback_dateformat_check');
-					$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_dateformat_check');
-					$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_dateformat_check');	
+					$this->form_validation->set_rules('registrationStart', 'registrationStart', 'required|xss_clean|callback_date_check[registrationStart]');
+					$this->form_validation->set_rules('registrationEnd', 'registrationEnd', 'required|xss_clean|callback_date_check[registrationEnd]');
+					$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_date_check[tournamentStart]');
+					$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_date_check[tournamentEnd]');	
 				break; 
 				case "inRegistration": 
-					$this->form_validation->set_rules('registrationEnd', 'registrationEnd', 'required|xss_clean|callback_dateformat_check');
-					$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_dateformat_check');
-					$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_dateformat_check');	
+					$this->form_validation->set_rules('registrationEnd', 'registrationEnd', 'required|xss_clean|callback_date_check[registrationEnd]');
+					$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_date_check[tournamentStart]');
+					$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_date_check[tournamentEnd]');	
 				break; 
 				case "postRegistration": 
-					$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_dateformat_check');
-					$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_dateformat_check');	
+					$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_date_check[tournamentStart]');
+					$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_date_check[tournamentEnd]');	
 				break; 
 				case "preTournament": 
-					$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_dateformat_check');
-					$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_dateformat_check');	
+					$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_date_check[tournamentStart]');
+					$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_date_check[tournamentEnd]');	
 				break; 
 				case "inTournament": 
-					$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_dateformat_check');	
+					$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_date_check[tournamentEnd]');	
 				break; 
 				case "postTournament": 
 				break;
 				default: 
-					$this->form_validation->set_rules('registrationStart', 'registrationStart', 'required|xss_clean|callback_dateformat_check');
-					$this->form_validation->set_rules('registrationEnd', 'registrationEnd', 'required|xss_clean|callback_dateformat_check');
-					$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_dateformat_check');
-					$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_dateformat_check');	
+					$this->form_validation->set_rules('registrationStart', 'registrationStart', 'required|xss_clean|callback_date_check[registrationStart]');
+					$this->form_validation->set_rules('registrationEnd', 'registrationEnd', 'required|xss_clean|callback_date_check[registrationEnd]');
+					$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_date_check[tournamentStart]');
+					$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_date_check[tournamentEnd]');	
 				break; 	
 			} 
 			
@@ -663,7 +663,7 @@ class Tms extends MY_Controller {
 		}
 	}
 
-	public function dateformat_check($strDate) {
+	public function date_check($strDate,$field) {
 		$format=array("y","m","d");
 		$ex="-";
 		if(count(explode($ex,$strDate))==3) { 
@@ -671,7 +671,34 @@ class Tms extends MY_Controller {
 			if(intval($date['m']) && intval($date['d']) && intval($date['y'])) {
 				$m = $date['m']; $d = $date['d']; $y = $date['y']; 
 				if( checkdate($m,$d,$y) ) {
-					return TRUE;
+					// Date is valid, now let's check it is part of a valid range
+					switch($field) {
+						case "registrationStart":
+						case "registrationEnd":
+							$registrationStartDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post('registrationStart') );
+							$registrationEndDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post('registrationEnd') );
+							if( $registrationStartDate < $registrationEndDate ) {
+								return TRUE; 
+							} else {
+								$this->form_validation->set_message('dateformat_check', 'The registration period must be a valid date range.');
+								return FALSE;
+							}
+						break;
+						case "tournamentStart":
+						case "tournamentEnd":
+							$tournamentStartDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post('tournamentStart') );
+							$tournamentEndDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post('tournamentEnd') );
+							if( $tournamentStartDate < $tournamentEndDate ) {
+								return TRUE; 
+							} else {
+								$this->form_validation->set_message('dateformat_check', 'The tournament match scheduling period must be a valid date range.');
+								return FALSE;
+							}
+						break;
+						default:
+							// We aren't handling a tournament or registration date range, so ignore other post fields and assume this date is acceptable
+							return TRUE;
+					}
 				} else {				
 					$this->form_validation->set_message('dateformat_check', 'The %s field must contain a date within realistic range. Provided: '.$y.' - '.$m.' - '.$d);
 					return FALSE;
