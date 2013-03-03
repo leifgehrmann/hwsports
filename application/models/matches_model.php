@@ -29,8 +29,8 @@ class Matches_model extends CI_Model {
 		$this->load->model('tournaments_model');
 		$tournament = $this->tournaments_model->get_tournament($tournamentID);
 		var_dump($tournament);
-		$tournamentStart 	= DateTime::createFromFormat(DATE_TIME_FORMAT,$tournament['tournamentStart']);
-		$tournamentEnd 		= DateTime::createFromFormat(DATE_TIME_FORMAT,$tournament['tournamentEnd']);
+		$tournamentStart 	= DateTime::createFromFormat(DATE_FORMAT,$tournament['tournamentStart']);
+		$tournamentEnd 		= DateTime::createFromFormat(DATE_FORMAT,$tournament['tournamentEnd']);
 		return (($startTime<$endTime) && 
 				($tournamentStart<=$startTime) && 
 				($tournamentStart<=$endTime) && 
