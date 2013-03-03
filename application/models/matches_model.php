@@ -27,7 +27,7 @@ class Matches_model extends CI_Model {
 	public function are_valid_dates_in_tournament($startTime, $endTime, $tournamentID)
 	{
 		$this->load->model('tournaments_model');
-		$tournament = $this->tournament_model->get_tournament($tournamentID);
+		$tournament = $this->tournaments_model->get_tournament($tournamentID);
 		$tournamentStart 	= DateTime::createFromFormat(DATE_TIME_FORMAT,$tournament['tournamentStart']);
 		$tournamentEnd 		= DateTime::createFromFormat(DATE_TIME_FORMAT,$tournament['tournamentEnd']);
 		return (($startTime<$endTime) && 
