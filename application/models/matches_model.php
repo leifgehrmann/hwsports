@@ -28,11 +28,13 @@ class Matches_model extends CI_Model {
 	{
 		$this->load->model('tournaments_model');
 		$tournament = $this->tournaments_model->get_tournament($tournamentID);
+		if(empty($tournament))
+			return false;
 		$tournamentStart 	= DateTime::createFromFormat(DATE_TIME_FORMAT,$tournament['tournamentStart']);
 		$tournamentEnd 		= DateTime::createFromFormat(DATE_TIME_FORMAT,$tournament['tournamentEnd']);
 		return (($startTime<$endTime) && 
-				($tournamentStart<$startTime) && 
-				($tournamentStart<$endTime) && 
+				($tournamentStart<=$startTime) && 
+				($tournamentStart<=$endTime) && 
 				($startTime<$tournamentEnd) && 
 				($endTime<$tournamentEnd));
 	}
@@ -46,7 +48,7 @@ class Matches_model extends CI_Model {
 	public function are_valid_dates_in_match($startTime, $endTime, $matchID)
 	{	
 		$match = $this->get_match($matchID);
-		if(array_key_exists('tournamentID',$match))
+		if(!empty($match['tournamentID']))
 			return $this->are_valid_dates_in_tournament($startTime, $endTime, $match['tournamentID']);
 		else
 			return ($startTime<$endTime);

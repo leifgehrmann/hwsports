@@ -393,7 +393,7 @@ class Db_Calendar extends MY_Controller {
 				// Fetch stuff from the database
 				$eventData;
 				switch ($type) {
-					case "match"		: $eventData = $this->matches_model->get_match($id); break;
+					case "match"		: $eventData = $this->matches_model	   ->get_match     ($id); break;
 					case "tournament"	: $eventData = $this->tournaments_model->get_tournament($id); break;
 					case "registration"	: $eventData = $this->tournaments_model->get_tournament($id); break;
 				}
@@ -430,6 +430,9 @@ class Db_Calendar extends MY_Controller {
 						$this->data['data'] .= $tournament['registrationEnd']."\n";
 						$this->data['data'] .= $newStartTime->format($switch_data[$type]['databaseFormat'])."\n";
 						$this->data['data'] .= $newEndTime->format($switch_data[$type]['databaseFormat'])."\n";
+					} else {
+						$this->data['data'] .= $newStartTime->format($switch_data[$type]['databaseFormat'])."\n";
+						$this->data['data'] .= $newEndTime->format($switch_data[$type]['databaseFormat'])."\n";
 					}
 
 					// Update the database
@@ -439,7 +442,7 @@ class Db_Calendar extends MY_Controller {
 						$data[$switch_data[$type]['startTime']]	= $newStartTime->format($switch_data[$type]['databaseFormat']);
 						$data[$switch_data[$type]['endTime']]	= $newEndTime->format($switch_data[$type]['databaseFormat']);
 						switch ($type) {
-							case "match"		: $updateResult = $this->matches_model->update_match($id,$data); break;
+							case "match"		: $updateResult = $this->matches_model	  ->update_match	 ($id,$data); break;
 							case "tournament"	: $updateResult = $this->tournaments_model->update_tournament($id,$data); break;
 							case "registration"	: $updateResult = $this->tournaments_model->update_tournament($id,$data); break;
 						}
@@ -457,7 +460,7 @@ class Db_Calendar extends MY_Controller {
 				"error updating ".$type." ".$id."\n"
 			);
 		} else {
-			header('HTTP', true, 400);
+			//header('HTTP', true, 400);
 		}
 		$this->load->view('data',$this->data);
 	}
