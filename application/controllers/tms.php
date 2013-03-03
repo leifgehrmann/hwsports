@@ -71,7 +71,7 @@ class Tms extends MY_Controller {
 		} else {
 			//display the create user form
 			//set the flash data error message if there is one
-			$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
+			$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
 		
 			$this->data['tournaments'] = $this->tournaments_model->get_tournaments($this->data['centre']['centreID']);
 		
@@ -194,7 +194,7 @@ class Tms extends MY_Controller {
 				redirect("/tms/tournament/$tournamentID", 'refresh');
 			} else {
 				//set the flash data error message if there is one
-				$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
+				$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
 				
 				$this->data['tournament']['status'] = $this->tournaments_model->get_tournament_status($tournamentID);
 				$sport = $this->sports_model->get_sport( $tournament['sportID'] );
