@@ -47,6 +47,7 @@
 				});
 				 
 				request.fail(function(jqXHR, textStatus) {
+					revertFunc();
 					alert( "Request failed: " + textStatus );
 				});
 			},
@@ -65,6 +66,7 @@
 				});
 				 
 				request.fail(function(jqXHR, textStatus) {
+					revertFunc();
 					alert( "Request failed: " + textStatus );
 				});
 			}
