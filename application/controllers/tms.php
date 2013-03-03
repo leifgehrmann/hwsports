@@ -663,7 +663,7 @@ class Tms extends MY_Controller {
 		}
 	}
 
-	public function date_check($strDate,$field) {
+	private function date_check($strDate,$field) {
 		$format=array("y","m","d");
 		$ex="-";
 		if(count(explode($ex,$strDate))==3) { 
@@ -671,42 +671,24 @@ class Tms extends MY_Controller {
 			if(intval($date['m']) && intval($date['d']) && intval($date['y'])) {
 				$m = $date['m']; $d = $date['d']; $y = $date['y']; 
 				if( checkdate($m,$d,$y) ) {
-					// Date is valid, now let's check it is part of a valid range
-					switch($field) {
-						case "registrationEnd":
-							// Check if we even have a start date to test against, since sometimes we're only changing the end date because we're already past the start date
-							if($this->input->post('registrationStart')!==FALSE) {
-								$registrationStartDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post('registrationStart') );
-								$registrationEndDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post('registrationEnd') );
-								if( $registrationStartDate < $registrationEndDate ) {
-									return TRUE; 
-								} else {
-									$this->form_validation->set_message('date_check', 'The registration period must be a valid date range. Please ensure the start date is before the end date.');
-									return FALSE;
-								}
-							} else {
-								return TRUE;
-							}
-						break;
-						case "tournamentEnd":
-							// Check if we even have a start date to test against, since sometimes we're only changing the end date because we're already past the start date
-							if($this->input->post('tournamentStart')!==FALSE) {
-								$tournamentStartDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post('tournamentStart') );
-								$tournamentEndDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post('tournamentEnd') );
-								if( $tournamentStartDate < $tournamentEndDate ) {
-									return TRUE; 
-								} else {
-									$this->form_validation->set_message('date_check', 'The tournament match scheduling period must be a valid date range. Please ensure the start date is before the end date.');
-									return FALSE;
-								}
-							} else {
-								return TRUE;
-							}
-						break;
-						default:
-							// We aren't handling a tournament or registration date range, so ignore other post fields and assume this date is acceptable
-							return TRUE;
+					// If last 3 characters of field we are checking is "End", assume there is a corresponding "Start" field and check for valid date range 
+					if(substr($field, -3)=="End") {
+						$endDateField = $field;
+						$startDateField = substr($field, 0, -3)."Start";
+						if(daterange_check($startDateField, $endDateField )===FALSE) {
+							$this->form_validation->set_message('date_check', "Invalid date range specified: $startDateField -> $endDateField. Please ensure start dates are before end dates, and end dates are in the future.");
+							return FALSE;
+						}
 					}
+					// If we have a registration end date and a tournament start date, check tournament is starting after registration period
+					if( $field=="registrationEnd" && ($this->input->post("tournamentStart")!==FALSE) ) {
+						if(daterange_check("registrationEnd", "tournamentStart" )===FALSE) {
+							$this->form_validation->set_message('date_check', "Tournament must start after registration period has ended. Please correct the tournament start date.");
+							return FALSE;
+						}
+					}
+					// Sanity checks passed, assume valid date
+					return TRUE;
 				} else {				
 					$this->form_validation->set_message('date_check', 'The %s field must contain a date within realistic range. Provided: '.$y.' - '.$m.' - '.$d);
 					return FALSE;
@@ -719,6 +701,17 @@ class Tms extends MY_Controller {
 			$this->form_validation->set_message('date_check', 'The %s field must have all three elements of a date. Provided: '.print_r($strDate,1) );
 			return FALSE;
 		}
+	}
+	
+	// Checks two correctly-formatted date strings in POST data for range sanity
+	private function daterange_check($startDateField, $endDateField) {
+		// If the start field doesn't exist, check end date against today's date instead, since we want the end date to be in the future 
+		$startDate = ( ($this->input->post($startDateField)===FALSE) ? new DateTime() : DateTime::createFromFormat(DATE_FORMAT, $this->input->post($startDateField) ) );
+		$endDate 	= DateTime::createFromFormat(DATE_FORMAT, $this->input->post($endDateField) );
+		if( $startDate >= $endDate ) {
+			return FALSE;
+		}
+		return TRUE;
 	}
 
 }
