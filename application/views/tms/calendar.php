@@ -25,7 +25,7 @@
 	$(document).ready(function() {
 		$('#calendar').fullCalendar({
 			firstDay: '1',
-			contentHeight: 590,
+			contentHeight: 600,
 			header: {
 				left: 'prev,next today',
 				center: 'title',
@@ -33,13 +33,13 @@
 			},
 			events: '/db_calendar/getAllEventsTMS/',
 			editable: true,
-			eventResize: function(match,dayDelta,minuteDelta,revertFunc) {
+			eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
 				//console.log(match);
 				var secondsDelta = ((dayDelta*1440)+minuteDelta)*60;
 				var request = $.ajax({
 					type: "POST",
 					url: '/db_calendar/changeEventEnd',
-					data: { 'secondsDelta': secondsDelta, 'id': match.data.id }
+					data: { 'secondsDelta': secondsDelta, 'id': event.data.id }
 				});
  
 				request.done(function(msg) {
@@ -51,14 +51,14 @@
 					alert( "Request failed: " + textStatus );
 				});
 			},
-			eventDrop: function(match,dayDelta,minuteDelta,allDay,revertFunc) {
+			eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
 				//console.log(match);
 				var secondsDelta = ((dayDelta*1440)+minuteDelta)*60;
 				//alert(minutesDelta);
 				var request = $.ajax({
 					type: "POST",
 					url: '/db_calendar/changeEventStart',
-					data: { 'secondsDelta': secondsDelta, 'id': match.data.id }
+					data: { 'secondsDelta': secondsDelta, 'id': event.data.id }
 				});
  				
 				request.done(function(msg) {

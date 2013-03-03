@@ -47,7 +47,7 @@ class Matches_model extends CI_Model {
 	{	
 		$match = $this->get_match($matchID);
 		if(array_key_exists('tournamentID',$match))
-			return are_valid_dates_in_tournament($startTime, $endTime, $match['tournamentID']);
+			return $this->are_valid_dates_in_tournament($startTime, $endTime, $match['tournamentID']);
 		else
 			return ($startTime<$endTime);
 	}
