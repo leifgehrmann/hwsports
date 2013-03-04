@@ -350,7 +350,7 @@ class Db_Calendar extends MY_Controller {
 	 *
 	 */
 
-	public function moveEvent() {
+	public function move_event() {
 		$eventVariableNames = array(
 			'match' => array(
 				'startTime' => 'startTime',
@@ -393,8 +393,8 @@ class Db_Calendar extends MY_Controller {
 
 		// Convert the time variables to datetime
 		try {
-			$oldStart 	= new DateTime( $eventData[$eventVariableNames[$eventType]['startTime']] );
-			$oldEnd 	= new DateTime( $eventData[$eventVariableNames[$eventType]['endTime']] );
+			$oldStart = new DateTime( $eventData[$eventVariableNames[$eventType]['startTime']] );
+			$oldEnd = new DateTime( $eventData[$eventVariableNames[$eventType]['endTime']] );
 		} catch (Exception $e) {
 			// Errof if the values are valid
 			$this->badRequest("Error: Invalid date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
@@ -472,7 +472,8 @@ class Db_Calendar extends MY_Controller {
 		$this->load->view('data',$this->data);
 	}
 
-	public function changeEventEnd() {
+	// Basically do all the same things as moveEvent
+	public function change_event_end() {
 		$eventVariableNames = array(
 			'match' => array(
 				'startTime' => 'startTime',
@@ -515,16 +516,15 @@ class Db_Calendar extends MY_Controller {
 
 		// Convert the time variables to datetime
 		try {
-			$oldStart 	= new DateTime( $eventData[$eventVariableNames[$eventType]['startTime']] );
-			$oldEnd 	= new DateTime( $eventData[$eventVariableNames[$eventType]['endTime']] );
+			$start = new DateTime( $eventData[$eventVariableNames[$eventType]['startTime']] );
+			$oldEnd = new DateTime( $eventData[$eventVariableNames[$eventType]['endTime']] );
 		} catch (Exception $e) {
 			// Errof if the values are valid
 			$this->badRequest("Error: Invalid date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
 		}
 		
-		// Add the delta to the old times
-		$newStart 	= $oldStart->modify("$secondsDelta seconds");
-		$newEnd 	= $oldEnd->modify("$secondsDelta seconds");
+		// Add the delta to the old time
+		$newEnd = $oldEnd->modify("$secondsDelta seconds");
 
 		// Validate date ranges for each of the three handled event types
 		switch ($eventType) {
@@ -538,8 +538,8 @@ class Db_Calendar extends MY_Controller {
 					$this->badRequest("Error: Invalid tournament date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
 				}
 				
-				if( $newEnd < $newStart ) badRequest("Error: Match has imploded. Everybody died.");
-				if( $newStart < $tournamentStart ) badRequest("Error: Match cannot start before tournament");
+				if( $newEnd < $start ) badRequest("Error: Match has imploded. Everybody died.");
+				if( $start < $tournamentStart ) badRequest("Error: Match cannot start before tournament");
 				if( $tournamentEnd < $newEnd ) badRequest("Error: Match cannot end after tournament");	
 			break;
 			case "tournament":
@@ -551,8 +551,8 @@ class Db_Calendar extends MY_Controller {
 					$this->badRequest("Error: Invalid registration date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
 				}
 				
-				if( $newStart < $registrationEnd ) badRequest("Error: Tournament cannot start before registration period has finished");
-				if( $newEnd < $newStart ) badRequest("Error: Tournament has imploded. Everyone died.");
+				if( $start < $registrationEnd ) badRequest("Error: Tournament cannot start before registration period has finished");
+				if( $newEnd < $start ) badRequest("Error: Tournament has imploded. Everyone died.");
 			break;
 			case "registration":
 				// Convert the time variables to datetime
@@ -564,13 +564,12 @@ class Db_Calendar extends MY_Controller {
 				}
 				
 				if( $tournamentStart < $newEnd ) badRequest("Error: Tournament cannot start before registration period has finished");
-				if( $newEnd < $newStart ) badRequest("Error: Registration period has imploded. Everyone died.");
+				if( $newEnd < $start ) badRequest("Error: Registration period has imploded. Everyone died.");
 			break;
 		}
 		
 		// Put the new start and new end datetimes back into string format and prepare array of database elements to update
 		$data = array(
-			$eventVariableNames[$eventType]['startTime'] => $newStart->format(DateTime::ISO8601),
 			$eventVariableNames[$eventType]['endTime'] => $newEnd->format(DateTime::ISO8601)
 		);
 		
@@ -594,26 +593,10 @@ class Db_Calendar extends MY_Controller {
 		$this->load->view('data',$this->data);
 	}
 	
-	
-	
-	
-	
-	
-	
-	public function changeEventEnd() {
-		$eventData = $this->matches_model->get_match($_POST['id']);
-		$oldEndTime = $eventData['endTime'];
-		$newEndTime = $oldEndTime+$_POST['minutesDelta'];
-		$updateResult = $this->matches_model->update_match($_POST['id'],array('endTime'=>$newEndTime));
-		$this->data['data'] = ($updateResult ? "Success!" : "False!");
-		$this->load->view('data',$this->data);
-	}
-	
+	// Output error message to ajax with correct header to show failure, then finish execution
 	public function badRequest($errorString) {
-		$this->data['data'] = $errorString;
 		//header("HTTP",true,400);
-		$this->load->view('data',$this->data);
-		exit;
+		die($errorString);
 	}
 }
 ?>
