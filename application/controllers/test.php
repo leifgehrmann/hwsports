@@ -69,18 +69,18 @@ class Test extends MY_Controller {
 	// Eg. http://hwsports.co.uk/test/datetime_to_public/2013-03-04%2003%3A51
 	// Should (in theory) output 2013-03-04 03:51 (which is basically just the exact same as the input
 	// the idea here is to make sure it doesn't change the date or time in conversion to/from DateTime object	 
-	public function datetime_to_public($dateInputStr){
+	public function test_datetime_to_public($dateInputStr){
 		$dateInputStr = urldecode($dateInputStr);
 		$output = datetime_to_public($dateInputStr);
 		$this->display($output);
 	}
 	
-	// Eg. http://hwsports.co.uk/test/datetime_to_public/2013-03-04%2003%3A51
+	// Eg. http://hwsports.co.uk/test/test_datetime_to_standard/2013-03-04%2003%3A51
 	// Should (in theory) output 2013-03-04 03:51 (which is basically just the exact same as the input
 	// the idea here is to make sure it doesn't change the date or time in conversion to/from DateTime object	 
-	public function datetime_to_iso($dateInputStr){
+	public function test_datetime_to_standard($dateInputStr){
 		$dateInputStr = urldecode($dateInputStr);
-		$output = datetime_to_iso($dateInputStr);
+		$output = datetime_to_standard($dateInputStr);
 		$this->display($output);
 	}
 
