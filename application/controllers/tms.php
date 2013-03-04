@@ -196,12 +196,11 @@ class Tms extends MY_Controller {
 			if ($this->form_validation->run() == true) {
 				$newdata = $_POST;
 				
-				$this->tournaments_model->update_tournament($tournamentID, $newdata);
-				if($tournamentID > -1) {
+				if($this->tournaments_model->update_tournament($tournamentID, $newdata)) {
 					// Successful update, show success message
 					$this->session->set_flashdata('message_success',  'Successfully Updated Tournament.');
 				} else {
-					$this->session->set_flashdata('message_error',  'Failed. Please contact Infusion Systems.');
+					$this->session->set_flashdata('message_error',  'Failed to update tournament. Please contact Infusion Systems.');
 				}
 				redirect("/tms/tournament/$tournamentID", 'refresh');
 			} else {
