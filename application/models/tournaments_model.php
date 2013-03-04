@@ -143,12 +143,12 @@ class Tournaments_model extends CI_Model {
 	{	
 		$sportID = $data['sport'];
 		unset($data['sport']);
-		
-		$this->db->trans_start();
-		
+				
 		$this->db->query("INSERT INTO tournaments (centreID,sportID) VALUES ({$this->data['centre']['centreID']},$sportID)");
-		print_r($this->db->last_query()); die();
 		$tournamentID = $this->db->insert_id();
+		print_r($this->db->last_query()." ID: $tournamentID"); die();
+
+		$this->db->trans_start();
 		if($tournamentID) {
 			
 			$insertDataArray = array();
