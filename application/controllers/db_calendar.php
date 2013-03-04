@@ -412,7 +412,7 @@ class Db_Calendar extends MY_Controller {
 						$this->$this->badRequest("Invalid tournament date was fetched from the database. Debug Exception: ".$e->getMessage());
 					}
 					if( $newStart < $tournamentStart ) $this->badRequest("Match cannot start before tournament");
-					if( $tournamentEnd < $newEnd ) $this->badRequest("Match cannot end after tournament");	
+					if( $tournamentEnd < $newEnd ) $this->badRequest("Match cannot end after tournament end");	
 				}
 				if( $newEnd < $newStart ) $this->badRequest("Match has imploded. Everybody died.");
 			break;
