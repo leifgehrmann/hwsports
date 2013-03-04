@@ -57,10 +57,10 @@ class Tms extends MY_Controller {
 		$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_datetime_check[tournamentEnd]');
 		
 		// Change dates from public, timepicker-friendly format to database-friendly ISO format.
-		if($this->input->post('registrationStart')) $_POST['registrationStart'] = convert_public_datetime($this->input->post('registrationStart'));
-		if($this->input->post('registrationEnd')) $_POST['registrationEnd'] = convert_public_datetime($this->input->post('registrationEnd'));
-		if($this->input->post('tournamentStart')) $_POST['tournamentStart'] = convert_public_datetime($this->input->post('tournamentStart'));
-		if($this->input->post('tournamentEnd')) $_POST['tournamentEnd'] = convert_public_datetime($this->input->post('tournamentEnd'));
+		if($this->input->post('registrationStart')) $_POST['registrationStart'] = $this->convert_public_datetime($this->input->post('registrationStart'));
+		if($this->input->post('registrationEnd')) $_POST['registrationEnd'] = $this->convert_public_datetime($this->input->post('registrationEnd'));
+		if($this->input->post('tournamentStart')) $_POST['tournamentStart'] = $this->convert_public_datetime($this->input->post('tournamentStart'));
+		if($this->input->post('tournamentEnd')) $_POST['tournamentEnd'] = $this->convert_public_datetime($this->input->post('tournamentEnd'));
 		
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
@@ -188,10 +188,10 @@ class Tms extends MY_Controller {
 			} 
 			
 			// Change dates from public, timepicker-friendly format to database-friendly ISO format.
-			if($this->input->post('registrationStart')) $_POST['registrationStart'] = convert_public_datetime($this->input->post('registrationStart'));
-			if($this->input->post('registrationEnd')) $_POST['registrationEnd'] = convert_public_datetime($this->input->post('registrationEnd'));
-			if($this->input->post('tournamentStart')) $_POST['tournamentStart'] = convert_public_datetime($this->input->post('tournamentStart'));
-			if($this->input->post('tournamentEnd')) $_POST['tournamentEnd'] = convert_public_datetime($this->input->post('tournamentEnd'));
+			if($this->input->post('registrationStart')) $_POST['registrationStart'] = $this->convert_public_datetime($this->input->post('registrationStart'));
+			if($this->input->post('registrationEnd')) $_POST['registrationEnd'] = $this->convert_public_datetime($this->input->post('registrationEnd'));
+			if($this->input->post('tournamentStart')) $_POST['tournamentStart'] = $this->convert_public_datetime($this->input->post('tournamentStart'));
+			if($this->input->post('tournamentEnd')) $_POST['tournamentEnd'] = $this->convert_public_datetime($this->input->post('tournamentEnd'));
 			
 			if ($this->form_validation->run() == true) {
 				$newdata = $_POST;
