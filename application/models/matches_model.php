@@ -18,59 +18,6 @@ class Matches_model extends CI_Model {
 	}
 
 	/**
-	 * Returns if the match dates are valid
-	 * @param startTime - the start of the match
-	 * @param endTime - the end of the match
-	 * @param tournamentID - the tournament we want to check
-	 * @return boolean
-	 **/
-	public function are_valid_dates_in_tournament($startTime, $endTime, $tournamentID)
-	{
-		$this->load->model('tournaments_model');
-		$tournament = $this->tournaments_model->get_tournament($tournamentID);
-		$tournamentStart 	= DateTime::createFromFormat(DATE_FORMAT,$tournament['tournamentStart']);
-		$tournamentEnd 		= DateTime::createFromFormat(DATE_FORMAT,$tournament['tournamentEnd']);
-		return (($startTime<$endTime) && 
-				($tournamentStart<=$startTime) && 
-				($tournamentStart<=$endTime) && 
-				($startTime<$tournamentEnd) && 
-				($endTime<$tournamentEnd));
-	}
-
-	/**
-	 * Verifies that the tournament dates make in the order they were written.
-	 *  
-	 * @param matchTimes, an associative array of 'startTime'=>value and endTime'=>value 
-	 * @param matchID, a match id of type int(11)
-	 * @return boolean
-	 **/
-	public function are_valid_dates(
-		$matchTimes,
-		$matchID )
-	{
-
-		$match = $this->get_match($matchID);
-
-		// initialize variables
-		$startTime;
-		$endTime;
-
-		// Get the data for the tournament
-		$tournament = $this->get_tournament($tournamentID);
-
-		// If we find that a variable has been defined, we replace it. Else, we ignore it.
-		if( array_key_exists('startTime',$matchTimes ) 	{ $startTime = $matchTimes['startTime'	]; }
-		else { $startTime 	= DateTime::createFromFormat(DATE_TIME_FORMAT, $match['startTime']); 	}
-		if( array_key_exists('endTime',$matchTimes ) 	{ $endTime 	= $matchTimes['endTime'	]; }
-		else { $endTime 	= DateTime::createFromFormat(DATE_TIME_FORMAT, $match['endTime']); 
-
-		if(!($match['tournamentID']==="0"))
-			return $this->are_valid_dates_in_tournament($startTime, $endTime, $match['tournamentID']);
-		else
-			return ($startTime<$endTime);
-	}
-
-	/**
 	 * Returns a 2d array of match data
 	 *  
 	 * @return array
