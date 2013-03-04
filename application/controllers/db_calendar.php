@@ -407,18 +407,19 @@ class Db_Calendar extends MY_Controller {
 		// Validate date ranges for each of the three handled event types
 		switch ($eventType) {
 			case "match":
-				// Convert the time variables to datetime
-				try {
-					$tournamentStart = new DateTime( $tournamentData['tournamentStart'] );
-					$tournamentEnd = new DateTime( $tournamentData['tournamentEnd'] );
-				} catch (Exception $e) {
-					// Errof if the values are valid
-					$this->badRequest("Error: Invalid tournament date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
+				if($eventData['tournamentID']!=0) {
+					try {
+						// Convert the time variables to datetime
+						$tournamentStart = new DateTime( $tournamentData['tournamentStart'] );
+						$tournamentEnd = new DateTime( $tournamentData['tournamentEnd'] );
+					} catch (Exception $e) {
+						// Errof if the values are valid
+						$this->badRequest("Error: Invalid tournament date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
+					}
+					if( $newStart < $tournamentStart ) badRequest("Error: Match cannot start before tournament");
+					if( $tournamentEnd < $newEnd ) badRequest("Error: Match cannot end after tournament");	
 				}
-				
 				if( $newEnd < $newStart ) badRequest("Error: Match has imploded. Everybody died.");
-				if( $newStart < $tournamentStart ) badRequest("Error: Match cannot start before tournament");
-				if( $tournamentEnd < $newEnd ) badRequest("Error: Match cannot end after tournament");	
 			break;
 			case "tournament":
 				// Convert the time variables to datetime
@@ -529,18 +530,19 @@ class Db_Calendar extends MY_Controller {
 		// Validate date ranges for each of the three handled event types
 		switch ($eventType) {
 			case "match":
-				// Convert the time variables to datetime
-				try {
-					$tournamentStart = new DateTime( $tournamentData['tournamentStart'] );
-					$tournamentEnd = new DateTime( $tournamentData['tournamentEnd'] );
-				} catch (Exception $e) {
-					// Errof if the values are valid
-					$this->badRequest("Error: Invalid tournament date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
-				}
-				
+				if($eventData['tournamentID']!=0) {
+					try {
+						// Convert the time variables to datetime
+						$tournamentStart = new DateTime( $tournamentData['tournamentStart'] );
+						$tournamentEnd = new DateTime( $tournamentData['tournamentEnd'] );
+					} catch (Exception $e) {
+						// Errof if the values are valid
+						$this->badRequest("Error: Invalid tournament date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
+					}
+					if( $newStart < $tournamentStart ) badRequest("Error: Match cannot start before tournament");
+					if( $tournamentEnd < $newEnd ) badRequest("Error: Match cannot end after tournament");	
+				}	
 				if( $newEnd < $start ) badRequest("Error: Match has imploded. Everybody died.");
-				if( $start < $tournamentStart ) badRequest("Error: Match cannot start before tournament");
-				if( $tournamentEnd < $newEnd ) badRequest("Error: Match cannot end after tournament");	
 			break;
 			case "tournament":
 				// Convert the time variables to datetime
