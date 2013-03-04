@@ -47,15 +47,18 @@ class MY_Controller extends CI_Controller {
 			return $new;       
 		}
 			
-		function datetimestr_to_standard($strDateTime) {
+		function datetime_to_standard($inDateTime) {
+			if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_FORMAT);
 			$dateTime = new DateTime($strDateTime);
 			return $dateTime->format(DATE_TIME_FORMAT);
 		}
-		function datetimestr_to_unix($strDateTime) {
+		function datetime_to_unix($inDateTime) {
+			if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_FORMAT);
 			$dateTime = new DateTime($strDateTime);
 			return $dateTime->format(DATE_TIME_UNIX_FORMAT);
 		}
-		function datetimestr_to_public($strDateTime) {
+		function datetime_to_public($inDateTime) {
+			if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_FORMAT);
 			$dateTime = new DateTime($strDateTime);
 			return $dateTime->format(PUBLIC_DATE_TIME_FORMAT);
 		}

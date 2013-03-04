@@ -57,10 +57,10 @@ class Tms extends MY_Controller {
 		$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_datetime_check[tournamentEnd]');
 		
 		// Change dates from public, timepicker-friendly format to database-friendly ISO format.
-		if($this->input->post('registrationStart')) $_POST['registrationStart'] = datetimestr_to_standard($this->input->post('registrationStart'));
-		if($this->input->post('registrationEnd')) $_POST['registrationEnd'] = datetimestr_to_standard($this->input->post('registrationEnd'));
-		if($this->input->post('tournamentStart')) $_POST['tournamentStart'] = datetimestr_to_standard($this->input->post('tournamentStart'));
-		if($this->input->post('tournamentEnd')) $_POST['tournamentEnd'] = datetimestr_to_standard($this->input->post('tournamentEnd'));
+		if($this->input->post('registrationStart')) $_POST['registrationStart'] = datetime_to_standard($this->input->post('registrationStart'));
+		if($this->input->post('registrationEnd')) $_POST['registrationEnd'] = datetime_to_standard($this->input->post('registrationEnd'));
+		if($this->input->post('tournamentStart')) $_POST['tournamentStart'] = datetime_to_standard($this->input->post('tournamentStart'));
+		if($this->input->post('tournamentEnd')) $_POST['tournamentEnd'] = datetime_to_standard($this->input->post('tournamentEnd'));
 		
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
@@ -107,28 +107,28 @@ class Tms extends MY_Controller {
 				'id'    => 'registrationStart',
 				'type'  => 'text',
 				'class' => 'date',
-				'value' => datetimestr_to_public( $this->form_validation->set_value('registrationStart') )
+				'value' => datetime_to_public( $this->form_validation->set_value('registrationStart') )
 			);
 			$this->data['registrationEnd'] = array(
 				'name'  => 'registrationEnd',
 				'id'    => 'registrationEnd',
 				'type'  => 'text',
 				'class' => 'date',
-				'value' => datetimestr_to_public( $this->form_validation->set_value('registrationEnd') )
+				'value' => datetime_to_public( $this->form_validation->set_value('registrationEnd') )
 			);
 			$this->data['tournamentStart'] = array(
 				'name'  => 'tournamentStart',
 				'id'    => 'tournamentStart',
 				'type'  => 'text',
 				'class' => 'date',
-				'value' => datetimestr_to_public( $this->form_validation->set_value('tournamentStart') )
+				'value' => datetime_to_public( $this->form_validation->set_value('tournamentStart') )
 			);
 			$this->data['tournamentEnd'] = array(
 				'name'  => 'tournamentEnd',
 				'id'    => 'tournamentEnd',
 				'type'  => 'text',
 				'class' => 'date',
-				'value' => datetimestr_to_public( $this->form_validation->set_value('tournamentEnd') )
+				'value' => datetime_to_public( $this->form_validation->set_value('tournamentEnd') )
 			);
 			
 		}
@@ -188,10 +188,10 @@ class Tms extends MY_Controller {
 			} 
 			
 			// Change dates from public, timepicker-friendly format to database-friendly ISO format.
-			if($this->input->post('registrationStart')) $_POST['registrationStart'] = datetimestr_to_standard($this->input->post('registrationStart'));
-			if($this->input->post('registrationEnd')) $_POST['registrationEnd'] = datetimestr_to_standard($this->input->post('registrationEnd'));
-			if($this->input->post('tournamentStart')) $_POST['tournamentStart'] = datetimestr_to_standard($this->input->post('tournamentStart'));
-			if($this->input->post('tournamentEnd')) $_POST['tournamentEnd'] = datetimestr_to_standard($this->input->post('tournamentEnd'));
+			if($this->input->post('registrationStart')) $_POST['registrationStart'] = datetime_to_standard($this->input->post('registrationStart'));
+			if($this->input->post('registrationEnd')) $_POST['registrationEnd'] = datetime_to_standard($this->input->post('registrationEnd'));
+			if($this->input->post('tournamentStart')) $_POST['tournamentStart'] = datetime_to_standard($this->input->post('tournamentStart'));
+			if($this->input->post('tournamentEnd')) $_POST['tournamentEnd'] = datetime_to_standard($this->input->post('tournamentEnd'));
 			
 			if ($this->form_validation->run() == true) {
 				$newdata = $_POST;
@@ -229,28 +229,28 @@ class Tms extends MY_Controller {
 					'id'    => 'registrationStart',
 					'type'  => 'text',
 					'class' => 'date',
-					'value' => datetimestr_to_public( $this->form_validation->set_value('registrationStart',(isset($tournament['registrationStart']) ? $tournament['registrationStart'] : '') ) )
+					'value' => datetime_to_public( $this->form_validation->set_value('registrationStart',(isset($tournament['registrationStart']) ? $tournament['registrationStart'] : '') ) )
 				);
 				$this->data['registrationEnd'] = array(
 					'name'  => 'registrationEnd',
 					'id'    => 'registrationEnd',
 					'type'  => 'text',
 					'class' => 'date',
-					'value' => datetimestr_to_public( $this->form_validation->set_value('registrationEnd',(isset($tournament['registrationEnd']) ? $tournament['registrationEnd'] : '') ) )
+					'value' => datetime_to_public( $this->form_validation->set_value('registrationEnd',(isset($tournament['registrationEnd']) ? $tournament['registrationEnd'] : '') ) )
 				);
 				$this->data['tournamentStart'] = array(
 					'name'  => 'tournamentStart',
 					'id'    => 'tournamentStart',
 					'type'  => 'text',
 					'class' => 'date',
-					'value' => datetimestr_to_public( $this->form_validation->set_value('tournamentStart',(isset($tournament['tournamentStart']) ? $tournament['tournamentStart'] : '') ) )
+					'value' => datetime_to_public( $this->form_validation->set_value('tournamentStart',(isset($tournament['tournamentStart']) ? $tournament['tournamentStart'] : '') ) )
 				);
 				$this->data['tournamentEnd'] = array(
 					'name'  => 'tournamentEnd',
 					'id'    => 'tournamentEnd',
 					'type'  => 'text',
 					'class' => 'date',
-					'value' => datetimestr_to_public( $this->form_validation->set_value('tournamentEnd',(isset($tournament['tournamentEnd']) ? $tournament['tournamentEnd'] : '') ) )
+					'value' => datetime_to_public( $this->form_validation->set_value('tournamentEnd',(isset($tournament['tournamentEnd']) ? $tournament['tournamentEnd'] : '') ) )
 				);
 				
 			}
@@ -691,9 +691,9 @@ class Tms extends MY_Controller {
 				// If start datetime is equal to or after end datetime 
 				if( $startDate >= $endDate ) {
 					if($this->input->post($startDateField)) {
-						$error = "$startDateField date: ".datetimestr_to_public($startDate)." is not before end date: ".datetimestr_to_public($endDate);
+						$error = "$startDateField date: ".datetime_to_public($startDate)." is not before end date: ".datetime_to_public($endDate);
 					} else {
-						$error = "$endDateField date: ".datetimestr_to_public($startDate)." is in the past";
+						$error = "$endDateField date: ".datetime_to_public($startDate)." is in the past";
 					}						
 					$this->form_validation->set_message('datetime_check', "Invalid date range specified. $error");
 					return FALSE;
