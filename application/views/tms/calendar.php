@@ -45,7 +45,7 @@
 				request.done(function(msg) {
 					if(msg.indexOf("Error") != -1) {
 						revertFunc();
-						$.fancybox( msg );
+						$("<div id='calendarErrorDialog'>"+msg+"</div>").dialog({show: 'slide', hide: 'explode', buttons: { 'Close': function() { $(this).dialog('close'); } }, closeOnEscape: true, resizable: false});
 					}
 				});
 				 
@@ -67,7 +67,7 @@
 				request.done(function(msg) {
 					if(msg.indexOf("Error") != -1) {
 						revertFunc();
-						$.fancybox( msg );
+						$("<div id='calendarErrorDialog'>"+msg+"</div>").dialog({show: 'slide', hide: 'explode', buttons: { 'Close': function() { $(this).dialog('close'); } }, closeOnEscape: true, resizable: false});
 					}
 				});
 				 
