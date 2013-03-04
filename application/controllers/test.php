@@ -76,7 +76,9 @@ class Test extends MY_Controller {
 	}
 
 	public function display($output){
-		$this->data['data'] = var_dump($output);
+		ob_start();
+		var_dump($output);
+		$this->data['data'] = ob_get_clean();
 		header('Content-Type: text/plain');
 		$this->load->view('data', $this->data);
 	}
