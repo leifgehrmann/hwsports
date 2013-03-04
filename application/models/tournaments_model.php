@@ -134,43 +134,35 @@ class Tournaments_model extends CI_Model {
 	
 	/**
 	 * Creates a tournament with data.
-	 * returns the tournamentID of the new tournament if it was
-	 * successful. If not, it should return -1.
 	 *  
-	 * @return int
+	 * @return integer ID of new tournament, or FALSE if failed
 	 **/
-	public function insert_tournament($data)
-	{	
+	public function insert_tournament($data) {	
+		// Get sport ID from input data, then unset it from data array since we don't want it in tournamentData, it's a field in the tournaments table
 		$sportID = $data['sport'];
 		unset($data['sport']);
-				
+		
 		$this->db->query("INSERT INTO tournaments (centreID,sportID) VALUES ({$this->data['centre']['centreID']},$sportID)");
 		$tournamentID = $this->db->insert_id();
-		print_r($this->db->last_query()." ID: $tournamentID"); die();
-
+		// Insert failed, we can't proceed
+		if($this->db->affected_rows()==0) return FALSE;
+		
+		// Batch insert, do it as one transaction for efficiency
 		$this->db->trans_start();
-		if($tournamentID) {
-			
-			$insertDataArray = array();
-			foreach($data as $key=>$value) {
-				$insertDataArray[] = array(
-					'tournamentID' => $tournamentID,
-					'key' => $key,
-					'value' => $value
-				);
-			}
-			if ($this->db->insert_batch('tournamentData',$insertDataArray)) {
-				// db success
-				$this->db->trans_complete();
-				return $tournamentID;
-			} else {
-				// db fail
-				print_r($this->db->last_query()); die();
-				return -1;
-			}
-		} else {
-			return -1;
+		$insertDataArray = array();
+		foreach($data as $key=>$value) {
+			$insertDataArray[] = array(
+				'tournamentID' => $tournamentID,
+				'key' => $key,
+				'value' => $value
+			);
 		}
+		// Batch insert failed?
+		if ( !$this->db->insert_batch('tournamentData',$insertDataArray) ) return FALSE;
+		
+		// Success
+		$this->db->trans_complete();
+		return $tournamentID;
 	}
 
 	/**
