@@ -691,11 +691,11 @@ class Tms extends MY_Controller {
 				// If start datetime is equal to or after end datetime 
 				if( $startDate >= $endDate ) {
 					if($this->input->post($startDateField)) {
-						$error = "$startDateField date: ".datetime_to_public($startDate)." is not before end date: ".datetime_to_public($endDate);
+						$error = "Date '$startDateField': ".datetime_to_public($startDate)." is not before end date: ".datetime_to_public($endDate);
 					} else {
-						$error = "$endDateField date: ".datetime_to_public($startDate)." is in the past";
+						$error = "Date '$endDateField': ".datetime_to_public($startDate)." is in the past";
 					}						
-					$this->form_validation->set_message('datetime_check', "Invalid date range specified. $error");
+					$this->form_validation->set_message('datetime_check', "Invalid date range specified: $error");
 					return FALSE;
 				}
 			}

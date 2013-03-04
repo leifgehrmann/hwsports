@@ -53,12 +53,12 @@ class MY_Controller extends CI_Controller {
 			return $dateTime->format(DATE_TIME_FORMAT);
 		}
 		function datetime_to_unix($inDateTime) {
-			if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_FORMAT);
+			if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_UNIX_FORMAT);
 			$dateTime = new DateTime($inDateTime);
 			return $dateTime->format(DATE_TIME_UNIX_FORMAT);
 		}
 		function datetime_to_public($inDateTime) {
-			if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_FORMAT);
+			if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_DATE_TIME_FORMAT);
 			$dateTime = new DateTime($inDateTime);
 			return $dateTime->format(PUBLIC_DATE_TIME_FORMAT);
 		}
