@@ -41,7 +41,7 @@
 					"type": "datetime",
 					"dateFormat": $.datepicker.ISO_8601,
 					"timeFormat": "HH:mm",
-					"separator": " @ "
+					"separator": " "
 				}, {
 					"label": "Description",
 					"name": "description"
