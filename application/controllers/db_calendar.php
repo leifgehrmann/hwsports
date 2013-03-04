@@ -592,7 +592,7 @@ class Db_Calendar extends MY_Controller {
 	
 	// Output error message to ajax with correct header to show failure, then finish execution
 	public function badRequest($errorString) {
-		header("HTTP",true,400);
+		//header("HTTP",true,400);
 		die($errorString);
 	}
 }
