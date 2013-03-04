@@ -45,7 +45,7 @@
 				request.done(function(msg) {
 					if(msg.indexOf("Error") != -1) {
 						revertFunc();
-						alert( msg );
+						$.fancybox( msg );
 					}
 				});
 				 
@@ -67,7 +67,7 @@
 				request.done(function(msg) {
 					if(msg.indexOf("Error") != -1) {
 						revertFunc();
-						alert( msg );
+						$.fancybox( msg );
 					}
 				});
 				 
