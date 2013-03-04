@@ -173,8 +173,8 @@ class Db_Calendar extends MY_Controller {
 		// Inserting all the tournament periods
 		if($showTournaments){
 			foreach($tournaments as $tournament) {
-				$tournamentStart	= DateTime::createFromFormat(DATE_FORMAT, $tournament['tournamentStart']);
-				$tournamentEnd		= DateTime::createFromFormat(DATE_FORMAT, $tournament['tournamentEnd']);
+				$tournamentStart	= new DateTime($tournament['tournamentStart']);
+				$tournamentEnd		= new DateTime($tournament['tournamentEnd']);
 
 				// If we encounter a syntax error in the dates...
 				if(empty($tournamentStart) || empty($tournamentEnd))
@@ -206,8 +206,8 @@ class Db_Calendar extends MY_Controller {
 		// Inserting all the registration periods
 		if($showRegistrations){
 			foreach($tournaments as $tournament) {
-				$registrationStart	= DateTime::createFromFormat(DATE_FORMAT, $tournament['registrationStart']);
-				$registrationEnd	= DateTime::createFromFormat(DATE_FORMAT, $tournament['registrationEnd']);
+				$registrationStart	= new DateTime($tournament['registrationStart']);
+				$registrationEnd	= new DateTime($tournament['registrationEnd']);
 
 				// If we encounter a syntax error in the dates...
 				if(empty($registrationStart) || empty($registrationEnd))
