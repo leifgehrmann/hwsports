@@ -43,12 +43,15 @@
 				});
  
 				request.done(function(msg) {
-					//alert( msg );
+					if(msg.indexOf("ERROR") != -1) {
+						revertFunc();
+						alert( "The event could not be moved: \n"+msg );
+					}
 				});
 				 
 				request.fail(function(jqXHR, textStatus) {
 					revertFunc();
-					alert( "The event could not be resized because it conflicts with current schedule. "+jqXHR.responseText );
+					alert( "Internal error occurred, please contact Infusion Systems: "+jqXHR.responseText );
 				});
 			},
 			eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
@@ -62,12 +65,15 @@
 				});
  				
 				request.done(function(msg) {
-					//alert( msg );
+					if(msg.indexOf("ERROR") != -1) {
+						revertFunc();
+						alert( "The event could not be moved: \n"+msg );
+					}
 				});
 				 
 				request.fail(function(jqXHR, textStatus) {
 					revertFunc();
-					alert( "The event could not be moved because it conflicts with current schedule. "+jqXHR.responseText );
+					alert( "Internal error occurred, please contact Infusion Systems: "+jqXHR.responseText );
 				});
 			}
 		});
