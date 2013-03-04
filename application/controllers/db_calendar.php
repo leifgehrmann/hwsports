@@ -372,7 +372,7 @@ class Db_Calendar extends MY_Controller {
 		// Check if everything has been defined.
 		if( !is_string($val) ) $this->badRequest("Error: ID not defined\n");
 		if( !($secondsDelta && is_numeric($secondsDelta)) ) $this->badRequest("Error: secondsDelta is invalid\n");
-		if( preg_match('|(match|tournament|registration)-[0-9]+|',$val) !== 1 ) $this->badRequest("Error: valid type and id not defined\n");
+		if( preg_match('~(match|tournament|registration)-[0-9]+~',$val) !== 1 ) $this->badRequest("Error: valid type and id not defined\n");
 		// We have a valid val string, parse it into type and id
 		list($eventType,$id) = explode("-",$val);
 		// Fetch stuff from the database
@@ -495,7 +495,7 @@ class Db_Calendar extends MY_Controller {
 		// Check if everything has been defined.
 		if( !is_string($val) ) $this->badRequest("Error: ID not defined\n");
 		if( !($secondsDelta && is_numeric($secondsDelta)) ) $this->badRequest("Error: secondsDelta is invalid\n");
-		if( preg_match('|(match|tournament|registration)-[0-9]+|',$val) !== 1 ) $this->badRequest("Error: valid type and id not defined\n");
+		if( preg_match('~(match|tournament|registration)-[0-9]+~',$val) !== 1 ) $this->badRequest("Error: valid type and id not defined\n");
 		// We have a valid val string, parse it into type and id
 		list($eventType,$id) = explode("-",$val);
 		// Fetch stuff from the database
