@@ -395,9 +395,9 @@ class Db_Calendar extends MY_Controller {
 		try {
 			$oldStart 	= new DateTime( $eventData[$eventVariableNames[$eventType]['startTime']] );
 			$oldEnd 	= new DateTime( $eventData[$eventVariableNames[$eventType]['endTime']] );
-		} catch {
+		} catch (Exception $e) {
 			// Errof if the values are valid
-			$this->badRequest("Error: Invalid date was fetched from the database.\n");
+			$this->badRequest("Error: Invalid date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
 		}
 		
 		// Add the delta to the old times
@@ -411,9 +411,9 @@ class Db_Calendar extends MY_Controller {
 				try {
 					$tournamentStart = new DateTime( $tournamentData['tournamentStart'] );
 					$tournamentEnd = new DateTime( $tournamentData['tournamentEnd'] );
-				} catch {
+				} catch (Exception $e) {
 					// Errof if the values are valid
-					$this->badRequest("Error: Invalid tournament date was fetched from the database.\n");
+					$this->badRequest("Error: Invalid tournament date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
 				}
 				
 				if( $newEnd < $newStart ) badRequest("Error: Match has imploded. Everybody died.");
@@ -424,9 +424,9 @@ class Db_Calendar extends MY_Controller {
 				// Convert the time variables to datetime
 				try {
 					$registrationEnd = new DateTime( $eventData['registrationEnd'] );
-				} catch {
+				} catch (Exception $e) {
 					// Errof if the values are valid
-					$this->badRequest("Error: Invalid registration date was fetched from the database.\n");
+					$this->badRequest("Error: Invalid registration date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
 				}
 				
 				if( $newStart < $registrationEnd ) badRequest("Error: Tournament cannot start before registration period has finished");
@@ -436,9 +436,9 @@ class Db_Calendar extends MY_Controller {
 				// Convert the time variables to datetime
 				try {
 					$tournamentStart = new DateTime( $eventData['tournamentStart'] );
-				} catch {
+				} catch (Exception $e) {
 					// Errof if the values are valid
-					$this->badRequest("Error: Invalid tournament date was fetched from the database.\n");
+					$this->badRequest("Error: Invalid tournament date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
 				}
 				
 				if( $tournamentStart < $newEnd ) badRequest("Error: Tournament cannot start before registration period has finished");
