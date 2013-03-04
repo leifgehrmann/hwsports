@@ -46,6 +46,19 @@ class MY_Controller extends CI_Controller {
 			else $new = $obj;
 			return $new;       
 		}
+			
+		function datetimestr_to_standard($strDateTime) {
+			$dateTime = new DateTime($strDateTime);
+			return $dateTime->format(DATE_TIME_FORMAT);
+		}
+		function datetimestr_to_unix($strDateTime) {
+			$dateTime = new DateTime($strDateTime);
+			return $dateTime->format(DATE_TIME_UNIX_FORMAT);
+		}
+		function datetimestr_to_public($strDateTime) {
+			$dateTime = new DateTime($strDateTime);
+			return $dateTime->format(PUBLIC_DATE_TIME_FORMAT);
+		}
 		
     }
 }

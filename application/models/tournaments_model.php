@@ -91,10 +91,10 @@ class Tournaments_model extends CI_Model {
 		$tournament = $this->get_tournament($tournamentID);
 		$today = new DateTime();
 		
-		$registrationStartDate = DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['registrationStart']);
-		$registrationEndDate = DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['registrationEnd']);
-		$tournamentStartDate = DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['tournamentStart']);
-		$tournamentEndDate = DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['tournamentEnd']);
+		$registrationStartDate = new DateTime($tournament['registrationStart']);
+		$registrationEndDate = new DateTime($tournament['registrationEnd']);
+		$tournamentStartDate = new DateTime($tournament['tournamentStart']);
+		$tournamentEndDate = new DateTime($tournament['tournamentEnd']);
 		
 		if(empty($registrationStartDate)) {
 			return("ERROR: Invalid registrationStartDate. Database contains: ".$tournament['registrationStart'].", which should be in the format: ".DATE_TIME_FORMAT); 
