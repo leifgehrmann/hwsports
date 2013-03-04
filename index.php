@@ -1,4 +1,6 @@
 <?php
+// Set timezone to GMT/UTC
+date_default_timezone_set('UTC');
 
 /*
  *---------------------------------------------------------------
