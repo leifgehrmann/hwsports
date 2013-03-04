@@ -247,12 +247,6 @@ class Db_Calendar extends MY_Controller {
 
 
 
-
-
-
-
-
-
 	/**
 	 *
 	 *

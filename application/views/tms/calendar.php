@@ -43,12 +43,12 @@
 				});
  
 				request.done(function(msg) {
-					alert( msg );
+					//alert( msg );
 				});
 				 
 				request.fail(function(jqXHR, textStatus) {
 					revertFunc();
-					alert( "The event could not be moved because it conflicts with current schedule. "+jqXHR.responseText );
+					alert( "The event could not be resized because it conflicts with current schedule. "+jqXHR.responseText );
 				});
 			},
 			eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
@@ -62,7 +62,7 @@
 				});
  				
 				request.done(function(msg) {
-					alert( msg );
+					//alert( msg );
 				});
 				 
 				request.fail(function(jqXHR, textStatus) {
