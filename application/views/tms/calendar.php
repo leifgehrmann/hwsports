@@ -48,7 +48,7 @@
 				 
 				request.fail(function(jqXHR, textStatus) {
 					revertFunc();
-					alert( "The event could not be moved because it conflicts with current schedule." );
+					alert( "The event could not be moved because it conflicts with current schedule. "+jqXHR.responseText );
 				});
 			},
 			eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
@@ -57,7 +57,7 @@
 				//alert(minutesDelta);
 				var request = $.ajax({
 					type: "POST",
-					url: '/db_calendar/changeEventStart',
+					url: '/db_calendar/moveEvent',
 					data: { 'secondsDelta': secondsDelta, 'id': event.data.id }
 				});
  				
@@ -67,7 +67,7 @@
 				 
 				request.fail(function(jqXHR, textStatus) {
 					revertFunc();
-					alert( "The event could not be moved because it conflicts with current schedule." );
+					alert( "The event could not be moved because it conflicts with current schedule. "+jqXHR.responseText );
 				});
 			}
 		});

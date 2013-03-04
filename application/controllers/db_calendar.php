@@ -350,7 +350,7 @@ class Db_Calendar extends MY_Controller {
 	 *
 	 */
 
-	public function changeEventStart() {
+	public function moveEvent() {
 		$eventVariableNames = array(
 			'match' => array(
 				'startTime' => 'startTime',
