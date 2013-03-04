@@ -38,6 +38,8 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
+// Set timezone to GMT/UTC
+date_default_timezone_set('UTC');
 
 // Herp derp date times
 define('PUBLIC_TIME_FORMAT', "H:i"); 				// Our time representation that should be displayed on websites

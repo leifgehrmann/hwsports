@@ -339,6 +339,8 @@ class Tms extends MY_Controller {
 
 		// Get data for this venue
 		$this->data['match'] = $this->matches_model->get_match($matchID);
+		$this->data['match']['startTime'] = datetime_to_public($this->data['match']['startTime']); 
+		$this->data['match']['endTime'] = datetime_to_public($this->data['match']['endTime']); 
 
 		$this->data['title'] = $this->data['match']['name']." match";
 		$this->data['page']  = "match"; 
