@@ -91,22 +91,22 @@ class Tournaments_model extends CI_Model {
 		$tournament = $this->get_tournament($tournamentID);
 		$today = new DateTime();
 		
-		$registrationStartDate = DateTime::createFromFormat(DATE_FORMAT, $tournament['registrationStart']);
-		$registrationEndDate = DateTime::createFromFormat(DATE_FORMAT, $tournament['registrationEnd']);
-		$tournamentStartDate = DateTime::createFromFormat(DATE_FORMAT, $tournament['tournamentStart']);
-		$tournamentEndDate = DateTime::createFromFormat(DATE_FORMAT, $tournament['tournamentEnd']);
+		$registrationStartDate = DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['registrationStart']);
+		$registrationEndDate = DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['registrationEnd']);
+		$tournamentStartDate = DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['tournamentStart']);
+		$tournamentEndDate = DateTime::createFromFormat(DATE_TIME_FORMAT, $tournament['tournamentEnd']);
 		
 		if(empty($registrationStartDate)) {
-			return("ERROR: Invalid registrationStartDate. Database contains: ".$tournament['registrationStart'].", which should be in the format: ".DATE_FORMAT); 
+			return("ERROR: Invalid registrationStartDate. Database contains: ".$tournament['registrationStart'].", which should be in the format: ".DATE_TIME_FORMAT); 
 		}
 		if(empty($registrationEndDate)) {
-			return("ERROR: Invalid registrationEndDate. Database contains: ".$tournament['registrationEnd'].", which should be in the format: ".DATE_FORMAT); 
+			return("ERROR: Invalid registrationEndDate. Database contains: ".$tournament['registrationEnd'].", which should be in the format: ".DATE_TIME_FORMAT); 
 		}
 		if(empty($tournamentStartDate)) {
-			return("ERROR: Invalid tournamentStartDate. Database contains: ".$tournament['tournamentStart'].", which should be in the format: ".DATE_FORMAT); 
+			return("ERROR: Invalid tournamentStartDate. Database contains: ".$tournament['tournamentStart'].", which should be in the format: ".DATE_TIME_FORMAT); 
 		}
 		if(empty($tournamentEndDate)) {
-			return("ERROR: Invalid tournamentEndDate. Database contains: ".$tournament['tournamentEnd'].", which should be in the format: ".DATE_FORMAT); 
+			return("ERROR: Invalid tournamentEndDate. Database contains: ".$tournament['tournamentEnd'].", which should be in the format: ".DATE_TIME_FORMAT); 
 		}
 		
 		if( ($today < $registrationStartDate) && ($today < $registrationEndDate) &&
@@ -133,11 +133,11 @@ class Tournaments_model extends CI_Model {
 			($today >= $tournamentStartDate) && ($today >= $tournamentEndDate) ) {
 			return("postTournament");
 		} else {
-			return("ERROR: Tournament has invalid dates. Today's date is: ".$today->format(DATE_FORMAT).".
-					Registration start date is: ".$registrationStartDate->format(DATE_FORMAT)."
-					Registration end date is: ".$registrationEndDate->format(DATE_FORMAT)."
-					Tournament start date is: ".$tournamentStartDate->format(DATE_FORMAT)."
-					Tournament start date is: ".$tournamentEndDate->format(DATE_FORMAT)."
+			return("ERROR: Tournament has invalid dates. Today's date is: ".$today->format(DATE_TIME_FORMAT).".
+					Registration start date is: ".$registrationStartDate->format(DATE_TIME_FORMAT)."
+					Registration end date is: ".$registrationEndDate->format(DATE_TIME_FORMAT)."
+					Tournament start date is: ".$tournamentStartDate->format(DATE_TIME_FORMAT)."
+					Tournament start date is: ".$tournamentEndDate->format(DATE_TIME_FORMAT)."
 					Please correct the dates below.");
 		}
 	}
