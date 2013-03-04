@@ -147,8 +147,9 @@ class Tournaments_model extends CI_Model {
 		$this->db->trans_start();
 		
 		$this->db->query("INSERT INTO tournaments (centreID,sportID) VALUES ({$this->data['centre']['centreID']},$sportID)");
+		print_r($this->db->last_query()); die();
 		$tournamentID = $this->db->insert_id();
-		if($this->db->affected_rows()>0) {
+		if($tournamentID) {
 			
 			$insertDataArray = array();
 			foreach($data as $key=>$value) {
