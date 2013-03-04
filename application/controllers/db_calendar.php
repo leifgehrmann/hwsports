@@ -375,7 +375,7 @@ class Db_Calendar extends MY_Controller {
 			case "match":
 				$eventData = $this->matches_model->get_match($id);
 				if($eventData['tournamentID']!=0) {
-					$tournamentData = $this->tournament_model->get_tournament($eventData['tournamentID']);
+					$tournamentData = $this->tournaments_model->get_tournament($eventData['tournamentID']);
 				}
 				break;
 			case "tournament":
@@ -499,7 +499,7 @@ class Db_Calendar extends MY_Controller {
 			case "match":
 				$eventData = $this->matches_model->get_match($id);
 				if($eventData['tournamentID']!=0) {
-					$tournamentData = $this->tournament_model->get_tournament($eventData['tournamentID']);
+					$tournamentData = $this->tournaments_model->get_tournament($eventData['tournamentID']);
 				}
 				break;
 			case "tournament":
