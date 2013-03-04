@@ -32,14 +32,14 @@
 					"label": "Start Time",
 					"name": "startTime",
 					"type": "datetime",
-					"dateFormat": "yy-mm-dd",
+					"dateFormat": $.datepicker.ISO_8601,
 					"timeFormat": "HH:mm",
-					"separator": " @ "
+					"separator": " "
 				}, {
 					"label": "End Time",
 					"name": "endTime",
 					"type": "datetime",
-					"dateFormat": "yy-mm-dd",
+					"dateFormat": $.datepicker.ISO_8601,
 					"timeFormat": "HH:mm",
 					"separator": " @ "
 				}, {
