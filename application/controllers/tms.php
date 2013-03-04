@@ -205,6 +205,7 @@ class Tms extends MY_Controller {
 				redirect("/tms/tournament/$tournamentID", 'refresh');
 			} else {
 				//set the flash data error message if there is one
+				$this->data['message_success'] = $this->session->flashdata('message_success');
 				$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
 				
 				$this->data['tournament']['status'] = $this->tournaments_model->get_tournament_status($tournamentID);
