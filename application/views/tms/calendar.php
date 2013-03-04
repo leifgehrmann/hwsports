@@ -43,7 +43,7 @@
 				});
  
 				request.done(function(msg) {
-					if(msg.indexOf("ERROR") != -1) {
+					if(msg.indexOf("Error") != -1) {
 						revertFunc();
 						alert( msg );
 					}
@@ -65,7 +65,7 @@
 				});
  				
 				request.done(function(msg) {
-					if(msg.indexOf("ERROR") != -1) {
+					if(msg.indexOf("Error") != -1) {
 						revertFunc();
 						alert( msg );
 					}
