@@ -43,7 +43,7 @@
 				});
  
 				request.done(function(msg) {
-					//alert( msg );
+					alert( msg );
 				});
 				 
 				request.fail(function(jqXHR, textStatus) {
@@ -62,7 +62,7 @@
 				});
  				
 				request.done(function(msg) {
-					//alert( msg );
+					alert( msg );
 				});
 				 
 				request.fail(function(jqXHR, textStatus) {
