@@ -172,6 +172,7 @@ class Db_Calendar extends MY_Controller {
 
 		// Inserting all the tournament periods
 		if($showTournaments){
+			var_dump($tournaments); die();
 			foreach($tournaments as $tournament) {
 				$tournamentStart	= new DateTime($tournament['tournamentStart']);
 				$tournamentEnd		= new DateTime($tournament['tournamentEnd']);
