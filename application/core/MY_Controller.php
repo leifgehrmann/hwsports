@@ -49,17 +49,17 @@ class MY_Controller extends CI_Controller {
 			
 		function datetime_to_standard($inDateTime) {
 			if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_FORMAT);
-			$dateTime = new DateTime($strDateTime);
+			$dateTime = new DateTime($inDateTime);
 			return $dateTime->format(DATE_TIME_FORMAT);
 		}
 		function datetime_to_unix($inDateTime) {
 			if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_FORMAT);
-			$dateTime = new DateTime($strDateTime);
+			$dateTime = new DateTime($inDateTime);
 			return $dateTime->format(DATE_TIME_UNIX_FORMAT);
 		}
 		function datetime_to_public($inDateTime) {
 			if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_FORMAT);
-			$dateTime = new DateTime($strDateTime);
+			$dateTime = new DateTime($inDateTime);
 			return $dateTime->format(PUBLIC_DATE_TIME_FORMAT);
 		}
 		
