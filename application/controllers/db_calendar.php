@@ -365,9 +365,9 @@ class Db_Calendar extends MY_Controller {
 		$val = $this->input->post('id');
 		$secondsDelta = $this->input->post('secondsDelta');
 		// Check if everything has been defined.
-		if( !is_string($val) ) $this->badRequest("Error: ID not defined\n");
-		if( !($secondsDelta && is_numeric($secondsDelta)) ) $this->badRequest("Error: secondsDelta is invalid\n");
-		if( preg_match('~(match|tournament|registration)-[0-9]+~',$val) !== 1 ) $this->badRequest("Error: valid type and id not defined\n");
+		if( !is_string($val) ) $this->$this->badRequest("Error: ID not defined\n");
+		if( !($secondsDelta && is_numeric($secondsDelta)) ) $this->$this->badRequest("Error: secondsDelta is invalid\n");
+		if( preg_match('~(match|tournament|registration)-[0-9]+~',$val) !== 1 ) $this->$this->badRequest("Error: valid type and id not defined\n");
 		// We have a valid val string, parse it into type and id
 		list($eventType,$id) = explode("-",$val);
 		// Fetch stuff from the database
@@ -392,7 +392,7 @@ class Db_Calendar extends MY_Controller {
 			$oldEnd = new DateTime( $eventData[$eventVariableNames[$eventType]['endTime']] );
 		} catch (Exception $e) {
 			// Errof if the values are valid
-			$this->badRequest("Error: Invalid date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
+			$this->$this->badRequest("Error: Invalid date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
 		}
 		
 		// Add the delta to the old times
@@ -409,12 +409,12 @@ class Db_Calendar extends MY_Controller {
 						$tournamentEnd = new DateTime( $tournamentData['tournamentEnd'] );
 					} catch (Exception $e) {
 						// Errof if the values are valid
-						$this->badRequest("Error: Invalid tournament date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
+						$this->$this->badRequest("Error: Invalid tournament date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
 					}
-					if( $newStart < $tournamentStart ) badRequest("Error: Match cannot start before tournament");
-					if( $tournamentEnd < $newEnd ) badRequest("Error: Match cannot end after tournament");	
+					if( $newStart < $tournamentStart ) $this->badRequest("Error: Match cannot start before tournament");
+					if( $tournamentEnd < $newEnd ) $this->badRequest("Error: Match cannot end after tournament");	
 				}
-				if( $newEnd < $newStart ) badRequest("Error: Match has imploded. Everybody died.");
+				if( $newEnd < $newStart ) $this->badRequest("Error: Match has imploded. Everybody died.");
 			break;
 			case "tournament":
 				// Convert the time variables to datetime
@@ -422,11 +422,11 @@ class Db_Calendar extends MY_Controller {
 					$registrationEnd = new DateTime( $eventData['registrationEnd'] );
 				} catch (Exception $e) {
 					// Errof if the values are valid
-					$this->badRequest("Error: Invalid registration date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
+					$this->$this->badRequest("Error: Invalid registration date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
 				}
 				
-				if( $newStart < $registrationEnd ) badRequest("Error: Tournament cannot start before registration period has finished");
-				if( $newEnd < $newStart ) badRequest("Error: Tournament has imploded. Everyone died.");
+				if( $newStart < $registrationEnd ) $this->badRequest("Error: Tournament cannot start before registration period has finished");
+				if( $newEnd < $newStart ) $this->badRequest("Error: Tournament has imploded. Everyone died.");
 			break;
 			case "registration":
 				// Convert the time variables to datetime
@@ -434,11 +434,11 @@ class Db_Calendar extends MY_Controller {
 					$tournamentStart = new DateTime( $eventData['tournamentStart'] );
 				} catch (Exception $e) {
 					// Errof if the values are valid
-					$this->badRequest("Error: Invalid tournament date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
+					$this->$this->badRequest("Error: Invalid tournament date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
 				}
 				
-				if( $tournamentStart < $newEnd ) badRequest("Error: Tournament cannot start before registration period has finished");
-				if( $newEnd < $newStart ) badRequest("Error: Registration period has imploded. Everyone died.");
+				if( $tournamentStart < $newEnd ) $this->badRequest("Error: Tournament cannot start before registration period has finished");
+				if( $newEnd < $newStart ) $this->badRequest("Error: Registration period has imploded. Everyone died.");
 			break;
 		}
 		
@@ -462,7 +462,7 @@ class Db_Calendar extends MY_Controller {
 		}
 		
 		// For some reason, the model update failed
-		if($updateResult===FALSE) badRequest("$eventType update failed.");
+		if($updateResult===FALSE) $this->badRequest("$eventType update failed.");
 		
 		$this->data['data'] = "Updated $eventType $id \n";
 		$this->load->view('data',$this->data);
@@ -489,9 +489,9 @@ class Db_Calendar extends MY_Controller {
 		$val = $this->input->post('id');
 		$secondsDelta = $this->input->post('secondsDelta');
 		// Check if everything has been defined.
-		if( !is_string($val) ) $this->badRequest("Error: ID not defined\n");
-		if( !($secondsDelta && is_numeric($secondsDelta)) ) $this->badRequest("Error: secondsDelta is invalid\n");
-		if( preg_match('~(match|tournament|registration)-[0-9]+~',$val) !== 1 ) $this->badRequest("Error: valid type and id not defined\n");
+		if( !is_string($val) ) $this->$this->badRequest("Error: ID not defined\n");
+		if( !($secondsDelta && is_numeric($secondsDelta)) ) $this->$this->badRequest("Error: secondsDelta is invalid\n");
+		if( preg_match('~(match|tournament|registration)-[0-9]+~',$val) !== 1 ) $this->$this->badRequest("Error: valid type and id not defined\n");
 		// We have a valid val string, parse it into type and id
 		list($eventType,$id) = explode("-",$val);
 		// Fetch stuff from the database
@@ -516,7 +516,7 @@ class Db_Calendar extends MY_Controller {
 			$oldEnd = new DateTime( $eventData[$eventVariableNames[$eventType]['endTime']] );
 		} catch (Exception $e) {
 			// Errof if the values are valid
-			$this->badRequest("Error: Invalid date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
+			$this->$this->badRequest("Error: Invalid date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
 		}
 		
 		// Add the delta to the old time
@@ -532,12 +532,12 @@ class Db_Calendar extends MY_Controller {
 						$tournamentEnd = new DateTime( $tournamentData['tournamentEnd'] );
 					} catch (Exception $e) {
 						// Errof if the values are valid
-						$this->badRequest("Error: Invalid tournament date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
+						$this->$this->badRequest("Error: Invalid tournament date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
 					}
-					if( $newStart < $tournamentStart ) badRequest("Error: Match cannot start before tournament");
-					if( $tournamentEnd < $newEnd ) badRequest("Error: Match cannot end after tournament");	
+					if( $newStart < $tournamentStart ) $this->badRequest("Error: Match cannot start before tournament");
+					if( $tournamentEnd < $newEnd ) $this->badRequest("Error: Match cannot end after tournament");	
 				}	
-				if( $newEnd < $start ) badRequest("Error: Match has imploded. Everybody died.");
+				if( $newEnd < $start ) $this->badRequest("Error: Match has imploded. Everybody died.");
 			break;
 			case "tournament":
 				// Convert the time variables to datetime
@@ -545,11 +545,11 @@ class Db_Calendar extends MY_Controller {
 					$registrationEnd = new DateTime( $eventData['registrationEnd'] );
 				} catch (Exception $e) {
 					// Errof if the values are valid
-					$this->badRequest("Error: Invalid registration date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
+					$this->$this->badRequest("Error: Invalid registration date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
 				}
 				
-				if( $start < $registrationEnd ) badRequest("Error: Tournament cannot start before registration period has finished");
-				if( $newEnd < $start ) badRequest("Error: Tournament has imploded. Everyone died.");
+				if( $start < $registrationEnd ) $this->badRequest("Error: Tournament cannot start before registration period has finished");
+				if( $newEnd < $start ) $this->badRequest("Error: Tournament has imploded. Everyone died.");
 			break;
 			case "registration":
 				// Convert the time variables to datetime
@@ -557,11 +557,11 @@ class Db_Calendar extends MY_Controller {
 					$tournamentStart = new DateTime( $eventData['tournamentStart'] );
 				} catch (Exception $e) {
 					// Errof if the values are valid
-					$this->badRequest("Error: Invalid tournament date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
+					$this->$this->badRequest("Error: Invalid tournament date was fetched from the database. Debug Exception: ".$e->getMessage()."\n");
 				}
 				
-				if( $tournamentStart < $newEnd ) badRequest("Error: Tournament cannot start before registration period has finished");
-				if( $newEnd < $start ) badRequest("Error: Registration period has imploded. Everyone died.");
+				if( $tournamentStart < $newEnd ) $this->badRequest("Error: Tournament cannot start before registration period has finished");
+				if( $newEnd < $start ) $this->badRequest("Error: Registration period has imploded. Everyone died.");
 			break;
 		}
 		
@@ -584,7 +584,7 @@ class Db_Calendar extends MY_Controller {
 		}
 		
 		// For some reason, the model update failed
-		if($updateResult===FALSE) badRequest("$eventType update failed.");
+		if($updateResult===FALSE) $this->badRequest("$eventType update failed.");
 		
 		$this->data['data'] = "Updated $eventType $id \n";
 		$this->load->view('data',$this->data);
