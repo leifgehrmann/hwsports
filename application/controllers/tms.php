@@ -693,7 +693,7 @@ class Tms extends MY_Controller {
 					if($this->input->post($startDateField)) {
 						$error = "Date '$startDateField': ".datetime_to_public($startDate)." is not before end date: ".datetime_to_public($endDate);
 					} else {
-						$error = "Date '$endDateField': ".datetime_to_public($startDate)." is in the past";
+						$error = "Date '$endDateField': ".datetime_to_public($endDate)." is before current time: ".datetime_to_public($startDate);
 					}						
 					$this->form_validation->set_message('datetime_check', "Invalid date range specified: $error");
 					return FALSE;
