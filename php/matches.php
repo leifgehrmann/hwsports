@@ -74,8 +74,10 @@ if ( !isset($_POST['action']) ) {
 		print_r(DATE_TIME_FORMAT);
 		print_r(DateTime::createFromFormat(DATE_TIME_FORMAT,$out['aaData'][$aaDataID]['startTime']));
 		print_r(DateTime::createFromFormat(DATE_TIME_FORMAT,$out['aaData'][$aaDataID]['startTime'])->format(PUBLIC_DATE_TIME_FORMAT));*/
-		$out['aaData'][$aaDataID]['startTime'] 	= DateTime::createFromFormat(DATE_TIME_FORMAT,$out['aaData'][$aaDataID]['startTime'])->format(PUBLIC_DATE_TIME_FORMAT);
-		$out['aaData'][$aaDataID]['endTime'] 	= DateTime::createFromFormat(DATE_TIME_FORMAT,$out['aaData'][$aaDataID]['endTime'])->format(PUBLIC_DATE_TIME_FORMAT);
+		$out['aaData'][$aaDataID]['startTime'] = new DateTime($out['aaData'][$aaDataID]['startTime']);
+		$out['aaData'][$aaDataID]['startTime'] = $out['aaData'][$aaDataID]['startTime']->format(PUBLIC_DATE_TIME_FORMAT);
+		$out['aaData'][$aaDataID]['endTime'] = new DateTime($out['aaData'][$aaDataID]['endTime']);
+		$out['aaData'][$aaDataID]['endTime'] = $out['aaData'][$aaDataID]['endTime']->format(PUBLIC_DATE_TIME_FORMAT);
 
 		$sportQueryString = "SELECT DISTINCT `value` FROM `sportData` WHERE `key` = 'name' AND `sportID` = '{$out['aaData'][$aaDataID]['sportID']}'";
 		$sportName = $db->sql($sportQueryString)->fetch();
