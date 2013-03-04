@@ -593,7 +593,7 @@ class Db_Calendar extends MY_Controller {
 	// Output error message to ajax and finish execution
 	public function badRequest($errorString) {
 		// All the header nonsense was unnecessary, we're just doing basic string checking in the javascript instead
-		$errorString = "ERROR:\n $errorString \n";
+		$errorString = "Error:\n $errorString \n";
 		die($errorString);
 	}
 }

@@ -45,7 +45,7 @@
 				request.done(function(msg) {
 					if(msg.indexOf("ERROR") != -1) {
 						revertFunc();
-						alert( "The event could not be moved: \n"+msg );
+						alert( msg );
 					}
 				});
 				 
@@ -67,7 +67,7 @@
 				request.done(function(msg) {
 					if(msg.indexOf("ERROR") != -1) {
 						revertFunc();
-						alert( "The event could not be moved: \n"+msg );
+						alert( msg );
 					}
 				});
 				 
