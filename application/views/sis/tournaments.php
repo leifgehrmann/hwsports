@@ -39,7 +39,7 @@ foreach($yearTournaments as $year){
 					<p><b>Duration:</b> <?=datetime_to_public($tournament['tournamentStart'])?> - <?=datetime_to_public($tournament['tournamentEnd'])?></p>
 					<div class="right">
 						<a href='/sis/tournament/<?=$tournament['tournamentID']?>' class='button normal'>Details</a>
-						<? if($tournament['status']=="inRegistration") { ?>
+						<? if($tournamentStatus=="inRegistration") { ?>
 							<a href='/<?=( $this->ion_auth->logged_in() ? "sis/signup" : "auth/register")?>/<?=$tournament['tournamentID']?>' class='button green'>Sign up!</a>
 						<? } ?>
 					</div>
