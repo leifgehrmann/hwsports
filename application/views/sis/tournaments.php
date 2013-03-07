@@ -36,7 +36,7 @@ foreach($yearTournaments as $year){
 					</div>
 				</a>
 				<div class="widget-body">
-					<p><b>Duration:</b> <?=$tournament['tournamentStart']?> - <?=$tournament['tournamentEnd']?></p>
+					<p><b>Duration:</b> <?=datetime_to_public($tournament['tournamentStart'])?> - <?=datetime_to_public($tournament['tournamentEnd'])?></p>
 					<div class="right">
 						<a href='/sis/tournament/<?=$tournament['tournamentID']?>' class='button normal'>Details</a>
 						<? if($tournament['status']=="inRegistration") { ?>
