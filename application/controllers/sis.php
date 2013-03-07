@@ -58,10 +58,10 @@ class Sis extends MY_Controller {
 				$matches[$key]['tournament'] = "None";
 			}
 			
-			$matches[$key]['date'] = date("Y/m/d",$match['startTime']);
+			$matches[$key]['date'] = datetime_to_public($match['startTime']);
 			
-			$matches[$key]['startTime'] = date("H:i",$match['startTime']);
-			$matches[$key]['endTime'] = date("H:i",$match['endTime']);
+			$matches[$key]['startTime'] = datetime_to_public($match['startTime']);
+			$matches[$key]['endTime'] = datetime_to_public($match['endTime']);
 		}
 
 		$this->data['matches'] = $matches;
