@@ -148,9 +148,9 @@ class Sis extends MY_Controller {
 		
 		if( $this->tournaments_model->tournament_exists($tournamentID) ) {
 			$tournament = $this->tournaments_model->get_tournament($tournamentID);
-			$this->data['tournament']['status'] = $this->tournaments_model->get_tournament_status($tournamentID);
 			$this->data['tournamentID'] = $tournamentID;
 			$this->data['tournament'] = $tournament;
+			$this->data['tournament']['status'] = $this->tournaments_model->get_tournament_status($tournamentID);
 			$sport = $this->sports_model->get_sport( $tournament['sportID'] );
 			
 			
