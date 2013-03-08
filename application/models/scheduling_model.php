@@ -402,7 +402,7 @@ class Scheduling_model extends CI_Model {
 			$dates[] = $date;
 			$date->modify('+1 day');
 		}
-		return $dates
+		return $dates;
 	}
 
 	/**
@@ -451,11 +451,12 @@ class Scheduling_model extends CI_Model {
 		foreach($items as $item)
 		{
 			if ( $x )
-				a = a + array($item);
+				$a = $a + array($item);
 			else
-				a = array($item) + a;
+				$a = array($item) + $a;
 			$x = !$x;
 		}
+		return $a;
 	}
 
 	/**
@@ -481,7 +482,7 @@ class Scheduling_model extends CI_Model {
 		// If we are lazy we won't do anything fancy
 		$order = array();
 		$i = 0;
-		foreach( $used as $date=>count )
+		foreach( $used as $date=>$count )
 		{
 			$order[$i] = $date;
 			$i++;
