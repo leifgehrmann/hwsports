@@ -30,7 +30,8 @@ class Scheduling_model extends CI_Model {
 		}
 
 		$matchDuration = new DateInterval('P'.$tournament['matchDuration'].'M'); // Match duration is assumed to be in minutes
-		$matchMinimumUmpires = 1; // This is hard coded for now
+		$matchMinimumUmpires = 1; // This is hard coded for now. This is the minimum number of umpires that must be present at a match
+		$matchMaximumPlays = 1; // This is hard coded for now. This is the maximum number of matches a player must play
 
 		$umpireIDs  = explode(',',$tournament['umpires']);
 		$teamIDs    = explode(',',$tournament['teams']);
@@ -56,26 +57,28 @@ class Scheduling_model extends CI_Model {
 
 
 
-		// We first want all possible matches times. This method
+		// We first want all possible matches datetimes. This method
 		// returns all the possible combinations of start times
 		// and days of the tournament. From here we need to
 		// filter it down by umpires, venues, and team competitions
-		$matchStartTimes = $this->get_match_start_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration);
+		$matchDateTimes = $this->get_match_date_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration);
 
 
-		
-		// For each day
-		foreach( $matchStartTimes as $day=>$startTimes)
+		// We now check if an umpire is available for a particular
+		// match. It it isn't, we just remove it from the list of choices.
+
+		// For each day...
+		foreach( $matchDateTimes as $date=>$dateTimes)
 		{
-			$dayDateTime = new DateTime($day); // we need to know what day of the week it is
-			$weekday = $startDateTime->format('l'); // return the weekday String
+			$dateObject = new DateTime($date); // we need to know what day of the week it is
+			$weekday = $dateObject->format('l'); // return the weekday String
 
 			// For each start time...
 			// Note: I'm checking each startTime because eventually we
 			// maybe want to have umpires specify the HOUR they are available.
 			// If we only cared about the weekday, then we woulnd't need to check
-			// the start time. 
-			foreach( $startTimes as $startTime=>$data )
+			// the starttime for availability. This is just code for future development. 
+			foreach( $dateTimes as $dateTime=>$data )
 			{
 				// keep a list of umpires available for this slot.
 				$countedUmpireIDs = array();
@@ -84,39 +87,43 @@ class Scheduling_model extends CI_Model {
 					// is the umpire available at that weekday/time?
 					if( $umpire['available'.$weekday] == '1' )
 						$countedUmpireIDs[] = $umpire['userID'];
+				// Are there enough umpires? Well good! Lets select them!
+				// Also, if there aren't enough, we remove the match.
 				if(count($countedUmpires) > $matchMinimumUmpires)
-					$matchStartTimes[$day][$startTime]['umpiresIDs'] = $countedUmpireIDs;
+					$matchDateTimes[$date][$dateTime]['umpiresIDs'] = $countedUmpireIDs;
 				else
-					unset($matchStartTimes[$day][$startTime]);
+					unset($matchDateTimes[$date][$dateTime]);
 			}
 		}
 
 		
 
 		// We now check if a venue is occupied with some other match.
-		// Note that this increases our possible permutation of matches to
-		// check. So this will increase time complexity ALOT
-		foreach($matchStartTimes as $matchStartTime)
+		// If it isn't, we say that this particular venue works at the
+		// particular time on this particular day.
+		foreach($matchDateTimes as $date=>$dateTimes)
 		{
 			// For each start time
-			foreach( $startTimes as $startTime=>$data )
+			foreach( $dateTimes as $dateTime=>$data )
 			{	
 				// Get start and end intervals of the match
-				$startDateTime = new DateTime($startTime);
+				$startDateTime = new DateTime($dateTime);
 				$endDateTime = clone $startDateTime;
 				$endDateTime->add($matchDuration);
 
 				// keep a list of venues available for this slot.
-				$matchStartTimes[$day][$startTime]['venues'] = array();
+				$matchDateTimes[$date][$dateTime]['venues'] = array();
 				// For each venue
 				foreach( $venuesIDs as $venueID )
+				{
 					// is the venue available at this time?
 					$venueMatches = $this->matches_model->get_venue_matches($startDateTime,$endDateTime);
 					if( count($venueMatches) != 0 )
-						$matchStartTimes[$day][$startTime]['venues'][] = $venueID;
+						$matchDateTimes[$date][$dateTime]['venues'][] = $venueID;
+				}
 				// If we didn't find any available venues, well then we ignore it.
-				if( count($matchStartTimes[$day][$startTime]['venues']) == 0 )
-					unset($matchStartTimes[$day][$startTime]);
+				if( count($matchDateTimes[$date][$dateTime]['venues']) == 0 )
+					unset($matchDateTimes[$date][$dateTime]);
 			}
 		}
 
@@ -126,6 +133,87 @@ class Scheduling_model extends CI_Model {
 		// We also want to have the matches spread out, so they
 		// don't occur all at the same time.
 
+		// We need to keep a track of how many matches we keep on
+		// a certain day. We also need to know how many matches
+		// occur at a particular time.
+
+		$matchDateTimesSelected = array(); // associated array of date->datetime->data. This will be our final result
+		$matchDateUsed     = array(); // associative array of date to number of matches on that day
+		$matchDateTimeUsed = array(); // associative array of date->datetime to number of matches during that slot
+		$matchDateTeam     = array(); // associative array of date->team to number of matches on that day
+		$matchDateTimeTeam = array(); // associative array of date->datetime->team to number of matches during that slot
+		$matchUmpire = array(); // associative array of umpireID to number of matches he/she already manages.
+		$matchDateUsedMax = 0;
+
+		// We set the initial count for every single array to be 0.
+		foreach($matchDateTimes as $date=>$dateTimes)
+		{
+			$matchDateUsed[$date] = 0;
+			foreach($dateTimes as $dateTime=>$data)
+			{
+				$matchDateUsed[$date][$dateTime] = 0;
+				foreach($teamIDs as $teamID)
+					$matchDateTeam[$date][$dateTime][$teamID] = 0;
+			}
+			foreach($teamIDs as $teamID)
+				$matchDateTeam[$date][$teamID] = 0;
+		}
+		foreach( $umpires as $umpire )
+			$matchUmpire[$umpire['userID']] = 0;
+
+		// Assuming for now that we only want round robins for now:
+		$combinations = $this->round_robin($teamIDs);
+
+		// For every single combination of a game we want.
+		foreach($combinations as $combinations)
+		{
+			$added = false; // This will indicate if we could find a place to put this match in.
+			$teamA = $combination[0];
+			$teamB = $combination[1];
+
+			// Get list of days ordered by a fitness function that encourages
+			// the spread of days in a tournament.
+			$weightedDates = $this->fitness_generator($matchDateUsed,$matchDateUsedMax);
+			foreach($weightedDates as $dateWeight=>$date)
+			{
+				// Has either team A or team B already played on this day the maximum number of times?
+				if($matchMaximumPlays <= $matchDateTeam[$date][$teamA])
+					continue;
+				if($matchMaximumPlays <= $matchDateTeam[$date][$teamB])
+					continue;
+
+				// Now we need to find our the time slot. Again, we use our fitness generator...
+				// we use -1 to indicate that we don't know the maximum. We could probably find
+				// out, but I'm to lazy to code it here. 
+				$weightedDateTimes = $this->fitness_generator($matchDateTimeUsed[$date],-1);
+				// I don't think there can be a case where we can't place a match for a particular
+				// dateTime. Because if it has already been unset from the list of options, it
+				// means that the leftovers will always be avaialble, nevermind the constrainst 
+				// in regards to matches. Eitherway, I'll leave it in. There is no real performance
+				// damage.
+				foreach($weightedDateTimes as $dateTimeWeight=>$dateTime)
+				{
+					// Good! This means we have found a good time to put our match
+					// Now we need to select which venue and which umpires to add.
+					// 
+					$
+
+					// We don't really care which venue we choose I guess. If the
+					// staff want to dictate priority, we can implement it here
+					// at some later point.
+				}
+
+				// Good! This means we have found a good place to put our match
+				// So lets get going...
+
+				// We need to increment all the count variables.
+				// We also need to add our match to the matchDateTimesSelect array
+				$matchDateTimesSelected[]
+			}
+			// This will only occur if the entire 
+			if(!$added)
+				return "Not enough time slots to support this tournament style";
+		}
 
 
 	}
@@ -165,25 +253,25 @@ class Scheduling_model extends CI_Model {
 	 * @param matchDuration		A dateInterval representing the length of a match
 	 * @return array of days, with a sub array of match starts
 	 **/
-	private function get_match_start_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration)
+	private function get_match_date_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration)
 	{	
 		// Get list of days
-		$days = $this->get_days($tournamentStart,$tournamentEnd);
+		$dates = $this->get_dates($tournamentStart,$tournamentEnd);
 
 		// If no days exist in this period, well we quit.
-		if(count($days)==0)
+		if(count($dates)==0)
 			return array();
 
 		// Figure out what the first weekday is. This
 		// is to reduce to work of always formatting the dateTime object
 		// when we want to know what day of the week it is.
-		$weekday = $this->get_weekday_index($days[0]->format('l'));
+		$weekday = $this->get_weekday_index($dates[0]->format('l'));
 
 		// For every day that the tournament exists in...
-		$startTimes = array();
-		foreach( $days as $day )
+		$matchDateTimes = array();
+		foreach( $dates as $date )
 		{
-			$dayString = datetime_to_standard($day);
+			$dateString = datetime_to_standard($date);
 			// For each possible start time that a match can have on
 			// this particular weekday
 			foreach( $matchWeekdayStartTimes[ $this->get_weekday_string($weekday) ] as $startTime )
@@ -191,20 +279,20 @@ class Scheduling_model extends CI_Model {
 				// Set the datetime object for the match
 				// to be a specific hour and minute
 				($startHour,$startMinute) = explode(':', $startTime);
-				$startDateTime = clone $day;
+				$startDateTime = clone $date;
 				$startDateTime->setTime($startHour, $startMinute, 0);
 				$endDateTime = clone $startDateTime;
 				$endDateTime->add($matchDuration);
-				$startDateTimeString = datetime_to_standard($startDateTime);
+				$dateTimeString = datetime_to_standard($startDateTime);
 
 				// If valid date, add it to our array
 				if($endDateTime<$tournamentEnd)
 					if($tournamentStart<=$startDateTime)
-						$matchStartTimes[$dayString][$startDateTimeString] = array();
+						$matchDateTimes[$dateString][$dateTimeString] = array();
 			}
-			$weekday = ($weekday + 1) % 7; // Increase the weekday index
+			$weekday = ($weekday + 1) % 7; // increase the weekday index
 		}
-		return $matchStartTimes;
+		return $matchDateTimes;
 	}
 
 	/**
@@ -213,19 +301,19 @@ class Scheduling_model extends CI_Model {
 	 * Returns a list of days
 	 * @param start A datetime for start
 	 * @param end 	A datetime for end
-	 * @return array of match starts
+	 * @return array of days in DateTime objects
 	 **/
-	private function get_days($start,$end)
+	private function get_Dates($start,$end)
 	{
-		$days = array();
-		$day = clone $start;
-		$day->setTime(0, 0, 0);
-		while($day <= $end)
+		$dates = array();
+		$date = clone $start;
+		$date->setTime(0, 0, 0);
+		while($date <= $end)
 		{
-			$days[] = $day;
-			$day->modify('+1 day');
+			$dates[] = $date;
+			$date->modify('+1 day');
 		}
-		return $days
+		return $dates
 	}
 
 	/**
@@ -278,6 +366,33 @@ class Scheduling_model extends CI_Model {
 			else
 				a = array($item) + a;
 			$x = !$x;
+		}
+	}
+
+	/**
+	 * HAS NOT BEEN TESTED
+	 *
+	 * This method returns an associative array of datetime to a fitness value
+	 * 
+	 * The fitness value of a particular datetime is:
+	 *
+	 *     MaxDelta / ( Used + 1 )
+	 *
+	 * MaxDelta is the time to the datetime with the largest highest allocated matches
+	 * Used 	is the number of already allocated matches for this particular datetime
+	 *
+	 * Note: The input array has to be ordered fastest to slowest. 
+	 * 
+	 * @param used 	an associative array of datetime (as formatted ISO string) to freqeuncy count
+	 * @param maxUsed 	A number that helps increase the speed of this algorithm
+	 * @return an ordered array of dates, sorted by fitness (best dates are in the front of the array)
+	 **/
+	private function fitness_generator($used,$maxUsed)
+	{
+		// For each date in the $used array
+		foreach($used as $date=>$count)
+		{
+
 		}
 	}
 
