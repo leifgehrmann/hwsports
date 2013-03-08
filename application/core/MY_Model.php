@@ -44,7 +44,7 @@ class MY_Model extends CI_Model {
 			// Get the actual ID, put it into relation array for safekeeping
 			$relation['objectID'] = $relationObjectIDQueryRow[$relation['objectIDKey']];
 			// Get the data for the actual object, passing in the known parameters
-			$data['relations'][$relation['relationTableName']] = get_data($relation['objectID'], $relation['objectIDKey'], $relation['relationTableName'], $relation['dataTableName'], $relation['relations']);
+			$data['relations'][$relation['relationTableName']] = $this->get_data($relation['objectID'], $relation['objectIDKey'], $relation['relationTableName'], $relation['dataTableName'], $relation['relations']);
 		}
 		
 		return $data;
