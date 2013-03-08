@@ -381,8 +381,8 @@ class Scheduling_model extends CI_Model {
 				var_dump("\n");
 				var_dump($dateTimeString);
 				var_dump("\n");
-				if($endDateTime<$tournamentEnd)
-					if($tournamentStart<=$startDateTime)
+//				if($endDateTime<$tournamentEnd)
+//					if($tournamentStart<=$startDateTime)
 						$matchDateTimes[$dateString][$dateTimeString] = array();
 			}
 			$weekday = ($weekday + 1) % 7; // increase the weekday index
