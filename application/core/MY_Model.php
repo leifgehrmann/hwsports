@@ -18,6 +18,7 @@ class MY_Model extends CI_Model {
 		// Create query to get all the key names so we know what to select later on
 		$dataKeysQuery = $this->db->query("SELECT `key` FROM `$_dataTableName` WHERE `$_objectIDKey` = '$_objectID'");
 		// Get all the key names into an indexed array
+		var_dump($dataKeysQuery->result_array()); die();
 		$dataKeys = array_values($dataKeysQuery->result_array());
 		var_dump($dataKeys); die();
 		// If we have no data about this tournament, return FALSE to make logic easier in controller 
