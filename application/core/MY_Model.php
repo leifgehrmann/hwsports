@@ -1,13 +1,7 @@
 <?php
-
-class MY_Model extends CI_Model
-{
-
-    /**
-     * Initialise the model, tie into the CodeIgniter superobject and
-     * try our best to guess the table name.
-     */
-    public function __construct()
+class MY_Model extends CI_Model {
+    
+	public function __construct()
     {
         parent::__construct();
 
