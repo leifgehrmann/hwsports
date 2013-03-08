@@ -53,6 +53,7 @@ class Test extends MY_Controller {
 	/*
 		scheduling_model
 	*/
+	// Try: http://hwsports.co.uk/test/get_match_date_times/2013-03-14T10%3A30%3A00%2B0000/2013-03-20T10%3A30%3A00%2B0000
 	public function get_match_date_times($tournamentStart,$tournamentEnd){
 		$start;
 		$start = new DateTime(urldecode($tournamentStart));
@@ -60,12 +61,13 @@ class Test extends MY_Controller {
 		$matchWeekdayStartTimes = array();
 		$matchWeekdayStartTimes['Monday'] = array('10:00'=>array(),'10:00'=>array(),'16:00'=>array());
 		$matchWeekdayStartTimes['Tuesday'] = array('12:00'=>array(),'10:00'=>array(),'16:00'=>array());
-		$matchWeekdayStartTimes['Wednesday'] = array('10:00'=>array(),'10:00'=>array(),'16:00'=>array());
+		$matchWeekdayStartTimes['Wednesday'] = array('10:00'=>array(),'13:00'=>array(),'16:00'=>array());
 		$matchWeekdayStartTimes['Thursday'] = array('14:00'=>array(),'10:00'=>array(),'16:00'=>array());
 		$matchWeekdayStartTimes['Sunday'] = array('19:00'=>array(),'10:00'=>array(),'10:00'=>array());
 		$output = $this->scheduling_model->get_dates($start,$end,$matchWeekdayStartTimes,$interval);
 		$this->display($output);
 	}
+	// Try: http://hwsports.co.uk/test/get_dates/2013-03-14T10%3A30%3A00%2B0000/2013-03-20T10%3A30%3A00%2B0000
 	public function get_dates($start,$end){
 		$start = new DateTime(urldecode($start));
 		$end   = new DateTime(urldecode($end));
