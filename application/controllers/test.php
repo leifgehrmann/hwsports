@@ -90,7 +90,7 @@ class Test extends MY_Controller {
 		}
 		$this->display($output);
 	}
-	public function get_weekday_index($weekday){
+	public function get_weekday_index(){
 		$output = "";
 		$output.= $this->scheduling_model->get_weekday_index("Monday")." \n";
 		$output.= $this->scheduling_model->get_weekday_index("tuesday")." \n";
