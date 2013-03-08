@@ -33,7 +33,7 @@ class Tournaments_model extends MY_Model {
 						)
 					);
 		$tournament = $this->get_data($tournamentID, "tournamentID", "tournaments", "tournamentData", $relations);
-		
+		/*
 		try {
 			$today = new DateTime();
 			$registrationStartDate = new DateTime($tournament['registrationStart']);
@@ -75,7 +75,7 @@ class Tournaments_model extends MY_Model {
 					Tournament start date is: ".datetime_to_public($tournamentEndDate)."
 					Please correct the dates below.";
 		}
-				
+				*/
 		return $tournament;
 	}
 	
