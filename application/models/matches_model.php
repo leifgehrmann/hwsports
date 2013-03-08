@@ -18,7 +18,7 @@ class Matches_model extends CI_Model {
 	}
 
 	/**
-	 * Returns a 2d array of match data
+	 * Returns a multidimensional array of match data
 	 *  
 	 * @return array
 	 **/
@@ -35,7 +35,56 @@ class Matches_model extends CI_Model {
 	}
 
 	/**
-	 * Returns a 2d array of match data
+	 * HAS NOT BEEN TESTED
+	 * Returns a multidimensional array of match data
+	 * @param startTime 	A dateTime Object
+	 * @param endTime 	A dateTime Object
+	 * @return array
+	 **/
+	public function get_venue_matches($venueID,$startTime=NULL,$endTime=NULL)
+	{
+		if(is_NULL($startTime))
+			$startTime = "0"; // 0 is less than 0000-01-01... Hopefully
+		else
+			$startTime = datetime_to_standard($startTime);
+		if(is_NULL($endTime))
+			$endTime = ":"; // : is greater than 9, which is the largest digit so far
+		else
+			$endTime = datetime_to_standard($endTime);
+		// Returns all the start times
+		$subquery = "SELECT ".
+						"matchID, ".
+						"MAX(CASE WHEN `key`='startTime' THEN value END ) AS startTime, ".
+						"MAX(CASE WHEN `key`='endTime' THEN value END ) AS endTime ".
+						"FROM matchData GROUP BY matchID ";
+
+		$queryString = 	"SELECT M.matchID ".
+						"FROM matches AS M, ".
+						"(".$subquery.") AS D ".
+						"WHERE M.venueID = ".$venueID." ".
+						"AND M.matchID = D.matchID ".
+						"AND ( ".
+							"( ".
+								"strcmp(".$startTime.", D.startTime) <= 0". // startTime is less or equal to than match start time
+								"AND strcmp(D.startTime,".$endTime.") <= 0". // match start time is less of equal to than end time
+							") ".
+							"OR ".
+							"( ".
+								"strcmp(".$startTime.", D.endTime) <= 0". // startTime is less than match end time
+								"AND strcmp(D.endTime,".$endTime.") <= 0". // match end time is less than end time
+							") ".
+						")"
+		$output = array();
+		$queryData = $this->db->query($queryString);
+		$data = $queryData->result_array();
+		foreach($data as $match) {
+			$output[] = $this->get_match($match['matchID']);
+		}
+		return $output;
+	}
+
+	/**
+	 * Returns a multidimensional array of match data
 	 *  
 	 * @return array
 	 **/
