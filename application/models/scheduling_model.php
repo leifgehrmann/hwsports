@@ -377,13 +377,9 @@ class Scheduling_model extends CI_Model {
 				$dateTimeString = datetime_to_standard($startDateTime);
 
 				// If valid date, add it to our array
-				if($endDateTime<$tournamentEnd)
-					if($tournamentStart<=$startDateTime)
+				if( $endDateTime < $tournamentEnd )
+					if( $tournamentStart <= $startDateTime )
 						$matchDateTimes[$dateString][$dateTimeString] = array();
-				var_dump($endDateTime);
-				var_dump($tournamentEnd);
-				var_dump($tournamentStart);
-				var_dump($startDateTime);
 
 			}
 			$weekday = ($weekday + 1) % 7; // increase the weekday index
