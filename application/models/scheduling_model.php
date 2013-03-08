@@ -360,7 +360,6 @@ class Scheduling_model extends CI_Model {
 		$matchDateTimes = array();
 		foreach( $dates as $date )
 		{
-			var_dump($dates);
 			$dateString = datetime_to_standard($date);
 			// For each possible start time that a match can have on
 			// this particular weekday
@@ -368,6 +367,7 @@ class Scheduling_model extends CI_Model {
 				$matchWeekdayStartTimes[$this->get_weekday_string($weekday)] = array();
 			foreach( $matchWeekdayStartTimes[ $this->get_weekday_string($weekday) ] as $startTime )
 			{
+				var_dump($startTime);
 				// Set the datetime object for the match
 				// to be a specific hour and minute
 				list($startHour,$startMinute) = explode(':', $startTime);
