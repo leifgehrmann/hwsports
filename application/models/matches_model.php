@@ -82,23 +82,6 @@ class Matches_model extends CI_Model {
 		}
 		return $output;
 	}
-
-	/**
-	 * Returns a multidimensional array of match data
-	 *  
-	 * @return array
-	 **/
-	public function get_venue_matches($venueID)
-	{
-		$output = array();
-		$queryString = "SELECT matchID FROM matches WHERE venueID = ".$this->db->escape($venueID);
-		$queryData = $this->db->query($queryString);
-		$data = $queryData->result_array();
-		foreach($data as $match) {
-			$output[] = $this->get_match($match['matchID']);
-		}
-		return $output;
-	}
 	
 	/**
 	 * Returns a 2d array of match data
