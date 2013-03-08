@@ -421,10 +421,10 @@ class Scheduling_model extends CI_Model {
 		for($a=0;$a<($n-1);$a++)
 		{	
 			for($b=0;$b<$a;$b++)
-				$combinations[] = array($items[$a],$items[$a]);
+				$combinations[] = array($items[$a],$items[$b]);
 
 			for($b=$a+1;$b<($n-1);$b++)
-				$combinations[] = array($teams[$a],$teams[$a]);
+				$combinations[] = array($items[$a],$items[$b]);
 		}
 		return $combinations;
 	}
@@ -448,7 +448,7 @@ class Scheduling_model extends CI_Model {
 	{	
 		$x = true;
 		$a = array();
-		foreach($items as $item)
+		foreach( $items as $item )
 		{
 			if ( $x )
 				$a = array_merge($a,array($item));
