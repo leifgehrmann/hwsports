@@ -418,13 +418,13 @@ class Scheduling_model extends CI_Model {
 	{	
 		$combinations = array();
 		$n = count($items);
-		for(a=0;a<(n-1);a++)
+		for($a=0;$a<($n-1);$a++)
 		{	
-			for(b=0;b<a;b++)
-				$combinations[] = array($items[a],$items[a]);
+			for($b=0;$b<$a;$b++)
+				$combinations[] = array($items[$a],$items[$a]);
 
-			for(b=a+1;b<(n-1);b++)
-				$combinations[] = array($teams[a],$teams[a]);
+			for($b=$a+1;$b<($n-1);$b++)
+				$combinations[] = array($teams[$a],$teams[$a]);
 		}
 		return $combinations;
 	}
