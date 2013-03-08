@@ -43,19 +43,19 @@ class Test extends MY_Controller {
 	}
 	public function round_robin(){
 		$teams = array();
-		$output = $this->scheduling_model->round_robin($start,$end);
+		$output = $this->scheduling_model->round_robin($teams);
 		$this->display($output);
 		$teams = array('1');
-		$output = $this->scheduling_model->round_robin($start,$end);
+		$output = $this->scheduling_model->round_robin($teams);
 		$this->display($output);
 		$teams = array('1','2');
-		$output = $this->scheduling_model->round_robin($start,$end);
+		$output = $this->scheduling_model->round_robin($teams);
 		$this->display($output);
 		$teams = array('1','2','3');
-		$output = $this->scheduling_model->round_robin($start,$end);
+		$output = $this->scheduling_model->round_robin($teams);
 		$this->display($output);
 		$teams = array('1','2','3','4','5','6','7','8');
-		$output = $this->scheduling_model->round_robin($start,$end);
+		$output = $this->scheduling_model->round_robin($teams);
 		$this->display($output);
 	}
 	public function alternate_items(){

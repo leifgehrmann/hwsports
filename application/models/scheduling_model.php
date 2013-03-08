@@ -451,9 +451,9 @@ class Scheduling_model extends CI_Model {
 		foreach($items as $item)
 		{
 			if ( $x )
-				$a = $a + array($item);
+				$a = array_merge($a,array($item));
 			else
-				$a = array($item) + $a;
+				$a = array_merge(array($item),$a);
 			$x = !$x;
 		}
 		return $a;
