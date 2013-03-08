@@ -367,7 +367,7 @@ class Scheduling_model extends CI_Model {
 			{
 				// Set the datetime object for the match
 				// to be a specific hour and minute
-				($startHour,$startMinute) = explode(':', $startTime);
+				list($startHour,$startMinute) = explode(':', $startTime);
 				$startDateTime = clone $date;
 				$startDateTime->setTime($startHour, $startMinute, 0);
 				$endDateTime = clone $startDateTime;
