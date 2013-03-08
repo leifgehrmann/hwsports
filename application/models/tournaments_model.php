@@ -1,22 +1,6 @@
 <?php
-class Tournaments_model extends CI_Model {
+class Tournaments_model extends MY_Model {
 
-	/**
-	 * $tournamentID is int(11)
-	 *  
-	 * @return boolean
-	 **/
-
-	public function tournament_exists($tournamentID)
-	{
-		$output = array();
-		$queryString = 	"SELECT ".$this->db->escape($tournamentID)." AS tournamentID, ".
-						"EXISTS(SELECT 1 FROM tournamentData WHERE tournamentID = ".$this->db->escape($tournamentID).") AS `exists`";
-		$queryData = $this->db->query($queryString);
-		$output = $queryData->row_array();
-		return $output['exists'];
-	}
-	
 	/**
 	 * Returns a 2d array of data for all tournaments
 	 *  
@@ -33,54 +17,23 @@ class Tournaments_model extends CI_Model {
 		}
 		return $output;
 	}
-
+	
 	/**
-	 * Returns an array of data from a specific tournament
+	 * Returns an array containing all known data about a specific tournament ID
 	 *  
 	 * @return array
 	 **/
 	public function get_tournament($tournamentID) {
-		$fields = array();
-		$fieldsQuery = $this->db->query("SELECT `key` FROM `tournamentData` WHERE `tournamentID` = ".$this->db->escape($tournamentID) );
-		$fieldsResult = $fieldsQuery->result_array();
-		foreach($fieldsResult as $fieldResult) {
-			$fields[] = $fieldResult['key'];
-		}
-		if(count($fields)==0)
-			return array();
+		$relations = array(
+						array( 
+							"objectIDKey" => "sportID",
+							"relationTableName" => "sports",
+							"dataTableName" => "sportsData",
+							"relations" => array()
+						)
+					);
+		$tournament = $this->get_data($tournamentID, "tournamentID", "tournaments", "tournamentData", $relations);
 		
-		/* Query the ids that are associated with this match */
-		$relational = array();
-		$relationalString = "SELECT sportID FROM tournaments WHERE tournamentID = ".$this->db->escape($tournamentID);
-		$relationalQuery = $this->db->query($relationalString);
-		$relationalResult = $relationalQuery->result_array();
-		
-		if(isset($relationalResult[0]['sportID'])){
-			$relationalString = "SELECT * FROM sports WHERE sportID = ".$relationalResult[0]['sportID'];
-			$relationalQuery = $this->db->query($relationalString);
-			$relationalResult = $relationalQuery->result_array();
-		} 
-		
-		$dataQueryString = "SELECT ";
-		$i = 0;
-		$len = count($fields);
-		foreach($fields as $field) {
-			$dataQueryString .= "MAX(CASE WHEN `key`='$field' THEN value END ) AS $field";
-			if($i<$len-1)
-				$dataQueryString .= ", ";
-			else
-				$dataQueryString .= " ";
-			$i++;
-		}
-		$dataQueryString .= "FROM tournamentData WHERE tournamentID = ".$this->db->escape($tournamentID);
-		$dataQuery = $this->db->query($dataQueryString);
-		$tournament = array_merge(array("tournamentID"=>$tournamentID), $dataQuery->row_array());
-		if(isset($relationalResult[0]['sportID']))
-			$tournament['sportID'] = $relationalResult[0]['sportID'];
-		if(isset($relationalResult[0]['sportCategoryID']))
-			$tournament['sportCategoryID'] = $relationalResult[0]['sportCategoryID'];
-			
-			
 		try {
 			$today = new DateTime();
 			$registrationStartDate = new DateTime($tournament['registrationStart']);
@@ -122,7 +75,7 @@ class Tournaments_model extends CI_Model {
 					Tournament start date is: ".datetime_to_public($tournamentEndDate)."
 					Please correct the dates below.";
 		}
-			
+				
 		return $tournament;
 	}
 	
