@@ -23,9 +23,9 @@ class Scheduling_model extends CI_Model {
 
 		// Returns an associative array of weekday start times.
 		// This is for every day of the week.
-		for( i=0; i<7; i++ )
+		for( $i=0; $i<7; $i++ )
 		{
-			$weekday = $this->get_weekday_string(i);
+			$weekday = $this->get_weekday_string($i);
 			$matchWeekdayStartTimes[$weekday]    = explode(',',$tournament['startTimes'.$weekday]);
 		}
 
