@@ -24,12 +24,13 @@ class MY_Model extends CI_Model {
 		
 		// Create SQL selection segments for each key in the data, ready to implode with commas into a full SQL query 
 		foreach($dataKeys as $dataKey) $dataQueryStringParts[] = "MAX(CASE WHEN `key`='$dataKey' THEN value END ) AS $dataKey";
-		// Build and execute query to actually select data from data table 
-		$dataQuery = $this->db->query("SELECT " . implode(', ', $dataQueryStringParts) . " FROM `$_dataTableName` WHERE `$_objectIDKey` = '$_objectID'");
+		// Build and execute query to actually select data from data table
+		$dataQueryString = "SELECT " . implode(', ', $dataQueryStringParts) . " FROM `$_dataTableName` WHERE `$_objectIDKey` = '$_objectID'";
+		$dataQuery = $this->db->query($dataQueryString);
 		// No data was returned by the query, something must have gone wrong
 		if ($dataQuery->num_rows() == 0) return FALSE;
 		// Put the returned data in the data variable ready to add more to and eventually output 
-		var_dump($dataQuery);
+		var_dump($dataQueryString);
 		$data = $dataQuery->result_array();
 
 		// Loop through all the relations we were given and grab all the data for them, stitch it onto the data we already have about this object 
