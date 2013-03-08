@@ -481,7 +481,7 @@ class Scheduling_model extends CI_Model {
 		// For each date in the $used array
 		foreach($used as $date=>$count)
 		{
-
+			
 		}
 	}
 	/**
