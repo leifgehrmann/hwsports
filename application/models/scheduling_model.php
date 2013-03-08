@@ -392,7 +392,7 @@ class Scheduling_model extends CI_Model {
 	 * @param end 	A datetime for end
 	 * @return array of days in DateTime objects
 	 **/
-	public function get_Dates($start,$end)
+	public function get_dates($start,$end)
 	{
 		$dates = array();
 		$date = clone $start;

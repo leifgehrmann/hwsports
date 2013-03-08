@@ -35,10 +35,10 @@ class Test extends MY_Controller {
 	/*
 		centre_model
 	*/
-	public function get_Dates($start,$end){
-		$start = new DateTime($start);
-		$end   = new DateTime($end);
-		$output = $this->scheduling_model->get_Dates($start,$end);
+	public function get_dates($start,$end){
+		$start = new DateTime(urldecode($start));
+		$end   = new DateTime(urldecode($end));
+		$output = $this->scheduling_model->get_dates($start,$end);
 		$this->display($output);
 	}
 	public function round_robin(){
