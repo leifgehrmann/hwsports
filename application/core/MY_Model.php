@@ -31,7 +31,7 @@ class MY_Model extends CI_Model {
 		// No data was returned by the query, something must have gone wrong
 		if ($dataQuery->num_rows() == 0) return FALSE;
 		// Put the returned data in the data variable ready to add more to and eventually output 
-		$object = $dataQuery->result_array();
+		$object = $dataQuery->row_array();
 
 		// Loop through all the relations we were given and grab all the data for them, stitch it onto the data we already have about this object 
 		foreach($relations as $relation) {
