@@ -367,7 +367,6 @@ class Scheduling_model extends CI_Model {
 				$matchWeekdayStartTimes[$this->get_weekday_string($weekday)] = array();
 			foreach( $matchWeekdayStartTimes[ $this->get_weekday_string($weekday) ] as $startTime )
 			{
-				var_dump($startTime);
 				// Set the datetime object for the match
 				// to be a specific hour and minute
 				list($startHour,$startMinute) = explode(':', $startTime);
@@ -378,6 +377,10 @@ class Scheduling_model extends CI_Model {
 				$dateTimeString = datetime_to_standard($startDateTime);
 
 				// If valid date, add it to our array
+				var_dump($dateString);
+				var_dump("\n");
+				var_dump($dateTimeString);
+				var_dump("\n");
 				if($endDateTime<$tournamentEnd)
 					if($tournamentStart<=$startDateTime)
 						$matchDateTimes[$dateString][$dateTimeString] = array();
