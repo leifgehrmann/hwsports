@@ -342,7 +342,7 @@ class Scheduling_model extends CI_Model {
 	 * @param matchDuration		A dateInterval representing the length of a match
 	 * @return array of days, with a sub array of match starts
 	 **/
-	private function get_match_date_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration)
+	public function get_match_date_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration)
 	{	
 		// Get list of days
 		$dates = $this->get_dates($tournamentStart,$tournamentEnd);
@@ -392,7 +392,7 @@ class Scheduling_model extends CI_Model {
 	 * @param end 	A datetime for end
 	 * @return array of days in DateTime objects
 	 **/
-	private function get_Dates($start,$end)
+	public function get_Dates($start,$end)
 	{
 		$dates = array();
 		$date = clone $start;
@@ -414,7 +414,7 @@ class Scheduling_model extends CI_Model {
 	 * want to just use IDs, not full associative arrays
 	 * @return array
 	 **/
-	private function round_robin($items)
+	public function round_robin($items)
 	{	
 		$combinations = array();
 		$n = count($items);
@@ -444,7 +444,7 @@ class Scheduling_model extends CI_Model {
 	 * @param items 	is a multi dimensional array of items
 	 * @return an ordered array of items
 	 **/
-	private function alternate_items($items)
+	public function alternate_items($items)
 	{	
 		$x = true;
 		$a = array();
@@ -477,7 +477,7 @@ class Scheduling_model extends CI_Model {
 	 * @param maxUsed 	A number that helps increase the speed of this algorithm
 	 * @return an ordered array of dates, sorted by fitness (best dates are in the front of the array)
 	 **/
-	private function fitness_generator($used)
+	public function fitness_generator($used)
 	{
 		// If we are lazy we won't do anything fancy
 		$order = array();
@@ -523,7 +523,7 @@ class Scheduling_model extends CI_Model {
 	 * @param durationB 	datetime object
 	 * @return boolean
 	 **/
-	private function is_overlapping( $startTimeA, $durationA, $startTimeB, $durationB )
+	public function is_overlapping( $startTimeA, $durationA, $startTimeB, $durationB )
 	{
 		// 
 		$endTimeA = clone $startTimeA;
@@ -545,7 +545,7 @@ class Scheduling_model extends CI_Model {
 	 * @param weekday, a string
 	 * @return an integer
 	 **/
-	private function get_weekday_index($weekday)
+	public function get_weekday_index($weekday)
 	{
 		$weekday = strtolower(substr($weekday, 0, 3));
 		$weekdays = array('mon','tue','wed','thu','fri','sat','sun');
@@ -562,7 +562,7 @@ class Scheduling_model extends CI_Model {
 	 * @param weekday, an integer
 	 * @return a string
 	 **/
-	private function get_weekday_string($weekday)
+	public function get_weekday_string($weekday)
 	{
 		$weekdays = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday');
 		if($weekday<0)

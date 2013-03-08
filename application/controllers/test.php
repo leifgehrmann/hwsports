@@ -85,7 +85,7 @@ class Test extends MY_Controller {
 	public function get_weekday_index(){
 		$output = "";
 		for($i=-10;$i<10;$i++){
-			$output.= i." ";
+			$output.= $i." ";
 			$output.= $this->scheduling_model->get_weekday_index($i)." \n";
 		}
 		$this->display($output);
