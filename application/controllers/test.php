@@ -35,6 +35,37 @@ class Test extends MY_Controller {
 	/*
 		centre_model
 	*/
+	/*
+		matches_model
+	*/
+	public function get_matches($centreID){
+		$output = $this->matches_model->get_matches($centreID);
+		$this->display($output);
+	}
+	public function get_venue_matches($venueID,$start,$end){
+		$output = $this->matches_model->get_venue_matches($userID,$start,$end);
+		$this->display($output);
+	}
+	/*
+		results_model
+	*/
+
+	/*
+		scheduling_model
+	*/
+	public function get_match_date_times($tournamentStart,$tournamentEnd){
+		$start;
+		$start = new DateTime(urldecode($tournamentStart));
+		$end   = new DateTime(urldecode($tournamentEnd));
+		$matchWeekdayStartTimes = array();
+		$matchWeekdayStartTimes['Monday'] = array('10:00'=>array(),'10:00'=>array(),'16:00'=>array());
+		$matchWeekdayStartTimes['Tuesday'] = array('12:00'=>array(),'10:00'=>array(),'16:00'=>array());
+		$matchWeekdayStartTimes['Wednesday'] = array('10:00'=>array(),'10:00'=>array(),'16:00'=>array());
+		$matchWeekdayStartTimes['Thursday'] = array('14:00'=>array(),'10:00'=>array(),'16:00'=>array());
+		$matchWeekdayStartTimes['Sunday'] = array('19:00'=>array(),'10:00'=>array(),'10:00'=>array());
+		$output = $this->scheduling_model->get_dates($start,$end,$matchWeekdayStartTimes,$interval);
+		$this->display($output);
+	}
 	public function get_dates($start,$end){
 		$start = new DateTime(urldecode($start));
 		$end   = new DateTime(urldecode($end));
@@ -104,26 +135,6 @@ class Test extends MY_Controller {
 		$output.= $this->scheduling_model->get_weekday_index("Wed")." \n";
 		$this->display($output);
 	}
-
-	/*
-		matches_model
-	*/
-	public function get_matches($centreID){
-		$output = $this->matches_model->get_matches($centreID);
-		$this->display($output);
-	}
-	public function get_venue_matches($venueID,$start,$end){
-		$output = $this->matches_model->get_venue_matches($userID,$start,$end);
-		$this->display($output);
-	}
-	/*
-		results_model
-	*/
-
-	/*
-		scheduling_model
-	*/
-
 	/*
 		sports_model
 	*/
