@@ -380,7 +380,7 @@ class Scheduling_model extends CI_Model {
 				if( $endDateTime < $tournamentEnd ){
 					var_dump("HELLO\n\n");
 					if( $tournamentStart <= $startDateTime ){
-						var_dump("WORLD\n\n“");
+						var_dump("WORLD\n\n");
 						$matchDateTimes[$dateString][$dateTimeString] = array();
 					}
 				}
