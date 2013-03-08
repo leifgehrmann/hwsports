@@ -32,7 +32,7 @@ class Tournaments_model extends MY_Model {
 							"relations" => array( 
 								"objectIDKey" => "sportCategoryID",
 								"dataTableName" => "sportCategoryData",
-								"relationTableName" => "sports",
+								"relationTableName" => "",
 								"relations" => array()
 							)
 						)
