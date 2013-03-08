@@ -19,6 +19,10 @@ class Test extends MY_Controller {
 		$output = $this->users_model->get_users($centreID);
 		$this->display($output);
 	}
+	public function user_exists($userID){
+		$output = $this->users_model->user_exists($userID);
+		$this->display($output);
+	}
 
 	// For example: http://hwsports.co.uk/test/update_user/34/%7B%22poop%22%3A%22smells%22%7D
 	// that web address updates userData to add "poop" = "smells" to user ID 34
@@ -156,15 +160,7 @@ class Test extends MY_Controller {
 	/*
 		venues_model
 	*/
-	public function get_all_teams($centreID){
-		$output = $this->teams_model->get_teams($centreID);
-		$this->display($output);
-	}
 	
-	public function user_exists($userID){
-		$output = $this->users_model->user_exists($userID);
-		$this->display($output);
-	}
 
 	public function test_constants(){
 		$output = array(APPPATH,SYSDIR,BASEPATH,ENVIRONMENT,SELF,FCPATH,EXT);
