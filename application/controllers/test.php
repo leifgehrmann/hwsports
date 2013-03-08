@@ -82,15 +82,15 @@ class Test extends MY_Controller {
 		$output = $this->scheduling_model->is_overlapping($startA,$interval,$startB,$interval);
 		$this->display($output);
 	}
-	public function get_weekday_index(){
+	public function get_weekday_string(){
 		$output = "";
 		for($i=-10;$i<10;$i++){
 			$output.= $i." ";
-			$output.= $this->scheduling_model->get_weekday_index($i)." \n";
+			$output.= $this->scheduling_model->get_weekday_string($i)." \n";
 		}
 		$this->display($output);
 	}
-	public function get_weekday_string($weekday){
+	public function get_weekday_index($weekday){
 		$output = "";
 		$output.= $this->scheduling_model->get_weekday_index("Monday")." \n";
 		$output.= $this->scheduling_model->get_weekday_index("tuesday")." \n";
