@@ -73,7 +73,7 @@ class Matches_model extends CI_Model {
 								"strcmp(".$startTime.", D.endTime) <= 0". // startTime is less than match end time
 								"AND strcmp(D.endTime,".$endTime.") <= 0". // match end time is less than end time
 							") ".
-						")"
+						")";
 		$output = array();
 		$queryData = $this->db->query($queryString);
 		$data = $queryData->result_array();

@@ -173,7 +173,7 @@ class Scheduling_model extends CI_Model {
 
 			// Get list of days ordered by a fitness function that encourages
 			// the spread of days in a tournament.
-			$weightedDates = $this->fitness_generator($matchDateUsed,$matchDateUsedMax);
+			$weightedDates = $this->fitness_generator($matchDateUsed);
 			foreach($weightedDates as $dateWeight=>$date)
 			{
 				// Has either team A or team B already played on this day the maximum number of times?
@@ -185,7 +185,7 @@ class Scheduling_model extends CI_Model {
 				// Now we need to find our the time slot. Again, we use our fitness generator...
 				// we use -1 to indicate that we don't know the maximum. We could probably find
 				// out, but I'm to lazy to code it here. 
-				$weightedDateTimes = $this->fitness_generator($matchDateTimeUsed[$date],-1);
+				$weightedDateTimes = $this->fitness_generator($matchDateTimeUsed[$date]);
 				foreach($weightedDateTimes as $dateTimeWeight=>$dateTime)
 				{
 					// Is this match already conflicting with another match where the 
@@ -476,13 +476,40 @@ class Scheduling_model extends CI_Model {
 	 * @param maxUsed 	A number that helps increase the speed of this algorithm
 	 * @return an ordered array of dates, sorted by fitness (best dates are in the front of the array)
 	 **/
-	private function fitness_generator($used,$maxUsed)
+	private function fitness_generator($used)
 	{
-		// For each date in the $used array
-		foreach($used as $date=>$count)
+		// If we are lazy we won't do anything fancy
+		$order = array();
+		$i = 0;
+		foreach( $used as $date=>count )
 		{
-			
+			$order[$i] = $date;
+			$i++;
 		}
+		// For each date in the $used array we would like to find out the position 
+		// of the max count so that we can calculate the delta.
+
+		/*foreach( $index = 0;$index < count($used); $index++ )
+		{
+			$offset = 0;
+			$indexDate = new DateTime($used[$index]);
+			$max = ;
+			$min
+			while( $index + $offset < count($used) || 0 < $index - $offset )
+			{
+				if($index + $offset < count($used))
+				{
+					$indexDate = new DateTime($used[$index]);
+					$indexDate = 0;
+				}
+				$offset++;
+			}
+			// If this is the case, then all days are of equal distribution
+			// We want to make sure that the events don't occur at the end
+			// have a predisposition 
+			if($min==$max)
+
+		}*/
 	}
 	/**
 	 * HAS NOT BEEN TESTED
