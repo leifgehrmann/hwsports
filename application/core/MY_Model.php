@@ -4,16 +4,6 @@ class MY_Model extends CI_Model {
 	public function __construct()
     {
         parent::__construct();
-
-        $this->load->helper('inflector');
-
-        $this->_set_database();
-        $this->_fetch_table();
-
-        array_unshift($this->before_create, 'protect_attributes');
-        array_unshift($this->before_update, 'protect_attributes');
-
-        $this->_temporary_return_type = $this->return_type;
     }
 
 	public function get_data($objectID, $objectIDKey, $relationTableName, $dataTableName, $relations = array()) {
