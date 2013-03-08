@@ -28,7 +28,7 @@ class Tournaments_model extends MY_Model {
 						array( 
 							"objectIDKey" => "sportID",
 							"relationTableName" => "sports",
-							"dataTableName" => "sportsData",
+							"dataTableName" => "sportData",
 							"relations" => array()
 						)
 					);
