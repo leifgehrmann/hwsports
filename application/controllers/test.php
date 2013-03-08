@@ -59,11 +59,11 @@ class Test extends MY_Controller {
 		$start = new DateTime(urldecode($tournamentStart));
 		$end   = new DateTime(urldecode($tournamentEnd));
 		$matchWeekdayStartTimes = array();
-		$matchWeekdayStartTimes['Monday'] = array('10:00'=>array(),'10:00'=>array(),'16:00'=>array());
-		$matchWeekdayStartTimes['Tuesday'] = array('12:00'=>array(),'10:00'=>array(),'16:00'=>array());
-		$matchWeekdayStartTimes['Wednesday'] = array('10:00'=>array(),'13:00'=>array(),'16:00'=>array());
-		$matchWeekdayStartTimes['Thursday'] = array('14:00'=>array(),'10:00'=>array(),'16:00'=>array());
-		$matchWeekdayStartTimes['Sunday'] = array('19:00'=>array(),'10:00'=>array(),'10:00'=>array());
+		$matchWeekdayStartTimes['Monday'] = array('10:00','10:00','16:00');
+		$matchWeekdayStartTimes['Tuesday'] = array('12:00','10:00','16:00');
+		$matchWeekdayStartTimes['Wednesday'] = array('10:00','13:00','16:00');
+		$matchWeekdayStartTimes['Thursday'] = array('14:00','10:00','16:00');
+		$matchWeekdayStartTimes['Sunday'] = array('19:00','10:00','10:00');
 		$output = $this->scheduling_model->get_match_date_times($start,$end,$matchWeekdayStartTimes,$interval);
 		$this->display($output);
 	}
