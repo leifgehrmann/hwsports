@@ -8,8 +8,6 @@ class MY_Model extends CI_Model {
 
 	// Required: $objectID, $objectIDKey, $dataTableName. Example usage: get_object(23, 'tournamentID', 'tournamentData');
 	public function get_object($objectID, $objectIDKey, $dataTableName, $relationTableName = "", $relations = array()) {
-		echo "\n\n\nWe're inside a get_object function call, looking for objectIDKey: $objectIDKey with value: $objectID from table: $dataTableName with relations: ".print_r($relations,1)." \n\n"; 
-		
 		// Sanitize / escape input variables into underscored variable names for simplicity
 		$_objectID = mysql_real_escape_string($objectID);
 		$_objectIDKey = mysql_real_escape_string($objectIDKey);
@@ -36,7 +34,6 @@ class MY_Model extends CI_Model {
 
 		// Loop through all the relations we were given and grab all the data for them, stitch it onto the data we already have about this object 
 		foreach($relations as $relation) {
-			echo "\n\n\nWe're inside the relations foreach loop!"; var_dump($relation); echo " Fin foreach\n\n\n"; 
 			// Get the ID of whichever other object we wish to grab data for 
 			$relationObjectIDQuery = $this->db->query("SELECT `{$relation['objectIDKey']}` FROM `$_relationTableName` WHERE `$_objectIDKey` = '$_objectID'");			
 			// If the relation table does not return a result when queried for the relation object key, we have bad input - die. 
