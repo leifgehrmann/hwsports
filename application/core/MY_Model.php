@@ -6,7 +6,8 @@ class MY_Model extends CI_Model {
         parent::__construct();
     }
 
-	public function get_data($objectID, $objectIDKey, $relationTableName, $dataTableName, $relations = array()) {
+	// 
+	public function get_object($objectID, $objectIDKey, $relationTableName, $dataTableName, $relations = array()) {
 		// Sanitize / escape input variables into underscored variable names for simplicity
 		$_objectID = mysql_real_escape_string($objectID);
 		$_objectIDKey = mysql_real_escape_string($objectIDKey);
@@ -30,25 +31,25 @@ class MY_Model extends CI_Model {
 		// No data was returned by the query, something must have gone wrong
 		if ($dataQuery->num_rows() == 0) return FALSE;
 		// Put the returned data in the data variable ready to add more to and eventually output 
-		$data = $dataQuery->result_array();
+		$object = $dataQuery->result_array();
 
 		// Loop through all the relations we were given and grab all the data for them, stitch it onto the data we already have about this object 
 		foreach($relations as $relation) {
-			// Create escaped version of relation input array
-			//$relation = array_map(mysql_real_escape_string, $relation);
 			// Get the ID of whichever other object we wish to grab data for 
-			$relationObjectIDQuery = $this->db->query("SELECT `{$relation['objectIDKey']}` FROM `$_relationTableName` WHERE `$_objectIDKey` = '$_objectID'");
+			$relationObjectIDQuery = $this->db->query("SELECT `{$relation['objectIDKey']}` FROM `$_relationTableName` WHERE `$_objectIDKey` = '$_objectID'");			
 			// If the relation table does not return a result when queried for the relation object key, we have bad input - die. 
 			if ($relationObjectIDQuery->num_rows() == 0) return FALSE;
 			// Get the row which contains the actual ID of the object we want to grab data for
 			$relationObjectIDQueryRow = $relationObjectIDQuery->row_array();
 			// Get the actual ID, put it into relation array for safekeeping
 			$relation['objectID'] = $relationObjectIDQueryRow[$relation['objectIDKey']];
+			// Put the ID in the object output array too, controllers might use it for other things
+			$object[$relation['objectIDKey']] = $relation['objectID']; 
 			// Get the data for the actual object, passing in the known parameters
-			$data['relations'][$relation['relationTableName']] = $this->get_data($relation['objectID'], $relation['objectIDKey'], $relation['relationTableName'], $relation['dataTableName'], $relation['relations']);
+			$object[$relation['dataTableName']] = $this->get_object($relation['objectID'], $relation['objectIDKey'], $relation['relationTableName'], $relation['dataTableName'], $relation['relations']);
 		}
 		
-		return $data;
+		return $object;
 	}
 
 }

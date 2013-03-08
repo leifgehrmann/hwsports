@@ -33,7 +33,7 @@ class Tournaments_model extends MY_Model {
 						)
 					);
 		//$tournament = $this->get_data($tournamentID, "tournamentID", "tournaments", "tournamentData");
-		return $this->get_data($tournamentID, "tournamentID", "tournaments", "tournamentData", $relations);
+		return $this->get_object($tournamentID, "tournamentID", "tournaments", "tournamentData", $relations);
 		/*
 		try {
 			$today = new DateTime();
