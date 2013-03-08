@@ -8,7 +8,7 @@ class MY_Model extends CI_Model {
 
 	// Required: $objectID, $objectIDKey, $dataTableName. Example usage: get_object(23, 'tournamentID', 'tournamentData');
 	public function get_object($objectID, $objectIDKey, $dataTableName, $relationTableName = "", $relations = array()) {
-		echo "\n\n\nWe're inside a get_object function call, looking for objectIDKey: $objectIDKey with value: $objectID from table: $dataTableName \n\n"; 
+		echo "\n\n\nWe're inside a get_object function call, looking for objectIDKey: $objectIDKey with value: $objectID from table: $dataTableName with relations: ".print_r($relations,1)." \n\n"; 
 		
 		// Sanitize / escape input variables into underscored variable names for simplicity
 		$_objectID = mysql_real_escape_string($objectID);
