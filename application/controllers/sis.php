@@ -58,10 +58,10 @@ class Sis extends MY_Controller {
 				$matches[$key]['tournament'] = "None";
 			}
 			
-			$matches[$key]['date'] = date("Y/m/d",$match['startTime']);
+			$matches[$key]['date'] = datetime_to_public($match['startTime']);
 			
-			$matches[$key]['startTime'] = date("H:i",$match['startTime']);
-			$matches[$key]['endTime'] = date("H:i",$match['endTime']);
+			$matches[$key]['startTime'] = datetime_to_public($match['startTime']);
+			$matches[$key]['endTime'] = datetime_to_public($match['endTime']);
 		}
 
 		$this->data['matches'] = $matches;
@@ -148,7 +148,6 @@ class Sis extends MY_Controller {
 		
 		if( $this->tournaments_model->tournament_exists($tournamentID) ) {
 			$tournament = $this->tournaments_model->get_tournament($tournamentID);
-			$this->data['tournament']['status'] = $this->tournaments_model->get_tournament_status($tournamentID);
 			$this->data['tournamentID'] = $tournamentID;
 			$this->data['tournament'] = $tournament;
 			$sport = $this->sports_model->get_sport( $tournament['sportID'] );

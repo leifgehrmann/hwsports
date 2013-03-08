@@ -74,12 +74,56 @@ class Tournaments_model extends CI_Model {
 		}
 		$dataQueryString .= "FROM tournamentData WHERE tournamentID = ".$this->db->escape($tournamentID);
 		$dataQuery = $this->db->query($dataQueryString);
-		$output = array_merge(array("tournamentID"=>$tournamentID), $dataQuery->row_array());
+		$tournament = array_merge(array("tournamentID"=>$tournamentID), $dataQuery->row_array());
 		if(isset($relationalResult[0]['sportID']))
-			$output['sportID'] = $relationalResult[0]['sportID'];
+			$tournament['sportID'] = $relationalResult[0]['sportID'];
 		if(isset($relationalResult[0]['sportCategoryID']))
-			$output['sportCategoryID'] = $relationalResult[0]['sportCategoryID'];
-		return $output;
+			$tournament['sportCategoryID'] = $relationalResult[0]['sportCategoryID'];
+			
+			
+		try {
+			$today = new DateTime();
+			$registrationStartDate = new DateTime($tournament['registrationStart']);
+			$registrationEndDate = new DateTime($tournament['registrationEnd']);
+			$tournamentStartDate = new DateTime($tournament['tournamentStart']);
+			$tournamentEndDate = new DateTime($tournament['tournamentEnd']);
+		} catch (Exception $e) {
+			$tournament['status'] = "ERROR: Invalid date in database. Debug Exception: ".$e->getMessage();
+		}
+		
+		if( ($today < $registrationStartDate) && ($today < $registrationEndDate) &&
+			($today < $tournamentStartDate) && ($today < $tournamentEndDate) ) {
+			$tournament['status'] = "preRegistration";
+		} elseif( ($today >= $registrationStartDate) && ($today < $registrationEndDate) &&
+			($today < $tournamentStartDate) && ($today < $tournamentEndDate) ) {
+			$tournament['status'] = "inRegistration";
+		} elseif( ($today >= $registrationStartDate) && ($today >= $registrationEndDate) &&
+			($today < $tournamentStartDate) && ($today < $tournamentEndDate) ) {
+			
+			// If the competitor list has been moderated, we are pre-start, not post-registration: all we are waiting for is the start date, no other staff interaction is required.
+			if( isset($tournament['competitorsModerated']) && ( $tournament['competitorsModerated'] == "true" ) ) {
+				$tournament['status'] = "preTournament";
+			} 
+			// Otherwise, we are still awaiting the staff to moderate the competitor list - set competitorsModerated to false in the DB to make this clear.
+			$this->update_tournament($tournamentID,array("competitorsModerated" => "false"));
+			// postRegistration means we need staff to moderate the competitor list
+			$tournament['status'] = "postRegistration";
+		} elseif( ($today >= $registrationStartDate) && ($today >= $registrationEndDate) &&
+			($today >= $tournamentStartDate) && ($today < $tournamentEndDate) ) {
+			$tournament['status'] = "inTournament";
+		} elseif( ($today >= $registrationStartDate) && ($today >= $registrationEndDate) &&
+			($today >= $tournamentStartDate) && ($today >= $tournamentEndDate) ) {
+			$tournament['status'] = "postTournament";
+		} else {
+			$tournament['status'] = "ERROR: Tournament has invalid dates. Today's date is: ".datetime_to_public($today).".
+					Registration start date is: ".datetime_to_public($registrationStartDate)."
+					Registration end date is: ".datetime_to_public($registrationEndDate)."
+					Tournament start date is: ".datetime_to_public($tournamentStartDate)."
+					Tournament start date is: ".datetime_to_public($tournamentEndDate)."
+					Please correct the dates below.";
+		}
+			
+		return $tournament;
 	}
 	
 	/**
@@ -89,47 +133,7 @@ class Tournaments_model extends CI_Model {
 	 **/
 	public function get_tournament_status($tournamentID) {
 		$tournament = $this->get_tournament($tournamentID);
-		try {
-			$today = new DateTime();
-			$registrationStartDate = new DateTime($tournament['registrationStart']);
-			$registrationEndDate = new DateTime($tournament['registrationEnd']);
-			$tournamentStartDate = new DateTime($tournament['tournamentStart']);
-			$tournamentEndDate = new DateTime($tournament['tournamentEnd']);
-		} catch (Exception $e) {
-			return("ERROR: Invalid date in database. Debug Exception: ".$e->getMessage() );
-		}
-		
-		if( ($today < $registrationStartDate) && ($today < $registrationEndDate) &&
-			($today < $tournamentStartDate) && ($today < $tournamentEndDate) ) {
-			return("preRegistration");
-		} elseif( ($today >= $registrationStartDate) && ($today < $registrationEndDate) &&
-			($today < $tournamentStartDate) && ($today < $tournamentEndDate) ) {
-			return("inRegistration");
-		} elseif( ($today >= $registrationStartDate) && ($today >= $registrationEndDate) &&
-			($today < $tournamentStartDate) && ($today < $tournamentEndDate) ) {
-			
-			// If the competitor list has been moderated, we are pre-start, not post-registration: all we are waiting for is the start date, no other staff interaction is required.
-			if( isset($tournament['competitorsModerated']) && ( $tournament['competitorsModerated'] == "true" ) ) {
-				return("preTournament");
-			} 
-			// Otherwise, we are still awaiting the staff to moderate the competitor list - set competitorsModerated to false in the DB to make this clear.
-			$this->update_tournament($tournamentID,array("competitorsModerated" => "false"));
-			// postRegistration means we need staff to moderate the competitor list
-			return("postRegistration");
-		} elseif( ($today >= $registrationStartDate) && ($today >= $registrationEndDate) &&
-			($today >= $tournamentStartDate) && ($today < $tournamentEndDate) ) {
-			return("inTournament");
-		} elseif( ($today >= $registrationStartDate) && ($today >= $registrationEndDate) &&
-			($today >= $tournamentStartDate) && ($today >= $tournamentEndDate) ) {
-			return("postTournament");
-		} else {
-			return("ERROR: Tournament has invalid dates. Today's date is: ".datetime_to_public($today).".
-					Registration start date is: ".datetime_to_public($registrationStartDate)."
-					Registration end date is: ".datetime_to_public($registrationEndDate)."
-					Tournament start date is: ".datetime_to_public($tournamentStartDate)."
-					Tournament start date is: ".datetime_to_public($tournamentEndDate)."
-					Please correct the dates below.");
-		}
+		return $tournament['status'];
 	}
 	
 	/**

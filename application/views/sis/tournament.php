@@ -9,7 +9,7 @@
 
 	echo $this->table->generate($tournamentTable);
 
-	if ( $registrationOpen ) { ?>
+	if ( $tournament['status'] == "inRegistration" ) { ?>
 		<div class="tournament-signup-button">
 			<a href='/sis/signup/<?=$tournamentID?>' class='tournamentSignupButton'>Sign Up Now!</a>
 		</div>
