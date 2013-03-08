@@ -34,6 +34,7 @@ class MY_Model extends CI_Model {
 
 		// Loop through all the relations we were given and grab all the data for them, stitch it onto the data we already have about this object 
 		foreach($relations as $relation) {
+			var_dump($relation); die();
 			// Get the ID of whichever other object we wish to grab data for 
 			$relationObjectIDQuery = $this->db->query("SELECT `{$relation['objectIDKey']}` FROM `$_relationTableName` WHERE `$_objectIDKey` = '$_objectID'");			
 			// If the relation table does not return a result when queried for the relation object key, we have bad input - die. 
