@@ -55,7 +55,7 @@ class Test extends MY_Controller {
 	*/
 	// Try: http://hwsports.co.uk/test/get_match_date_times/2013-03-14T10%3A30%3A00%2B0000/2013-03-20T10%3A30%3A00%2B0000
 	public function get_match_date_times($tournamentStart,$tournamentEnd){
-		$start;
+		$interval = new DateInterval('P30M');
 		$start = new DateTime(urldecode($tournamentStart));
 		$end   = new DateTime(urldecode($tournamentEnd));
 		$matchWeekdayStartTimes = array();
