@@ -8,10 +8,10 @@ class MY_Model extends CI_Model {
 
 	public function get_data($objectID, $objectIDKey, $relationTableName, $dataTableName, $relations = array()) {
 		// Sanitize / escape input variables into underscored variable names for simplicity
-		$_objectID = mysqli_real_escape_string($objectID);
-		$_objectIDKey = mysqli_real_escape_string($objectIDKey);
-		$_relationTableName = mysqli_real_escape_string($relationTableName);
-		$_dataTableName = mysqli_real_escape_string($dataTableName);
+		$_objectID = mysql_real_escape_string($objectID);
+		$_objectIDKey = mysql_real_escape_string($objectIDKey);
+		$_relationTableName = mysql_real_escape_string($relationTableName);
+		$_dataTableName = mysql_real_escape_string($dataTableName);
 		
 		// If user gave us something other than an array, assume bad input - return FALSE
 		if(!is_array($relations)) return FALSE;
