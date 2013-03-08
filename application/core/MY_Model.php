@@ -6,8 +6,8 @@ class MY_Model extends CI_Model {
         parent::__construct();
     }
 
-	// 
-	public function get_object($objectID, $objectIDKey, $relationTableName, $dataTableName, $relations = array()) {
+	// Required: $objectID, $objectIDKey, $dataTableName. Example usage: get_object(23, 'tournamentID', 'tournamentData');
+	public function get_object($objectID, $objectIDKey, $dataTableName, $relationTableName = "", $relations = array()) {
 		// Sanitize / escape input variables into underscored variable names for simplicity
 		$_objectID = mysql_real_escape_string($objectID);
 		$_objectIDKey = mysql_real_escape_string($objectIDKey);
@@ -22,7 +22,6 @@ class MY_Model extends CI_Model {
 		$dataKeys = array_map( function($row) { return $row['key']; }, $dataKeysQuery->result_array() );
 		// If we have no data about this tournament, return FALSE to make logic easier in controller 
 		if(count($dataKeys)==0) return FALSE;
-		
 		// Create SQL selection segments for each key in the data, ready to implode with commas into a full SQL query 
 		foreach($dataKeys as $dataKey) $dataQueryStringParts[] = "MAX(CASE WHEN `key`='$dataKey' THEN value END ) AS $dataKey";
 		// Build and execute query to actually select data from data table
@@ -46,7 +45,7 @@ class MY_Model extends CI_Model {
 			// Put the ID in the object output array too, controllers might use it for other things
 			$object[$relation['objectIDKey']] = $relation['objectID']; 
 			// Get the data for the actual object, passing in the known parameters
-			$object[$relation['dataTableName']] = $this->get_object($relation['objectID'], $relation['objectIDKey'], $relation['relationTableName'], $relation['dataTableName'], $relation['relations']);
+			$object[$relation['dataTableName']] = $this->get_object($relation['objectID'], $relation['objectIDKey'], $relation['dataTableName'], $relation['relationTableName'], $relation['relations']);
 		}
 		
 		return $object;

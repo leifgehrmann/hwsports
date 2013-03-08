@@ -27,14 +27,18 @@ class Tournaments_model extends MY_Model {
 		$relations = array(
 						array( 
 							"objectIDKey" => "sportID",
-							"relationTableName" => "sports",
 							"dataTableName" => "sportData",
-							"relations" => array()
+							"relationTableName" => "sports",
+							"relations" => array( 
+								"objectIDKey" => "sportCategoryID",
+								"dataTableName" => "sportCategoryData",
+								"relationTableName" => "sports",
+								"relations" => array()
+							)
 						)
 					);
-		//$tournament = $this->get_data($tournamentID, "tournamentID", "tournaments", "tournamentData");
-		return $this->get_object($tournamentID, "tournamentID", "tournaments", "tournamentData", $relations);
-		/*
+		$tournament = $this->get_object($tournamentID, "tournamentID", "tournamentData", "tournaments", $relations);
+		
 		try {
 			$today = new DateTime();
 			$registrationStartDate = new DateTime($tournament['registrationStart']);
@@ -76,8 +80,8 @@ class Tournaments_model extends MY_Model {
 					Tournament start date is: ".datetime_to_public($tournamentEndDate)."
 					Please correct the dates below.";
 		}
-				*/
-		//return $tournament;
+		
+		return $tournament;
 	}
 	
 	/**
