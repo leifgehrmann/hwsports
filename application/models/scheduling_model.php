@@ -90,7 +90,7 @@ class Scheduling_model extends CI_Model {
 				// Are there enough umpires? Well good! Lets select them!
 				// Also, if there aren't enough, we remove the match.
 				if(count($countedUmpires) > $matchMinimumUmpires)
-					$matchDateTimes[$date][$dateTime]['umpiresIDs'] = $countedUmpireIDs;
+					$matchDateTimes[$date][$dateTime]['umpireIDs'] = $countedUmpireIDs;
 				else
 					unset($matchDateTimes[$date][$dateTime]);
 			}
@@ -112,17 +112,17 @@ class Scheduling_model extends CI_Model {
 				$endDateTime->add($matchDuration);
 
 				// keep a list of venues available for this slot.
-				$matchDateTimes[$date][$dateTime]['venues'] = array();
+				$matchDateTimes[$date][$dateTime]['venueIDs'] = array();
 				// For each venue
 				foreach( $venuesIDs as $venueID )
 				{
 					// is the venue available at this time?
 					$venueMatches = $this->matches_model->get_venue_matches($startDateTime,$endDateTime);
 					if( count($venueMatches) != 0 )
-						$matchDateTimes[$date][$dateTime]['venues'][] = $venueID;
+						$matchDateTimes[$date][$dateTime]['venueIDs'][] = $venueID;
 				}
 				// If we didn't find any available venues, well then we ignore it.
-				if( count($matchDateTimes[$date][$dateTime]['venues']) == 0 )
+				if( count($matchDateTimes[$date][$dateTime]['venueIDs']) == 0 )
 					unset($matchDateTimes[$date][$dateTime]);
 			}
 		}
@@ -142,7 +142,7 @@ class Scheduling_model extends CI_Model {
 		$matchDateTimeUsed = array(); // associative array of date->datetime to number of matches during that slot
 		$matchDateTeam     = array(); // associative array of date->team to number of matches on that day
 		$matchDateTimeTeam = array(); // associative array of date->datetime->team to number of matches during that slot
-		$matchUmpire = array(); // associative array of umpireID to number of matches he/she already manages.
+		$umpireCount = array(); // associative array of umpireID to number of matches he/she already manages.
 		$matchDateUsedMax = 0;
 
 		// We set the initial count for every single array to be 0.
@@ -186,31 +186,120 @@ class Scheduling_model extends CI_Model {
 				// we use -1 to indicate that we don't know the maximum. We could probably find
 				// out, but I'm to lazy to code it here. 
 				$weightedDateTimes = $this->fitness_generator($matchDateTimeUsed[$date],-1);
-				// I don't think there can be a case where we can't place a match for a particular
-				// dateTime. Because if it has already been unset from the list of options, it
-				// means that the leftovers will always be avaialble, nevermind the constrainst 
-				// in regards to matches. Eitherway, I'll leave it in. There is no real performance
-				// damage.
 				foreach($weightedDateTimes as $dateTimeWeight=>$dateTime)
 				{
-					// Good! This means we have found a good time to put our match
-					// Now we need to select which venue and which umpires to add.
-					// 
-					$
+					// Is this match already conflicting with another match where the 
+					// same team is performing (It could be the case that a team can play
+					// more than once a day if we ignored the rules above)
+					$isOverlapping = false;
+					foreach($matchDateTimesSelected[$date] as $dateTimeSelected=>$dateTimeData)
+					{
+						// Are any of the teams that we care about actually playing during that time?
+						if($matchDateTimeTeam[$date][$dateTimeSelected][$teamA]==0 && $matchDateTimeTeam[$date][$dateTimeSelected][$teamB]==0)
+							continue;
+
+						// Do these times even overlap?
+						$dateTimeObject = new DateTime($dateTime);
+						$dateTimeSelectedObject = new DateTime($dateTimeSelected);
+						if($this->is_overlapping($dateTimeObject,$matchDuration,$dateTimeSelectedObject,$matchDuration))
+							$isOverlapping = true;
+					}
+					// If there is a conflict, well we better check another time slot.
+					if($isOverlapping)
+						continue;
+					
+					// For umpires, we just select the umpire with the lowest 
+					// amount of work. Because hey, we can't just give the same
+					// person all the work just because he is available.
+
+					// BUT we must also consider that the umpire may be assigned
+					// already to another match. so again, we have to check for
+					// any overlaps NEVERMIND LETS LET THE UNSET HANDLE THAT
+					// IT IS MUCH EASIER!!!
+
+					// First the array of umpires by order of least use (aka, 1 means less busy than 4)
+					$u = $matchDateTimes[$date][$dateTime]['umpireIDs']; // array of umpires for this match
+					$matchUmpires = array();
+					usort($array, function($a, $b)
+						{
+							if($umpireCount[$a] == $umpireCount[$b])
+								return 0;
+							return $umpireCount[$a] < $umpireCount[$b] ? -1 : 1;
+						});
+					for($i=0;$i<$matchMaximumUmpires;$i++)
+					{
+						$umpireCount[$u[$i]] = $umpireCount[$u[$i]] + 1;
+						$matchUmpireIDs[] = $u[$i];
+					}
 
 					// We don't really care which venue we choose I guess. If the
 					// staff want to dictate priority, we can implement it here
 					// at some later point.
+					// You know what, lets just RANDOMLY select a venue for fun.
+					$matchVenueID = array_rand($matchDateTimes[$date][$dateTime]['venueIDs']);
+
+
+
+					// Hey thats it! Let's add our result to the selected array:
+					$matchDateTimesSelected[$date][$dateTime] = array();
+					$matchDateTimesSelected[$date][$dateTime]['teamIDs'] = array($teamA,$teamB);
+					$matchDateTimesSelected[$date][$dateTime]['umpireIDs'] = $matchUmpireIDs;
+					$matchDateTimesSelected[$date][$dateTime]['venueID'] = $matchVenueID;
+					$added = true;
+					// Now remove the umpires that we selected, and also remove them from
+					// the original available options to avoid conflicting schedules
+					//$matchDateTimes[$date][$dateTime]['umpireIDs'] = array_diff( $matchDateTimes[$date][$dateTime]['umpireIDs'], $matchUmpireIDs);
+					foreach($matchDateTimes[$date] as $dateTimeAlt=>$dateTimeDataAlt)
+					{
+						// Do these times even overlap? It should at least once
+						$dateTimeObject = new DateTime($dateTime);
+						$dateTimeAltObject = new DateTime($dateTimeAlt);
+						if($this->is_overlapping($dateTimeObject,$matchDuration,$dateTimeAltObject,$matchDuration))
+						{
+							$matchDateTimes[$date][$dateTimeAlt]['umpireIDs'] = array_diff( $matchDateTimes[$date][$dateTimeAlt]['umpireIDs'], $matchUmpireIDs);
+							if(count($matchDateTimes[$date][$dateTimeAlt]['umpireIDs'])==0)
+								unset($matchDateTimes[$date][$dateTimeAlt]);
+						}
+					}
+					// Now remove the venue that we selected, and also remove it from
+					// the original available options to avoid conflicting schedules
+					//$matchDateTimes[$date][$dateTime]['venueIDs'] = array_diff( $matchDateTimes[$date][$dateTime]['venueIDs'], array($matchVenueID));
+					if(count($matchDateTimes[$date][$dateTime]['venueIDs'])==0)
+						unset($matchDateTimes[$date][$dateTime]);
+					foreach($matchDateTimes[$date] as $dateTimeAlt=>$dateTimeDataAlt)
+					{
+						// Do these times even overlap? It should at least once
+						$dateTimeObject = new DateTime($dateTime);
+						$dateTimeAltObject = new DateTime($dateTimeAlt);
+						if($this->is_overlapping($dateTimeObject,$matchDuration,$dateTimeAltObject,$matchDuration))
+						{
+							$matchDateTimes[$date][$dateTimeAlt]['venueIDs'] = array_diff( $matchDateTimes[$date][$dateTimeAlt]['venueIDs'], array($matchVenueID));
+							if(count($matchDateTimes[$date][$dateTimeAlt]['venueIDs'])==0)
+								unset($matchDateTimes[$date][$dateTimeAlt]);
+						}
+					}
+
+					// We now need to finally update the statistics
+					$matchDateTimesSelected = array(); // associated array of date->datetime->data. This will be our final result
+					$matchDateUsed[$date] = $matchDateUsed[$date] + 1; 
+					$matchDateTimeUsed[$dateTime] = $matchDateTimeUsed[$dateTime] + 1; 
+					$matchDateTeam[$date][$teamA] = $matchDateTeam[$date][$teamA] + 1;
+					$matchDateTeam[$date][$teamB] = $matchDateTeam[$date][$teamB] + 1;
+					$matchDateTimeTeam[$date][$dateTime][$teamA] = $matchDateTimeTeam[$date][$dateTime][$teamA] + 1;
+					$matchDateTimeTeam[$date][$dateTime][$teamB] = $matchDateTimeTeam[$date][$dateTime][$teamB] + 1;
+					if( $matchDateUsedMax < $matchDateUsed[$date] )
+						$matchDateUsedMax = $matchDateUsed[$date];
+
+					// Stop the loop! We have just added our match!
+					break;
 				}
-
-				// Good! This means we have found a good place to put our match
-				// So lets get going...
-
-				// We need to increment all the count variables.
-				// We also need to add our match to the matchDateTimesSelect array
-				$matchDateTimesSelected[]
+				// If it wasn't added, we continue the loop of course.
+				// but if it was, we would like to move onto the next team combination.
+				if($added)
+					break;
 			}
-			// This will only occur if the entire 
+			// This will only occur if the entire thing above did not work.
+			// hopefully that doesn't happen a lot when we do testing. :)
 			if(!$added)
 				return "Not enough time slots to support this tournament style";
 		}
@@ -395,7 +484,29 @@ class Scheduling_model extends CI_Model {
 
 		}
 	}
-
+	/**
+	 * HAS NOT BEEN TESTED
+	 *
+	 * are these two events overlapping?
+	 * 
+	 * @param startTimeA 	datetime object
+	 * @param durationA 	datetime object
+	 * @param startTimeB 	datetime object
+	 * @param durationB 	datetime object
+	 * @return boolean
+	 **/
+	private function is_overlapping( $startTimeA, $durationA, $startTimeB, $durationB )
+	{
+		// 
+		$endTimeA = clone $startTimeA;
+		$endTimeB = clone $startTimeB;
+		$endTimeA->add($durationA);
+		$endTimeB->add($durationB);
+		
+		if($endTimeA < $startTimeB || $endTimeB < $startTimeA)
+			return false;
+		return true;
+	}
 	/**
 	 * HAS NOT BEEN TESTED
 	 *
