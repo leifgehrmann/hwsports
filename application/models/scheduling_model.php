@@ -423,7 +423,7 @@ class Scheduling_model extends CI_Model {
 			for($b=0;$b<$a;$b++)
 				$combinations[] = array($items[$a],$items[$b]);
 
-			for($b=$a+1;$b<($n-1);$b++)
+			for($b=$a+1;$b<$n;$b++)
 				$combinations[] = array($items[$a],$items[$b]);
 		}
 		return $combinations;
