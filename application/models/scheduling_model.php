@@ -377,9 +377,13 @@ class Scheduling_model extends CI_Model {
 				$dateTimeString = datetime_to_standard($startDateTime);
 
 				// If valid date, add it to our array
-				if($endDateTime<$tournamentEnd)
-					if($tournamentStart<=$startDateTime)
+				if( $endDateTime < $tournamentEnd ){
+					var_dump("HELLO\n\n");
+					if( $tournamentStart <= $startDateTime ){
+						var_dump("WORLD\n\n“");
 						$matchDateTimes[$dateString][$dateTimeString] = array();
+					}
+				}
 				var_dump($endDateTime);
 				var_dump($tournamentEnd);
 				var_dump($tournamentStart);
