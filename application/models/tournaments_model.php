@@ -32,7 +32,8 @@ class Tournaments_model extends MY_Model {
 							"relations" => array()
 						)
 					);
-		$tournament = $this->get_data($tournamentID, "tournamentID", "tournaments", "tournamentData");
+		//$tournament = $this->get_data($tournamentID, "tournamentID", "tournaments", "tournamentData");
+		return $this->get_data($tournamentID, "tournamentID", "tournaments", "tournamentData");
 		/*
 		try {
 			$today = new DateTime();
@@ -76,7 +77,7 @@ class Tournaments_model extends MY_Model {
 					Please correct the dates below.";
 		}
 				*/
-		return $tournament;
+		//return $tournament;
 	}
 	
 	/**
