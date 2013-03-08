@@ -348,8 +348,8 @@ class Scheduling_model extends CI_Model {
 		$dates = $this->get_dates($tournamentStart,$tournamentEnd);
 
 		// If no days exist in this period, well we quit.
-		/*if(count($dates)==0)
-			return array();*/
+		if(count($dates)==0)
+			return array();
 
 		// Figure out what the first weekday is. This
 		// is to reduce to work of always formatting the dateTime object
@@ -360,6 +360,7 @@ class Scheduling_model extends CI_Model {
 		$matchDateTimes = array();
 		foreach( $dates as $date )
 		{
+			var_dump($dates);
 			$dateString = datetime_to_standard($date);
 			// For each possible start time that a match can have on
 			// this particular weekday
