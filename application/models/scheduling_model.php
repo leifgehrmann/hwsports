@@ -363,6 +363,8 @@ class Scheduling_model extends CI_Model {
 			$dateString = datetime_to_standard($date);
 			// For each possible start time that a match can have on
 			// this particular weekday
+			if(!array_key_exists($this->get_weekday_string($weekday)))
+				$matchWeekdayStartTimes[$this->get_weekday_string($weekday)] = array();
 			foreach( $matchWeekdayStartTimes[ $this->get_weekday_string($weekday) ] as $startTime )
 			{
 				// Set the datetime object for the match
