@@ -399,7 +399,7 @@ class Scheduling_model extends CI_Model {
 		$date->setTime(0, 0, 0);
 		while($date <= $end)
 		{
-			$dates[] = $date;
+			$dates[] = clone $date;
 			$date->modify('+1 day');
 		}
 		return $dates;
