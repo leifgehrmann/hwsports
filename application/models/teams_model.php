@@ -13,7 +13,7 @@ class Teams_model extends MY_Model {
 		$this->load->model('users_model');
 		// Query the teamsUsers table for user IDs
 		$userIDsQuery = $this->db->query("SELECT `userID` FROM `teamsUsers` WHERE `teamID` = ".$this->db->escape($teamID) );
-		foreach($usersQuery->result_array() as $userIDrow) {
+		foreach($userIDsQuery->result_array() as $userIDrow) {
 			// Put each user into the team array, indexed by their userID for convenience
 			$team['users'][$userIDrow['userID']] = $this->users_model->get_user($userIDrow['userID']);
 		}
