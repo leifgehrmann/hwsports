@@ -76,9 +76,11 @@ class Matches_model extends MY_Model {
 	{
 		//$startTime = $this->db->escape(( is_null($startTime) ? "0" : datetime_to_standard($startTime) )); 	// 0 is less than 0000-01-01... Hopefully
 		//$endTime = $this->db->escape(( is_null($endTime) ? ":" : datetime_to_standard($endTime) ));		// : is greater than 9, which is the largest digit so far
-		//var_dump($startTime);
-		//var_dump($endTime);
-		$startTimeX = "Hello";
+		var_dump($venueID);
+		var_dump($startTimeY);
+		var_dump($endTimeY);
+		die();
+		/*$startTimeX = "Hello";
 		$endTimeX = "World";
 		
 		// Returns all the start times
@@ -93,13 +95,13 @@ class Matches_model extends MY_Model {
 						AND M.matchID = D.matchID
 						AND   ( 
 							( 
-								strcmp($startTimeX, D.startTime) <= 0 /* startTime is less or equal to than match start time */
-								AND strcmp(D.startTime,$endTimeX) <= 0 /* match start time is less of equal to than end time */
+								strcmp($startTimeX, D.startTime) <= 0
+								AND strcmp(D.startTime,$endTimeX) <= 0 
 							)
 							OR 
 							( 
-								strcmp($startTimeX, D.endTime) <= 0 /* startTime is less than match end time */
-								AND strcmp(D.endTime,$endTimeX) <= 0 /* match end time is less than end time */
+								strcmp($startTimeX, D.endTime) <= 0 
+								AND strcmp(D.endTime,$endTimeX) <= 0
 							) 
 						)";
 		$queryData = $this->db->query($queryString);
@@ -107,7 +109,7 @@ class Matches_model extends MY_Model {
 		foreach($data as $match) {
 			$output[] = $this->get_match($match['matchID']);
 		}
-		return $output;
+		return $output;*/
 	}
 
 	/**
