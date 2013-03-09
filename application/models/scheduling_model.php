@@ -18,6 +18,9 @@ class Scheduling_model extends MY_Model {
 		// Get tournament Information
 		$tournament = $this->tournaments_model->get_tournament($tournamentID);
 
+		if($tournament==FALSE)
+			return FALSE;
+
 		$tournamentStart     = new DateTime($tournament['tournamentStart']);
 		$tournamentEnd       = new DateTime($tournament['tournamentEnd']);
 
@@ -26,7 +29,7 @@ class Scheduling_model extends MY_Model {
 		for( $i=0; $i<7; $i++ )
 		{
 			$weekday = $this->get_weekday_string($i);
-			$matchWeekdayStartTimes[$weekday]    = explode(',',$tournament['startTimes'.$weekday]);
+			$matchWeekdayStartTimes[$weekday] = ( array_key_exists('startTimes'.$weekday,$tournament) ? explode(',',$tournament['startTimes'.$weekday]) : array() );
 		}
 
 		$matchDuration = new DateInterval('PT'.$tournament['matchDuration'].'M'); // Match duration is assumed to be in minutes
@@ -43,7 +46,7 @@ class Scheduling_model extends MY_Model {
 		$umpires = array();
 		foreach($umpireIDs as $umpireID)
 		{
-			$umpires[] = $this->users_model->get_umpire($umpireID);
+			$umpires[] = $this->users_model->get_user($umpireID);
 		}
 		
 		// If tournament is round robin...
@@ -64,12 +67,14 @@ class Scheduling_model extends MY_Model {
 		// returns all the possible combinations of start times
 		// and days of the tournament. From here we need to
 		// filter it down by umpires, venues, and team competitions
+		var_dump($tournamentStart);
+		var_dump($tournamentEnd);
+		var_dump($matchWeekdayStartTimes);
 		$matchDateTimes = $this->get_match_date_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration);
 
-
+		var_dump($matchDateTimes);
 		// We now check if an umpire is available for a particular
 		// match. It it isn't, we just remove it from the list of choices.
-
 		// For each day...
 		foreach( $matchDateTimes as $date=>$dateTimes)
 		{
@@ -86,20 +91,21 @@ class Scheduling_model extends MY_Model {
 				// keep a list of umpires available for this slot.
 				$countedUmpireIDs = array();
 				// For each umpire
-				foreach( $umpires as $umpire )
+				foreach( $umpires as $umpire ){
 					// is the umpire available at that weekday/time?
 					if( $umpire['available'.$weekday] == '1' )
 						$countedUmpireIDs[] = $umpire['userID'];
+				}
 				// Are there enough umpires? Well good! Lets select them!
 				// Also, if there aren't enough, we remove the match.
-				if(count($countedUmpires) > $matchMinimumUmpires)
+				if(count($countedUmpireIDs) > $matchMinimumUmpires)
 					$matchDateTimes[$date][$dateTime]['umpireIDs'] = $countedUmpireIDs;
 				else
 					unset($matchDateTimes[$date][$dateTime]);
 			}
+			if(count($matchDateTimes[$date]) == 0)
+				unset($matchDateTimes[$date]);
 		}
-
-		
 
 		// We now check if a venue is occupied with some other match.
 		// If it isn't, we say that this particular venue works at the
@@ -129,6 +135,8 @@ class Scheduling_model extends MY_Model {
 					unset($matchDateTimes[$date][$dateTime]);
 			}
 		}
+		var_dump($matchDateTimes);
+		die();
 
 		// We now want to create our individual matches for each
 		// combination of matches. We want to make sure that no
@@ -168,7 +176,7 @@ class Scheduling_model extends MY_Model {
 		$combinations = $this->round_robin($teamIDs);
 
 		// For every single combination of a game we want.
-		foreach($combinations as $combinations)
+		foreach($combinations as $combination)
 		{
 			$added = false; // This will indicate if we could find a place to put this match in.
 			$teamA = $combination[0];
@@ -176,8 +184,8 @@ class Scheduling_model extends MY_Model {
 
 			// Get list of days ordered by a fitness function that encourages
 			// the spread of days in a tournament.
-			$weightedDates = $this->fitness_generator($matchDateUsed);
-			foreach($weightedDates as $dateWeight=>$date)
+			$optimallySortedDates = $this->fitness_generator($matchDateUsed);
+			foreach($optimallySortedDates as $date)
 			{
 				// Has either team A or team B already played on this day the maximum number of times?
 				if($matchMaximumPlays <= $matchDateTeam[$date][$teamA])
@@ -550,6 +558,7 @@ class Scheduling_model extends MY_Model {
 			if($min==$max)
 
 		}*/
+		return $order;
 	}
 	/**
 	 * HAS NOT BEEN TESTED
