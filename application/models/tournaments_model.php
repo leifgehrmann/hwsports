@@ -72,6 +72,9 @@ class Tournaments_model extends MY_Model {
 	}
 
 	public function get_tournament_actors($tournamentID){
+		$this->load->model('users_model');
+		$this->load->model('teams_model');
+		
 		$tournament = $this->get_tournament($tournamentID);
 		if($tournament == FALSE) return FALSE;
 		
