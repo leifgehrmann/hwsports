@@ -85,7 +85,7 @@ class Tms extends MY_Controller {
 			$newdata = $_POST;
 			unset($newdata['submit']);
 			
-			$tournamentID = $this->tournaments_model->insert_tournament($newdata);
+			$tournamentID = $this->tournaments_model->insert($newdata);
 			if($tournamentID > -1) {
 				// Successful update, show success message
 				$this->session->set_flashdata('message_success',  'Successfully Created Tournament.');
@@ -98,10 +98,10 @@ class Tms extends MY_Controller {
 			//set the flash data error message if there is one
 			$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
 		
-			$this->data['tournaments'] = $this->tournaments_model->get_tournaments($this->data['centre']['centreID']);
+			$this->data['tournaments'] = $this->tournaments_model->get($this->data['centre']['centreID']);
 		
 			$this->data['sports'] = array();
-			foreach( $this->sports_model->get_sports($this->data['centre']['centreID']) as $sport) {				
+			foreach( $this->sports_model->get_all($this->data['centre']['centreID']) as $sport) {				
 				$this->data['sports'][$sport['sportCategoryData']['name']][$sport['sportID']] = $sport['name'];
 			}
 			ksort($this->data['sports']);
@@ -160,7 +160,7 @@ class Tms extends MY_Controller {
 		$this->load->model('sports_model');
 		
 		$this->data['tournamentID'] = $tournamentID;
-		$this->data['tournament'] = $tournament = $this->tournaments_model->get_tournament($tournamentID);
+		$this->data['tournament'] = $tournament = $this->tournaments_model->get($tournamentID);
 		if($tournament==FALSE) {
 			$this->session->set_flashdata('message_error',  "Tournament ID $id does not exist.");
 			redirect("/tms/tournaments", 'refresh');
@@ -223,7 +223,7 @@ class Tms extends MY_Controller {
 			$this->data['message_success'] = $this->session->flashdata('message_success');
 			$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
 			
-			$sport = $this->sports_model->get_sport( $tournament['sportID'] );
+			$sport = $this->sports_model->get( $tournament['sportID'] );
 			$this->data['tournament']['sportName'] = $sport['name'];
 		
 			$this->data['name'] = array(
@@ -281,7 +281,7 @@ class Tms extends MY_Controller {
 	{
 		$this->load->model('tournaments_model');
 
-		if($this->tournaments_model->delete_tournament($tournamentID) ) {
+		if($this->tournaments_model->delete($tournamentID) ) {
 			// Successful delete, show success message
 			$this->session->set_flashdata('message_success',  'Successfully Deleted Tournament.');
 		} else {
@@ -326,7 +326,7 @@ class Tms extends MY_Controller {
 		$this->load->model('venues_model');
 
 		// Get data for this venue
-		$this->data['venue'] = $this->venues_model->get_venue($venueID);
+		$this->data['venue'] = $this->venues_model->get($venueID);
 
 		$this->data['title'] = $this->data['venue']['name']+" venue";
 		$this->data['page']  = "venue"; 
