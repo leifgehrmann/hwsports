@@ -179,8 +179,8 @@ class Scheduling_model extends MY_Model {
 
 			// Get list of days ordered by a fitness function that encourages
 			// the spread of days in a tournament.
-			$weightedDates = $this->fitness_generator($matchDateUsed);
-			foreach($weightedDates as $dateWeight=>$date)
+			$optimallySortedDates = $this->fitness_generator($matchDateUsed);
+			foreach($optimallySortedDates as $date)
 			{
 				// Has either team A or team B already played on this day the maximum number of times?
 				if($matchMaximumPlays <= $matchDateTeam[$date][$teamA])
