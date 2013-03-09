@@ -52,7 +52,7 @@ class Test extends MY_Controller {
 		$output = $this->matches_model->get_matches($centreID);
 		$this->display($output);
 	}
-	public function get_venue_matches($venueID,$start,$end){
+	public function get_venue_matches($venueID,$start=NULL,$end=NULL){
 		$start = new DateTime(urldecode($start));
 		$end   = new DateTime(urldecode($end));
 		$output = $this->matches_model->get_venue_matches($userID,$start,$end);
