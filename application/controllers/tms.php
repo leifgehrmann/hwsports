@@ -33,9 +33,9 @@ class Tms extends MY_Controller {
 		}
 	}
 
-	public function display($data){
+	public function view($view,$data){
 		$this->load->view('tms/header',$data);
-		$this->load->view('tms/'.,$data);
+		$this->load->view('tms/'.$view,$data);
 		$this->load->view('tms/footer',$data);
 	}
 
@@ -43,7 +43,7 @@ class Tms extends MY_Controller {
 	{
 		$this->data['title'] = "Home";
 		$this->data['page'] = "tmshome";
-		$this->display('home',$this->data);
+		$this->view('home',$this->data);
 	}
 	public function tournaments()
 	{
