@@ -70,7 +70,6 @@ class Scheduling_model extends MY_Model {
 		var_dump($tournamentStart);
 		var_dump($tournamentEnd);
 		var_dump($matchWeekdayStartTimes);
-		var_dump($matchDuration);
 		$matchDateTimes = $this->get_match_date_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration);
 
 		var_dump($matchDateTimes);
@@ -92,10 +91,12 @@ class Scheduling_model extends MY_Model {
 				// keep a list of umpires available for this slot.
 				$countedUmpireIDs = array();
 				// For each umpire
-				foreach( $umpires as $umpire )
+				foreach( $umpires as $umpire ){
+					var_dump($umpire);
 					// is the umpire available at that weekday/time?
 					if( $umpire['available'.$weekday] == '1' )
 						$countedUmpireIDs[] = $umpire['userID'];
+				}
 				// Are there enough umpires? Well good! Lets select them!
 				// Also, if there aren't enough, we remove the match.
 				if(count($countedUmpires) > $matchMinimumUmpires)
