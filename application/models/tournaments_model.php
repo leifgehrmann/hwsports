@@ -76,6 +76,8 @@ class Tournaments_model extends MY_Model {
 		$tournament = $this->get_tournament($tournamentID);
 		if($tournament == FALSE) return FALSE;
 
+		var_dump($tournament); die();
+		
 		$actorRows = $this->db->select('actorID', 'roleID', 'sportCategoryRoleName', 'actorTable')
 					->from('tournamentActors')
 					->join('sportCategoryRoles', 'sportCategoryRoles.sportCategoryRoleID = tournamentActors.roleID')
