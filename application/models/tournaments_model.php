@@ -12,7 +12,7 @@ class Tournaments_model extends MY_Model {
 		$this->dataTableName = "tournamentData";
 		$this->relationTableName = "tournaments";
     }
-		
+
 	/**
 	 * Returns all data about a specific tournament, including sport and sport category data
 	 *  
@@ -35,7 +35,7 @@ class Tournaments_model extends MY_Model {
 					);
 		$tournament = $this->get_object($ID, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relations);
 		// This tournament ID doesn't exist
-		if(empty($tournament)) return FALSE;
+		if(!$tournament) return FALSE;
 		
 		// Start tournament status logic - sets tournament[status] to value: preRegistration, inRegistration, postRegistration, preTournament, inTournament, postTournament or ERROR 
 		try {
@@ -108,7 +108,7 @@ class Tournaments_model extends MY_Model {
 	 **/
 	public function get_actors($ID) {
 		// Check if ID exists
-		if(empty($this->get($ID))) return FALSE;
+		if(!$this->get($ID)) return FALSE;
 		// Select all info about actors for this specific tournament - join the roles table so we get info about how to handle the different roles
 		$actorRows = $this->db->select('actorID, roleID, sportCategoryRoleName, actorTable, actorMethod')
 					->from('tournamentActors')

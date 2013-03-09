@@ -1,6 +1,18 @@
 <?php
 class Teams_model extends MY_Model {
 
+	public function __construct() {
+        parent::__construct();
+		// Load models we might be referencing
+		$this->load->model('users_model');
+		$this->load->model('teams_model');
+		
+		// Basic variables which apply to all table operations
+		$this->objectIDKey = "teamID";
+		$this->dataTableName = "teamData";
+		$this->relationTableName = "teams";
+    }
+
 	/**
 	 * Returns all data about a specific team, including all team members in $team['users']
 	 *  
@@ -8,7 +20,7 @@ class Teams_model extends MY_Model {
 	 **/
 	public function get_team($teamID) {
 		// Get all the teamData
-		$team = $this->get_object($teamID, "teamID", "teamData");
+		$team = $this->get_object($teamID, $this->objectIDKey, $this->dataTableName);
 		// Load the users model since we want to use the get_user function
 		$this->load->model('users_model');
 		// Query the teamsUsers table for user IDs
