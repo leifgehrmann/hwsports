@@ -2,7 +2,7 @@
 class Centre_model extends MY_Model {
 
 	/**
-	 * Returns an array of data from a specific centre
+	 * Returns an array of all data about a specific centre
 	 *  
 	 * @return array
 	 **/
@@ -11,8 +11,9 @@ class Centre_model extends MY_Model {
 	}
 
 	/**
-	 * Creates a centre with data.
-	 * returns the centreID of the new centre if it was successful; otherwise FALSE.
+	 * Creates a new centre with data.
+	 * Returns the centreID of the new centre if it was successful.
+	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
 	 *  
 	 * @return int
 	 **/
@@ -21,7 +22,9 @@ class Centre_model extends MY_Model {
 	}
 	
 	/**
-	 * Updates a centre with data.
+	 * Updates data for a specific centre.
+	 * Returns TRUE on success.
+	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
 	 *
 	 * @return boolean
 	 **/
