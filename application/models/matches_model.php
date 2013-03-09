@@ -74,10 +74,10 @@ class Matches_model extends MY_Model {
 	 **/
 	public function get_venue_matches($venueID,$startTime=NULL,$endTime=NULL)
 	{
-		$startTime = $this->db->escape(( is_null($startTime) ? "0" : datetime_to_standard($startTime) )); 	// 0 is less than 0000-01-01... Hopefully
-		$endTime = $this->db->escape(( is_null($endTime) ? ":" : datetime_to_standard($endTime) ));		// : is greater than 9, which is the largest digit so far
-		var_dump($startTime);
-		var_dump($endTime);
+		//$startTime = $this->db->escape(( is_null($startTime) ? "0" : datetime_to_standard($startTime) )); 	// 0 is less than 0000-01-01... Hopefully
+		//$endTime = $this->db->escape(( is_null($endTime) ? ":" : datetime_to_standard($endTime) ));		// : is greater than 9, which is the largest digit so far
+		//var_dump($startTime);
+		//var_dump($endTime);
 		$startTime = "Hello";
 		$startTime = "World";
 		
