@@ -36,6 +36,10 @@ class Test extends MY_Controller {
 		$output = $this->centre_model->get_centre($centreID);
 		$this->display($output);
 	}
+	public function insert_centre($data){
+		$output = $this->centre_model->insert_centre(array("name"=>"poopname","address"=>"poopaddress"));
+		$this->display($output);
+	}
 	
 	/*
 		matches_model

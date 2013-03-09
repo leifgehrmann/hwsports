@@ -12,37 +12,14 @@ class Centre_model extends MY_Model {
 
 	/**
 	 * Creates a centre with data.
-	 * returns the centreID of the new centre if it was
-	 * successful. If not, it should return -1.
+	 * returns the centreID of the new centre if it was successful; otherwise FALSE.
 	 *  
 	 * @return int
 	 **/
-	public function insert_centre($data)
-	{	
-		$this->db->trans_start();
-
-		$this->db->query("INSERT INTO centreData (centreID) VALUES (".$this->db->escape($centreID).")");
-		$centreID = $this->db->insert_id();
-
-		$insertDataArray = array();
-		foreach($data as $key=>$value) {
-			$dataArray = array(
-					'centreID' => $this->db->escape($centreID),
-					'key' => $this->db->escape($key),
-					'value' => $this->db->escape($value)
-				);
-			$insertDataArray[] = $dataArray;
-		}
-		if ($this->db->insert_batch('centreData',$insertDataArray)) {
-			// db success
-			$this->db->trans_complete();
-			return $centreID;
-		} else {
-			// db fail
-			return -1;
-		}
+	public function insert_centre($data) {
+		return insert_object($data, "centreID", "centreData");
 	}
-
+	
 	/**
 	 * Updates a centre with data.
 	 *

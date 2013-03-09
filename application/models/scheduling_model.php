@@ -325,8 +325,6 @@ class Scheduling_model extends MY_Model {
 		$this->load->model('matches_model');
 		$this->load->model('tournaments_model');
 
-		$participantIDs
-
 		// Get tournament Information
 		$tournament = $this->tournaments_model->get_tournament($tournamentID);
 
