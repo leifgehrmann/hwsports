@@ -407,7 +407,7 @@ class Tms extends MY_Controller {
 		$this->load->view('tms/annoucements',$this->data);
 		$this->load->view('tms/footer',$this->data);
 	}
-	public function announcements()
+	public function announcement()
 	{
 		$this->data['title'] = $announcement['title']." | Announcement";
 		$this->data['page'] = "announcement";
