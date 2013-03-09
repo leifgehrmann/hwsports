@@ -70,6 +70,30 @@ class Tournaments_model extends MY_Model {
 		return $tournament;
 	}
 
+	public function get_tournament_actors($tournamentID){
+
+		$tournament = $this->get_tournament($tournamentID);
+		if($tournament == FALSE) return FALSE;
+
+		$actorRows = $this->db->select('actorID', 'roleID', 'sportCategoryRoleName', 'actorTable')
+					->from('tournamentActors')
+					->join('sportCategoryRoles', 'sportCategoryRoles.sportCategoryRoleID = tournamentActors.roleID')
+					->where('tournamentID',$tournamentID)
+					->get()
+					->result_array;
+
+		$actors = array();
+		foreach($actorRows as $actorRow)
+		{
+			if($actorRow['actorTable']=="teams")
+				$actors[$actorRow['roleName']][] = $this->teams_model->get_team($actorRow['actorID']);
+			elseif($actorRow['actorTable']=="users")
+				$actors[$actorRow['roleName']][] = $this->users_model->get_user($actorRow['actorID']);
+		}
+		return $actors;
+
+	}
+
 	/**
 	 * Returns all data about all tournaments at a specific centre
 	 *  

@@ -190,6 +190,10 @@ class Test extends MY_Controller {
 		$output = $this->tournaments_model->get_tournaments($centreID);
 		$this->display($output);
 	}
+	public function get_tournament_actors(){
+		$output = $this->tournaments_model->get_tournament_actors($tID);
+		$this->display($output);
+	}
 	/*
 		venues_model
 	*/
