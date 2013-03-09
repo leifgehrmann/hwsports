@@ -121,10 +121,10 @@ class MY_Model extends CI_Model {
 	}
 	
 	// Updates an object in the database with new values
-	// Required: $objectID, $objectIDKey, $data, $dataTableName. 
-	// Example usage: update_object(1, "centreID", array("address"=>"14 Parkhead Loan"), 'centreData');
+	// Required: $objectID, $data, $objectIDKey, $dataTableName. 
+	// Example usage: update_object(1, array("address"=>"14 Parkhead Loan"), "centreID", 'centreData');
 	// Returns: TRUE if update was successful, FALSE otherwise.
-	public function update_object($objectID, $objectIDKey, $data, $dataTableName, $relationTableName = false, $relations = array()) {		
+	public function update_object($objectID, $data, $objectIDKey, $dataTableName, $relationTableName = false, $relations = array()) {		
 		// If we've been given a relational table and relations to go in that table, we should update the entry in that first in case of foreign key restraints
 		if( $relationTableName && count($relations) ) {
 			// Update the correct row in the relation table with the new relation IDs specified 

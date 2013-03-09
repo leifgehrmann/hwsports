@@ -7,6 +7,7 @@ class Tournaments_model extends MY_Model {
 		$this->load->model('users_model');
 		$this->load->model('teams_model');
 		
+		// Basic variables which apply to all table operations
 		$objectIDKey = "tournamentID";
 		$dataTableName = "tournamentData";
 		$relationTableName = "tournaments";
@@ -134,7 +135,7 @@ class Tournaments_model extends MY_Model {
 	 *  
 	 * @return int
 	 **/
-	public function insert($data,$relationIDs) {
+	public function insert($data, $relationIDs=array()) {
 		return $this->insert_object($data, $objectIDKey, $dataTableName, $relationIDs);
 	}
 
@@ -145,17 +146,19 @@ class Tournaments_model extends MY_Model {
 	 *
 	 * @return boolean
 	 **/
-	public function update($tournamentID, $data) {
-		return $this->update_object($tournamentID, $objectIDKey, $data, $dataTableName);
+	public function update($ID, $data) {
+		return $this->update_object($ID, $objectIDKey, $data, $dataTableName);
 	}
 
 	/**
 	 * Deletes a tournament with data.
 	 * Also deletes all objects which depend on it, unless $testRun is TRUE in which case a string is returned showing all
+	 * Returns TRUE on success.
+	 * Returns FALSE on any error or deletion failure (most likely forgotten foreign key restraints).
 	 *
 	 * @return boolean
 	 **/
-	public function delete($tournamentID,$testRun=TRUE){
+	public function delete($ID, $testRun=TRUE){
 		return $this->delete_object($testRun, $tournamentID, $objectIDKey, $data, $dataTableName);
 	}
 
