@@ -103,7 +103,7 @@ class Matches_model extends MY_Model {
 		foreach($data as $match) {
 			$output[] = $this->get_match($match['matchID']);
 		}
-		return $output;*/
+		return $output;
 	}
 
 	/**
