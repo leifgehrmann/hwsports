@@ -158,7 +158,7 @@ class Tournaments_model extends MY_Model {
 	 *
 	 * @return boolean
 	 **/
-	public function delete($ID, $testRun=TRUE)
+	public function delete($ID, $testRun=TRUE) {
 		$dependents = array(
 			'sports' => 'centreID',
 			'venues' => 'centreID',
