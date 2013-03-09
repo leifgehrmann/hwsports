@@ -346,7 +346,7 @@ class Tms extends MY_Controller {
 		$this->load->model('matches_model');
 
 		// Get data for this venue
-		$this->data['match'] = $this->matches_model->get_match($matchID);
+		$this->data['match'] = $this->matches_model->get($matchID);
 		$this->data['match']['startTime'] = datetime_to_public($this->data['match']['startTime']); 
 		$this->data['match']['endTime'] = datetime_to_public($this->data['match']['endTime']); 
 
@@ -409,6 +409,10 @@ class Tms extends MY_Controller {
 	}
 	public function announcements()
 	{
+		$this->load->model('announcements_model');
+		$user = $this->announcements_model->get_all();
+		$this->data['announcement'] = $announcement;
+
 		$this->data['title'] = "Announcements";
 		$this->data['page'] = "announcements";
 		$this->load->view('tms/header',$this->data);
@@ -417,6 +421,10 @@ class Tms extends MY_Controller {
 	}
 	public function announcement()
 	{
+		$this->load->model('announcements_model');
+		$user = $this->announcements_model->get($announcementID);
+		$this->data['announcement'] = $announcement;
+
 		$this->data['title'] = $announcement['title']." | Announcement";
 		$this->data['page'] = "announcement";
 		$this->load->view('tms/header',$this->data);

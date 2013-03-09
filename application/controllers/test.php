@@ -5,10 +5,10 @@ class Test extends MY_Controller {
 	{
 		parent::__construct();
 		// $this->load->model('sports_model');
-		$this->load->model('tournaments_model');
+		// $this->load->model('tournaments_model');
 		// $this->load->model('matches_model');
 		// $this->load->model('teams_model');
-		// $this->load->model('users_model');
+		$this->load->model('users_model');
 		// $this->load->model('scheduling_model');
 	}
 	
