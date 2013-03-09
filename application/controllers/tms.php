@@ -51,12 +51,15 @@ class Tms extends MY_Controller {
 
 	public function index()
 	{
+		// $this->load->model('tournaments_model');
+		// $this->load->model('matches_model');
 		// Ideally we should be getting:
 		// list of upcoming matches
+		// $this->
 		// list of latest matches
 		// list of upcoming tournament
 		// list of latest tournament
-		
+
 		$this->view('home',"tmshome","Home",$this->data);
 	}
 	public function tournaments()
