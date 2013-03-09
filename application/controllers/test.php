@@ -36,10 +36,12 @@ class Test extends MY_Controller {
 		$output = $this->centre_model->get_centre($centreID);
 		$this->display($output);
 	}
-	public function insert_centre($data){
-		$data = urldecode($data);
-		$data = unserialize($data);
-		$output = $this->centre_model->insert_centre($data);
+	public function insert_centre(){
+		$output = $this->centre_model->insert_centre( array("hello"=>"world") );
+		$this->display($output);
+	}
+	public function update_centre($centreID){
+		$output = $this->centre_model->update_centre( $centreID, array("hello"=>"poop") );
 		$this->display($output);
 	}
 	

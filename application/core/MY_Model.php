@@ -75,29 +75,23 @@ class MY_Model extends CI_Model {
 			$maxRow = $this->db->get($dataTableName)->row_array();
 			// This is the actual numerical ID we wish to insert data as
 			$objectID = $maxRow[$objectIDKey]+1;
-			var_dump($objectID); die();
 		}
 		
 		// Lump all inserts into one transaction
 		$this->db->trans_start();
 		// Loop through input data
 		foreach($data as $key => $value) {
-			// Set the where clauses and the values for the insert
-			$where = array(
-				$objectIDKey => $objectID,
-				'key'   => $key
-			);
+			// Set the values for the insert
 			$insert = array(
+				$objectIDKey => $objectID,
+				'key'   => $key,
 				'value' => $value
 			);
-			// Create the insert - active record sanitizes inputs automatically
-			$this->db->where($where);
-			$this->db->insert($dataTableName, $insert);			
+			// Create the insert - active record sanitizes inputs automatically. Return false if insert fails.
+			if(!$this->db->insert($dataTableName, $insert)) return FALSE;			
 		}
 		// Complete transaction, all is well
 		$this->db->trans_complete();
-		// No rows were affected? Something went wrong.
-		if($this->db->affected_rows()==0) return FALSE;
 		
 		// Return the newly generated ID of this object, ready for referencing with get_object
 		return $objectID;
@@ -112,9 +106,8 @@ class MY_Model extends CI_Model {
 		if( $relationTableName && count($relations) ) {
 			// Update the correct row in the relation table with the new relation IDs specified 
 			$this->db->where($objectIDKey, $objectID);
-			$this->db->update($relationTableName, $relations);
-			// No rows were affected? Something went wrong.
-			if($this->db->affected_rows()==0) return FALSE;
+			// If the update fails, return FALSE
+			if(!$this->db->update($relationTableName, $relations))return FALSE;
 		}
 		
 		// Lump all updates into one transaction
@@ -129,14 +122,12 @@ class MY_Model extends CI_Model {
 			$update = array(
 				'value' => $value
 			);
-			// Create the update - active record sanitizes inputs automatically
+			// Create the update - active record sanitizes inputs automatically. Return false if update fails.
 			$this->db->where($where);
-			$this->db->update($dataTableName, $update);			
+			if(!$this->db->update($dataTableName, $update)) return FALSE;			
 		}
 		// Complete transaction, all is well
 		$this->db->trans_complete();
-		// No rows were affected? Something went wrong.
-		if($this->db->affected_rows()==0) return FALSE;
 		
 		// Return TRUE: if we got to here it must have all worked
 		return TRUE;
