@@ -15,8 +15,8 @@ class Test extends MY_Controller {
 	/*
 		users_model
 	*/
-	public function get_all_users($centreID){
-		$output = $this->users_model->get_users($centreID);
+	public function get_all_users(){
+		$output = $this->users_model->get_all();
 		$this->display($output);
 	}
 	
@@ -26,22 +26,22 @@ class Test extends MY_Controller {
 	public function update_user($userID,$dataJSON){
 		$dataJSON = urldecode($dataJSON);
 		$data = json_decode($dataJSON);
-		$output = $this->users_model->update_user($userID,$data);
+		$output = $this->users_model->update($userID,$data);
 		$this->display($output);
 	}
 	/*
 		centre_model
 	*/
-	public function get_centre($centreID){
-		$output = $this->centre_model->get_centre($centreID);
+	public function get_centre(){
+		$output = $this->centre_model->get();
 		$this->display($output);
 	}
 	public function insert_centre(){
-		$output = $this->centre_model->insert_centre( array("hello"=>"world") );
+		$output = $this->centre_model->insert( array("hello"=>"world") );
 		$this->display($output);
 	}
 	public function update_centre($centreID){
-		$output = $this->centre_model->update_centre( $centreID, array("hello"=>"poop") );
+		$output = $this->centre_model->update( $centreID, array("hello"=>"poop") );
 		$this->display($output);
 	}
 	
@@ -51,7 +51,7 @@ class Test extends MY_Controller {
 	public function get_matches($centreID,$start=FALSE,$end=FALSE){
 		$start = urldecode($start);
 		$end   = urldecode($end);
-		$output = $this->matches_model->get_matches($centreID,$start,$end);
+		$output = $this->matches_model->get($centreID,$start,$end);
 		$this->display($output);
 	}
 	public function get_venue_matches($venueID,$start=FALSE,$end=FALSE){
@@ -161,7 +161,7 @@ class Test extends MY_Controller {
 		sports_model
 	*/
 	public function get_sport($sportID){
-		$output = $this->sports_model->get_sport($sportID);
+		$output = $this->sports_model->get($sportID);
 		$this->display($output);
 	}
 	public function get_sport_category_roles($sportID){
@@ -175,23 +175,23 @@ class Test extends MY_Controller {
 	/*
 		teams_model
 	*/
-	public function get_all_teams($centreID){
-		$output = $this->teams_model->get_teams($centreID);
+	public function get_all_teams(){
+		$output = $this->teams_model->get_all();
 		$this->display($output);
 	}
 	/*
 		tournaments_model
 	*/
 	public function get_tournament($tournamentID){
-		$output = $this->tournaments_model->get_tournament($tournamentID);
+		$output = $this->tournaments_model->get($tournamentID);
 		$this->display($output);
 	}
-	public function get_tournaments($centreID){
-		$output = $this->tournaments_model->get_tournaments($centreID);
+	public function get_tournaments(){
+		$output = $this->tournaments_model->get_all();
 		$this->display($output);
 	}
 	public function get_tournament_actors($tournamentID){
-		$output = $this->tournaments_model->get_tournament_actors($tournamentID);
+		$output = $this->tournaments_model->get_actors($tournamentID);
 		$this->display($output);
 	}
 	/*

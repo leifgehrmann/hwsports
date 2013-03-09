@@ -33,7 +33,17 @@ class Tms extends MY_Controller {
 		}
 	}
 
-	public function view($view,$data){
+	/**
+	 * 
+	 *
+	 * @param view 		The view to load
+	 * @param page 		The page ID it will have
+	 * @param title 	
+	 * @param data 		passed in data
+	 */
+	public function view($view,$page,$title,$data){
+		$data['title'] = $title;
+		$data['page'] = $page;
 		$this->load->view('tms/header',$data);
 		$this->load->view('tms/'.$view,$data);
 		$this->load->view('tms/footer',$data);
@@ -41,15 +51,16 @@ class Tms extends MY_Controller {
 
 	public function index()
 	{
-		$this->data['title'] = "Home";
-		$this->data['page'] = "tmshome";
-		$this->view('home',$this->data);
+		// Ideally we should be getting:
+		// list of upcoming matches
+		// list of latest matches
+		// list of upcoming tournament
+		// list of latest tournament
+		
+		$this->view('home',"tmshome","Home",$this->data);
 	}
 	public function tournaments()
-	{
-		$this->data['title'] = "Tournaments";
-		$this->data['page'] = "tournaments";
-		
+	{	
 		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
 		
@@ -136,16 +147,11 @@ class Tms extends MY_Controller {
 			);
 			
 		}
-		
-		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/tournaments',$this->data);
-		$this->load->view('tms/footer',$this->data);
+		$this->view('tournaments',"tournaments","Tournaments",$this->data);
 	}
 	
 	public function tournament($tournamentID)
 	{
-		$this->data['title'] = "Tournament";
-		$this->data['page'] = "tournament";
 		
 		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
@@ -260,6 +266,8 @@ class Tms extends MY_Controller {
 			
 		}
 		
+		$this->data['title'] = "Tournament";
+		$this->data['page'] = "tournament";
 		$this->load->view('tms/header',$this->data);
 		$this->load->view('tms/tournament',$this->data);
 		$this->load->view('tms/footer',$this->data);
@@ -281,8 +289,6 @@ class Tms extends MY_Controller {
 
 	public function venues($action='portal')
 	{
-		$this->data['title'] = "Venues";
-		$this->data['page'] = "venues";
 	
 		// query google maps api for lat / lng of sports centre
 		$address = urlencode($this->data['centre']['address']);
@@ -304,6 +310,8 @@ class Tms extends MY_Controller {
 		$this->data['centreLat'] = $lat;
 		$this->data['centreLng'] = $lng;
 		
+		$this->data['title'] = "Venues";
+		$this->data['page'] = "venues";
 		$this->load->view('tms/header',$this->data);
 		$this->load->view('tms/venues',$this->data);
 		$this->load->view('tms/footer',$this->data);
@@ -432,8 +440,6 @@ class Tms extends MY_Controller {
 	}
 	public function settings()
 	{
-		$this->data['title'] = "Settings";
-		$this->data['page'] = "settings";
 			
 		$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
 		$this->form_validation->set_rules('shortName', 'Short Name', 'required|xss_clean');
@@ -534,6 +540,8 @@ class Tms extends MY_Controller {
 				);
 			}
 
+			$this->data['title'] = "Settings";
+			$this->data['page'] = "settings";
 			$this->load->view('tms/header',$this->data);
 			$this->load->view('tms/settings', $this->data);
 			$this->load->view('tms/footer',$this->data);
@@ -541,10 +549,7 @@ class Tms extends MY_Controller {
 	}
 
 	public function appearance()
-	{
-		$this->data['title'] = "Settings";
-		$this->data['page'] = "settings";
-			
+	{		
 		$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
 		$this->form_validation->set_rules('shortName', 'Short Name', 'required|xss_clean');
 		$this->form_validation->set_rules('address', 'Address', 'required|xss_clean');
@@ -608,6 +613,8 @@ class Tms extends MY_Controller {
 				'value' => $this->form_validation->set_value('footerText',(isset($this->data['centre']['footerText']) ? $this->data['centre']['footerText'] : '') )
 			);
 			
+			$this->data['title'] = "Settings";
+			$this->data['page'] = "settings";
 			$this->load->view('tms/header',$this->data);
 			$this->load->view('tms/settings', $this->data);
 			$this->load->view('tms/footer',$this->data);
