@@ -48,7 +48,7 @@ class Users_model extends MY_Model {
 				$all[] = $user;
 			}
 		}
-		return $all
+		return $all;
 	}
 
 	public function update_user($userID, $data)
