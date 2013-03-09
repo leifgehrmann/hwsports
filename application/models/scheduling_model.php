@@ -171,7 +171,7 @@ class Scheduling_model extends MY_Model {
 		$combinations = $this->round_robin($teamIDs);
 
 		// For every single combination of a game we want.
-		foreach($combinations as $combinations)
+		foreach($combinations as $combination)
 		{
 			$added = false; // This will indicate if we could find a place to put this match in.
 			$teamA = $combination[0];
