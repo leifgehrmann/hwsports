@@ -61,6 +61,12 @@ class Test extends MY_Controller {
 	/*
 		scheduling_model
 	*/
+
+	// Try: http://hwsports.co.uk/test/schedule_football_family/37
+	public function schedule_football_family($tournamentID){
+		$output = $this->scheduling_model->schedule_football_family($tournamentID);
+		$this->display($output);
+	}
 	// Try: http://hwsports.co.uk/test/get_match_date_times/2013-03-14T10%3A30%3A00%2B0000/2013-03-20T10%3A30%3A00%2B0000
 	public function get_match_date_times($tournamentStart,$tournamentEnd){
 		$interval = new DateInterval('PT30M');
