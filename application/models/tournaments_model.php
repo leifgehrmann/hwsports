@@ -105,7 +105,6 @@ class Tournaments_model extends MY_Model {
 	public function get_actors($ID) {
 		// Load models we might be referencing
 		$this->load->model('users_model');
-		$this->load->model('teams_model');
 		// Check if ID exists
 		if(!$this->get($ID)) return FALSE;
 		// Select all info about actors for this specific tournament - join the roles table so we get info about how to handle the different roles
