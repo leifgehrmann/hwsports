@@ -46,7 +46,7 @@ class Teams_model extends MY_Model {
 	}
 	
 	/**
-	 * Creates a new tournament with data, using the sport ID as specified.
+	 * Creates a new team with data
 	 * Returns the ID of the new object if it was successful.
 	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
 	 *  
@@ -57,7 +57,7 @@ class Teams_model extends MY_Model {
 	}
 
 	/**
-	 * Updates data for a specific tournament.
+	 * Updates data for a specific team.
 	 * Returns TRUE on success.
 	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
 	 *
@@ -68,29 +68,17 @@ class Teams_model extends MY_Model {
 	}
 	
 	/**
-	 * Adds users to team
+	 * Adds user IDs to teamsUsers table
 	 *  
 	 * @return bool
 	 **/
-	public function add_team_members($ID, $userIDs)
-	{	
+	public function add_team_members($ID, $userIDs) {	
 		$this->db->trans_start();
-		
-		$insertDataArray = array();
 		foreach($userIDs as $userID) {
-			$insertDataArray[] = array(
-				$this->objectIDKey => $this->db->escape($ID),
-				'userID' => $this->db->escape($userID)
-			);
+			$this-db->insert("teamsUsers", array($this->objectIDKey => $ID, "userID" => $userID) ); 
 		}
-		if ($this->db->insert_batch('teamsUsers',$insertDataArray)) {
-			// db success
-			$this->db->trans_complete();
-			return true;
-		} else {
-			// db fail
-			return false;
-		}
+		$this->db->trans_complete();
+		return ($this->db->affected_rows() ? TRUE : FALSE);
 	}
 	
 	

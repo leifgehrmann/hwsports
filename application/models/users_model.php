@@ -1,46 +1,71 @@
 <?php
 class Users_model extends MY_Model {
 
+	public function __construct() {
+		// Load models we might be referencing
+		$this->load->model('users_model');
+		
+		// Basic variables which apply to all table operations
+		$this->objectIDKey = "userID";
+		$this->dataTableName = "userData";
+		$this->relationTableName = "users";
+    }
+	
 	/**
 	 * Returns all data about a specific user
 	 *  
 	 * @return array
 	 **/
-	public function get_user($userID) {
+	public function get($ID) {
 		// Get all the userData
-		$user = $this->get_object($userID, "userID", "userData");
-		return $user;
+		return $this->get_object($ID, $this->objectIDKey, $this->dataTableName);
 	}
 	
 	/**
-	 * Returns all data about all users at a specific centre
-	 *  
+	 * Returns all data about all users at current centre
+	 * 
 	 * @return array
 	 **/
-	public function get_users($centreID) {
-		// To find out if a user is associated with the centre...
-		// Tickets > "userID"
-		// Tournaments[teamSport=1] > "teams"    >> TeamsUsers > "userID"
-		// Tournaments[teamSport=0] > "athletes" >> "userID"
-		// UserData[centreID=1] > userID
-		
-		// Query to return the IDs for everything which takes place at the specified sports centre
-		$IDsQuery = $this->db->query("SELECT userID FROM userData WHERE `key`='centreID' AND `value`=".$this->db->escape($centreID));
+	public function get_all() {
+		// Fetch the IDs for everything at the current sports centre
+		$IDRows = $this->db->get_where($this->relationTableName, array('centreID' => $this->centreID))->result_array();
+		// Create empty array to output if there are no results
+		$all = array();
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
-		foreach($IDsQuery->result_array() as $IDRow) {
-			$all[] = $this->get_user($IDRow['userID']);
+		foreach($IDRows as $IDRow) {
+			$all[] = $this->get($IDRow[$this->objectIDKey]);
 		}
-		return (empty($all) ? FALSE : $all);
+		return $all;
 	}
 	
+	/**
+	 * Creates a new tournament with data, using the sport ID as specified.
+	 * Returns the ID of the new object if it was successful.
+	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
+	 *  
+	 * @return int
+	 **/
+	public function insert($data, $relationIDs=array()) {
+		return $this->insert_object($data, $this->objectIDKey, $this->dataTableName, $relationIDs);
+	}
+
+	/**
+	 * Updates data for a specific tournament.
+	 * Returns TRUE on success.
+	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
+	 *
+	 * @return boolean
+	 **/
+	public function update($ID, $data) {
+		return $this->update_object($ID, $this->objectIDKey, $data, $this->dataTableName);
+	}
+
 	/**
 	 * Returns all data about users in a particular tournament
 	 *  
 	 * @return array
 	 **/
 	public function get_tournament_users($tournamentID) {
-		// Load the teams model since we want to use the get_tournament_teams function
-		$this->load->model('users_model');
 		// Loop through all teams in tournament
 		foreach($this->teams_model->get_tournament_teams($tournamentID) as $team) {
 			// Loop through all users in team, add to output array
@@ -50,29 +75,7 @@ class Users_model extends MY_Model {
 		}
 		return (empty($all) ? FALSE : $all);
 	}
-
-	public function update_user($userID, $data)
-	{
-		$this->db->trans_start();
-			foreach($data as $key=>$value) {
-				$escKey = $this->db->escape($key);
-				$escValue = $this->db->escape($value);
-				$dataQueryString1 = "DELETE FROM `userData` WHERE `key`=$escKey AND `userID`=$userID";
-				$dataQueryString2 = "INSERT INTO `userData` (
-										`userID`,
-										`key`,
-										`value`
-									) VALUES (
-										$userID,
-										$escKey,
-										$escValue
-									)";
-				$this->db->query($dataQueryString1);
-				$this->db->query($dataQueryString2);
-			}
-			return $this->db->trans_complete();
-	}
-
+	
 	/**
 	 * returns an array of teamIDs that the user
 	 * is a part of.
