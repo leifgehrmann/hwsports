@@ -106,9 +106,8 @@ class MY_Model extends CI_Model {
 		if( $relationTableName && count($relations) ) {
 			// Update the correct row in the relation table with the new relation IDs specified 
 			$this->db->where($objectIDKey, $objectID);
-			$this->db->update($relationTableName, $relations);
-			// No rows were affected? Something went wrong.
-			if($this->db->affected_rows()==0) return FALSE;
+			// If the update fails, return FALSE
+			if(!$this->db->update($relationTableName, $relations))return FALSE;
 		}
 		
 		// Lump all updates into one transaction
@@ -123,14 +122,12 @@ class MY_Model extends CI_Model {
 			$update = array(
 				'value' => $value
 			);
-			// Create the update - active record sanitizes inputs automatically
+			// Create the update - active record sanitizes inputs automatically. Return false if update fails.
 			$this->db->where($where);
-			$this->db->update($dataTableName, $update);			
+			if(!$this->db->update($dataTableName, $update)) return FALSE;			
 		}
 		// Complete transaction, all is well
 		$this->db->trans_complete();
-		// No rows were affected? Something went wrong.
-		if($this->db->affected_rows()==0) return FALSE;
 		
 		// Return TRUE: if we got to here it must have all worked
 		return TRUE;
