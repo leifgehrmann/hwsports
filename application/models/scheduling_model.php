@@ -103,6 +103,7 @@ class Scheduling_model extends MY_Model {
 				else
 					unset($matchDateTimes[$date][$dateTime]);
 			}
+			// If there are no possible datetimes for this day, remove the entire day
 			if(count($matchDateTimes[$date]) == 0)
 				unset($matchDateTimes[$date]);
 		}
@@ -134,6 +135,9 @@ class Scheduling_model extends MY_Model {
 				if( count($matchDateTimes[$date][$dateTime]['venueIDs']) == 0 )
 					unset($matchDateTimes[$date][$dateTime]);
 			}
+			// If there are no possible datetimes for this day, remove the entire day
+			if(count($matchDateTimes[$date]) == 0)
+				unset($matchDateTimes[$date]);
 		}
 		var_dump($matchDateTimes);
 		die();
