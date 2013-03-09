@@ -126,7 +126,7 @@ class Scheduling_model extends MY_Model {
 				foreach( $venueIDs as $venueID )
 				{
 					// is the venue available at this time?
-					$venueMatches = $this->matches_model->get_venue_matches($startDateTime,$endDateTime);
+					$venueMatches = $this->matches_model->get_venue_matches($venueID,$startDateTime,$endDateTime);
 					if( count($venueMatches) != 0 )
 						$matchDateTimes[$date][$dateTime]['venueIDs'][] = $venueID;
 				}
@@ -135,7 +135,7 @@ class Scheduling_model extends MY_Model {
 					unset($matchDateTimes[$date][$dateTime]);
 			}
 		}
-		//var_dump($matchDateTimes);
+		var_dump($matchDateTimes);
 		die();
 
 		// We now want to create our individual matches for each
