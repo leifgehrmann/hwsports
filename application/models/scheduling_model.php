@@ -29,9 +29,12 @@ class Scheduling_model extends MY_Model {
 			$matchWeekdayStartTimes[$weekday]    = explode(',',$tournament['startTimes'.$weekday]);
 		}
 
-		$matchDuration = new DateInterval('P'.$tournament['matchDuration'].'M'); // Match duration is assumed to be in minutes
+		$matchDuration = new DateInterval('PT'.$tournament['matchDuration'].'M'); // Match duration is assumed to be in minutes
+		$matchUmpiresBoolean = true; // This is hard coded for now. This is whether we need umpires or not.
 		$matchMinimumUmpires = 1; // This is hard coded for now. This is the minimum number of umpires that must be present at a match
+		$matchMaximumUmpires = 1; // This is hard coded for now. This is the maximum number of umpires that can be present at a match
 		$matchMaximumPlays = 1; // This is hard coded for now. This is the maximum number of matches a player must play
+
 
 		$umpireIDs  = explode(',',$tournament['umpires']);
 		$teamIDs    = explode(',',$tournament['teams']);
@@ -214,19 +217,19 @@ class Scheduling_model extends MY_Model {
 
 					// BUT we must also consider that the umpire may be assigned
 					// already to another match. so again, we have to check for
-					// any overlaps NEVERMIND LETS LET THE UNSET HANDLE THAT
+					// any overlaps NEVERMIND LET'S LET THE UNSET HANDLE THAT
 					// IT IS MUCH EASIER!!!
 
 					// First the array of umpires by order of least use (aka, 1 means less busy than 4)
 					$u = $matchDateTimes[$date][$dateTime]['umpireIDs']; // array of umpires for this match
-					$matchUmpires = array();
-					usort($array, function($a, $b)
+					usort($u, function($a, $b)
 						{
 							if($umpireCount[$a] == $umpireCount[$b])
 								return 0;
 							return $umpireCount[$a] < $umpireCount[$b] ? -1 : 1;
 						});
-					for($i=0;$i<$matchMaximumUmpires;$i++)
+					$matchUmpireIDs = array();
+					for($i=0;$i<count($u);$i++)
 					{
 						$umpireCount[$u[$i]] = $umpireCount[$u[$i]] + 1;
 						$matchUmpireIDs[] = $u[$i];
@@ -318,6 +321,41 @@ class Scheduling_model extends MY_Model {
 
 	public function schedule_running($tournamentID)
 	{
+		$this->load->model('users_model');
+		$this->load->model('matches_model');
+		$this->load->model('tournaments_model');
+
+		$participantIDs
+
+		// Get tournament Information
+		$tournament = $this->tournaments_model->get_tournament($tournamentID);
+
+		$tournamentStart     = new DateTime($tournament['tournamentStart']);
+		$tournamentEnd       = new DateTime($tournament['tournamentEnd']);
+
+		// Returns an associative array of weekday start times.
+		// This is for every day of the week.
+		for( $i=0; $i<7; $i++ )
+		{
+			$weekday = $this->get_weekday_string($i);
+			$matchWeekdayStartTimes[$weekday]    = explode(',',$tournament['startTimes'.$weekday]);
+		}
+
+		$matchDuration = new DateInterval('PT'.$tournament['matchDuration'].'M'); // Match duration is assumed to be in minutes
+		$matchMinimumUmpires = 1; // This is hard coded for now. This is the minimum number of umpires that must be present at a match
+		$matchMaximumPlays = 1; // This is hard coded for now. This is the maximum number of matches a player must play
+
+		$umpireIDs  = explode(',',$tournament['umpires']);
+		$teamIDs    = explode(',',$tournament['teams']);
+		$venueIDs   = explode(',',$tournament['venues']);
+
+		$umpires = array();
+		foreach($umpireIDs as $umpireID)
+		{
+			$umpires[] = $this->users_model->get_umpire($umpireID);
+		}
+		// Calculate number of matches we need
+
 		// For every individual player
 
 		// Get performance of every individual player
