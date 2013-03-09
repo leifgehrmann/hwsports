@@ -2,10 +2,7 @@
 class Tournaments_model extends MY_Model {
 	
 	public function __construct() {
-		// Load models we might be referencing
-		$this->load->model('users_model');
-		$this->load->model('teams_model');
-		
+        parent::__construct();
 		// Basic variables which apply to all table operations
 		$this->objectIDKey = "tournamentID";
 		$this->dataTableName = "tournamentData";
