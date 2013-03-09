@@ -87,13 +87,11 @@ class MY_Model extends CI_Model {
 				'key'   => $key,
 				'value' => $value
 			);
-			// Create the insert - active record sanitizes inputs automatically
-			$this->db->insert($dataTableName, $insert);			
+			// Create the insert - active record sanitizes inputs automatically. Return false if insert fails.
+			if(!$this->db->insert($dataTableName, $insert)) return FALSE;			
 		}
 		// Complete transaction, all is well
 		$this->db->trans_complete();
-		// No rows were affected? Something went wrong.
-		if($this->db->affected_rows()==0) return FALSE;
 		
 		// Return the newly generated ID of this object, ready for referencing with get_object
 		return $objectID;
