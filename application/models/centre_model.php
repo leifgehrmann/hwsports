@@ -1,34 +1,59 @@
 <?php
 class Centre_model extends MY_Model {
 
+	public function __construct() {
+        parent::__construct();
+		// Basic variables which apply to all table operations
+		$objectIDKey = "centreID";
+		$dataTableName = "centreData";
+    }
 	/**
 	 * Returns an array of all data about a specific centre
-	 *  
+	 * 
 	 * @return array
 	 **/
-	public function get_centre($centreID) {
-		return $this->get_object($centreID, "centreID", "centreData");
+	public function get($ID) {
+		return $this->get_object($ID, $objectIDKey, $dataTableName);
 	}
 
 	/**
 	 * Creates a new centre with data.
 	 * Returns the centreID of the new centre if it was successful.
 	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
-	 *  
+	 * 
 	 * @return int
 	 **/
-	public function insert_centre($data) {
-		return $this->insert_object($data, "centreID", "centreData");
+	public function insert($data) {
+		return $this->insert_object($data, $objectIDKey, $dataTableName);
 	}
 	
 	/**
 	 * Updates data for a specific centre.
 	 * Returns TRUE on success.
 	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
+	 * 
+	 * @return boolean
+	 **/
+	public function update($ID, $data) {
+		return $this->update_object($ID, $data, $objectIDKey, $dataTableName);
+	}
+	
+	/**
+	 * Deletes a centre with data.
+	 * Also deletes all objects which depend on it, unless $testRun is TRUE in which case a string is returned showing all
+	 * Returns TRUE on success.
+	 * Returns FALSE on any error or deletion failure (most likely forgotten foreign key restraints).
 	 *
 	 * @return boolean
 	 **/
-	public function update_centre($centreID, $data) {
-		return $this->update_object($centreID, "centreID", $data, 'centreData');
+	public function delete($ID, $testRun=TRUE) {
+		$dependents = array(
+			'sports' => 'centreID',
+			'venues' => 'centreID',
+			'tournaments' => 'centreID',
+			'teams' => 'centreID'
+		);
+		return $this->delete_object($testRun, $ID, $objectIDKey, $dataTableName, false, $dependents);
 	}
+	
 }
