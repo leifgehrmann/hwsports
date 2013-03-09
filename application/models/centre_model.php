@@ -4,8 +4,8 @@ class Centre_model extends MY_Model {
 	public function __construct() {
         parent::__construct();
 		// Basic variables which apply to all table operations
-		$objectIDKey = "centreID";
-		$dataTableName = "centreData";
+		$this->objectIDKey = "centreID";
+		$this->dataTableName = "centreData";
     }
 	/**
 	 * Returns an array of all data about a specific centre
@@ -13,7 +13,7 @@ class Centre_model extends MY_Model {
 	 * @return array
 	 **/
 	public function get($ID) {
-		return $this->get_object($ID, $objectIDKey, $dataTableName);
+		return $this->get_object($ID, $this->$objectIDKey, $this->$dataTableName);
 	}
 
 	/**
@@ -24,7 +24,7 @@ class Centre_model extends MY_Model {
 	 * @return int
 	 **/
 	public function insert($data) {
-		return $this->insert_object($data, $objectIDKey, $dataTableName);
+		return $this->insert_object($data, $this->$objectIDKey, $this->$dataTableName);
 	}
 	
 	/**
@@ -35,7 +35,7 @@ class Centre_model extends MY_Model {
 	 * @return boolean
 	 **/
 	public function update($ID, $data) {
-		return $this->update_object($ID, $data, $objectIDKey, $dataTableName);
+		return $this->update_object($ID, $data, $this->$objectIDKey, $this->$dataTableName);
 	}
 	
 	/**
@@ -53,7 +53,7 @@ class Centre_model extends MY_Model {
 			'tournaments' => 'centreID',
 			'teams' => 'centreID'
 		);
-		return $this->delete_object($testRun, $ID, $objectIDKey, $dataTableName, false, $dependents);
+		return $this->delete_object($testRun, $ID, $this->$objectIDKey, $this->$dataTableName, false, $dependents);
 	}
 	
 }
