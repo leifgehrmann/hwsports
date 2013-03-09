@@ -48,13 +48,15 @@ class Test extends MY_Controller {
 	/*
 		matches_model
 	*/
-	public function get_matches($centreID){
-		$output = $this->matches_model->get_matches($centreID);
+	public function get_matches($centreID,$start=FALSE,$end=FALSE){
+		$start = urldecode($start);
+		$end   = urldecode($end);
+		$output = $this->matches_model->get_matches($centreID,$start,$end);
 		$this->display($output);
 	}
-	public function get_venue_matches($venueID,$start=NULL,$end=NULL){
-		$start = new DateTime(urldecode($start));
-		$end   = new DateTime(urldecode($end));
+	public function get_venue_matches($venueID,$start=FALSE,$end=FALSE){
+		$start = urldecode($start);
+		$end   = urldecode($end);
 		$output = $this->matches_model->get_venue_matches($venueID,$start,$end);
 		$this->display($output);
 	}
@@ -180,12 +182,16 @@ class Test extends MY_Controller {
 	/*
 		tournaments_model
 	*/
-	public function get_tournament($tID){
-		$output = $this->tournaments_model->get_tournament($tID);
+	public function get_tournament($tournamentID){
+		$output = $this->tournaments_model->get_tournament($tournamentID);
 		$this->display($output);
 	}
 	public function get_tournaments($centreID){
 		$output = $this->tournaments_model->get_tournaments($centreID);
+		$this->display($output);
+	}
+	public function get_tournament_actors($tournamentID){
+		$output = $this->tournaments_model->get_tournament_actors($tournamentID);
 		$this->display($output);
 	}
 	/*

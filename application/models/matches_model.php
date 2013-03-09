@@ -40,14 +40,49 @@ class Matches_model extends MY_Model {
 	 *  
 	 * @return array
 	 **/
-	public function get_matches($centreID) {
-		// Query to return the IDs for everything which takes place at the specified sports centre
-		$IDsQuery = $this->db->query("SELECT matchID FROM matches LEFT JOIN venues ON matches.venueID = venues.venueID WHERE venues.centreID = ".$this->db->escape($centreID));
-		// Loop through all result rows, get the ID and use that to put all the data into the output array 
-		foreach($IDsQuery->result_array() as $IDRow) {
-			$all[] = $this->get_match($IDRow['matchID']);
+	public function get_matches($centreID,$startTime=FALSE,$endTime=FALSE) {
+
+		if($startTime==FALSE && $endTime == FALSE) {
+			// Query to return the IDs for everything which takes place at the specified sports centre
+			$IDsQuery = $this->db->query("SELECT matchID FROM matches LEFT JOIN venues ON matches.venueID = venues.venueID WHERE venues.centreID = ".$this->db->escape($centreID));
+			// Loop through all result rows, get the ID and use that to put all the data into the output array 
+			$all = array();
+			foreach($IDsQuery->result_array() as $IDRow) {
+				$all[] = $this->get_match($IDRow['matchID']);
+			}
+			return $all;
+		} else {
+
+			$startTime = ( $startTime ? $startTime : new DateTime('1st January 0001'));
+			$endTime = ( $endTime ? $endTime : new DateTime('31st December 9999'));
+
+			try {
+				$startTime = ( is_object($startTime) ? $startTime : new DateTime($startTime));
+				$endTime = ( is_object($endTime) ? $endTime : new DateTime($endTime));
+			} catch (Exception $e) {
+				log_message('error', "ERROR: Invalid input date. Debug Exception: ".$e->getMessage());
+				return FALSE;
+			}
+
+			$matches = $this->get_matches($venueID);
+			if($matches == FALSE) return FALSE;
+
+			$filtered = array();
+			foreach($matches as $match) {
+
+				try {
+					$matchStartTime = new DateTime($match['startTime']);
+					$matchEndTime 	= new DateTime($match['endTime']);
+				} catch (Exception $e) {
+					log_message('error', "ERROR: Invalid date in database. Debug Exception: ".$e->getMessage());
+					return FALSE;
+				}
+
+				if( $startTime < $matchEndTime && $matchStartTime < $endTime )
+					$filtered[] = $match;
+			}
+			return $filtered;
 		}
-		return (empty($all) ? FALSE : $all);
 	}
 
 	/**
@@ -72,44 +107,51 @@ class Matches_model extends MY_Model {
 	 * @param endTime 	A dateTime Object
 	 * @return array
 	 **/
-	public function get_venue_matches($venueID,$startTime=NULL,$endTime=NULL)
+	public function get_venue_matches($venueID,$startTime=FALSE,$endTime=FALSE)
 	{
-		// verify that the venue exists
-		$this->load->model('venues_model');
-		if($this->venues_model->get_venue($venueID) == FALSE) return FALSE;
+		if($startTime==FALSE && $endTime == FALSE) {
+			// verify that the venue exists
+			$this->load->model('venues_model');
+			if($this->venues_model->get_venue($venueID) == FALSE) return FALSE;
 
-		// Get valid database inputs.
-		$startTime = $this->db->escape(( is_null($startTime) ? "0" : datetime_to_standard($startTime) )); 	// 0 is less than 0000-01-01... Hopefully
-		$endTime = $this->db->escape(( is_null($endTime) ? ":" : datetime_to_standard($endTime) ));		// : is greater than 9, which is the largest digit so far
-		
-		// Returns all the start times
-		$subquery = "SELECT matchID, 
-						MAX(CASE WHEN `key`='startTime' THEN value END ) AS startTime, 
-						MAX(CASE WHEN `key`='endTime' THEN value END ) AS endTime
-						FROM matchData GROUP BY matchID ";
+			// Query to return the IDs for everything which takes place at the specified sports centre
+			$IDsQuery = $this->db->select("matchID")->where("venueID", $venueID)->get("matches")->result_array();
+			// Loop through all result rows, get the ID and use that to put all the data into the output array 
+			$all = array();
+			foreach($IDsQuery as $IDRow) {
+				$all[] = $this->get_match($IDRow['matchID']);
+			}
+			return $all;
+		} else {
 
-		$queryString = "SELECT M.matchID FROM matches AS M, 
-						($subquery) AS D 
-						WHERE M.venueID = $venueID 
-						AND M.matchID = D.matchID
-						AND   ( 
-							( 
-								strcmp($startTime, D.startTime) <= 0
-								AND strcmp(D.startTime,$endTime) <= 0 
-							)
-							OR 
-							( 
-								strcmp($startTime, D.endTime) <= 0 
-								AND strcmp(D.endTime,$endTime) <= 0
-							) 
-						)";
-		$queryData = $this->db->query($queryString);
-		$data = $queryData->result_array();
-		$output = array();
-		foreach($data as $match) {
-			$output[] = $this->get_match($match['matchID']);
+			$startTime = ( $startTime ? $startTime : new DateTime('1st January 0001'));
+			$endTime = ( $endTime ? $endTime : new DateTime('31st December 9999'));
+
+			try {
+				$startTime = ( is_object($startTime) ? $startTime : new DateTime($startTime));
+				$endTime = ( is_object($endTime) ? $endTime : new DateTime($endTime));
+			} catch (Exception $e) {
+				return "ERROR: Invalid input date in database. Debug Exception: ".$e->getMessage();
+			}
+
+			$matches = $this->get_venue_matches($venueID);
+			if($matches == FALSE) return FALSE;
+
+			$filtered = array();
+			foreach($matches as $match) {
+
+				try {
+					$matchStartTime = new DateTime($match['startTime']);
+					$matchEndTime 	= new DateTime($match['endTime']);
+				} catch (Exception $e) {
+					return "ERROR: Invalid date in database. Debug Exception: ".$e->getMessage();
+				}
+
+				if( $startTime < $matchEndTime && $matchStartTime < $endTime )
+					$filtered[] = $match;
+			}
+			return $filtered;
 		}
-		return $output;
 	}
 
 	/**
