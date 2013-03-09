@@ -78,6 +78,9 @@ class Matches_model extends MY_Model {
 		$endTime = $this->db->escape(( is_null($endTime) ? ":" : datetime_to_standard($endTime) ));		// : is greater than 9, which is the largest digit so far
 		var_dump($startTime);
 		var_dump($endTime);
+		$startTime = "Hello";
+		$startTime = "World";
+		
 		// Returns all the start times
 		$subquery = "SELECT matchID, 
 						MAX(CASE WHEN `key`='startTime' THEN value END ) AS startTime, 
