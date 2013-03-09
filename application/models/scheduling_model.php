@@ -123,7 +123,7 @@ class Scheduling_model extends MY_Model {
 				// keep a list of venues available for this slot.
 				$matchDateTimes[$date][$dateTime]['venueIDs'] = array();
 				// For each venue
-				foreach( $venuesIDs as $venueID )
+				foreach( $venueIDs as $venueID )
 				{
 					// is the venue available at this time?
 					$venueMatches = $this->matches_model->get_venue_matches($startDateTime,$endDateTime);
