@@ -86,59 +86,25 @@ class Tournaments_model extends MY_Model {
 	}
 
 	/**
-	 * Creates a tournament with data.
+	 * Creates a new tournament with data, using the sport ID as specified.
+	 * Returns the ID of the new object if it was successful.
+	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
 	 *  
-	 * @return integer ID of new tournament, or FALSE if failed
+	 * @return int
 	 **/
-	public function insert_tournament($data) {	
-		// Get sport ID from input data, then unset it from data array since we don't want it in tournamentData, it's a field in the tournaments table
-		$sportID = $data['sport'];
-		unset($data['sport']);
-		
-		$this->db->query("INSERT INTO tournaments (centreID,sportID) VALUES ({$this->data['centre']['centreID']},$sportID)");
-		$tournamentID = $this->db->insert_id();
-		// Insert failed, we can't proceed
-		if($this->db->affected_rows()==0) return FALSE;
-		
-		// Batch insert, do it as one transaction for efficiency
-		$this->db->trans_start();
-		$insertDataArray = array();
-		foreach($data as $key=>$value) {
-			$insertDataArray[] = array(
-				'tournamentID' => $tournamentID,
-				'key' => $key,
-				'value' => $value
-			);
-		}
-		// Batch insert failed?
-		if ( !$this->db->insert_batch('tournamentData',$insertDataArray) ) return FALSE;
-		
-		// Success
-		$this->db->trans_complete();
-		return $tournamentID;
+	public function insert_tournament($data,$sportID) {
+		return $this->insert_object($data, "tournamentID", "tournamentData", );
 	}
 
 	/**
-	 * Updates a tournament with data.
+	 * Updates data for a specific tournament.
+	 * Returns TRUE on success.
+	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
 	 *
 	 * @return boolean
 	 **/
-	public function update_tournament($tournamentID, $data){
-
-		$this->db->trans_start();
-
-			foreach($data as $key=>$value) {
-				if(!is_string($key)) return false;
-				$escKey = $this->db->escape($key);
-				$escValue = $this->db->escape($value);
-				$dataQueryString = 	"UPDATE `tournamentData` ".
-									"SET `value`=$escValue ".
-									"WHERE `key`=$escKey ".
-									"AND `tournamentID`=$tournamentID";
-				$this->db->query($dataQueryString);
-			}
-			$this->db->trans_complete();
-			return true;
+	public function update_tournament($tournamentID, $data) {
+		return $this->update_object($tournamentID, "tournamentID", $data, 'tournamentData');
 	}
 
 	/**
@@ -147,9 +113,9 @@ class Tournaments_model extends MY_Model {
 	 * @return boolean
 	 **/
 	public function delete_tournament($tournamentID){
-			$this->db->query("DELETE FROM tournamentData WHERE tournamentID = $tournamentID");
-			$this->db->query("DELETE FROM tournaments WHERE tournamentID = $tournamentID");
-			return true;
+		//$this->db->query("DELETE FROM tournamentData WHERE tournamentID = $tournamentID");
+		//$this->db->query("DELETE FROM tournaments WHERE tournamentID = $tournamentID");
+		return $this->delete_object($tournamentID, "tournamentID", $data, 'tournamentData');
 	}
 
 }
