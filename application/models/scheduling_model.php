@@ -18,6 +18,9 @@ class Scheduling_model extends MY_Model {
 		// Get tournament Information
 		$tournament = $this->tournaments_model->get_tournament($tournamentID);
 
+		if($tournament==FALSE)
+			return FALSE;
+
 		$tournamentStart     = new DateTime($tournament['tournamentStart']);
 		$tournamentEnd       = new DateTime($tournament['tournamentEnd']);
 
