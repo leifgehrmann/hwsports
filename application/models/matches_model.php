@@ -89,14 +89,14 @@ class Matches_model extends MY_Model {
 						AND M.matchID = D.matchID
 						AND   ( 
 							( 
-								strcmp($startTime, D.startTime) <= 0". // startTime is less or equal to than match start time
-								"AND strcmp(D.startTime,$endTime) <= 0". // match start time is less of equal to than end time
-							")
+								strcmp($startTime, D.startTime) <= 0 /* startTime is less or equal to than match start time */
+								AND strcmp(D.startTime,$endTime) <= 0 /* match start time is less of equal to than end time */
+							)
 							OR 
 							( 
-								strcmp($startTime, D.endTime) <= 0". // startTime is less than match end time
-								"AND strcmp(D.endTime,$endTime) <= 0". // match end time is less than end time
-							") 
+								strcmp($startTime, D.endTime) <= 0 /* startTime is less than match end time */
+								AND strcmp(D.endTime,$endTime) <= 0 /* match end time is less than end time */
+							) 
 						)";
 		$queryData = $this->db->query($queryString);
 		$data = $queryData->result_array();
