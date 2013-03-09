@@ -1,39 +1,70 @@
 <?php
-class Matches_model extends CI_Model {
+class Matches_model extends MY_Model {
 
 	/**
-	 * $matchID is int(11)
-	 *  
-	 * @return boolean
-	 **/
-
-	public function match_exists($matchID)
-	{
-		$output = array();
-		$queryString = 	"SELECT ".$this->db->escape($matchID)." AS matchID, ".
-						"EXISTS(SELECT 1 FROM matches WHERE matchID = ".$this->db->escape($matchID).") AS `exists`";
-		$queryData = $this->db->query($queryString);
-		$output = $queryData->row_array();
-		return $output['exists'];
-	}
-
-	/**
-	 * Returns a multidimensional array of match data
+	 * Returns all data about a specific match, including related data (sport, sport category, venue, tournament)
 	 *  
 	 * @return array
 	 **/
-	public function get_matches($centreID)
-	{
-		$output = array();
-		$queryString = "SELECT matchID FROM matches LEFT JOIN venues ON matches.venueID = venues.venueID WHERE venues.centreID = ".$this->db->escape($centreID);
-		$queryData = $this->db->query($queryString);
-		$data = $queryData->result_array();
-		foreach($data as $match) {
-			$output[] = $this->get_match($match['matchID']);
+	public function get_match($matchID) {
+		// The relations we are setting up here will pull all the data about this matches sport type, the venue it is in and the tournament it is in
+		$relations = array(
+						array( 
+							"objectIDKey" => "sportID",
+							"dataTableName" => "sportData",
+							"relationTableName" => "sports",
+							"relations" => array( 
+								array( 
+									"objectIDKey" => "sportCategoryID",
+									"dataTableName" => "sportCategoryData"
+								)
+							)
+						),
+						array( 
+							"objectIDKey" => "venueID",
+							"dataTableName" => "venueData"
+						),
+						array( 
+							"objectIDKey" => "tournamentID",
+							"dataTableName" => "tournamentData"
+						)
+					);
+		// Get all data about this match from matchData, the append all the data from associated tables as specified above
+		$match = $this->get_object($matchID, "matchID", "matchData", "matches", $relations);
+		// We could do some other match-specific functional processing here before returning the results if we need to
+		return $match;
+	}	
+	
+	/**
+	 * Returns all data about all matches at a specific centre
+	 *  
+	 * @return array
+	 **/
+	public function get_matches($centreID) {
+		// Query to return the IDs for everything which takes place at the specified sports centre
+		$IDsQuery = $this->db->query("SELECT matchID FROM matches LEFT JOIN venues ON matches.venueID = venues.venueID WHERE venues.centreID = ".$this->db->escape($centreID));
+		// Loop through all result rows, get the ID and use that to put all the data into the output array 
+		foreach($IDsQuery->result_array() as $IDRow) {
+			$all[] = $this->get_match($IDRow['matchID']);
 		}
-		return $output;
+		return (empty($all) ? FALSE : $all);
 	}
 
+	/**
+	 * Returns all data about all matches in a specific tournament
+	 *  
+	 * @return array
+	 **/
+	public function get_tournament_matches($tournamentID) {
+		// Query to return the IDs for everything which takes place at the specified sports centre
+		$IDsQuery = $this->db->query("SELECT matchID FROM matches WHERE tournamentID = ".$this->db->escape($tournamentID));
+		// Loop through all result rows, get the ID and use that to put all the data into the output array 
+		foreach($IDsQuery->result_array() as $IDRow) {
+			$all[] = $this->get_match($IDRow['matchID']);
+		}
+		return (empty($all) ? FALSE : $all);
+	}
+	
 	/**
 	 * HAS NOT BEEN TESTED
 	 * Returns a multidimensional array of match data
@@ -43,108 +74,35 @@ class Matches_model extends CI_Model {
 	 **/
 	public function get_venue_matches($venueID,$startTime=NULL,$endTime=NULL)
 	{
-		if(is_NULL($startTime))
-			$startTime = "0"; // 0 is less than 0000-01-01... Hopefully
-		else
-			$startTime = datetime_to_standard($startTime);
-		if(is_NULL($endTime))
-			$endTime = ":"; // : is greater than 9, which is the largest digit so far
-		else
-			$endTime = datetime_to_standard($endTime);
+		$startTime = ( is_null($startTime) ? "0" : datetime_to_standard($startTime) ); 	// 0 is less than 0000-01-01... Hopefully
+		$endTime = ( is_null($endTime) ? ":" : datetime_to_standard($endTime) );		// : is greater than 9, which is the largest digit so far
+
 		// Returns all the start times
-		$subquery = "SELECT ".
-						"matchID, ".
-						"MAX(CASE WHEN `key`='startTime' THEN value END ) AS startTime, ".
-						"MAX(CASE WHEN `key`='endTime' THEN value END ) AS endTime ".
-						"FROM matchData GROUP BY matchID ";
+		$subquery = "SELECT matchID, 
+						MAX(CASE WHEN `key`='startTime' THEN value END ) AS startTime, 
+						MAX(CASE WHEN `key`='endTime' THEN value END ) AS endTime
+						FROM matchData GROUP BY matchID ";
 
-		$queryString = 	"SELECT M.matchID ".
-						"FROM matches AS M, ".
-						"(".$subquery.") AS D ".
-						"WHERE M.venueID = ".$venueID." ".
-						"AND M.matchID = D.matchID ".
-						"AND ( ".
-							"( ".
-								"strcmp(".$startTime.", D.startTime) <= 0". // startTime is less or equal to than match start time
-								"AND strcmp(D.startTime,".$endTime.") <= 0". // match start time is less of equal to than end time
-							") ".
-							"OR ".
-							"( ".
-								"strcmp(".$startTime.", D.endTime) <= 0". // startTime is less than match end time
-								"AND strcmp(D.endTime,".$endTime.") <= 0". // match end time is less than end time
-							") ".
-						")";
-		$output = array();
+		$queryString = "SELECT M.matchID FROM matches AS M, 
+						($subquery) AS D 
+						WHERE M.venueID = $venueID 
+						AND M.matchID = D.matchID
+						AND   ( 
+							( 
+								strcmp($startTime, D.startTime) <= 0". // startTime is less or equal to than match start time
+								"AND strcmp(D.startTime,$endTime) <= 0". // match start time is less of equal to than end time
+							")
+							OR 
+							( 
+								strcmp($startTime, D.endTime) <= 0". // startTime is less than match end time
+								"AND strcmp(D.endTime,$endTime) <= 0". // match end time is less than end time
+							") 
+						)";
 		$queryData = $this->db->query($queryString);
 		$data = $queryData->result_array();
 		foreach($data as $match) {
 			$output[] = $this->get_match($match['matchID']);
 		}
-		return $output;
-	}
-	
-	/**
-	 * Returns a 2d array of match data
-	 *  
-	 * @return array
-	 **/
-	public function get_tournament_matches($tournamentID)
-	{
-		$output = array();
-		$queryString = "SELECT matchID FROM matches WHERE tournamentID = ".$this->db->escape($tournamentID);
-		$queryData = $this->db->query($queryString);
-		$data = $queryData->result_array();
-		foreach($data as $match) {
-			$output[] = $this->get_match($match['matchID']);
-		}
-		return $output;
-	}
-
-	/**
-	 * Returns an array of data from a specific match
-	 *  
-	 * @return array
-	 **/
-	public function get_match($matchID)
-	{
-		/* Return the fields that can be discovered within this match */
-		$fields = array();
-		$fieldsString = "SELECT `key` FROM `matchData` WHERE `matchID` = ".$this->db->escape($matchID);
-		$fieldsQuery = $this->db->query($fieldsString);
-		$fieldsResult = $fieldsQuery->result_array();
-		foreach($fieldsResult as $fieldResult) {
-			$fields[] = $fieldResult['key'];
-		}
-		if(count($fields)==0)
-			return array();
-
-		/* Query the ids that are associated with this match */
-		$relational = array();
-		$relationalString = "SELECT matchID, sportID, venueID, tournamentID FROM matches WHERE matchID = ".$this->db->escape($matchID);
-		$relationalQuery = $this->db->query($relationalString);
-		$relationalResult = $relationalQuery->result_array();
-
-		/* Fetch the data */
-		$dataString = "SELECT ";
-		$i = 0;
-		$len = count($fields);
-		foreach($fields as $field) {
-			$dataString .= "MAX(CASE WHEN `key`=".$this->db->escape($field)." THEN value END ) AS ".$this->db->escape($field);
-			if($i<$len-1)
-				$dataString .= ", ";
-			else
-				$dataString .= " ";
-			$i++;
-		}
-		$dataString .= "FROM matchData WHERE matchID = ".$this->db->escape($matchID);
-		$dataQuery = $this->db->query($dataString);
-		$dataResult = $dataQuery->result_array();
-
-		/* Fetch Sport Data */
-		$this->load->model('sports_model');
-		$relationalResult[0] = array_merge($relationalResult[0], $this->sports_model->get_sport($relationalResult[0]['sportID']));
-
-		$output = array_merge(array("matchID"=>$matchID), $relationalResult[0], $dataResult[0]);
 		return $output;
 	}
 
@@ -190,20 +148,16 @@ class Matches_model extends CI_Model {
 
 		$this->db->trans_start();
 
-		if($this->match_exists($matchID)){
-			foreach($data as $key=>$value) {
-				$escKey = $this->db->escape($key);
-				$escValue = $this->db->escape($value);
-				$dataQueryString = 	"UPDATE `matchData` ".
-									"SET `value`=$escValue ".
-									"WHERE `key`=$escKey ".
-									"AND `matchID`=$matchID";
-				$this->db->query($dataQueryString);
-			}
-			$this->db->trans_complete();
-			return true;
-		} else {
-			return false;
+		foreach($data as $key=>$value) {
+			$escKey = $this->db->escape($key);
+			$escValue = $this->db->escape($value);
+			$dataQueryString = 	"UPDATE `matchData` ".
+								"SET `value`=$escValue ".
+								"WHERE `key`=$escKey ".
+								"AND `matchID`=$matchID";
+			$this->db->query($dataQueryString);
 		}
+		$this->db->trans_complete();
+		return true;
 	}
 }

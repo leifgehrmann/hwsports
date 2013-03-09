@@ -51,12 +51,8 @@ class Sis extends MY_Controller {
 			$venue = $this->venues_model->get_venue( $match['venueID'] );
 			$matches[$key]['venue'] = $venue['name'];
 			
-			if($this->tournaments_model->tournament_exists( $match['tournamentID'] )) {
-				$tournament = $this->tournaments_model->get_tournament( $match['tournamentID'] );
-				$matches[$key]['tournament'] = $tournament['name'];
-			} else {
-				$matches[$key]['tournament'] = "None";
-			}
+			$tournament = $this->tournaments_model->get_tournament( $match['tournamentID'] );
+			$matches[$key]['tournament'] = ($tournament ? $tournament['name'] : "None");
 			
 			$matches[$key]['date'] = datetime_to_public($match['startTime']);
 			
@@ -80,49 +76,44 @@ class Sis extends MY_Controller {
 		$this->load->model('venues_model');
 		$this->load->model('matches_model');
 		
-		if( $this->matches_model->match_exists($matchID) ) {
-			$match = $this->matches_model->get_match($matchID);
-			
-			$sport = $this->sports_model->get_sport( $match['sportID'] );
-			$match['sport'] = $sport['name'];
-			
-			$venue = $this->venues_model->get_venue( $match['venueID'] );
-			$match['venue'] = $venue['name'];
-			
-			if($this->tournaments_model->tournament_exists( $match['tournamentID'] )) {
-				$tournament = $this->tournaments_model->get_tournament( $match['tournamentID'] );
-				$match['tournament'] = $tournament['name'];
-			} else {
-				$match['tournament'] = "None";
-			}
-			
-			$match['date'] = date("F jS, Y",$match['startTime']);
-			$match['startTime'] = date("H:i",$match['startTime']);
-			$match['endTime'] = date("H:i",$match['endTime']);
-			
-			$this->data['match'] = $match;
-			
-			$this->data['matchTable'] = array(
-				array('<span class="bold">Name:</span>',$match['name']),
-				array('<span class="bold">Description:</span>',$match['description']),
-				array('<span class="bold">Sport:</span>',$match['sport']),
-				array('<span class="bold">Venue:</span>',$match['venue']),
-				array('<span class="bold">Tournament:</span>',$match['tournament']),
-				array('<span class="bold">Date:</span>',$match['date']),
-				array('<span class="bold">Start Time:</span>',$match['startTime']),
-				array('<span class="bold">End Time:</span>',$match['endTime']),
-			);
-			
-			$this->data['title'] = $match['name'];
-			$this->data['page'] = "match";
-			
-			$this->load->view('sis/header',$this->data);
-			$this->load->view('sis/match',$this->data);
-			$this->load->view('sis/footer',$this->data);
-		} else {
+		$match = $this->matches_model->get_match($matchID);
+		if($match==FALSE) {
 			$this->session->set_flashdata('message',  "Match ID $id does not exist.");
 			redirect("/sis/tournaments", 'refresh');
 		}
+		
+		$sport = $this->sports_model->get_sport( $match['sportID'] );
+		$match['sport'] = $sport['name'];
+		
+		$venue = $this->venues_model->get_venue( $match['venueID'] );
+		$match['venue'] = $venue['name'];
+		
+		$tournament = $this->tournaments_model->get_tournament( $match['tournamentID'] );
+		$match['tournament'] = ($tournament ? $tournament['name'] : "None");
+		
+		$match['date'] = date("F jS, Y",$match['startTime']);
+		$match['startTime'] = date("H:i",$match['startTime']);
+		$match['endTime'] = date("H:i",$match['endTime']);
+		
+		$this->data['match'] = $match;
+		
+		$this->data['matchTable'] = array(
+			array('<span class="bold">Name:</span>',$match['name']),
+			array('<span class="bold">Description:</span>',$match['description']),
+			array('<span class="bold">Sport:</span>',$match['sport']),
+			array('<span class="bold">Venue:</span>',$match['venue']),
+			array('<span class="bold">Tournament:</span>',$match['tournament']),
+			array('<span class="bold">Date:</span>',$match['date']),
+			array('<span class="bold">Start Time:</span>',$match['startTime']),
+			array('<span class="bold">End Time:</span>',$match['endTime']),
+		);
+		
+		$this->data['title'] = $match['name'];
+		$this->data['page'] = "match";
+		
+		$this->load->view('sis/header',$this->data);
+		$this->load->view('sis/match',$this->data);
+		$this->load->view('sis/footer',$this->data);
 	}
 
 	public function tournaments()
@@ -146,31 +137,31 @@ class Sis extends MY_Controller {
 		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
 		
-		if( $this->tournaments_model->tournament_exists($tournamentID) ) {
-			$tournament = $this->tournaments_model->get_tournament($tournamentID);
-			$this->data['tournamentID'] = $tournamentID;
-			$this->data['tournament'] = $tournament;
-			$sport = $this->sports_model->get_sport( $tournament['sportID'] );
-			
-			
-			$this->data['tournamentTable'] = array(
-				array('<span class="bold">Name:</span>',$tournament['name']),
-				array('<span class="bold">Description:</span>',$tournament['description']),
-				array('<span class="bold">Sport:</span>',$sport['name']),
-				array('<span class="bold">Start Date:</span>',$tournament['tournamentStart']),
-				array('<span class="bold">End Date:</span>',$tournament['tournamentEnd']),
-			);
-			
-			// Page title
-			$this->data['title'] = $tournament['name'];
-			$this->data['page'] = "tournament";
-			$this->load->view('sis/header',$this->data);
-			$this->load->view('sis/tournament',$this->data);
-			$this->load->view('sis/footer',$this->data);
-		} else {
+		$tournament = $this->tournaments_model->get_tournament($tournamentID);
+		if($tournament==FALSE) {
 			$this->session->set_flashdata('message',  "Tournament ID $id does not exist.");
 			redirect("/sis/tournaments", 'refresh');
 		}
+		
+		$this->data['tournamentID'] = $tournamentID;
+		$this->data['tournament'] = $tournament;
+		$sport = $this->sports_model->get_sport( $tournament['sportID'] );
+		
+		
+		$this->data['tournamentTable'] = array(
+			array('<span class="bold">Name:</span>',$tournament['name']),
+			array('<span class="bold">Description:</span>',$tournament['description']),
+			array('<span class="bold">Sport:</span>',$sport['name']),
+			array('<span class="bold">Start Date:</span>',$tournament['tournamentStart']),
+			array('<span class="bold">End Date:</span>',$tournament['tournamentEnd']),
+		);
+		
+		// Page title
+		$this->data['title'] = $tournament['name'];
+		$this->data['page'] = "tournament";
+		$this->load->view('sis/header',$this->data);
+		$this->load->view('sis/tournament',$this->data);
+		$this->load->view('sis/footer',$this->data);
 	}
 	public function ticketsinfo()
 	{
@@ -216,65 +207,65 @@ class Sis extends MY_Controller {
 		$this->load->model('users_model');
 		$this->load->model('teams_model');
 	
-		if( $this->tournaments_model->tournament_exists($tournamentID) ) {
-			$this->data['tournamentID'] = $tournamentID;
-			$this->data['tournament'] = $tournament = $this->tournaments_model->get_tournament($tournamentID);
-			$this->data['roles'] = $roles = $this->sports_model->get_sport_category_roles($tournament['sportCategoryID']);
-	
-			if( $this->input->post() ) {			
-				$roleID = $this->input->post('role');
-				$roleInputs = $this->sports_model->get_sport_category_role_inputs($roleID);
-				
-				$userData = array();
-				$teamData = array();
-				$teamMembers = array();
-				
-				foreach($roleInputs as $roleInput) {
-					// Skip these inputs, they are processed by the addTeamMember method
-					if(strpos($roleInput['inputType'],'tm-') === 0) continue;
-					if($roleInput['keyName']=='teamMembers') {
-						$teamMembersIDs = array_map("intval", explode(",", $this->input->post('teamMemberIDs') ));
-					}
-					
-					// So far we only need to handle two input types, userData and teamData, but this is easily extensible
-					switch($roleInput['tableName']) {
-						case "userData":
-							// grab value from post data, update userData table with correct table key
-							$userData[$roleInput['tableKeyName']] = $this->input->post($roleInput['keyName']);
-						break;
-						case "teamData":
-							// grab value from post data, add to teamData array with correct table key
-							$teamData[$roleInput['tableKeyName']] = $this->input->post($roleInput['keyName']);
-						break;
-					}
-				}
-				
-				if(!empty($userData)) {
-					$this->users_model->update_user($currentUser->id, $userData);
-				}
-				if(!empty($teamData)) {
-					$teamID = $this->teams_model->insert_team($centreID,$teamData);
-					if($this->teams_model->add_team_members($teamID,$teamMembersIDs) == false) {
-						$this->session->set_flashdata('message',  "Adding team members failed.");
-						redirect("/sis/tournaments", 'refresh');
-					}
-				} else {
-					$teamID = false;
-				}
-				
-				$this->session->set_flashdata('message',  "Signup successful!");
-				redirect("/sis/tournaments", 'refresh');
-						
-			} else {			
-				$this->data['title'] = "Signup";
-				$this->data['page'] = "signup";
-				$this->load->view('sis/header',$this->data);
-				$this->load->view('sis/signup',$this->data);
-				$this->load->view('sis/footer',$this->data);
-			}
-		} else {
+		$this->data['tournamentID'] = $tournamentID;
+		$this->data['tournament'] = $tournament = $this->tournaments_model->get_tournament($tournamentID);
+		if($tournament==FALSE) {
 			$this->session->set_flashdata('message',  "Tournament ID $id does not exist.");
 			redirect("/sis/tournaments", 'refresh');
+		}
+		
+		$this->data['roles'] = $roles = $this->sports_model->get_sport_category_roles($tournament['sportCategoryID']);
+
+		if( $this->input->post() ) {			
+			$roleID = $this->input->post('role');
+			$roleInputs = $this->sports_model->get_sport_category_role_inputs($roleID);
+			
+			$userData = array();
+			$teamData = array();
+			$teamMembers = array();
+			
+			foreach($roleInputs as $roleInput) {
+				// Skip these inputs, they are processed by the addTeamMember method
+				if(strpos($roleInput['inputType'],'tm-') === 0) continue;
+				if($roleInput['keyName']=='teamMembers') {
+					$teamMembersIDs = array_map("intval", explode(",", $this->input->post('teamMemberIDs') ));
+				}
+				
+				// So far we only need to handle two input types, userData and teamData, but this is easily extensible
+				switch($roleInput['tableName']) {
+					case "userData":
+						// grab value from post data, update userData table with correct table key
+						$userData[$roleInput['tableKeyName']] = $this->input->post($roleInput['keyName']);
+					break;
+					case "teamData":
+						// grab value from post data, add to teamData array with correct table key
+						$teamData[$roleInput['tableKeyName']] = $this->input->post($roleInput['keyName']);
+					break;
+				}
+			}
+			
+			if(!empty($userData)) {
+				$this->users_model->update_user($currentUser->id, $userData);
+			}
+			if(!empty($teamData)) {
+				$teamID = $this->teams_model->insert_team($centreID,$teamData);
+				if($this->teams_model->add_team_members($teamID,$teamMembersIDs) == false) {
+					$this->session->set_flashdata('message',  "Adding team members failed.");
+					redirect("/sis/tournaments", 'refresh');
+				}
+			} else {
+				$teamID = false;
+			}
+			
+			$this->session->set_flashdata('message',  "Signup successful!");
+			redirect("/sis/tournaments", 'refresh');
+					
+		} else {			
+			$this->data['title'] = "Signup";
+			$this->data['page'] = "signup";
+			$this->load->view('sis/header',$this->data);
+			$this->load->view('sis/signup',$this->data);
+			$this->load->view('sis/footer',$this->data);
 		}
 	}
 	

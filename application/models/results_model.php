@@ -1,5 +1,5 @@
 <?php
-class Results_model extends CI_Model {
+class Results_model extends MY_Model {
 
 	// Get result data for a team
 	// Get result data for an athlete

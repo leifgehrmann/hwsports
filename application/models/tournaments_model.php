@@ -1,39 +1,29 @@
 <?php
 class Tournaments_model extends MY_Model {
-
-	/**
-	 * Returns a 2d array of data for all tournaments
-	 *  
-	 * @return array
-	 **/
-	public function get_tournaments($centreID)
-	{
-		$output = array();
-		$queryString = "SELECT tournamentID FROM tournaments WHERE centreID = ".$this->db->escape($centreID);;
-		$queryData = $this->db->query($queryString);
-		$data = $queryData->result_array();
-		foreach($data as $tournament) {
-			$output[] = $this->get_tournament($tournament['tournamentID']);
-		}
-		return $output;
-	}
 	
 	/**
-	 * Returns an array containing all known data about a specific tournament ID
+	 * Returns all data about a specific tournament, including sport and sport category data
 	 *  
 	 * @return array
 	 **/
 	public function get_tournament($tournamentID) {
+		// These relations will pull all the data about this tournament's sport type and sport category
 		$relations = array(
 						array( 
 							"objectIDKey" => "sportID",
+							"dataTableName" => "sportData",
 							"relationTableName" => "sports",
-							"dataTableName" => "sportsData",
-							"relations" => array()
+							"relations" => array( 
+								array( 
+									"objectIDKey" => "sportCategoryID",
+									"dataTableName" => "sportCategoryData"
+								)
+							)
 						)
 					);
-		$tournament = $this->get_data($tournamentID, "tournamentID", "tournaments", "tournamentData", $relations);
+		$tournament = $this->get_object($tournamentID, "tournamentID", "tournamentData", "tournaments", $relations);
 		
+		// Start tournament status logic - sets tournament[status] to value: preRegistration, inRegistration, postRegistration, preTournament, inTournament, postTournament or ERROR 
 		try {
 			$today = new DateTime();
 			$registrationStartDate = new DateTime($tournament['registrationStart']);
@@ -75,20 +65,26 @@ class Tournaments_model extends MY_Model {
 					Tournament start date is: ".datetime_to_public($tournamentEndDate)."
 					Please correct the dates below.";
 		}
-				
+		// End tournament status logic 
+		
 		return $tournament;
 	}
-	
+
 	/**
-	 * Returns a string specifying the status of a specific tournament
+	 * Returns all data about all tournaments at a specific centre
 	 *  
-	 * @return string : preRegistration, inRegistration, postRegistration, preTournament, inTournament, postTournament or ERROR
+	 * @return array
 	 **/
-	public function get_tournament_status($tournamentID) {
-		$tournament = $this->get_tournament($tournamentID);
-		return $tournament['status'];
+	public function get_tournaments($centreID) {
+		// Query to return the IDs for everything which takes place at the specified sports centre
+		$IDsQuery = $this->db->query("SELECT tournamentID FROM tournaments WHERE centreID = ".$this->db->escape($centreID));
+		// Loop through all result rows, get the ID and use that to put all the data into the output array 
+		foreach($IDsQuery->result_array() as $IDRow) {
+			$all[] = $this->get_tournament($IDRow['tournamentID']);
+		}
+		return (empty($all) ? FALSE : $all);
 	}
-	
+
 	/**
 	 * Creates a tournament with data.
 	 *  
@@ -131,7 +127,6 @@ class Tournaments_model extends MY_Model {
 
 		$this->db->trans_start();
 
-		if($this->tournament_exists($tournamentID)){
 			foreach($data as $key=>$value) {
 				if(!is_string($key)) return false;
 				$escKey = $this->db->escape($key);
@@ -144,9 +139,6 @@ class Tournaments_model extends MY_Model {
 			}
 			$this->db->trans_complete();
 			return true;
-		} else {
-			return false;
-		}
 	}
 
 	/**
@@ -155,24 +147,9 @@ class Tournaments_model extends MY_Model {
 	 * @return boolean
 	 **/
 	public function delete_tournament($tournamentID){
-		if($this->tournament_exists($tournamentID)){
 			$this->db->query("DELETE FROM tournamentData WHERE tournamentID = $tournamentID");
 			$this->db->query("DELETE FROM tournaments WHERE tournamentID = $tournamentID");
 			return true;
-		} else {
-			return false;
-		}
 	}
 
-
-
-
-
-
-
-
-
-
-
-	
 }

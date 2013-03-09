@@ -1,115 +1,64 @@
 <?php
-class Sports_model extends CI_Model {
+class Sports_model extends MY_Model {
 
 	/**
-	 * $sportID is int(11)
-	 *  
-	 * @return boolean
-	 **/
-
-	public function sport_exists($sportID)
-	{
-		$output = array();
-		$queryString = 	"SELECT ".$this->db->escape($sportID)." AS sportID, ".
-						"EXISTS(SELECT 1 FROM sports WHERE sportID = ".$this->db->escape($sportID).") AS `exists`";
-		$queryData = $this->db->query($queryString);
-		$output = $queryData->row_array();
-		return $output['exists'];
-	}
-
-	/**
-	 * Returns a 2d array of sport data
+	 * Returns all data about a specific sport, including sport category data
 	 *  
 	 * @return array
 	 **/
-
-	public function get_sports($centreID)
-	{
-		$output = array();
-		$queryString = "SELECT sportID FROM sports WHERE centreID = ".$this->db->escape($centreID);
-		$queryData = $this->db->query($queryString);
-		$data = $queryData->result_array();
-		foreach($data as $sport) {
-			$output[] = $this->get_sport($sport['sportID']);
-		}
-		return $output;
-	}
-
+	public function get_sport($sportID) {
+		// The relations we are setting up here will pull all the sport category data
+		$relations = array(
+						array( 
+							"objectIDKey" => "sportCategoryID",
+							"dataTableName" => "sportCategoryData"
+						)
+					);
+		// Get all data about this sport, the append the data from associated tables as specified above
+		$sport = $this->get_object($sportID, "sportID", "sportData", "sports", $relations);
+		// We could do some other specific functional processing here before returning the results if we need to
+		return $sport;
+	}	
+	
 	/**
-	 * Returns an array of data from a specific sport
+	 * Returns all data about all sports at a specific centre
 	 *  
 	 * @return array
 	 **/
-	public function get_sport($sportID)
-	{
-		$fields = array();
-		$fieldsQuery = $this->db->query("SELECT `key` FROM `sportData` WHERE `sportID` = ".$this->db->escape($sportID) );
-		$fieldsResult = $fieldsQuery->result_array();
-		foreach($fieldsResult as $fieldResult) {
-			$fields[] = $fieldResult['key'];
+	public function get_sports($centreID) {
+		// Query to return the IDs for everything which takes place at the specified sports centre
+		$IDsQuery = $this->db->query("SELECT sportID FROM sports WHERE centreID = ".$this->db->escape($centreID));
+		// Loop through all result rows, get the ID and use that to put all the data into the output array 
+		foreach($IDsQuery->result_array() as $IDRow) {
+			$all[] = $this->get_sport($IDRow['sportID']);
 		}
-
-		/* Query the ids that are associated with this match */
-		$relational = array();
-		$relationalString = "SELECT sportCategoryID FROM sports WHERE sportID = ".$this->db->escape($sportID);
-		$relationalQuery = $this->db->query($relationalString);
-		$relationalResult = $relationalQuery->result_array();
-
-		$dataQueryString = "SELECT ";
-		$i = 0;
-		$len = count($fields);
-		foreach($fields as $field) {
-			$dataQueryString .= "MAX(CASE WHEN `key`=".$this->db->escape($field)." THEN value END ) AS ".$this->db->escape($field);
-			if($i<$len-1)
-				$dataQueryString .= ", ";
-			else
-				$dataQueryString .= " ";
-			$i++;
-		}
-		$dataQueryString .= "FROM sportData WHERE sportID = ".$this->db->escape($sportID);
-		$dataQuery = $this->db->query($dataQueryString);
-		$output = array_merge(array("sportID"=>$sportID), $dataQuery->row_array());
-		$output['sportCategoryID'] = $relationalResult[0]['sportCategoryID'];
-		$output['sportCategory'] = $this->get_sport_category($relationalResult[0]['sportCategoryID']);
-		return $output;
+		return (empty($all) ? FALSE : $all);
 	}
-
-	public function get_sport_categories()
-	{
-		$output = array();
-		$queryString = "SELECT DISTINCT sportCategoryID FROM sportCategoryData";
-		$queryData = $this->db->query($queryString);
-		$data = $queryData->result_array();
-		foreach($data as $sportCategory) {
-			$output[$sportCategory['sportCategoryID']] = $this->get_sport_category($sportCategory['sportCategoryID']);
-		}
-		return $output;
+	
+	
+	/**
+	 * Returns all data about a specific sport category
+	 *  
+	 * @return array
+	 **/
+	public function get_sport_category($sportCategoryID) {
+		// Get all data about this sport, the append the data from associated tables as specified above
+		$sport = $this->get_object($sportCategoryID, "sportCategoryID", "sportCategoryData");
 	}
-
-	public function get_sport_category($sportCategoryID)
-	{
-		$fields = array();
-		$fieldsQuery = $this->db->query("SELECT `key` FROM `sportCategoryData` WHERE `sportCategoryID` = ".$this->db->escape($sportCategoryID) );
-		$fieldsResult = $fieldsQuery->result_array();
-		foreach($fieldsResult as $fieldResult) {
-			$fields[] = $fieldResult['key'];
+	
+	/**
+	 * Returns all data about all sport categories at a specific centre
+	 *  
+	 * @return array
+	 **/
+	public function get_sport_categories($centreID) {
+		// Query to return the IDs for everything which takes place at the specified sports centre
+		$IDsQuery = $this->db->query("SELECT DISTINCT sportCategoryID FROM sportCategoryData");
+		// Loop through all result rows, get the ID and use that to put all the data into the output array 
+		foreach($IDsQuery->result_array() as $IDRow) {
+			$all[$IDRow['sportCategoryID']] = $this->get_sport_category($IDRow['sportCategoryID']);
 		}
-
-		$dataQueryString = "SELECT ";
-		$i = 0;
-		$len = count($fields);
-		foreach($fields as $field) {
-			$dataQueryString .= "MAX(CASE WHEN `key`=".$this->db->escape($field)." THEN value END ) AS ".$this->db->escape($field);
-			if($i<$len-1)
-				$dataQueryString .= ", ";
-			else
-				$dataQueryString .= " ";
-			$i++;
-		}
-		$dataQueryString .= "FROM sportCategoryData WHERE sportCategoryID = ".$this->db->escape($sportCategoryID);
-		$dataQuery = $this->db->query($dataQueryString);
-		$output = array_merge($dataQuery->row_array());
-		return $output;
+		return (empty($all) ? FALSE : $all);
 	}
 	
 	
@@ -240,21 +189,17 @@ class Sports_model extends CI_Model {
 	public function update_venue($sportID, $data){
 
 		$this->db->trans_start();
-
-		if($this->venue_exists($sportID)){
-			foreach($data as $key=>$value) {
-				$escKey = $this->db->escape($key);
-				$escValue = $this->db->escape($value);
-				$dataQueryString = 	"UPDATE `venueData` ".
-									"SET `value`=$escValue ".
-									"WHERE `key`=$escKey ".
-									"AND `sportID`=$sportID";
-				$this->db->query($dataQueryString);
-			}
-			$this->db->trans_complete();
-			return true;
-		} else {
-			return false;
+	
+		foreach($data as $key=>$value) {
+			$escKey = $this->db->escape($key);
+			$escValue = $this->db->escape($value);
+			$dataQueryString = 	"UPDATE `venueData` ".
+								"SET `value`=$escValue ".
+								"WHERE `key`=$escKey ".
+								"AND `sportID`=$sportID";
+			$this->db->query($dataQueryString);
 		}
+		$this->db->trans_complete();
+		return true;
 	}
 }
