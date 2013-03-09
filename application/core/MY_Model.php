@@ -75,7 +75,6 @@ class MY_Model extends CI_Model {
 			$maxRow = $this->db->get($dataTableName)->row_array();
 			// This is the actual numerical ID we wish to insert data as
 			$objectID = $maxRow[$objectIDKey]+1;
-			var_dump($objectID); die();
 		}
 		
 		// Lump all inserts into one transaction

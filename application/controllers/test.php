@@ -39,7 +39,7 @@ class Test extends MY_Controller {
 	public function insert_centre($data){
 		$data = urldecode($data);
 		$data = unserialize($data);
-		$output = $this->centre_model->insert_centre($data);
+		$output = $this->centre_model->insert_centre( array("hello"=>"world") );
 		$this->display($output);
 	}
 	
