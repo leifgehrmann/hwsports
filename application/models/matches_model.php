@@ -80,10 +80,10 @@ class Matches_model extends MY_Model {
 			if($this->venues_model->get_venue($venueID) == FALSE) return FALSE;
 
 			// Query to return the IDs for everything which takes place at the specified sports centre
-			$IDsQuery = $this->db->select("matchID")->get_where("matches",array('venueID'=>$venueID))->result_array();
+			$IDsQuery = $this->db->select("matchID")->where("venueID", $venueID)->get("matches")->result_array();
 			// Loop through all result rows, get the ID and use that to put all the data into the output array 
 			$all = array();
-			foreach($IDsQuery->result_array() as $IDRow) {
+			foreach($IDsQuery as $IDRow) {
 				$all[] = $this->get_match($IDRow['matchID']);
 			}
 			return $all;
@@ -104,7 +104,7 @@ class Matches_model extends MY_Model {
 				} catch (Exception $e) {
 					$tournament['status'] = "ERROR: Invalid date in database. Debug Exception: ".$e->getMessage();
 				}
-				
+
 				if( $startTime < $matchEndTime && $matchStartTime < $endTime )
 					$filtered[] = $match;
 			}
