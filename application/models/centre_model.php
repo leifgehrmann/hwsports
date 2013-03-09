@@ -25,20 +25,7 @@ class Centre_model extends MY_Model {
 	 *
 	 * @return boolean
 	 **/
-	public function update_centre($centreID, $data){
-
-		$this->db->trans_start();
-
-		foreach($data as $key=>$value) {
-			$escKey = $this->db->escape($key);
-			$escValue = $this->db->escape($value);
-			$dataQueryString = 	"UPDATE `centreData` ".
-								"SET `value`=$escValue ".
-								"WHERE `key`=$escKey ".
-								"AND `centreID`=$centreID";
-			$this->db->query($dataQueryString);
-		}
-		$this->db->trans_complete();
-		return true;
+	public function update_centre($centreID, $data) {
+		return $this->update_object($centreID, "centreID", $data, 'centreData');
 	}
 }

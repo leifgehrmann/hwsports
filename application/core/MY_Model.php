@@ -1,8 +1,7 @@
 <?php
 class MY_Model extends CI_Model {
     
-	public function __construct()
-    {
+	public function __construct() {
         parent::__construct();
     }
 
@@ -59,14 +58,10 @@ class MY_Model extends CI_Model {
 	}
 	
 	// Inserts a new object into the database
-	// Required: $data, $objectIDKey, $dataTableName. Example usage: insert_object(array("address"=>"14 Parkhead Loan"), 'centreID', 'centreData');
+	// Required: $data, $objectIDKey, $dataTableName. 
+	// Example usage: insert_object(array("address"=>"14 Parkhead Loan"), 'centreID', 'centreData');
 	// Returns: ID of object created.
-	public function insert_object($data, $objectIDKey, $dataTableName, $relationTableName = false, $relations = array()) {
-		// Sanitize / escape input variables into underscored variable names for simplicity
-		$_objectIDKey = mysql_real_escape_string($objectIDKey);
-		$_dataTableName = mysql_real_escape_string($dataTableName);
-		$_relationTableName = mysql_real_escape_string($relationTableName);
-		
+	public function insert_object($data, $objectIDKey, $dataTableName, $relationTableName = false, $relations = array()) {		
 		// If we've been given a relational table and relations to go in that table, we should create the entry in that first to get the ID to use for the data
 		if( $relationTableName && count($relations) ) {
 			// Insert the row in the relation table with all the relations specified, generating an ID using AUTO_INCREMENT 
@@ -76,27 +71,74 @@ class MY_Model extends CI_Model {
 		} else {
 			// Since we're storing IDs only in the data table, we can't have a primary key or auto increment on it
 			// Therefore to get the next ID to insert, we have to find the current highest and increment it to get a unique ID
-			$maxRow = $this->db->query("SELECT MAX($_objectIDKey) AS maxID FROM `$_dataTableName`")->row_array();
-			$objectID = $maxRow['maxID']+1;
+			$this->db->select_max($objectIDKey);
+			$maxRow = $this->db->get($dataTableName)->row_array();
+			// This is the actual numerical ID we wish to insert data as
+			$objectID = $maxRow[$objectIDKey]+1;
 		}
 		
-		// Lump all queries into one transaction
+		// Lump all inserts into one transaction
 		$this->db->trans_start();
 		// Loop through input data
 		foreach($data as $key => $value) {
-			// Sanitize inputs
-			$_key = mysql_real_escape_string($key);
-			$_value = mysql_real_escape_string($value);
-			// Insert a row of data into the data table with correct keys and the newly generated ID
-			$this->db->query("INSERT INTO `$_dataTableName` (`$_objectIDKey`, `key`, `value`) VALUES ('$objectID', '$_key', '$_value');");
+			// Set the where clauses and the values for the insert
+			$where = array(
+				$objectIDKey => $objectID,
+				'key'   => $key
+			);
+			$insert = array(
+				'value' => $value
+			);
+			// Create the insert - active record sanitizes inputs automatically
+			$this->db->where($where);
+			$this->db->insert($dataTableName, $insert);			
 		}
 		// Complete transaction, all is well
 		$this->db->trans_complete();
+		// No rows were affected? Something went wrong.
+		if($this->db->affected_rows()==0) return FALSE;
 		
 		// Return the newly generated ID of this object, ready for referencing with get_object
 		return $objectID;
 	}
-				
-	// $this->db->query("UPDATE `$_dataTableName` SET `value` = '$_value' WHERE `key` = '$_key'");
+	
+	// Updates an object in the database with new values
+	// Required: $objectID, $objectIDKey, $data, $dataTableName. 
+	// Example usage: update_object(1, "centreID", array("address"=>"14 Parkhead Loan"), 'centreData');
+	// Returns: TRUE if update was successful, FALSE otherwise.
+	public function update_object($objectID, $objectIDKey, $data, $dataTableName, $relationTableName = false, $relations = array()) {		
+		// If we've been given a relational table and relations to go in that table, we should update the entry in that first in case of foreign key restraints
+		if( $relationTableName && count($relations) ) {
+			// Update the correct row in the relation table with the new relation IDs specified 
+			$this->db->where($objectIDKey, $objectID);
+			$this->db->update($relationTableName, $relations);
+			// No rows were affected? Something went wrong.
+			if($this->db->affected_rows()==0) return FALSE;
+		}
+		
+		// Lump all updates into one transaction
+		$this->db->trans_start();
+		// Loop through input data
+		foreach($data as $key => $value) {
+			// Set the where clauses and the values for the update
+			$where = array(
+				$objectIDKey => $objectID,
+				'key'   => $key
+			);
+			$update = array(
+				'value' => $value
+			);
+			// Create the update - active record sanitizes inputs automatically
+			$this->db->where($where);
+			$this->db->update($dataTableName, $update);			
+		}
+		// Complete transaction, all is well
+		$this->db->trans_complete();
+		// No rows were affected? Something went wrong.
+		if($this->db->affected_rows()==0) return FALSE;
+		
+		// Return TRUE: if we got to here it must have all worked
+		return TRUE;
+	}
 
 }
