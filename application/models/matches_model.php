@@ -92,8 +92,12 @@ class Matches_model extends MY_Model {
 			$startTime = ( $startTime ? $startTime : new DateTime('1st January 0001'));
 			$endTime = ( $endTime ? $endTime : new DateTime('31st December 9999'));
 
-			$startTime = new DateTime($startTime);
-			$endTime = new DateTime($endTime);
+			try {
+				$startTime = new DateTime($startTime);
+				$endTime = new DateTime($endTime);
+			} catch (Exception $e) {
+				return "ERROR: Invalid input date in database. Debug Exception: ".$e->getMessage();
+			}
 
 			$matches = $this->get_venue_matches($venueID);
 			if($matches == FALSE) return FALSE;
