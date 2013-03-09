@@ -92,8 +92,6 @@ class Matches_model extends MY_Model {
 			$startTime = ( $startTime ? $startTime : new DateTime('1st January 0001'));
 			$endTime = ( $endTime ? $endTime : new DateTime('31st December 9999'));
 
-			var_dump($startTime);
-			var_dump($endTime);
 			try {
 				$startTime = new DateTime($startTime);
 				$endTime = new DateTime($endTime);
