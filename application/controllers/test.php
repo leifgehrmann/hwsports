@@ -40,8 +40,8 @@ class Test extends MY_Controller {
 		$output = $this->centre_model->insert_centre( array("hello"=>"world") );
 		$this->display($output);
 	}
-	public function update_centre(){
-		$output = $this->centre_model->update_centre( array("hello"=>"poop") );
+	public function update_centre($centreID){
+		$output = $this->centre_model->update_centre( $centreID, array("hello"=>"poop") );
 		$this->display($output);
 	}
 	
