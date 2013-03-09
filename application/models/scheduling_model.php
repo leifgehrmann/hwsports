@@ -17,6 +17,8 @@ class Scheduling_model extends MY_Model {
 
 		// Get tournament Information
 		$tournament = $this->tournaments_model->get_tournament($tournamentID);
+		$actors 	= $this->tournaments_model->get_tournament_actors($tournamentID);
+		$venues 	= $this->tournaments_model->get_tournament_venues($tournamentID);
 
 		if($tournament==FALSE)
 			return FALSE;
@@ -36,18 +38,12 @@ class Scheduling_model extends MY_Model {
 		$matchUmpiresBoolean = true; // This is hard coded for now. This is whether we need umpires or not.
 		$matchMinimumUmpires = 1; // This is hard coded for now. This is the minimum number of umpires that must be present at a match
 		$matchMaximumUmpires = 1; // This is hard coded for now. This is the maximum number of umpires that can be present at a match
-		$matchMaximumPlays = 1; // This is hard coded for now. This is the maximum number of matches a player must play
+		$matchMaximumTeamPlays = 1; // This is hard coded for now. This is the maximum number of matches a player must play
+		$matchMaximumPlays = 1; // This is hard coded for now. This is the maximum number of matches that can occur in a day
 
-
-		$umpireIDs  = explode(',',$tournament['umpireIDs']);
-		$teamIDs    = explode(',',$tournament['teamIDs']);
-		$venueIDs   = explode(',',$tournament['venueIDs']);
-
-		$umpires = array();
-		foreach($umpireIDs as $umpireID)
-		{
-			$umpires[] = $this->users_model->get_user($umpireID);
-		}
+		$umpires  = $actors['umpire'];
+		$teams    = $actors['teams'];
+		$venues   = $venues;
 		
 		// If tournament is round robin...
 
@@ -67,12 +63,8 @@ class Scheduling_model extends MY_Model {
 		// returns all the possible combinations of start times
 		// and days of the tournament. From here we need to
 		// filter it down by umpires, venues, and team competitions
-		// var_dump($tournamentStart);
-		// var_dump($tournamentEnd);
-		// var_dump($matchWeekdayStartTimes);
 		$matchDateTimes = $this->get_match_date_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration);
 
-		// var_dump($matchDateTimes);
 		// We now check if an umpire is available for a particular
 		// match. It it isn't, we just remove it from the list of choices.
 		// For each day...
@@ -128,10 +120,6 @@ class Scheduling_model extends MY_Model {
 				{
 					// is the venue available at this time?
 					$venueMatches = $this->matches_model->get_venue_matches($venueID,$startDateTime,$endDateTime);
-					var_dump($venueID);
-					var_dump($startDateTime);
-					var_dump($endDateTime);
-					var_dump($venueMatches);
 					if( count($venueMatches) == 0 )
 						$matchDateTimes[$date][$dateTime]['venueIDs'][] = $venueID;
 				}
