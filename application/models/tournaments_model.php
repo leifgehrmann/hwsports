@@ -1,27 +1,39 @@
 <?php
 class Tournaments_model extends MY_Model {
 	
+	public function __construct() {
+        parent::__construct();
+		// Load models we might be referencing
+		$this->load->model('users_model');
+		$this->load->model('teams_model');
+		
+		$objectIDKey = "tournamentID";
+		$dataTableName = "tournamentData";
+		$relationTableName = "tournaments";
+    }
+		
 	/**
 	 * Returns all data about a specific tournament, including sport and sport category data
 	 *  
 	 * @return array
 	 **/
-	public function get_tournament($tournamentID) {
+	public function get($ID) {
 		// These relations will pull all the data about this tournament's sport type and sport category
 		$relations = array(
-						array( 
+						array(
 							"objectIDKey" => "sportID",
 							"dataTableName" => "sportData",
 							"relationTableName" => "sports",
-							"relations" => array( 
-								array( 
+							"relations" => array(
+								array(
 									"objectIDKey" => "sportCategoryID",
 									"dataTableName" => "sportCategoryData"
 								)
 							)
 						)
 					);
-		$tournament = $this->get_object($tournamentID, "tournamentID", "tournamentData", "tournaments", $relations);
+		$tournament = $this->get_object($ID, $objectIDKey, $dataTableName, $relationTableName, $relations);
+		// This tournament ID doesn't exist
 		if(empty($tournament)) return FALSE;
 		
 		// Start tournament status logic - sets tournament[status] to value: preRegistration, inRegistration, postRegistration, preTournament, inTournament, postTournament or ERROR 
@@ -49,7 +61,7 @@ class Tournaments_model extends MY_Model {
 				$tournament['status'] = "preTournament";
 			} 
 			// Otherwise, we are still awaiting the staff to moderate the competitor list - set competitorsModerated to false in the DB to make this clear.
-			$this->update_tournament($tournamentID,array("competitorsModerated" => "false"));
+			$this->update_tournament($ID,array("competitorsModerated" => "false"));
 			// postRegistration means we need staff to moderate the competitor list
 			$tournament['status'] = "postRegistration";
 		} elseif( ($today >= $registrationStartDate) && ($today >= $registrationEndDate) &&
@@ -71,42 +83,48 @@ class Tournaments_model extends MY_Model {
 		return $tournament;
 	}
 
-	public function get_tournament_actors($tournamentID){
-		$this->load->model('users_model');
-		$this->load->model('teams_model');
-		
-		$tournament = $this->get_tournament($tournamentID);
-		if($tournament == FALSE) return FALSE;
-		
-		$actorRows = $this->db->select('actorID, roleID, sportCategoryRoleName, actorTable, actorMethod')
-					->from('tournamentActors')
-					->join('sportCategoryRoles', 'sportCategoryRoles.sportCategoryRoleID = tournamentActors.roleID')
-					->where('tournamentID',$tournamentID)
-					->get()
-					->result_array();
-					
-		$actors = array();
-		foreach($actorRows as $actorRow) {
-			eval("\$actor = \$this->{$actorRow['actorMethod']}({$actorRow['actorID']});");
-			$actors[$actorRow['sportCategoryRoleName']][] = $actor;
+	/**
+	 * Returns all data about all tournaments at current centre
+	 * 
+	 * @return array
+	 **/
+	public function get_all() {
+		// Fetch the IDs for everything at the current sports centre
+		$IDRows = $this->db->get_where('tournaments', array('centreID' => $centreID))->result_array();
+		// Create empty array to output if there are no results
+		$all = array();
+		// Loop through all result rows, get the ID and use that to put all the data into the output array 
+		foreach($IDRows as $IDRow) {
+			$all[] = $this->get($IDRow[$objectIDKey]);
 		}
-		return $actors;
-
+		return $all;
 	}
 
 	/**
-	 * Returns all data about all tournaments at a specific centre
+	 * Returns all data about all actors in a tournament (teams, users, umpires, fluffy bunnies)
 	 *  
 	 * @return array
 	 **/
-	public function get_tournaments($centreID) {
-		// Query to return the IDs for everything which takes place at the specified sports centre
-		$IDsQuery = $this->db->query("SELECT tournamentID FROM tournaments WHERE centreID = ".$this->db->escape($centreID));
-		// Loop through all result rows, get the ID and use that to put all the data into the output array 
-		foreach($IDsQuery->result_array() as $IDRow) {
-			$all[] = $this->get_tournament($IDRow['tournamentID']);
+	public function get_actors($ID) {
+		// Check if ID exists
+		if(empty($this->get($ID))) return FALSE;
+		// Select all info about actors for this specific tournament - join the roles table so we get info about how to handle the different roles
+		$actorRows = $this->db->select('actorID, roleID, sportCategoryRoleName, actorTable, actorMethod')
+					->from('tournamentActors')
+					->join('sportCategoryRoles', 'sportCategoryRoles.sportCategoryRoleID = tournamentActors.roleID')
+					->where('tournamentID',$ID)
+					->get()
+					->result_array();
+		// We should return an empty array if there are no actors at all, so create it here
+		$actors = array();
+		foreach($actorRows as $actorRow) {
+			// For each actor, use eval with the actorMethod and actorID from the database to get the actual actor data 
+			eval("\$actor = \$this->{$actorRow['actorMethod']}({$actorRow['actorID']});");
+			// Append the actor to the output array, in a sub array of the role name - therefore from your sport-specific function you might use $actors['Umpire'] to get all the umpires, etc.
+			$actors[$actorRow['sportCategoryRoleName']][] = $actor;
 		}
-		return (empty($all) ? FALSE : $all);
+		// Return all actors
+		return $actors;
 	}
 
 	/**
@@ -116,8 +134,8 @@ class Tournaments_model extends MY_Model {
 	 *  
 	 * @return int
 	 **/
-	public function insert_tournament($data,$sportID) {
-		return $this->insert_object($data, "tournamentID", "tournamentData" );
+	public function insert($data,$relationIDs) {
+		return $this->insert_object($data, $objectIDKey, $dataTableName, $relationIDs);
 	}
 
 	/**
@@ -127,19 +145,18 @@ class Tournaments_model extends MY_Model {
 	 *
 	 * @return boolean
 	 **/
-	public function update_tournament($tournamentID, $data) {
-		return $this->update_object($tournamentID, "tournamentID", $data, 'tournamentData');
+	public function update($tournamentID, $data) {
+		return $this->update_object($tournamentID, $objectIDKey, $data, $dataTableName);
 	}
 
 	/**
 	 * Deletes a tournament with data.
+	 * Also deletes all objects which depend on it, unless $testRun is TRUE in which case a string is returned showing all
 	 *
 	 * @return boolean
 	 **/
-	public function delete_tournament($tournamentID){
-		//$this->db->query("DELETE FROM tournamentData WHERE tournamentID = $tournamentID");
-		//$this->db->query("DELETE FROM tournaments WHERE tournamentID = $tournamentID");
-		return $this->delete_object($tournamentID, "tournamentID", $data, 'tournamentData');
+	public function delete($tournamentID,$testRun=TRUE){
+		return $this->delete_object($testRun, $tournamentID, $objectIDKey, $data, $dataTableName);
 	}
 
 }
