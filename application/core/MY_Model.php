@@ -49,8 +49,12 @@ class MY_Model extends CI_Model {
 			$relation['relations'] = (isset($relation['relations']) ? $relation['relations'] : array() );
 			// Get the data for the actual object, passing in the known parameters
 			$object[$relation['dataTableName']] = $this->get_object($relation['objectID'], $relation['objectIDKey'], $relation['dataTableName'], $relation['relationTableName'], $relation['relations']);
+			$object[$relation['dataTableName']][$relation['objectIDKey']] = $relation['objectID'];
 		}
 		
+		// Put the ID value which we already know back into the output for convenience
+		$object[$objectIDKey] = $objectID;
+		// Finally return all the data - a beautifully crafted multidimensional array
 		return $object;
 	}
 
