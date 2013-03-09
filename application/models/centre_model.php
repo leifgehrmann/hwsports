@@ -2,67 +2,12 @@
 class Centre_model extends CI_Model {
 
 	/**
-	 * $centreID is int(11)
-	 *  
-	 * @return boolean
-	 **/
-
-	public function centre_exists($centreID)
-	{
-		$output = array();
-		$queryString = 	"SELECT ".$this->db->escape($centreID)." AS centreID, ".
-						"EXISTS(SELECT 1 FROM centreData WHERE centreID = ".$this->db->escape($centreID).") AS `exists`";
-		$queryData = $this->db->query($queryString);
-		$output = $queryData->row_array();
-		return $output['exists'];
-	}
-
-	/**
-	 * Returns a 2d array of data for all centres
-	 *  
-	 * @return array
-	 **/
-	public function get_centres($centreID)
-	{
-		$output = array();
-		$queryString = "SELECT DISTINCT centreID FROM centreData";
-		$queryData = $this->db->query($queryString);
-		$data = $queryData->result_array();
-		foreach($data as $centre) {
-			$output[] = $this->get_centre($centre['centreID']);
-		}
-		return $output;
-	}
-
-	/**
 	 * Returns an array of data from a specific centre
 	 *  
 	 * @return array
 	 **/
-	public function get_centre($centreID)
-	{
-		$fields = array();
-		$fieldsQuery = $this->db->query("SELECT `key` FROM `centreData` WHERE `centreID` = ".$this->db->escape($centreID) );
-		$fieldsResult = $fieldsQuery->result_array();
-		foreach($fieldsResult as $fieldResult) {
-			$fields[] = $fieldResult['key'];
-		}
-		
-		$dataQueryString = "SELECT ";
-		$i = 0;
-		$len = count($fields);
-		foreach($fields as $field) {
-			$dataQueryString .= "MAX(CASE WHEN `key`=".$this->db->escape($field)." THEN value END ) AS ".$this->db->escape($field);
-			if($i<$len-1)
-				$dataQueryString .= ", ";
-			else
-				$dataQueryString .= " ";
-			$i++;
-		}
-		$dataQueryString .= "FROM centreData WHERE centreID = ".$this->db->escape($centreID);
-		$dataQuery = $this->db->query($dataQueryString);
-		$output = array_merge(array("centreID"=>$centreID), $dataQuery->row_array());
-		return $output;
+	public function get_centre($centreID) {
+		return $this->get_object($centreID, "centreID", "centreData");
 	}
 
 	/**
