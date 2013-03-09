@@ -35,6 +35,11 @@ class Test extends MY_Controller {
 	/*
 		centre_model
 	*/
+	public function get_centre($centreID){
+		$output = $this->centre_model->get_centre($centreID);
+		$this->display($output);
+	}
+	
 	/*
 		matches_model
 	*/
