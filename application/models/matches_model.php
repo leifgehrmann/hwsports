@@ -46,10 +46,11 @@ class Matches_model extends MY_Model {
 			// Query to return the IDs for everything which takes place at the specified sports centre
 			$IDsQuery = $this->db->query("SELECT matchID FROM matches LEFT JOIN venues ON matches.venueID = venues.venueID WHERE venues.centreID = ".$this->db->escape($centreID));
 			// Loop through all result rows, get the ID and use that to put all the data into the output array 
+			$all = array();
 			foreach($IDsQuery->result_array() as $IDRow) {
 				$all[] = $this->get_match($IDRow['matchID']);
 			}
-			return (empty($all) ? FALSE : $all);
+			return $all;
 		} else {
 
 			$startTime = ( $startTime ? $startTime : new DateTime('1st January 0001'));
