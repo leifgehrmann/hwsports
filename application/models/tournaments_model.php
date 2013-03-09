@@ -75,7 +75,7 @@ class Tournaments_model extends MY_Model {
 		$tournament = $this->get_tournament($tournamentID);
 		if($tournament == FALSE) return FALSE;
 		
-		$actorRows = $this->db->select('actorID, roleID, sportCategoryRoleName, actorTable')
+		$actorRows = $this->db->select('actorID, roleID, sportCategoryRoleName, actorTable, actorMethod')
 					->from('tournamentActors')
 					->join('sportCategoryRoles', 'sportCategoryRoles.sportCategoryRoleID = tournamentActors.roleID')
 					->where('tournamentID',$tournamentID)
@@ -83,12 +83,8 @@ class Tournaments_model extends MY_Model {
 					->result_array();
 					
 		$actors = array();
-		foreach($actorRows as $actorRow)
-		{
-			if($actorRow['actorTable']=="teams")
-				$actors[$actorRow['roleName']][] = $this->teams_model->get_team($actorRow['actorID']);
-			elseif($actorRow['actorTable']=="users")
-				$actors[$actorRow['roleName']][] = $this->users_model->get_user($actorRow['actorID']);
+		foreach($actorRows as $actorRow) {
+			$actors[$actorRow['sportCategoryRoleName']][] = $actorRow['actorMethod']($actorRow['actorID']);
 		}
 		return $actors;
 
