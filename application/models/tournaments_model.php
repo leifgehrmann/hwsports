@@ -120,7 +120,7 @@ class Tournaments_model extends MY_Model {
 	 * @return int
 	 **/
 	public function insert_tournament($data,$sportID) {
-		return $this->insert_object($data, "tournamentID", "tournamentData", );
+		return $this->insert_object($data, "tournamentID", "tournamentData" );
 	}
 
 	/**
