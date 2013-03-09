@@ -72,7 +72,7 @@ class Scheduling_model extends MY_Model {
 		var_dump($matchWeekdayStartTimes);
 		var_dump($matchDuration);
 		$matchDateTimes = $this->get_match_date_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration);
-
+		die();
 
 		// We now check if an umpire is available for a particular
 		// match. It it isn't, we just remove it from the list of choices.
