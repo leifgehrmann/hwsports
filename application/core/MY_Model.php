@@ -5,8 +5,27 @@ class MY_Model extends CI_Model {
         parent::__construct();
     }
 
-	// Queries an object from the database
-	// Required: $objectID, $objectIDKey, $dataTableName. Example usage: get_object(23, 'tournamentID', 'tournamentData');
+	/* Queries an object from the database
+	* Required: 		Int $objectID, String $objectIDKey, String $dataTableName. 
+	* Optional: 		String $relationTableName, Array $relations
+	* Returns: 			Array of data about object.
+	* Basic example: 	get_object(23, 'tournamentID', 'tournamentData');
+	* Complex example: [Returns a tournament, including all data about the corresponding sport, and all data about the corresponding sport category]
+		$relations = array(
+			array( 
+				"objectIDKey" => "sportID",
+				"dataTableName" => "sportData",
+				"relationTableName" => "sports",
+				"relations" => array( 
+					array( 
+						"objectIDKey" => "sportCategoryID",
+						"dataTableName" => "sportCategoryData"
+					)
+				)
+			)
+		);
+		$tournament = $this->get_object($tournamentID, "tournamentID", "tournamentData", "tournaments", $relations);
+	*/
 	public function get_object($objectID, $objectIDKey, $dataTableName, $relationTableName = "", $relations = array()) {
 		// Sanitize / escape input variables into underscored variable names for simplicity
 		$_objectID = mysql_real_escape_string($objectID);
@@ -57,10 +76,13 @@ class MY_Model extends CI_Model {
 		return $object;
 	}
 	
-	// Inserts a new object into the database
-	// Required: $data, $objectIDKey, $dataTableName. 
-	// Example usage: insert_object(array("address"=>"14 Parkhead Loan"), 'centreID', 'centreData');
-	// Returns: ID of object created.
+	/* Inserts a new object into the database
+	* Required: 		Array $data, String $objectIDKey, String $dataTableName.
+	* Optional: 		String $relationTableName, Array $relations
+	* Returns: 			ID of object created.
+	* Basic example: 	insert_object( array("address"=>"14 Parkhead Loan"), 'centreID', 'centreData');
+	* Complex example: 	
+	*/
 	public function insert_object($data, $objectIDKey, $dataTableName, $relationTableName = false, $relations = array()) {		
 		// If we've been given a relational table and relations to go in that table, we should create the entry in that first to get the ID to use for the data
 		if( $relationTableName && count($relations) ) {
@@ -131,6 +153,43 @@ class MY_Model extends CI_Model {
 		
 		// Return TRUE: if we got to here it must have all worked
 		return TRUE;
+	}
+	
+	// Deletes an object from the database, optionally also deleting any child relations
+	// Required: $objectID, $objectIDKey, $data, $dataTableName. 
+	// Example usage: delete_object(1, "centreID", 'centreData');
+	// Returns: TRUE if update was successful, FALSE otherwise.
+	public function delete_object($objectID, $objectIDKey, $dataTableName, $relations = array()) {
+		return FALSE;
+		/*// If we've been given a relational table and relations to go in that table, we should update the entry in that first in case of foreign key restraints
+		if( $relationTableName && count($relations) ) {
+			// Update the correct row in the relation table with the new relation IDs specified 
+			$this->db->where($objectIDKey, $objectID);
+			// If the update fails, return FALSE
+			if(!$this->db->update($relationTableName, $relations))return FALSE;
+		}
+		
+		// Lump all updates into one transaction
+		$this->db->trans_start();
+		// Loop through input data
+		foreach($data as $key => $value) {
+			// Set the where clauses and the values for the update
+			$where = array(
+				$objectIDKey => $objectID,
+				'key'   => $key
+			);
+			$update = array(
+				'value' => $value
+			);
+			// Create the update - active record sanitizes inputs automatically. Return false if update fails.
+			$this->db->where($where);
+			if(!$this->db->update($dataTableName, $update)) return FALSE;			
+		}
+		// Complete transaction, all is well
+		$this->db->trans_complete();
+		
+		// Return TRUE: if we got to here it must have all worked
+		return TRUE;*/
 	}
 
 }
