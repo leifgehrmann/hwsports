@@ -7,18 +7,6 @@
     <label for="name">Name:</label><br />
     <?php echo form_input($name);?>
   </p>
-  <p>
-    <label for="shortName">Short Name:</label><br />
-    <?php echo form_input($shortName);?>
-  </p>
-  <p>
-    <label for="address">Address:</label><br />
-    <?php echo form_input($address);?>
-  </p>
-  <p>
-    <label for="footerText">Footer Text:</label><br />
-    <?php echo form_input($footerText);?>
-  </p>
   
 	<h2>Opening Times:</h2>
 	<table>

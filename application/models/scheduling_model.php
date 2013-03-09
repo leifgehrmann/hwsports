@@ -41,8 +41,8 @@ class Scheduling_model extends MY_Model {
 		$matchMaximumTeamPlays = 1; // This is hard coded for now. This is the maximum number of matches a player must play
 		$matchMaximumPlays = 1; // This is hard coded for now. This is the maximum number of matches that can occur in a day
 
-		$umpires  = $actors['umpire'];
-		$teams    = $actors['teams'];
+		$umpires  = $actors['Umpire'];
+		$teams    = $actors['Team'];
 		$venues   = $venues;
 		
 		// If tournament is round robin...
@@ -116,12 +116,12 @@ class Scheduling_model extends MY_Model {
 				// keep a list of venues available for this slot.
 				$matchDateTimes[$date][$dateTime]['venueIDs'] = array();
 				// For each venue
-				foreach( $venueIDs as $venueID )
+				foreach( $venues as $venue )
 				{
 					// is the venue available at this time?
-					$venueMatches = $this->matches_model->get_venue_matches($venueID,$startDateTime,$endDateTime);
+					$venueMatches = $this->matches_model->get_venue_matches($venue['venueID'],$startDateTime,$endDateTime);
 					if( count($venueMatches) == 0 )
-						$matchDateTimes[$date][$dateTime]['venueIDs'][] = $venueID;
+						$matchDateTimes[$date][$dateTime]['venueIDs'][] = $venue['venueID'];
 				}
 				// If we didn't find any available venues, well then we ignore it.
 				if( count($matchDateTimes[$date][$dateTime]['venueIDs']) == 0 )

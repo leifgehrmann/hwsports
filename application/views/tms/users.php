@@ -1,14 +1,22 @@
-This page is still under development.<br />
-<br />
-
-<? foreach($users as $user) { ?>
-<div>
-	User ID: <?=$user['id']?> (<a href="/auth/delete_user/<?=$user['id']?>" target="_blank">Delete?</a>)<br>
-	Sports Centre: <?=$user['centreName']?><br>
-	First Name: <?=$user['firstName']?><br>
-	Last Name: <?=$user['lastName']?><br>
-	Phone: <?=$user['phone']?><br>
-	Email: <?=$user['email']?><br>
-</div>
-<br />
-<? } ?>
+<h1>Users</h1>
+<table>
+	<th>
+		<td>ID</td>
+		<td>First Name</td>
+		<td>Last Name</td>
+		<td>Phone</td>
+		<td>Email</td>
+		<td></td>
+		<td></td>
+	</th>
+	<? foreach($users as $user) { ?>
+	<tr>
+		<td><?=$user['id']?></td>
+		<td><?=$user['firstName']?></td>
+		<td><?=$user['lastName']?></td>
+		<td><?=$user['phone']?></td>
+		<td><?=$user['email']?></td>
+		<td><a class="button" href="/tms/user/<?=$user['id']?>">View</a></td>
+	</tr>
+	<? } ?>
+</table>
