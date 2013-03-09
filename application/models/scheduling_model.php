@@ -103,14 +103,9 @@ class Scheduling_model extends MY_Model {
 					$matchDateTimes[$date][$dateTime]['umpireIDs'] = $countedUmpireIDs;
 				else
 					unset($matchDateTimes[$date][$dateTime]);
-				var_dump($countedUmpireIDs);
-				var_dump($matchDateTimes);
-				die();
 			}
 			if(count($matchDateTimes[$date]) == 0)
 				unset($matchDateTimes[$date]);
-			var_dump($matchDateTimes);
-			die();
 		}
 		var_dump($matchDateTimes);
 		die();
