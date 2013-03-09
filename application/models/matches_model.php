@@ -74,6 +74,10 @@ class Matches_model extends MY_Model {
 	 **/
 	public function get_venue_matches($venueID,$startTime=NULL,$endTime=NULL)
 	{
+		// verify that the venue exists
+		$this->load->model('venues_model');
+		if($this->venues_model->get_venue($venueID) == FALSE) return FALSE;
+
 		$startTime = $this->db->escape(( is_null($startTime) ? "0" : datetime_to_standard($startTime) )); 	// 0 is less than 0000-01-01... Hopefully
 		$endTime = $this->db->escape(( is_null($endTime) ? ":" : datetime_to_standard($endTime) ));		// : is greater than 9, which is the largest digit so far
 		
@@ -100,6 +104,7 @@ class Matches_model extends MY_Model {
 						)";
 		$queryData = $this->db->query($queryString);
 		$data = $queryData->result_array();
+		$output = array();
 		foreach($data as $match) {
 			$output[] = $this->get_match($match['matchID']);
 		}
