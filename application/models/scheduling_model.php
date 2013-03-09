@@ -36,9 +36,9 @@ class Scheduling_model extends MY_Model {
 		$matchMaximumPlays = 1; // This is hard coded for now. This is the maximum number of matches a player must play
 
 
-		$umpireIDs  = explode(',',$tournament['umpires']);
-		$teamIDs    = explode(',',$tournament['teams']);
-		$venueIDs   = explode(',',$tournament['venues']);
+		$umpireIDs  = explode(',',$tournament['umpireIDs']);
+		$teamIDs    = explode(',',$tournament['teamIDs']);
+		$venueIDs   = explode(',',$tournament['venueIDs']);
 
 		$umpires = array();
 		foreach($umpireIDs as $umpireID)
