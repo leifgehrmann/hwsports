@@ -79,13 +79,13 @@ class Matches_model extends MY_Model {
 		//var_dump($startTime);
 		//var_dump($endTime);
 		$startTime = "Hello";
-		$startTime = "World";
+		$endTime = "World";
 		
 		// Returns all the start times
-		$subquery = "SELECT matchID, 
+		/*$subquery = "SELECT matchID, 
 						MAX(CASE WHEN `key`='startTime' THEN value END ) AS startTime, 
 						MAX(CASE WHEN `key`='endTime' THEN value END ) AS endTime
-						FROM matchData GROUP BY matchID ";
+						FROM matchData GROUP BY matchID ";*/
 
 		$queryString = "SELECT M.matchID FROM matches AS M, 
 						($subquery) AS D 
