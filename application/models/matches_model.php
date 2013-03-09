@@ -56,10 +56,11 @@ class Matches_model extends MY_Model {
 			$endTime = ( $endTime ? $endTime : new DateTime('31st December 9999'));
 
 			try {
-				$startTime = new DateTime($startTime);
-				$endTime = new DateTime($endTime);
+				$startTime = ( is_object($startTime) ? $startTime : new DateTime($startTime));
+				$endTime = ( is_object($endTime) ? $endTime : new DateTime($endTime));
 			} catch (Exception $e) {
-				return "ERROR: Invalid input date in database. Debug Exception: ".$e->getMessage();
+				log_message('error', "ERROR: Invalid input date. Debug Exception: ".$e->getMessage());
+				return FALSE;
 			}
 
 			$matches = $this->get_matches($venueID);
@@ -72,7 +73,8 @@ class Matches_model extends MY_Model {
 					$matchStartTime = new DateTime($match['startTime']);
 					$matchEndTime 	= new DateTime($match['endTime']);
 				} catch (Exception $e) {
-					return "ERROR: Invalid date in database. Debug Exception: ".$e->getMessage();
+					log_message('error', "ERROR: Invalid date in database. Debug Exception: ".$e->getMessage());
+					return FALSE;
 				}
 
 				if( $startTime < $matchEndTime && $matchStartTime < $endTime )
@@ -125,8 +127,8 @@ class Matches_model extends MY_Model {
 			$endTime = ( $endTime ? $endTime : new DateTime('31st December 9999'));
 
 			try {
-				$startTime = new DateTime($startTime);
-				$endTime = new DateTime($endTime);
+				$startTime = ( is_object($startTime) ? $startTime : new DateTime($startTime));
+				$endTime = ( is_object($endTime) ? $endTime : new DateTime($endTime));
 			} catch (Exception $e) {
 				return "ERROR: Invalid input date in database. Debug Exception: ".$e->getMessage();
 			}
