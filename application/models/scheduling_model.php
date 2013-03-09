@@ -128,7 +128,7 @@ class Scheduling_model extends MY_Model {
 				{
 					// is the venue available at this time?
 					$venueMatches = $this->matches_model->get_venue_matches($venueID,$startDateTime,$endDateTime);
-					if( count($venueMatches) != 0 )
+					if( count($venueMatches) == 0 )
 						$matchDateTimes[$date][$dateTime]['venueIDs'][] = $venueID;
 				}
 				// If we didn't find any available venues, well then we ignore it.
