@@ -553,6 +553,7 @@ class Scheduling_model extends MY_Model {
 			if($min==$max)
 
 		}*/
+		return $order;
 	}
 	/**
 	 * HAS NOT BEEN TESTED
