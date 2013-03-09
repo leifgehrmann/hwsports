@@ -72,7 +72,6 @@ class Scheduling_model extends MY_Model {
 		var_dump($matchWeekdayStartTimes);
 		var_dump($matchDuration);
 		$matchDateTimes = $this->get_match_date_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration);
-		die();
 
 		// We now check if an umpire is available for a particular
 		// match. It it isn't, we just remove it from the list of choices.
@@ -105,8 +104,8 @@ class Scheduling_model extends MY_Model {
 					unset($matchDateTimes[$date][$dateTime]);
 			}
 		}
-
-		
+		var_dump($matchDateTimes);
+		die();
 
 		// We now check if a venue is occupied with some other match.
 		// If it isn't, we say that this particular venue works at the
