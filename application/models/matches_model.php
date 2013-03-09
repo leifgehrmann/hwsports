@@ -76,7 +76,8 @@ class Matches_model extends MY_Model {
 	{
 		$startTime = ( is_null($startTime) ? "0" : datetime_to_standard($startTime) ); 	// 0 is less than 0000-01-01... Hopefully
 		$endTime = ( is_null($endTime) ? ":" : datetime_to_standard($endTime) );		// : is greater than 9, which is the largest digit so far
-
+		var_dump($startTime);
+		var_dump($endTime);
 		// Returns all the start times
 		$subquery = "SELECT matchID, 
 						MAX(CASE WHEN `key`='startTime' THEN value END ) AS startTime, 
