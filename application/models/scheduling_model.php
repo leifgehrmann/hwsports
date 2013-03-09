@@ -72,7 +72,7 @@ class Scheduling_model extends MY_Model {
 
 		// We now check if an umpire is available for a particular
 		// match. It it isn't, we just remove it from the list of choices.
-
+		var_dump($matchDateTimes);
 		// For each day...
 		foreach( $matchDateTimes as $date=>$dateTimes)
 		{
@@ -152,7 +152,6 @@ class Scheduling_model extends MY_Model {
 		$matchDateUsedMax = 0;
 
 		// We set the initial count for every single array to be 0.
-		var_dump($matchDateTimes);
 		foreach($matchDateTimes as $date=>$dateTimes)
 		{
 			$matchDateUsed[$date] = 0;
