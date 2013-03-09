@@ -81,16 +81,13 @@ class MY_Model extends CI_Model {
 		$this->db->trans_start();
 		// Loop through input data
 		foreach($data as $key => $value) {
-			// Set the where clauses and the values for the insert
-			$where = array(
-				$objectIDKey => $objectID,
-				'key'   => $key
-			);
+			// Set the values for the insert
 			$insert = array(
+				$objectIDKey => $objectID,
+				'key'   => $key,
 				'value' => $value
 			);
 			// Create the insert - active record sanitizes inputs automatically
-			$this->db->where($where);
 			$this->db->insert($dataTableName, $insert);			
 		}
 		// Complete transaction, all is well
