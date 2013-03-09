@@ -72,11 +72,8 @@ class Tournaments_model extends MY_Model {
 	}
 
 	public function get_tournament_actors($tournamentID){
-
 		$tournament = $this->get_tournament($tournamentID);
 		if($tournament == FALSE) return FALSE;
-
-		var_dump($tournament); die();
 		
 		$actorRows = $this->db->select('actorID', 'roleID', 'sportCategoryRoleName', 'actorTable')
 					->from('tournamentActors')
@@ -84,7 +81,9 @@ class Tournaments_model extends MY_Model {
 					->where('tournamentID',$tournamentID)
 					->get()
 					->result_array;
-
+					
+		return($actorRows);
+					
 		$actors = array();
 		foreach($actorRows as $actorRow)
 		{
