@@ -78,14 +78,14 @@ class Matches_model extends MY_Model {
 		//$endTime = $this->db->escape(( is_null($endTime) ? ":" : datetime_to_standard($endTime) ));		// : is greater than 9, which is the largest digit so far
 		//var_dump($startTime);
 		//var_dump($endTime);
-		$startTime = "Hello";
-		$endTime = "World";
+		$startTimeX = "Hello";
+		$endTimeX = "World";
 		
 		// Returns all the start times
-		/*$subquery = "SELECT matchID, 
+		$subquery = "SELECT matchID, 
 						MAX(CASE WHEN `key`='startTime' THEN value END ) AS startTime, 
 						MAX(CASE WHEN `key`='endTime' THEN value END ) AS endTime
-						FROM matchData GROUP BY matchID ";*/
+						FROM matchData GROUP BY matchID ";
 
 		$queryString = "SELECT M.matchID FROM matches AS M, 
 						($subquery) AS D 
@@ -93,13 +93,13 @@ class Matches_model extends MY_Model {
 						AND M.matchID = D.matchID
 						AND   ( 
 							( 
-								strcmp($startTime, D.startTime) <= 0 /* startTime is less or equal to than match start time */
-								AND strcmp(D.startTime,$endTime) <= 0 /* match start time is less of equal to than end time */
+								strcmp($startTimeX, D.startTime) <= 0 /* startTime is less or equal to than match start time */
+								AND strcmp(D.startTime,$endTimeX) <= 0 /* match start time is less of equal to than end time */
 							)
 							OR 
 							( 
-								strcmp($startTime, D.endTime) <= 0 /* startTime is less than match end time */
-								AND strcmp(D.endTime,$endTime) <= 0 /* match end time is less than end time */
+								strcmp($startTimeX, D.endTime) <= 0 /* startTime is less than match end time */
+								AND strcmp(D.endTime,$endTimeX) <= 0 /* match end time is less than end time */
 							) 
 						)";
 		$queryData = $this->db->query($queryString);
