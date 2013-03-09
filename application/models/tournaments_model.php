@@ -87,7 +87,7 @@ class Tournaments_model extends MY_Model {
 					
 		$actors = array();
 		foreach($actorRows as $actorRow) {
-			$actors[$actorRow['sportCategoryRoleName']][] = $this->$actorRow['actorMethod']($actorRow['actorID']);
+			$actors[$actorRow['sportCategoryRoleName']][] = eval("\$this->{$actorRow['actorMethod']}({$actorRow['actorID']})");
 		}
 		return $actors;
 
