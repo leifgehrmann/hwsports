@@ -17,7 +17,7 @@ class Centre_model extends MY_Model {
 	 * @return int
 	 **/
 	public function insert_centre($data) {
-		return insert_object($data, "centreID", "centreData");
+		return $this->insert_object($data, "centreID", "centreData");
 	}
 	
 	/**
