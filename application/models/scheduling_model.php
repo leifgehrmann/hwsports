@@ -67,6 +67,10 @@ class Scheduling_model extends MY_Model {
 		// returns all the possible combinations of start times
 		// and days of the tournament. From here we need to
 		// filter it down by umpires, venues, and team competitions
+		var_dump($tournamentStart);
+		var_dump($tournamentEnd);
+		var_dump($matchWeekdayStartTimes);
+		var_dump($matchDuration);
 		$matchDateTimes = $this->get_match_date_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration);
 
 
