@@ -182,16 +182,16 @@ class Test extends MY_Controller {
 	/*
 		tournaments_model
 	*/
-	public function get_tournament($tID){
-		$output = $this->tournaments_model->get_tournament($tID);
+	public function get_tournament($tournamentID){
+		$output = $this->tournaments_model->get_tournament($tournamentID);
 		$this->display($output);
 	}
 	public function get_tournaments($centreID){
 		$output = $this->tournaments_model->get_tournaments($centreID);
 		$this->display($output);
 	}
-	public function get_tournament_actors(){
-		$output = $this->tournaments_model->get_tournament_actors($tID);
+	public function get_tournament_actors($tournamentID){
+		$output = $this->tournaments_model->get_tournament_actors($tournamentID);
 		$this->display($output);
 	}
 	/*
