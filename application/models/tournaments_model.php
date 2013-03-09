@@ -127,7 +127,6 @@ class Tournaments_model extends MY_Model {
 
 		$this->db->trans_start();
 
-		if($this->tournament_exists($tournamentID)){
 			foreach($data as $key=>$value) {
 				if(!is_string($key)) return false;
 				$escKey = $this->db->escape($key);
@@ -140,9 +139,6 @@ class Tournaments_model extends MY_Model {
 			}
 			$this->db->trans_complete();
 			return true;
-		} else {
-			return false;
-		}
 	}
 
 	/**
@@ -151,13 +147,9 @@ class Tournaments_model extends MY_Model {
 	 * @return boolean
 	 **/
 	public function delete_tournament($tournamentID){
-		if($this->tournament_exists($tournamentID)){
 			$this->db->query("DELETE FROM tournamentData WHERE tournamentID = $tournamentID");
 			$this->db->query("DELETE FROM tournaments WHERE tournamentID = $tournamentID");
 			return true;
-		} else {
-			return false;
-		}
 	}
 
 }

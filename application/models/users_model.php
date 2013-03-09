@@ -54,7 +54,6 @@ class Users_model extends MY_Model {
 	public function update_user($userID, $data)
 	{
 		$this->db->trans_start();
-		if($this->user_exists($userID)){
 			foreach($data as $key=>$value) {
 				$escKey = $this->db->escape($key);
 				$escValue = $this->db->escape($value);
@@ -72,8 +71,6 @@ class Users_model extends MY_Model {
 				$this->db->query($dataQueryString2);
 			}
 			return $this->db->trans_complete();
-		}
-		return false;
 	}
 
 	/**

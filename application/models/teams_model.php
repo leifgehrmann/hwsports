@@ -115,29 +115,25 @@ class Teams_model extends MY_Model {
 
 		$this->db->trans_start();
 
-		if($this->team_exists($teamID)){
-			foreach($data as $key=>$value) {
-				$escKey = $this->db->escape( str_replace("'", '', $key) );
-				$escValue = $this->db->escape($value);
-				error_log("About to INSERT teamData: ".var_export($data,1));
-				
-				$dataQueryString1 = "DELETE FROM `teamData` WHERE `key`=$escKey AND `teamID`=$userID";
-				$dataQueryString2 = "INSERT INTO `teamData` (
-										`teamID`,
-										`key`,
-										`value`
-									) VALUES (
-										$teamID,
-										$escKey,
-										$escValue
-									)";
-				$this->db->query($dataQueryString1);
-				$this->db->query($dataQueryString2);
-			}
-			$this->db->trans_complete();
-			return true;
-		} else {
-			return false;
+		foreach($data as $key=>$value) {
+			$escKey = $this->db->escape( str_replace("'", '', $key) );
+			$escValue = $this->db->escape($value);
+			error_log("About to INSERT teamData: ".var_export($data,1));
+			
+			$dataQueryString1 = "DELETE FROM `teamData` WHERE `key`=$escKey AND `teamID`=$userID";
+			$dataQueryString2 = "INSERT INTO `teamData` (
+									`teamID`,
+									`key`,
+									`value`
+								) VALUES (
+									$teamID,
+									$escKey,
+									$escValue
+								)";
+			$this->db->query($dataQueryString1);
+			$this->db->query($dataQueryString2);
 		}
+		$this->db->trans_complete();
+		return true;
 	}
 }

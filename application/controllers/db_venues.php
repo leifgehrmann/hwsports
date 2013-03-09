@@ -19,14 +19,7 @@ class Db_venues extends MY_Controller {
 		using a form to update each individual detail.
 
 	*/
-	public function venue_exists($venueID){
-		$output = $this->venues_model->venue_exists($venueID);
-		$this->data['data'] =  json_encode($output);
-		header('Content-Type: application/json');
-		$this->load->view('data', $this->data);
-	}
-
-	// 
+	
 	public function get_venues()
 	{
 		$output = $this->venues_model->get_venues($this->data['centre']['centreID']);

@@ -69,7 +69,6 @@ class Venues_model extends MY_Model {
 
 		$this->db->trans_start();
 
-		if($this->venue_exists($venueID)){
 			foreach($data as $key=>$value) {
 				$escKey = $this->db->escape($key);
 				$escValue = $this->db->escape($value);
@@ -81,8 +80,5 @@ class Venues_model extends MY_Model {
 			}
 			$this->db->trans_complete();
 			return true;
-		} else {
-			return false;
-		}
 	}
 }
