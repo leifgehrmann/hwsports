@@ -88,7 +88,7 @@ class MY_Model extends CI_Model {
 			$_key = mysql_real_escape_string($key);
 			$_value = mysql_real_escape_string($value);
 			// Insert a row of data into the data table with correct keys and the newly generated ID
-			$this->db->query("INSERT INTO `$_dataTableName` ($_objectIDKey, key, value) VALUES ('$objectID', '$_key', $_value')");
+			$this->db->query("INSERT INTO `$_dataTableName` (`$_objectIDKey`, `key`, `value`) VALUES ('$objectID', '$_key', '$_value');");
 		}
 		// Complete transaction, all is well
 		$this->db->trans_complete();
