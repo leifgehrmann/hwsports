@@ -2,7 +2,6 @@
 class Teams_model extends MY_Model {
 
 	public function __construct() {
-        parent::__construct();
 		// Load models we might be referencing
 		$this->load->model('users_model');
 		$this->load->model('teams_model');
@@ -18,92 +17,70 @@ class Teams_model extends MY_Model {
 	 *  
 	 * @return array
 	 **/
-	public function get_team($teamID) {
+	public function get($ID) {
 		// Get all the teamData
-		$team = $this->get_object($teamID, $this->objectIDKey, $this->dataTableName);
-		// Load the users model since we want to use the get_user function
-		$this->load->model('users_model');
-		// Query the teamsUsers table for user IDs
-		$userIDsQuery = $this->db->query("SELECT `userID` FROM `teamsUsers` WHERE `teamID` = ".$this->db->escape($teamID) );
-		foreach($userIDsQuery->result_array() as $userIDrow) {
-			// Put each user into the team array, indexed by their userID for convenience
-			$team['users'][$userIDrow['userID']] = $this->users_model->get_user($userIDrow['userID']);
+		$team = $this->get_object($ID, $this->objectIDKey, $this->dataTableName);
+		// Fetch the IDs for all users in the team
+		$IDRows = $this->db->get_where('teamsUsers', array('teamID' => $ID))->result_array();
+		// Loop through all result rows, get the ID and use that to put all the data into the output array 
+		foreach($IDRows as $IDRow) {
+			$team['users'][$IDRow['userID']] = $this->users_model->get_user($IDRow['userID']);
 		}
 		return $team;
 	}
 	
 	/**
-	 * Returns all data about all teams at a specific centre
+	 * Returns all data about all teams at current centre
 	 *  
 	 * @return array
 	 **/
-	public function get_teams($centreID) {
-		// Query to return the IDs for everything which takes place at the specified sports centre
-		$IDsQuery = $this->db->query("SELECT teamID FROM teams WHERE centreID = ".$this->db->escape($centreID));
+	public function get_all() {
+		// Fetch the IDs for everything at the current sports centre
+		$IDRows = $this->db->get_where($this->relationTableName, array('centreID' => $this->centreID))->result_array();
+		// Create empty array to output if there are no results
+		$all = array();
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
-		foreach($IDsQuery->result_array() as $IDRow) {
-			$all[] = $this->get_team($IDRow['teamID']);
+		foreach($IDRows as $IDRow) {
+			$all[] = $this->get($IDRow[$this->objectIDKey]);
 		}
-		return (empty($all) ? FALSE : $all);
+		return $all;
 	}
-
+	
 	/**
-	 * Returns all data about teams in a particular tournament
-	 *  
-	 * @return array
-	 **/
-	public function get_tournament_teams($tournamentID) {
-		// Not implemented yet (should teams table have a tournament field, or should it be in tournamentData?)
-		return FALSE;
-	}
-
-	/**
-	 * Creates a team with data.
-	 * returns the teamID of the new team if it was
-	 * successful. If not, it should return -1.
+	 * Creates a new tournament with data, using the sport ID as specified.
+	 * Returns the ID of the new object if it was successful.
+	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
 	 *  
 	 * @return int
 	 **/
-	public function insert_team($centreID,$data)
-	{	
-		// Create team, get ID
-		$this->db->query("INSERT INTO teams (centreID) VALUES ({$centreID})");
-		$teamID = $this->db->insert_id();
-
-		$this->db->trans_start();
-		
-		$insertDataArray = array();
-		foreach($data as $key=>$value) {
-			$insertDataArray[] = array(
-				'teamID' => $this->db->escape($teamID),
-				'key' => $this->db->escape($key),
-				'value' => $this->db->escape($value)
-			);
-		}
-		if ($this->db->insert_batch('teamData',$insertDataArray)) {
-			// db success
-			$this->db->trans_complete();
-			return $teamID;
-		} else {
-			// db fail
-			return false;
-		}
+	public function insert($data, $relationIDs=array()) {
+		return $this->insert_object($data, $this->objectIDKey, $this->dataTableName, $relationIDs);
 	}
 
+	/**
+	 * Updates data for a specific tournament.
+	 * Returns TRUE on success.
+	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
+	 *
+	 * @return boolean
+	 **/
+	public function update($ID, $data) {
+		return $this->update_object($ID, $this->objectIDKey, $data, $this->dataTableName);
+	}
 	
 	/**
 	 * Adds users to team
 	 *  
 	 * @return bool
 	 **/
-	public function add_team_members($teamID, $userIDs)
+	public function add_team_members($ID, $userIDs)
 	{	
 		$this->db->trans_start();
 		
 		$insertDataArray = array();
 		foreach($userIDs as $userID) {
 			$insertDataArray[] = array(
-				'teamID' => $this->db->escape($teamID),
+				$this->objectIDKey => $this->db->escape($ID),
 				'userID' => $this->db->escape($userID)
 			);
 		}
@@ -119,11 +96,30 @@ class Teams_model extends MY_Model {
 	
 	
 	/**
+	 * Deletes a tournament with data.
+	 * Also deletes all objects which depend on it, unless $testRun is TRUE in which case a string is returned showing all
+	 * Returns TRUE on success.
+	 * Returns FALSE on any error or deletion failure (most likely forgotten foreign key restraints).
+	 *
+	 * @return boolean
+	 **/
+	public function delete($ID, $testRun=TRUE) {
+		$dependents = array(
+			'sports' => 'centreID',
+			'venues' => 'centreID',
+			'tournaments' => 'centreID',
+			'teams' => 'centreID'
+		);
+		return $this->delete_object($testRun, $ID, $this->objectIDKey, $this->dataTableName, false, $dependents);
+	}
+
+	
+	/**
 	 * Updates a team with data.
 	 *
 	 * @return boolean
 	 **/
-	public function update_team($teamID, $data){
+	public function update_team($ID, $data){
 
 		$this->db->trans_start();
 
@@ -138,7 +134,7 @@ class Teams_model extends MY_Model {
 									`key`,
 									`value`
 								) VALUES (
-									$teamID,
+									$ID,
 									$escKey,
 									$escValue
 								)";
