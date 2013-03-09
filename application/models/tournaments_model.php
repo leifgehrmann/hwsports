@@ -2,7 +2,6 @@
 class Tournaments_model extends MY_Model {
 	
 	public function __construct() {
-        parent::__construct();
 		// Load models we might be referencing
 		$this->load->model('users_model');
 		$this->load->model('teams_model');
@@ -91,7 +90,7 @@ class Tournaments_model extends MY_Model {
 	 **/
 	public function get_all() {
 		// Fetch the IDs for everything at the current sports centre
-		$IDRows = $this->db->get_where('tournaments', array('centreID' => $this->centreID))->result_array();
+		$IDRows = $this->db->get_where($this->relationTableName, array('centreID' => $this->centreID))->result_array();
 		// Create empty array to output if there are no results
 		$all = array();
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
