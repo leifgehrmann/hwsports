@@ -82,7 +82,7 @@ class Tournaments_model extends MY_Model {
 					->get()
 					->result_array;
 					
-		return($actorRows);
+		return($this->db->last_query());
 					
 		$actors = array();
 		foreach($actorRows as $actorRow)
