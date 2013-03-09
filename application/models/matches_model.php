@@ -78,6 +78,7 @@ class Matches_model extends MY_Model {
 		$this->load->model('venues_model');
 		if($this->venues_model->get_venue($venueID) == FALSE) return FALSE;
 
+		// Get valid database inputs.
 		$startTime = $this->db->escape(( is_null($startTime) ? "0" : datetime_to_standard($startTime) )); 	// 0 is less than 0000-01-01... Hopefully
 		$endTime = $this->db->escape(( is_null($endTime) ? ":" : datetime_to_standard($endTime) ));		// : is greater than 9, which is the largest digit so far
 		
