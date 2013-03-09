@@ -3,6 +3,9 @@ class Tournaments_model extends MY_Model {
 	
 	public function __construct() {
         parent::__construct();
+		// Load models we might be referencing
+		$this->load->model('users_model');
+		$this->load->model('teams_model');
 		// Basic variables which apply to all table operations
 		$this->objectIDKey = "tournamentID";
 		$this->dataTableName = "tournamentData";
@@ -103,8 +106,6 @@ class Tournaments_model extends MY_Model {
 	 * @return array
 	 **/
 	public function get_actors($ID) {
-		// Load models we might be referencing
-		$this->load->model('users_model');
 		// Check if ID exists
 		if(!$this->get($ID)) return FALSE;
 		// Select all info about actors for this specific tournament - join the roles table so we get info about how to handle the different roles
