@@ -105,7 +105,7 @@ class Matches_model extends MY_Model {
 					$matchStartTime = new DateTime($match['startTime']);
 					$matchEndTime 	= new DateTime($match['endTime']);
 				} catch (Exception $e) {
-					$tournament['status'] = "ERROR: Invalid date in database. Debug Exception: ".$e->getMessage();
+					return "ERROR: Invalid date in database. Debug Exception: ".$e->getMessage();
 				}
 
 				if( $startTime < $matchEndTime && $matchStartTime < $endTime )
