@@ -1,99 +1,48 @@
 <?php
-class Teams_model extends CI_Model {
+class Teams_model extends MY_Model {
 
 	/**
-	 * $teamID is int(11)
-	 *  
-	 * @return boolean
-	 **/
-
-	public function team_exists($teamID)
-	{
-		$output = array();
-		$queryString = 	"SELECT ".$this->db->escape($teamID)." AS teamID, ".
-						"EXISTS(SELECT 1 FROM teams WHERE teamID = ".$this->db->escape($teamID).") AS `exists`";
-		$queryData = $this->db->query($queryString);
-		$output = $queryData->row_array();
-		return $output['exists'];
-	}
-
-	/**
-	 * Returns all team data for the teams in a particular tournament
+	 * Returns all data about a specific team, including all team members in $team['users']
 	 *  
 	 * @return array
 	 **/
-
-	public function get_tournament_teams($tournamentID)
-	{
-		/*$output = array();
-		$queryString = "SELECT sportID FROM sports WHERE centreID = ".$this->db->escape($centreID);
-		$queryData = $this->db->query($queryString);
-		$data = $queryData->result_array();
-		foreach($data as $sport) {
-			$output[] = $this->get_sport($sport['sportID']);
+	public function get_team($teamID) {
+		// Get all the teamData
+		$team = $this->get_object($teamID, "teamID", "teamData");
+		// Load the users model since we want to use the get_user function
+		$this->load->model('users_model');
+		// Query the teamsUsers table for user IDs
+		$userIDsQuery = $this->db->query("SELECT `userID` FROM `teamsUsers` WHERE `teamID` = ".$this->db->escape($teamID) );
+		foreach($usersQuery->result_array() as $userIDrow) {
+			// Put each user into the team array, indexed by their userID for convenience
+			$team['users'][$userIDrow['userID']] = $this->users_model->get_user($userIDrow['userID']);
 		}
-		return $output;*/
+		return $team;
 	}
-
+	
 	/**
-	 * Returns all team data for the teams in a 
+	 * Returns all data about all teams at a specific centre
 	 *  
 	 * @return array
 	 **/
-
-	public function get_teams($centreID)
-	{
-		$output = array();
-		$queryString = "SELECT teamID FROM teams WHERE centreID = ".$this->db->escape($centreID);
-		$queryData = $this->db->query($queryString);
-		$data = $queryData->result_array();
-		foreach($data as $team) {
-			$output[] = $this->get_team($team['teamID']);
+	public function get_teams($centreID) {
+		// Query to return the IDs for everything which takes place at the specified sports centre
+		$IDsQuery = $this->db->query("SELECT teamID FROM teams WHERE centreID = ".$this->db->escape($centreID));
+		// Loop through all result rows, get the ID and use that to put all the data into the output array 
+		foreach($IDsQuery->result_array() as $IDRow) {
+			$all[] = $this->get_team($IDRow['teamID']);
 		}
-		return $output;
+		return $all;
 	}
 
 	/**
-	 * Returns an array of data for a specific team
-	 * It should also return all team members.
+	 * Returns all data about teams in a particular tournament
 	 *  
 	 * @return array
 	 **/
-	public function get_team($teamID)
-	{
-		$fields = array();
-		$fieldsQuery = $this->db->query("SELECT `key` FROM `teamData` WHERE `teamID` = ".$this->db->escape($teamID) );
-		$fieldsResult = $fieldsQuery->result_array();
-		foreach($fieldsResult as $fieldResult) {
-			$fields[] = $fieldResult['key'];
-		}
-
-		$dataQueryString = "SELECT ";
-		$i = 0;
-		$len = count($fields);
-		foreach($fields as $field) {
-			$dataQueryString .= "MAX(CASE WHEN `key`=".$this->db->escape($field)." THEN value END ) AS ".$this->db->escape($field);
-			if($i<$len-1)
-				$dataQueryString .= ", ";
-			else
-				$dataQueryString .= " ";
-			$i++;
-		}
-		$dataQueryString .= "FROM teamData WHERE teamID = ".$this->db->escape($teamID);
-		$dataQuery = $this->db->query($dataQueryString);
-
-		// We would also like to get all the users from the team.
-		// So someone should add that in later.
-		$users = array();
-		$usersQuery = $this->db->query("SELECT `userID` FROM `teamsUsers` WHERE `teamID` = ".$this->db->escape($teamID) );
-		$usersResult = $usersQuery->result_array();
-		foreach($usersResult as $userResult) {
-			$users[] = $fieldResult['key'];
-		}
-
-		$output = array_merge(array("teamID"=>$teamID), $dataQuery->row_array());
-		$output['users'] = $users;
-		return $output;
+	public function get_tournament_teams($tournamentID) {
+		// Not implemented yet (should teams table have a tournament field, or should it be in tournamentData?)
+		return FALSE;
 	}
 
 	/**

@@ -1,74 +1,56 @@
 <?php
-class Users_model extends CI_Model {
+class Users_model extends MY_Model {
 
-	public function user_exists($userID)
-	{
-		$output = array();
-		$queryString = 	"SELECT ".$this->db->escape($userID)." AS userID, ".
-						"EXISTS(SELECT 1 FROM users WHERE id = ".$this->db->escape($userID).") AS `exists`";
-		$queryData = $this->db->query($queryString);
-		$output = $queryData->row_array();
-		return (bool)$output['exists'];
+	/**
+	 * Returns all data about a specific user
+	 *  
+	 * @return array
+	 **/
+	public function get_user($userID) {
+		// Get all the userData
+		$user = $this->get_object($userID, "userID", "userData");
+		return $user;
 	}
-
-	public function get_users($centreID)
-	{
+	
+	/**
+	 * Returns all data about all users at a specific centre
+	 *  
+	 * @return array
+	 **/
+	public function get_users($centreID) {
 		// To find out if a user is associated with the centre...
-
 		// Tickets > "userID"
 		// Tournaments[teamSport=1] > "teams"    >> TeamsUsers > "userID"
 		// Tournaments[teamSport=0] > "athletes" >> "userID"
 		// UserData[centreID=1] > userID
-
-		$output = array();
-		$queryString = "SELECT userID FROM userData WHERE `key`='centreID' AND `value`=".$this->db->escape($centreID);
-		$queryData = $this->db->query($queryString);
-		$data = $queryData->result_array();
-		foreach($data as $user) {
-			$output[] = $this->get_user($user['userID']);
-		}
-		return $output;
-	}
-
-	/*public function get_tournament_users($tournamentID)
-	{
-		$output = array();
-		$queryString = "SELECT userID FROM users WHERE centreID = ".$this->db->escape($centreID);
-		$queryData = $this->db->query($queryString);
-		$data = $queryData->result_array();
-		foreach($data as $user) {
-			$output[] = $this->get_user($user['userID']);
-		}
-		return $output;
-	}*/
-
-	public function get_user($userID)
-	{
-		$fields = array();
-		$fieldsQuery = $this->db->query("SELECT `key` FROM `userData` WHERE `userID` = ".$this->db->escape($userID) );
-		$fieldsResult = $fieldsQuery->result_array();
-		foreach($fieldsResult as $fieldResult) {
-			$fields[] = $fieldResult['key'];
-		}
-
-		$dataQueryString = "SELECT ";
-		$i = 0;
-		$len = count($fields);
-		foreach($fields as $field) {
-			$dataQueryString .= "MAX(CASE WHEN `key`=".$this->db->escape($field)." THEN value END ) AS ".$this->db->escape($field);
-			if($i<$len-1)
-				$dataQueryString .= ", ";
-			else
-				$dataQueryString .= " ";
-			$i++;
-		}
-		$dataQueryString .= "FROM userData WHERE userID = ".$this->db->escape($userID);
-		$dataQuery = $this->db->query($dataQueryString);
 		
-		$output = array_merge(array("userID"=>$userID), $dataQuery->row_array());
-		return $output;
+		// Query to return the IDs for everything which takes place at the specified sports centre
+		$IDsQuery = $this->db->query("SELECT userID FROM userData WHERE `key`='centreID' AND `value`=".$this->db->escape($centreID));
+		// Loop through all result rows, get the ID and use that to put all the data into the output array 
+		foreach($IDsQuery->result_array() as $IDRow) {
+			$all[] = $this->get_user($IDRow['userID']);
+		}
+		return $all;
 	}
 	
+	/**
+	 * Returns all data about users in a particular tournament
+	 *  
+	 * @return array
+	 **/
+	public function get_tournament_users($tournamentID) {
+		// Load the teams model since we want to use the get_tournament_teams function
+		$this->load->model('users_model');
+		// Loop through all teams in tournament
+		foreach($this->teams_model->get_tournament_teams($tournamentID) as $team) {
+			// Loop through all users in team, add to output array
+			foreach($team['users'] as $user) {
+				$all[] = $user;
+			}
+		}
+		return $all
+	}
+
 	public function update_user($userID, $data)
 	{
 		$this->db->trans_start();

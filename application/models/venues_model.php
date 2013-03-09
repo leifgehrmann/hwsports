@@ -1,64 +1,32 @@
 <?php
-class Venues_model extends CI_Model {
+class Venues_model extends MY_Model {
 
 	/**
-	 * $venueID is int(11)
-	 *  
-	 * @return boolean
-	 **/
-
-	public function venue_exists($venueID)
-	{
-		$output = array();
-		$queryString = 	"SELECT ".$this->db->escape($venueID)." AS venueID, ".
-						"EXISTS(SELECT 1 FROM venues WHERE venueID = ".$this->db->escape($venueID).") AS `exists`";
-		$queryData = $this->db->query($queryString);
-		$output = $queryData->row_array();
-		return $output['exists'];
-	}
-
-	/**
-	 * Returns a 2d array of venue data
+	 * Returns all data about a specific venue
 	 *  
 	 * @return array
 	 **/
-
-	public function get_venues($centreID, $fields=array("name","description","directions","lat","lng"))
-	{
-		$output = array();
-		$queryString = "SELECT venueID FROM venues WHERE centreID = ".$this->db->escape($centreID);
-		$queryData = $this->db->query($queryString);
-		$data = $queryData->result_array();
-		foreach($data as $venue) {
-			$output[] = $this->get_venue($venue['venueID'],$fields);
-		}
-		return $output;
+	public function get_venue($venueID) {
+		// Get all the venueData
+		$venue = $this->get_object($venueID, "venueID", "venueData");
+		return $venue;
 	}
-
+	
 	/**
-	 * Returns an array of data from a specific venue
+	 * Returns all data about all venues at a specific centre
 	 *  
 	 * @return array
 	 **/
-	public function get_venue($venueID, $fields=array("name","description","directions","lat","lng"))
-	{
-		$dataQueryString = "SELECT ";
-		$i = 0;
-		$len = count($fields);
-		foreach($fields as $field) {
-			$dataQueryString .= "MAX(CASE WHEN `key`=".$this->db->escape($field)." THEN value END ) AS ".$this->db->escape($field);
-			if($i<$len-1)
-				$dataQueryString .= ", ";
-			else
-				$dataQueryString .= " ";
-			$i++;
+	public function get_venues($centreID) {
+		// Query to return the IDs for everything which takes place at the specified sports centre
+		$IDsQuery = $this->db->query("SELECT venueID FROM venues WHERE centreID = ".$this->db->escape($centreID));
+		// Loop through all result rows, get the ID and use that to put all the data into the output array 
+		foreach($IDsQuery->result_array() as $IDRow) {
+			$all[] = $this->get_venue($IDRow['venueID']);
 		}
-		$dataQueryString .= "FROM venueData WHERE venueID = ".$this->db->escape($venueID);
-		$dataQuery = $this->db->query($dataQueryString);
-		$output = array_merge(array("venueID"=>$venueID), $dataQuery->row_array());
-		return $output;
+		return $all;
 	}
-
+	
 	/**
 	 * Creates a venue with data.
 	 * returns the venueID of the new venue if it was

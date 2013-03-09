@@ -1,5 +1,5 @@
 <?php
-class MY_Model extends CI_Model {
+class MY_Model extends MY_Model {
     
 	public function __construct()
     {
@@ -44,6 +44,9 @@ class MY_Model extends CI_Model {
 			$relation['objectID'] = $relationObjectIDQueryRow[$relation['objectIDKey']];
 			// Put the ID in the object output array too, controllers might use it for other things
 			$object[$relation['objectIDKey']] = $relation['objectID']; 
+			// Set blank values for the relation variables if they have been omitted
+			$relation['relationTableName'] = (isset($relation['relationTableName']) ? $relation['relationTableName'] : '');
+			$relation['relations'] = (isset($relation['relations']) ? $relation['relations'] : array() );
 			// Get the data for the actual object, passing in the known parameters
 			$object[$relation['dataTableName']] = $this->get_object($relation['objectID'], $relation['objectIDKey'], $relation['dataTableName'], $relation['relationTableName'], $relation['relations']);
 		}
