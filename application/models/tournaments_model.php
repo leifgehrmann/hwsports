@@ -8,11 +8,11 @@ class Tournaments_model extends MY_Model {
 		$this->load->model('teams_model');
 		
 		// Basic variables which apply to all table operations
-		$objectIDKey = "tournamentID";
-		$dataTableName = "tournamentData";
-		$relationTableName = "tournaments";
+		$this->objectIDKey = "tournamentID";
+		$this->dataTableName = "tournamentData";
+		$this->relationTableName = "tournaments";
     }
-		
+
 	/**
 	 * Returns all data about a specific tournament, including sport and sport category data
 	 *  
@@ -33,9 +33,9 @@ class Tournaments_model extends MY_Model {
 							)
 						)
 					);
-		$tournament = $this->get_object($ID, $objectIDKey, $dataTableName, $relationTableName, $relations);
+		$tournament = $this->get_object($ID, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relations);
 		// This tournament ID doesn't exist
-		if(empty($tournament)) return FALSE;
+		if(!$tournament) return FALSE;
 		
 		// Start tournament status logic - sets tournament[status] to value: preRegistration, inRegistration, postRegistration, preTournament, inTournament, postTournament or ERROR 
 		try {
@@ -91,12 +91,12 @@ class Tournaments_model extends MY_Model {
 	 **/
 	public function get_all() {
 		// Fetch the IDs for everything at the current sports centre
-		$IDRows = $this->db->get_where('tournaments', array('centreID' => $centreID))->result_array();
+		$IDRows = $this->db->get_where('tournaments', array('centreID' => $this->centreID))->result_array();
 		// Create empty array to output if there are no results
 		$all = array();
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
 		foreach($IDRows as $IDRow) {
-			$all[] = $this->get($IDRow[$objectIDKey]);
+			$all[] = $this->get($IDRow[$this->objectIDKey]);
 		}
 		return $all;
 	}
@@ -108,7 +108,7 @@ class Tournaments_model extends MY_Model {
 	 **/
 	public function get_actors($ID) {
 		// Check if ID exists
-		if(empty($this->get($ID))) return FALSE;
+		if(!$this->get($ID)) return FALSE;
 		// Select all info about actors for this specific tournament - join the roles table so we get info about how to handle the different roles
 		$actorRows = $this->db->select('actorID, roleID, sportCategoryRoleName, actorTable, actorMethod')
 					->from('tournamentActors')
@@ -136,7 +136,7 @@ class Tournaments_model extends MY_Model {
 	 * @return int
 	 **/
 	public function insert($data, $relationIDs=array()) {
-		return $this->insert_object($data, $objectIDKey, $dataTableName, $relationIDs);
+		return $this->insert_object($data, $this->objectIDKey, $this->dataTableName, $relationIDs);
 	}
 
 	/**
@@ -147,7 +147,7 @@ class Tournaments_model extends MY_Model {
 	 * @return boolean
 	 **/
 	public function update($ID, $data) {
-		return $this->update_object($ID, $objectIDKey, $data, $dataTableName);
+		return $this->update_object($ID, $this->objectIDKey, $data, $this->dataTableName);
 	}
 
 	/**
@@ -158,8 +158,14 @@ class Tournaments_model extends MY_Model {
 	 *
 	 * @return boolean
 	 **/
-	public function delete($ID, $testRun=TRUE){
-		return $this->delete_object($testRun, $tournamentID, $objectIDKey, $data, $dataTableName);
+	public function delete($ID, $testRun=TRUE) {
+		$dependents = array(
+			'sports' => 'centreID',
+			'venues' => 'centreID',
+			'tournaments' => 'centreID',
+			'teams' => 'centreID'
+		);
+		return $this->delete_object($testRun, $ID, $this->objectIDKey, $this->dataTableName, false, $dependents);
 	}
 
 }

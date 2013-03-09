@@ -31,7 +31,7 @@ class MY_Controller extends CI_Controller {
 			$this->load->model('centre_model');
 			
 			// Make all centre data accessible from all controllers and views
-			$this->data['centre'] = $this->centre_model->get_centre( $row['centreID'] );
+			$this->data['centre'] = $this->centre_model->get( $row['centreID'] );
 			$this->centreID = $this->data['centre']['centreID'];
 		}	
 		
