@@ -46,7 +46,7 @@ class Scheduling_model extends MY_Model {
 		$umpires = array();
 		foreach($umpireIDs as $umpireID)
 		{
-			$umpires[] = $this->users_model->get_umpire($umpireID);
+			$umpires[] = $this->users_model->get_user($umpireID);
 		}
 		
 		// If tournament is round robin...
