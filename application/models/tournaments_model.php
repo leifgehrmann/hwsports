@@ -22,6 +22,7 @@ class Tournaments_model extends MY_Model {
 						)
 					);
 		$tournament = $this->get_object($tournamentID, "tournamentID", "tournamentData", "tournaments", $relations);
+		if(is_empty($tournament)) return FALSE
 		
 		// Start tournament status logic - sets tournament[status] to value: preRegistration, inRegistration, postRegistration, preTournament, inTournament, postTournament or ERROR 
 		try {
