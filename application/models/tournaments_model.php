@@ -80,9 +80,7 @@ class Tournaments_model extends MY_Model {
 					->join('sportCategoryRoles', 'sportCategoryRoles.sportCategoryRoleID = tournamentActors.roleID')
 					->where('tournamentID',$tournamentID)
 					->get()
-					->result_array;
-					
-		return($this->db->last_query());
+					->result_array();
 					
 		$actors = array();
 		foreach($actorRows as $actorRow)
