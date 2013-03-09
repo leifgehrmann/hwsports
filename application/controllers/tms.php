@@ -84,6 +84,8 @@ class Tms extends MY_Controller {
 			$this->data['sports'] = array();
 			
 			foreach( $this->sports_model->get_sports($this->data['centre']['centreID']) as $sport) {
+				print_r($sport); die();
+				
 				$this->data['sports'][$sport['sportCategory']['name']][$sport['sportID']] = $sport['name'];
 			}
 			ksort($this->data['sports']);
