@@ -2,9 +2,6 @@
 class Users_model extends MY_Model {
 
 	public function __construct() {
-		// Load models we might be referencing
-		$this->load->model('users_model');
-		
 		// Basic variables which apply to all table operations
 		$this->objectIDKey = "userID";
 		$this->dataTableName = "userData";

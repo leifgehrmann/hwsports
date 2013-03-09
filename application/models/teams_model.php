@@ -68,6 +68,19 @@ class Teams_model extends MY_Model {
 	}
 	
 	/**
+	 * Deletes a team with data.
+	 * Also deletes all objects which depend on it, unless $testRun is TRUE in which case a string is returned showing all
+	 * Returns TRUE on success.
+	 * Returns FALSE on any error or deletion failure (most likely forgotten foreign key restraints).
+	 *
+	 * @return boolean
+	 **/
+	public function delete($ID, $testRun=TRUE) {
+		$dependents = array();
+		return $this->delete_object($testRun, $ID, $this->objectIDKey, $this->dataTableName, false, $dependents);
+	}
+	
+	/**
 	 * Adds user IDs to teamsUsers table
 	 *  
 	 * @return bool
@@ -81,54 +94,4 @@ class Teams_model extends MY_Model {
 		return ($this->db->affected_rows() ? TRUE : FALSE);
 	}
 	
-	
-	/**
-	 * Deletes a tournament with data.
-	 * Also deletes all objects which depend on it, unless $testRun is TRUE in which case a string is returned showing all
-	 * Returns TRUE on success.
-	 * Returns FALSE on any error or deletion failure (most likely forgotten foreign key restraints).
-	 *
-	 * @return boolean
-	 **/
-	public function delete($ID, $testRun=TRUE) {
-		$dependents = array(
-			'sports' => 'centreID',
-			'venues' => 'centreID',
-			'tournaments' => 'centreID',
-			'teams' => 'centreID'
-		);
-		return $this->delete_object($testRun, $ID, $this->objectIDKey, $this->dataTableName, false, $dependents);
-	}
-
-	
-	/**
-	 * Updates a team with data.
-	 *
-	 * @return boolean
-	 **/
-	public function update_team($ID, $data){
-
-		$this->db->trans_start();
-
-		foreach($data as $key=>$value) {
-			$escKey = $this->db->escape( str_replace("'", '', $key) );
-			$escValue = $this->db->escape($value);
-			error_log("About to INSERT teamData: ".var_export($data,1));
-			
-			$dataQueryString1 = "DELETE FROM `teamData` WHERE `key`=$escKey AND `teamID`=$userID";
-			$dataQueryString2 = "INSERT INTO `teamData` (
-									`teamID`,
-									`key`,
-									`value`
-								) VALUES (
-									$ID,
-									$escKey,
-									$escValue
-								)";
-			$this->db->query($dataQueryString1);
-			$this->db->query($dataQueryString2);
-		}
-		$this->db->trans_complete();
-		return true;
-	}
 }
