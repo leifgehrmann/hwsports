@@ -32,7 +32,7 @@ class Sports_model extends MY_Model {
 		foreach($IDsQuery->result_array() as $IDRow) {
 			$all[] = $this->get_sport($IDRow['sportID']);
 		}
-		return $all;
+		return (empty($all) ? FALSE : $all);
 	}
 	
 	
@@ -58,7 +58,7 @@ class Sports_model extends MY_Model {
 		foreach($IDsQuery->result_array() as $IDRow) {
 			$all[$IDRow['sportCategoryID']] = $this->get_sport_category($IDRow['sportCategoryID']);
 		}
-		return $all;
+		return (empty($all) ? FALSE : $all);
 	}
 	
 	

@@ -30,7 +30,7 @@ class Users_model extends MY_Model {
 		foreach($IDsQuery->result_array() as $IDRow) {
 			$all[] = $this->get_user($IDRow['userID']);
 		}
-		return $all;
+		return (empty($all) ? FALSE : $all);
 	}
 	
 	/**
@@ -48,7 +48,7 @@ class Users_model extends MY_Model {
 				$all[] = $user;
 			}
 		}
-		return $all;
+		return (empty($all) ? FALSE : $all);
 	}
 
 	public function update_user($userID, $data)

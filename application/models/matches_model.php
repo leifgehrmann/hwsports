@@ -47,7 +47,7 @@ class Matches_model extends MY_Model {
 		foreach($IDsQuery->result_array() as $IDRow) {
 			$all[] = $this->get_match($IDRow['matchID']);
 		}
-		return $all;
+		return (empty($all) ? FALSE : $all);
 	}
 
 	/**
@@ -62,7 +62,7 @@ class Matches_model extends MY_Model {
 		foreach($IDsQuery->result_array() as $IDRow) {
 			$all[] = $this->get_match($IDRow['matchID']);
 		}
-		return $all;
+		return (empty($all) ? FALSE : $all);
 	}
 	
 	/**
