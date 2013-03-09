@@ -214,7 +214,7 @@ class Sis extends MY_Controller {
 			redirect("/sis/tournaments", 'refresh');
 		}
 		
-		$this->data['roles'] = $roles = $this->sports_model->get_sport_category_roles($tournament['sportCategoryID']);
+		$this->data['roles'] = $roles = $this->sports_model->get_sport_category_roles($tournament['sportData']['sportCategoryID']);
 
 		if( $this->input->post() ) {			
 			$roleID = $this->input->post('role');
