@@ -29,7 +29,7 @@ class Scheduling_model extends MY_Model {
 		for( $i=0; $i<7; $i++ )
 		{
 			$weekday = $this->get_weekday_string($i);
-			$matchWeekdayStartTimes[$weekday] = ( array_key_exists('startTimes$weekday',$tournament) ? explode(',',$tournament['startTimes'.$weekday]) : array() );
+			$matchWeekdayStartTimes[$weekday] = ( array_key_exists('startTimes'.$weekday,$tournament) ? explode(',',$tournament['startTimes'.$weekday]) : array() );
 		}
 
 		$matchDuration = new DateInterval('PT'.$tournament['matchDuration'].'M'); // Match duration is assumed to be in minutes
