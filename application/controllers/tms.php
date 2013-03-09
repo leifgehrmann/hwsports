@@ -371,26 +371,27 @@ class Tms extends MY_Controller {
 		$this->load->view('tms/footer',$this->data);
 	}
 	public function users()
-	{
-		$this->data['title'] = "Users";
-		$this->data['page'] = "users";
-		
-		$users = obj2arr( $this->ion_auth->users()->result() );
-		foreach($users as $userkey => $user) {
-			$query = $this->db->query("SELECT `key`,`value` FROM `userData` WHERE `userID` = '{$user['id']}'");
-			foreach($query->result_array() as $userDataRow) {
-				$users[$userkey][$userDataRow['key']] = $userDataRow['value'];
-				if($userDataRow['key'] == 'centreID') {
-					$query = $this->db->query("SELECT `value` FROM `centreData` WHERE `key` = 'shortName' AND `centreID` = {$userDataRow['value']}");
-					$nameResult = $query->result_array();
-					$users[$userkey]['centreName'] = $nameResult[0]['value'];
-				}
-			}
-		}
+	{	
+		$this->load->model('users_model');
+		$users = $this->users_model->get_all();
 		$this->data['users'] = $users;
 		
+		$this->data['title'] = "Users";
+		$this->data['page'] = "users";
 		$this->load->view('tms/header',$this->data);
 		$this->load->view('tms/users',$this->data);
+		$this->load->view('tms/footer',$this->data);
+	}
+	public function user($userID)
+	{
+		$this->load->model('users_model');
+		$user = $this->users_model->get_all($userID);
+		$this->data['user'] = $user;
+		
+		$this->data['title'] = $user['firstName']." ".$user['lastName'];
+		$this->data['page'] = "user";
+		$this->load->view('tms/header',$this->data);
+		$this->load->view('tms/user',$this->data);
 		$this->load->view('tms/footer',$this->data);
 	}
 	public function news()
