@@ -40,14 +40,46 @@ class Matches_model extends MY_Model {
 	 *  
 	 * @return array
 	 **/
-	public function get_matches($centreID) {
-		// Query to return the IDs for everything which takes place at the specified sports centre
-		$IDsQuery = $this->db->query("SELECT matchID FROM matches LEFT JOIN venues ON matches.venueID = venues.venueID WHERE venues.centreID = ".$this->db->escape($centreID));
-		// Loop through all result rows, get the ID and use that to put all the data into the output array 
-		foreach($IDsQuery->result_array() as $IDRow) {
-			$all[] = $this->get_match($IDRow['matchID']);
+	public function get_matches($centreID,$startTime=FALSE,$endTime=FALSE) {
+
+		if($startTime==FALSE && $endTime == FALSE) {
+			// Query to return the IDs for everything which takes place at the specified sports centre
+			$IDsQuery = $this->db->query("SELECT matchID FROM matches LEFT JOIN venues ON matches.venueID = venues.venueID WHERE venues.centreID = ".$this->db->escape($centreID));
+			// Loop through all result rows, get the ID and use that to put all the data into the output array 
+			foreach($IDsQuery->result_array() as $IDRow) {
+				$all[] = $this->get_match($IDRow['matchID']);
+			}
+			return (empty($all) ? FALSE : $all);
+		} else {
+
+			$startTime = ( $startTime ? $startTime : new DateTime('1st January 0001'));
+			$endTime = ( $endTime ? $endTime : new DateTime('31st December 9999'));
+
+			try {
+				$startTime = new DateTime($startTime);
+				$endTime = new DateTime($endTime);
+			} catch (Exception $e) {
+				return "ERROR: Invalid input date in database. Debug Exception: ".$e->getMessage();
+			}
+
+			$matches = $this->get_matches($venueID);
+			if($matches == FALSE) return FALSE;
+
+			$filtered = array();
+			foreach($matches as $match) {
+
+				try {
+					$matchStartTime = new DateTime($match['startTime']);
+					$matchEndTime 	= new DateTime($match['endTime']);
+				} catch (Exception $e) {
+					return "ERROR: Invalid date in database. Debug Exception: ".$e->getMessage();
+				}
+
+				if( $startTime < $matchEndTime && $matchStartTime < $endTime )
+					$filtered[] = $match;
+			}
+			return $filtered;
 		}
-		return (empty($all) ? FALSE : $all);
 	}
 
 	/**
