@@ -152,6 +152,7 @@ class Scheduling_model extends MY_Model {
 		$matchDateUsedMax = 0;
 
 		// We set the initial count for every single array to be 0.
+		var_dump($matchDateTimes);
 		foreach($matchDateTimes as $date=>$dateTimes)
 		{
 			$matchDateUsed[$date] = 0;
@@ -180,7 +181,6 @@ class Scheduling_model extends MY_Model {
 			// Get list of days ordered by a fitness function that encourages
 			// the spread of days in a tournament.
 			$optimallySortedDates = $this->fitness_generator($matchDateUsed);
-			var_dump($matchDateUsed);
 			foreach($optimallySortedDates as $date)
 			{
 				// Has either team A or team B already played on this day the maximum number of times?
