@@ -8,9 +8,9 @@ class Tournaments_model extends MY_Model {
 		$this->load->model('teams_model');
 		
 		// Basic variables which apply to all table operations
-		$objectIDKey = "tournamentID";
-		$dataTableName = "tournamentData";
-		$relationTableName = "tournaments";
+		$this->objectIDKey = "tournamentID";
+		$this->dataTableName = "tournamentData";
+		$this->relationTableName = "tournaments";
     }
 		
 	/**
@@ -33,7 +33,7 @@ class Tournaments_model extends MY_Model {
 							)
 						)
 					);
-		$tournament = $this->get_object($ID, $objectIDKey, $dataTableName, $relationTableName, $relations);
+		$tournament = $this->get_object($ID, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relations);
 		// This tournament ID doesn't exist
 		if(empty($tournament)) return FALSE;
 		
@@ -96,7 +96,7 @@ class Tournaments_model extends MY_Model {
 		$all = array();
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
 		foreach($IDRows as $IDRow) {
-			$all[] = $this->get($IDRow[$objectIDKey]);
+			$all[] = $this->get($IDRow[$this->objectIDKey]);
 		}
 		return $all;
 	}
@@ -136,7 +136,7 @@ class Tournaments_model extends MY_Model {
 	 * @return int
 	 **/
 	public function insert($data, $relationIDs=array()) {
-		return $this->insert_object($data, $objectIDKey, $dataTableName, $relationIDs);
+		return $this->insert_object($data, $this->objectIDKey, $this->dataTableName, $relationIDs);
 	}
 
 	/**
@@ -147,7 +147,7 @@ class Tournaments_model extends MY_Model {
 	 * @return boolean
 	 **/
 	public function update($ID, $data) {
-		return $this->update_object($ID, $objectIDKey, $data, $dataTableName);
+		return $this->update_object($ID, $this->objectIDKey, $data, $this->dataTableName);
 	}
 
 	/**
@@ -165,7 +165,7 @@ class Tournaments_model extends MY_Model {
 			'tournaments' => 'centreID',
 			'teams' => 'centreID'
 		);
-		return $this->delete_object($testRun, $ID, $objectIDKey, $dataTableName, false, $dependents);
+		return $this->delete_object($testRun, $ID, $this->objectIDKey, $this->dataTableName, false, $dependents);
 	}
 
 }
