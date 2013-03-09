@@ -6,13 +6,14 @@ class MY_Model extends CI_Model {
         parent::__construct();
     }
 
+	// Queries an object from the database
 	// Required: $objectID, $objectIDKey, $dataTableName. Example usage: get_object(23, 'tournamentID', 'tournamentData');
 	public function get_object($objectID, $objectIDKey, $dataTableName, $relationTableName = "", $relations = array()) {
 		// Sanitize / escape input variables into underscored variable names for simplicity
 		$_objectID = mysql_real_escape_string($objectID);
 		$_objectIDKey = mysql_real_escape_string($objectIDKey);
-		$_relationTableName = mysql_real_escape_string($relationTableName);
 		$_dataTableName = mysql_real_escape_string($dataTableName);
+		$_relationTableName = mysql_real_escape_string($relationTableName);
 		
 		// If user gave us something other than an array, assume bad input - return FALSE
 		if(!is_array($relations)) return FALSE;
@@ -56,5 +57,46 @@ class MY_Model extends CI_Model {
 		// Finally return all the data - a beautifully crafted multidimensional array
 		return $object;
 	}
+	
+	// Inserts a new object into the database
+	// Required: $data, $objectIDKey, $dataTableName. Example usage: insert_object(array("address"=>"14 Parkhead Loan"), 'centreID', 'centreData');
+	// Returns: ID of object created.
+	public function insert_object($data, $objectIDKey, $dataTableName, $relationTableName = false, $relations = array()) {
+		// Sanitize / escape input variables into underscored variable names for simplicity
+		$_objectIDKey = mysql_real_escape_string($objectIDKey);
+		$_dataTableName = mysql_real_escape_string($dataTableName);
+		$_relationTableName = mysql_real_escape_string($relationTableName);
+		
+		// If we've been given a relational table and relations to go in that table, we should create the entry in that first to get the ID to use for the data
+		if( $relationTableName && count($relations) ) {
+			// Insert the row in the relation table with all the relations specified, generating an ID using AUTO_INCREMENT 
+			$this->db->insert($relationTableName, $relations);
+			// Get the generated ID of this new object
+			$objectID = $this->db->insert_id();
+		} else {
+			// Since we're storing IDs only in the data table, we can't have a primary key or auto increment on it
+			// Therefore to get the next ID to insert, we have to find the current highest and increment it to get a unique ID
+			$maxRow = $this->db->query("SELECT MAX($_objectIDKey) AS maxID FROM `$_dataTableName`")->row_array();
+			$objectID = $maxRow['maxID']+1;
+		}
+		
+		// Lump all queries into one transaction
+		$this->db->trans_start();
+		// Loop through input data
+		foreach($data as $key => $value) {
+			// Sanitize inputs
+			$_key = mysql_real_escape_string($key);
+			$_value = mysql_real_escape_string($value);
+			// Insert a row of data into the data table with correct keys and the newly generated ID
+			$this->db->query("INSERT INTO `$_dataTableName` ($_objectIDKey, key, value) VALUES ('$objectID', '$_key', $_value')");
+		}
+		// Complete transaction, all is well
+		$this->db->trans_complete();
+		
+		// Return the newly generated ID of this object, ready for referencing with get_object
+		return $objectID;
+	}
+				
+	// $this->db->query("UPDATE `$_dataTableName` SET `value` = '$_value' WHERE `key` = '$_key'");
 
 }
