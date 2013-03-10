@@ -61,7 +61,7 @@ class Tournaments_model extends MY_Model {
 				$tournament['status'] = "preTournament";
 			} 
 			// Otherwise, we are still awaiting the staff to moderate the competitor list - set competitorsModerated to false in the DB to make this clear.
-			$this->update_tournament($ID,array("competitorsModerated" => "false"));
+			$this->update($ID,array("competitorsModerated" => "false"));
 			// postRegistration means we need staff to moderate the competitor list
 			$tournament['status'] = "postRegistration";
 		} elseif( ($today >= $registrationStartDate) && ($today >= $registrationEndDate) &&
