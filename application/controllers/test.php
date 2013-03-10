@@ -17,10 +17,11 @@ class Test extends MY_Controller {
 	// Basic example usage: 
 	//
 	public function model($model,$action,$params="a:0:{}") {
+		$params = urldecode($params);
 		if(strpos($params,':')!==FALSE) { 
-			$args = implode(', ',unserialize(urldecode($params))); 
+			$args = implode(', ',unserialize($params)); 
 		} else {
-			$args = urldecode($params);
+			$args = $params;
 		}	
 		eval('$output = $this->'.$model.'->'.$action.'('.$args.');');
 		$this->display($output);
