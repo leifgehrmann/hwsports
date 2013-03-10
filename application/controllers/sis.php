@@ -67,9 +67,9 @@ class Sis extends MY_Controller {
 		}
 		
 		$match['tournamentData']['name'] = ($match['tournamentData'] ? $match['tournamentData']['name'] : "None");
-		$match['date'] = date("F jS, Y",$match['startTime']);
-		$match['startTime'] = date("H:i",$match['startTime']);
-		$match['endTime'] = date("H:i",$match['endTime']);
+		$match['date'] = date("F jS, Y",new DateTime($match['startTime']));
+		$match['startTime'] = date("H:i",new DateTime($match['startTime']));
+		$match['endTime'] = date("H:i",new DateTime($match['endTime']));
 		
 		$this->data['match'] = $match;
 		
