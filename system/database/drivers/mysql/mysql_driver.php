@@ -551,7 +551,28 @@ class CI_DB_mysql_driver extends CI_DB {
 	{
 		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
 	}
-
+	
+	// --------------------------------------------------------------------
+    
+    /**
+     * Replace into statement
+     *
+     * Generates a replace into string from the supplied data
+     *
+     * @access    public
+     * @param    string    the table name
+     * @param    array    the update data
+     * @return    string
+     */
+    function _replace_into($table, $data)
+    {
+        $append = array();
+        foreach($data as $key => $val){
+            $append[] = $key . " = " . $val;
+        }
+        return "REPLACE INTO " . $table . " SET " . implode(',',$append);
+    } 
+	
 	// --------------------------------------------------------------------
 
 
