@@ -25,7 +25,7 @@ class Test extends MY_Controller {
 	public function model($model,$action,$args="") {
 		$args = json_decode(urldecode($args));
 		if(is_array($args)) {
-			var_dump($args); die();
+			var_export($args); die();
 			$args = implode(', ', $args);
 			$eval = '$output = $this->'.$model.'->'.$action.'('.var_export($args, true).');';
 		} else {
