@@ -12,6 +12,6 @@
 	<? } ?>
 	<tr>
 		<td></td>
-		<td><a class="button red" href="/auth/delete_user/<?=$user['id']?>" target="_blank" >Delete</td>
+		<td><a class="button red" href="/auth/delete_user/<?=$user['userID']?>" target="_blank" >Delete</td>
 	</tr>
 </table>
