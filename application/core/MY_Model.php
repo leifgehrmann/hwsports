@@ -80,11 +80,9 @@ class MY_Model extends CI_Model {
 		// Loop through all the relations we were given and grab all the data for them, stitch it onto the data we already have about this object 
 		foreach($relations as $relation) {
 			// Get the ID of whichever other object we wish to grab data for 
-			$relationObjectIDQuery = $this->db->select($relation['objectIDKey'])->from($relationTableName)->where($objectIDKey,$objectID);			
+			$relationObjectIDQueryRow = $this->db->select($relation['objectIDKey'])->from($relationTableName)->where($objectIDKey,$objectID)->get()->row_array();
 			// If the relation table does not return a result when queried for the relation object key, we have bad input - die. 
-			if ($relationObjectIDQuery->num_rows() == 0) return FALSE;
-			// Get the row which contains the actual ID of the object we want to grab data for
-			$relationObjectIDQueryRow = $relationObjectIDQuery->row_array();
+			if(count($relationObjectIDQueryRow)==0) return FALSE;
 			// Get the actual ID, put it into relation array for safekeeping
 			$relation['objectID'] = $relationObjectIDQueryRow[$relation['objectIDKey']];
 			// Put the ID in the object output array too, controllers might use it for other things
