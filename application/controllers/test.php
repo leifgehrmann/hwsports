@@ -31,7 +31,8 @@ class Test extends MY_Controller {
 		}
 		echo("Eval string: ".$eval."\n\n");
 		eval($eval);
-		$this->display("ï»¿".$output);
+		echo "ï»¿";
+		$this->display($output);
 	}
 	
 	public function helper() {
