@@ -25,6 +25,7 @@
 					<span style="display: inline-block;padding-left: 40px;"><?=$date?> &mdash; <?=$time?></span>
 				</p>
 			</div>
+			<? } ?>
 		<? } ?>
 		<p><a href="/tms/matches/" class="button right blue">View All Matches</a></p>
 	</div>
@@ -55,6 +56,7 @@
 					<span style="display: inline-block;padding-left: 40px;"><?=$date?> &mdash; <?=$time?></span>
 				</p>
 			</div>
+			<? } ?>
 		<? } ?>
 		<p><a href="/tms/matches/" class="button right blue">View All Matches</a></p>
 	</div>
