@@ -1,9 +1,9 @@
-<h1><a href="/tms/users/">Users</a><div class="icon subsection"></div><?=$user['firstName']?><?=$user['lastName']?></h1>
+<h1><a href="/tms/users/">Users</a><div class="icon subsection"></div><?=$user['firstName']?> <?=$user['lastName']?></h1>
 <table>
-	<th>
-		<td>Key</td>
-		<td>Value</td>
-	</th>
+	<tr>
+		<th>Key</th>
+		<th>Value</th>
+	</tr>
 	<? foreach($user as $key=>$value){ ?>
 	<tr>
 		<td><?=$key?></td>
