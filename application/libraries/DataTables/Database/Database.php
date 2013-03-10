@@ -35,7 +35,7 @@ class Database {
 	 */
 	function __construct( ) {
 		$this->query_driver = "DataTables\\Database\\DriverMysqlQuery";
-		$this->_db = call_user_func(call_user_func($this->query_driver.'::connect',"sports_web","group8","localhost","3306","sports_web");
+		$this->_db = call_user_func($this->query_driver.'::connect',"sports_web","group8","localhost","3306","sports_web");
 	}
 	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
