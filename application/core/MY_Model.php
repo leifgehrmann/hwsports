@@ -188,7 +188,7 @@ class MY_Model extends CI_Model {
 	// Returns: TRUE if update was successful, FALSE otherwise.
 	public function delete_object($objectID, $objectIDKey, $primaryTableName, $testRun=TRUE) {
 		// This string will hold the message showing what will be deleted
-		$testResults = "";
+		$testResults = array();
 		// Lump all data table updates into one transaction in case one fails
 		$this->db->trans_start();
 		// Get the list of tables this object might have dependent rows in
@@ -202,7 +202,7 @@ class MY_Model extends CI_Model {
 			foreach($dependentRows as $dependentRow) {
 				//$testResults .= "Calling delete object on $table - $field, deleting ID: {$dependentRow[$field]}\n";
 				// Now call the delete function on dependent object - we get the ID from the field name (specified in the global array) in the returned row 
-				$testResults .= $this->delete_object($dependentRow[$field], $field, $table, $testRun);
+				$testResults[] = $this->delete_object($dependentRow[$field], $field, $table, $testRun);
 			}
 		}
 		
@@ -211,9 +211,10 @@ class MY_Model extends CI_Model {
 			$rows = $this->db->get_where($primaryTableName, array($objectIDKey => $objectID))->result_array();
 			foreach($rows as $row) {
 				$rowfields = array();
-				$testResults .= "Table: $primaryTableName; Row: ";
+				$rowResult = "Table: $primaryTableName; Row: ";
 				foreach($row as $key=>$value) $rowfields[] = "[$key] = $value";
-				$testResults .= implode(' | ',$rowfields)." \n\n";
+				$rowResult .= implode(' | ',$rowfields)." \n\n";
+				$testResults[] = $rowResult;
 			}
 		} else {			
 			// Delete the rows in the table table which reference the deleted object 
@@ -225,7 +226,10 @@ class MY_Model extends CI_Model {
 		// Complete transaction, all is well
 		$this->db->trans_complete();
 		// Return TRUE: if we got to here it must have all worked
-		if($testRun) return $testResults;
+		if($testRun) {
+			array_unique($testResults);
+			return explode("\n",$testResults);
+		}
 		else return TRUE;
 	}
 
