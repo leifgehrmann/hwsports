@@ -73,7 +73,7 @@
 		<? } else {
 			foreach($latestTournaments as $tournament){ 
 				$start = datetime_to_public_date($tournament['tournamentStart']);
-				$end = datetime_to_public_time($tournament['tournamentStart']);
+				$end = datetime_to_public_date($tournament['tournamentEnd']);
 			?>
 			<div class="tournament 
 				tournamentID-<?=$match['tournamentID']?> 
@@ -88,10 +88,6 @@
 				</p>
 			</div>
 			<? } ?>
-		<? } ?>
-		<div class="match sportCategoryID-9"><div class="icon left margin-right"></div><p><a href="/tms/tournament/dshjf"		>2012 Heriot Watt</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p></div>
-		<div class="match sportCategoryID-10"><div class="icon left margin-right"></div><p><a href="/tms/tournament/afjb"		>2012 Rugby</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p></div>
-		<div class="match sportCategoryID-11"><div class="icon left margin-right"></div><p><a href="/tms/tournament/sdlkfjsd"	>2012 Summer WattBall</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p></div>
 		<p><a href="/tms/tournaments/" class="button right blue">View All Tournaments</a></p>
 	</div>
 </div>
@@ -102,13 +98,32 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<div class="match sportCategoryID-13"><div class="icon left margin-right"></div><p><a href="/tms/tournament/flksdf">2013 Heriot Watt</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p></div>
-		<div class="match sportCategoryID-14"><div class="icon left margin-right"></div><p><a href="/tms/tournament/dsflkjsd">2014 Summer WattBall</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p></div>
+		<? if(count($upcomingTournaments)==0) { ?>
+			<p>There are no upcoming tournaments.</p>
+		<? } else {
+			foreach($upcomingTournaments as $tournament){ 
+				$start = datetime_to_public_date($tournament['tournamentStart']);
+				$end = datetime_to_public_date($tournament['tournamentEnd']);
+			?>
+			<div class="tournament 
+				tournamentID-<?=$match['tournamentID']?> 
+				sportID-<?=$match['sportID']?> 
+				sportCategoryID-<?=$match['sportData']['sportCategoryID']?> 
+			">
+				<div class="icon left margin-right"></div>
+				<p>
+					<a href="/tms/tournament/<?=$tournament['tournamentID']?>"><?=$tournament['name']?></a><br/>
+					<span style="display: inline-block;padding-left: 40px;">Starts: <?=$start?></span><br/>
+					<span style="display: inline-block;padding-left: 40px;">Ends: <?=$end?></span>
+				</p>
+			</div>
+			<? } ?>
 		<p><a href="/tms/tournaments/" class="button right blue">View All Tournaments</a></p>
 	</div>
 </div>
 <div class="widget half icons">
 	<div class="widget-title">
+		<div class="widget-title-left icon"></div>
 		<div class="widget-title-centre">Happy small icons</div>
 		<div class="widget-title-right icon"></div>
 	</div>
