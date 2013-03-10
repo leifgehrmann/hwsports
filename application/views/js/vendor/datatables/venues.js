@@ -23,7 +23,7 @@
 
 	$(document).ready(function() {
 		editor = new $.fn.dataTable.Editor( {
-			"ajaxUrl": "/datatables/venues",
+			"ajaxUrl": "/datatablesserver/venues",
 			"domTable": "#venues",
 			"fields": [ {
 					"label": "centreID",
@@ -78,7 +78,7 @@
 
 		$('#venues').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
-			"sAjaxSource": "/datatables/venues",
+			"sAjaxSource": "/datatablesserver/venues",
 			"aoColumns": [
 				{ "mData": "centreID" },
 				{ "mData": "lat" },

@@ -11,10 +11,21 @@ use
 	DataTables\Editor\Join,
 	DataTables\Editor\Validate;
 
-class Datatables extends MY_Controller {
+class DatatablesServer extends MY_Controller {
 
 	function __construct() {
 		parent::__construct();
+								
+		//
+		// Database connection
+		//   Database connection it globally available
+		//
+		$this->dtdb = new Database();
+
+		// Leif was here :)
+		$this->dtdb->sql("SET character_set_client=utf8");
+		$this->dtdb->sql("SET character_set_connection=utf8");
+		$this->dtdb->sql("SET character_set_results=utf8");
 	}
 
 	public function sports() {
