@@ -1,20 +1,24 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-// DataTables PHP library
-require( FCPATH.APPPATH."libraries/DataTables/DataTables.php" );
-
-// Alias Editor classes so they are easy to use
-use
-	DataTables\Editor,
-	DataTables\Editor\Field,
-	DataTables\Editor\Format,
-	DataTables\Editor\Join,
-	DataTables\Editor\Validate;
-
 class DatatablesServer extends MY_Controller {
 
 	function __construct() {
 		parent::__construct();
+						
+		namespace DataTables;
+		define("DATATABLES", true, true);
+
+		// DataTables PHP library
+		require( FCPATH.APPPATH."libraries/DataTables/DataTables.php" );
+		require( FCPATH.APPPATH."libraries/DataTables/Database/Database.php" );
+
+		// Alias Editor classes so they are easy to use
+		use
+			DataTables\Editor,
+			DataTables\Editor\Field,
+			DataTables\Editor\Format,
+			DataTables\Editor\Join,
+			DataTables\Editor\Validate;
 								
 		//
 		// Database connection
