@@ -72,18 +72,7 @@ class Assets extends MY_Controller {
 				$this->load->view("css/{$this->data['slug']}/$path",$this->data);	
 				//$this->output->cache(60); // cache css for 1 hour
 			}
-		} elseif( $file_ext == "js" ) {
-			// If the file is js, we insert the slug to the path ONLY if the
-			// string "vendor" doesn't exist in the the second segment.
-			if($vendor) {
-				header("Content-Type: ".$this->ctype);
-				echo file_get_contents(FCPATH.APPPATH."views/js/vendor/$path");
-			} else {
-				$this->load->view("js/{$this->data['slug']}/$path",$this->data);
-			}
-			//$this->output->cache(60*24); // cache js for 24 hours
-
-		} elseif( 	$file_ext == "png" || 
+		 elseif( 	$file_ext == "png" || 
 					$file_ext == "jpg" || 
 					$file_ext == "jpeg" || 
 					$file_ext == "gif" 
@@ -96,6 +85,13 @@ class Assets extends MY_Controller {
 				// This is a binary image so read the file directly from the img 
 				// folder after sending the header - don't load it as a view
 				$this->readBinaryFile(FCPATH.APPPATH."views/img/{$this->data['slug']}/{$path}");
+			}
+		} elseif( $file_ext == "htm" || $file_ext == "html" ) {
+			if( $file_category == "js" ) {
+				// Since we're looking for html in the js folder, don't do any redirecting of paths
+				// Ideally this would never happen but with some large libraries (tinymce... mumble mumble) it's just too much effort to separate it all
+				header("Content-Type: ".$this->ctype);
+				$this->load->view("js/vendor/$path",$this->data);
 			}
 		} else {
 			// This isn't js, css or an image based on it's extension so try and
