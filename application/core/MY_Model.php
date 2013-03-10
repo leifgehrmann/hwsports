@@ -167,8 +167,7 @@ class MY_Model extends CI_Model {
 			if($testRun) {
 				$rows = $this->db->get_where($dependentTable, array($objectIDKey => $objectID))->result_array();
 				foreach($rows as $row) {
-					$testResults .= print_r($row,true);
-					$testResults .= "\nFrom table: $dependentTable";
+					$testResults .= "\n$dependentTable table row: ".print_r($row,true)." \n";
 				}
 			} else {			
 				// Delete the rows in the dependentTable table which reference the deleted object 
@@ -182,8 +181,7 @@ class MY_Model extends CI_Model {
 			if($testRun) {
 				$rows = $this->db->get_where($dataTableName, array($objectIDKey => $objectID))->result_array();
 				foreach($rows as $row) {
-					$testResults .= print_r($row,true);
-					$testResults .= "\nFrom table: $dataTableName";
+					$testResults .= "\n$dataTableName table row: ".print_r($row,true)." \n";
 				}
 			} else {			
 				// Delete the rows in the data table which reference the deleted object 
@@ -197,8 +195,7 @@ class MY_Model extends CI_Model {
 			if($testRun) {
 				$rows = $this->db->get_where($relationTableName, array($objectIDKey => $objectID))->result_array();
 				foreach($rows as $row) {
-					$testResults .= print_r($row,true);
-					$testResults .= "\nFrom table: $relationTableName";
+					$testResults .= "\n$relationTableName table row: ".print_r($row,true)." \n";
 				}
 			} else {
 				// Delete the rows in the data table which reference the deleted object 
