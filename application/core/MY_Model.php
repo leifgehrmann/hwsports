@@ -196,6 +196,7 @@ class MY_Model extends CI_Model {
 		// Iterate through dependents to process corresponding entries from - these should be in a specific order to satisfy foreign keys
 		foreach( $dependents as $table=>$field ) {
 			// Search this table for our object key/ID - if it exists, we want to delete whatever object was referencing our object
+			var_dump("Searching table: $table for field: $objectIDKey set to value: $objectID"); die();
 			$dependentRows = $this->db->get_where($table, array($objectIDKey => $objectID))->result_array();
 			var_dump($dependentRows); die();
 			// Loop through all rows which were referencing this object
