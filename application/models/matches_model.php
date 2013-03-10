@@ -77,7 +77,7 @@ class Matches_model extends MY_Model {
 				return FALSE;
 			}
 
-			$matches = $this->get_matches($venueID);
+			$matches = $this->get_all();
 			if($matches == FALSE) return FALSE;
 
 			$filtered = array();
