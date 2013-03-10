@@ -158,7 +158,7 @@ class MY_Model extends CI_Model {
 	// Returns: TRUE if update was successful, FALSE otherwise.
 	public function delete_object($testRun=TRUE, $objectID, $objectIDKey, $dataTableName, $relationTableName, $dependents = array()) {
 		// This string will hold the message to the user explaining what will be deleted
-		$testResults = "If this delete query is executed, the following rows will be deleted: \n";
+		$testResults = "If this delete query is executed, the following rows will be deleted: \n\n";
 		// Lump all data table updates into one transaction in case one fails
 		$this->db->trans_start();
 		// Append the data table and then the relation table to the list of tables to delete from - this way they are processed in the right order
@@ -185,7 +185,8 @@ class MY_Model extends CI_Model {
 		
 		// Complete transaction, all is well
 		$this->db->trans_complete();
-		
+		// Finalise output message
+		$testResults = "\nIf this is correct, click 'Confirm'. \n\n";
 		// Return TRUE: if we got to here it must have all worked
 		if($testRun) return $testResults;
 		else return TRUE;
