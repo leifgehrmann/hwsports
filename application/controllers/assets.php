@@ -72,7 +72,7 @@ class Assets extends MY_Controller {
 				$this->load->view("css/{$this->data['slug']}/$path",$this->data);	
 				//$this->output->cache(60); // cache css for 1 hour
 			}
-		 elseif( 	$file_ext == "png" || 
+		} elseif( 	$file_ext == "png" || 
 					$file_ext == "jpg" || 
 					$file_ext == "jpeg" || 
 					$file_ext == "gif" 
