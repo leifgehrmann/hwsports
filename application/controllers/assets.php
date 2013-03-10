@@ -77,7 +77,7 @@ class Assets extends MY_Controller {
 			// string "vendor" doesn't exist in the the second segment.
 			if($vendor) {
 				header("Content-Type: ".$this->ctype);
-				echo file_get_contents("/home/sports/public_html/application/views/js/vendor/$path");
+				echo file_get_contents(FCPATH.APPPATH."views/js/vendor/$path");
 			} else {
 				$this->load->view("js/{$this->data['slug']}/$path",$this->data);
 			}
@@ -91,7 +91,7 @@ class Assets extends MY_Controller {
 			if( $file_category == "js" ) {
 				// Since we're looking for an image file in the js folder, don't do any redirecting of paths
 				// Ideally all images would be in the img folder, etc, but with some large libraries (tinymce... mumble mumble) it's just too much effort to separate it all
-				$this->readBinaryFile("js/vendor/$path");	
+				$this->readBinaryFile(FCPATH.APPPATH."views/js/vendor/$path");	
 			} else {
 				// This is a binary image so read the file directly from the img 
 				// folder after sending the header - don't load it as a view
