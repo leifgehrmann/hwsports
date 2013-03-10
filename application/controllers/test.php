@@ -11,7 +11,7 @@ class Test extends MY_Controller {
 		$this->load->model('sports_model');
 		$this->load->model('scheduling_model');
 		$this->load->model('venues_model');
-		header('Content-type: text/plain; charset=us-ascii');
+		header('Content-Type: text/plain');
 	}
 	
 	//
@@ -31,7 +31,7 @@ class Test extends MY_Controller {
 		}
 		echo("Eval string: ".$eval."\n\n");
 		eval($eval);
-		$this->display($output);
+		$this->display("ï»¿".$output);
 	}
 	
 	public function helper() {
