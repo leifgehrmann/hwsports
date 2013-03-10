@@ -29,6 +29,8 @@ class Test extends MY_Controller {
 				$argstrings[] = var_export($arg,true);
 			}
 			$argstrings = implode(', ', $argstrings);
+			var_export($argstrings); die();
+			
 			$eval = '$output = $this->'.$model.'->'.$action.'('.var_export($argstrings, true).');';
 		} else {
 			$eval = '$output = $this->'.$model.'->'.$action.'('.$args.');';
