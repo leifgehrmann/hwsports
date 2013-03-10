@@ -3,6 +3,15 @@
 // DataTables PHP library
 require( FCPATH.APPPATH."libraries/DataTables/DataTables.php" );
 
+// Alias Editor classes so they are easy to use
+use
+	DataTables\Editor,
+	DataTables\Editor\Field,
+	DataTables\Editor\Format,
+	DataTables\Editor\Join,
+	DataTables\Editor\Validate;
+}
+
 class Datatables extends MY_Controller {
 
 	function __construct() {
