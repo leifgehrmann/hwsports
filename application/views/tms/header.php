@@ -211,20 +211,20 @@
         					</ul>
 
 
-        					<a class="toggleMenuItem <?=(($page=='settingscentre'||$page=='settingsappearence') ? 'selected' : '')?>">
+        					<a class="toggleMenuItem <?=(($page=='settings'||$page=='appearance') ? 'selected' : '')?>">
         						<li>
         							<div class="icon settings"></div>Settings<div class="icon close"></div>
         						</li>
         					</a>
         					<ul>
-        						<a href="/tms/settingscentre" title="Change sports centre settings" class="<?=($page=='settingscentre' ? 'selected' : '')?>">
+        						<a href="/tms/settings" title="Change sports centre settings" class="<?=($page=='settings' ? 'selected' : '')?>">
         							<li>
-        								<div class="icon settingscentre"></div>Centre Settings
+        								<div class="icon settings"></div>Centre Settings
         							</li>
         						</a>
-        						<a href="/tms/settingsappearence" title="Change website appearence" class="<?=($page=='settingsappearence' ? 'selected' : '')?>">
+        						<a href="/tms/appearance" title="Change website appearance" class="<?=($page=='appearance' ? 'selected' : '')?>">
         							<li>
-        								<div class="icon settingsappearence"></div>Appearence
+        								<div class="icon appearance"></div>Appearance
         							</li>
         						</a>
         					</ul>
