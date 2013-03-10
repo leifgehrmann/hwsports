@@ -171,6 +171,7 @@ class MY_Model extends CI_Model {
 			if($testRun) {
 				$rows = $this->db->get_where($table, array($objectIDKey => $objectID))->result_array();
 				foreach($rows as $row) {
+					$rowfields = array();
 					$testResults .= "Table: $table; Row: ";
 					foreach($row as $key=>$value) $rowfields[] = "[$key] = $value";
 					$testResults .= implode(' | ',$rowfields)." \n\n";
