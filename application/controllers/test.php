@@ -11,7 +11,10 @@ class Test extends MY_Controller {
 		$this->load->model('sports_model');
 		$this->load->model('scheduling_model');
 		$this->load->model('venues_model');
-		header('Content-Type: text/plain');
+		header('Content-Encoding: UTF-8');
+		header('Content-type: text/plain; charset=UTF-8');
+		header('Content-Disposition: attachment; filename=Customers_Export.csv');
+		echo "\xEF\xBB\xBF";
 	}
 	
 	//
@@ -31,7 +34,6 @@ class Test extends MY_Controller {
 		}
 		echo("Eval string: ".$eval."\n\n");
 		eval($eval);
-		echo "ï»¿";
 		$this->display($output);
 	}
 	
