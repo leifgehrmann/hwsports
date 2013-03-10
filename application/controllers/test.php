@@ -56,7 +56,7 @@ class Test extends MY_Controller {
 					<input type='submit' name='exec' value='Execute'></form><br />
 				</form><br />";
 					
-		if($str) {
+		if(isset($str)) {
 			eval("\$evalstr = $str;");
 			$encoded = rawurlencode(json_encode($evalstr));
 			echo "Test Link: <br /><a id='link' target='_blank' href='/test/model/$model/$function/$encoded'>/test/model/$model/$function/$encoded</a><br />
