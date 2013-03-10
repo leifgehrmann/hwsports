@@ -24,10 +24,14 @@ class Test extends MY_Controller {
 	// 	
 	public function model($model,$action,$args="") {
 		$args = json_decode(urldecode($args),true);
+		var_export($args);
+		
 		if(is_array($args)) {
 			foreach($args as $arg) {
 				$argstrings[] = var_export($arg,true);
 			}
+			var_export($argstrings);
+			
 			$argstrings = implode(', ', $argstrings);
 			var_export($argstrings); die();
 			
