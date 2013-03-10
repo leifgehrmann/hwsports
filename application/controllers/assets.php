@@ -21,6 +21,8 @@ class Assets extends MY_Controller {
 			
 			readfile($file);
 			exit;
+		} else {
+			var_dump($file);
 		} // else silently fail
 	}
 
