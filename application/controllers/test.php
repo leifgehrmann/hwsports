@@ -46,7 +46,7 @@ class Test extends MY_Controller {
 		}
 		
 		header('Content-Type: text/html');
-		$this->display($output);
+		echo($output);
 	}
 
 	// Try: http://hwsports.co.uk/test/schedule_football_family/37
