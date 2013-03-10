@@ -51,14 +51,71 @@ class Tms extends MY_Controller {
 
 	public function index()
 	{
-		// $this->load->model('tournaments_model');
-		// $this->load->model('matches_model');
+		$this->load->model('tournaments_model');
+		$this->load->model('matches_model');
+
+		// Get todays date as a string
+		// Note we want to say that today is everything until this afternoon.
+		$today = new DateTime();
+		$today->setTime ( 23, 59, 59 );
+
+		// Get all the tournaments and matches from the database.
+		$latestMatches = $this->matches_model->get_all(FALSE,$today); // Get all matches that have occured and today's matches
+		$upcomingMatches = $this->matches_model->get_all($today,FALSE); // Get all tournaments that occur after today
+		$latestTournaments = $this->tournaments_model->get_all(FALSE,$today); // Get all matches that have occured and today's matches
+		$upcomingTournaments  = $this->tournaments_model->get_all($today,FALSE); // Get all tournaments that occur after today
+
+		// We want to remove the matches that already exist in the latest matches
+		foreach($upcomingMatches as $u=>$uMatches){
+			if($today<new DateTime($uMatches['startTime']))
+				break;
+			foreach($latestMatches as $i=>$lMatches){
+				if($uMatches['matchID']==$lMatches['matchID']){
+					unset($upcomingMatches[$u]);
+					break;
+				}
+			}
+		}
+
+		// We want to remove the tournaments that already exist in the latest tournaments
+		foreach($upcomingTournament as $u=>$uTournament){
+			if($today<new DateTime($uTournament['tournamentStart']))
+				break;
+			foreach($latestTournaments as $i=>$lTournament){
+				if($utournament['tournamentID']==$lTournament['tournamentID']){
+					unset($upcomingTournament[$u]);
+					break;
+				}
+			}
+		}
+
 		// Ideally we should be getting:
 		// list of upcoming matches
-		// $this->
 		// list of latest matches
-		// list of upcoming tournament
-		// list of latest tournament
+
+		// Ideally we should be getting:
+		// list of upcoming tournaments
+		// list of latest tournaments
+
+		function cmp($a, $b){
+			if ($a['endTime'] == $b['endTime']) { return 0; }
+			return ($a['endTime'] < $b['endTime']) ? -1 : 1;
+		}
+
+		usort($latestMatches, "cmp");
+		usort($upcomingMatches, "cmp");
+		usort($latestTournaments, "cmp");
+		usort($upcomingTournaments, "cmp");
+
+		$latestMatches 			= array_slice($latestMatches, -1, 5);
+		$upcomingMatches 		= array_slice($upcomingMatches, -1, 5);
+		$latestTournaments 		= array_slice($latestTournaments, -1, 1);
+		$upcomingTournaments 	= array_slice($upcomingTournaments, -1, 5);
+
+		$this->data['latestTournaments'] 	= $latestTournaments;
+		$this->data['upcomingTournaments'] 	= $upcomingTournaments;
+		$this->data['latestMatches'] 		= $latestTournaments;
+		$this->data['upcomingMatches'] 		= $upcomingTournaments;
 
 		$this->view('home',"tmshome","Home",$this->data);
 	}
