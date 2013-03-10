@@ -10,17 +10,8 @@
  *  @link      http://editor.datatables.net
  */
 
-
 namespace DataTables;
 define("DATATABLES", true, true);
-
-
-//
-// Configuration
-//   Load the database connection configuration options
-//
-include( dirname(__FILE__).'/config.php' );
-
 
 //
 // Auto-loader
@@ -48,16 +39,3 @@ spl_autoload_register( function ($class) {
 		require( dirname(__FILE__).'/'.$a[1].'/'.$location.'.php' );
 	}
 } );
-
-
-//
-// Database connection
-//   Database connection it globally available
-//
-$db = new Database( $sql_details );
-
-// Leif was here :)
-$db->sql("SET character_set_client=utf8");
-$db->sql("SET character_set_connection=utf8");
-$db->sql("SET character_set_results=utf8");
-

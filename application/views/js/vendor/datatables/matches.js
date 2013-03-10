@@ -2,7 +2,7 @@
 	
 	$(document).ready(function() {
 		editor = new $.fn.dataTable.Editor( {
-			"ajaxUrl": "/php/matches.php",
+			"ajaxUrl": "/datatablesserver/matches",
 			"domTable": "#matches",
 			"fields": [ {
 					"label": "Centre ID",
@@ -59,7 +59,7 @@
 
 		$('#matches').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
-			"sAjaxSource": "/php/matches.php",
+			"sAjaxSource": "/datatablesserver/matches",
 			"aoColumns": [
 				{ "mData": "centreID" },
 				{ "mData": "matchID" },
