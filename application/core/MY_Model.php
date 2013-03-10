@@ -192,11 +192,6 @@ class MY_Model extends CI_Model {
 		// Lump all data table updates into one transaction in case one fails
 		$this->db->trans_start();
 		// Get the list of tables this object might have dependent rows in
-		var_dump($primaryTableName); 
-		var_dump($this->table_dependents); 
-		var_dump($this); 
-		var_dump($dependents); die();
-		
 		$dependents = $this->table_dependents[$primaryTableName];
 		// Iterate through dependents to process corresponding entries from - these should be in a specific order to satisfy foreign keys
 		foreach( $dependents as $table=>$field ) {
