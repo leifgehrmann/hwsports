@@ -43,7 +43,7 @@ class Test extends MY_Controller {
 		$model = ( isset($_POST['model']) ? $_POST['model'] : '' );
 		$function = ( isset($_POST['function']) ? $_POST['function'] : '' );
 		
-		echo "<h1>Test Helper<h1>
+		echo "<h1>Test Helper</h1>
 				<form id='testhelperform' method='post' action='/test/helper'>
 					Model: <input id='model' type='text' name='model' value='$model' /><br />
 					Function: <input id='function' type='text' name='function' value='$function' /><br />
