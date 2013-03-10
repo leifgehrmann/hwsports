@@ -34,7 +34,7 @@ class Database {
 	 * Constructor
 	 */
 	function __construct( ) {
-		$this->_db = call_user_func("DataTables\\Database\\Driver\\Mysql\\Query::connect","sports_web","group8","localhost","3306","sports_web");
+		$this->_db = call_user_func("DataTables\\Database\\DriverMysqlQuery::connect","sports_web","group8","localhost","3306","sports_web");
 	}
 	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
