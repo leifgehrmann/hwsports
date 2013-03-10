@@ -288,12 +288,12 @@ class Ion_auth
 
 		if (!$email_activation)
 		{
-			$id = $this->ion_auth_model->register($username, $password, $email, $additional_data, $group_name);
-			if ($id !== FALSE)
+			$userID = $this->ion_auth_model->register($username, $password, $email, $additional_data, $group_name);
+			if ($userID !== FALSE)
 			{
 				$this->set_message('account_creation_successful');
 				$this->ion_auth_model->trigger_events(array('post_account_creation', 'post_account_creation_successful'));
-				return $id;
+				return $userID;
 			}
 			else
 			{
@@ -304,15 +304,15 @@ class Ion_auth
 		}
 		else
 		{
-			$id = $this->ion_auth_model->register($username, $password, $email, $additional_data, $group_name);
+			$userID = $this->ion_auth_model->register($username, $password, $email, $additional_data, $group_name);
 
-			if (!$id)
+			if (!$userID)
 			{
 				$this->set_error('account_creation_unsuccessful');
 				return FALSE;
 			}
 
-			$deactivate = $this->ion_auth_model->deactivate($id);
+			$deactivate = $this->ion_auth_model->deactivate($userID);
 
 			if (!$deactivate)
 			{
@@ -323,11 +323,11 @@ class Ion_auth
 
 			$activation_code = $this->ion_auth_model->activation_code;
 			$identity        = $this->config->item('identity', 'ion_auth');
-			$user            = $this->ion_auth_model->user($id)->row();
+			$user            = $this->ion_auth_model->user($userID)->row();
 
 			$data = array(
 				'identity'   => $user->{$identity},
-				'id'         => $user->id,
+				'userID'         => $user->userID,
 				'email'      => $email,
 				'activation' => $activation_code,
 			);
@@ -351,7 +351,7 @@ class Ion_auth
 				{
 					$this->ion_auth_model->trigger_events(array('post_account_creation', 'post_account_creation_successful', 'activation_email_successful'));
 					$this->set_message('activation_email_successful');
-					return $id;
+					return $userID;
 				}
 			}
 
@@ -373,7 +373,7 @@ class Ion_auth
 
 		$identity = $this->config->item('identity', 'ion_auth');
 		$this->session->unset_userdata($identity);
-		$this->session->unset_userdata('id');
+		$this->session->unset_userdata('userID');
 		$this->session->unset_userdata('user_id');
 
 		//delete the remember me cookies if they exist
@@ -415,13 +415,13 @@ class Ion_auth
 	 * @return bool
 	 * @author Ben Edmunds
 	 **/
-	public function is_admin($id=false)
+	public function is_admin($userID=false)
 	{
 		$this->ion_auth_model->trigger_events('is_admin');
 
 		$admin_group = $this->config->item('admin_group', 'ion_auth');
 
-		return $this->in_group($admin_group, $id);
+		return $this->in_group($admin_group, $userID);
 	}
 
 	/**
@@ -430,30 +430,30 @@ class Ion_auth
 	 * @return bool
 	 * @author Phil Sturgeon
 	 **/
-	public function in_group($check_group, $id=false)
+	public function in_group($check_group, $userID=false)
 	{
 		$this->ion_auth_model->trigger_events('in_group');
 		
-		$id || $id = $this->session->userdata('user_id');
+		$userID || $userID = $this->session->userdata('user_id');
 
 		if (!is_array($check_group))
 		{
 			$check_group = array($check_group);
 		}
 		
-		if (isset($this->_cache_user_in_group[$id]))
+		if (isset($this->_cache_user_in_group[$userID]))
 		{
-			$groups_array = $this->_cache_user_in_group[$id];
+			$groups_array = $this->_cache_user_in_group[$userID];
 		}
 		else
 		{
-			$users_groups = $this->ion_auth_model->get_users_groups($id)->result();
+			$users_groups = $this->ion_auth_model->get_users_groups($userID)->result();
 			$groups_array = array();
 			foreach ($users_groups as $group)
 			{
-				$groups_array[$group->id] = $group->name;
+				$groups_array[$group->groupID] = $group->name;
 			}
-			$this->_cache_user_in_group[$id] = $groups_array;
+			$this->_cache_user_in_group[$userID] = $groups_array;
 		}
 		foreach ($check_group as $key => $value)
 		{

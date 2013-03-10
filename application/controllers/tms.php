@@ -23,7 +23,7 @@ class Tms extends MY_Controller {
 
 		if ( $this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin') ) {
 			$this->data['currentUser'] = $currentUser = $this->ion_auth->user()->row();
-			$query = $this->db->query("SELECT `key`,`value` FROM `userData` WHERE `userID` = '{$currentUser->id}'");
+			$query = $this->db->query("SELECT `key`,`value` FROM `userData` WHERE `userID` = '{$currentUser->userID}'");
 			foreach($query->result_array() as $userDataRow) {
 				$currentUser->$userDataRow['key'] = $userDataRow['value'];
 			}

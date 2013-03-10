@@ -36,7 +36,7 @@ class Users_model extends MY_Model {
 	}
 	
 	/**
-	 * Creates a new tournament with data, using the sport ID as specified.
+	 * Creates a new user with data, using the sport ID as specified.
 	 * Returns the ID of the new object if it was successful.
 	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
 	 *  
@@ -47,7 +47,7 @@ class Users_model extends MY_Model {
 	}
 
 	/**
-	 * Updates data for a specific tournament.
+	 * Updates data for a specific user.
 	 * Returns TRUE on success.
 	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
 	 *
@@ -57,6 +57,19 @@ class Users_model extends MY_Model {
 		return $this->update_object($ID, $this->objectIDKey, $data, $this->dataTableName);
 	}
 
+	/**
+	 * Deletes a user with data.
+	 * Also deletes all objects which depend on it, unless $testRun is TRUE in which case a string is returned showing all
+	 * Returns TRUE on success.
+	 * Returns FALSE on any error or deletion failure (most likely forgotten foreign key restraints).
+	 *
+	 * @return boolean
+	 **/
+	public function delete($ID, $testRun=TRUE) {
+		$dependents = array();
+		return $this->delete_object($testRun, $ID, $this->objectIDKey, $this->dataTableName, false, $dependents);
+	}
+	
 	/**
 	 * Returns all data about users in a particular tournament
 	 *  

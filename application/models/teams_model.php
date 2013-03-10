@@ -88,7 +88,7 @@ class Teams_model extends MY_Model {
 	public function add_team_members($ID, $userIDs) {	
 		$this->db->trans_start();
 		foreach($userIDs as $userID) {
-			$this-db->insert("teamsUsers", array($this->objectIDKey => $ID, "userID" => $userID) ); 
+			$this->db->insert("teamsUsers", array($this->objectIDKey => $ID, "userID" => $userID) ); 
 		}
 		$this->db->trans_complete();
 		return ($this->db->affected_rows() ? TRUE : FALSE);
