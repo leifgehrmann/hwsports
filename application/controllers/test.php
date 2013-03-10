@@ -10,6 +10,7 @@ class Test extends MY_Controller {
 		$this->load->model('teams_model');
 		$this->load->model('users_model');
 		$this->load->model('scheduling_model');
+		header('Content-Type: text/plain');
 	}
 	
 	//
@@ -155,7 +156,6 @@ class Test extends MY_Controller {
 		ob_start();
 		var_dump($output);
 		$this->data['data'] = ob_get_clean();
-		header('Content-Type: text/plain');
 		$this->load->view('data', $this->data);
 	}
 }
