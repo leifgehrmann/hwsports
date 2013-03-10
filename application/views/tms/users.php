@@ -11,12 +11,12 @@
 	</th>
 	<? foreach($users as $user) { ?>
 	<tr>
-		<td><?=$user['id']?></td>
+		<td><?=$user['userid']?></td>
 		<td><?=$user['firstName']?></td>
 		<td><?=$user['lastName']?></td>
 		<td><?=$user['phone']?></td>
 		<td><?=$user['email']?></td>
-		<td><a class="button" href="/tms/user/<?=$user['id']?>">View</a></td>
+		<td><a class="button" href="/tms/user/<?=$user['userid']?>">View</a></td>
 	</tr>
 	<? } ?>
 </table>
