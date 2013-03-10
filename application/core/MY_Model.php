@@ -136,17 +136,14 @@ class MY_Model extends CI_Model {
 		$this->db->trans_start();
 		// Loop through input data
 		foreach($data as $key => $value) {
-			// Set the where clauses and the values for the update
-			$where = array(
+			// Set the values for the replace into
+			$replace = array(
 				$objectIDKey => $objectID,
-				'key'   => $key
-			);
-			$update = array(
+				'key'   => $key,
 				'value' => $value
 			);
-			// Create the update - active record sanitizes inputs automatically. Return false if update fails.
-			$this->db->where($where);
-			if(!$this->db->replace_into($dataTableName, $update)) return FALSE;			
+			// Create the insert - active record sanitizes inputs automatically. Return false if insert fails.
+			if(!$this->db->replace_into($dataTableName, $replace)) return FALSE;			
 		}
 		// Complete transaction, all is well
 		$this->db->trans_complete();
