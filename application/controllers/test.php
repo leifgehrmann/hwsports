@@ -45,10 +45,10 @@ class Test extends MY_Controller {
 			
 		if(isset($_POST['str'])) {
 			$encoded = rawurlencode(json_encode($_POST['str']));
-			$output = "Model: <input type='text' name='model' /><br />
-					Function: <input type='text' name='function' /><br />
+			$output = "Model: <input type='text' name='model' value='{$_POST['model']}' /><br />
+					Function: <input type='text' name='function' value='{$_POST['function']}' /><br />
 					Input: <br />
-					<form method='post' action='/test/helper'><textarea name='str' id='str' style='height: 100pt' rows='1' cols='50'></textarea><input type='submit' name='exec' value='Execute'></form><br />
+					<form method='post' action='/test/helper'><textarea name='str' id='str' style='height: 100pt' rows='1' cols='50'>{$_POST['str']}</textarea><input type='submit' name='exec' value='Execute'></form><br />
 					Test Link: <br /><a href='/test/model/{$_POST['model']}/{$_POST['function']}/$encoded'>/test/model/{$_POST['model']}/{$_POST['function']}/$encoded</a><br />";  
 		}
 		
