@@ -17,11 +17,7 @@ class Test extends MY_Controller {
 	// GENERIC testing function, can be used to execute any function in any model with either a single basic argument or a serialized array of arguments  
 	// Basic example usage, get a single match with ID 18: 
 	// 		http://hwsports.co.uk/test/model/matches_model/get/18
-	// Complex example, get all matches between two date strings (which are elements of a serialized array, which has then been urlencoded)
-	// First http://php.fnlist.com/php/json_encode this: array("2013-03-06T10:00:00+0000", "2013-03-10T10:00:00+0000")
-	// Which produces: 
-	// Then  to produce this test URL:
-	// 	http://hwsports.co.uk/test/model/matches_model/get_all/a%3A2%3A%7Bi%3A0%3Bs%3A26%3A%22%222013-03-06T10%3A00%3A00%2B0000%22%22%3Bi%3A1%3Bs%3A26%3A%22%222013-03-10T10%3A00%3A00%2B0000%22%22%3B%7D
+	// For complex examples, use the testing helper ;) http://hwsports.co.uk/test/helper
 	// 	
 	public function model($model,$action,$args="") {
 		$args = json_decode(rawurldecode(html_entity_decode($args)),true);
@@ -32,9 +28,9 @@ class Test extends MY_Controller {
 		} else {
 			$eval = '$output = $this->'.$model.'->'.$action.'('.$args.');';
 		}
-		//$this->display($eval);
-		eval($eval);
-		$this->display($output);
+		$this->display($eval);
+		//eval($eval);
+		//$this->display($output);
 	}
 	
 	public function helper() {
@@ -43,15 +39,18 @@ class Test extends MY_Controller {
 		$model = ( isset($_POST['model']) ? $_POST['model'] : '' );
 		$function = ( isset($_POST['function']) ? $_POST['function'] : '' );
 		
-		echo "Model: <input id='model' type='text' name='model' value='$model' /><br />
-				Function: <input id='function' type='text' name='function' value='$function' /><br />
-				Input: <br />
-				<textarea name='str' id='str' style='height: 100pt' rows='1' cols='50'>$str</textarea><br />
-				<input type='submit' name='exec' value='Execute'></form><br />";
-		
+		echo "<h1>Test Helper</h1>
+				<form id='testhelperform' method='post' action='/test/helper'>
+					Model: <input id='model' type='text' name='model' value='$model' /><br />
+					Function: <input id='function' type='text' name='function' value='$function' /><br />
+					Input: <br />
+					<textarea name='str' id='str' style='height: 100pt' rows='1' cols='50'>$str</textarea><br />
+					<input type='submit' name='exec' value='Execute'></form><br />
+				</form><br />";
+					
 		if($str) {
 			$encoded = rawurlencode(json_encode($str));
-			echo "Test Link: <br /><a href='/test/model/$model/$function/$encoded'>/test/model/$model/$function/$encoded</a><br />";
+			echo "Test Link: <br /><a target='_blank' href='/test/model/$model/$function/$encoded'>/test/model/$model/$function/$encoded</a><br />";
 		}
 	}
 
