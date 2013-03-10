@@ -21,14 +21,14 @@ class Test extends MY_Controller {
 	// 	
 	public function model($model,$action,$args="") {
 		$args = json_decode(rawurldecode(html_entity_decode($args)),true);
-		//$this->display($args);
+		$this->display($args);
 		if(is_array($args)) {
 			$argstring = implode(', ',$args);
 			$eval = '$output = $this->'.$model.'->'.$action.'('.$argstring.');';
 		} else {
 			$eval = '$output = $this->'.$model.'->'.$action.'('.$args.');';
 		}
-		$this->display($eval);
+		//$this->display($eval);
 		//eval($eval);
 		//$this->display($output);
 	}
@@ -49,7 +49,8 @@ class Test extends MY_Controller {
 				</form><br />";
 					
 		if($str) {
-			$encoded = rawurlencode(json_encode($str));
+			eval("\$evalstr = $str;");
+			$encoded = rawurlencode(json_encode($evalstr));
 			echo "Test Link: <br /><a target='_blank' href='/test/model/$model/$function/$encoded'>/test/model/$model/$function/$encoded</a><br />";
 		}
 	}
