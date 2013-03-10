@@ -16,7 +16,7 @@ class Users_model extends MY_Model {
 	 **/
 	public function get($ID) {
 		// Get all the userData
-		return $this->get_object($ID, $this->objectIDKey, $this->dataTableName);
+		return $this->get_object($ID, $this->objectIDKey, $this->dataTableName, $this->relationTableName);
 	}
 	
 	/**
