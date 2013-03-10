@@ -27,7 +27,6 @@ class Test extends MY_Controller {
 	public function get_all($model,$params="a:0:{}") {
 		$args = implode(', ', unserialize(urldecode($params)));
 		$evalString = '$output = $this->'.$model.'->get_all('.$args.');';
-		var_dump($evalString);
 		eval($evalString);
 		$this->display($output);
 	}
@@ -36,7 +35,6 @@ class Test extends MY_Controller {
 	public function insert($model,$params="a:0:{}") {
 		$args = implode(', ',unserialize(urldecode($params)));
 		$evalString = "\$output = \$this->{$model}->insert($args);";
-		var_dump($evalString);
 		eval($evalString);
 		$this->display($output);
 	}
@@ -45,7 +43,6 @@ class Test extends MY_Controller {
 	public function update($model,$params="a:0:{}") {
 		$args = implode(', ',unserialize(urldecode($params)));
 		$evalString = "\$output = \$this->{$model}->update($args);";
-		var_dump($evalString);
 		eval($evalString);
 		$this->display($output);
 	}
