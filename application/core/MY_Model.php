@@ -227,8 +227,8 @@ class MY_Model extends CI_Model {
 		$this->db->trans_complete();
 		// Return TRUE: if we got to here it must have all worked
 		if($testRun) {
-			array_unique($testResults);
-			return implode("\n",$testResults);
+			$testResultsUnique = array_unique($testResults);
+			return implode("\n",$testResultsUnique);
 		}
 		else return TRUE;
 	}
