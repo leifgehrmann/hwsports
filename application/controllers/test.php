@@ -25,8 +25,11 @@ class Test extends MY_Controller {
 	public function model($model,$action,$args="") {
 		$args = json_decode(urldecode($args),true);
 		if(is_array($args)) {
-			$args = implode(', ', $args);
-			$eval = '$output = $this->'.$model.'->'.$action.'('.var_export($args, true).');';
+			foreach($args as $arg) {
+				$argstrings[] = var_export($arg);
+			}
+			$argstrings = implode(', ', $argstrings);
+			$eval = '$output = $this->'.$model.'->'.$action.'('.var_export($argstrings, true).');';
 		} else {
 			$eval = '$output = $this->'.$model.'->'.$action.'('.$args.');';
 		}
