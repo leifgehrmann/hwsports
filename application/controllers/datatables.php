@@ -360,7 +360,6 @@ class Datatables extends MY_Controller {
 		}
 
 		// Send it back to the client
-		echo json_encode( $out );
-		
+		echo json_encode( $out );		
 	}
-		
+}
