@@ -43,19 +43,17 @@ class Sis extends MY_Controller {
 		$this->load->model('matches_model');
 		$this->load->model('venues_model');
 		
-		$matches = $this->matches_model->get_matches($this->data['centre']['centreID']);
+		$matches = $this->matches_model->get_all();
 		foreach($matches as $key => $match) {
-			$sport = $this->sports_model->get_sport( $match['sportID'] );
-			$matches[$key]['sport'] = $sport['name'];
-			
-			$venue = $this->venues_model->get_venue( $match['venueID'] );
-			$matches[$key]['venue'] = $venue['name'];
-			
-			$tournament = $this->tournaments_model->get_tournament( $match['tournamentID'] );
-			$matches[$key]['tournament'] = ($tournament ? $tournament['name'] : "None");
-			
+
+			// $sport 		= $this->sports_model->get( $match['sportID'] );
+			// $venue 		= $this->venues_model->get( $match['venueID'] );
+			// $tournament = $this->tournaments_model->get( $match['tournamentID'] );
+
+			// $matches[$key]['sport'] = $sport['name'];
+			// $matches[$key]['venue'] = $venue['name'];
+			// $matches[$key]['tournament'] = ($tournament ? $tournament['name'] : "None");
 			$matches[$key]['date'] = datetime_to_public($match['startTime']);
-			
 			$matches[$key]['startTime'] = datetime_to_public($match['startTime']);
 			$matches[$key]['endTime'] = datetime_to_public($match['endTime']);
 		}
@@ -76,21 +74,18 @@ class Sis extends MY_Controller {
 		$this->load->model('venues_model');
 		$this->load->model('matches_model');
 		
-		$match = $this->matches_model->get_match($matchID);
+		$match = $this->matches_model->get($matchID);
 		if($match==FALSE) {
 			$this->session->set_flashdata('message',  "Match ID $id does not exist.");
 			redirect("/sis/tournaments", 'refresh');
 		}
+		$sport = $this->sports_model->get( $match['sportID'] );
+		$venue = $this->venues_model->get( $match['venueID'] );
+		$tournament = $this->tournaments_model->get($match['tournamentID'] );
 		
-		$sport = $this->sports_model->get_sport( $match['sportID'] );
 		$match['sport'] = $sport['name'];
-		
-		$venue = $this->venues_model->get_venue( $match['venueID'] );
 		$match['venue'] = $venue['name'];
-		
-		$tournament = $this->tournaments_model->get_tournament( $match['tournamentID'] );
 		$match['tournament'] = ($tournament ? $tournament['name'] : "None");
-		
 		$match['date'] = date("F jS, Y",$match['startTime']);
 		$match['startTime'] = date("H:i",$match['startTime']);
 		$match['endTime'] = date("H:i",$match['endTime']);
@@ -124,7 +119,7 @@ class Sis extends MY_Controller {
 		
 		$this->load->model('tournaments_model');
 		
-		$this->data['tournaments'] = $this->tournaments_model->get_tournaments($this->data['centre']['centreID']);
+		$this->data['tournaments'] = $this->tournaments_model->get_all();
 		
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('sis/tournaments',$this->data);

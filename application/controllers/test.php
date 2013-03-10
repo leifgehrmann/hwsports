@@ -48,10 +48,10 @@ class Test extends MY_Controller {
 	/*
 		matches_model
 	*/
-	public function get_matches($centreID,$start=FALSE,$end=FALSE){
+	public function get_matches($start=FALSE,$end=FALSE){
 		$start = urldecode($start);
 		$end   = urldecode($end);
-		$output = $this->matches_model->get($centreID,$start,$end);
+		$output = $this->matches_model->get_all($start,$end);
 		$this->display($output);
 	}
 	public function get_venue_matches($venueID,$start=FALSE,$end=FALSE){
