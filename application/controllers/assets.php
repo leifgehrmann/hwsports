@@ -39,6 +39,7 @@ class Assets extends MY_Controller {
 		// If we are redirecting to javascript files, we wish to properly handle
 		// the slug (vendor files are in another folder).
 		$vendor = false;
+		
 		if($file_category=="js")
 			$vendor = ( $segments[2] == "vendor" );
 		if($vendor) unset($segments[2]);
@@ -67,15 +68,21 @@ class Assets extends MY_Controller {
 		$this->output->set_header("Content-Type: {$this->ctype}");
 
 		if( $file_ext == "css" ) {
-			// If the file is css, we insert the slug to the path
-			$this->load->view("css/{$this->data['slug']}/$path",$this->data);	
-			//$this->output->cache(60); // cache css for 1 hour
-
+			if( $file_category == "js" ) {
+				// Since we're looking for a css file in the js folder, don't do any redirecting of paths
+				// Ideally all css would be in the css folder, etc, but with some large libraries (tinymce... mumble mumble) it's just too much effort to separate it all
+				header("Content-Type: ".$this->ctype);
+				$this->load->view("js/vendor/$path",$this->data);	
+			} else {
+				// If the file is css, we insert the slug to the path
+				$this->load->view("css/{$this->data['slug']}/$path",$this->data);	
+				//$this->output->cache(60); // cache css for 1 hour
+			}
 		} elseif( $file_ext == "js" ) {
 			// If the file is js, we insert the slug to the path ONLY if the
 			// string "vendor" doesn't exist in the the second segment.
 			if($vendor) {
-				header("Content-Type: application/x-javascript");
+				header("Content-Type: ".$this->ctype);
 				echo file_get_contents("/home/sports/public_html/application/views/js/vendor/$path");
 			} else {
 				$this->load->view("js/{$this->data['slug']}/$path",$this->data);
@@ -87,9 +94,15 @@ class Assets extends MY_Controller {
 					$file_ext == "jpeg" || 
 					$file_ext == "gif" 
 			) {
-			// This is a binary image so read the file directly from the img 
-			// folder after sending the header - don't load it as a view
-			$this->readBinaryFile(FCPATH.APPPATH."views/img/{$this->data['slug']}/{$path}");
+			if( $file_category == "js" ) {
+				// Since we're looking for an image file in the js folder, don't do any redirecting of paths
+				// Ideally all images would be in the img folder, etc, but with some large libraries (tinymce... mumble mumble) it's just too much effort to separate it all
+				$this->readBinaryFile("js/vendor/$path");	
+			} else {
+				// This is a binary image so read the file directly from the img 
+				// folder after sending the header - don't load it as a view
+				$this->readBinaryFile(FCPATH.APPPATH."views/img/{$this->data['slug']}/{$path}");
+			}
 		} else {
 			// This isn't js, css or an image based on it's extension so try and
 			// load it from a random folder based on it's extension?
