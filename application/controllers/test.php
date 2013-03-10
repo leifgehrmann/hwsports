@@ -23,7 +23,7 @@ class Test extends MY_Controller {
 	// 	http://hwsports.co.uk/test/model/matches_model/get_all/a%3A2%3A%7Bi%3A0%3Bs%3A26%3A%22%222013-03-06T10%3A00%3A00%2B0000%22%22%3Bi%3A1%3Bs%3A26%3A%22%222013-03-10T10%3A00%3A00%2B0000%22%22%3B%7D
 	// 	
 	public function model($model,$action,$args="") {
-		$args = json_decode(urldecode($args));
+		$args = json_decode(urldecode($args),true);
 		if(is_array($args)) {
 			var_export($args); die();
 			$args = implode(', ', $args);
