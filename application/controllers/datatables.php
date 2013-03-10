@@ -10,7 +10,6 @@ use
 	DataTables\Editor\Format,
 	DataTables\Editor\Join,
 	DataTables\Editor\Validate;
-}
 
 class Datatables extends MY_Controller {
 
