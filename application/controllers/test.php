@@ -25,7 +25,7 @@ class Test extends MY_Controller {
 	// 	
 	public function model($model,$action,$args="") {
 		$args = json_decode(rawurldecode($args),true);
-		$this->display($args);
+		$this->display($args);/*
 		
 		if(is_array($args)) {
 			$argstring = implode(', ',$args);
@@ -35,7 +35,7 @@ class Test extends MY_Controller {
 		}
 		$this->display($eval);
 		eval($eval);
-		$this->display($output);
+		$this->display($output);*/
 	}
 	
 
