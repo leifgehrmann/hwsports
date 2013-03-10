@@ -9,8 +9,9 @@
 		<td><?=$key?></td>
 		<td><?=$value?></td>
 	</tr>
+	<? } ?>
 	<tr>
-		<td><?=$key?></td>
+		<td></td>
 		<td><a class="button red" href="/auth/delete_user/<?=$user['id']?>" target="_blank" >Delete</td>
 	</tr>
 </table>
