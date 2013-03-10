@@ -95,12 +95,12 @@
 	</div>
 	<div class="widget-body">
 		<? for($i=1;$i<=46;$i++) { ?>
-			<div style="margin-top:20px;" class="match 
-			sportCategoryID-<?=$i?> 
-			tournamentID-<?=$match['tournamentID']?>
-		">
-			<div class="icon left margin-right"></div>
-		</div>
+			<div class="match 
+				sportCategoryID-<?=$i?> 
+				tournamentID-<?=$match['tournamentID']?>
+			">
+				<div style="margin-bottom:20px" class="icon left margin-right"></div>
+			</div>
 		<? } ?>
 	</div>
 </div>
