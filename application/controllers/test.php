@@ -15,28 +15,28 @@ class Test extends MY_Controller {
 	// START GENERIC CRUD TESTERS
 	
 	// Generic get function, can be used to execute the get function in any model with a serialized array of arguments  
-	public function get($model,$params) {
+	public function get($model,$params=array()) {
 		$args = implode(', ',unserialize($params));
 		eval("\$output = \$this->{$model}=>get($args);");
 		$this->display($output);
 	}
 	
 	// Generic get_all function, can be used to execute the get_all function in any model with a serialized array of arguments  
-	public function get_all($model,$params) {
+	public function get_all($model,$params=array()) {
 		$args = implode(', ',unserialize($params));
 		eval("\$output = \$this->{$model}=>get_all($args);");
 		$this->display($output);
 	}
 	
 	// Generic insert function, can be used to execute the insert function in any model with a serialized array of arguments  
-	public function insert($model,$params) {
+	public function insert($model,$params=array()) {
 		$args = implode(', ',unserialize($params));
 		eval("\$output = \$this->{$model}=>insert($args);");
 		$this->display($output);
 	}
 	
 	// Generic update function, can be used to execute the insert function in any model with a serialized array of arguments  
-	public function update($model,$params) {
+	public function update($model,$params=array()) {
 		$args = implode(', ',unserialize($params));
 		eval("\$output = \$this->{$model}=>update($args);");
 		$this->display($output);
