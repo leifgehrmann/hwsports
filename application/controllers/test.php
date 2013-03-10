@@ -18,26 +18,36 @@ class Test extends MY_Controller {
 	// Basic example usage, get a single match with ID 18: 
 	// 		http://hwsports.co.uk/test/model/matches_model/get/18
 	// Complex example, get all matches between two date strings (which are elements of a serialized array, which has then been urlencoded)
-	// Go to http://php.fnlist.com/php/serialize and serialize this: array('"2013-03-06T10:00:00+0000"', '"2013-03-10T10:00:00+0000"')
-	// Which produces: a:2:{i:0;s:26:""2013-03-06T10:00:00+0000"";i:1;s:26:""2013-03-10T10:00:00+0000"";}
-	// Then urlencode it here: http://meyerweb.com/eric/tools/dencoder/ to produce this test URL:
+	// First http://php.fnlist.com/php/json_encode this: array("2013-03-06T10:00:00+0000", "2013-03-10T10:00:00+0000")
+	// Which produces: 
+	// Then  to produce this test URL:
 	// 	http://hwsports.co.uk/test/model/matches_model/get_all/a%3A2%3A%7Bi%3A0%3Bs%3A26%3A%22%222013-03-06T10%3A00%3A00%2B0000%22%22%3Bi%3A1%3Bs%3A26%3A%22%222013-03-10T10%3A00%3A00%2B0000%22%22%3B%7D
 	// 	
 	public function model($model,$action,$args="") {
 		$args = json_decode(rawurldecode(html_entity_decode($args)),true);
 		//$this->display($args);
-		
 		if(is_array($args)) {
 			$argstring = implode(', ',$args);
 			$eval = '$output = $this->'.$model.'->'.$action.'('.$argstring.');';
 		} else {
 			$eval = '$output = $this->'.$model.'->'.$action.'('.$args.');';
 		}
-		$this->display($eval);
-		/*eval($eval);
-		$this->display($output);*/
+		//$this->display($eval);
+		eval($eval);
+		$this->display($output);
 	}
 	
+	public function helper() {
+		$output = 'Input: <br /><form method="post" action="/test/helper"><textarea name="str" id="str" style="height: 100pt" rows="1" cols="50"></textarea><input type="submit" name="exec" value="Execute"></form><br />';
+			
+		if(isset($_POST['str'])) {
+			$encoded = rawurlencode(json_encode($_POST['str']));
+			$output .= "Output: <textarea style='height: 100pt' cols='50'>$encoded</textarea>";  
+		}
+		
+		header('Content-Type: text/html');
+		$this->display($output);
+	}
 
 	// Try: http://hwsports.co.uk/test/schedule_football_family/37
 	public function schedule_football_family($tournamentID){
