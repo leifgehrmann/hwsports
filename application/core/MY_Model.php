@@ -8,7 +8,7 @@ class MY_Model extends CI_Model {
 		// Basically each "object" has an array of other "objects" which directly reference it
 		// Therefore if we are deleting an object, we must get the IDs of any other objects which reference it
 		// Then call the delete_object function on those objects before trying to delete our original object
-		$this->table_dependents = array(
+		$table_dependents = array(
 			'centre' => array('sports'=>'sportID','venues'=>'venueID','tournaments'=>'tournamentID','teams'=>'teamID'),
 			'sports' => array('matches'=>'matchID','tournaments'=>'tournamentID','sportData'=>'sportID'),
 			'venues' => array('matches'=>'matchID','tournamentVenues'=>'venueID','venueData'=>'venueID'),
@@ -187,12 +187,14 @@ class MY_Model extends CI_Model {
 	// Example usage: delete_object(1, "centreID", "centreData", false);
 	// Returns: TRUE if update was successful, FALSE otherwise.
 	public function delete_object($objectID, $objectIDKey, $primaryTableName, $testRun=TRUE) {
+		// We need to access the global array of dependencies
+		global $table_dependents;
 		// This string will hold the message showing what will be deleted
 		$testResults = "";
 		// Lump all data table updates into one transaction in case one fails
 		$this->db->trans_start();
 		// Get the list of tables this object might have dependent rows in
-		$dependents = $this->table_dependents[$primaryTableName];
+		$dependents = $table_dependents[$primaryTableName];
 		// Iterate through dependents to process corresponding entries from - these should be in a specific order to satisfy foreign keys
 		foreach( $dependents as $table=>$field ) {
 			// Search this table for our object key/ID - if it exists, we want to delete whatever object was referencing our object
