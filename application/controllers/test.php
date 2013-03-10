@@ -49,7 +49,8 @@ class Test extends MY_Controller {
 				</form><br />";
 					
 		if($str) {
-			$encoded = rawurlencode(json_encode($str));
+			eval("\$evalstr = $str;");
+			$encoded = rawurlencode(json_encode($evalstr));
 			echo "Test Link: <br /><a target='_blank' href='/test/model/$model/$function/$encoded'>/test/model/$model/$function/$encoded</a><br />";
 		}
 	}
