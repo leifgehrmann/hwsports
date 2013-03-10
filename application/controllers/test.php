@@ -21,16 +21,16 @@ class Test extends MY_Controller {
 	// 	
 	public function model($model,$action,$args="") {
 		$args = json_decode(rawurldecode(html_entity_decode($args)),true);
-		$this->display($args);
+		//$this->display($args);
 		if(is_array($args)) {
 			$argstring = implode(', ',$args);
 			$eval = '$output = $this->'.$model.'->'.$action.'('.$argstring.');';
 		} else {
 			$eval = '$output = $this->'.$model.'->'.$action.'('.$args.');';
 		}
-		//$this->display($eval);
-		//eval($eval);
-		//$this->display($output);
+		echo($eval);
+		eval($eval);
+		$this->display($output);
 	}
 	
 	public function helper() {
@@ -44,7 +44,15 @@ class Test extends MY_Controller {
 					Model: <input id='model' type='text' name='model' value='$model' /><br />
 					Function: <input id='function' type='text' name='function' value='$function' /><br />
 					Input: <br />
-					<textarea name='str' id='str' style='height: 100pt' rows='1' cols='50'>$str</textarea><br />
+					<span style='text-decoration: italic'>To pass multiple arguments to the function, create an array() with multiple parameters. <br />
+					To pass an array as one of the parameters, create the array but put that in single quotes. An example with two array parameters has been inserted into the textarea for you.</span><br />
+					<textarea name='str' id='str' style='height: 100pt' rows='1' cols='50'>";
+					if($str) echo $str; 
+					else echo 'array(
+								\'array("hello"=>"world")\',
+								\'array("sportID"=>8)\'
+								)';
+					echo "</textarea><br />
 					<input type='submit' name='exec' value='Execute'></form><br />
 				</form><br />";
 					
