@@ -25,7 +25,7 @@ class Test extends MY_Controller {
 	
 	// Generic get_all function, can be used to execute the get_all function in any model with a serialized array of arguments  
 	public function get_all($model,$params="a:0:{}") {
-		$args = implode(', ',unserialize(urldecode($params)));
+		$args = implode(', ',array("2013-03-06T10:00:00+0000")); //unserialize(urldecode($params)));
 		$evalString = '$output = $this->'.$model.'->get_all('.$args.');';
 		var_dump($evalString);
 		eval($evalString);
