@@ -13,7 +13,6 @@ class Test extends MY_Controller {
 		$this->load->model('venues_model');
 		header('Content-Encoding: UTF-8');
 		header('Content-type: text/plain; charset=UTF-8');
-		header('Content-Disposition: attachment; filename=Customers_Export.csv');
 		echo "\xEF\xBB\xBF";
 	}
 	
