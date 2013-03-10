@@ -90,13 +90,12 @@
 </div>
 <div class="widget half icons">
 	<div class="widget-title">
-		<div class="widget-title-left icon"></div>
 		<div class="widget-title-centre">Happy small icons</div>
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<? for($i=0;$i<46;$i++) { ?>
-			<div class="match 
+		<? for($i=1;$i<=46;$i++) { ?>
+			<div style="margin-top:20px;" class="match 
 			sportCategoryID-<?=$i?> 
 			tournamentID-<?=$match['tournamentID']?>
 		">
