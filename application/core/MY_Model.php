@@ -152,41 +152,67 @@ class MY_Model extends CI_Model {
 		return TRUE;
 	}
 	
-	// Deletes an object from the database, optionally also deleting any child relations
+	// Deletes an object from the database, optionally also deleting any dependents
 	// Required: $objectID, $objectIDKey, $data, $dataTableName. 
 	// Example usage: delete_object(1, "centreID", 'centreData');
 	// Returns: TRUE if update was successful, FALSE otherwise.
-	public function delete_object($objectID, $objectIDKey, $dataTableName, $relations = array()) {
-		return FALSE;
-		/*// If we've been given a relational table and relations to go in that table, we should update the entry in that first in case of foreign key restraints
-		if( $relationTableName && count($relations) ) {
-			// Update the correct row in the relation table with the new relation IDs specified 
-			$this->db->where($objectIDKey, $objectID);
-			// If the update fails, return FALSE
-			if(!$this->db->update($relationTableName, $relations))return FALSE;
+	public function delete_object($testRun=TRUE, $objectID, $objectIDKey, $dataTableName, $relationTableName, $dependents = array()) {
+		// This string will hold the message to the user explaining what will be deleted
+		$testResults = "If this delete query is executed, the following rows will be deleted: \n";
+		// Lump all data table updates into one transaction in case one fails
+		$this->db->trans_start();
+		
+		// If we've been given some relational tables to delete corresponding entries from, do that first to satisfy foreign keys
+		foreach( $dependents as $dependentTable ) {
+			if($testRun) {
+				$rows = $this->db->get_where($dependentTable, array($objectIDKey => $objectID))->result_array();
+				foreach($rows as $row) {
+					$testResults .= print_r($row,true);
+					$testResults .= "\nFrom table: $dependentTable";
+				}
+			} else {			
+				// Delete the rows in the dependentTable table which reference the deleted object 
+				$this->db->where($objectIDKey, $objectID);
+				$this->db->delete($dependentTable);
+			}
 		}
 		
-		// Lump all updates into one transaction
-		$this->db->trans_start();
-		// Loop through input data
-		foreach($data as $key => $value) {
-			// Set the where clauses and the values for the update
-			$where = array(
-				$objectIDKey => $objectID,
-				'key'   => $key
-			);
-			$update = array(
-				'value' => $value
-			);
-			// Create the update - active record sanitizes inputs automatically. Return false if update fails.
-			$this->db->where($where);
-			if(!$this->db->update($dataTableName, $update)) return FALSE;			
+		// We've deleted the dependents, now delete the data (if it exists!)
+		if($dataTableName) {
+			if($testRun) {
+				$rows = $this->db->get_where($dataTableName, array($objectIDKey => $objectID))->result_array();
+				foreach($rows as $row) {
+					$testResults .= print_r($row,true);
+					$testResults .= "\nFrom table: $dataTableName";
+				}
+			} else {			
+				// Delete the rows in the data table which reference the deleted object 
+				$this->db->where($objectIDKey, $objectID);
+				$this->db->delete($dataTableName);
+			}
 		}
+		
+		// We've deleted the data, now finally get the relation table row
+		if($relationTableName) {
+			if($testRun) {
+				$rows = $this->db->get_where($relationTableName, array($objectIDKey => $objectID))->result_array();
+				foreach($rows as $row) {
+					$testResults .= print_r($row,true);
+					$testResults .= "\nFrom table: $relationTableName";
+				}
+			} else {
+				// Delete the rows in the data table which reference the deleted object 
+				$this->db->where($objectIDKey, $objectID);
+				$this->db->delete($relationTableName);
+			}
+		}
+		
 		// Complete transaction, all is well
 		$this->db->trans_complete();
 		
 		// Return TRUE: if we got to here it must have all worked
-		return TRUE;*/
+		if($testRun) return $testResults;
+		else return TRUE;
 	}
 
 }

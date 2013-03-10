@@ -158,8 +158,13 @@ class Tournaments_model extends MY_Model {
 	 * @return boolean
 	 **/
 	public function delete($ID, $testRun=TRUE) {
-		$dependents = array();
-		return $this->delete_object($testRun, $ID, $this->objectIDKey, $this->dataTableName, false, $dependents);
+		$dependents = array(
+			'tickets',
+			'matches',
+			'tournamentVenues',
+			'tournamentActors'
+		);
+		return $this->delete_object($testRun, $ID, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $dependents);
 	}
 
 }
