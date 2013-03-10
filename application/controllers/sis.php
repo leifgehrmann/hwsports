@@ -36,57 +36,37 @@ class Sis extends MY_Controller {
 
 	public function calendar()
 	{
-		// Page title
-		$this->data['title'] = "Calendar";
-		$this->data['page'] = "calendar";
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('sis/calendar',$this->data);
-		$this->load->view('sis/footer',$this->data);
+		$this->view('calendar','calendar','Calendar',$this->data);
 	}
 
 	public function matches()
 	{			
-		$this->load->model('tournaments_model');
-		$this->load->model('sports_model');
 		$this->load->model('matches_model');
-		$this->load->model('venues_model');
 		
 		$matches = $this->matches_model->get_all();
 		foreach($matches as $key => $match) {
-
-			// $sport 		= $this->sports_model->get( $match['sportID'] );
-			// $venue 		= $this->venues_model->get( $match['venueID'] );
-			// $tournament = $this->tournaments_model->get( $match['tournamentID'] );
-
-			// $matches[$key]['sport'] = $sport['name'];
-			// $matches[$key]['venue'] = $venue['name'];
-			// $matches[$key]['tournament'] = ($tournament ? $tournament['name'] : "None");
 			$matches[$key]['date'] = datetime_to_public($match['startTime']);
 			$matches[$key]['startTime'] = datetime_to_public($match['startTime']);
 			$matches[$key]['endTime'] = datetime_to_public($match['endTime']);
 		}
-
 		$this->data['matches'] = $matches;
-		
+
 		$this->view('matches','matches','Matches',$this->data);
-	}
+	} 
 
 	public function match($matchID)
 	{
 		$this->load->library('table');
 		
-		$this->load->model('tournaments_model');
-		$this->load->model('sports_model');
-		$this->load->model('venues_model');
 		$this->load->model('matches_model');
 		
 		$match = $this->matches_model->get($matchID);
 		if($match==FALSE) {
 			$this->session->set_flashdata('message',  "Match ID $id does not exist.");
-			redirect("/sis/tournaments", 'refresh');
+			redirect("/sis/matches", 'refresh');
 		}
 		
-		$match['tournamentData']['name'] = ($tournament['tournamentData'] ? $tournament['tournamentData']['name'] : "None");
+		$match['tournamentData']['name'] = ($match['tournamentData'] ? $match['tournamentData']['name'] : "None");
 		$match['date'] = date("F jS, Y",$match['startTime']);
 		$match['startTime'] = date("H:i",$match['startTime']);
 		$match['endTime'] = date("H:i",$match['endTime']);
@@ -103,34 +83,21 @@ class Sis extends MY_Controller {
 			array('<span class="bold">Start Time:</span>',date("H:i",$match['startTime'])),
 			array('<span class="bold">End Time:</span>',date("H:i",$match['endTime'])),
 		);
-		
-		$this->data['title'] = $match['name'];
-		$this->data['page'] = "match";
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('sis/match',$this->data);
-		$this->load->view('sis/footer',$this->data);
+		$this->view('match','match',$match['name'].' | Match',$this->data);
 	}
 
 	public function tournaments()
-	{
-		// Page title
-		$this->data['title'] = "Tournaments";
-		$this->data['page'] = "tournaments";
-		
-		$this->load->model('tournaments_model');
-		
+	{	
+		$this->load->model('tournaments_model');	
 		$this->data['tournaments'] = $this->tournaments_model->get_all();
 		
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('sis/tournaments',$this->data);
-		$this->load->view('sis/footer',$this->data);
+		$this->view('tournaments','tournaments','Tournaments',$this->data);
 	}
 
 	public function tournament($tournamentID)
 	{
 		$this->load->library('table');
 		$this->load->model('tournaments_model');
-		$this->load->model('sports_model');
 		
 		$tournament = $this->tournaments_model->get_tournament($tournamentID);
 		if($tournament==FALSE) {
@@ -138,34 +105,21 @@ class Sis extends MY_Controller {
 			redirect("/sis/tournaments", 'refresh');
 		}
 		
-		$this->data['tournamentID'] = $tournamentID;
 		$this->data['tournament'] = $tournament;
-		$sport = $this->sports_model->get_sport( $tournament['sportID'] );
-		
 		
 		$this->data['tournamentTable'] = array(
 			array('<span class="bold">Name:</span>',$tournament['name']),
 			array('<span class="bold">Description:</span>',$tournament['description']),
-			array('<span class="bold">Sport:</span>',$sport['name']),
+			array('<span class="bold">Sport:</span>',$tournament['sportData']['name']),
 			array('<span class="bold">Start Date:</span>',$tournament['tournamentStart']),
 			array('<span class="bold">End Date:</span>',$tournament['tournamentEnd']),
 		);
 		
-		// Page title
-		$this->data['title'] = $tournament['name'];
-		$this->data['page'] = "tournament";
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('sis/tournament',$this->data);
-		$this->load->view('sis/footer',$this->data);
+		$this->view('tournament','tournament',$tournament['name'].' | Tournament',$this->data);
 	}
 	public function ticketsinfo()
 	{
-		// Page title
-		$this->data['title'] = "Tickets";
-		$this->data['page'] = "ticketsinfo";
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('sis/ticketsinfo',$this->data);
-		$this->load->view('sis/footer',$this->data);
+		$this->view('ticketsinfo','ticketsinfo','Tickets',$this->data);
 	}
 	public function account()
 	{
@@ -180,11 +134,7 @@ class Sis extends MY_Controller {
 			}
 		}
 		
-		$this->data['title'] = "Account";
-		$this->data['page'] = "account";
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('sis/account',$this->data);
-		$this->load->view('sis/footer',$this->data);
+		$this->view('account','account','Account',$this->data);
 	}
 	
 	// sign up for tournament
@@ -255,12 +205,8 @@ class Sis extends MY_Controller {
 			$this->session->set_flashdata('message',  "Signup successful!");
 			redirect("/sis/tournaments", 'refresh');
 					
-		} else {			
-			$this->data['title'] = "Signup";
-			$this->data['page'] = "signup";
-			$this->load->view('sis/header',$this->data);
-			$this->load->view('sis/signup',$this->data);
-			$this->load->view('sis/footer',$this->data);
+		} else {
+			$this->view('signup','signup','Signup',$this->data);
 		}
 	}
 	
@@ -524,25 +470,13 @@ class Sis extends MY_Controller {
 	}
 	
 	public function info() {
-		$this->data['title'] = "About Us";
-		$this->data['page'] = "info";
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('sis/info',$this->data);
-		$this->load->view('sis/footer',$this->data);
+		$this->view('info','info','About Us',$this->data);
 	}
 	public function help() {
-		$this->data['title'] = "Help";
-		$this->data['page'] = "help";
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('sis/help',$this->data);
-		$this->load->view('sis/footer',$this->data);
+		$this->view('help','help','Help',$this->data);
 	}
 	public function playground() {
-		$this->data['title'] = "Branding Playground";
-		$this->data['page'] = "playground";
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('sis/playground',$this->data);
-		$this->load->view('sis/footer',$this->data);
+		$this->view('playground','playground','Branding Playground',$this->data);
 	}
 
 	private function generatePassword($length = 9, $available_sets = 'lud')
