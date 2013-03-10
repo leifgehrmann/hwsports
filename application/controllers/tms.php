@@ -74,7 +74,7 @@ class Tms extends MY_Controller {
 			if($today<new DateTime($uMatches['startTime']))
 				break;
 			foreach($latestMatches as $i=>$lMatch){
-				if(!$lMatches){
+				if(!$lMatch){
 					unset($latestTournaments[$i]);
 					break;
 				}
@@ -86,14 +86,14 @@ class Tms extends MY_Controller {
 		}
 		// We want to remove the tournaments that already exist in the latest tournaments
 		foreach($upcomingTournaments as $u=>$uTournament){
-			if(!$upcomingTournament){
-				unset($upcomingTournament[$u]);
+			if(!$uTournament){
+				unset($upcomingTournaments[$u]);
 				break;
 			}
 			if($today<new DateTime($uTournament['tournamentStart']))
 				break;
 			foreach($latestTournaments as $i=>$lTournament){
-				if(!$upcomingTournaments){
+				if(!$lTournament){
 					unset($latestTournaments[$i]);
 					break;
 				}
