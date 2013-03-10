@@ -28,7 +28,6 @@ class Assets extends MY_Controller {
 	{
 		// get path segments as interpreted by CI routing
 		$segments = $this->uri->segment_array();
-		print_r($segments); die();
 		
 		// Get rid of "css", "img", "js", etc. from path as we don't need it for
 		// anything. Our redirection is based on the file extension. However, we
