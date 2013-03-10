@@ -67,7 +67,7 @@ class Assets extends MY_Controller {
 			// If the file is js, we insert the slug to the path ONLY if the
 			// string "vendor" doesn't exist in the the second segment.
 			if($vendor) {
-				header("Content-Type: {$this->ctype}");
+				header("Content-Type: text/js");
 				echo file_get_contents("/home/sports/public_html/application/views/js/vendor/$path");
 			} else {
 				$this->load->view("js/{$this->data['slug']}/$path",$this->data);
