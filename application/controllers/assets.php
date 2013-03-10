@@ -28,6 +28,7 @@ class Assets extends MY_Controller {
 	{
 		// get path segments as interpreted by CI routing
 		$segments = $this->uri->segment_array();
+		print_r($segments); die();
 		
 		// Get rid of "css", "img", "js", etc. from path as we don't need it for
 		// anything. Our redirection is based on the file extension. However, we
@@ -68,7 +69,6 @@ class Assets extends MY_Controller {
 			// string "vendor" doesn't exist in the the second segment.
 			if($vendor) {
 				header("Content-Type: application/x-javascript");
-				echo $path; die();
 				echo file_get_contents("/home/sports/public_html/application/views/js/vendor/$path");
 			} else {
 				$this->load->view("js/{$this->data['slug']}/$path",$this->data);
