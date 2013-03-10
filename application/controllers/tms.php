@@ -78,7 +78,7 @@ class Tms extends MY_Controller {
 		}
 
 		// We want to remove the tournaments that already exist in the latest tournaments
-		foreach($upcomingTournament as $u=>$uTournament){
+		foreach($upcomingTournaments as $u=>$uTournament){
 			if($today<new DateTime($uTournament['tournamentStart']))
 				break;
 			foreach($latestTournaments as $i=>$lTournament){
@@ -89,14 +89,6 @@ class Tms extends MY_Controller {
 			}
 		}
 
-		// Ideally we should be getting:
-		// list of upcoming matches
-		// list of latest matches
-
-		// Ideally we should be getting:
-		// list of upcoming tournaments
-		// list of latest tournaments
-
 		function cmp($a, $b){
 			if ($a['endTime'] == $b['endTime']) { return 0; }
 			return ($a['endTime'] < $b['endTime']) ? -1 : 1;
@@ -106,10 +98,9 @@ class Tms extends MY_Controller {
 		usort($upcomingMatches, "cmp");
 		usort($latestTournaments, "cmp");
 		usort($upcomingTournaments, "cmp");
-
 		$latestMatches 			= array_slice($latestMatches, -1, 5);
 		$upcomingMatches 		= array_slice($upcomingMatches, -1, 5);
-		$latestTournaments 		= array_slice($latestTournaments, -1, 1);
+		$latestTournaments 		= array_slice($latestTournaments, -1, 5);
 		$upcomingTournaments 	= array_slice($upcomingTournaments, -1, 5);
 
 		$this->data['latestTournaments'] 	= $latestTournaments;
