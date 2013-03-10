@@ -38,22 +38,21 @@ class Test extends MY_Controller {
 	}
 	
 	public function helper() {
-		$output = 'Model: <input type="text" name="model" /><br />
-					Function: <input type="text" name="function" /><br />
-					Input: <br />
-					<form method="post" action="/test/helper"><textarea name="str" id="str" style="height: 100pt" rows="1" cols="50"></textarea><input type="submit" name="exec" value="Execute"></form><br />';
-			
-		if(isset($_POST['str'])) {
-			$encoded = rawurlencode(json_encode($_POST['str']));
-			$output = "Model: <input type='text' name='model' value='{$_POST['model']}' /><br />
-					Function: <input type='text' name='function' value='{$_POST['function']}' /><br />
-					Input: <br />
-					<form method='post' action='/test/helper'><textarea name='str' id='str' style='height: 100pt' rows='1' cols='50'>{$_POST['str']}</textarea><input type='submit' name='exec' value='Execute'></form><br />
-					Test Link: <br /><a href='/test/model/{$_POST['model']}/{$_POST['function']}/$encoded'>/test/model/{$_POST['model']}/{$_POST['function']}/$encoded</a><br />";  
-		}
-		
 		header('Content-Type: text/html');
-		echo($output);
+		$str = ( isset($_POST['str']) ? $_POST['str'] : '' );
+		$model = ( isset($_POST['model']) ? $_POST['model'] : '' );
+		$function = ( isset($_POST['function']) ? $_POST['function'] : '' );
+		
+		echo "Model: <input type='text' name='model' value='$model' /><br />
+				Function: <input type='text' name='function' value='$function' /><br />
+				Input: <br />
+				<textarea name='str' id='str' style='height: 100pt' rows='1' cols='50'>$str</textarea><br />
+				<input type='submit' name='exec' value='Execute'></form><br />";
+		
+		if($str) {
+			$encoded = rawurlencode(json_encode($str));
+			echo "Test Link: <br /><a href='/test/model/$model/$function/$encoded'>/test/model/$model/$function/$encoded</a><br />";
+		}
 	}
 
 	// Try: http://hwsports.co.uk/test/schedule_football_family/37
