@@ -38,11 +38,18 @@ class Test extends MY_Controller {
 	}
 	
 	public function helper() {
-		$output = 'Input: <br /><form method="post" action="/test/helper"><textarea name="str" id="str" style="height: 100pt" rows="1" cols="50"></textarea><input type="submit" name="exec" value="Execute"></form><br />';
+		$output = 'Model: <input type="text" name="model" /><br />
+					Function: <input type="text" name="function" /><br />
+					Input: <br />
+					<form method="post" action="/test/helper"><textarea name="str" id="str" style="height: 100pt" rows="1" cols="50"></textarea><input type="submit" name="exec" value="Execute"></form><br />';
 			
 		if(isset($_POST['str'])) {
 			$encoded = rawurlencode(json_encode($_POST['str']));
-			$output .= "Output: <textarea style='height: 100pt' cols='50'>$encoded</textarea>";  
+			$output = "Model: <input type='text' name='model' /><br />
+					Function: <input type='text' name='function' /><br />
+					Input: <br />
+					<form method='post' action='/test/helper'><textarea name='str' id='str' style='height: 100pt' rows='1' cols='50'></textarea><input type='submit' name='exec' value='Execute'></form><br />
+					Test Link: <br /><a href='/test/model/{$_POST['model']}/{$_POST['function']}/$encoded'>/test/model/{$_POST['model']}/{$_POST['function']}/$encoded</a><br />";  
 		}
 		
 		header('Content-Type: text/html');
