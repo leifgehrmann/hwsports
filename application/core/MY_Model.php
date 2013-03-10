@@ -173,7 +173,7 @@ class MY_Model extends CI_Model {
 				foreach($rows as $row) {
 					$testResults .= "Table: $table; Row: ";
 					foreach($row as $key=>$value) $rowfields[] = "[$key] = $value";
-					$testResults .= implode(' | ',$rowfields)." \n";
+					$testResults .= implode(' | ',$rowfields)." \n\n";
 				}
 			} else {			
 				// Delete the rows in the table table which reference the deleted object 
