@@ -12,8 +12,7 @@ class Test extends MY_Controller {
 		$this->load->model('scheduling_model');
 		$this->load->model('venues_model');
 		header('Content-Encoding: UTF-8');
-		header('Content-type: text/plain; charset=UTF-8');
-		echo "\xEF\xBB\xBF";
+		header('Content-type: text/html; charset=UTF-8');
 	}
 	
 	//
@@ -186,7 +185,7 @@ class Test extends MY_Controller {
 	public function display($output){
 		ob_start();
 		var_dump($output);
-		$this->data['data'] = ob_get_clean();
+		$this->data['data'] = "<pre>".ob_get_clean()."</pre>";
 		$this->load->view('data', $this->data);
 	}
 }
