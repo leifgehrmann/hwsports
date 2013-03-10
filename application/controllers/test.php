@@ -12,58 +12,84 @@ class Test extends MY_Controller {
 		$this->load->model('scheduling_model');
 	}
 	
-	/*
-		users_model
-	*/
-	public function get_all_users(){
-		$output = $this->users_model->get_all();
+	// START GENERIC CRUD TESTERS
+	
+	// Generic get function, can be used to execute the get function in any model with a serialized array of arguments  
+	public function get($model,$params) {
+		$args = implode(', ',unserialize($params));
+		eval("\$output = \$this->{$model}=>get($args);")
 		$this->display($output);
 	}
 	
+	// Generic get_all function, can be used to execute the get_all function in any model with a serialized array of arguments  
+	public function get_all($model,$params) {
+		$args = implode(', ',unserialize($params));
+		eval("\$output = \$this->{$model}=>get_all($args);")
+		$this->display($output);
+	}
+	
+	// Generic insert function, can be used to execute the insert function in any model with a serialized array of arguments  
+	public function insert($model,$params) {
+		$args = implode(', ',unserialize($params));
+		eval("\$output = \$this->{$model}=>insert($args);")
+		$this->display($output);
+	}
+	
+	// Generic update function, can be used to execute the insert function in any model with a serialized array of arguments  
+	public function update($model,$params) {
+		$args = implode(', ',unserialize($params));
+		eval("\$output = \$this->{$model}=>update($args);")
+		$this->display($output);
+	}
 
-	// For example: http://hwsports.co.uk/test/update_user/34/%7B%22poop%22%3A%22smells%22%7D
-	// that web address updates userData to add "poop" = "smells" to user ID 34
-	public function update_user($userID,$dataJSON){
-		$dataJSON = urldecode($dataJSON);
-		$data = json_decode($dataJSON);
-		$output = $this->users_model->update($userID,$data);
-		$this->display($output);
-	}
+	// END OF GENERIC CRUD TESTERS
+	
 	/*
-		centre_model
+		users_model
 	*/
-	public function get_centre(){
-		$output = $this->centre_model->get();
-		$this->display($output);
-	}
-	public function insert_centre(){
-		$output = $this->centre_model->insert( array("hello"=>"world") );
-		$this->display($output);
-	}
-	public function update_centre($centreID){
-		$output = $this->centre_model->update( $centreID, array("hello"=>"poop") );
-		$this->display($output);
-	}
 	
 	/*
 		matches_model
 	*/
-	public function get_matches($start=FALSE,$end=FALSE){
-		$start = urldecode($start);
-		$end   = urldecode($end);
-		$output = $this->matches_model->get_all($start,$end);
-		$this->display($output);
-	}
 	public function get_venue_matches($venueID,$start=FALSE,$end=FALSE){
 		$start = urldecode($start);
 		$end   = urldecode($end);
 		$output = $this->matches_model->get_venue_matches($venueID,$start,$end);
 		$this->display($output);
 	}
+	
 	/*
 		results_model
 	*/
-
+	
+	/*
+		sports_model
+	*/
+	public function get_sport_category_roles($sportID){
+		$output = $this->sports_model->get_sport_category_roles($sportID);
+		$this->display($output);
+	}
+	public function get_sport_category($sportID){
+		$output = $this->sports_model->get_sport_categories();
+		$this->display($output);
+	}
+	
+	/*
+		teams_model
+	*/
+	
+	/*
+		tournaments_model
+	*/
+	public function get_tournament_actors($tournamentID){
+		$output = $this->tournaments_model->get_actors($tournamentID);
+		$this->display($output);
+	}
+	
+	/*
+		venues_model
+	*/
+	
 	/*
 		scheduling_model
 	*/
@@ -157,47 +183,6 @@ class Test extends MY_Controller {
 		$output.= $this->scheduling_model->get_weekday_index("Wed")." \n";
 		$this->display($output);
 	}
-	/*
-		sports_model
-	*/
-	public function get_sport($sportID){
-		$output = $this->sports_model->get($sportID);
-		$this->display($output);
-	}
-	public function get_sport_category_roles($sportID){
-		$output = $this->sports_model->get_sport_category_roles($sportID);
-		$this->display($output);
-	}
-	public function get_sport_category($sportID){
-		$output = $this->sports_model->get_sport_categories();
-		$this->display($output);
-	}
-	/*
-		teams_model
-	*/
-	public function get_all_teams(){
-		$output = $this->teams_model->get_all();
-		$this->display($output);
-	}
-	/*
-		tournaments_model
-	*/
-	public function get_tournament($tournamentID){
-		$output = $this->tournaments_model->get($tournamentID);
-		$this->display($output);
-	}
-	public function get_tournaments(){
-		$output = $this->tournaments_model->get_all();
-		$this->display($output);
-	}
-	public function get_tournament_actors($tournamentID){
-		$output = $this->tournaments_model->get_actors($tournamentID);
-		$this->display($output);
-	}
-	/*
-		venues_model
-	*/
-	
 
 	public function test_constants(){
 		$output = array(APPPATH,SYSDIR,BASEPATH,ENVIRONMENT,SELF,FCPATH,EXT);
