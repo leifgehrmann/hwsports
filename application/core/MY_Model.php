@@ -213,7 +213,7 @@ class MY_Model extends CI_Model {
 				$rowfields = array();
 				$rowResult = "Table: $primaryTableName; Row: ";
 				foreach($row as $key=>$value) $rowfields[] = "[$key] = $value";
-				$rowResult .= implode(' | ',$rowfields)." \n\n";
+				$rowResult .= implode(' | ',$rowfields)." \n";
 				$testResults[] = $rowResult;
 			}
 		} else {			
