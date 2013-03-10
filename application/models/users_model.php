@@ -15,8 +15,16 @@ class Users_model extends MY_Model {
 	 * @return array
 	 **/
 	public function get($ID) {
+		$relations = array(
+						array( 
+							"objectIDKey" => "userID",
+							"dataTableName" => "userData",
+							"relationTableName" => "users",
+							"relations" => array()
+						)
+					);
 		// Get all the userData
-		return $this->get_object($ID, $this->objectIDKey, $this->dataTableName, $this->relationTableName);
+		return $this->get_object($ID, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relations);
 	}
 	
 	/**
