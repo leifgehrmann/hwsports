@@ -2,10 +2,24 @@
 
 class Sis extends MY_Controller {
 
+	/**
+	 * A short hand method to basically print out the page with a certain pageid and title
+	 *
+	 * @param view 		The view to load
+	 * @param page 		The page ID it will have
+	 * @param title 	
+	 * @param data 		passed in data
+	 */
+	public function view($view,$page,$title,$data){
+		$data['title'] = $title;
+		$data['page'] = $page;
+		$this->load->view('sis/header',$data);
+		$this->load->view('sis/'.$view,$data);
+		$this->load->view('sis/footer',$data);
+	}
+
 	public function index() {
-		// Page title
-		$this->data['title'] = "Home";
-		$this->data['page'] = "sishome";
+		
 		//set the flash data error message if there is one
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		
@@ -17,9 +31,7 @@ class Sis extends MY_Controller {
 			}
 		}
 		
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('sis/home',$this->data);
-		$this->load->view('sis/footer',$this->data);
+		$this->view('home','sishome','Home',$this->data);
 	}
 
 	public function calendar()
@@ -79,13 +91,8 @@ class Sis extends MY_Controller {
 			$this->session->set_flashdata('message',  "Match ID $id does not exist.");
 			redirect("/sis/tournaments", 'refresh');
 		}
-		$sport = $this->sports_model->get( $match['sportID'] );
-		$venue = $this->venues_model->get( $match['venueID'] );
-		$tournament = $this->tournaments_model->get($match['tournamentID'] );
 		
-		$match['sport'] = $sport['name'];
-		$match['venue'] = $venue['name'];
-		$match['tournament'] = ($tournament ? $tournament['name'] : "None");
+		$match['tournamentData']['name'] = ($tournament['tournamentData'] ? $tournament['tournamentData']['name'] : "None");
 		$match['date'] = date("F jS, Y",$match['startTime']);
 		$match['startTime'] = date("H:i",$match['startTime']);
 		$match['endTime'] = date("H:i",$match['endTime']);
@@ -95,17 +102,16 @@ class Sis extends MY_Controller {
 		$this->data['matchTable'] = array(
 			array('<span class="bold">Name:</span>',$match['name']),
 			array('<span class="bold">Description:</span>',$match['description']),
-			array('<span class="bold">Sport:</span>',$match['sport']),
-			array('<span class="bold">Venue:</span>',$match['venue']),
-			array('<span class="bold">Tournament:</span>',$match['tournament']),
-			array('<span class="bold">Date:</span>',$match['date']),
-			array('<span class="bold">Start Time:</span>',$match['startTime']),
-			array('<span class="bold">End Time:</span>',$match['endTime']),
+			array('<span class="bold">Sport:</span>',$match['sportData']['name']),
+			array('<span class="bold">Venue:</span>',$match['venueData']['name']),
+			array('<span class="bold">Tournament:</span>',$match['tournamentData']['name']),
+			array('<span class="bold">Date:</span>',date("F jS, Y",$match['date'])),
+			array('<span class="bold">Start Time:</span>',date("H:i",$match['startTime'])),
+			array('<span class="bold">End Time:</span>',date("H:i",$match['endTime'])),
 		);
 		
 		$this->data['title'] = $match['name'];
 		$this->data['page'] = "match";
-		
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('sis/match',$this->data);
 		$this->load->view('sis/footer',$this->data);
