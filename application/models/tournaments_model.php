@@ -159,7 +159,11 @@ class Tournaments_model extends MY_Model {
 	 * @return boolean
 	 **/
 	public function delete($ID, $testRun=TRUE) {
-		return $this->delete_object($ID, $this->objectIDKey, $this->relationTableName, $testRun);
+		$output = "";
+		if($testRun) $output .= "If this delete query is executed, the following objects will be deleted: \n\n";
+		$output .= $this->delete_object($ID, $this->objectIDKey, $this->relationTableName, $testRun);
+		if($testRun) $output .= "If this looks correct, click 'Confirm'. Otherwise please update or delete dependencies manually.";
+		return $output;
 	}
 	
 }

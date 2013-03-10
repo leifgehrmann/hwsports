@@ -187,8 +187,8 @@ class MY_Model extends CI_Model {
 	// Example usage: delete_object(1, "centreID", "centreData", false);
 	// Returns: TRUE if update was successful, FALSE otherwise.
 	public function delete_object($objectID, $objectIDKey, $primaryTableName, $testRun=TRUE) {
-		// This string will hold the message to the user explaining what will be deleted
-		$testResults = "If this delete query is executed, the following objects will be deleted: \n\n";
+		// This string will hold the message showing what will be deleted
+		$testResults = "";
 		// Lump all data table updates into one transaction in case one fails
 		$this->db->trans_start();
 		// Get the list of tables this object might have dependent rows in
@@ -223,8 +223,6 @@ class MY_Model extends CI_Model {
 		
 		// Complete transaction, all is well
 		$this->db->trans_complete();
-		// Finalise output message
-		$testResults .= "If this looks correct, click 'Confirm'. Otherwise please update or delete dependencies manually.";
 		// Return TRUE: if we got to here it must have all worked
 		if($testRun) return $testResults;
 		else return TRUE;
