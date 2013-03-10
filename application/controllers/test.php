@@ -11,7 +11,6 @@ class Test extends MY_Controller {
 		$this->load->model('sports_model');
 		$this->load->model('scheduling_model');
 		$this->load->model('venues_model');
-		header('Content-Type: text/plain');
 	}
 	
 	//
