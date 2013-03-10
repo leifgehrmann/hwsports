@@ -13,9 +13,10 @@ class Test extends MY_Controller {
 	}
 	
 	//
-	// GENERIC testing function, can be used to execute any function in any model with a serialized array of arguments  
+	// GENERIC testing function, can be used to execute any function in any model with either a single basic argument or a serialized array of arguments  
+	// Basic example usage: 
 	//
-	public function crud($model,$action,$params="a:0:{}") {
+	public function model($model,$action,$params="a:0:{}") {
 		if(strpos($params,':')!==FALSE) { 
 			$args = implode(', ',unserialize(urldecode($params))); 
 		} else {
