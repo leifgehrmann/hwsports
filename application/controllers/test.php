@@ -44,7 +44,8 @@ class Test extends MY_Controller {
 					Model: <input id='model' type='text' name='model' value='$model' /><br />
 					Function: <input id='function' type='text' name='function' value='$function' /><br />
 					Input: <br />
-					<span style='text-decoration: italic'>To give mulitple arguments to the function, create an array with multiple parameters. To pass an array as one of the parameters, create the array but put that in single quotes. An example with two array parameters has been inserted into the textarea for you.</span><br />
+					<span style='text-decoration: italic'>To pass multiple arguments to the function, create an array() with multiple parameters. <br />
+					To pass an array as one of the parameters, create the array but put that in single quotes. An example with two array parameters has been inserted into the textarea for you.</span><br />
 					<textarea name='str' id='str' style='height: 100pt' rows='1' cols='50'>";
 					if($str) echo $str; 
 					else echo 'array(
