@@ -10,6 +10,8 @@
 			<p>There are no latest matches</p>
 		<? } else {
 			foreach($latestMatches as $match){ 
+				var_dump($match);
+				die();
 				$date = datetime_to_public_date($match['startTime']);
 				$time = datetime_to_public_time($match['startTime']);
 			?>
