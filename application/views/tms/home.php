@@ -73,7 +73,7 @@
 		<? } else {
 			foreach($latestTournaments as $tournament){ 
 				$start = datetime_to_public_date($tournament['tournamentStart']);
-				$end = datetime_to_public_time($match['tournamentStart']);
+				$end = datetime_to_public_time($tournament['tournamentStart']);
 			?>
 			<div class="tournament 
 				tournamentID-<?=$match['tournamentID']?> 
