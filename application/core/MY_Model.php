@@ -123,13 +123,13 @@ class MY_Model extends CI_Model {
 	// Required: $objectID, $data, $objectIDKey, $dataTableName. 
 	// Example usage: update_object(1, array("address"=>"14 Parkhead Loan"), "centreID", 'centreData');
 	// Returns: TRUE if update was successful, FALSE otherwise.
-	public function update_object($objectID, $data, $objectIDKey, $dataTableName, $relationTableName = false, $relations = array()) {		
+	public function update_object($objectID, $data, $objectIDKey, $dataTableName, $relationTableName = false, $relationIDs = array()) {		
 		// If we've been given a relational table and relations to go in that table, we should update the entry in that first in case of foreign key restraints
-		if( $relationTableName && count($relations) ) {
+		if( $relationTableName && count($relationIDs) ) {
 			// Update the correct row in the relation table with the new relation IDs specified 
 			$this->db->where($objectIDKey, $objectID);
 			// If the update fails, return FALSE
-			if(!$this->db->update($relationTableName, $relations)) return FALSE;
+			if(!$this->db->update($relationTableName, $relationIDs)) return FALSE;
 		}
 		
 		// Lump all updates into one transaction
