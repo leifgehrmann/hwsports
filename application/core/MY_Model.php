@@ -179,14 +179,15 @@ class MY_Model extends CI_Model {
 			} else {			
 				// Delete the rows in the table table which reference the deleted object 
 				$this->db->where($objectIDKey, $objectID);
-				$this->db->delete($table);
+				// If the delete fails, return false
+				if(!$this->db->delete($table)) return FALSE;
 			}
 		}
 		
 		// Complete transaction, all is well
 		$this->db->trans_complete();
 		// Finalise output message
-		$testResults = "\nIf this is correct, click 'Confirm'. Otherwise please update or delete dependencies manually. \n\n";
+		$testResults .= "\nIf this is correct, click 'Confirm'. Otherwise please update or delete dependencies manually. \n";
 		// Return TRUE: if we got to here it must have all worked
 		if($testRun) return $testResults;
 		else return TRUE;
