@@ -7,11 +7,9 @@
 	</div>
 	<div class="widget-body">
 		<? if(count($latestMatches)==0) { ?>
-			<p>There are no latest matches</p>
+			<p>There are no recent or current matches.</p>
 		<? } else {
 			foreach($latestMatches as $match){ 
-				var_dump($match);
-				die();
 				$date = datetime_to_public_date($match['startTime']);
 				$time = datetime_to_public_time($match['startTime']);
 			?>
@@ -40,7 +38,7 @@
 	</div>
 	<div class="widget-body">
 		<? if(count($upcomingMatches)==0) { ?>
-			<p>There are no upcoming matches</p>
+			<p>There are no upcoming matches.</p>
 		<? } else {
 			foreach($upcomingMatches as $match){ 
 				$date = datetime_to_public_date($match['startTime']);
@@ -70,6 +68,27 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
+		<? if(count($latestTournaments)==0) { ?>
+			<p>There are no recent or currently running tournaments.</p>
+		<? } else {
+			foreach($latestTournaments as $tournament){ 
+				$start = datetime_to_public_date($tournament['tournamentStart']);
+				$end = datetime_to_public_time($match['tournamentStart']);
+			?>
+			<div class="tournament 
+				tournamentID-<?=$match['tournamentID']?> 
+				sportID-<?=$match['sportID']?> 
+				sportCategoryID-<?=$match['sportData']['sportCategoryID']?> 
+			">
+				<div class="icon left margin-right"></div>
+				<p>
+					<a href="/tms/tournament/<?=$tournament['tournamentID']?>"><?=$tournament['name']?></a><br/>
+					<span style="display: inline-block;padding-left: 40px;">Starts: <?=$start?></span><br/>
+					<span style="display: inline-block;padding-left: 40px;">Ends: <?=$end?></span>
+				</p>
+			</div>
+			<? } ?>
+		<? } ?>
 		<div class="match sportCategoryID-9"><div class="icon left margin-right"></div><p><a href="/tms/tournament/dshjf"		>2012 Heriot Watt</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p></div>
 		<div class="match sportCategoryID-10"><div class="icon left margin-right"></div><p><a href="/tms/tournament/afjb"		>2012 Rugby</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p></div>
 		<div class="match sportCategoryID-11"><div class="icon left margin-right"></div><p><a href="/tms/tournament/sdlkfjsd"	>2012 Summer WattBall</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p></div>
