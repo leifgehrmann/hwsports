@@ -28,7 +28,7 @@ class Test extends MY_Controller {
 		} else {
 			$eval = '$output = $this->'.$model.'->'.$action.'('.$args.');';
 		}
-		//$this->display($eval);
+		echo($eval);
 		eval($eval);
 		$this->display($output);
 	}
