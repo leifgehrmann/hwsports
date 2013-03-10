@@ -197,6 +197,7 @@ class MY_Model extends CI_Model {
 		foreach( $dependents as $table=>$field ) {
 			// Search this table for our object key/ID - if it exists, we want to delete whatever object was referencing our object
 			$dependentRows = $this->db->get_where($table, array($objectIDKey => $objectID))->result_array();
+			var_dump($dependentRows); die();
 			// Loop through all rows which were referencing this object
 			foreach($dependentRows as $dependentRow) {
 				//$testResults .= "Calling delete object on $table - $field, deleting ID: {$dependentRow[$field]}\n";
