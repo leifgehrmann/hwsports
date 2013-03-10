@@ -71,14 +71,14 @@ class Tms extends MY_Controller {
 				unset($upcomingMatches[$u]);
 				break;
 			}
-			if($today<new DateTime($uMatches['startTime']))
+			if($today<new DateTime($uMatch['startTime']))
 				break;
 			foreach($latestMatches as $i=>$lMatch){
 				if(!$lMatch){
 					unset($latestTournaments[$i]);
 					break;
 				}
-				if($uMatches['matchID']==$lMatches['matchID']){
+				if($uMatch['matchID']==$lMatch['matchID']){
 					unset($upcomingMatches[$u]);
 					break;
 				}
