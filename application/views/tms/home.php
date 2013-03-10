@@ -118,6 +118,7 @@
 				</p>
 			</div>
 			<? } ?>
+		<? } ?>
 		<p><a href="/tms/tournaments/" class="button right blue">View All Tournaments</a></p>
 	</div>
 </div>
