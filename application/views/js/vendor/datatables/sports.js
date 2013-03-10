@@ -2,7 +2,7 @@
 	
 	$(document).ready(function() {
 		editor = new $.fn.dataTable.Editor( {
-			"ajaxUrl": "/php/sports.php",
+			"ajaxUrl": "/datatables/sports",
 			"domTable": "#sports",
 			"fields": [ {
 					"label": "Sport ID",
@@ -37,7 +37,7 @@
 
 		$('#sports').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
-			"sAjaxSource": "/php/sports.php",
+			"sAjaxSource": "/datatables/sports",
 			"aoColumns": [
 				{ "mData": "sportID" },
 				{ "mData": "centreID" },

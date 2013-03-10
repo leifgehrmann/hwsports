@@ -10,17 +10,8 @@
  *  @link      http://editor.datatables.net
  */
 
-
 namespace DataTables;
 define("DATATABLES", true, true);
-
-
-//
-// Configuration
-//   Load the database connection configuration options
-//
-include( dirname(__FILE__).'/config.php' );
-
 
 //
 // Auto-loader
@@ -54,7 +45,7 @@ spl_autoload_register( function ($class) {
 // Database connection
 //   Database connection it globally available
 //
-$db = new Database( $sql_details );
+$db = new Database();
 
 // Leif was here :)
 $db->sql("SET character_set_client=utf8");

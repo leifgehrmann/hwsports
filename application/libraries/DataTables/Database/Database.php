@@ -33,40 +33,16 @@ class Database {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * Constructor
 	 */
-
-	/**
-	 * Database instance constructor.
-	 *  @param string[] $opts Array of connection parameters for the database:
-	 *    <code>
-	 *      array(
-	 *          "user" => "", // User name
-	 *          "pass" => "", // Password
-	 *          "host" => "", // Host name
-	 *          "port" => "", // Port
-	 *          "db"   => "", // Database name
-	 *          "type" => ""  // Datable type: "Mysql", "Postgres" or "Sqlite"
-	 *      )
-	 *    </code>
-	 */
-	function __construct( $opts )
-	{
-		$this->query_driver = "DataTables\\Database\\Driver".$opts['type'].'Query';
-
-		$this->_db = call_user_func($this->query_driver.'::connect',
-			$opts['user'], $opts['pass'], $opts['host'], $opts['port'], $opts['db']
-		);
+	function __construct( $opts ) {
+		$this->_db = call_user_func("DataTables\\Database\\Driver\\Mysql\\Query::connect","sports_web","group8","localhost","3306","sports_web");
 	}
-
-
-
+	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * Private properties
 	 */
 
 	/** @var resource */
 	private $_db = null;
-
-
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * Public methods
