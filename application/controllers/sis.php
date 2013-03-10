@@ -45,9 +45,9 @@ class Sis extends MY_Controller {
 		
 		$matches = $this->matches_model->get_all();
 		foreach($matches as $key => $match) {
-			$matches[$key]['date'] = datetime_to_public($match['startTime']);
-			$matches[$key]['startTime'] = datetime_to_public($match['startTime']);
-			$matches[$key]['endTime'] = datetime_to_public($match['endTime']);
+			$matches[$key]['date'] = datetime_to_public_date($match['startTime']);
+			$matches[$key]['startTime'] = datetime_to_public_time($match['startTime']);
+			$matches[$key]['endTime'] = datetime_to_public_time($match['endTime']);
 		}
 		$this->data['matches'] = $matches;
 
@@ -67,9 +67,9 @@ class Sis extends MY_Controller {
 		}
 		
 		$match['tournamentData']['name'] = ($match['tournamentData'] ? $match['tournamentData']['name'] : "None");
-		$match['date'] = date_create($match['startTime'])->format('F jS, Y');
-		$match['startTime'] = date_create($match['startTime'])->format('H:i');
-		$match['endTime'] = date_create($match['endTime'])->format('H:i');
+		$match['date'] = datetime_to_public_date($match['startTime']);
+		$match['startTime'] = datetime_to_public_time($match['startTime']);
+		$match['endTime'] = datetime_to_public_time($match['endTime']);
 		
 		$this->data['match'] = $match;
 		

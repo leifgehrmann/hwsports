@@ -66,6 +66,18 @@ class MY_Controller extends CI_Controller {
 			$dateTime = new DateTime($inDateTime);
 			return $dateTime->format(PUBLIC_DATE_TIME_FORMAT);
 		}
+		function datetime_to_public_date($inDateTime) {
+			if(empty($inDateTime)) return $inDateTime;
+			if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_DATE_FORMAT);
+			$dateTime = new DateTime($inDateTime);
+			return $dateTime->format(PUBLIC_DATE_FORMAT);
+		}
+		function datetime_to_public_time($inDateTime) {
+			if(empty($inDateTime)) return $inDateTime;
+			if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_TIME_FORMAT);
+			$dateTime = new DateTime($inDateTime);
+			return $dateTime->format(PUBLIC_TIME_FORMAT);
+		}
 		
     }
 }
