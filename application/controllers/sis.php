@@ -45,11 +45,7 @@ class Sis extends MY_Controller {
 	}
 
 	public function matches()
-	{
-		// Page title
-		$this->data['title'] = "Matches";
-		$this->data['page'] = "matches";
-				
+	{			
 		$this->load->model('tournaments_model');
 		$this->load->model('sports_model');
 		$this->load->model('matches_model');
@@ -72,9 +68,7 @@ class Sis extends MY_Controller {
 
 		$this->data['matches'] = $matches;
 		
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('sis/matches',$this->data);
-		$this->load->view('sis/footer',$this->data);
+		$this->view('matches','matches','Matches',$this->data);
 	}
 
 	public function match($matchID)
