@@ -90,7 +90,6 @@ class MY_Model extends CI_Model {
 			$this->db->insert($relationTableName, $relations);
 			// Get the generated ID of this new object
 			$objectID = $this->db->insert_id();
-			return $objectID;
 		} else {
 			// Since we're storing IDs only in the data table, we can't have a primary key or auto increment on it
 			// Therefore to get the next ID to insert, we have to find the current highest and increment it to get a unique ID
@@ -130,7 +129,7 @@ class MY_Model extends CI_Model {
 			// Update the correct row in the relation table with the new relation IDs specified 
 			$this->db->where($objectIDKey, $objectID);
 			// If the update fails, return FALSE
-			if(!$this->db->update($relationTableName, $relations))return FALSE;
+			if(!$this->db->update($relationTableName, $relations)) return FALSE;
 		}
 		
 		// Lump all updates into one transaction
@@ -147,7 +146,7 @@ class MY_Model extends CI_Model {
 			);
 			// Create the update - active record sanitizes inputs automatically. Return false if update fails.
 			$this->db->where($where);
-			if(!$this->db->update($dataTableName, $update)) return FALSE;			
+			if(!$this->db->replace_into($dataTableName, $update)) return FALSE;			
 		}
 		// Complete transaction, all is well
 		$this->db->trans_complete();

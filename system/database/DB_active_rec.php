@@ -1198,6 +1198,52 @@ class CI_DB_active_record extends CI_DB_driver {
 
 	// --------------------------------------------------------------------
 
+    /**
+     * Replace into
+     *
+     * Compiles an insert into string and runs the query
+     *
+     * @access    public
+     * @param    string    the table name
+     * @param    array    the update data
+     * @return    object
+     */
+    function replace_into($table = '', $set = NULL){
+         $this->_merge_cache();
+         if( $set !== NULL )
+             $this->set($set);
+        if (count($this->ar_set) == 0)
+        {
+            if ($this->db_debug)
+            {
+                return $this->display_error('db_must_use_set');
+            }
+            return FALSE;
+        }
+        if ($table == '')
+        {
+            if ( ! isset($this->ar_from[0]))
+            {
+                if ($this->db_debug)
+                {
+                    return $this->display_error('db_must_set_table');
+                }
+                return FALSE;
+            }
+            
+            $table = $this->ar_from[0];
+        }
+        
+        $sql = $this->_replace_into(
+            $this->_protect_identifiers($table, TRUE, NULL, FALSE),
+            $this->ar_set);
+        
+        $this->_reset_write();
+        return $this->query($sql);
+    } 
+	
+	// --------------------------------------------------------------------
+
 	/**
 	 * Replace
 	 *

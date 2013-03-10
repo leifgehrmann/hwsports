@@ -134,6 +134,7 @@ class Tournaments_model extends MY_Model {
 	 * @return int
 	 **/
 	public function insert($data, $relationIDs=array()) {
+		$relationIDs['centreID']=$this->centreID;
 		return $this->insert_object($data, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relationIDs);
 	}
 
@@ -145,7 +146,7 @@ class Tournaments_model extends MY_Model {
 	 * @return boolean
 	 **/
 	public function update($ID, $data) {
-		return $this->update_object($ID, $this->objectIDKey, $data, $this->dataTableName);
+		return $this->update_object($ID, $data, $this->objectIDKey, $this->dataTableName);
 	}
 
 	/**
