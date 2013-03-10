@@ -66,9 +66,6 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<? 
-			// foreach($)
-		?>
 		<div class="match sportCategoryID-9"><div class="icon left margin-right"></div><p><a href="/tms/tournament/dshjf"		>2012 Heriot Watt</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p></div>
 		<div class="match sportCategoryID-10"><div class="icon left margin-right"></div><p><a href="/tms/tournament/afjb"		>2012 Rugby</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p></div>
 		<div class="match sportCategoryID-11"><div class="icon left margin-right"></div><p><a href="/tms/tournament/sdlkfjsd"	>2012 Summer WattBall</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p></div>
@@ -82,9 +79,6 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<? 
-			// foreach($)
-		?>
 		<div class="match sportCategoryID-13"><div class="icon left margin-right"></div><p><a href="/tms/tournament/flksdf">2013 Heriot Watt</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p>
 		<div class="match sportCategoryID-14"><div class="icon left margin-right"></div><p><a href="/tms/tournament/dsflkjsd">2014 Summer WattBall</a><br/><span style="display: inline-block;padding-left: 40px;">5th-12th February</span></p>
 		<p><a href="/tms/tournaments/" class="button right blue">View All Tournaments</a></p>
