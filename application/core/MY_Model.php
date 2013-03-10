@@ -196,6 +196,8 @@ class MY_Model extends CI_Model {
 		// Get the list of tables this object might have dependent rows in
 		$dependents = $table_dependents[$primaryTableName];
 		// Iterate through dependents to process corresponding entries from - these should be in a specific order to satisfy foreign keys
+		var_dump($primaryTableName); 
+		var_dump($table_dependents); 
 		var_dump($dependents); die();
 		foreach( $dependents as $table=>$field ) {
 			// Search this table for our object key/ID - if it exists, we want to delete whatever object was referencing our object
