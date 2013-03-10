@@ -9,7 +9,7 @@ class MY_Model extends CI_Model {
 		// Therefore if we are deleting an object, we must get the IDs of any other objects which reference it
 		// Then call the delete_object function on those objects before trying to delete our original object
 		$this->table_dependents = array(
-			'centre' => array('sports'=>'sportID','venues'=>'venueID','tournaments'=>'tournamentID','teams'=>'teamID'),
+			'centreData' => array('sports'=>'sportID','venues'=>'venueID','tournaments'=>'tournamentID','teams'=>'teamID'),
 			'sports' => array('matches'=>'matchID','tournaments'=>'tournamentID','sportData'=>'sportID'),
 			'venues' => array('matches'=>'matchID','tournamentVenues'=>'venueID','venueData'=>'venueID'),
 			'tournaments' => array('tickets'=>'ticketID','matches'=>'matchID','tournamentVenues'=>'tournamentID','tournamentActors'=>'tournamentID','tournamentData'=>'tournamentID'),
@@ -20,7 +20,6 @@ class MY_Model extends CI_Model {
 			'matchActors' => array('matchActorResults'=>'resultID'),
 			'matchActorResults' => array('matchActorResultData'=>'resultID'),
 			// Empty arrays for tables which have no dependents
-			'centreData' => array(),
 			'sportData' => array(),
 			'venueData' => array(),
 			'teamData' => array(),
