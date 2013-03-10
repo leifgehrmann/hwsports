@@ -57,24 +57,20 @@ class MY_Model extends CI_Model {
 		$tournament = $this->get_object($tournamentID, "tournamentID", "tournamentData", "tournaments", $relations);
 	*/
 	public function get_object($objectID, $objectIDKey, $dataTableName, $relationTableName = "", $relations = array()) {
-		// Sanitize / escape input variables into underscored variable names for simplicity
-		$_objectID = mysql_real_escape_string($objectID);
-		$_objectIDKey = mysql_real_escape_string($objectIDKey);
-		$_dataTableName = mysql_real_escape_string($dataTableName);
-		$_relationTableName = mysql_real_escape_string($relationTableName);
-		
 		// If user gave us something other than an array, assume bad input - return FALSE
 		if(!is_array($relations)) return FALSE;
 		// Create query to get all the key names so we know what to select later on
-		$dataKeysQuery = $this->db->query("SELECT `key` FROM `$_dataTableName` WHERE `$_objectIDKey` = '$_objectID'");
+		$dataKeysRows = $this->db->select('key')->from($dataTableName)->where($objectIDKey,$objectID)->get()->result_array();
 		// Get all the key names into an indexed array
-		$dataKeys = array_map( function($row) { return $row['key']; }, $dataKeysQuery->result_array() );
+		$dataKeys = array_map( function($row) { return $row['key']; }, $dataKeysRows );
 		// If we have no data about this tournament, return FALSE to make logic easier in controller 
 		if(count($dataKeys)==0) return FALSE;
 		// Create SQL selection segments for each key in the data, ready to implode with commas into a full SQL query 
 		foreach($dataKeys as $dataKey) $dataQueryStringParts[] = "MAX(CASE WHEN `key`='$dataKey' THEN value END ) AS $dataKey";
 		// Build and execute query to actually select data from data table
-		$dataQueryString = "SELECT " . implode(', ', $dataQueryStringParts) . " FROM `$_dataTableName` WHERE `$_objectIDKey` = '$_objectID'";
+		$dataQueryString = "SELECT ".implode(', ', $dataQueryStringParts)." 
+						    FROM `".mysql_real_escape_string($dataTableName)."` 
+							 WHERE `".mysql_real_escape_string($objectIDKey)."` = '".mysql_real_escape_string($objectID)."'";
 		$dataQuery = $this->db->query($dataQueryString);
 		// No data was returned by the query, something must have gone wrong
 		if ($dataQuery->num_rows() == 0) return FALSE;
@@ -84,7 +80,7 @@ class MY_Model extends CI_Model {
 		// Loop through all the relations we were given and grab all the data for them, stitch it onto the data we already have about this object 
 		foreach($relations as $relation) {
 			// Get the ID of whichever other object we wish to grab data for 
-			$relationObjectIDQuery = $this->db->query("SELECT `{$relation['objectIDKey']}` FROM `$_relationTableName` WHERE `$_objectIDKey` = '$_objectID'");			
+			$relationObjectIDQuery = $this->db->select($relation['objectIDKey'])->from($relationTableName)->where($objectIDKey,$objectID);			
 			// If the relation table does not return a result when queried for the relation object key, we have bad input - die. 
 			if ($relationObjectIDQuery->num_rows() == 0) return FALSE;
 			// Get the row which contains the actual ID of the object we want to grab data for
@@ -98,6 +94,15 @@ class MY_Model extends CI_Model {
 			$relation['relations'] = (isset($relation['relations']) ? $relation['relations'] : array() );
 			// Get the data for the actual object, passing in the known parameters
 			$object[$relation['dataTableName']] = $this->get_object($relation['objectID'], $relation['objectIDKey'], $relation['dataTableName'], $relation['relationTableName'], $relation['relations']);
+		}
+		
+		// Add all values from the relational table to the output - this covers structure such as users table
+		if($relationTableName) {
+			$relationTableData = $this->db->select('*')->from($relationTableName)->where($objectIDKey,$objectID)->get()->row_array();			
+			foreach($relationTableData as $field=>$value) {
+				// Add value directly to object, overwriting existing values
+				$object[$field]=$value;
+			}
 		}
 		
 		// Put the ID value which we already know back into the output for convenience
