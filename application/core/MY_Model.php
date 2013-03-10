@@ -196,31 +196,31 @@ class MY_Model extends CI_Model {
 		// Iterate through dependents to process corresponding entries from - these should be in a specific order to satisfy foreign keys
 		foreach( $dependents as $table=>$field ) {
 			// Search this table for our object key/ID - if it exists, we want to delete whatever object was referencing our object
-			var_dump("Searching table: $table for field: $objectIDKey set to value: $objectID"); die();
+			var_dump("Searching table: $table for field: $objectIDKey set to value: $objectID"); 
 			$dependentRows = $this->db->get_where($table, array($objectIDKey => $objectID))->result_array();
-			var_dump($dependentRows); die();
+			var_dump($dependentRows); 
 			// Loop through all rows which were referencing this object
 			foreach($dependentRows as $dependentRow) {
 				//$testResults .= "Calling delete object on $table - $field, deleting ID: {$dependentRow[$field]}\n";
 				// Now call the delete function on dependent object - we get the ID from the field name (specified in the global array) in the returned row 
 				$testResults .= $this->delete_object($dependentRow[$field], $field, $table, $testRun);
 			}
-			
-			// We've dealt with any dependents, now we just need to delete the row(s) in our primary table
-			if($testRun) {
-				$rows = $this->db->get_where($primaryTableName, array($objectIDKey => $objectID))->result_array();
-				foreach($rows as $row) {
-					$rowfields = array();
-					$testResults .= "Table: $primaryTableName; Row: ";
-					foreach($row as $key=>$value) $rowfields[] = "[$key] = $value";
-					$testResults .= implode(' | ',$rowfields)." \n\n";
-				}
-			} else {			
-				// Delete the rows in the table table which reference the deleted object 
-				$this->db->where($objectIDKey, $objectID);
-				// If the delete fails, return false
-				if(!$this->db->delete($primaryTableName)) return FALSE;
+		}
+		
+		// We've dealt with any dependents, now we just need to delete the row(s) in our primary table
+		if($testRun) {
+			$rows = $this->db->get_where($primaryTableName, array($objectIDKey => $objectID))->result_array();
+			foreach($rows as $row) {
+				$rowfields = array();
+				$testResults .= "Table: $primaryTableName; Row: ";
+				foreach($row as $key=>$value) $rowfields[] = "[$key] = $value";
+				$testResults .= implode(' | ',$rowfields)." \n\n";
 			}
+		} else {			
+			// Delete the rows in the table table which reference the deleted object 
+			$this->db->where($objectIDKey, $objectID);
+			// If the delete fails, return false
+			if(!$this->db->delete($primaryTableName)) return FALSE;
 		}
 		
 		// Complete transaction, all is well
