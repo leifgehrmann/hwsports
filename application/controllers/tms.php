@@ -98,10 +98,10 @@ class Tms extends MY_Controller {
 			//set the flash data error message if there is one
 			$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
 		
-			$this->data['tournaments'] = $this->tournaments_model->get($this->data['centre']['centreID']);
+			$this->data['tournaments'] = $this->tournaments_model->get_all();
 		
 			$this->data['sports'] = array();
-			foreach( $this->sports_model->get_all($this->data['centre']['centreID']) as $sport) {				
+			foreach( $this->sports_model->get_all() as $sport) {				
 				$this->data['sports'][$sport['sportCategoryData']['name']][$sport['sportID']] = $sport['name'];
 			}
 			ksort($this->data['sports']);
@@ -211,7 +211,7 @@ class Tms extends MY_Controller {
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
 			
-			if($this->tournaments_model->update_tournament($tournamentID, $newdata)) {
+			if($this->tournaments_model->update($tournamentID, $newdata)) {
 				// Successful update, show success message
 				$this->session->set_flashdata('message_success',  'Successfully Updated Tournament.');
 			} else {
@@ -269,11 +269,7 @@ class Tms extends MY_Controller {
 			
 		}
 		
-		$this->data['title'] = "Tournament";
-		$this->data['page'] = "tournament";
-		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/tournament',$this->data);
-		$this->load->view('tms/footer',$this->data);
+		$this->view('tournament',"tournament","Tournament",$this->data);
 	}
 	
 	
@@ -313,11 +309,7 @@ class Tms extends MY_Controller {
 		$this->data['centreLat'] = $lat;
 		$this->data['centreLng'] = $lng;
 		
-		$this->data['title'] = "Venues";
-		$this->data['page'] = "venues";
-		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/venues',$this->data);
-		$this->load->view('tms/footer',$this->data);
+		$this->view('venues',"venues","Tournament",$this->data);
 	}
 
 	public function venue($venueID)
@@ -328,20 +320,12 @@ class Tms extends MY_Controller {
 		// Get data for this venue
 		$this->data['venue'] = $this->venues_model->get($venueID);
 
-		$this->data['title'] = $this->data['venue']['name']+" venue";
-		$this->data['page']  = "venue"; 
-		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/venue',$this->data);
-		$this->load->view('tms/footer',$this->data);
+		$this->view('venue',"venue",$this->data['venue']['name']." | Venue",$this->data);
 	}
 
 	public function sports()
 	{
-		$this->data['title'] = "Sports";
-		$this->data['page'] = "sports";
-		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/sports',$this->data);
-		$this->load->view('tms/footer',$this->data);
+		$this->view('sports',"sports","Sports",$this->data);
 	}
 	public function match($matchID)
 	{
@@ -353,38 +337,20 @@ class Tms extends MY_Controller {
 		$this->data['match']['startTime'] = datetime_to_public($this->data['match']['startTime']); 
 		$this->data['match']['endTime'] = datetime_to_public($this->data['match']['endTime']); 
 
-		$this->data['title'] = $this->data['match']['name']." match";
-		$this->data['page']  = "match"; 
-		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/match',$this->data);
-		$this->load->view('tms/footer',$this->data);
+		$this->view('match',"match",$this->data['match']['name']." | Match",$this->data);
 	}
 	public function matches()
 	{
-		$this->data['title'] = "Matches";
-		$this->data['page'] = "matches";
-		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/matches',$this->data);
-		$this->load->view('tms/footer',$this->data);
+		$this->view('matches',"matches","Matches",$this->data);
 	}
 	public function calendar()
 	{
-		$this->data['title'] = "Calendar";
-		$this->data['page'] = "calendar";
-		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/calendar',$this->data);
-		$this->load->view('tms/footer',$this->data);
+		$this->view('calendar',"calendar","Calendar",$this->data);
 	}
 	public function groups()
 	{
-		$this->data['title'] = "Groups";
-		$this->data['page'] = "groups";
-		
 		$this->data['groups'] = $this->ion_auth->groups()->result();
-		
-		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/groups',$this->data);
-		$this->load->view('tms/footer',$this->data);
+		$this->view('groups',"groups","Groups",$this->data);
 	}
 	public function users()
 	{	
@@ -392,11 +358,7 @@ class Tms extends MY_Controller {
 		$users = $this->users_model->get_all();
 		$this->data['users'] = $users;
 		
-		$this->data['title'] = "Users";
-		$this->data['page'] = "users";
-		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/users',$this->data);
-		$this->load->view('tms/footer',$this->data);
+		$this->view('users',"users","Users",$this->data);
 	}
 	public function user($userID)
 	{
@@ -404,50 +366,46 @@ class Tms extends MY_Controller {
 		$user = $this->users_model->get($userID);
 		$this->data['user'] = $user;
 		
-		$this->data['title'] = $user['firstName']." ".$user['lastName']." | User";
-		$this->data['page'] = "user";
-		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/user',$this->data);
-		$this->load->view('tms/footer',$this->data);
+		$this->view('user',"user",$user['firstName']." ".$user['lastName']." | User",$this->data);
+	}
+	public function teams()
+	{	
+		$this->load->model('teams_model');
+		$user = $this->teams_model->get_all();
+		$this->data['users'] = $users;
+		
+		$this->view('users',"users","Users",$this->data);
+	}
+	public function team($teamID)
+	{
+		$this->load->model('teams_model');
+		$user = $this->teams_model->get($teamID);
+		$this->data['user'] = $user;
+		
+		$this->view('team',"team",$user['firstName']." ".$user['lastName']." | Team",$this->data);
 	}
 	public function announcements()
 	{
 		$this->load->model('announcements_model');
-		$user = $this->announcements_model->get_all();
-		$this->data['announcement'] = $announcement;
+		$announcements = $this->announcements_model->get_all();
+		$this->data['announcements'] = $announcements;
 
-		$this->data['title'] = "Announcements";
-		$this->data['page'] = "announcements";
-		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/annoucements',$this->data);
-		$this->load->view('tms/footer',$this->data);
+		$this->view('announcements',"announcements","Announcements",$this->data);
 	}
-	public function announcement()
+	public function announcement($announcementID)
 	{
 		$this->load->model('announcements_model');
 		$user = $this->announcements_model->get($announcementID);
 		$this->data['announcement'] = $announcement;
 
-		$this->data['title'] = $announcement['title']." | Announcement";
-		$this->data['page'] = "announcement";
-		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/annoucement',$this->data);
-		$this->load->view('tms/footer',$this->data);
+		$this->view('annoucement',"annoucement",$announcement['title']." | Announcement",$this->data);
 	}
 	public function reports()
 	{
-		$this->data['title'] = "Reports";
-		$this->data['page'] = "reports";
-		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/reports',$this->data);
-		$this->load->view('tms/footer',$this->data);
+		$this->view('reports',"reports","Reports",$this->data);
 	}
 	public function playground() {
-		$this->data['title'] = "Branding Playground";
-		$this->data['page'] = "playground";
-		$this->load->view('tms/header',$this->data);
-		$this->load->view('tms/playground',$this->data);
-		$this->load->view('tms/footer',$this->data);
+		$this->view('playground',"playground","Branding Playground",$this->data);
 	}
 	public function settings()
 	{
@@ -551,11 +509,7 @@ class Tms extends MY_Controller {
 				);
 			}
 
-			$this->data['title'] = "Settings";
-			$this->data['page'] = "settings";
-			$this->load->view('tms/header',$this->data);
-			$this->load->view('tms/settings', $this->data);
-			$this->load->view('tms/footer',$this->data);
+			$this->view('settings',"settings","Centre Settings",$this->data);
 		}
 	}
 
@@ -571,13 +525,13 @@ class Tms extends MY_Controller {
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
 			
-			if($this->centre_model->update_centre($this->data['centre']['centreID'],$newdata ) ) {
+			if($this->centre_model->update($newdata)) {
 				// Successful update, show success message
 				$this->session->set_flashdata('message_success',  'Successfully Updated');
 			} else {
 				$this->session->set_flashdata('message_error',  'Failed. Please contact Infusion Systems.');
 			}
-			redirect("/tms/settings", 'refresh');
+			redirect("/tms/appearance", 'refresh');
 		} else {
 			//display the create user form
 			//set the flash data error message if there is one
@@ -624,11 +578,7 @@ class Tms extends MY_Controller {
 				'value' => $this->form_validation->set_value('footerText',(isset($this->data['centre']['footerText']) ? $this->data['centre']['footerText'] : '') )
 			);
 			
-			$this->data['title'] = "Settings";
-			$this->data['page'] = "settings";
-			$this->load->view('tms/header',$this->data);
-			$this->load->view('tms/settings', $this->data);
-			$this->load->view('tms/footer',$this->data);
+			$this->view('appearance',"appearance","Apprearance",$this->data);
 		}
 	}
 
