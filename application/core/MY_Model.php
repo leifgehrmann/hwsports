@@ -187,7 +187,7 @@ class MY_Model extends CI_Model {
 		// Complete transaction, all is well
 		$this->db->trans_complete();
 		// Finalise output message
-		$testResults .= "\nIf this is correct, click 'Confirm'. Otherwise please update or delete dependencies manually. \n";
+		$testResults .= "If this is correct, click 'Confirm'. Otherwise please update or delete dependencies manually.";
 		// Return TRUE: if we got to here it must have all worked
 		if($testRun) return $testResults;
 		else return TRUE;
