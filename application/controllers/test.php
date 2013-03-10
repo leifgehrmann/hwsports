@@ -54,7 +54,7 @@ class Test extends MY_Controller {
 					
 		if($str) {
 			$encoded = rawurlencode(json_encode($str));
-			echo "Test Link: <br /><a href='/test/model/$model/$function/$encoded'>/test/model/$model/$function/$encoded</a><br />";
+			echo "Test Link: <br /><a target='_blank' href='/test/model/$model/$function/$encoded'>/test/model/$model/$function/$encoded</a><br />";
 		}
 	}
 
