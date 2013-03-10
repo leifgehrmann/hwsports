@@ -10,6 +10,7 @@ class Test extends MY_Controller {
 		$this->load->model('teams_model');
 		$this->load->model('users_model');
 		$this->load->model('scheduling_model');
+		header('Content-Type: text/plain');
 	}
 	
 	//
@@ -17,33 +18,42 @@ class Test extends MY_Controller {
 	// Basic example usage, get a single match with ID 18: 
 	// 		http://hwsports.co.uk/test/model/matches_model/get/18
 	// Complex example, get all matches between two date strings (which are elements of a serialized array, which has then been urlencoded)
-	// Go to http://php.fnlist.com/php/serialize and serialize this: array('"2013-03-06T10:00:00+0000"', '"2013-03-10T10:00:00+0000"')
-	// Which produces: a:2:{i:0;s:26:""2013-03-06T10:00:00+0000"";i:1;s:26:""2013-03-10T10:00:00+0000"";}
-	// Then urlencode it here: http://meyerweb.com/eric/tools/dencoder/ to produce this test URL:
+	// First http://php.fnlist.com/php/json_encode this: array("2013-03-06T10:00:00+0000", "2013-03-10T10:00:00+0000")
+	// Which produces: 
+	// Then  to produce this test URL:
 	// 	http://hwsports.co.uk/test/model/matches_model/get_all/a%3A2%3A%7Bi%3A0%3Bs%3A26%3A%22%222013-03-06T10%3A00%3A00%2B0000%22%22%3Bi%3A1%3Bs%3A26%3A%22%222013-03-10T10%3A00%3A00%2B0000%22%22%3B%7D
 	// 	
 	public function model($model,$action,$args="") {
-		$args = json_decode(urldecode($args),true);
-		var_export($args); echo "\n<br />";
-		
+		$args = json_decode(rawurldecode(html_entity_decode($args)),true);
+		//$this->display($args);
 		if(is_array($args)) {
-			foreach($args as $arg) {
-				$argstrings[] = var_export($arg,true);
-			}
-			var_export($argstrings); echo "\n<br />";
-			
-			$argstrings = implode(', ', $argstrings);
-			var_export($argstrings); die();
-			
-			$eval = '$output = $this->'.$model.'->'.$action.'('.var_export($argstrings, true).');';
+			$argstring = implode(', ',$args);
+			$eval = '$output = $this->'.$model.'->'.$action.'('.$argstring.');';
 		} else {
 			$eval = '$output = $this->'.$model.'->'.$action.'('.$args.');';
 		}
-		var_dump($eval);
+		//$this->display($eval);
 		eval($eval);
 		$this->display($output);
 	}
 	
+	public function helper() {
+		header('Content-Type: text/html');
+		$str = ( isset($_POST['str']) ? $_POST['str'] : '' );
+		$model = ( isset($_POST['model']) ? $_POST['model'] : '' );
+		$function = ( isset($_POST['function']) ? $_POST['function'] : '' );
+		
+		echo "Model: <input id='model' type='text' name='model' value='$model' /><br />
+				Function: <input id='function' type='text' name='function' value='$function' /><br />
+				Input: <br />
+				<textarea name='str' id='str' style='height: 100pt' rows='1' cols='50'>$str</textarea><br />
+				<input type='submit' name='exec' value='Execute'></form><br />";
+		
+		if($str) {
+			$encoded = rawurlencode(json_encode($str));
+			echo "Test Link: <br /><a href='/test/model/$model/$function/$encoded'>/test/model/$model/$function/$encoded</a><br />";
+		}
+	}
 
 	// Try: http://hwsports.co.uk/test/schedule_football_family/37
 	public function schedule_football_family($tournamentID){
@@ -162,7 +172,6 @@ class Test extends MY_Controller {
 		ob_start();
 		var_dump($output);
 		$this->data['data'] = ob_get_clean();
-		header('Content-Type: text/plain');
 		$this->load->view('data', $this->data);
 	}
 }
