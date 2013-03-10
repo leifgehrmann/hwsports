@@ -43,12 +43,15 @@ class Test extends MY_Controller {
 		$model = ( isset($_POST['model']) ? $_POST['model'] : '' );
 		$function = ( isset($_POST['function']) ? $_POST['function'] : '' );
 		
-		echo "Model: <input id='model' type='text' name='model' value='$model' /><br />
-				Function: <input id='function' type='text' name='function' value='$function' /><br />
-				Input: <br />
-				<textarea name='str' id='str' style='height: 100pt' rows='1' cols='50'>$str</textarea><br />
-				<input type='submit' name='exec' value='Execute'></form><br />";
-		
+		echo "<h1>Test Helper<h1>
+				<form id='testhelperform' method='post' action='/test/helper'>
+					Model: <input id='model' type='text' name='model' value='$model' /><br />
+					Function: <input id='function' type='text' name='function' value='$function' /><br />
+					Input: <br />
+					<textarea name='str' id='str' style='height: 100pt' rows='1' cols='50'>$str</textarea><br />
+					<input type='submit' name='exec' value='Execute'></form><br />
+				</form><br />";
+					
 		if($str) {
 			$encoded = rawurlencode(json_encode($str));
 			echo "Test Link: <br /><a href='/test/model/$model/$function/$encoded'>/test/model/$model/$function/$encoded</a><br />";
