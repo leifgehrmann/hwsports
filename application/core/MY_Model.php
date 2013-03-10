@@ -200,7 +200,7 @@ class MY_Model extends CI_Model {
 			$dependentRows = $this->db->get_where($table, array($objectIDKey => $objectID))->result_array();
 			// Loop through all rows which were referencing this object
 			foreach($dependentRows as $dependentRow) {
-				//$testResults .= "Calling delete object on $table - $field, deleting ID: {$dependentRow[$field]}\n";
+				$testResults[] = "Calling delete object on $table - $field, deleting ID: {$dependentRow[$field]}\n";
 				// Now call the delete function on dependent object - we get the ID from the field name (specified in the global array) in the returned row 
 				$testResults[] = $this->delete_object($dependentRow[$field], $field, $table, $testRun);
 			}
