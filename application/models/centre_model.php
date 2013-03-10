@@ -40,20 +40,15 @@ class Centre_model extends MY_Model {
 	
 	/**
 	 * Deletes a centre with data.
-	 * Also deletes all objects which depend on it, unless $testRun is TRUE in which case a string is returned showing all
+	 * Also deletes all objects which depend on it. 
+	 * If $testRun is TRUE, no deletion occurs. Instead, a string is returned showing all deletions which would occur otherwise.
 	 * Returns TRUE on success.
 	 * Returns FALSE on any error or deletion failure (most likely forgotten foreign key restraints).
 	 *
 	 * @return boolean
 	 **/
 	public function delete($ID, $testRun=TRUE) {
-		$dependents = array(
-			'sports' => 'centreID',
-			'venues' => 'centreID',
-			'tournaments' => 'centreID',
-			'teams' => 'centreID'
-		);
-		return $this->delete_object($testRun, $ID, $this->objectIDKey, $this->dataTableName, false, $dependents);
+		return $this->delete_object($ID, $this->objectIDKey, $this->dataTableName, $testRun);
 	}
 	
 }
