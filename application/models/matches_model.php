@@ -1,12 +1,19 @@
 <?php
 class Matches_model extends MY_Model {
 
+	public function __construct() {
+		// Basic variables which apply to all table operations
+		$this->objectIDKey = "matchID";
+		$this->dataTableName = "matchData";
+		$this->relationTableName = "matches";
+    }
+	
 	/**
 	 * Returns all data about a specific match, including related data (sport, sport category, venue, tournament)
 	 *  
 	 * @return array
 	 **/
-	public function get_match($matchID) {
+	public function get($ID) {
 		// The relations we are setting up here will pull all the data about this matches sport type, the venue it is in and the tournament it is in
 		$relations = array(
 						array( 
@@ -30,29 +37,30 @@ class Matches_model extends MY_Model {
 						)
 					);
 		// Get all data about this match from matchData, the append all the data from associated tables as specified above
-		$match = $this->get_object($matchID, "matchID", "matchData", "matches", $relations);
+		$match = $this->get_object($ID, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relations);
 		// We could do some other match-specific functional processing here before returning the results if we need to
 		return $match;
 	}	
 	
 	/**
-	 * Returns all data about all matches at a specific centre
+	 * Returns all data about all matches at a specific centre, optionally between two DateTimes passed (or before, or after, if only one is passed)
 	 *  
 	 * @return array
 	 **/
-	public function get_matches($centreID,$startTime=FALSE,$endTime=FALSE) {
+	public function get_all($startTime=FALSE,$endTime=FALSE) {
 
 		if($startTime==FALSE && $endTime == FALSE) {
-			// Query to return the IDs for everything which takes place at the specified sports centre
-			$IDsQuery = $this->db->query("SELECT matchID FROM matches LEFT JOIN venues ON matches.venueID = venues.venueID WHERE venues.centreID = ".$this->db->escape($centreID));
-			// Loop through all result rows, get the ID and use that to put all the data into the output array 
+			// Fetch the IDs for everything at the current sports centre
+			$IDRows = $this->db->get_where($this->relationTableName, array('centreID' => $this->centreID))->result_array();
+			// Create empty array to output if there are no results
 			$all = array();
-			foreach($IDsQuery->result_array() as $IDRow) {
-				$all[] = $this->get_match($IDRow['matchID']);
+			// Loop through all result rows, get the ID and use that to put all the data into the output array 
+			foreach($IDRows as $IDRow) {
+				$all[] = $this->get($IDRow[$this->objectIDKey]);
 			}
 			return $all;
 		} else {
-
+			// Set up extremes for comparison if we aren't given an end time, or have a FALSE startTime, allowing for 
 			$startTime = ( $startTime ? $startTime : new DateTime('1st January 0001'));
 			$endTime = ( $endTime ? $endTime : new DateTime('31st December 9999'));
 
@@ -155,57 +163,37 @@ class Matches_model extends MY_Model {
 	}
 
 	/**
-	 * Creates a match with data.
-	 * returns the matchID of the new match if it was
-	 * successful. If not, it should return -1.
+	 * Creates a new match with data, using the sport ID as specified.
+	 * Returns the ID of the new object if it was successful.
+	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
 	 *  
 	 * @return int
 	 **/
-	public function insert_match($centreID, $data)
-	{	
-		$this->db->trans_start();
-
-		$this->db->query("INSERT INTO matches (centreID) VALUES (".$this->db->escape($centreID).")");
-		$matchID = $this->db->insert_id();
-
-		$insertDataArray = array();
-		foreach($data as $key=>$value) {
-			$dataArray = array(
-					'matchID' => $this->db->escape($matchID),
-					'key' => $this->db->escape($key),
-					'value' => $this->db->escape($value)
-				);
-			$insertDataArray[] = $dataArray;
-		}
-		if ($this->db->insert_batch('matchData',$insertDataArray)) {
-			// db success
-			$this->db->trans_complete();
-			return $matchID;
-		} else {
-			// db fail
-			return -1;
-		}
+	public function insert($data, $relationIDs=array()) {
+		return $this->insert_object($data, $this->objectIDKey, $this->dataTableName, $relationIDs);
 	}
 
 	/**
-	 * Updates a match with data.
+	 * Updates data for a specific match.
+	 * Returns TRUE on success.
+	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
 	 *
 	 * @return boolean
 	 **/
-	public function update_match($matchID, $data){
+	public function update($ID, $data) {
+		return $this->update_object($ID, $this->objectIDKey, $data, $this->dataTableName);
+	}
 
-		$this->db->trans_start();
-
-		foreach($data as $key=>$value) {
-			$escKey = $this->db->escape($key);
-			$escValue = $this->db->escape($value);
-			$dataQueryString = 	"UPDATE `matchData` ".
-								"SET `value`=$escValue ".
-								"WHERE `key`=$escKey ".
-								"AND `matchID`=$matchID";
-			$this->db->query($dataQueryString);
-		}
-		$this->db->trans_complete();
-		return true;
+	/**
+	 * Deletes a match with data.
+	 * Also deletes all objects which depend on it, unless $testRun is TRUE in which case a string is returned showing all
+	 * Returns TRUE on success.
+	 * Returns FALSE on any error or deletion failure (most likely forgotten foreign key restraints).
+	 *
+	 * @return boolean
+	 **/
+	public function delete($ID, $testRun=TRUE) {
+		$dependents = array();
+		return $this->delete_object($testRun, $ID, $this->objectIDKey, $this->dataTableName, false, $dependents);
 	}
 }
