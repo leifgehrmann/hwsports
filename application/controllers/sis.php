@@ -67,9 +67,9 @@ class Sis extends MY_Controller {
 		}
 		
 		$match['tournamentData']['name'] = ($match['tournamentData'] ? $match['tournamentData']['name'] : "None");
-		$match['date'] = date("F jS, Y",new DateTime($match['startTime']));
-		$match['startTime'] = date("H:i",new DateTime($match['startTime']));
-		$match['endTime'] = date("H:i",new DateTime($match['endTime']));
+		$match['date'] = date_create($match['startTime'])->format('F jS, Y');
+		$match['startTime'] = date_create($match['startTime'])->format('H:i');
+		$match['endTime'] = date_create($match['endTime'])->format('H:i');
 		
 		$this->data['match'] = $match;
 		
@@ -79,9 +79,9 @@ class Sis extends MY_Controller {
 			array('<span class="bold">Sport:</span>',$match['sportData']['name']),
 			array('<span class="bold">Venue:</span>',$match['venueData']['name']),
 			array('<span class="bold">Tournament:</span>',$match['tournamentData']['name']),
-			array('<span class="bold">Date:</span>',		date("F jS, Y",new DateTime($match['date']))),
-			array('<span class="bold">Start Time:</span>',	date("H:i",new DateTime($match['startTime']))),
-			array('<span class="bold">End Time:</span>',	date("H:i",new DateTime($match['endTime']))),
+			array('<span class="bold">Date:</span>',		$match['date']),
+			array('<span class="bold">Start Time:</span>',	$match['startTime']),
+			array('<span class="bold">End Time:</span>',	$match['endTime'])
 		);
 		$this->view('match','match',$match['name'].' | Match',$this->data);
 	}
