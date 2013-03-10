@@ -47,7 +47,7 @@ class Test extends MY_Controller {
 					<span style='text-decoration: italic'>To pass multiple arguments to the function, create an array() with multiple parameters. <br />
 					To pass an array as one of the parameters, create the array but put that in single quotes. An example with two array parameters has been inserted into the textarea for you.</span><br />
 					<textarea name='str' id='str' style='height: 100pt' rows='1' cols='50'>";
-					if(isset($str)) echo $str; 
+					if(isset($_POST['str'])) echo $str; 
 					else echo 'array(
 								\'array("hello"=>"world")\',
 								\'array("sportID"=>8)\'
@@ -56,8 +56,8 @@ class Test extends MY_Controller {
 					<input type='submit' name='exec' value='Execute'></form><br />
 				</form><br />";
 					
-		if(isset($str)) {
-			if($str) {
+		if(isset($_POST['str'])) {
+			if($_POST['str']!=='') {
 				eval("\$evalstr = $str;");
 				$encoded = rawurlencode(json_encode($evalstr));
 			} else {
