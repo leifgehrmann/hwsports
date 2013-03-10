@@ -34,7 +34,7 @@ class Tms extends MY_Controller {
 	}
 
 	/**
-	 * 
+	 * A short hand method to basically print out the page with a certain pageid and title
 	 *
 	 * @param view 		The view to load
 	 * @param page 		The page ID it will have
