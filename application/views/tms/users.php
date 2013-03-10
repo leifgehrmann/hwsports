@@ -11,7 +11,7 @@
 	</th>
 	<? foreach($users as $user) { ?>
 	<tr>
-		<td><?=$user['userid']?></td>
+		<td><?=$user['userID']?></td>
 		<td><?=$user['firstName']?></td>
 		<td><?=$user['lastName']?></td>
 		<td><?=$user['phone']?></td>

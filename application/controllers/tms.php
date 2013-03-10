@@ -372,18 +372,18 @@ class Tms extends MY_Controller {
 	public function teams()
 	{	
 		$this->load->model('teams_model');
-		$user = $this->teams_model->get_all();
-		$this->data['users'] = $users;
+		$teams = $this->teams_model->get_all();
+		$this->data['teams'] = $teams;
 		
-		$this->view('users',"users","Users",$this->data);
+		$this->view('teams',"teams","Teams",$this->data);
 	}
 	public function team($teamID)
 	{
 		$this->load->model('teams_model');
-		$user = $this->teams_model->get($teamID);
-		$this->data['user'] = $user;
+		$team = $this->teams_model->get($teamID);
+		$this->data['team'] = $user;
 		
-		$this->view('team',"team",$user['firstName']." ".$user['lastName']." | Team",$this->data);
+		$this->view('team',"team",$user['name']." | Team",$this->data);
 	}
 	public function announcements()
 	{
@@ -396,7 +396,7 @@ class Tms extends MY_Controller {
 	public function announcement($announcementID)
 	{
 		$this->load->model('announcements_model');
-		$user = $this->announcements_model->get($announcementID);
+		$announcement = $this->announcements_model->get($announcementID);
 		$this->data['announcement'] = $announcement;
 
 		$this->view('annoucement',"annoucement",$announcement['title']." | Announcement",$this->data);
