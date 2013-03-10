@@ -27,15 +27,11 @@ class Test extends MY_Controller {
 		var_export($args); echo "\n<br />";
 		
 		if(is_array($args)) {
+			$argstring = "";
 			foreach($args as $arg) {
-				$argstrings[] = var_export($arg,true);
+				$argstring .= $arg;
 			}
-			var_export($argstrings); echo "\n<br />";
-			
-			$argstrings = implode(', ', $argstrings);
-			var_export($argstrings); die();
-			
-			$eval = '$output = $this->'.$model.'->'.$action.'('.var_export($argstrings, true).');';
+			$eval = '$output = $this->'.$model.'->'.$action.'('.$argstring.');';
 		} else {
 			$eval = '$output = $this->'.$model.'->'.$action.'('.$args.');';
 		}
