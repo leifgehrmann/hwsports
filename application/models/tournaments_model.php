@@ -145,21 +145,25 @@ class Tournaments_model extends MY_Model {
 	 *
 	 * @return boolean
 	 **/
-	public function update($ID, $data) {
-		return $this->update_object($ID, $data, $this->objectIDKey, $this->dataTableName);
+	public function update($ID, $data, $relationIDs=array()) {
+		return $this->update_object($ID, $data, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relationIDs);
 	}
 
 	/**
 	 * Deletes a tournament with data.
-	 * Also deletes all objects which depend on it, unless $testRun is TRUE in which case a string is returned showing all
+	 * Also deletes all objects which depend on it. 
+	 * If $testRun is TRUE, no deletion occurs. Instead, a string is returned showing all deletions which would occur otherwise.
 	 * Returns TRUE on success.
 	 * Returns FALSE on any error or deletion failure (most likely forgotten foreign key restraints).
 	 *
 	 * @return boolean
 	 **/
 	public function delete($ID, $testRun=TRUE) {
-		$dependents = array();
-		return $this->delete_object($testRun, $ID, $this->objectIDKey, $this->dataTableName, false, $dependents);
+		$output = "";
+		if($testRun) $output .= "If this delete query is executed, the following objects will be deleted: \n\n";
+		$output .= $this->delete_object($ID, $this->objectIDKey, $this->relationTableName, $testRun);
+		if($testRun) $output .= "If this looks correct, click 'Confirm'. Otherwise please update or delete dependencies manually.";
+		return $output;
 	}
-
+	
 }

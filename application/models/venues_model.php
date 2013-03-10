@@ -1,84 +1,77 @@
 <?php
 class Venues_model extends MY_Model {
 
+	public function __construct() {
+        parent::__construct();
+		// Basic variables which apply to all table operations
+		$this->objectIDKey = "venueID";
+		$this->dataTableName = "venueData";
+		$this->relationTableName = "venues";
+    }
+	
 	/**
-	 * Returns all data about a specific venue
-	 *  
+	 * Returns an array of all data about a specific venue
+	 * 
 	 * @return array
 	 **/
-	public function get_venue($venueID) {
-		// Get all the venueData
-		$venue = $this->get_object($venueID, "venueID", "venueData");
-		return $venue;
+	public function get($ID) {
+		return $this->get_object($ID, $this->objectIDKey, $this->dataTableName);
 	}
 	
 	/**
-	 * Returns all data about all venues at a specific centre
-	 *  
+	 * Returns all data about all venues at current centre
+	 * 
 	 * @return array
 	 **/
-	public function get_venues($centreID) {
-		// Query to return the IDs for everything which takes place at the specified sports centre
-		$IDsQuery = $this->db->query("SELECT venueID FROM venues WHERE centreID = ".$this->db->escape($centreID));
+	public function get_all() {
+		// Fetch the IDs for everything at the current sports centre
+		$IDRows = $this->db->get_where($this->relationTableName, array('centreID' => $this->centreID))->result_array();
+		// Create empty array to output if there are no results
+		$all = array();
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
-		foreach($IDsQuery->result_array() as $IDRow) {
-			$all[] = $this->get_venue($IDRow['venueID']);
+		foreach($IDRows as $IDRow) {
+			$all[] = $this->get($IDRow[$this->objectIDKey]);
 		}
-		return (empty($all) ? FALSE : $all);
+		return $all;
 	}
 	
 	/**
-	 * Creates a venue with data.
-	 * returns the venueID of the new venue if it was
-	 * successful. If not, it should return -1.
+	 * Creates a new venue with data, using the sport ID as specified.
+	 * Returns the ID of the new object if it was successful.
+	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
 	 *  
 	 * @return int
 	 **/
-	public function insert_venue($centreID, $data)
-	{	
-		$this->db->trans_start();
-
-		$this->db->query("INSERT INTO venues (centreID) VALUES (".$this->db->escape($centreID).")");
-		$venueID = $this->db->insert_id();
-
-		$insertDataArray = array();
-		foreach($data as $key=>$value) {
-			$dataArray = array(
-					'venueID' => $this->db->escape($venueID),
-					'key' => $this->db->escape($key),
-					'value' => $this->db->escape($value)
-				);
-			$insertDataArray[] = $dataArray;
-		}
-		if ($this->db->insert_batch('venueData',$insertDataArray)) {
-			// db success
-			$this->db->trans_complete();
-			return $venueID;
-		} else {
-			// db fail
-			return -1;
-		}
+	public function insert($data, $relationIDs=array()) {
+		$relationIDs['centreID']=$this->centreID;
+		return $this->insert_object($data, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relationIDs);
 	}
 
 	/**
-	 * Updates a venue with data.
+	 * Updates data for a specific venue.
+	 * Returns TRUE on success.
+	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
 	 *
 	 * @return boolean
 	 **/
-	public function update_venue($venueID, $data){
-
-		$this->db->trans_start();
-
-			foreach($data as $key=>$value) {
-				$escKey = $this->db->escape($key);
-				$escValue = $this->db->escape($value);
-				$dataQueryString = 	"UPDATE `venueData` ".
-									"SET `value`=$escValue ".
-									"WHERE `key`=$escKey ".
-									"AND `venueID`=$venueID";
-				$this->db->query($dataQueryString);
-			}
-			$this->db->trans_complete();
-			return true;
+	public function update($ID, $data, $relationIDs=array()) {
+		return $this->update_object($ID, $data, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relationIDs);
 	}
+
+	/**
+	 * Deletes a venue with data.
+	 * Also deletes all objects which depend on it, unless $testRun is TRUE in which case a string is returned showing all
+	 * Returns TRUE on success.
+	 * Returns FALSE on any error or deletion failure (most likely forgotten foreign key restraints).
+	 *
+	 * @return boolean
+	 **/
+	public function delete($ID, $testRun=TRUE) {
+		$output = "";
+		if($testRun) $output .= "If this delete query is executed, the following objects will be deleted: \n\n";
+		$output .= $this->delete_object($ID, $this->objectIDKey, $this->relationTableName, $testRun);
+		if($testRun) $output .= "If this looks correct, click 'Confirm'. Otherwise please update or delete dependencies manually.";
+		return $output;
+	}
+
 }

@@ -2,6 +2,7 @@
 class Users_model extends MY_Model {
 
 	public function __construct() {
+        parent::__construct();
 		// Basic variables which apply to all table operations
 		$this->objectIDKey = "userID";
 		$this->dataTableName = "userData";
@@ -66,8 +67,11 @@ class Users_model extends MY_Model {
 	 * @return boolean
 	 **/
 	public function delete($ID, $testRun=TRUE) {
-		$dependents = array();
-		return $this->delete_object($testRun, $ID, $this->objectIDKey, $this->dataTableName, false, $dependents);
+		$output = "";
+		if($testRun) $output .= "If this delete query is executed, the following objects will be deleted: \n\n";
+		$output .= $this->delete_object($ID, $this->objectIDKey, $this->relationTableName, $testRun);
+		if($testRun) $output .= "If this looks correct, click 'Confirm'. Otherwise please update or delete dependencies manually.";
+		return $output;
 	}
 	
 	/**

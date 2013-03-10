@@ -3,6 +3,36 @@ class MY_Model extends CI_Model {
     
 	public function __construct() {
         parent::__construct();
+		
+		// This array sets up the relationships for deletion, since there's no easy way to guess or calculate this
+		// Basically each "object" has an array of other "objects" which directly reference it
+		// Therefore if we are deleting an object, we must get the IDs of any other objects which reference it
+		// Then call the delete_object function on those objects before trying to delete our original object
+		$this->table_dependents = array(
+			'centreData' => array('sports'=>'sportID','venues'=>'venueID','tournaments'=>'tournamentID','teams'=>'teamID'),
+			'sports' => array('matches'=>'matchID','tournaments'=>'tournamentID','sportData'=>'sportID'),
+			'venues' => array('matches'=>'matchID','tournamentVenues'=>'venueID','venueData'=>'venueID'),
+			'tournaments' => array('tickets'=>'ticketID','matches'=>'matchID','tournamentVenues'=>'tournamentID','tournamentActors'=>'tournamentID','tournamentData'=>'tournamentID'),
+			'teams' => array('teamsUsers'=>'teamID','teamData'=>'teamID'),
+			'matches' => array('tickets'=>'ticketID','matchActors'=>'matchActorID','matchData'=>'matchID'),
+			'tickets' => array('ticketData'=>'ticketID'),
+			'users' => array('teamsUsers'=>'userID','tickets'=>'ticketID','usersGroups'=>'userID','userData'=>'userID'),
+			'matchActors' => array('matchActorResults'=>'resultID'),
+			'matchActorResults' => array('matchActorResultData'=>'resultID'),
+			// Empty arrays for tables which have no dependents
+			'sportData' => array(),
+			'venueData' => array(),
+			'teamData' => array(),
+			'matchData' => array(),
+			'ticketData' => array(),
+			'userData' => array(),
+			'usersGroups' => array(),
+			'matchActorResultData' => array(),
+			'teamsUsers' => array(),
+			'tournamentData' => array(),
+			'tournamentVenues' => array(),
+			'tournamentActors' => array()
+		);
     }
 
 	/* Queries an object from the database
@@ -123,13 +153,13 @@ class MY_Model extends CI_Model {
 	// Required: $objectID, $data, $objectIDKey, $dataTableName. 
 	// Example usage: update_object(1, array("address"=>"14 Parkhead Loan"), "centreID", 'centreData');
 	// Returns: TRUE if update was successful, FALSE otherwise.
-	public function update_object($objectID, $data, $objectIDKey, $dataTableName, $relationTableName = false, $relations = array()) {		
+	public function update_object($objectID, $data, $objectIDKey, $dataTableName, $relationTableName = false, $relationIDs = array()) {		
 		// If we've been given a relational table and relations to go in that table, we should update the entry in that first in case of foreign key restraints
-		if( $relationTableName && count($relations) ) {
+		if( $relationTableName && count($relationIDs) ) {
 			// Update the correct row in the relation table with the new relation IDs specified 
 			$this->db->where($objectIDKey, $objectID);
 			// If the update fails, return FALSE
-			if(!$this->db->update($relationTableName, $relations)) return FALSE;
+			if(!$this->db->update($relationTableName, $relationIDs)) return FALSE;
 		}
 		
 		// Lump all updates into one transaction
@@ -152,41 +182,55 @@ class MY_Model extends CI_Model {
 		return TRUE;
 	}
 	
-	// Deletes an object from the database, optionally also deleting any child relations
-	// Required: $objectID, $objectIDKey, $data, $dataTableName. 
-	// Example usage: delete_object(1, "centreID", 'centreData');
+	// Deletes an object from the database, optionally also deleting any dependents
+	// Required: $testRun, $objectID, $objectIDKey, $primaryTableName. 
+	// Example usage: delete_object(1, "centreID", "centreData", false);
 	// Returns: TRUE if update was successful, FALSE otherwise.
-	public function delete_object($objectID, $objectIDKey, $dataTableName, $relations = array()) {
-		return FALSE;
-		/*// If we've been given a relational table and relations to go in that table, we should update the entry in that first in case of foreign key restraints
-		if( $relationTableName && count($relations) ) {
-			// Update the correct row in the relation table with the new relation IDs specified 
-			$this->db->where($objectIDKey, $objectID);
-			// If the update fails, return FALSE
-			if(!$this->db->update($relationTableName, $relations))return FALSE;
+	public function delete_object($objectID, $objectIDKey, $primaryTableName, $testRun=TRUE) {
+		// This string will hold the message showing what will be deleted
+		$testResults = array();
+		// Lump all data table updates into one transaction in case one fails
+		$this->db->trans_start();
+		// Get the list of tables this object might have dependent rows in
+		$dependents = $this->table_dependents[$primaryTableName];
+		// Iterate through dependents to process corresponding entries from - these should be in a specific order to satisfy foreign keys
+		foreach( $dependents as $table=>$field ) {
+			// Search this table for our object key/ID - if it exists, we want to delete whatever object was referencing our object
+			//var_dump("Searching table: $table for field: $objectIDKey set to value: $objectID"); 
+			$dependentRows = $this->db->get_where($table, array($objectIDKey => $objectID))->result_array();
+			// Loop through all rows which were referencing this object
+			foreach($dependentRows as $dependentRow) {
+				$testResults[] = "Calling delete object on $table - $field, deleting ID: {$dependentRow[$field]}\n";
+				// Now call the delete function on dependent object - we get the ID from the field name (specified in the global array) in the returned row 
+				$testResults[] = $this->delete_object($dependentRow[$field], $field, $table, $testRun);
+			}
 		}
 		
-		// Lump all updates into one transaction
-		$this->db->trans_start();
-		// Loop through input data
-		foreach($data as $key => $value) {
-			// Set the where clauses and the values for the update
-			$where = array(
-				$objectIDKey => $objectID,
-				'key'   => $key
-			);
-			$update = array(
-				'value' => $value
-			);
-			// Create the update - active record sanitizes inputs automatically. Return false if update fails.
-			$this->db->where($where);
-			if(!$this->db->update($dataTableName, $update)) return FALSE;			
+		// We've dealt with any dependents, now we just need to delete the row(s) in our primary table
+		if($testRun) {
+			$rows = $this->db->get_where($primaryTableName, array($objectIDKey => $objectID))->result_array();
+			foreach($rows as $row) {
+				$rowfields = array();
+				$rowResult = "Table: $primaryTableName; Row: ";
+				foreach($row as $key=>$value) $rowfields[] = "[$key] = $value";
+				$rowResult .= implode(' | ',$rowfields)." \n";
+				$testResults[] = $rowResult;
+			}
+		} else {			
+			// Delete the rows in the table table which reference the deleted object 
+			$this->db->where($objectIDKey, $objectID);
+			// If the delete fails, return false
+			if(!$this->db->delete($primaryTableName)) return FALSE;
 		}
+		
 		// Complete transaction, all is well
 		$this->db->trans_complete();
-		
 		// Return TRUE: if we got to here it must have all worked
-		return TRUE;*/
+		if($testRun) {
+			$testResultsUnique = array_unique($testResults);
+			return implode("\n",$testResultsUnique);
+		}
+		else return TRUE;
 	}
 
 }

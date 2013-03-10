@@ -4,12 +4,13 @@ class Test extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('sports_model');
 		$this->load->model('tournaments_model');
-		$this->load->model('matches_model');
 		$this->load->model('teams_model');
 		$this->load->model('users_model');
+		$this->load->model('matches_model');
+		$this->load->model('sports_model');
 		$this->load->model('scheduling_model');
+		$this->load->model('venues_model');
 		header('Content-Type: text/plain');
 	}
 	
@@ -35,7 +36,6 @@ class Test extends MY_Controller {
 	
 	public function helper() {
 		header('Content-Type: text/html');
-		$str = ( isset($_POST['str']) ? $_POST['str'] : '' );
 		$model = ( isset($_POST['model']) ? $_POST['model'] : '' );
 		$function = ( isset($_POST['function']) ? $_POST['function'] : '' );
 		
@@ -47,7 +47,7 @@ class Test extends MY_Controller {
 					<span style='text-decoration: italic'>To pass multiple arguments to the function, create an array() with multiple parameters. <br />
 					To pass an array as one of the parameters, create the array but put that in single quotes. An example with two array parameters has been inserted into the textarea for you.</span><br />
 					<textarea name='str' id='str' style='height: 100pt' rows='1' cols='50'>";
-					if($str) echo $str; 
+					if(isset($_POST['str'])) echo $_POST['str']; 
 					else echo 'array(
 								\'array("hello"=>"world")\',
 								\'array("sportID"=>8)\'
@@ -56,9 +56,13 @@ class Test extends MY_Controller {
 					<input type='submit' name='exec' value='Execute'></form><br />
 				</form><br />";
 					
-		if($str) {
-			eval("\$evalstr = $str;");
-			$encoded = rawurlencode(json_encode($evalstr));
+		if(isset($_POST['str'])) {
+			if($_POST['str']!=='') {
+				eval("\$evalstr = {$_POST['str']};");
+				$encoded = rawurlencode(json_encode($evalstr));
+			} else {
+				$encoded = '';
+			}
 			echo "Test Link: <br /><a id='link' target='_blank' href='/test/model/$model/$function/$encoded'>/test/model/$model/$function/$encoded</a><br />
 				<script>document.getElementById('link').click()</script>";
 		}
