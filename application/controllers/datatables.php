@@ -3,7 +3,7 @@
 // DataTables PHP library
 require( FCPATH.APPPATH."libraries/DataTables/DataTables.php" );
 
-class Tms extends MY_Controller {
+class Datatables extends MY_Controller {
 
 	function __construct() {
 		parent::__construct();
