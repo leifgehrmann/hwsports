@@ -11,7 +11,7 @@ class Sis extends MY_Controller {
 		
 		$this->data['currentUser'] = $currentUser = $this->ion_auth->user()->row();
 		if(!empty($currentUser)) {
-			$query = $this->db->query("SELECT `key`,`value` FROM `userData` WHERE `userID` = '{$currentUser->id}'");
+			$query = $this->db->query("SELECT `key`,`value` FROM `userData` WHERE `userID` = '{$currentUser->userID}'");
 			foreach($query->result_array() as $userDataRow) {
 				$currentUser->$userDataRow['key'] = $userDataRow['value'];
 			}
