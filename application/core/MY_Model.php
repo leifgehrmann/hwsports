@@ -20,6 +20,7 @@ class MY_Model extends CI_Model {
 			'matchActors' => array('matchActorResults'=>'resultID'),
 			'matchActorResults' => array('matchActorResultData'=>'resultID'),
 			// Empty arrays for tables which have no dependents
+			'centreData' => array(),
 			'sportData' => array(),
 			'venueData' => array(),
 			'teamData' => array(),
