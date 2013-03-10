@@ -161,50 +161,19 @@ class MY_Model extends CI_Model {
 		$testResults = "If this delete query is executed, the following rows will be deleted: \n";
 		// Lump all data table updates into one transaction in case one fails
 		$this->db->trans_start();
+		// Append the data table and then the relation table to the list of tables to delete from - this way they are processed in the right order
+		$tables = $dependents;
+		$tables[] = $dataTableName;
+		$tables[] = $relationTableName;
 		
-		// If we've been given some relational tables to delete corresponding entries from, do that first to satisfy foreign keys
-		foreach( $dependents as $dependentTable ) {
-			$table = $dependentTable;
+		// Iterate through tables to delete corresponding entries from - execute in order to satisfy foreign keys
+		foreach( $tables as $table ) {
 			if($testRun) {
 				$rows = $this->db->get_where($table, array($objectIDKey => $objectID))->result_array();
 				foreach($rows as $row) {
 					$testResults .= "Table: $table; Row: ";
 					foreach($row as $key=>$value) $rowfields[] = "[$key] = $value";
-					$testResults .= implode(', ',$rowfields)." \n";
-				}
-			} else {			
-				// Delete the rows in the table table which reference the deleted object 
-				$this->db->where($objectIDKey, $objectID);
-				$this->db->delete($table);
-			}
-		}
-		
-		// We've deleted the dependents, now delete the data (if it exists!)
-		if($dataTableName) {
-			$table = $dataTableName;
-			if($testRun) {
-				$rows = $this->db->get_where($table, array($objectIDKey => $objectID))->result_array();
-				foreach($rows as $row) {
-					$testResults .= "Table: $table; Row: ";
-					foreach($row as $key=>$value) $rowfields[] = "[$key] = $value";
-					$testResults .= implode(', ',$rowfields)." \n";
-				}
-			} else {			
-				// Delete the rows in the table table which reference the deleted object 
-				$this->db->where($objectIDKey, $objectID);
-				$this->db->delete($table);
-			}
-		}
-		
-		// We've deleted the data, now finally get the relation table row
-		if($relationTableName) {
-			$table = $relationTableName;
-			if($testRun) {
-				$rows = $this->db->get_where($table, array($objectIDKey => $objectID))->result_array();
-				foreach($rows as $row) {
-					$testResults .= "Table: $table; Row: ";
-					foreach($row as $key=>$value) $rowfields[] = "[$key] = $value";
-					$testResults .= implode(', ',$rowfields)." \n";
+					$testResults .= implode(' | ',$rowfields)." \n";
 				}
 			} else {			
 				// Delete the rows in the table table which reference the deleted object 
