@@ -16,7 +16,7 @@
 		<td><?=$user['lastName']?></td>
 		<td><?=$user['phone']?></td>
 		<td><?=$user['email']?></td>
-		<td><a class="button" href="/tms/user/<?=$user['userid']?>">View</a></td>
+		<td><a class="button" href="/tms/user/<?=$user['userID']?>">View</a></td>
 	</tr>
 	<? } ?>
 </table>
