@@ -35,7 +35,6 @@ class Test extends MY_Controller {
 	
 	public function helper() {
 		header('Content-Type: text/html');
-		$str = ( isset($_POST['str']) ? $_POST['str'] : '' );
 		$model = ( isset($_POST['model']) ? $_POST['model'] : '' );
 		$function = ( isset($_POST['function']) ? $_POST['function'] : '' );
 		
@@ -58,7 +57,7 @@ class Test extends MY_Controller {
 					
 		if(isset($_POST['str'])) {
 			if($_POST['str']!=='') {
-				eval("\$evalstr = $str;");
+				eval("\$evalstr = {$_POST['str']};");
 				$encoded = rawurlencode(json_encode($evalstr));
 			} else {
 				$encoded = '';
