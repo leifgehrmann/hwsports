@@ -1,38 +1,38 @@
 <?php
 class MY_Model extends CI_Model {
     
+	// This array sets up the relationships for deletion, since there's no easy way to guess or calculate this
+	// Basically each "object" has an array of other "objects" which directly reference it
+	// Therefore if we are deleting an object, we must get the IDs of any other objects which reference it
+	// Then call the delete_object function on those objects before trying to delete our original object
+	$table_dependents = array(
+		'centre' => array('sports'=>'sportID','venues'=>'venueID','tournaments'=>'tournamentID','teams'=>'teamID'),
+		'sports' => array('matches'=>'matchID','tournaments'=>'tournamentID','sportData'=>'sportID'),
+		'venues' => array('matches'=>'matchID','tournamentVenues'=>'venueID','venueData'=>'venueID'),
+		'tournaments' => array('tickets'=>'ticketID','matches'=>'matchID','tournamentVenues'=>'tournamentID','tournamentActors'=>'tournamentID','tournamentData'=>'tournamentID'),
+		'teams' => array('teamsUsers'=>'teamID','teamData'=>'teamID'),
+		'matches' => array('tickets'=>'ticketID','matchActors'=>'matchActorID','matchData'=>'matchID'),
+		'tickets' => array('ticketData'=>'ticketID'),
+		'users' => array('teamsUsers'=>'userID','tickets'=>'ticketID','usersGroups'=>'userID','userData'=>'userID'),
+		'matchActors' => array('matchActorResults'=>'resultID'),
+		'matchActorResults' => array('matchActorResultData'=>'resultID'),
+		// Empty arrays for tables which have no dependents
+		'sportData' => array(),
+		'venueData' => array(),
+		'teamData' => array(),
+		'matchData' => array(),
+		'ticketData' => array(),
+		'userData' => array(),
+		'usersGroups' => array(),
+		'matchActorResultData' => array(),
+		'teamsUsers' => array(),
+		'tournamentData' => array(),
+		'tournamentVenues' => array(),
+		'tournamentActors' => array()
+	);
+	
 	public function __construct() {
         parent::__construct();
-		
-		// This array sets up the relationships for deletion, since there's no easy way to guess or calculate this
-		// Basically each "object" has an array of other "objects" which directly reference it
-		// Therefore if we are deleting an object, we must get the IDs of any other objects which reference it
-		// Then call the delete_object function on those objects before trying to delete our original object
-		$table_dependents = array(
-			'centre' => array('sports'=>'sportID','venues'=>'venueID','tournaments'=>'tournamentID','teams'=>'teamID'),
-			'sports' => array('matches'=>'matchID','tournaments'=>'tournamentID','sportData'=>'sportID'),
-			'venues' => array('matches'=>'matchID','tournamentVenues'=>'venueID','venueData'=>'venueID'),
-			'tournaments' => array('tickets'=>'ticketID','matches'=>'matchID','tournamentVenues'=>'tournamentID','tournamentActors'=>'tournamentID','tournamentData'=>'tournamentID'),
-			'teams' => array('teamsUsers'=>'teamID','teamData'=>'teamID'),
-			'matches' => array('tickets'=>'ticketID','matchActors'=>'matchActorID','matchData'=>'matchID'),
-			'tickets' => array('ticketData'=>'ticketID'),
-			'users' => array('teamsUsers'=>'userID','tickets'=>'ticketID','usersGroups'=>'userID','userData'=>'userID'),
-			'matchActors' => array('matchActorResults'=>'resultID'),
-			'matchActorResults' => array('matchActorResultData'=>'resultID'),
-			// Empty arrays for tables which have no dependents
-			'sportData' => array(),
-			'venueData' => array(),
-			'teamData' => array(),
-			'matchData' => array(),
-			'ticketData' => array(),
-			'userData' => array(),
-			'usersGroups' => array(),
-			'matchActorResultData' => array(),
-			'teamsUsers' => array(),
-			'tournamentData' => array(),
-			'tournamentVenues' => array(),
-			'tournamentActors' => array()
-		);
     }
 
 	/* Queries an object from the database
