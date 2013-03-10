@@ -90,6 +90,7 @@ class MY_Model extends CI_Model {
 			$this->db->insert($relationTableName, $relations);
 			// Get the generated ID of this new object
 			$objectID = $this->db->insert_id();
+			return $objectID;
 		} else {
 			// Since we're storing IDs only in the data table, we can't have a primary key or auto increment on it
 			// Therefore to get the next ID to insert, we have to find the current highest and increment it to get a unique ID
