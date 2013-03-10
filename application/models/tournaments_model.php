@@ -146,7 +146,7 @@ class Tournaments_model extends MY_Model {
 	 * @return boolean
 	 **/
 	public function update($ID, $data) {
-		return $this->update_object($ID, $this->objectIDKey, $data, $this->dataTableName);
+		return $this->update_object($ID, $data, $this->objectIDKey, $this->dataTableName);
 	}
 
 	/**
