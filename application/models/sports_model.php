@@ -1,12 +1,19 @@
 <?php
 class Sports_model extends MY_Model {
 
+	public function __construct() {
+		// Basic variables which apply to all table operations
+		$this->objectIDKey = "sportID";
+		$this->dataTableName = "sportData";
+		$this->relationTableName = "sports";
+    }
+	
 	/**
 	 * Returns all data about a specific sport, including sport category data
 	 *  
 	 * @return array
 	 **/
-	public function get_sport($sportID) {
+	public function get($ID) {
 		// The relations we are setting up here will pull all the sport category data
 		$relations = array(
 						array( 
@@ -15,24 +22,61 @@ class Sports_model extends MY_Model {
 						)
 					);
 		// Get all data about this sport, the append the data from associated tables as specified above
-		$sport = $this->get_object($sportID, "sportID", "sportData", "sports", $relations);
+		$sport = $this->get_object($ID, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relations);
 		// We could do some other specific functional processing here before returning the results if we need to
 		return $sport;
 	}	
 	
 	/**
-	 * Returns all data about all sports at a specific centre
-	 *  
+	 * Returns all data about all users at current centre
+	 * 
 	 * @return array
 	 **/
-	public function get_sports($centreID) {
-		// Query to return the IDs for everything which takes place at the specified sports centre
-		$IDsQuery = $this->db->query("SELECT sportID FROM sports WHERE centreID = ".$this->db->escape($centreID));
+	public function get_all() {
+		// Fetch the IDs for everything at the current sports centre
+		$IDRows = $this->db->get_where($this->relationTableName, array('centreID' => $this->centreID))->result_array();
+		// Create empty array to output if there are no results
+		$all = array();
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
-		foreach($IDsQuery->result_array() as $IDRow) {
-			$all[] = $this->get_sport($IDRow['sportID']);
+		foreach($IDRows as $IDRow) {
+			$all[] = $this->get($IDRow[$this->objectIDKey]);
 		}
-		return (empty($all) ? FALSE : $all);
+		return $all;
+	}
+	
+	/**
+	 * Creates a new sport with data
+	 * Returns the ID of the new object if it was successful.
+	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
+	 *  
+	 * @return int
+	 **/
+	public function insert($data, $relationIDs=array()) {
+		return $this->insert_object($data, $this->objectIDKey, $this->dataTableName, $relationIDs);
+	}
+
+	/**
+	 * Updates data for a specific sport.
+	 * Returns TRUE on success.
+	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
+	 *
+	 * @return boolean
+	 **/
+	public function update($ID, $data) {
+		return $this->update_object($ID, $this->objectIDKey, $data, $this->dataTableName);
+	}
+
+	/**
+	 * Deletes a sport with data.
+	 * Also deletes all objects which depend on it, unless $testRun is TRUE in which case a string is returned showing all
+	 * Returns TRUE on success.
+	 * Returns FALSE on any error or deletion failure (most likely forgotten foreign key restraints).
+	 *
+	 * @return boolean
+	 **/
+	public function delete($ID, $testRun=TRUE) {
+		$dependents = array();
+		return $this->delete_object($testRun, $ID, $this->objectIDKey, $this->dataTableName, false, $dependents);
 	}
 	
 	
@@ -51,16 +95,15 @@ class Sports_model extends MY_Model {
 	 *  
 	 * @return array
 	 **/
-	public function get_sport_categories($centreID) {
-		// Query to return the IDs for everything which takes place at the specified sports centre
-		$IDsQuery = $this->db->query("SELECT DISTINCT sportCategoryID FROM sportCategoryData");
-		// Loop through all result rows, get the ID and use that to put all the data into the output array 
-		foreach($IDsQuery->result_array() as $IDRow) {
+	public function get_sport_categories() {
+		// Query to return the IDs for all sport categories
+		$IDRows = $this->db->distinct()->get('sportCategoryData')->result_array();
+		// Loop through all result rows, get the ID and use that to put all the data into the output array
+		foreach($IDRows as $IDRow) {
 			$all[$IDRow['sportCategoryID']] = $this->get_sport_category($IDRow['sportCategoryID']);
 		}
-		return (empty($all) ? FALSE : $all);
+		return $all;
 	}
-	
 	
 	public function get_sport_category_roles($sportCategoryID)
 	{
@@ -146,60 +189,5 @@ class Sports_model extends MY_Model {
 		}
 		
 		return $inputs;
-	}
-
-	/**
-	 * Creates a sport with data.
-	 * returns the sportID of the new sport if it was
-	 * successful. If not, it should return -1.
-	 *  
-	 * @return int
-	 **/
-	public function insert_sport($centreID, $data)
-	{	
-		$this->db->trans_start();
-
-		$this->db->query("INSERT INTO sports (centreID) VALUES (".$this->db->escape($centreID).")");
-		$sportID = $this->db->insert_id();
-
-		$insertDataArray = array();
-		foreach($data as $key=>$value) {
-			$dataArray = array(
-					'sportID' => $this->db->escape($sportID),
-					'key' => $this->db->escape($key),
-					'value' => $this->db->escape($value)
-				);
-			$insertDataArray[] = $dataArray;
-		}
-		if ($this->db->insert_batch('venueData',$insertDataArray)) {
-			// db success
-			$this->db->trans_complete();
-			return $sportID;
-		} else {
-			// db fail
-			return -1;
-		}
-	}
-
-	/**
-	 * Updates a sport with data.
-	 *
-	 * @return boolean
-	 **/
-	public function update_venue($sportID, $data){
-
-		$this->db->trans_start();
-	
-		foreach($data as $key=>$value) {
-			$escKey = $this->db->escape($key);
-			$escValue = $this->db->escape($value);
-			$dataQueryString = 	"UPDATE `venueData` ".
-								"SET `value`=$escValue ".
-								"WHERE `key`=$escKey ".
-								"AND `sportID`=$sportID";
-			$this->db->query($dataQueryString);
-		}
-		$this->db->trans_complete();
-		return true;
 	}
 }
