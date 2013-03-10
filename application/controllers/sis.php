@@ -79,9 +79,9 @@ class Sis extends MY_Controller {
 			array('<span class="bold">Sport:</span>',$match['sportData']['name']),
 			array('<span class="bold">Venue:</span>',$match['venueData']['name']),
 			array('<span class="bold">Tournament:</span>',$match['tournamentData']['name']),
-			array('<span class="bold">Date:</span>',date("F jS, Y",$match['date'])),
-			array('<span class="bold">Start Time:</span>',date("H:i",$match['startTime'])),
-			array('<span class="bold">End Time:</span>',date("H:i",$match['endTime'])),
+			array('<span class="bold">Date:</span>',		date("F jS, Y",new DateTime($match['date']))),
+			array('<span class="bold">Start Time:</span>',	date("H:i",new DateTime($match['startTime']))),
+			array('<span class="bold">End Time:</span>',	date("H:i",new DateTime($match['endTime']))),
 		);
 		$this->view('match','match',$match['name'].' | Match',$this->data);
 	}
