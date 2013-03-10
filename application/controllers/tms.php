@@ -89,15 +89,23 @@ class Tms extends MY_Controller {
 			}
 		}
 
-		function cmp($a, $b){
-			if ($a['endTime'] == $b['endTime']) { return 0; }
-			return ($a['endTime'] < $b['endTime']) ? -1 : 1;
+		function cmpMatches($a, $b){
+			$a = new DateTime($a['endTime']);
+			$b = new DateTime($b['endTime']);
+			if ($a == $b) { return 0; }
+			return ($a < $b) ? -1 : 1;
+		}
+		function cmpTournaments($a, $b){
+			$a = new DateTime($a['tournamentEnd']);
+			$b = new DateTime($b['tournamentEnd']);
+			if ($a == $b) { return 0; }
+			return ($a < $b) ? -1 : 1;
 		}
 
-		usort($latestMatches, "cmp");
-		usort($upcomingMatches, "cmp");
-		usort($latestTournaments, "cmp");
-		usort($upcomingTournaments, "cmp");
+		usort($latestMatches, "cmpMatches");
+		usort($upcomingMatches, "cmpMatches");
+		usort($latestTournaments, "cmpTournaments");
+		usort($upcomingTournaments, "cmpTournaments");
 		$latestMatches 			= array_slice($latestMatches, -1, 5);
 		$upcomingMatches 		= array_slice($upcomingMatches, -1, 5);
 		$latestTournaments 		= array_slice($latestTournaments, -1, 5);
