@@ -75,7 +75,7 @@ class Tms extends MY_Controller {
 				break;
 			foreach($latestMatches as $i=>$lMatch){
 				if(!$lMatch){
-					unset($latestTournaments[$i]);
+					unset($latestMatches[$i]);
 					break;
 				}
 				if($uMatch['matchID']==$lMatch['matchID']){
@@ -97,7 +97,7 @@ class Tms extends MY_Controller {
 					unset($latestTournaments[$i]);
 					break;
 				}
-				if($utournament['tournamentID']==$lTournament['tournamentID']){
+				if($uTournament['tournamentID']==$lTournament['tournamentID']){
 					unset($upcomingTournament[$u]);
 					break;
 				}
