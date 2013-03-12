@@ -69,15 +69,15 @@ class Tms extends MY_Controller {
 		foreach($upcomingMatches as $u=>$uMatch){
 			if(!$uMatch){
 				unset($upcomingMatches[$u]);
-				break;
+				continue;
 			}
 			if($today<new DateTime($uMatch['startTime']))
-				break;
+				continue;
 			foreach($latestMatches as $i=>$lMatch){
 				var_dump($i."\n");
 				if(!$lMatch){
 					unset($latestMatches[$i]);
-					break;
+					continue;
 				}
 				if($uMatch['matchID']==$lMatch['matchID']){
 					unset($upcomingMatches[$u]);
@@ -89,15 +89,15 @@ class Tms extends MY_Controller {
 		foreach($upcomingTournaments as $u=>$uTournament){
 			if(!$uTournament){
 				unset($upcomingTournaments[$u]);
-				break;
+				continue;
 			}
 			if($today<new DateTime($uTournament['tournamentStart']))
-				break;
+				continue;
 			foreach($latestTournaments as $i=>$lTournament){
 				var_dump($i."\n");
 				if(!$lTournament){
 					unset($latestTournaments[$i]);
-					break;
+					continue;
 				}
 				if($uTournament['tournamentID']==$lTournament['tournamentID']){
 					unset($upcomingTournaments[$u]);
