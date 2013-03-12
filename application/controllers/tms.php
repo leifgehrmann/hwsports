@@ -74,6 +74,7 @@ class Tms extends MY_Controller {
 			if($today<new DateTime($uMatch['startTime']))
 				break;
 			foreach($latestMatches as $i=>$lMatch){
+				var_dump($i."\n");
 				if(!$lMatch){
 					unset($latestMatches[$i]);
 					break;
@@ -93,6 +94,7 @@ class Tms extends MY_Controller {
 			if($today<new DateTime($uTournament['tournamentStart']))
 				break;
 			foreach($latestTournaments as $i=>$lTournament){
+				var_dump($i."\n");
 				if(!$lTournament){
 					unset($latestTournaments[$i]);
 					break;
