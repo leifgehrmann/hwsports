@@ -98,7 +98,7 @@ class Tms extends MY_Controller {
 					break;
 				}
 				if($uTournament['tournamentID']==$lTournament['tournamentID']){
-					unset($upcomingTournament[$u]);
+					unset($upcomingTournaments[$u]);
 					break;
 				}
 			}
