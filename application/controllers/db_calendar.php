@@ -145,8 +145,8 @@ class Db_Calendar extends MY_Controller {
 
 			var_dump($match);
 
-			$startTime	= DateTime::createFromFormat(DATE_TIME_FORMAT, $match['startTime']);
-			$endTime	= DateTime::createFromFormat(DATE_TIME_FORMAT, $match['endTime']);
+			$startTime	= new DateTime( $match['startTime'] );
+			$endTime	= new DateTime( $match['endTime'] );
 
 			// If we encounter a syntax error in the dates...
 			if(empty($startTime) || empty($endTime))
