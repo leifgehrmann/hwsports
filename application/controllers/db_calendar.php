@@ -140,6 +140,9 @@ class Db_Calendar extends MY_Controller {
 
 		// Inserting all the matches
 		foreach($matches as $match) {
+
+			if(!$match) continue;
+
 			$startTime	= DateTime::createFromFormat(DATE_TIME_FORMAT, $match['startTime']);
 			$endTime	= DateTime::createFromFormat(DATE_TIME_FORMAT, $match['endTime']);
 
@@ -176,6 +179,9 @@ class Db_Calendar extends MY_Controller {
 		if($showTournaments){
 			//var_dump($tournaments); die();
 			foreach($tournaments as $tournament) {
+
+				if(!$tournament) continue;
+
 				$tournamentStart	= new DateTime($tournament['tournamentStart']);
 				$tournamentEnd		= new DateTime($tournament['tournamentEnd']);
 
