@@ -97,7 +97,7 @@ class Db_Calendar extends MY_Controller {
 				foreach($tournaments as $tournamentID=>$tournament){
 					$l = $this->matches_model->get_tournament_matches($tournamentID);
 					var_dump($l);
-					$matchesAll = $matchesAll + $this->matches_model->get_tournament_matches($tournamentID);
+					$matchesAll = $matchesAll + $l;
 				}
 			} else {
 				$matchesAll = $this->matches_model->get_all();
