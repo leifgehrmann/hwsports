@@ -377,14 +377,14 @@ class Db_Calendar extends MY_Controller {
 			case "match":
 				$eventData = $this->matches_model->get_match($id);
 				if($eventData['tournamentID']!=0) {
-					$tournamentData = $this->tournaments_model->get_tournament($eventData['tournamentID']);
+					$tournamentData = $this->tournaments_model->get($eventData['tournamentID']);
 				}
 				break;
 			case "tournament":
-				$eventData = $this->tournaments_model->get_tournament($id); 
+				$eventData = $this->tournaments_model->get($id); 
 				break;
 			case "registration":
-				$eventData = $this->tournaments_model->get_tournament($id); 
+				$eventData = $this->tournaments_model->get($id); 
 				break;
 		}
 
@@ -453,13 +453,13 @@ class Db_Calendar extends MY_Controller {
 		// Perform the update, 
 		switch($eventType) {
 			case "match": 
-				$updateResult = $this->matches_model->update_match($id,$data); 
+				$updateResult = $this->matches_model->update($id,$data); 
 			break;
 			case "tournament": 
-				$updateResult = $this->tournaments_model->update_tournament($id,$data); 
+				$updateResult = $this->tournaments_model->update($id,$data); 
 			break;
 			case "registration": 
-				$updateResult = $this->tournaments_model->update_tournament($id,$data); 
+				$updateResult = $this->tournaments_model->update($id,$data); 
 			break;
 		}
 		
