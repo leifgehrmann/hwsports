@@ -219,6 +219,9 @@ class Db_Calendar extends MY_Controller {
 		// Inserting all the registration periods
 		if($showRegistrations){
 			foreach($tournaments as $tournament) {
+
+				if(!$tournament) continue;
+
 				$registrationStart	= new DateTime($tournament['registrationStart']);
 				$registrationEnd	= new DateTime($tournament['registrationEnd']);
 
