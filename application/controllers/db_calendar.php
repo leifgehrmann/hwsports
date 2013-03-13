@@ -182,6 +182,8 @@ class Db_Calendar extends MY_Controller {
 
 				if(!$tournament) continue;
 
+				var_dump($tournament);
+
 				$tournamentStart	= new DateTime($tournament['tournamentStart']);
 				$tournamentEnd		= new DateTime($tournament['tournamentEnd']);
 
