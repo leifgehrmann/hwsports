@@ -147,9 +147,6 @@ class Db_Calendar extends MY_Controller {
 
 			if(!$match) continue;
 
-			var_dump($matches);
-			var_dump($match);
-
 			$startTime	= new DateTime( $match['startTime'] );
 			$endTime	= new DateTime( $match['endTime'] );
 
