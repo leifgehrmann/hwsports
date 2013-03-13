@@ -95,7 +95,7 @@ class Db_Calendar extends MY_Controller {
 			// Do we want tournament matches only?
 			if($showTournamentMatchesOnly){
 				foreach($tournaments as $tournamentID=>$tournament)
-					$matchesAll[] = $this->matches_model->get_tournament_matches($tournamentID);
+					$matchesAll = $matchesAll + $this->matches_model->get_tournament_matches($tournamentID);
 			} else {
 				$matchesAll = $this->matches_model->get_all();
 			}
