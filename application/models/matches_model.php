@@ -106,10 +106,14 @@ class Matches_model extends MY_Model {
 	 **/
 	public function get_tournament_matches($tournamentID) {
 		// Query to return the IDs for everything which takes place at the specified sports centre
-		$IDsQuery = $this->db->query("SELECT matchID FROM matches WHERE tournamentID = ".$this->db->escape($tournamentID));
+		$where = array('tournamentID' => $tournamentID);
+		$IDRows = $this->db->select($this->objectIDKey)
+							   ->from($this->relationTableName)
+							   ->where($where)
+							   ->get()->result_array();
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
-		foreach($IDsQuery->result_array() as $IDRow) {
-			$all[$IDRow['matchID']] = $this->get_match($IDRow['matchID']);
+		foreach($IDRows as $IDRow) {
+			$all[$IDRow['matchID']] = $this->get($IDRow['matchID']);
 		}
 		return (empty($all) ? FALSE : $all);
 	}
