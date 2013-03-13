@@ -40,7 +40,7 @@ class Sports_model extends MY_Model {
 		$all = array();
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
 		foreach($IDRows as $IDRow) {
-			$all[] = $this->get($IDRow[$this->objectIDKey]);
+			$all[$IDRow[$this->objectIDKey]] = $this->get($IDRow[$this->objectIDKey]);
 		}
 		return $all;
 	}

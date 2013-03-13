@@ -69,7 +69,7 @@ class Db_Calendar extends MY_Controller {
 
 		// We select all the tournaments with the appropriate sport.
 		if($tournamentIDs=="all"){ // If we want all tournaments
-			$tournamentsAll = $this->tournaments_model->get_tournaments($centreID);
+			$tournamentsAll = $this->tournaments_model->get_all();
 			foreach ($tournamentsAll as $tournament )
 				if($sportIDs=="all") // If we want only a particular sport
 					$tournaments[] = $tournament;
@@ -80,7 +80,7 @@ class Db_Calendar extends MY_Controller {
 
 		} else { // If we want only particular tournaments
 			foreach ($tournamentIDs as $tournamentID ){
-				$tournament = $this->tournaments_model->get_tournament($tournamentID);
+				$tournament = $this->tournaments_model->get($tournamentID);
 				if($sportIDs=="all") // If we want only a particular sport
 					$tournaments[] = $tournament;
 				else
@@ -93,10 +93,12 @@ class Db_Calendar extends MY_Controller {
 		if($matchIDs=="all"){ // If we want all matches
 			$matchesAll = array();
 			// Do we want tournament matches only?
-			if($showTournamentMatchesOnly)
-				$matchesAll = $this->matches_model->get_tournament_matches($centreID);
-			else 
-				$matchesAll = $this->matches_model->get_matches($centreID);
+			if($showTournamentMatchesOnly){
+				foreach($tournaments as $tournamentID=>$tournament)
+				$matchesAll[] = $this->matches_model->get_tournament_matches($tournamentID);
+			} else {
+				$matchesAll = $this->matches_model->get_all();
+			}
 			foreach ($matchesAll as $match ){
 				if($sportIDs=="all") // If we want only a particular sport
 					if($venueIDs=="all") // If we want only a particular venue
@@ -116,7 +118,7 @@ class Db_Calendar extends MY_Controller {
 
 		} else { // If we only want particular matches
 			foreach ($matchIDs as $matchID ){
-				$match = $this->matches_model->get_match($matchID);
+				$match = $this->matches_model->get($matchID);
 				if($sportIDs=="all") // If we want only a particular sport
 					if($venueIDs=="all") // If we want only a particular venue
 						$matches[] = $match;
@@ -158,7 +160,7 @@ class Db_Calendar extends MY_Controller {
 								' venueID-'.$match['venueID'].
 								' sportID-'.$match['sportID'].
 								' tournamentID-'.$match['tournamentID'].
-								' sportCategoryID-'.$match['sportCategoryID']
+								' sportCategoryID-'.$match['sportData']['sportCategoryID']
 			);
 			if(isset($matchUrl))
 				$event['url'] = $matchUrl.$match['matchID'];
@@ -192,7 +194,7 @@ class Db_Calendar extends MY_Controller {
 					'className' => 	'tournament'.
 									' sportID-'.$tournament['sportID'].
 									' tournamentID-'.$tournament['tournamentID'].
-									' sportCategoryID-'.$tournament['sportCategoryID']
+									' sportCategoryID-'.$tournament['sportData']['sportCategoryID']
 				);
 				if(isset($tournamentUrl))
 					$event['url'] = $tournamentUrl.$tournament['tournamentID'];
@@ -225,7 +227,7 @@ class Db_Calendar extends MY_Controller {
 					'className' => 	'registration'.
 									' sportID-'.$tournament['sportID'].
 									' tournamentID-'.$tournament['tournamentID'].
-									' sportCategoryID-'.$tournament['sportCategoryID']
+									' sportCategoryID-'.$tournament['sportData']['sportCategoryID']
 				);
 				if(isset($registrationUrl))
 					$event['url'] = $registrationUrl.$tournament['tournamentID'];
@@ -497,16 +499,16 @@ class Db_Calendar extends MY_Controller {
 		// Fetch stuff from the database
 		switch ($eventType) {
 			case "match":
-				$eventData = $this->matches_model->get_match($id);
+				$eventData = $this->matches_model->get($id);
 				if($eventData['tournamentID']!=0) {
-					$tournamentData = $this->tournaments_model->get_tournament($eventData['tournamentID']);
+					$tournamentData = $this->tournaments_model->get($eventData['tournamentID']);
 				}
 				break;
 			case "tournament":
-				$eventData = $this->tournaments_model->get_tournament($id); 
+				$eventData = $this->tournaments_model->get($id); 
 				break;
 			case "registration":
-				$eventData = $this->tournaments_model->get_tournament($id); 
+				$eventData = $this->tournaments_model->get($id); 
 				break;
 		}
 
@@ -573,13 +575,13 @@ class Db_Calendar extends MY_Controller {
 		// Perform the update, 
 		switch($eventType) {
 			case "match": 
-				$updateResult = $this->matches_model->update_match($id,$data); 
+				$updateResult = $this->matches_model->update($id,$data); 
 			break;
 			case "tournament": 
-				$updateResult = $this->tournaments_model->update_tournament($id,$data); 
+				$updateResult = $this->tournaments_model->update($id,$data); 
 			break;
 			case "registration": 
-				$updateResult = $this->tournaments_model->update_tournament($id,$data); 
+				$updateResult = $this->tournaments_model->update($id,$data); 
 			break;
 		}
 		

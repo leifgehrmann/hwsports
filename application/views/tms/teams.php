@@ -13,9 +13,9 @@
 		<td><div class="icon"></td>
 		<td><?=$team['teamID']?></td>
 		<td><?=$team['name']?></td>
-		<td>...</td>
-		<td>...</td>
-		<td>...</td>
+		<td></td>
+		<td></td>
+		<td></td>
 		<td><a class="button" href="/tms/user/<?=$team['teamID']?>">View</a></td>
 	</tr>
 	<? } ?>

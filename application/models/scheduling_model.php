@@ -16,9 +16,9 @@ class Scheduling_model extends MY_Model {
 		$this->load->model('tournaments_model');
 
 		// Get tournament Information
-		$tournament = $this->tournaments_model->get_tournament($tournamentID);
-		$actors 	= $this->tournaments_model->get_tournament_actors($tournamentID);
-		$venues 	= $this->tournaments_model->get_tournament_venues($tournamentID);
+		$tournament = $this->tournaments_model->get($tournamentID);
+		$actors 	= $this->tournaments_model->get_actors($tournamentID);
+		$venues 	= $this->tournaments_model->get_venues($tournamentID);
 
 		if($tournament==FALSE)
 			return FALSE;

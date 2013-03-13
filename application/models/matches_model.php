@@ -62,7 +62,7 @@ class Matches_model extends MY_Model {
 			$all = array();
 			// Loop through all result rows, get the ID and use that to put all the data into the output array 
 			foreach($IDRows as $IDRow) {
-				$all[] = $this->get($IDRow[$this->objectIDKey]);
+				$all[$IDRow[$this->objectIDKey]] = $this->get($IDRow[$this->objectIDKey]);
 			}
 			return $all;
 		} else {
@@ -93,7 +93,7 @@ class Matches_model extends MY_Model {
 				}
 
 				if( $startTime < $matchEndTime && $matchStartTime < $endTime )
-					$filtered[] = $match;
+					$filtered[$match['matchID']] = $match;
 			}
 			return $filtered;
 		}
@@ -109,7 +109,7 @@ class Matches_model extends MY_Model {
 		$IDsQuery = $this->db->query("SELECT matchID FROM matches WHERE tournamentID = ".$this->db->escape($tournamentID));
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
 		foreach($IDsQuery->result_array() as $IDRow) {
-			$all[] = $this->get_match($IDRow['matchID']);
+			$all[$IDRow['matchID']] = $this->get_match($IDRow['matchID']);
 		}
 		return (empty($all) ? FALSE : $all);
 	}
@@ -133,7 +133,7 @@ class Matches_model extends MY_Model {
 			// Loop through all result rows, get the ID and use that to put all the data into the output array 
 			$all = array();
 			foreach($IDsQuery as $IDRow) {
-				$all[] = $this->get_match($IDRow['matchID']);
+				$all[$IDRow['matchID']] = $this->get_match($IDRow['matchID']);
 			}
 			return $all;
 		} else {
@@ -162,7 +162,7 @@ class Matches_model extends MY_Model {
 				}
 
 				if( $startTime < $matchEndTime && $matchStartTime < $endTime )
-					$filtered[] = $match;
+					$filtered[$match['matchID']] = $match;
 			}
 			return $filtered;
 		}

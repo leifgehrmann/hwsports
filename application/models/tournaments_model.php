@@ -6,6 +6,7 @@ class Tournaments_model extends MY_Model {
 		// Load models we might be referencing
 		$this->load->model('users_model');
 		$this->load->model('teams_model');
+		$this->load->model('venues_model');
 		// Basic variables which apply to all table operations
 		$this->objectIDKey = "tournamentID";
 		$this->dataTableName = "tournamentData";
@@ -94,7 +95,7 @@ class Tournaments_model extends MY_Model {
 		$all = array();
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
 		foreach($IDRows as $IDRow) {
-			$all[] = $this->get($IDRow[$this->objectIDKey]);
+			$all[$IDRow[$this->objectIDKey]] = $this->get($IDRow[$this->objectIDKey]);
 		}
 		return $all;
 	}
@@ -120,10 +121,36 @@ class Tournaments_model extends MY_Model {
 			// For each actor, use eval with the actorMethod and actorID from the database to get the actual actor data 
 			eval("\$actor = \$this->{$actorRow['actorMethod']}({$actorRow['actorID']});");
 			// Append the actor to the output array, in a sub array of the role name - therefore from your sport-specific function you might use $actors['Umpire'] to get all the umpires, etc.
-			$actors[$actorRow['sportCategoryRoleName']][] = $actor;
+			$actors[$actorRow['sportCategoryRoleName']][$actorRow['actorID']] = $actor;
 		}
 		// Return all actors
 		return $actors;
+	}
+
+	/**
+	 * Returns all data about all venues in a tournament
+	 *  
+	 * @return array
+	 **/
+	public function get_venues($ID) {
+		// Check if ID exists
+		if(!$this->get($ID)) return FALSE;
+		// Select all info about venues for this specific tournament
+		$venueRows = $this->db->select('venueID')
+					->from('tournamentVenues')
+					->where('tournamentID',$ID)
+					->get()
+					->result_array();
+		// We should return an empty array if there are no venues at all, so create it here
+		$venues = array();
+		foreach($venueRows as $venueRow) {
+			// Get the value of the venues_model
+			$venue = $this->venues_model->get($venueRow['venueID']);
+			// add the venue to the array
+			$venues[$venueRow['venueID']] = $venue;
+		}
+		// Return all actors
+		return $venues;
 	}
 
 	/**
