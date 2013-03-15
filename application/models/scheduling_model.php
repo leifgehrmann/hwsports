@@ -185,9 +185,9 @@ class Scheduling_model extends MY_Model {
 
 			// Get list of days ordered by a fitness function that encourages
 			// the spread of days in a tournament.
-			$optimallySortedDates = $this->fitness_generator($matchDateUsed);
-			var_dump($matchDateUsed);
-			foreach($optimallySortedDates as $date)
+			$weightedDates = $this->fitness_generator($matchUsage);
+			var_dump($weightedDates);
+			foreach($weightedDates as $date)
 			{
 				// Has either team A or team B already played on this day the maximum number of times?
 				if($matchMaximumPlays <= $matchUsage[$date]['teams'][$teamA]['count'])
@@ -451,8 +451,6 @@ class Scheduling_model extends MY_Model {
 	}
 
 	/**
-	 * HAS NOT BEEN TESTED
-	 *
 	 * @param items is an array of items. Can be a multidimensional array
 	 * of teams for example. 
 	 * returns an array of tuples. In which case you probably just
