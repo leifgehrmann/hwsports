@@ -204,10 +204,10 @@ textarea {
                 inset 0px 1px 2px rgba(0,0,0,0.6), 
                 inset 0px 0px 1px rgba(0,0,0,0.6);
 }
-input.time, input.colorpicker {
+input.time, input.color {
     width: 100px;
 }
-input.colorpicker {
+input.color {
     width: 100px;
     color: #FFF;
     text-shadow: 

@@ -34,7 +34,7 @@
 <?php echo form_close();?>
 
 <script type="text/javascript">
-$('input.colorpicker').ColorPicker({
+$('input.color').ColorPicker({
 	onSubmit: function(hsb, hex, rgb, el) {
 		$(el).val(hex);
 		$(el).css('background-color','#'+hex);
