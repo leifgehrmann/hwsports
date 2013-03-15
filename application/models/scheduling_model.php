@@ -322,11 +322,14 @@ class Scheduling_model extends MY_Model {
 					// We now need to finally update the statistics
 					//$matchDateTimesSelected = array(); // associated array of date->datetime->data. This will be our final result
 					$matchUsage[$date]['count'] += 1; // $matchDateUsed[$date] = $matchDateUsed[$date] + 1; 
-					$matchUsage[$date][$dateTime]['count'] += 1; // $matchDateTimeUsed[$dateTime] = $matchDateTimeUsed[$dateTime] + 1;
 					$matchUsage[$date]['teams'][$teamA]['count'] += 1; // $matchDateTeam[$date][$teamA] = $matchDateTeam[$date][$teamA] + 1;
 					$matchUsage[$date]['teams'][$teamB]['count'] += 1; // $matchDateTeam[$date][$teamB] = $matchDateTeam[$date][$teamB] + 1;
-					$matchUsage[$date][$dateTime]['teams'][$teamA]['count'] += 1; // $matchDateTimeTeam[$date][$dateTime][$teamA] = $matchDateTimeTeam[$date][$dateTime][$teamA] + 1;
-					$matchUsage[$date][$dateTime]['teams'][$teamB]['count'] += 1; // $matchDateTimeTeam[$date][$dateTime][$teamB] = $matchDateTimeTeam[$date][$dateTime][$teamB] + 1;
+					if(array_key_exists($dateTime,$matchDateTimes[$date]))
+					{
+						$matchUsage[$date][$dateTime]['count'] += 1; // $matchDateTimeUsed[$dateTime] = $matchDateTimeUsed[$dateTime] + 1;
+						$matchUsage[$date][$dateTime]['teams'][$teamA]['count'] += 1; // $matchDateTimeTeam[$date][$dateTime][$teamA] = $matchDateTimeTeam[$date][$dateTime][$teamA] + 1;
+						$matchUsage[$date][$dateTime]['teams'][$teamB]['count'] += 1; // $matchDateTimeTeam[$date][$dateTime][$teamB] = $matchDateTimeTeam[$date][$dateTime][$teamB] + 1;
+					}
 					//if( $matchDateUsedMax < $matchUsage[$date]['count'] )
 					//	$matchDateUsedMax = $matchUsage[$date]['count'];
 
