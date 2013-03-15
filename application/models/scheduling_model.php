@@ -207,6 +207,7 @@ class Scheduling_model extends MY_Model {
 					if($key!="teams" && $key!="count")
 						$matchUsageDateTimes[$key] = $value;
 				$weightedDateTimes = $this->fitness_generator($matchUsageDateTimes);
+				var_dump($$matchUsage[$date]);
 				foreach($weightedDateTimes as $dateTimeWeight=>$dateTime)
 				{
 					var_dump("Attempting to add Event at datetime ".$dateTime);
