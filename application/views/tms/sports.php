@@ -9,6 +9,7 @@
 				<th width="30%">Name</th>
 				<th width="30%">Description</th>
 				<th width="30%">Category</th>
+				<th width="5%">&nbsp;</th>
 			</tr>
 		</thead>
 	</table>
