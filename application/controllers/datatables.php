@@ -28,7 +28,7 @@ class Datatables extends MY_Controller {
 		switch ($action) {
 			case "load":
 				$sports = $this->sports_model->get_all();
-				$out['aaData'] = array("DT_RowId"=>"row_1","name"=>"hello","description"=>"world","category"=>19);
+				$out['aaData'] = array("DT_RowId"=>"row_1","sportID"=>1,"centreID"=>1,"name"=>"hello","description"=>"world","sportCategoryName"=>"football");
 				//$out['error'] = $sports;
 			break;
 			case "create":

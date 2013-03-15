@@ -81,7 +81,7 @@
 				]
 			},
 			"fnInitComplete": function ( settings, json ) {
-				editor.field('sportCategoryID').update( json.sportCategoryData );
+				//editor.field('sportCategoryID').update( json.sportCategoryData );
 			}
 		} );
 
