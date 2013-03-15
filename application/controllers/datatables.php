@@ -29,22 +29,6 @@ class Datatables extends MY_Controller {
 			case "load":
 				$sports = $this->sports_model->get_all();
 				$out['aaData'] = array("DT_RowId"=>"row_1","sportID"=>1,"centreID"=>1,"name"=>"hello","description"=>"world","sportCategoryName"=>"football");
-				
-				$out = '{"id":-1,
-					"error":"",
-					"fieldErrors":[],
-					"data":[],
-					"aaData":[
-						{
-							"DT_RowId":"row_1",
-							"sportID":1,
-							"centreID":1,
-							"name":"hello",
-							"description":"world",
-							"sportCategoryName":"football"
-						}
-					]
-				}';
 				//$out['error'] = $sports;
 			break;
 			case "create":
@@ -64,8 +48,8 @@ class Datatables extends MY_Controller {
 		}
 
 		// Send it back to the client, via our plain data dump view
-		//$this->data['data'] = json_encode($out);
-		$this->data['data'] = $out;
+		$this->data['data'] = json_encode($out);
+		//$this->data['data'] = $out;
 		$this->load->view('data', $this->data);
 	}
 }
