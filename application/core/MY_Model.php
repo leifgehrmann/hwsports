@@ -117,6 +117,9 @@ class MY_Model extends CI_Model {
 	* Complex example: 	
 	*/
 	public function insert_object($data, $objectIDKey, $dataTableName, $relationTableName = false, $relations = array()) {		
+		// Lump all inserts into one transaction
+		$this->db->trans_start();
+		
 		// If we've been given a relational table and relations to go in that table, we should create the entry in that first to get the ID to use for the data
 		if( $relationTableName && count($relations) ) {
 			// Insert the row in the relation table with all the relations specified, generating an ID using AUTO_INCREMENT 
@@ -131,9 +134,6 @@ class MY_Model extends CI_Model {
 			// This is the actual numerical ID we wish to insert data as
 			$objectID = $maxRow[$objectIDKey]+1;
 		}
-		
-		// Lump all inserts into one transaction
-		$this->db->trans_start();
 		// Loop through input data
 		foreach($data as $key => $value) {
 			// Set the values for the insert

@@ -7,10 +7,17 @@ class Datatables extends MY_Controller {
 		$this->load->model('matches_model');
 		$this->load->model('sports_model');
 		$this->load->model('venues_model');
+		
 		$this->singulars = array(
 			"matches" => "match",
 			"sports" => "sport",
 			"venues" => "venue"
+		);
+		
+		$this->relations = array(
+			"matches" => array("sportID","venueID","tournamentID"),
+			"sports" => array("sportCategoryID"),
+			"venues" => array()
 		);
 	}
 
@@ -47,8 +54,18 @@ class Datatables extends MY_Controller {
 				$out['aaData'] = $aaData;
 			break;
 			case "create":
+				// Copy the input data so we feel better about modifying it directly
 				$newData = $_POST['data'];
-				eval('$newID = $this->'.$type.'_model->insert($newData);');
+				// Take the "matchID", "sportID" etc out of the input array
+				unset[$newData[$this->singulars[$type].'ID']];
+				// For each input ID which is defined as a relational field for this type, remove from input and put into relations
+				$newRelations = array();
+				foreach($this->relations[$type] as $relation) {
+					$newRelations[$this->singulars[$type].'ID'] = $newData[$this->singulars[$type].'ID']; 
+					unset($newData[$this->singulars[$type].'ID']);
+				}
+				// Do the insert, with an empty $newRelations array if there are no dependents
+				eval('$newID = $this->'.$type.'_model->insert($newData,$newRelations);');
 				if($newID!==FALSE) {
 					eval('$newObject = $this->'.$type.'_model->get($newID);');
 					$newObject['detailsLink'] = "<a href='/tms/{$this->singulars[$type]}/$newID'>Details</a>";
