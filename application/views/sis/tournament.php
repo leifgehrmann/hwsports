@@ -30,7 +30,7 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			events: '/db_calendar/getTournamentMatches/<?=$tournamentID?>',
+			events: '/db_calendar/getTournamentMatches/<?=$tournament['ID']?>',
 			editable: false
 		});
 		
