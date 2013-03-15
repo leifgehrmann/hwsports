@@ -191,7 +191,7 @@ class Scheduling_model extends MY_Model {
 				// Has either team A or team B already played on this day the maximum number of times?
 				if($matchMaximumPlays <= $matchUsage[$date]['teams'][$teamA]['count'])
 					continue;
-				if($matchMaximumPlays <= $matchUsage[$date]['teams'][$teamA]['count'])
+				if($matchMaximumPlays <= $matchUsage[$date]['teams'][$teamB]['count'])
 					continue;
 
 				// Now we need to find our the time slot. Again, we use our fitness generator...
