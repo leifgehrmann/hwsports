@@ -137,8 +137,11 @@ class Tms extends MY_Controller {
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
 			unset($newdata['submit']);
+			$relationIDs = array(
+				'sportID' => $newdata['sport']
+			);
 			
-			$tournamentID = $this->tournaments_model->insert($newdata);
+			$tournamentID = $this->tournaments_model->insert($newdata,$relationIDs);
 			if($tournamentID > -1) {
 				// Successful update, show success message
 				$this->session->set_flashdata('message_success',  'Successfully Created Tournament.');
