@@ -1,5 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+<?php 
 namespace DataTables;
 // Alias Editor classes so they are easy to use
 use
