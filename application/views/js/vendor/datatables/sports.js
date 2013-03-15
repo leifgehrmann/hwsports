@@ -2,7 +2,7 @@
 	
 	function predelete(id) {
 		$.fancybox({
-			href : '/datatables/predelete/sports-'+id,
+			href : '/datatables/predelete/'+id,
 			type : 'ajax'
 		});
 	}
