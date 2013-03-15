@@ -451,6 +451,8 @@ class Scheduling_model extends MY_Model {
 			{
 				// Set the datetime object for the match
 				// to be a specific hour and minute
+				if(!preg_match("|[0-9][0-9]:[0-9][0-9]|",$startTime,))
+					continue;
 				list($startHour,$startMinute) = explode(':', $startTime);
 				$startDateTime = clone $date;
 				$startDateTime->setTime($startHour, $startMinute, 0);
