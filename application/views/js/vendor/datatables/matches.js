@@ -5,11 +5,6 @@
 			"ajaxUrl": "/datatables/matches",
 			"domTable": "#matches",
 			"fields": [ {
-					"label": "Centre ID",
-					"name": "centreID",
-					"default": $('#centreID').text(),
-					"type": "hidden"
-				}, {
 					"label": "ID",
 					"name": "matchID",
 					"type": "hidden"
@@ -53,6 +48,12 @@
 				"onEdit": function (json, data) {
 				},
 				"onOpen": function ( settings, json ) {
+				},
+				"onInitRemove": function() {
+					$.fancybox({
+						href : '/datatables/predelete/'+$('.DTTT_selected').attr('id'),
+						type : 'ajax'
+					});
 				}
 			}
 		} );
@@ -61,25 +62,23 @@
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/matches",
 			"aoColumns": [
-				{ "mData": "centreID" },
 				{ "mData": "matchID" },
-				{ "mData": "sportName" },
-				{ "mData": "venueName" },
-				{ 
-					"mData": "tournamentName",
-					"sDefaultContent": ""
-				},
 				{ "mData": "name" },
+				{ 
+					"mData": "tournamentData.name",
+					"sDefaultContent": "None"
+				},
 				{ "mData": "startTime" },
 				{ "mData": "endTime" },
-				{ "mData": "description" }
+				{ "mData": "description" },
+				{ "mData": "sportData.name" },
+				{ "mData": "venueData.name" }
 			],
 			"aoColumnDefs": [
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] }
             ],
 			"oTableTools": {
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
-				"sRowSelect": "multi",
+				"sRowSelect": "single",
 				"aButtons": [
 					{ "sExtends": "editor_create", "editor": editor },
 					{ "sExtends": "editor_edit",   "editor": editor },

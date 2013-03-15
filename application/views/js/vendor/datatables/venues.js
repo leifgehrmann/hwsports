@@ -26,11 +26,6 @@
 			"ajaxUrl": "/datatables/venues",
 			"domTable": "#venues",
 			"fields": [ {
-					"label": "centreID",
-					"name": "centreID",
-					"default": $('#centreID').text(),
-					"type": "hidden"
-				}, {
 					"label": "Lat",
 					"name": "lat",
 					"type": "hidden"
@@ -72,6 +67,12 @@
 						$('#mapcontainer').hide();
 						$('#venuemap').hide();
 					}
+				},
+				"onInitRemove": function() {
+					$.fancybox({
+						href : '/datatables/predelete/'+$('.DTTT_selected').attr('id'),
+						type : 'ajax'
+					});
 				}
 			}
 		} );
@@ -80,7 +81,6 @@
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/venues",
 			"aoColumns": [
-				{ "mData": "centreID" },
 				{ "mData": "lat" },
 				{ "mData": "lng" },
 				{ "mData": "venueID" },
@@ -95,12 +95,11 @@
 			"aoColumnDefs": [
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 1 ] },
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 2 ] },
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 3 ] }
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 2 ] }
             ],
 			"oTableTools": {
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
-				"sRowSelect": "multi",
+				"sRowSelect": "single",
 				"aButtons": [
 					{ "sExtends": "editor_create", "editor": editor },
 					{ "sExtends": "editor_edit",   "editor": editor },
