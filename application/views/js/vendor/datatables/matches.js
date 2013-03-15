@@ -53,6 +53,12 @@
 				"onEdit": function (json, data) {
 				},
 				"onOpen": function ( settings, json ) {
+				},
+				"onInitRemove": function() {
+					$.fancybox({
+						href : '/datatables/predelete/'+$('.DTTT_selected').attr('id'),
+						type : 'ajax'
+					});
 				}
 			}
 		} );
@@ -79,7 +85,7 @@
             ],
 			"oTableTools": {
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
-				"sRowSelect": "multi",
+				"sRowSelect": "single",
 				"aButtons": [
 					{ "sExtends": "editor_create", "editor": editor },
 					{ "sExtends": "editor_edit",   "editor": editor },

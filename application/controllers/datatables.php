@@ -61,6 +61,104 @@ class Datatables extends MY_Controller {
 		$this->load->view('data', $this->data);
 	}
 	
+	
+	public function matches() {
+		$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "load";
+		$out = array (
+				'id' => -1,
+				'error' => '',
+				'fieldErrors' => array (
+								 ),
+				'data' => array (
+						  ),
+			   );
+
+		switch ($action) {
+			case "load":
+				$matches = $this->matches_model->get_all();
+				$aaData = array();
+				foreach($matches as $id => $sport) {
+					$sport['DT_RowId'] = "matches-$id";
+					$aaData[] = $sport;
+				}
+				$out['aaData'] = $aaData;
+			break;
+			case "create":
+				$matches = $this->matches_model->get_all();
+				$out['error'] = $matches;
+			break;
+			case "edit":
+				$newdata = $_POST['data'];
+				$out['error'] = $newdata;
+			break;
+			case "remove":
+				$removedata = $_POST['data'];
+				$removerow = $removedata[0];
+				$modelid = explode('-',$removerow);
+				$model = $modelid[0];
+				$ID = $modelid[1];
+				if($this->matches_model->delete($ID,false)) {
+					$out = array('id' => -1);
+				} else {
+					$out['error'] = "An error occurred. Please contact Infusion Systems.";
+				}
+			break;
+		}
+
+		// Send it back to the client, via our plain data dump view
+		$this->data['data'] = json_encode($out);
+		$this->load->view('data', $this->data);
+	}
+	
+	
+	public function venues() {
+		$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "load";
+		$out = array (
+				'id' => -1,
+				'error' => '',
+				'fieldErrors' => array (
+								 ),
+				'data' => array (
+						  ),
+			   );
+
+		switch ($action) {
+			case "load":
+				$venues = $this->venues_model->get_all();
+				$aaData = array();
+				foreach($venues as $id => $sport) {
+					$sport['DT_RowId'] = "venues-$id";
+					$aaData[] = $sport;
+				}
+				$out['aaData'] = $aaData;
+			break;
+			case "create":
+				$venues = $this->venues_model->get_all();
+				$out['error'] = $venues;
+			break;
+			case "edit":
+				$newdata = $_POST['data'];
+				$out['error'] = $newdata;
+			break;
+			case "remove":
+				$removedata = $_POST['data'];
+				$removerow = $removedata[0];
+				$modelid = explode('-',$removerow);
+				$model = $modelid[0];
+				$ID = $modelid[1];
+				if($this->venues_model->delete($ID,false)) {
+					$out = array('id' => -1);
+				} else {
+					$out['error'] = "An error occurred. Please contact Infusion Systems.";
+				}
+			break;
+		}
+
+		// Send it back to the client, via our plain data dump view
+		$this->data['data'] = json_encode($out);
+		$this->load->view('data', $this->data);
+	}
+	
 	public function predelete($model_id) {
 		$modelid = explode('-',$model_id);
 		$model = $modelid[0];
