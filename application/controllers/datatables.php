@@ -19,19 +19,17 @@ class Datatables extends MY_Controller {
 		$out = array (
 				'id' => -1,
 				'error' => '',
-				'fieldErrors' => 
-					array (
-					),
-				'data' => 
-					array (
-					),
+				'fieldErrors' => array (
+								 ),
+				'data' => array (
+						  ),
 			   );
 
 		switch ($action) {
 			case "load":
 				$sports = $this->sports_model->get_all();
 				$out['aaData'] = $sports;
-				$out['error'] = $sports;
+				//$out['error'] = $sports;
 			break;
 			case "create":
 				$sports = $this->sports_model->get_all();
