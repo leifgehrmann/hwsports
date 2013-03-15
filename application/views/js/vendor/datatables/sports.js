@@ -39,7 +39,8 @@
 				},
 				"onOpen": function ( settings, json ) {
 				},
-				"onInitRemove": function() {
+				"onInitRemove": function(hello) {
+					console.log(hello);
 					$('.DTE_Action_Remove .DTE_Footer_Content .DTE_Form_Buttons button').before('<button onclick="predelete('+this.get('id')+');">Check Dependencies</button>');
 				}
 			}
