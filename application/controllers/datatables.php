@@ -44,7 +44,7 @@ class Datatables extends MY_Controller {
 			break;
 			case "remove": 
 			//src='/datatables/sports?action=jspredelete&id={$_POST['data'][0]['id']}
-				$out['error'] = "<script type='text/javascript>jQuery.fancybox.close();</script>";
+				$out['error'] = "<script type='text/javascript'>jQuery.fancybox.close();</script>";
 			break;
 			case "jspredelete":
 				$ID = $_GET['id'];
