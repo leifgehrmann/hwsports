@@ -164,10 +164,10 @@ class Scheduling_model extends MY_Model {
 			{
 				$matchUsage[$date][$dateTime]['count'] = 0;
 				foreach($teamIDs as $teamID)
-					$matchUsage[$date][$dateTime][$teamID]['count'] = 0;
+					$matchUsage[$date][$dateTime]['teams'][$teamID]['count'] = 0;
 			}
 			foreach($teamIDs as $teamID)
-				$matchUsage[$date]['team'][$teamID]['count'] = 0;
+				$matchUsage[$date]['teams'][$teamID]['count'] = 0;
 		}
 		foreach( $umpires as $umpire )
 			$umpireUsage[$umpire['userID']] = 0;
