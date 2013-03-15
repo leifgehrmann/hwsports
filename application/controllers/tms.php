@@ -415,7 +415,9 @@ class Tms extends MY_Controller {
 		$tournaments = $this->tournaments_model->get_all();
 		$venues = $this->venues_model->get_all();
 
-		foreach($sports as $sport) $sportOptions[$sport['sportID']] = $sport['name'];
+		foreach($sports as $sport){
+			$sportOptions[$sport['sportCategoryData']['name']][$sport['sportID']] = $sport['name'];
+		}
 		foreach($tournaments as $tournament) {
 			$start = new DateTime($tournament['tournamentStart']);
 			$year = $start->format('Y');
