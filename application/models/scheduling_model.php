@@ -143,10 +143,11 @@ class Scheduling_model extends MY_Model {
 		// occur at a particular time.
 
 		$matchDateTimesSelected = array(); // associated array of date->datetime->data. This will be our final result
+		$matchUsage = array();
 		$matchDateUsed     = array(); // associative array of date to number of matches on that day
 		$matchDateTimeUsed = array(); // associative array of date->datetime to number of matches during that slot
-		$matchDateTeam     = array(); // associative array of date->team to number of matches on that day
-		$matchDateTimeTeam = array(); // associative array of date->datetime->team to number of matches during that slot
+		$matchDateTeamUsed     = array(); // associative array of date->team to number of matches on that day
+		$matchDateTimeTeamUsed = array(); // associative array of date->datetime->team to number of matches during that slot
 		$umpireCount = array(); // associative array of umpireID to number of matches he/she already manages.
 		$matchDateUsedMax = 0;
 
@@ -159,18 +160,18 @@ class Scheduling_model extends MY_Model {
 		// We set the initial count for every single array to be 0.
 		foreach($matchDateTimes as $date=>$dateTimes)
 		{
-			$matchDateUsed[$date] = 0;
+			$matchUsage[$date]['count'] = 0;
 			foreach($dateTimes as $dateTime=>$data)
 			{
-				$matchDateTimeUsed[$date][$dateTime] = 0;
+				$matchUsage[$date][$dateTime]['count'] = 0;
 				foreach($teamIDs as $teamID)
-					$matchDateTeam[$date][$dateTime][$teamID] = 0;
+					$matchUsage[$date][$dateTime][$teamID]['count'] = 0;
 			}
-			foreach($matchDateTeam as $teamID)
-				$matchDateTeam[$date][$teamID] = 0;
+			foreach($teamIDs as $teamID)
+				$matchUsage[$date]['team'][$teamID]['count'] = 0;
 		}
 		foreach( $umpires as $umpire )
-			$matchUmpire[$umpire['userID']] = 0;
+			$umpireUsage[$umpire['userID']] = 0;
 
 		// Assuming for now that we only want round robins for now:
 		$combinations = $this->round_robin($teamIDs);
@@ -188,15 +189,15 @@ class Scheduling_model extends MY_Model {
 			foreach($optimallySortedDates as $date)
 			{
 				// Has either team A or team B already played on this day the maximum number of times?
-				if($matchMaximumPlays <= $matchDateTeam[$date][$teamA])
+				if($matchMaximumPlays <= $matchUsage[$date]['teams'][$teamA]['count'])
 					continue;
-				if($matchMaximumPlays <= $matchDateTeam[$date][$teamB])
+				if($matchMaximumPlays <= $matchUsage[$date]['teams'][$teamA]['count'])
 					continue;
 
 				// Now we need to find our the time slot. Again, we use our fitness generator...
 				// we use -1 to indicate that we don't know the maximum. We could probably find
 				// out, but I'm to lazy to code it here. 
-				$weightedDateTimes = $this->fitness_generator($matchDateTimeUsed[$date]);
+				$weightedDateTimes = $this->fitness_generator($matchUsage);
 				foreach($weightedDateTimes as $dateTimeWeight=>$dateTime)
 				{
 					// Is this match already conflicting with another match where the 
@@ -232,9 +233,9 @@ class Scheduling_model extends MY_Model {
 					$u = $matchDateTimes[$date][$dateTime]['umpireIDs']; // array of umpires for this match
 					usort($u, function($a, $b)
 						{
-							if($umpireCount[$a] == $umpireCount[$b])
+							if($umpireUsage[$a] == $umpireUsage[$b])
 								return 0;
-							return $umpireCount[$a] < $umpireCount[$b] ? -1 : 1;
+							return $umpireUsage[$a] < $umpireUsage[$b] ? -1 : 1;
 						});
 					$matchUmpireIDs = array();
 					for($i=0;$i<count($u);$i++)
@@ -291,15 +292,15 @@ class Scheduling_model extends MY_Model {
 					}
 
 					// We now need to finally update the statistics
-					$matchDateTimesSelected = array(); // associated array of date->datetime->data. This will be our final result
-					$matchDateUsed[$date] = $matchDateUsed[$date] + 1; 
-					$matchDateTimeUsed[$dateTime] = $matchDateTimeUsed[$dateTime] + 1; 
-					$matchDateTeam[$date][$teamA] = $matchDateTeam[$date][$teamA] + 1;
-					$matchDateTeam[$date][$teamB] = $matchDateTeam[$date][$teamB] + 1;
-					$matchDateTimeTeam[$date][$dateTime][$teamA] = $matchDateTimeTeam[$date][$dateTime][$teamA] + 1;
-					$matchDateTimeTeam[$date][$dateTime][$teamB] = $matchDateTimeTeam[$date][$dateTime][$teamB] + 1;
-					if( $matchDateUsedMax < $matchDateUsed[$date] )
-						$matchDateUsedMax = $matchDateUsed[$date];
+					//$matchDateTimesSelected = array(); // associated array of date->datetime->data. This will be our final result
+					$matchUsage[$date]['count'] += 1; // $matchDateUsed[$date] = $matchDateUsed[$date] + 1; 
+					$matchUsage[$date][$dateTime]['count'] += 1; // $matchDateTimeUsed[$dateTime] = $matchDateTimeUsed[$dateTime] + 1;
+					$matchUsage[$date]['teams'][$teamA]['count'] += 1; // $matchDateTeam[$date][$teamA] = $matchDateTeam[$date][$teamA] + 1;
+					$matchUsage[$date]['teams'][$teamB]['count'] += 1; // $matchDateTeam[$date][$teamB] = $matchDateTeam[$date][$teamB] + 1;
+					$matchUsage[$date][$dateTime]['teams'][$teamA]['count'] += 1; // $matchDateTimeTeam[$date][$dateTime][$teamA] = $matchDateTimeTeam[$date][$dateTime][$teamA] + 1;
+					$matchUsage[$date][$dateTime]['teams'][$teamB]['count'] += 1; // $matchDateTimeTeam[$date][$dateTime][$teamB] = $matchDateTimeTeam[$date][$dateTime][$teamB] + 1;
+					if( $matchDateUsedMax < $matchDateUsed[$date]['count'] )
+						$matchDateUsedMax = $matchDateUsed[$date]['count'];
 
 					// Stop the loop! We have just added our match!
 					break;
