@@ -65,6 +65,7 @@ class Datatables extends MY_Controller {
 						// Since the database will just give them the default value, or auto_increment which is usually what we want
 						$newRelations[$relation] = $newData[$relation];
 					} elseif($default!==NULL) {
+						// Set relation ID to a default if none was provided - this covers the issue of tournamentID in matches
 						$newRelations[$relation] = $default;
 					}
 					unset($newData[$relation]);
