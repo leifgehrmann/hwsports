@@ -12,6 +12,10 @@ class Datatables extends MY_Controller {
 		$this->load->model('users_model');
 		$this->load->model('teams_model');
 		
+	}
+
+	public function sports() {
+		$action = isset($_POST['action']) ? $_POST['action'] : "load";
 		$out = array (
 				'id' => -1,
 				'error' => '',
@@ -23,10 +27,6 @@ class Datatables extends MY_Controller {
 					),
 			   );
 
-		$action = isset($_POST['action']) ? $_POST['action'] : "load";
-	}
-
-	public function sports() {
 		switch ($action) {
 			case "load":
 				$sports = $this->sports_model->get_all();
