@@ -240,6 +240,8 @@ class Scheduling_model extends MY_Model {
 					//	$u[] = array($umpireID,$umpireUsage[$umpireID]);
 					//$u = array_multisort();
 					echo "<pre>";
+					var_dump($date);
+					var_dump($dateTime);
 					var_dump($matchDateTimes[$date]);
 					//var_dump($umpireUsage);
 					usort($u, function($a, $b)
