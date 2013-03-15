@@ -5,13 +5,13 @@
 		<thead>
 			<tr>
 				<th>ID</th>
-				<th>Sport</th>
-				<th>Venue</th>
-				<th>Tournament</th>
 				<th>Name</th>
+				<th>Tournament</th>
 				<th>Start Time</th>
 				<th>End Time</th>
 				<th>Description</th>
+				<th>Sport</th>
+				<th>Venue</th>
 			</tr>
 		</thead>
 	</table>

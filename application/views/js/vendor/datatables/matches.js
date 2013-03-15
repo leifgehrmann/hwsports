@@ -63,16 +63,16 @@
 			"sAjaxSource": "/datatables/matches",
 			"aoColumns": [
 				{ "mData": "matchID" },
-				{ "mData": "sportData.name" },
-				{ "mData": "venueData.name" },
+				{ "mData": "name" },
 				{ 
 					"mData": "tournamentData.name",
 					"sDefaultContent": "None"
 				},
-				{ "mData": "name" },
 				{ "mData": "startTime" },
 				{ "mData": "endTime" },
-				{ "mData": "description" }
+				{ "mData": "description" },
+				{ "mData": "sportData.name" },
+				{ "mData": "venueData.name" }
 			],
 			"aoColumnDefs": [
             ],
