@@ -203,18 +203,19 @@ class Scheduling_model extends MY_Model {
 					// same team is performing (It could be the case that a team can play
 					// more than once a day if we ignored the rules above)
 					$isOverlapping = false;
-					foreach($matchDateTimesSelected[$date] as $dateTimeSelected=>$dateTimeData)
-					{
-						// Are any of the teams that we care about actually playing during that time?
-						if($matchUsage[$date][$dateTimeSelected]['teams'][$teamA]==0 && $matchUsage[$date][$dateTimeSelected]['teams'][$teamB]==0)
-							continue;
+					if(array_key_exists($date,$matchDateTimesSelected))
+						foreach($matchDateTimesSelected[$date] as $dateTimeSelected=>$dateTimeData)
+						{
+							// Are any of the teams that we care about actually playing during that time?
+							if($matchUsage[$date][$dateTimeSelected]['teams'][$teamA]==0 && $matchUsage[$date][$dateTimeSelected]['teams'][$teamB]==0)
+								continue;
 
-						// Do these times even overlap?
-						$dateTimeObject = new DateTime($dateTime);
-						$dateTimeSelectedObject = new DateTime($dateTimeSelected);
-						if($this->is_overlapping($dateTimeObject,$matchDuration,$dateTimeSelectedObject,$matchDuration))
-							$isOverlapping = true;
-					}
+							// Do these times even overlap?
+							$dateTimeObject = new DateTime($dateTime);
+							$dateTimeSelectedObject = new DateTime($dateTimeSelected);
+							if($this->is_overlapping($dateTimeObject,$matchDuration,$dateTimeSelectedObject,$matchDuration))
+								$isOverlapping = true;
+						}
 					// If there is a conflict, well we better check another time slot.
 					if($isOverlapping)
 						continue;
