@@ -40,8 +40,14 @@ class Datatables extends MY_Controller {
 				$out['aaData'] = $aaData;
 			break;
 			case "create":
-				$deleteOutput = false;
-				$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");
+				$newData = $_POST['data'];
+				eval('$newID = $this->'.$type.'_model->insert($newData);');
+				if($newID!==FALSE) {
+					eval('$newObject = $this->'.$type.'_model->get($newID);');
+					$out = array('id' => "$type-$newID", 'row' => $newObject);
+				} else {
+					$out = array('error' => "An error occurred. Please contact Infusion Systems.");
+				}
 			break;
 			case "edit":
 				$deleteOutput = false;
