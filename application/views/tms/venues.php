@@ -9,7 +9,6 @@
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="venues" width="100%">
 		<thead>
 			<tr>
-				<th width="0%">Centre ID</th>
 				<th width="0%">Lat</th>
 				<th width="0%">Lng</th>
 				<th width="0%">Venue ID</th>
