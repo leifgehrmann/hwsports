@@ -57,7 +57,7 @@ class Datatables extends MY_Controller {
 		$modelid = explode('_',$model_id);
 		$model = $modelid[0];
 		$ID = $modelid[1];
-		eval("\$this->data['dependencies'] = \$this->{$model}_model'->delete({$ID});");
+		$this->data['dependencies'] = $this->sports_model->delete($ID);
 		$this->load->view('tms/datatables-predelete.php',$this->data);
 	}
 }
