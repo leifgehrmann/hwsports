@@ -130,7 +130,6 @@ class Scheduling_model extends MY_Model {
 			if(count($matchDateTimes[$date]) == 0)
 				unset($matchDateTimes[$date]);
 		}
-		var_dump($matchDateTimes);
 
 		// We now want to create our individual matches for each
 		// combination of matches. We want to make sure that no
@@ -177,6 +176,7 @@ class Scheduling_model extends MY_Model {
 		$combinations = $this->round_robin($teamIDs);
 
 		// For every single combination of a game we want.
+		var_dump($combination);
 		foreach($combinations as $combination)
 		{
 			$added = false; // This will indicate if we could find a place to put this match in.
@@ -186,6 +186,7 @@ class Scheduling_model extends MY_Model {
 			// Get list of days ordered by a fitness function that encourages
 			// the spread of days in a tournament.
 			$optimallySortedDates = $this->fitness_generator($matchDateUsed);
+			var_dump($matchDateUsed);
 			foreach($optimallySortedDates as $date)
 			{
 				// Has either team A or team B already played on this day the maximum number of times?
@@ -351,10 +352,6 @@ class Scheduling_model extends MY_Model {
 		$matchDuration = new DateInterval('PT'.$tournament['matchDuration'].'M'); // Match duration is assumed to be in minutes
 		$matchMinimumUmpires = 1; // This is hard coded for now. This is the minimum number of umpires that must be present at a match
 		$matchMaximumPlays = 1; // This is hard coded for now. This is the maximum number of matches a player must play
-
-		$umpireIDs  = explode(',',$tournament['umpires']);
-		$teamIDs    = explode(',',$tournament['teams']);
-		$venueIDs   = explode(',',$tournament['venues']);
 
 		$umpires = array();
 		foreach($umpireIDs as $umpireID)
