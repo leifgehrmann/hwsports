@@ -123,12 +123,6 @@ class Scheduling_model extends MY_Model {
 
 					if( count($venueMatches) == 0 )
 						$matchDateTimes[$date][$dateTime]['venueIDs'][] = $venue['venueID'];
-					else {
-						var_dump($venue['venueID']);
-						var_dump($startDateTime);
-						var_dump($endDateTime);
-						var_dump($venueMatches);
-					}
 				}
 				// If we didn't find any available venues, well then we ignore it.
 				if( count($matchDateTimes[$date][$dateTime]['venueIDs']) == 0 )
