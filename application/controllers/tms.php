@@ -472,21 +472,20 @@ class Tms extends MY_Controller {
 		$this->form_validation->set_rules('footerText', 'Footer Text', 'required|xss_clean');
 		
 		$weekdaysShort = array('mon','tue','wed','thu','fri','sat','sun');
-		$weekdaysLong  = array('monday','tuesday','wednesday','thursday','friday','saturday','sunday');
 
 		for($i=0;$i<7;$i++)
 		{
-			$this->form_validation->set_rules($weekdayShort[$i].'OpenTime', $weekdayShort[$i].'day Open Time', 'required|xss_clean');
-			$this->form_validation->set_rules($weekdayShort[$i].'CloseTime', $weekdayShort[$i].'day Close Time', 'required|xss_clean');
+			$this->form_validation->set_rules($weekdaysShort[$i].'OpenTime', $weekdaysShort[$i].'day Open Time', 'required|xss_clean');
+			$this->form_validation->set_rules($weekdaysShort[$i].'CloseTime', $weekdaysShort[$i].'day Close Time', 'required|xss_clean');
 		}
 		
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
 			// If checkbox is unticked, it returns no value - this means FALSE
 			for($i=0;$i<7;$i++)
-				if(!isset($newdata[$weekdayShort[$i].'Open'])) $newdata[$weekdayShort[$i].'Open'] = 0;
+				if(!isset($newdata[$weekdaysShort[$i].'Open'])) $newdata[$weekdaysShort[$i].'Open'] = 0;
 			
-			if($this->centre_model->update_centre($this->data['centre']['centreID'],$newdata ) ) {
+			if($this->centre_model->update($this->data['centre']['centreID'],$newdata ) ) {
 				// Successful update, show success message
 				$this->session->set_flashdata('message_success',  'Successfully Updated');
 			} else {
@@ -540,26 +539,26 @@ class Tms extends MY_Controller {
 			);
 			
 			for($i=0;$i<7;$i++){
-				$this->data[$weekdayShort[$i].'Open'] = array(
-					'name'  => $weekdayShort[$i].'Open',
-					'id'    => $weekdayShort[$i].'Open',
+				$this->data[$weekdaysShort[$i].'Open'] = array(
+					'name'  => $weekdaysShort[$i].'Open',
+					'id'    => $weekdaysShort[$i].'Open',
 					'type'  => 'checkbox',
 					'value' => '1',
-					($this->data['centre'][$weekdayShort[$i].'Open'] ? 'checked' : 'notchecked') => 'checked'
+					($this->data['centre'][$weekdaysShort[$i].'Open'] ? 'checked' : 'notchecked') => 'checked'
 				);
-				$this->data[$weekdayShort[$i].'OpenTime'] = array(
-					'name'  => $weekdayShort[$i].'OpenTime',
-					'id'    => $weekdayShort[$i].'OpenTime',
+				$this->data[$weekdaysShort[$i].'OpenTime'] = array(
+					'name'  => $weekdaysShort[$i].'OpenTime',
+					'id'    => $weekdaysShort[$i].'OpenTime',
 					'type'  => 'text',
 					'class'  => 'time',
-					'value' => $this->form_validation->set_value($weekdayShort[$i].'OpenTime',(isset($this->data['centre'][$weekdayShort[$i].'OpenTime']) ? $this->data['centre'][$weekdayShort[$i].'OpenTime'] : '') )
+					'value' => $this->form_validation->set_value($weekdaysShort[$i].'OpenTime',(isset($this->data['centre'][$weekdaysShort[$i].'OpenTime']) ? $this->data['centre'][$weekdaysShort[$i].'OpenTime'] : '') )
 				);
-				$this->data[$weekdayShort[$i].'CloseTime'] = array(
-					'name'  => $weekdayShort[$i].'CloseTime',
-					'id'    => $weekdayShort[$i].'CloseTime',
+				$this->data[$weekdaysShort[$i].'CloseTime'] = array(
+					'name'  => $weekdaysShort[$i].'CloseTime',
+					'id'    => $weekdaysShort[$i].'CloseTime',
 					'type'  => 'text',
 					'class'  => 'time',
-					'value' => $this->form_validation->set_value($weekdayShort[$i].'CloseTime',(isset($this->data['centre'][$weekdayShort[$i].'CloseTime']) ? $this->data['centre'][$weekdayShort[$i].'CloseTime'] : '') )
+					'value' => $this->form_validation->set_value($weekdaysShort[$i].'CloseTime',(isset($this->data['centre'][$weekdaysShort[$i].'CloseTime']) ? $this->data['centre'][$weekdaysShort[$i].'CloseTime'] : '') )
 				);
 			}
 
