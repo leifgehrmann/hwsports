@@ -14,7 +14,7 @@ class Datatables extends MY_Controller {
 	}
 
 	public function sports() {
-		$action = isset($_POST['action']) ? $_POST['action'] : "load";
+		$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "load";
 		$out = array (
 				'id' => -1,
 				'error' => '',
@@ -43,30 +43,32 @@ class Datatables extends MY_Controller {
 				$out['error'] = $newdata;
 			break;
 			case "remove":
-				foreach($_POST['data'] as $clientRowString) {
-					$sportID = substr($clientRowString,4);
-					$errorMessage = str_replace("'", "", $this->sports_model->delete($sportID));
-
-					$out['error'] = "<script>if (confirm('$errorMessage')) {
-												$.ajax({
-													url: 'myUrl',
-													type: 'POST',
-													data: {
-														// data stuff here
-													},
-													success: function () {
-														// does some stuff here...
-													}
-												});
-											}
-									</script>";
-				}
+				$out['error'] = "<script type='text'javascript' src='/datatables/sports?action=jspredelete&id={$_POST['data'][0]['id']}' />";
+			break;
+			case "jspredelete":
+				$ID = $_GET['id'];
+				$errorMessage = $this->sports_model->delete($ID);
+				$js = "<script>confirm('$errorMessage');</script>";
+				$more = "//if (confirm('$errorMessage')) {
+								$.ajax({
+									url: 'myUrl',
+									type: 'POST',
+									data: {
+										// data stuff here
+									},
+									success: function () {
+										// does some stuff here...
+									}
+								});
+							//}
+					</script>";
+				$this->data['data'] = $js;
+				$this->load->view('data', $this->data);
 			break;
 		}
 
 		// Send it back to the client, via our plain data dump view
 		$this->data['data'] = json_encode($out);
-		//$this->data['data'] = $out;
 		$this->load->view('data', $this->data);
 	}
 }
