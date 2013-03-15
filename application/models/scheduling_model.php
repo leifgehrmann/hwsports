@@ -147,7 +147,7 @@ class Scheduling_model extends MY_Model {
 		$matchDateTimeUsed = array(); // associative array of date->datetime to number of matches during that slot
 		$matchDateTeamUsed     = array(); // associative array of date->team to number of matches on that day
 		$matchDateTimeTeamUsed = array(); // associative array of date->datetime->team to number of matches during that slot
-		$umpireCount = array(); // associative array of umpireID to number of matches he/she already manages.
+		$umpireUsage = array(); // associative array of umpireID to number of matches he/she already manages.
 		$matchDateUsedMax = 0;
 
 		// Turn teams into list of teamIDs
@@ -237,11 +237,15 @@ class Scheduling_model extends MY_Model {
 
 					// First the array of umpires by order of least use (aka, 1 means less busy than 4)
 					$u = $matchDateTimes[$date][$dateTime]['umpireIDs']; // array of umpires for this match
+					foreach($u as $key=>$umpireID)
+					{
+						$u[$key]['usage'] = $umpireUsage[$umpireID];
+					}
 					usort($u, function($a, $b)
 						{
-							if($umpireUsage[$a] == $umpireUsage[$b])
+							if($a['usage'] == $b['usage'])
 								return 0;
-							return $umpireUsage[$a] < $umpireUsage[$b] ? -1 : 1;
+							return $a['usage'] < $b['usage'] ? -1 : 1;
 						});
 					$matchUmpireIDs = array();
 					for($i=0;$i<count($u);$i++)
