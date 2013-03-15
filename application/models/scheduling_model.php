@@ -285,7 +285,7 @@ class Scheduling_model extends MY_Model {
 						{
 							$matchDateTimes[$date][$dateTimeAlt]['umpireIDs'] = array_diff( $matchDateTimes[$date][$dateTimeAlt]['umpireIDs'], $matchUmpireIDs);
 							if(count($matchDateTimes[$date][$dateTimeAlt]['umpireIDs'])==0){
-								unset($matchUsageDates[$date][$dateTimeAlt]);
+								unset($matchUsage[$date][$dateTimeAlt]);
 								unset($matchDateTimes[$date][$dateTimeAlt]);
 								var_dump("removed ".$dateTime);
 							}
@@ -298,7 +298,7 @@ class Scheduling_model extends MY_Model {
 						//$matchDateTimes[$date][$dateTime]['venueIDs'] = array_diff( $matchDateTimes[$date][$dateTime]['venueIDs'], array($matchVenueID));
 						if(count($matchDateTimes[$date][$dateTime]['venueIDs'])==0)
 						{
-							unset($matchUsageDates[$date][$dateTime]);
+							unset($matchUsage[$date][$dateTime]);
 							unset($matchDateTimes[$date][$dateTime]);
 							var_dump("removed ".$dateTime);
 						}
@@ -311,7 +311,7 @@ class Scheduling_model extends MY_Model {
 							{
 								$matchDateTimes[$date][$dateTimeAlt]['venueIDs'] = array_diff( $matchDateTimes[$date][$dateTimeAlt]['venueIDs'], array($matchVenueID));
 								if(count($matchDateTimes[$date][$dateTimeAlt]['venueIDs'])==0){
-									unset($matchUsageDates[$date][$dateTimeAlt]);
+									unset($matchUsage[$date][$dateTimeAlt]);
 									unset($matchDateTimes[$date][$dateTimeAlt]);
 									var_dump("removed ".$dateTime);
 								}
