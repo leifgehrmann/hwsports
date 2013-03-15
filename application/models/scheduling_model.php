@@ -11,6 +11,7 @@ class Scheduling_model extends MY_Model {
 	 **/
 	public function schedule_football_family($tournamentID)
 	{
+		echo "<pre>";
 		$this->load->model('users_model');
 		$this->load->model('matches_model');
 		$this->load->model('tournaments_model');
@@ -242,7 +243,6 @@ class Scheduling_model extends MY_Model {
 					//foreach($umpireIDsUsage as $umpireID)
 					//	$u[] = array($umpireID,$umpireUsage[$umpireID]);
 					//$u = array_multisort();
-					echo "<pre>";
 
 					usort($u, function($a, $b)
 						{
@@ -336,9 +336,11 @@ class Scheduling_model extends MY_Model {
 				}
 				// If it wasn't added, we continue the loop of course.
 				// but if it was, we would like to move onto the next team combination.
+				var_dump($added);
 				if($added)
 					break;
 			}
+			var_dump($added);
 			// This will only occur if the entire thing above did not work.
 			// hopefully that doesn't happen a lot when we do testing. :)
 			if(!$added)
