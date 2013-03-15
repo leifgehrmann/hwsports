@@ -25,7 +25,7 @@ class Datatables extends MY_Controller {
 				// Load all objects of type from the correct model. Assume model named based on type exists. Eval is scary.
 				eval('$all = $this->'.$type.'_model->get_all();');
 				// Loop through all objects, process them if required and add them to the output array as datatables rows
-				foreach($object as $id => $object) {
+				foreach($all as $id => $object) {
 					// The DataTables row ID; eg. sports-8 or matches-332
 					$object['DT_RowId'] = "$type-$id";
 					// Format date/time objects for the public
