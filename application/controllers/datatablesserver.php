@@ -7,14 +7,6 @@ class DatatablesServer extends MY_Controller {
 		
 		$this->load->library('customautoloader');
 
-		// Alias Editor classes so they are easy to use
-		use
-			DataTables\Editor,
-			DataTables\Editor\Field,
-			DataTables\Editor\Format,
-			DataTables\Editor\Join,
-			DataTables\Editor\Validate;
-								
 		//
 		// Database connection
 		//   Database connection it globally available
