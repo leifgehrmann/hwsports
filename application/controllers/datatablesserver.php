@@ -4,8 +4,6 @@ class DatatablesServer extends MY_Controller {
 
 	function __construct() {
 		parent::__construct();
-						
-		namespace DataTables;
 		define("DATATABLES", true, true);
 
 		// DataTables PHP library
