@@ -281,8 +281,10 @@ class Scheduling_model extends MY_Model {
 						if($this->is_overlapping($dateTimeObject,$matchDuration,$dateTimeAltObject,$matchDuration))
 						{
 							$matchDateTimes[$date][$dateTimeAlt]['umpireIDs'] = array_diff( $matchDateTimes[$date][$dateTimeAlt]['umpireIDs'], $matchUmpireIDs);
-							if(count($matchDateTimes[$date][$dateTimeAlt]['umpireIDs'])==0)
+							if(count($matchDateTimes[$date][$dateTimeAlt]['umpireIDs'])==0){
 								unset($matchDateTimes[$date][$dateTimeAlt]);
+								var_dump("removed ".$dateTime);
+							}
 						}
 					}
 					// Now remove the venue that we selected, and also remove it from
@@ -291,7 +293,10 @@ class Scheduling_model extends MY_Model {
 					{
 						//$matchDateTimes[$date][$dateTime]['venueIDs'] = array_diff( $matchDateTimes[$date][$dateTime]['venueIDs'], array($matchVenueID));
 						if(count($matchDateTimes[$date][$dateTime]['venueIDs'])==0)
+						{
 							unset($matchDateTimes[$date][$dateTime]);
+							var_dump("removed ".$dateTime);
+						}
 						foreach($matchDateTimes[$date] as $dateTimeAlt=>$dateTimeDataAlt)
 						{
 							// Do these times even overlap? It should at least once
@@ -300,8 +305,10 @@ class Scheduling_model extends MY_Model {
 							if($this->is_overlapping($dateTimeObject,$matchDuration,$dateTimeAltObject,$matchDuration))
 							{
 								$matchDateTimes[$date][$dateTimeAlt]['venueIDs'] = array_diff( $matchDateTimes[$date][$dateTimeAlt]['venueIDs'], array($matchVenueID));
-								if(count($matchDateTimes[$date][$dateTimeAlt]['venueIDs'])==0)
+								if(count($matchDateTimes[$date][$dateTimeAlt]['venueIDs'])==0){
 									unset($matchDateTimes[$date][$dateTimeAlt]);
+									var_dump("removed ".$dateTime);
+								}
 							}
 						}
 					}
