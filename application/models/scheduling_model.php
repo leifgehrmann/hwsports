@@ -287,19 +287,22 @@ class Scheduling_model extends MY_Model {
 					}
 					// Now remove the venue that we selected, and also remove it from
 					// the original available options to avoid conflicting schedules
-					//$matchDateTimes[$date][$dateTime]['venueIDs'] = array_diff( $matchDateTimes[$date][$dateTime]['venueIDs'], array($matchVenueID));
-					if(count($matchDateTimes[$date][$dateTime]['venueIDs'])==0)
-						unset($matchDateTimes[$date][$dateTime]);
-					foreach($matchDateTimes[$date] as $dateTimeAlt=>$dateTimeDataAlt)
+					if(array_key_exists($dateTime,$matchDateTimes[$date]))
 					{
-						// Do these times even overlap? It should at least once
-						$dateTimeObject = new DateTime($dateTime);
-						$dateTimeAltObject = new DateTime($dateTimeAlt);
-						if($this->is_overlapping($dateTimeObject,$matchDuration,$dateTimeAltObject,$matchDuration))
+						//$matchDateTimes[$date][$dateTime]['venueIDs'] = array_diff( $matchDateTimes[$date][$dateTime]['venueIDs'], array($matchVenueID));
+						if(count($matchDateTimes[$date][$dateTime]['venueIDs'])==0)
+							unset($matchDateTimes[$date][$dateTime]);
+						foreach($matchDateTimes[$date] as $dateTimeAlt=>$dateTimeDataAlt)
 						{
-							$matchDateTimes[$date][$dateTimeAlt]['venueIDs'] = array_diff( $matchDateTimes[$date][$dateTimeAlt]['venueIDs'], array($matchVenueID));
-							if(count($matchDateTimes[$date][$dateTimeAlt]['venueIDs'])==0)
-								unset($matchDateTimes[$date][$dateTimeAlt]);
+							// Do these times even overlap? It should at least once
+							$dateTimeObject = new DateTime($dateTime);
+							$dateTimeAltObject = new DateTime($dateTimeAlt);
+							if($this->is_overlapping($dateTimeObject,$matchDuration,$dateTimeAltObject,$matchDuration))
+							{
+								$matchDateTimes[$date][$dateTimeAlt]['venueIDs'] = array_diff( $matchDateTimes[$date][$dateTimeAlt]['venueIDs'], array($matchVenueID));
+								if(count($matchDateTimes[$date][$dateTimeAlt]['venueIDs'])==0)
+									unset($matchDateTimes[$date][$dateTimeAlt]);
+							}
 						}
 					}
 
