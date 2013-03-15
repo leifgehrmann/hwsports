@@ -67,7 +67,7 @@
 				{ "mData": "venueData.name" },
 				{ 
 					"mData": "tournamentData.name",
-					"sDefaultContent": ""
+					"sDefaultContent": "None"
 				},
 				{ "mData": "name" },
 				{ "mData": "startTime" },
