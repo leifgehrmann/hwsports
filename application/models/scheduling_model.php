@@ -150,6 +150,12 @@ class Scheduling_model extends MY_Model {
 		$umpireCount = array(); // associative array of umpireID to number of matches he/she already manages.
 		$matchDateUsedMax = 0;
 
+		// Turn teams into list of teamIDs
+		$teamIDs = array();
+		foreach($teams as $team){
+			$teamIDs[] = $team['teamID'];
+		}
+
 		// We set the initial count for every single array to be 0.
 		foreach($matchDateTimes as $date=>$dateTimes)
 		{
@@ -157,7 +163,7 @@ class Scheduling_model extends MY_Model {
 			foreach($dateTimes as $dateTime=>$data)
 			{
 				$matchDateTimeUsed[$date][$dateTime] = 0;
-				foreach($matchDateTeam as $teamID)
+				foreach($teamIDs as $teamID)
 					$matchDateTeam[$date][$dateTime][$teamID] = 0;
 			}
 			foreach($matchDateTeam as $teamID)
