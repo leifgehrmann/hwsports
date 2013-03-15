@@ -11,7 +11,6 @@ class Datatables extends MY_Controller {
 		$this->load->model('venues_model');
 		$this->load->model('users_model');
 		$this->load->model('teams_model');
-		
 	}
 
 	public function sports() {
@@ -46,7 +45,20 @@ class Datatables extends MY_Controller {
 			case "remove":
 				foreach($_POST['data'] as $clientRowString) {
 					$sportID = substr($clientRowString,4);
-					$out['error'] = $this->sports_model->delete($sportID);
+					$errorMessage = $this->sports_model->delete($sportID);
+					$out['error'] = "<script>if (confirm('Are you sure you want to delete this?')) {
+												$.ajax({
+													url: 'myUrl',
+													type: 'POST',
+													data: {
+														// data stuff here
+													},
+													success: function () {
+														// does some stuff here...
+													}
+												});
+											}
+									</script>";
 				}
 			break;
 		}
