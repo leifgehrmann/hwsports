@@ -194,12 +194,12 @@ class Scheduling_model extends MY_Model {
 				var_dump("Attempting to add Event at date ".$date);
 				// Has either team A or team B already played on this day the maximum number of times?
 				if($matchMaximumPlays <= $matchUsage[$date]['teams'][$teamA]['count']){
-					continue;
 					var_dump("failed ".$dateTime." because team has already played max number of times");
+					continue;
 				}
 				if($matchMaximumPlays <= $matchUsage[$date]['teams'][$teamB]['count']){
-					continue;
 					var_dump("failed ".$dateTime." because team has already played max number of times");
+					continue;
 				}
 
 				// Now we need to find our the time slot. Again, we use our fitness generator...
@@ -207,6 +207,7 @@ class Scheduling_model extends MY_Model {
 					if($key!="teams" && $key!="count")
 						$matchUsageDateTimes[$key] = $value;
 				$weightedDateTimes = $this->fitness_generator($matchUsageDateTimes);
+				var_dump($weightedDateTimes);
 				foreach($weightedDateTimes as $dateTimeWeight=>$dateTime)
 				{
 					var_dump("Attempting to add Event at datetime ".$dateTime);
@@ -219,8 +220,8 @@ class Scheduling_model extends MY_Model {
 						{
 							// Are any of the teams that we care about actually playing during that time?
 							if($matchUsage[$date][$dateTimeSelected]['teams'][$teamA]==0 && $matchUsage[$date][$dateTimeSelected]['teams'][$teamB]==0){
-								continue;
 								var_dump("failed ".$dateTime." because team is already playing at that time");
+								continue;
 							}
 
 							// Do these times even overlap?
@@ -231,8 +232,8 @@ class Scheduling_model extends MY_Model {
 						}
 					// If there is a conflict, well we better check another time slot.
 					if($isOverlapping){
-						continue;
 						var_dump("failed ".$dateTime." because of overlapping");
+						continue;
 					}
 					
 					// For umpires, we just select the umpire with the lowest 
