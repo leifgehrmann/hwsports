@@ -325,6 +325,7 @@ class Scheduling_model extends MY_Model {
 					//	$matchDateUsedMax = $matchUsage[$date]['count'];
 
 					// Stop the loop! We have just added our match!
+					var_dump("Event was added at ".$dateTime." at the venue ".$matchDateTimesSelected[$date][$dateTime]['venueID']." with the teams ".$matchDateTimesSelected[$date][$dateTime]['teamIDs'][0]." and ".$matchDateTimesSelected[$date][$dateTime]['teamIDs'][1]);
 					$added = true;
 					break;
 				}
