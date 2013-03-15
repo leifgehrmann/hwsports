@@ -46,33 +46,18 @@ class Datatables extends MY_Controller {
 				//src='/datatables/sports?action=jspredelete&id={$_POST['data'][0]['id']}
 				$out['error'] = "<script type='text/javascript'>$.fancybox({content:'hello',beforeShow:func});</script>";
 			break;
-			case "jspredelete":
-				$ID = $_GET['id'];
-				$errorMessage = json_encode(addslashes($this->sports_model->delete($ID)));
-				$js = "<script>confirm('$errorMessage');</script>";
-				
-				$more = "//if (confirm('$errorMessage')) {
-								$.ajax({
-									url: 'myUrl',
-									type: 'POST',
-									data: {
-										// data stuff here
-									},
-									success: function () {
-										// does some stuff here...
-									}
-								});
-							//}
-					</script>";
-					
-				$this->data['data'] = $js;
-				$this->load->view('data', $this->data);
-				return;
-			break;
 		}
 
 		// Send it back to the client, via our plain data dump view
 		$this->data['data'] = json_encode($out);
 		$this->load->view('data', $this->data);
+	}
+	
+	public function predelete($model_id) {
+		$modelid = explode('_',$model_id);
+		$model = $modelid[0];
+		$ID = $modelid[1];
+		eval('$deleteCheck = $this->'.$model.'_model->delete('.$ID.');');
+		echo $deleteCheck; die();
 	}
 }
