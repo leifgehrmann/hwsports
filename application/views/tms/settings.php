@@ -47,7 +47,7 @@
 		<td><?php echo form_input($sunCloseTime);?></td>
 	</tr>
 </table>
-<p><?php echo form_submit('submit', 'Submit Changes', $submit);?></p>
+<p><?php echo form_submit('submit', 'Submit Changes', array('class' => 'green'));?></p>
     
 <?php echo form_close();?>
 
