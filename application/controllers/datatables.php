@@ -15,9 +15,9 @@ class Datatables extends MY_Controller {
 		);
 		
 		$this->relations = array(
-			"matches" => array("sportID","venueID","tournamentID"),
-			"sports" => array("sportCategoryID"),
-			"venues" => array()
+			"matches" => array("matchID","sportID","venueID","tournamentID"),
+			"sports" => array("sportID","sportCategoryID"),
+			"venues" => array("venueID")
 		);
 	}
 
@@ -56,13 +56,11 @@ class Datatables extends MY_Controller {
 			case "create":
 				// Copy the input data so we feel better about modifying it directly
 				$newData = $_POST['data'];
-				// Take the "matchID", "sportID" etc out of the input array
-				unset[$newData[$this->singulars[$type].'ID']];
 				// For each input ID which is defined as a relational field for this type, remove from input and put into relations
 				$newRelations = array();
 				foreach($this->relations[$type] as $relation) {
-					$newRelations[$this->singulars[$type].'ID'] = $newData[$this->singulars[$type].'ID']; 
-					unset($newData[$this->singulars[$type].'ID']);
+					$newRelations[$relation] = $newData[$relation]; 
+					unset($newData[$relation]);
 				}
 				// Do the insert, with an empty $newRelations array if there are no dependents
 				eval('$newID = $this->'.$type.'_model->insert($newData,$newRelations);');
