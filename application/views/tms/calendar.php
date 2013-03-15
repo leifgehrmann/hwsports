@@ -1,24 +1,32 @@
 <h1>Calendar</h1>
-<p>Below is a list of upcoming matches and tournaments.</p>
+<p>Click the matches/tournaments for more information.</p>
+<p>Drag a match to change the start date/time, or stretch it from the bottom to change it's length.</p>
 <ul>
 	<li>Tournaments are coloured as <span style="color:rgb(73, 134, 231);font-weight:bold;">blue</span>.</li>
 	<li>Tournament matches are coloured as <span style="color:rgb(123, 209, 72);font-weight:bold;">green</span>.</li>
 	<li>Standard bookings are coloured as <span style="color:rgb(123, 209, 72);font-weight:bold;">brown</span>.</li>
 </ul>
-<p>Click the matches/tournaments for more information.</p>
-<p>Drag a match to change the start date/time, or stretch it from the bottom to change it's length.</p>
-<div class="filter">
-	<h2>Filter Category</h2>
-	<p>Select a category to filter the calendar results.</p>
-	<input type="checkbox" name="filter" value="tournament" class="filter-tournament">
-	<select name="select_tournament" disabled class="select-tournament">
-		<option value="a">A</option>
-		<option value="b">B</option>
-		<option value="c">C</option>
-	</select>
-	<input type="checkbox" name="filter" value="venue" class="filter-venue">
-	<input type="checkbox" name="filter" value="sport" class="filter-sport">
-</div>
+<?php echo form_open("tms/calendar", array('id' => 'filterForm'));?>
+<h2>Filter Category</h2>
+<table>
+	<tr>
+		<td>View</td>
+		<td>form_dropdown('viewSelect', $viewOptions, $viewSelection );</td>
+		<td>Sport</td>
+		<td>form_dropdown('sportSelect', $sportOptions, $sportSelection );</td>
+	</tr>
+	<tr>
+		<td>Tournament</td>
+		<td>form_dropdown('tournamentSelect', $tournamentOptions, $tournamentSelection );</td>
+		<td>Venue</td>
+		<td>form_dropdown('venueSelect', $venueOptions, $venueSelection );</td>
+	</tr>
+	<tr>
+		<td colspan="3"></td>
+		<td><?php echo form_submit('submit', 'Submit Changes', array('class' => 'green'));?></td>
+	</tr>
+</table>
+<?php echo form_close();?>
 <div id='calendar'></div>
 <script type='text/javascript' src='/js/vendor/fullcalendar/_loader.js'></script>
 <script type='text/javascript'>
