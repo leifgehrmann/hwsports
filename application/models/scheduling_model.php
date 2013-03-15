@@ -191,7 +191,7 @@ class Scheduling_model extends MY_Model {
 			$weightedDates = $this->fitness_generator($matchUsageDates);
 			foreach($weightedDates as $date)
 			{
-				var_dump("Attempting to add Event at date ".$date);
+				var_dump("Attempting to add Event at date ".$date." for teams ".$combination[0]." and ".$combination[1]);
 				// Has either team A or team B already played on this day the maximum number of times?
 				if($matchMaximumPlays <= $matchUsage[$date]['teams'][$teamA]['count']){
 					var_dump("failed ".$dateTime." because team has already played max number of times");
@@ -203,6 +203,7 @@ class Scheduling_model extends MY_Model {
 				}
 
 				// Now we need to find our the time slot. Again, we use our fitness generator...
+				$matchUsageDateTimes = array();
 				foreach( $matchUsage[$date] as $key => $value )
 					if($key!="teams" && $key!="count")
 						$matchUsageDateTimes[$key] = $value;
