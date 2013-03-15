@@ -106,8 +106,8 @@
 				]
 			},
 			"fnInitComplete": function ( settings, json ) {
-				editor.field('sportID').update( json.sportData );
-				editor.field('venueID').update( json.venueData );
+				editor.field('sportID').update( json.sports );
+				editor.field('venueID').update( json.venues );
 			}
 		} );
 

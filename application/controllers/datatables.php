@@ -85,10 +85,23 @@ class Datatables extends MY_Controller {
 			break;
 		}
 		
-		foreach($this->sports_model->get_sport_categories() as $sportCategory) {
+		// Add value => label data to output to allow dropdown select boxes to work in create/edit dialogs 
+		foreach($this->sports_model->get_sport_categories() as $ID => $sportCategory) {
 			$out['sportCategories'][] = array(
-				'value' => $sportCategory['sportCategoryID'],
-				'name' => $sportCategory['name']
+				'value' => $ID,
+				'label' => $sportCategory['name']
+			);
+		}
+		foreach($this->venues_model->get_all() as $ID => $venue) {
+			$out['venues'][] = array(
+				'value' => $ID,
+				'label' => $venue['name']
+			);
+		}
+		foreach($this->sports_model->get_all() as $ID => $sport) {
+			$out['sports'][] = array(
+				'value' => $ID,
+				'label' => $sport['name']
 			);
 		}
 		
