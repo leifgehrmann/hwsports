@@ -51,7 +51,7 @@ class Centre_model extends MY_Model {
 		$output = "";
 		if($testRun) $output .= "If this delete query is executed, the following objects will be deleted: \n\n";
 		$output .= $this->delete_object($ID, $this->objectIDKey, $this->dataTableName, $testRun);
-		if($testRun) $output .= "If this looks correct, click 'Confirm'. Otherwise please update or delete dependencies manually.";
+		if($testRun) $output .= "\nIf this looks correct, click 'Confirm'. Otherwise please update or delete dependencies manually.\n\n";
 		return $output;
 	}
 	
