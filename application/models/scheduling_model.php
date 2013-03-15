@@ -314,8 +314,8 @@ class Scheduling_model extends MY_Model {
 					$matchUsage[$date]['teams'][$teamB]['count'] += 1; // $matchDateTeam[$date][$teamB] = $matchDateTeam[$date][$teamB] + 1;
 					$matchUsage[$date][$dateTime]['teams'][$teamA]['count'] += 1; // $matchDateTimeTeam[$date][$dateTime][$teamA] = $matchDateTimeTeam[$date][$dateTime][$teamA] + 1;
 					$matchUsage[$date][$dateTime]['teams'][$teamB]['count'] += 1; // $matchDateTimeTeam[$date][$dateTime][$teamB] = $matchDateTimeTeam[$date][$dateTime][$teamB] + 1;
-					if( $matchDateUsedMax < $matchDateUsed[$date]['count'] )
-						$matchDateUsedMax = $matchDateUsed[$date]['count'];
+					//if( $matchDateUsedMax < $matchUsage[$date]['count'] )
+					//	$matchDateUsedMax = $matchUsage[$date]['count'];
 
 					// Stop the loop! We have just added our match!
 					break;
