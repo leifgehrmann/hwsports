@@ -46,7 +46,7 @@ class Datatables extends MY_Controller {
 				foreach($_POST['data'] as $clientRowString) {
 					$sportID = substr($clientRowString,4);
 					$errorMessage = $this->sports_model->delete($sportID);
-					$out['error'] = "<script>if (confirm('Are you sure you want to delete this?')) {
+					$out['error'] = "<script>if (confirm('$errorMessage')) {
 												$.ajax({
 													url: 'myUrl',
 													type: 'POST',
