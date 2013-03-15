@@ -239,8 +239,8 @@ class Scheduling_model extends MY_Model {
 					//foreach($umpireIDsUsage as $umpireID)
 					//	$u[] = array($umpireID,$umpireUsage[$umpireID]);
 					//$u = array_multisort();
-					var_dump($u);
-					var_dump($umpireUsage);
+					var_dump($matchDateTimes[$date]);
+					//var_dump($umpireUsage);
 					usort($u, function($a, $b)
 						{
 							global $umpireUsage;
@@ -248,7 +248,7 @@ class Scheduling_model extends MY_Model {
 								return 0;
 							return $umpireUsage[$a] < $umpireUsage[$b] ? -1 : 1;
 						});
-					var_dump($u);
+					//var_dump($u);
 					$matchUmpireIDs = array();
 					for($i=0;$i<count($u);$i++)
 					{
