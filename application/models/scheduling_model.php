@@ -234,16 +234,14 @@ class Scheduling_model extends MY_Model {
 					// IT IS MUCH EASIER!!!
 
 					// calculate the array of umpires by order of least use (aka, 1 means less busy than 4)
+					var_dump($matchDateTimes);
 					$u = $matchDateTimes[$date][$dateTime]['umpireIDs']; // array of umpires for this match
 					//$u = array();
 					//foreach($umpireIDsUsage as $umpireID)
 					//	$u[] = array($umpireID,$umpireUsage[$umpireID]);
 					//$u = array_multisort();
 					echo "<pre>";
-					var_dump($date);
-					var_dump($dateTime);
-					var_dump($matchDateTimes[$date]);
-					//var_dump($umpireUsage);
+
 					usort($u, function($a, $b)
 						{
 							global $umpireUsage;
@@ -272,7 +270,6 @@ class Scheduling_model extends MY_Model {
 					$matchDateTimesSelected[$date][$dateTime]['teamIDs'] = array($teamA,$teamB);
 					$matchDateTimesSelected[$date][$dateTime]['umpireIDs'] = $matchUmpireIDs;
 					$matchDateTimesSelected[$date][$dateTime]['venueID'] = $matchVenueID;
-					$added = true;
 					// Now remove the umpires that we selected, and also remove them from
 					// the original available options to avoid conflicting schedules
 					//$matchDateTimes[$date][$dateTime]['umpireIDs'] = array_diff( $matchDateTimes[$date][$dateTime]['umpireIDs'], $matchUmpireIDs);
@@ -321,6 +318,7 @@ class Scheduling_model extends MY_Model {
 					//	$matchDateUsedMax = $matchUsage[$date]['count'];
 
 					// Stop the loop! We have just added our match!
+					$added = true;
 					break;
 				}
 				// If it wasn't added, we continue the loop of course.
