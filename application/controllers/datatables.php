@@ -28,14 +28,12 @@ class Datatables extends MY_Controller {
 		switch ($action) {
 			case "load":
 				$sports = $this->sports_model->get_all();
-				
-				$out['aaData'] = array(
-					array("DT_RowId"=>"row_1","sportID"=>1,"centreID"=>1,"name"=>"hello","description"=>"world","sportCategoryName"=>"football")
-				);
-				
-				$out['aaData'] = $sports;
-				
-				//$out['error'] = $sports;
+				$aaData = array();
+				foreach($sports as $id => $sport) {
+					$sport['DT_RowId'] = $id;
+					$aaData[] = $sport;
+				}
+				$out['aaData'] = $aaData;
 			break;
 			case "create":
 				$sports = $this->sports_model->get_all();
