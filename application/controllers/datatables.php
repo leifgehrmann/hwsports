@@ -48,7 +48,7 @@ class Datatables extends MY_Controller {
 				$modelid = explode('-',$removerow);
 				$model = $modelid[0];
 				$ID = $modelid[1];
-				if($this->sports_model->delete($ID)) {
+				if($this->sports_model->delete($ID,false)) {
 					$out = array('id' => -1);
 				} else {
 					$out['error'] = "An error occurred. Please contact Infusion Systems.";
