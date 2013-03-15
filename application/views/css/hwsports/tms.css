@@ -562,14 +562,6 @@ input.colorpickerinput {
 	text-shadow:0px 0px 4px #000000;
 	color:#FFF;
 }*/
-#settingsForm input.time, #settingsForm input.colorpickerinput {
-	width: 100px;
-	padding: 5px;
-}
-#settingsForm input[type="checkbox"] {
-	width: auto;
-	padding: 5px;
-}
 
 #tournamentSelect {
 	max-height: 100px;
