@@ -29,7 +29,7 @@ class Datatables extends MY_Controller {
 			case "load":
 				$sports = $this->sports_model->get_all();
 				$out['aaData'] = $sports;
-				//$out['error'] = $sports;
+				$out['error'] = var_dump($sports);
 			break;
 			case "create":
 				$sports = $this->sports_model->get_all();
