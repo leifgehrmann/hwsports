@@ -40,7 +40,8 @@
 				"onOpen": function ( settings, json ) {
 				},
 				"onInitRemove": function() {
-					$('.DTE_Action_Remove .DTE_Footer_Content .DTE_Form_Buttons button').before('<button onclick="predelete('+editor.get().sportID+');">Check Dependencies</button>');
+					var sportID = $('.DTTT_selected').attr('id');
+					$('.DTE_Action_Remove .DTE_Footer_Content .DTE_Form_Buttons button').before('<button onclick="predelete('+sportID+');">Check Dependencies</button>');
 				}
 			}
 		} );

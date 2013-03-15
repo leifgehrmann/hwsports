@@ -29,7 +29,7 @@ class Datatables extends MY_Controller {
 				$sports = $this->sports_model->get_all();
 				$aaData = array();
 				foreach($sports as $id => $sport) {
-					$sport['DT_RowId'] = $id;
+					$sport['DT_RowId'] = "sports-$id";
 					$aaData[] = $sport;
 				}
 				$out['aaData'] = $aaData;
@@ -43,7 +43,6 @@ class Datatables extends MY_Controller {
 				$out['error'] = $newdata;
 			break;
 			case "remove": 
-				//src='/datatables/sports?action=jspredelete&id={$_POST['data'][0]['id']}
 				$out['error'] = "<script type='text/javascript'>$.fancybox({content:'hello',beforeShow:func});</script>";
 			break;
 		}
