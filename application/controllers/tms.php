@@ -70,7 +70,6 @@ class Tms extends MY_Controller {
 			if($today<new DateTime($uMatch['startTime']))
 				continue;
 			foreach($latestMatches as $i=>$lMatch){
-				var_dump($i."\n");
 				if($uMatch['matchID']==$lMatch['matchID']){
 					unset($upcomingMatches[$u]);
 					break;
@@ -82,7 +81,6 @@ class Tms extends MY_Controller {
 			if($today<new DateTime($uTournament['tournamentStart']))
 				continue;
 			foreach($latestTournaments as $i=>$lTournament){
-				var_dump($i."\n");
 				if($uTournament['tournamentID']==$lTournament['tournamentID']){
 					unset($upcomingTournaments[$u]);
 					break;
