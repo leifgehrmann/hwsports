@@ -47,7 +47,7 @@ class Datatables extends MY_Controller {
 			break;
 			case "jspredelete":
 				$ID = $_GET['id'];
-				$errorMessage = $this->sports_model->delete($ID);
+				$errorMessage = addslashes($this->sports_model->delete($ID));
 				$js = "<script>confirm('$errorMessage');</script>";
 				$more = "//if (confirm('$errorMessage')) {
 								$.ajax({
