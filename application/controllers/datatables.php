@@ -30,6 +30,10 @@ class Datatables extends MY_Controller {
 				$aaData = array();
 				foreach($sports as $id => $sport) {
 					$sport['DT_RowId'] = "sports-$id";
+					if(isset($sport['startTime']) && isset($sport['endTime'])) {
+						$sport['startTime'] = datetime_to_public($sport['endTime']);
+						$sport['endTime'] = datetime_to_public($sport['endTime']);
+					}
 					$aaData[] = $sport;
 				}
 				$out['aaData'] = $aaData;
@@ -79,6 +83,10 @@ class Datatables extends MY_Controller {
 				$aaData = array();
 				foreach($matches as $id => $sport) {
 					$sport['DT_RowId'] = "matches-$id";
+					if(isset($sport['startTime']) && isset($sport['endTime'])) {
+						$sport['startTime'] = datetime_to_public($sport['endTime']);
+						$sport['endTime'] = datetime_to_public($sport['endTime']);
+					}
 					$aaData[] = $sport;
 				}
 				$out['aaData'] = $aaData;
@@ -128,8 +136,10 @@ class Datatables extends MY_Controller {
 				$aaData = array();
 				foreach($venues as $id => $sport) {
 					$sport['DT_RowId'] = "venues-$id";
-					$sport['startTime'] = datetime_to_public($sport['endTime']);
-					$sport['endTime'] = datetime_to_public($sport['endTime']);
+					if(isset($sport['startTime']) && isset($sport['endTime'])) {
+						$sport['startTime'] = datetime_to_public($sport['endTime']);
+						$sport['endTime'] = datetime_to_public($sport['endTime']);
+					}
 					$aaData[] = $sport;
 				}
 				$out['aaData'] = $aaData;
