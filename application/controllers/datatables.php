@@ -42,8 +42,17 @@ class Datatables extends MY_Controller {
 				$newdata = $_POST['data'];
 				$out['error'] = $newdata;
 			break;
-			case "remove": 
-				$out['error'] = "<script type='text/javascript'>$.fancybox({content:'hello',beforeShow:func});</script>";
+			case "remove":
+				$removedata = $_POST['data'];
+				$removerow = $removedata[0];
+				$modelid = explode('-',$removerow);
+				$model = $modelid[0];
+				$ID = $modelid[1];
+				if($this->sports_model->delete($ID,false)) {
+					$out = array('id' => -1);
+				} else {
+					$out['error'] = "An error occurred. Please contact Infusion Systems.";
+				}
 			break;
 		}
 
