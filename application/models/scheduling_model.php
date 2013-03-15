@@ -199,9 +199,10 @@ class Scheduling_model extends MY_Model {
 					continue;
 
 				// Now we need to find our the time slot. Again, we use our fitness generator...
+				var_dump($matchUsage[$date]);
 				foreach( $matchUsage[$date] as $key => $value )
-				if($key!="teams" && $key!="count")
-					$matchUsageDateTimes[$key] = $value;
+					if($key!="teams" && $key!="count")
+						$matchUsageDateTimes[$key] = $value;
 				$weightedDateTimes = $this->fitness_generator($matchUsageDateTimes);
 				foreach($weightedDateTimes as $dateTimeWeight=>$dateTime)
 				{
@@ -336,11 +337,9 @@ class Scheduling_model extends MY_Model {
 				}
 				// If it wasn't added, we continue the loop of course.
 				// but if it was, we would like to move onto the next team combination.
-				var_dump($added);
 				if($added)
 					break;
 			}
-			var_dump($added);
 			// This will only occur if the entire thing above did not work.
 			// hopefully that doesn't happen a lot when we do testing. :)
 			if(!$added)
