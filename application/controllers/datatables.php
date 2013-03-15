@@ -50,14 +50,24 @@ class Datatables extends MY_Controller {
 				}
 			break;
 			case "edit":
-				$deleteOutput = false;
-				$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");
+				// We should only ever have one row selected when delete is pressed, 
+				// so data[0] from the input the type-ID string of the row which is being deleted
+				$edit_type_id = explode('-',$_POST['data'][0]);
+				$ID = $edit_type_id[1];
+				// Data to update
+				$updateData = $_POST['data'];
+				eval('$updateSuccess = $this->'.$type.'_model->update($ID, $updateData);');
+				if($updateSuccess!==FALSE) {
+					eval('$updatedObject = $this->'.$type.'_model->get($ID);');
+					$out = array('id' => "$type-$ID", 'row' => $updatedObject);
+				} else {
+					$out = array('error' => "An error occurred. Please contact Infusion Systems.");
+				}
 			break;
 			case "remove":
 				// We should only ever have one row selected when delete is pressed, 
 				// so data[0] from the input the type-ID string of the row which is being deleted
 				$delete_type_id = explode('-',$_POST['data'][0]);
-				$type = $delete_type_id[0];
 				$ID = $delete_type_id[1];
 				// Execute the delete function of the correct model with the second parameter set to false to confirm deletion
 				eval('$deleteOutput = $this->'.$type.'_model->delete('.$ID.', false);'); 
