@@ -84,6 +84,8 @@ class Scheduling_model extends MY_Model {
 				$countedUmpireIDs = array();
 				// For each umpire
 				foreach( $umpires as $umpire ){
+					if( !isset($umpire['available'.$weekday]) )
+						continue;
 					// is the umpire available at that weekday/time?
 					if( $umpire['available'.$weekday] == '1' )
 						$countedUmpireIDs[] = $umpire['userID'];
@@ -208,7 +210,6 @@ class Scheduling_model extends MY_Model {
 					if($key!="teams" && $key!="count")
 						$matchUsageDateTimes[$key] = $value;
 				$weightedDateTimes = $this->fitness_generator($matchUsageDateTimes);
-				var_dump($weightedDateTimes);
 				foreach($weightedDateTimes as $dateTimeWeight=>$dateTime)
 				{
 					var_dump("Attempting to add Event at datetime ".$dateTime);
@@ -357,7 +358,8 @@ class Scheduling_model extends MY_Model {
 				return "Not enough time slots to support this tournament style";
 		}
 
-
+		return $matchDateTimesSelected;
+		
 	}
 
 	/**
