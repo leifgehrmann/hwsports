@@ -12,6 +12,10 @@ class Datatables extends MY_Controller {
 		$this->load->model('users_model');
 		$this->load->model('teams_model');
 		
+	}
+
+	public function sports() {
+		$action = isset($_POST['action']) ? $_POST['action'] : "load";
 		$out = array (
 				'id' => -1,
 				'error' => '',
@@ -23,23 +27,19 @@ class Datatables extends MY_Controller {
 					),
 			   );
 
-		$action = isset($_POST['action']) ? $_POST['action'] : "load";
-	}
-
-	public function sports() {
 		switch ($action) {
 			case "load":
 				$sports = $this->sports_model->get_all();
 				$out['aaData'] = $sports;
-				$out['error'] = print_r($sports);
+				$out['error'] = $sports;
 			break;
 			case "create":
 				$sports = $this->sports_model->get_all();
-				$out['error'] = print_r($sports);
+				$out['error'] = $sports;
 			break;
 			case "edit":
 				$newdata = $_POST['data'];
-				$out['error'] = print_r($newdata);
+				$out['error'] = $newdata;
 			break;
 			case "remove":
 				foreach($_POST['data'] as $clientRowString) {
