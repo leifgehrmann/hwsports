@@ -208,7 +208,7 @@ class Scheduling_model extends MY_Model {
 					foreach($matchDateTimesSelected[$date] as $dateTimeSelected=>$dateTimeData)
 					{
 						// Are any of the teams that we care about actually playing during that time?
-						if($matchDateTimeTeam[$date][$dateTimeSelected][$teamA]==0 && $matchDateTimeTeam[$date][$dateTimeSelected][$teamB]==0)
+						if($matchUsage[$date][$dateTimeSelected]['teams'][$teamA]==0 && $matchUsage[$date][$dateTimeSelected]['teams'][$teamB]==0)
 							continue;
 
 						// Do these times even overlap?
