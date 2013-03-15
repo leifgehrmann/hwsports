@@ -513,9 +513,6 @@ class Tms extends MY_Controller {
 					'value' => $this->form_validation->set_value($weekdaysShort[$i].'CloseTime',(isset($this->data['centre'][$weekdaysShort[$i].'CloseTime']) ? $this->data['centre'][$weekdaysShort[$i].'CloseTime'] : '') )
 				);
 			}
-			$this->data['submit'] = array(
-				'class'  => 'green'
-			);
 
 			$this->view('settings',"settings","Centre Settings",$this->data);
 		}
@@ -585,10 +582,6 @@ class Tms extends MY_Controller {
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('footerText',(isset($this->data['centre']['footerText']) ? $this->data['centre']['footerText'] : '') )
 			);
-			$this->data['submit'] = array(
-				'class'  => 'green'
-			);
-			
 			$this->view('appearance',"appearance","Apprearance",$this->data);
 		}
 	}
