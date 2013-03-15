@@ -38,10 +38,8 @@
 				"onEdit": function (json, data) {
 				},
 				"onOpen": function ( settings, json ) {
-					//var oldFooter = $('.DTE_Action_Remove .DTE_Footer_Content').html();
-					console.log(settings);
-					console.log(json);
-					
+				},
+				"onInitRemove": function() {
 					$('.DTE_Action_Remove .DTE_Footer_Content .DTE_Form_Buttons button').before('<button onclick="predelete('+this.get('id')+');">Check Dependencies</button>');
 				}
 			}
