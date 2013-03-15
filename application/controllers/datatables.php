@@ -7,8 +7,14 @@ class Datatables extends MY_Controller {
 		$this->load->model('matches_model');
 		$this->load->model('sports_model');
 		$this->load->model('venues_model');
+		$this->singulars = array(
+			"matches" => "match",
+			"sports" => "sport",
+			"venues" => "venue"
+		);
 	}
 
+	// $type should be the plural model name; eg sports, venues, matches
 	public function data($type) {
 		// Define $action even if the use has just loaded the page
 		$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "load";
@@ -25,14 +31,15 @@ class Datatables extends MY_Controller {
 				// Load all objects of type from the correct model. Assume model named based on type exists. Eval is scary.
 				eval('$allObjects = $this->'.$type.'_model->get_all();');
 				// Loop through all objects, process them if required and add them to the output array as datatables rows
-				foreach($allObjects as $id => $object) {
+				foreach($allObjects as $ID => $object) {
 					// The DataTables row ID; eg. sports-8 or matches-332
-					$object['DT_RowId'] = "$type-$id";
+					$object['DT_RowId'] = "$type-$ID";
 					// Format date/time objects for the public
 					if(isset($object['startTime']) && isset($object['endTime'])) {
 						$object['startTime'] = datetime_to_public($object['endTime']);
 						$object['endTime'] = datetime_to_public($object['endTime']);
 					}
+					$object['detailsLink'] = "/tms/{$this->singulars[$type]}/$ID";
 					// Create / add to the aaData rows array, ready to be jsonified
 					$aaData[] = $object;
 				}
@@ -44,6 +51,7 @@ class Datatables extends MY_Controller {
 				eval('$newID = $this->'.$type.'_model->insert($newData);');
 				if($newID!==FALSE) {
 					eval('$newObject = $this->'.$type.'_model->get($newID);');
+					$newObject['detailsLink'] = "/tms/{$this->singulars[$type]}/$newID";
 					$out = array('id' => "$type-$newID", 'row' => $newObject);
 				} else {
 					$out = array('error' => "An error occurred. Please contact Infusion Systems.");
@@ -59,6 +67,7 @@ class Datatables extends MY_Controller {
 				eval('$updateSuccess = $this->'.$type.'_model->update($ID, $updateData);');
 				if($updateSuccess!==FALSE) {
 					eval('$updatedObject = $this->'.$type.'_model->get($ID);');
+					$updatedObject['detailsLink'] = "/tms/{$this->singulars[$type]}/$ID";
 					$out = array('id' => "$type-$ID", 'row' => $updatedObject);
 				} else {
 					$out = array('error' => "An error occurred. Please contact Infusion Systems.");

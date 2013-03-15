@@ -87,10 +87,7 @@
 				{ "mData": "name" },
 				{ "mData": "description" },
 				{ "mData": "directions" },
-				{
-	                "mData": null,
-	                "sDefaultContent": ""
-            	}
+				{ "mData": "detailsLink" }
 			],
 			"aoColumnDefs": [
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
@@ -119,19 +116,15 @@
 							},
 							{
 								"sExtends": "pdf",
-								"mColumns": [ 4, 5, 6 ]
+								"mColumns": [ 3, 4, 5 ]
 							}
 						]
 					}
 				]
 			},
 			"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-				$('td:eq(3)', nRow).html( '<a href="/tms/venue/'+aData['venueID']+'" class="editor-details">Details</a>' );
 			},
 			"fnInitComplete": function ( settings, json ) {
-				// Set the allowed values for the select field based on
-				// what is available in the database
-				//editor.field('manager').update( json.userList );
 			}
 		} );
 
