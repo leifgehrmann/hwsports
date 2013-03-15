@@ -203,6 +203,7 @@ class Scheduling_model extends MY_Model {
 				}
 
 				// Now we need to find our the time slot. Again, we use our fitness generator...
+				$matchUsageDateTimes = array();
 				foreach( $matchUsage[$date] as $key => $value )
 					if($key!="teams" && $key!="count")
 						$matchUsageDateTimes[$key] = $value;
