@@ -153,7 +153,7 @@ class Matches_model extends MY_Model {
 			}
 
 			$matches = $this->get_venue_matches($venueID);
-			if($matches == FALSE) return FALSE;
+			if($matches === FALSE) return FALSE;
 
 			$filtered = array();
 			foreach($matches as $match) {
