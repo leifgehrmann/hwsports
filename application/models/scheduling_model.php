@@ -43,7 +43,6 @@ class Scheduling_model extends MY_Model {
 
 		$umpires  = $actors['Umpire'];
 		$teams    = $actors['Team'];
-		$venues   = $venues;
 		
 		// If tournament is round robin...
 
@@ -151,6 +150,12 @@ class Scheduling_model extends MY_Model {
 		$umpireCount = array(); // associative array of umpireID to number of matches he/she already manages.
 		$matchDateUsedMax = 0;
 
+		// Turn teams into list of teamIDs
+		$teamIDs = array();
+		foreach($teams as $team){
+			$teamIDs[] = $team['teamID'];
+		}
+
 		// We set the initial count for every single array to be 0.
 		foreach($matchDateTimes as $date=>$dateTimes)
 		{
@@ -161,7 +166,7 @@ class Scheduling_model extends MY_Model {
 				foreach($teamIDs as $teamID)
 					$matchDateTeam[$date][$dateTime][$teamID] = 0;
 			}
-			foreach($teamIDs as $teamID)
+			foreach($matchDateTeam as $teamID)
 				$matchDateTeam[$date][$teamID] = 0;
 		}
 		foreach( $umpires as $umpire )
