@@ -176,7 +176,6 @@ class Scheduling_model extends MY_Model {
 		$combinations = $this->round_robin($teamIDs);
 
 		// For every single combination of a game we want.
-		var_dump($combinations);
 		foreach($combinations as $combination)
 		{
 			$added = false; // This will indicate if we could find a place to put this match in.
@@ -189,7 +188,6 @@ class Scheduling_model extends MY_Model {
 				if($key!="teams" && $key!="count")
 					$matchUsageDates[$key] = $value;
 			$weightedDates = $this->fitness_generator($matchUsageDates);
-			var_dump($weightedDates);
 			foreach($weightedDates as $date)
 			{
 				// Has either team A or team B already played on this day the maximum number of times?
@@ -241,6 +239,8 @@ class Scheduling_model extends MY_Model {
 					//foreach($umpireIDsUsage as $umpireID)
 					//	$u[] = array($umpireID,$umpireUsage[$umpireID]);
 					//$u = array_multisort();
+					var_dump($u);
+					var_dump($umpireUsage);
 					usort($u, function($a, $b)
 						{
 							global $umpireUsage;
