@@ -99,7 +99,6 @@ class Scheduling_model extends MY_Model {
 			if(count($matchDateTimes[$date]) == 0)
 				unset($matchDateTimes[$date]);
 		}
-		var_dump($matchDateTimes);
 		// We now check if a venue is occupied with some other match.
 		// If it isn't, we say that this particular venue works at the
 		// particular time on this particular day.
@@ -133,7 +132,6 @@ class Scheduling_model extends MY_Model {
 				unset($matchDateTimes[$date]);
 		}
 		var_dump($matchDateTimes);
-		die();
 
 		// We now want to create our individual matches for each
 		// combination of matches. We want to make sure that no
