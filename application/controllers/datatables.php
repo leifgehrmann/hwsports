@@ -31,15 +31,15 @@ class Datatables extends MY_Controller {
 			case "load":
 				$sports = $this->sports_model->get_all();
 				$out['aaData'] = $sports;
-				$out['error'] = print_r($sports,1);
+				$out['error'] = $sports;
 			break;
 			case "create":
 				$sports = $this->sports_model->get_all();
-				$out['error'] = print_r($sports,1);
+				$out['error'] = $sports;
 			break;
 			case "edit":
 				$newdata = $_POST['data'];
-				$out['error'] = print_r($newdata,1);
+				$out['error'] = $newdata;
 			break;
 			case "remove":
 				foreach($_POST['data'] as $clientRowString) {
