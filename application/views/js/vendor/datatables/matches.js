@@ -5,11 +5,6 @@
 			"ajaxUrl": "/datatables/matches",
 			"domTable": "#matches",
 			"fields": [ {
-					"label": "Centre ID",
-					"name": "centreID",
-					"default": $('#centreID').text(),
-					"type": "hidden"
-				}, {
 					"label": "ID",
 					"name": "matchID",
 					"type": "hidden"
@@ -67,12 +62,11 @@
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/matches",
 			"aoColumns": [
-				{ "mData": "centreID" },
 				{ "mData": "matchID" },
-				{ "mData": "sportName" },
-				{ "mData": "venueName" },
+				{ "mData": "sportData.name" },
+				{ "mData": "venueData.name" },
 				{ 
-					"mData": "tournamentName",
+					"mData": "tournamentData.name",
 					"sDefaultContent": ""
 				},
 				{ "mData": "name" },
