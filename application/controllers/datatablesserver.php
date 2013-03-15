@@ -1,6 +1,12 @@
 <?php 
 namespace DataTables;
 // Alias Editor classes so they are easy to use
+define("DATATABLES", true, true);
+
+// DataTables PHP library
+require( FCPATH.APPPATH."libraries/DataTables/DataTables.php" );
+require( FCPATH.APPPATH."libraries/DataTables/Database/Database.php" );
+						
 use
 	DataTables\Editor,
 	DataTables\Editor\Field,
@@ -12,12 +18,6 @@ class DatatablesServer extends MY_Controller {
 
 	function __construct() {
 		parent::__construct();
-		define("DATATABLES", true, true);
-
-		// DataTables PHP library
-		require( FCPATH.APPPATH."libraries/DataTables/DataTables.php" );
-		require( FCPATH.APPPATH."libraries/DataTables/Database/Database.php" );
-								
 		//
 		// Database connection
 		//   Database connection it globally available
