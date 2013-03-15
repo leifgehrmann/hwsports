@@ -39,7 +39,10 @@
 				},
 				"onOpen": function ( settings, json ) {
 					//var oldFooter = $('.DTE_Action_Remove .DTE_Footer_Content').html();
-					$('.DTE_Action_Remove .DTE_Footer_Content .DTE_Form_Buttons button').before('<button onclick="predelete(8);">Check Dependencies</button>');
+					console.log(settings);
+					console.log(json);
+					
+					$('.DTE_Action_Remove .DTE_Footer_Content .DTE_Form_Buttons button').before('<button onclick="predelete('+this.get('id')+');">Check Dependencies</button>');
 				}
 			}
 		} );
