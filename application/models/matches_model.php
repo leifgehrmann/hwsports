@@ -180,7 +180,7 @@ class Matches_model extends MY_Model {
 	 * @return int
 	 **/
 	public function insert($data, $relationIDs=array()) {
-		return $this->insert_object($data, $this->objectIDKey, $this->dataTableName, $relationIDs);
+		return $this->insert_object($data, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relationIDs);
 	}
 
 	/**
