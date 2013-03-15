@@ -190,6 +190,7 @@ class Scheduling_model extends MY_Model {
 			$weightedDates = $this->fitness_generator($matchUsageDates);
 			foreach($weightedDates as $date)
 			{
+				var_dump("Attempting to add Event at date ".$date);
 				// Has either team A or team B already played on this day the maximum number of times?
 				if($matchMaximumPlays <= $matchUsage[$date]['teams'][$teamA]['count'])
 					continue;
@@ -203,6 +204,7 @@ class Scheduling_model extends MY_Model {
 				$weightedDateTimes = $this->fitness_generator($matchUsageDateTimes);
 				foreach($weightedDateTimes as $dateTimeWeight=>$dateTime)
 				{
+					var_dump("Attempting to add Event at datetime ".$dateTime);
 					// Is this match already conflicting with another match where the 
 					// same team is performing (It could be the case that a team can play
 					// more than once a day if we ignored the rules above)
@@ -282,6 +284,7 @@ class Scheduling_model extends MY_Model {
 						{
 							$matchDateTimes[$date][$dateTimeAlt]['umpireIDs'] = array_diff( $matchDateTimes[$date][$dateTimeAlt]['umpireIDs'], $matchUmpireIDs);
 							if(count($matchDateTimes[$date][$dateTimeAlt]['umpireIDs'])==0){
+								unset($matchUsageDates[$date][$dateTimeAlt]);
 								unset($matchDateTimes[$date][$dateTimeAlt]);
 								var_dump("removed ".$dateTime);
 							}
@@ -294,6 +297,7 @@ class Scheduling_model extends MY_Model {
 						//$matchDateTimes[$date][$dateTime]['venueIDs'] = array_diff( $matchDateTimes[$date][$dateTime]['venueIDs'], array($matchVenueID));
 						if(count($matchDateTimes[$date][$dateTime]['venueIDs'])==0)
 						{
+							unset($matchUsageDates[$date][$dateTime]);
 							unset($matchDateTimes[$date][$dateTime]);
 							var_dump("removed ".$dateTime);
 						}
@@ -306,6 +310,7 @@ class Scheduling_model extends MY_Model {
 							{
 								$matchDateTimes[$date][$dateTimeAlt]['venueIDs'] = array_diff( $matchDateTimes[$date][$dateTimeAlt]['venueIDs'], array($matchVenueID));
 								if(count($matchDateTimes[$date][$dateTimeAlt]['venueIDs'])==0){
+									unset($matchUsageDates[$date][$dateTimeAlt]);
 									unset($matchDateTimes[$date][$dateTimeAlt]);
 									var_dump("removed ".$dateTime);
 								}
