@@ -62,7 +62,8 @@ class Datatables extends MY_Controller {
 		}
 
 		// Send it back to the client, via our plain data dump view
-		$this->data['data'] = json_encode($out);
+		//$this->data['data'] = json_encode($out);
+		$this->data['data'] = $out;
 		$this->load->view('data', $this->data);
 	}
 }
