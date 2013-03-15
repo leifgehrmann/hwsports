@@ -186,7 +186,7 @@ class Scheduling_model extends MY_Model {
 			// Get list of days ordered by a fitness function that encourages
 			// the spread of days in a tournament.
 			foreach( $matchUsage as $key => $value )
-				if($key=="teams" || $key=="count")
+				if($key!="teams" && $key!="count")
 					$matchUsageDates[$key] = $value;
 			$weightedDates = $this->fitness_generator($matchUsageDates);
 			var_dump($weightedDates);
@@ -200,7 +200,7 @@ class Scheduling_model extends MY_Model {
 
 				// Now we need to find our the time slot. Again, we use our fitness generator...
 				foreach( $matchUsage[$date] as $key => $value )
-				if($key=="teams" || $key=="count")
+				if($key!="teams" && $key!="count")
 					$matchUsageDateTimes[$key] = $value;
 				$weightedDateTimes = $this->fitness_generator($matchUsageDateTimes);
 				foreach($weightedDateTimes as $dateTimeWeight=>$dateTime)
