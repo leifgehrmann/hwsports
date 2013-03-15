@@ -39,8 +39,7 @@
 				},
 				"onOpen": function ( settings, json ) {
 					//var oldFooter = $('.DTE_Action_Remove .DTE_Footer_Content').html();
-					$('.DTE_Action_Remove .DTE_Body_Content').html('Click next to check for other objects which depend on the object you are trying to delete:');
-					$('.DTE_Action_Remove .DTE_Footer_Content .DTE_Form_Buttons button').before('<button onclick="predelete(8);">Next</button>');
+					$('.DTE_Action_Remove .DTE_Footer_Content .DTE_Form_Buttons button').before('<button onclick="predelete(8);">Check Dependencies</button>');
 				}
 			}
 		} );
