@@ -157,7 +157,7 @@ class Scheduling_model extends MY_Model {
 			$matchDateUsed[$date] = 0;
 			foreach($dateTimes as $dateTime=>$data)
 			{
-				$matchDateUsed[$date][$dateTime] = 0;
+				$matchDateTimeUsed[$date][$dateTime] = 0;
 				foreach($teamIDs as $teamID)
 					$matchDateTeam[$date][$dateTime][$teamID] = 0;
 			}
