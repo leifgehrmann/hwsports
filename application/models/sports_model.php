@@ -91,7 +91,7 @@ class Sports_model extends MY_Model {
 	 **/
 	public function get_sport_category($sportCategoryID) {
 		// Get all data about this sport, the append the data from associated tables as specified above
-		$sport = $this->get_object($sportCategoryID, "sportCategoryID", "sportCategoryData");
+		return $this->get_object($sportCategoryID, "sportCategoryID", "sportCategoryData");
 	}
 	
 	/**
