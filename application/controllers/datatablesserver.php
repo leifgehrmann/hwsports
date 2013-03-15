@@ -1,5 +1,4 @@
 <?php 
-namespace DataTables;
 // Alias Editor classes so they are easy to use
 define("DATATABLES", true, true);
 
