@@ -24,7 +24,7 @@ class Teams_model extends MY_Model {
 		$IDRows = $this->db->get_where('teamsUsers', array('teamID' => $ID))->result_array();
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
 		foreach($IDRows as $IDRow) {
-			$team['users'][$IDRow['userID']] = $this->users_model->get_user($IDRow['userID']);
+			$team['users'][$IDRow['userID']] = $this->users_model->get($IDRow['userID']);
 		}
 		return $team;
 	}
