@@ -22,7 +22,7 @@
 <h2>Website Appearance</h2>
 <table>
 	<tr>
-		<td><label for="headerColour">Header Colour:</label></td>
+		<td><label for="headerColour">Interface Colour:</label></td>
 		<td><?php echo form_input($headerColour);?></td>
 		<td><label for="backgroundColour">Background Colour:</label></td>
 		<td><?php echo form_input($backgroundColour);?></td>

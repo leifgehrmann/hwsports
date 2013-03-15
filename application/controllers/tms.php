@@ -399,6 +399,37 @@ class Tms extends MY_Controller {
 	}
 	public function calendar()
 	{
+		$this->load->model('sports_model');
+		$this->load->model('tournaments_model');
+		$this->load->model('venues_model');
+			
+		$viewOptions['all'] = "All Events";
+		$sportOptions['all'] = "All";
+		$tournamentOptions['all'] = "All";
+		$venueOptions['all'] = "All";
+
+		$sports = $this->sports_model->get_all();
+		$tournaments = $this->tournaments_model->get_all();
+		$venues = $this->venues_model->get_all();
+
+		foreach($sports as $sport) $sportOptions[$sport['sportID']] = $sport['name'];
+		foreach($tournaments as $tournament) $tournamentOptions[$tournament['tournamentID']] = $tournament['name'];
+		foreach($venues as $venue) $venueOptions[$venue['venueID']] = $venue['name'];
+
+		$viewOptions = array(
+			'all'  => 'All Events',	
+			'tournaments'    => 'Tournament Events'
+		);
+
+		$this->data['viewOptions'] = $viewOptions;
+		$this->data['viewSelection'] = 'all';
+		$this->data['sportOptions'] = $sportOptions;
+		$this->data['sportSelection'] = 'all';
+		$this->data['tournamentOptions'] = $tournamentOptions;
+		$this->data['tournamentSelection'] = 'all';
+		$this->data['venueOptions'] = $venueOptions;
+		$this->data['venueSelection'] = 'all';
+
 		$this->view('calendar',"calendar","Calendar",$this->data);
 	}
 	public function groups()

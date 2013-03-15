@@ -216,6 +216,11 @@ input.color {
          1px -1px 1px #333, 
         -1px 1px  1px #333;
 }
+.colorpicker input {
+    line-height: normal;
+    height: 11px;
+}
+
 /***************************************\
 
             Content Styling
