@@ -61,6 +61,8 @@ class Datatables extends MY_Controller {
 				foreach($this->relations[$type] as $relation) {
 					if(strlen(trim($newData[$relation]))) {
 						// If this input field has a value, add it to the relations array. Otherwise just unset it
+						// This allows for empty primary IDs to be submitted by dataTables (such as no-tournament matches etc)
+						// Since the database will just give them the default value, or auto_increment which is usually what we want
 						$newRelations[$relation] = $newData[$relation];
 					}
 					unset($newData[$relation]);
