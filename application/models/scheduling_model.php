@@ -200,8 +200,8 @@ class Scheduling_model extends MY_Model {
 
 				// Now we need to find our the time slot. Again, we use our fitness generator...
 				foreach( $matchUsage[$date] as $key => $value )
-				if($key!="teams" && $key!="count")
-					$matchUsageDateTimes[$key] = $value;
+					if($key!="teams" && $key!="count")
+						$matchUsageDateTimes[$key] = $value;
 				$weightedDateTimes = $this->fitness_generator($matchUsageDateTimes);
 				foreach($weightedDateTimes as $dateTimeWeight=>$dateTime)
 				{
@@ -237,7 +237,6 @@ class Scheduling_model extends MY_Model {
 					// IT IS MUCH EASIER!!!
 
 					// calculate the array of umpires by order of least use (aka, 1 means less busy than 4)
-					var_dump($matchDateTimes);
 					$u = $matchDateTimes[$date][$dateTime]['umpireIDs']; // array of umpires for this match
 					//$u = array();
 					//foreach($umpireIDsUsage as $umpireID)
@@ -284,7 +283,7 @@ class Scheduling_model extends MY_Model {
 						{
 							$matchDateTimes[$date][$dateTimeAlt]['umpireIDs'] = array_diff( $matchDateTimes[$date][$dateTimeAlt]['umpireIDs'], $matchUmpireIDs);
 							if(count($matchDateTimes[$date][$dateTimeAlt]['umpireIDs'])==0){
-								unset($matchUsageDates[$date][$dateTimeAlt]);
+								unset($matchUsage[$date][$dateTimeAlt]);
 								unset($matchDateTimes[$date][$dateTimeAlt]);
 								var_dump("removed ".$dateTime);
 							}
@@ -297,7 +296,7 @@ class Scheduling_model extends MY_Model {
 						//$matchDateTimes[$date][$dateTime]['venueIDs'] = array_diff( $matchDateTimes[$date][$dateTime]['venueIDs'], array($matchVenueID));
 						if(count($matchDateTimes[$date][$dateTime]['venueIDs'])==0)
 						{
-							unset($matchUsageDates[$date][$dateTime]);
+							unset($matchUsage[$date][$dateTime]);
 							unset($matchDateTimes[$date][$dateTime]);
 							var_dump("removed ".$dateTime);
 						}
@@ -310,7 +309,7 @@ class Scheduling_model extends MY_Model {
 							{
 								$matchDateTimes[$date][$dateTimeAlt]['venueIDs'] = array_diff( $matchDateTimes[$date][$dateTimeAlt]['venueIDs'], array($matchVenueID));
 								if(count($matchDateTimes[$date][$dateTimeAlt]['venueIDs'])==0){
-									unset($matchUsageDates[$date][$dateTimeAlt]);
+									unset($matchUsage[$date][$dateTimeAlt]);
 									unset($matchDateTimes[$date][$dateTimeAlt]);
 									var_dump("removed ".$dateTime);
 								}
@@ -321,11 +320,14 @@ class Scheduling_model extends MY_Model {
 					// We now need to finally update the statistics
 					//$matchDateTimesSelected = array(); // associated array of date->datetime->data. This will be our final result
 					$matchUsage[$date]['count'] += 1; // $matchDateUsed[$date] = $matchDateUsed[$date] + 1; 
-					$matchUsage[$date][$dateTime]['count'] += 1; // $matchDateTimeUsed[$dateTime] = $matchDateTimeUsed[$dateTime] + 1;
 					$matchUsage[$date]['teams'][$teamA]['count'] += 1; // $matchDateTeam[$date][$teamA] = $matchDateTeam[$date][$teamA] + 1;
 					$matchUsage[$date]['teams'][$teamB]['count'] += 1; // $matchDateTeam[$date][$teamB] = $matchDateTeam[$date][$teamB] + 1;
-					$matchUsage[$date][$dateTime]['teams'][$teamA]['count'] += 1; // $matchDateTimeTeam[$date][$dateTime][$teamA] = $matchDateTimeTeam[$date][$dateTime][$teamA] + 1;
-					$matchUsage[$date][$dateTime]['teams'][$teamB]['count'] += 1; // $matchDateTimeTeam[$date][$dateTime][$teamB] = $matchDateTimeTeam[$date][$dateTime][$teamB] + 1;
+					if(array_key_exists($dateTime,$matchDateTimes[$date]))
+					{
+						$matchUsage[$date][$dateTime]['count'] += 1; // $matchDateTimeUsed[$dateTime] = $matchDateTimeUsed[$dateTime] + 1;
+						$matchUsage[$date][$dateTime]['teams'][$teamA]['count'] += 1; // $matchDateTimeTeam[$date][$dateTime][$teamA] = $matchDateTimeTeam[$date][$dateTime][$teamA] + 1;
+						$matchUsage[$date][$dateTime]['teams'][$teamB]['count'] += 1; // $matchDateTimeTeam[$date][$dateTime][$teamB] = $matchDateTimeTeam[$date][$dateTime][$teamB] + 1;
+					}
 					//if( $matchDateUsedMax < $matchUsage[$date]['count'] )
 					//	$matchDateUsedMax = $matchUsage[$date]['count'];
 
@@ -336,11 +338,9 @@ class Scheduling_model extends MY_Model {
 				}
 				// If it wasn't added, we continue the loop of course.
 				// but if it was, we would like to move onto the next team combination.
-				var_dump($added);
 				if($added)
 					break;
 			}
-			var_dump($added);
 			// This will only occur if the entire thing above did not work.
 			// hopefully that doesn't happen a lot when we do testing. :)
 			if(!$added)
