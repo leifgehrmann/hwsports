@@ -199,7 +199,6 @@ class Scheduling_model extends MY_Model {
 					continue;
 
 				// Now we need to find our the time slot. Again, we use our fitness generator...
-				var_dump($matchUsage);
 				foreach( $matchUsage[$date] as $key => $value )
 					if($key!="teams" && $key!="count")
 						$matchUsageDateTimes[$key] = $value;
@@ -238,7 +237,6 @@ class Scheduling_model extends MY_Model {
 					// IT IS MUCH EASIER!!!
 
 					// calculate the array of umpires by order of least use (aka, 1 means less busy than 4)
-					var_dump($matchDateTimes);
 					$u = $matchDateTimes[$date][$dateTime]['umpireIDs']; // array of umpires for this match
 					//$u = array();
 					//foreach($umpireIDsUsage as $umpireID)
