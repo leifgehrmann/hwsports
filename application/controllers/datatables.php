@@ -11,11 +11,10 @@ class Datatables extends MY_Controller {
 		$this->load->model('venues_model');
 		$this->load->model('users_model');
 		$this->load->model('teams_model');
-		
 	}
 
 	public function sports() {
-		$action = isset($_POST['action']) ? $_POST['action'] : "load";
+		$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "load";
 		$out = array (
 				'id' => -1,
 				'error' => '',
@@ -28,8 +27,12 @@ class Datatables extends MY_Controller {
 		switch ($action) {
 			case "load":
 				$sports = $this->sports_model->get_all();
-				$out['aaData'] = array("DT_RowId"=>"row_1","sportID"=>1,"centreID"=>1,"name"=>"hello","description"=>"world","sportCategoryName"=>"football");
-				//$out['error'] = $sports;
+				$aaData = array();
+				foreach($sports as $id => $sport) {
+					$sport['DT_RowId'] = $id;
+					$aaData[] = $sport;
+				}
+				$out['aaData'] = $aaData;
 			break;
 			case "create":
 				$sports = $this->sports_model->get_all();
@@ -39,11 +42,32 @@ class Datatables extends MY_Controller {
 				$newdata = $_POST['data'];
 				$out['error'] = $newdata;
 			break;
-			case "remove":
-				foreach($_POST['data'] as $clientRowString) {
-					$sportID = substr($clientRowString,4);
-					$out['error'] = $this->sports_model->delete($sportID);
-				}
+			case "remove": 
+			//src='/datatables/sports?action=jspredelete&id={$_POST['data'][0]['id']}
+				$out['error'] = "<script type='text/javascript'>alert('hello');</script>";
+			break;
+			case "jspredelete":
+				$ID = $_GET['id'];
+				$errorMessage = json_encode(addslashes($this->sports_model->delete($ID)));
+				$js = "<script>confirm('$errorMessage');</script>";
+				
+				$more = "//if (confirm('$errorMessage')) {
+								$.ajax({
+									url: 'myUrl',
+									type: 'POST',
+									data: {
+										// data stuff here
+									},
+									success: function () {
+										// does some stuff here...
+									}
+								});
+							//}
+					</script>";
+					
+				$this->data['data'] = $js;
+				$this->load->view('data', $this->data);
+				return;
 			break;
 		}
 
