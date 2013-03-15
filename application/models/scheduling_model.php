@@ -196,9 +196,7 @@ class Scheduling_model extends MY_Model {
 					continue;
 
 				// Now we need to find our the time slot. Again, we use our fitness generator...
-				// we use -1 to indicate that we don't know the maximum. We could probably find
-				// out, but I'm to lazy to code it here. 
-				$weightedDateTimes = $this->fitness_generator($matchUsage);
+				$weightedDateTimes = $this->fitness_generator($matchUsage[$date]);
 				foreach($weightedDateTimes as $dateTimeWeight=>$dateTime)
 				{
 					// Is this match already conflicting with another match where the 
