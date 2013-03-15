@@ -7,7 +7,7 @@ class Scheduling_model extends MY_Model {
 	 * $tournamentID is int(11)
 	 * returns true if the scheduling went well.
 	 * an error string if it didn't go well.
-	 * @return boolean 
+	 * @return an array of matches 
 	 **/
 	public function schedule_football_family($tournamentID)
 	{
@@ -144,6 +144,7 @@ class Scheduling_model extends MY_Model {
 		// a certain day. We also need to know how many matches
 		// occur at a particular time.
 
+		$scheduledMatches = array();
 		$matchDateTimesSelected = array(); // associated array of date->datetime->data. This will be our final result
 		$matchUsage = array();
 		$matchDateUsed     = array(); // associative array of date to number of matches on that day
@@ -193,14 +194,14 @@ class Scheduling_model extends MY_Model {
 			$weightedDates = $this->fitness_generator($matchUsageDates);
 			foreach($weightedDates as $date)
 			{
-				var_dump("Attempting to add Event at date ".$date." for teams ".$combination[0]." and ".$combination[1]);
+				echo "Attempting to add Event at date ".$date." for teams ".$combination[0]." and ".$combination[1];
 				// Has either team A or team B already played on this day the maximum number of times?
 				if($matchMaximumPlays <= $matchUsage[$date]['teams'][$teamA]['count']){
-					var_dump("failed ".$dateTime." because team has already played max number of times");
+					echo "failed ".$dateTime." because team has already played max number of times";
 					continue;
 				}
 				if($matchMaximumPlays <= $matchUsage[$date]['teams'][$teamB]['count']){
-					var_dump("failed ".$dateTime." because team has already played max number of times");
+					echo "failed ".$dateTime." because team has already played max number of times";
 					continue;
 				}
 
@@ -212,7 +213,7 @@ class Scheduling_model extends MY_Model {
 				$weightedDateTimes = $this->fitness_generator($matchUsageDateTimes);
 				foreach($weightedDateTimes as $dateTimeWeight=>$dateTime)
 				{
-					var_dump("Attempting to add Event at datetime ".$dateTime);
+					echo "Attempting to add Event at datetime ".$dateTime;
 					// Is this match already conflicting with another match where the 
 					// same team is performing (It could be the case that a team can play
 					// more than once a day if we ignored the rules above)
@@ -234,7 +235,7 @@ class Scheduling_model extends MY_Model {
 						}
 					// If there is a conflict, well we better check another time slot.
 					if($isOverlapping){
-						var_dump("failed ".$dateTime." because of overlapping");
+						echo "failed ".$dateTime." because of overlapping";
 						continue;
 					}
 					
@@ -277,11 +278,22 @@ class Scheduling_model extends MY_Model {
 
 
 
-					// Hey thats it! Let's add our result to the selected array:
+					// Hey thats it! Let's add our result to the selected array and a list of scheduled matches:
+					$newMatch = array();
+					$newMatch['startTime'] = $dateTime;
+					$endTime = new DateTime($dateTime);
+					$endTime->add($matchDuration);
+					$newMatch['endTime'] = datetime_to_standard($endTime);
+					$newMatch['teamA'] = $teamA;
+					$newMatch['teamB'] = $teamB;
+					$newMatch['venueID'] = $matchVenueID;
+					$newMatch['UmpireIDs'] = $matchUmpireIDs;
 					$matchDateTimesSelected[$date][$dateTime] = array();
 					$matchDateTimesSelected[$date][$dateTime]['teamIDs'] = array($teamA,$teamB);
 					$matchDateTimesSelected[$date][$dateTime]['umpireIDs'] = $matchUmpireIDs;
 					$matchDateTimesSelected[$date][$dateTime]['venueID'] = $matchVenueID;
+					$scheduledMatch[] = $newMatch;
+
 					// Now remove the umpires that we selected, and also remove them from
 					// the original available options to avoid conflicting schedules
 					//$matchDateTimes[$date][$dateTime]['umpireIDs'] = array_diff( $matchDateTimes[$date][$dateTime]['umpireIDs'], $matchUmpireIDs);
@@ -296,7 +308,7 @@ class Scheduling_model extends MY_Model {
 							if(count($matchDateTimes[$date][$dateTimeAlt]['umpireIDs'])==0){
 								unset($matchUsage[$date][$dateTimeAlt]);
 								unset($matchDateTimes[$date][$dateTimeAlt]);
-								var_dump("removed ".$dateTime);
+								echo "removed ".$dateTime;
 							}
 						}
 					}
@@ -309,7 +321,7 @@ class Scheduling_model extends MY_Model {
 						{
 							unset($matchUsage[$date][$dateTime]);
 							unset($matchDateTimes[$date][$dateTime]);
-							var_dump("removed ".$dateTime);
+							echo "removed ".$dateTime;
 						}
 						foreach($matchDateTimes[$date] as $dateTimeAlt=>$dateTimeDataAlt)
 						{
@@ -322,7 +334,7 @@ class Scheduling_model extends MY_Model {
 								if(count($matchDateTimes[$date][$dateTimeAlt]['venueIDs'])==0){
 									unset($matchUsage[$date][$dateTimeAlt]);
 									unset($matchDateTimes[$date][$dateTimeAlt]);
-									var_dump("removed ".$dateTime);
+									echo "removed ".$dateTime;
 								}
 							}
 						}
@@ -343,7 +355,7 @@ class Scheduling_model extends MY_Model {
 					//	$matchDateUsedMax = $matchUsage[$date]['count'];
 
 					// Stop the loop! We have just added our match!
-					var_dump("Event was added at ".$dateTime." at the venue ".$matchDateTimesSelected[$date][$dateTime]['venueID']." with the teams ".$matchDateTimesSelected[$date][$dateTime]['teamIDs'][0]." and ".$matchDateTimesSelected[$date][$dateTime]['teamIDs'][1]);
+					echo "Event was added at ".$dateTime." at the venue ".$matchDateTimesSelected[$date][$dateTime]['venueID']." with the teams ".$matchDateTimesSelected[$date][$dateTime]['teamIDs'][0]." and ".$matchDateTimesSelected[$date][$dateTime]['teamIDs'][1];
 					$added = true;
 					break;
 				}
@@ -355,11 +367,12 @@ class Scheduling_model extends MY_Model {
 			// This will only occur if the entire thing above did not work.
 			// hopefully that doesn't happen a lot when we do testing. :)
 			if(!$added)
-				return "Not enough time slots to support this tournament style";
+				echo "Not enough time slots to support this tournament style";
+				return FALSE;
 		}
 
-		return $matchDateTimesSelected;
-		
+		return $scheduledMatch;
+
 	}
 
 	/**
@@ -410,9 +423,15 @@ class Scheduling_model extends MY_Model {
 
 		// Sort that array
 
+	}
 
-
-
+	/**
+	 * 
+	 * 
+	 * @param tournamentID		the tournament to continue
+	 * @return return a sequence of updated matches (this can be simply added to add match data)
+	 */
+	private function schedule_running_continue($tournamentID) {
 
 	}
 
