@@ -560,12 +560,18 @@ class Tms extends MY_Controller {
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('address',(isset($this->data['centre']['address']) ? $this->data['centre']['address'] : '') )
 			);
+			$this->data['footerText'] = array(
+				'name'  => 'footerText',
+				'id'    => 'footerText',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('footerText',(isset($this->data['centre']['footerText']) ? $this->data['centre']['footerText'] : '') )
+			);
 			$this->data['headerColour'] = array(
 				'name'  => 'headerColour',
 				'id'    => 'headerColour',
 				'type'  => 'text',
 				'style' => 'background-color: #'.(isset($this->data['centre']['headerColour']) ? $this->data['centre']['headerColour'] : 'FFFFFF'),
-				'class' => 'colorpicker',
+				'class' => 'color',
 				'value' => $this->form_validation->set_value('headerColour',(isset($this->data['centre']['headerColour']) ? $this->data['centre']['headerColour'] : '') )
 			);
 			$this->data['backgroundColour'] = array(
@@ -573,14 +579,8 @@ class Tms extends MY_Controller {
 				'id'    => 'backgroundColour',
 				'type'  => 'text',
 				'style' => 'background-color: #'.(isset($this->data['centre']['backgroundColour']) ? $this->data['centre']['backgroundColour'] : 'FFFFFF'),
-				'class' => 'colorpicker',
+				'class' => 'color',
 				'value' => $this->form_validation->set_value('backgroundColour',(isset($this->data['centre']['backgroundColour']) ? $this->data['centre']['backgroundColour'] : '') )
-			);
-			$this->data['footerText'] = array(
-				'name'  => 'footerText',
-				'id'    => 'footerText',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('footerText',(isset($this->data['centre']['footerText']) ? $this->data['centre']['footerText'] : '') )
 			);
 			$this->view('appearance',"appearance","Apprearance",$this->data);
 		}
