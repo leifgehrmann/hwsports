@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/vendor/normalize/normalize.min.css">
 	<link rel='stylesheet' type="text/css" href="/css/vendor/jquery-ui/jquery-ui-1.10.0.custom.min.css">
 	<link rel='stylesheet' type="text/css" href="/css/vendor/datatables/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="/css/vendor/fancybox/jquery.fancybox.css">
 	<link rel='stylesheet' type="text/css" href="/css/vendor/datatables/dataTables.tabletools.css">
 	<link rel='stylesheet' type="text/css" href="/css/vendor/datatables/dataTables.editor.css">
 	<link rel='stylesheet' type="text/css" href="/css/vendor/datatables/dataTables.ColVis.css">
@@ -24,6 +25,7 @@
 	<script charset="utf-8" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
 	<script charset="utf-8" src="/js/vendor/jquery/jquery-ui-1.10.0.custom.min.js"></script>
 	<script charset="utf-8" src="/js/vendor/jquery/jquery-ui-timepicker-addon.js"></script>
+	<script src="/js/vendor/fancybox/jquery.fancybox.pack.js"></script>
 	<script charset="utf-8" src="/js/vendor/datatables/jquery.dataTables.min.js"></script>
 	<script charset="utf-8" src="/js/vendor/datatables/dataTables.tabletools.min.js"></script>
 	<script charset="utf-8" src="/js/vendor/datatables/dataTables.editor.min.js"></script>
