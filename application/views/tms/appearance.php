@@ -12,11 +12,11 @@
 	</tr>
 	<tr>
 		<td><label for="address">Address:</label></td>
-		<td colspan="3"><?php echo form_input($address);?></td>
+		<td colspan="3"><?php echo form_textarea($address);?></td>
 	</tr>
 	<tr>
 		<td><label for="footerText">Footer Text:</label></td>
-		<td colspan="3"><?php echo form_input($footerText);?></td>
+		<td colspan="3"><?php echo form_textarea($footerText);?></td>
 	</tr>
 </table>
 <h2>Website Appearance</h2>

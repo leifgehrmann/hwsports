@@ -557,13 +557,13 @@ class Tms extends MY_Controller {
 			$this->data['address'] = array(
 				'name'  => 'address',
 				'id'    => 'address',
-				'type'  => 'textarea',
+				'type'  => 'text',
 				'value' => $this->form_validation->set_value('address',(isset($this->data['centre']['address']) ? $this->data['centre']['address'] : '') )
 			);
 			$this->data['footerText'] = array(
 				'name'  => 'footerText',
 				'id'    => 'footerText',
-				'type'  => 'textarea',
+				'type'  => 'text',
 				'value' => $this->form_validation->set_value('footerText',(isset($this->data['centre']['footerText']) ? $this->data['centre']['footerText'] : '') )
 			);
 			$this->data['headerColour'] = array(
