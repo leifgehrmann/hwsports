@@ -84,7 +84,14 @@ class Datatables extends MY_Controller {
 				$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");
 			break;
 		}
-
+		
+		foreach($this->sports_model->get_sport_categories() as $sportCategory) {
+			$out['sportCategories'][] = array(
+				'value' => $sportCategory['sportCategoryID'],
+				'name' => $sportCategory['name']
+			);
+		}
+		
 		// Send it back to the client, via our plain data dump view
 		$this->data['data'] = json_encode($out);
 		$this->load->view('data', $this->data);
