@@ -31,6 +31,9 @@
 				"onEdit": function (json, data) {
 				},
 				"onOpen": function ( settings, json ) {
+					var oldFooter = $('.DTE_Action_Remove .DTE_Footer').html();
+					$('.DTE_Action_Remove .DTE_Body').html('Click next to check for other objects which depend on the object you are trying to delete:');
+					$('.DTE_Action_Remove .DTE_Footer').html('<a href="/datatables/predelete/8">Next</a>');
 				}
 			}
 		} );
@@ -81,5 +84,32 @@
 				//editor.field('sportCategoryID').update( json.sportCategoryData );
 			}
 		} );
+		
+		// show user what will be deleted if they click delete
+		$(".predelete").fancybox({
+			beforeShow:function (){			
+				//grab this function so that we can pass it back to
+				//`onComplete` of the new fancybox we're going to create
+				var func = arguments.callee;
 
+				//bind the submit of our new form
+				$('.fancyform form').unbind('submit').bind("submit", function() {
+					//shiny
+					$.fancybox.showLoading();
+
+					var data = $(this).serialize();
+					var url = $(this).attr('action')
+					
+					//post to the server and when we get a response, 
+					//draw a new fancybox, and run this function on completion
+					//so that we can bind the form and create a new fancybox on submit
+					$.post(url, data, function(msg){
+						$.fancybox({content:msg,beforeShow:func});
+					});
+					
+					return false; 
+				});
+			}
+		});
+		
 	} );
