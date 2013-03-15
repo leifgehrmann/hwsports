@@ -130,14 +130,14 @@ class Matches_model extends MY_Model {
 		if($startTime==FALSE && $endTime == FALSE) {
 			// verify that the venue exists
 			$this->load->model('venues_model');
-			if($this->venues_model->get_venue($venueID) == FALSE) return FALSE;
+			if($this->venues_model->get($venueID) == FALSE) return FALSE;
 
 			// Query to return the IDs for everything which takes place at the specified sports centre
 			$IDsQuery = $this->db->select("matchID")->where("venueID", $venueID)->get("matches")->result_array();
 			// Loop through all result rows, get the ID and use that to put all the data into the output array 
 			$all = array();
 			foreach($IDsQuery as $IDRow) {
-				$all[$IDRow['matchID']] = $this->get_match($IDRow['matchID']);
+				$all[$IDRow['matchID']] = $this->get($IDRow['matchID']);
 			}
 			return $all;
 		} else {
