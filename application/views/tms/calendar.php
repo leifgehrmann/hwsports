@@ -8,7 +8,7 @@
 </ul>
 <?php echo form_open("tms/calendar", array('id' => 'filterForm'));?>
 <h2>Filter Category</h2>
-<table>
+<table style="width:100%;">
 	<tr>
 		<td>View</td>
 		<td><?php echo form_dropdown('viewSelect', $viewOptions, $viewSelection ); ?></td>
