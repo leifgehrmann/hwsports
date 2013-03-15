@@ -43,7 +43,6 @@ class Scheduling_model extends MY_Model {
 
 		$umpires  = $actors['Umpire'];
 		$teams    = $actors['Team'];
-		$venues   = $venues;
 		
 		// If tournament is round robin...
 
@@ -158,10 +157,10 @@ class Scheduling_model extends MY_Model {
 			foreach($dateTimes as $dateTime=>$data)
 			{
 				$matchDateTimeUsed[$date][$dateTime] = 0;
-				foreach($teamIDs as $teamID)
+				foreach($matchDateTeam as $teamID)
 					$matchDateTeam[$date][$dateTime][$teamID] = 0;
 			}
-			foreach($teamIDs as $teamID)
+			foreach($matchDateTeam as $teamID)
 				$matchDateTeam[$date][$teamID] = 0;
 		}
 		foreach( $umpires as $umpire )
