@@ -283,16 +283,16 @@ class Scheduling_model extends MY_Model {
 					$newMatch['startTime'] = $dateTime;
 					$endTime = new DateTime($dateTime);
 					$endTime->add($matchDuration);
+					$newMatch['name'] = $teams[$teamA]." vs ".$teams[$teamB];
 					$newMatch['endTime'] = datetime_to_standard($endTime);
-					$newMatch['teamA'] = $teamA;
-					$newMatch['teamB'] = $teamB;
-					$newMatch['venueID'] = $matchVenueID;
-					$newMatch['UmpireIDs'] = $matchUmpireIDs;
+					$newMatch['team'] = array($teamA,$teamB);
+					$newMatch['venue'] = $matchVenueID;
+					$newMatch['umpire'] = $matchUmpireIDs;
 					$matchDateTimesSelected[$date][$dateTime] = array();
 					$matchDateTimesSelected[$date][$dateTime]['teamIDs'] = array($teamA,$teamB);
 					$matchDateTimesSelected[$date][$dateTime]['umpireIDs'] = $matchUmpireIDs;
 					$matchDateTimesSelected[$date][$dateTime]['venueID'] = $matchVenueID;
-					$scheduledMatch[] = $newMatch;
+					$scheduledMatches[] = $newMatch;
 
 					// Now remove the umpires that we selected, and also remove them from
 					// the original available options to avoid conflicting schedules
@@ -372,7 +372,7 @@ class Scheduling_model extends MY_Model {
 			}
 		}
 
-		return $scheduledMatch;
+		return $scheduledMatches;
 
 	}
 
