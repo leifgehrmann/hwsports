@@ -15,9 +15,9 @@ class Datatables extends MY_Controller {
 		);
 		
 		$this->relations = array(
-			"matches" => array("matchID","sportID","venueID","tournamentID"),
-			"sports" => array("sportID","sportCategoryID"),
-			"venues" => array("venueID")
+			"matches" => array("matchID" => NULL,"sportID" => NULL,"venueID" => NULL,"tournamentID" => 0),
+			"sports" => array("sportID" => NULL,"sportCategoryID" => NULL),
+			"venues" => array("venueID" => NULL)
 		);
 	}
 
@@ -58,12 +58,14 @@ class Datatables extends MY_Controller {
 				$newData = $_POST['data'];
 				// For each input ID which is defined as a relational field for this type, remove from input and put into relations
 				$newRelations = array();
-				foreach($this->relations[$type] as $relation) {
+				foreach($this->relations[$type] as $relation => $default) {
 					if(strlen(trim($newData[$relation]))) {
 						// If this input field has a value, add it to the relations array. Otherwise just unset it
 						// This allows for empty primary IDs to be submitted by dataTables (such as no-tournament matches etc)
 						// Since the database will just give them the default value, or auto_increment which is usually what we want
 						$newRelations[$relation] = $newData[$relation];
+					} elseif($default!==NULL) {
+						$newRelations[$relation] = $default;
 					}
 					unset($newData[$relation]);
 				}
