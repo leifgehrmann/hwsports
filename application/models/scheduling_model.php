@@ -241,6 +241,8 @@ class Scheduling_model extends MY_Model {
 					//foreach($umpireIDsUsage as $umpireID)
 					//	$u[] = array($umpireID,$umpireUsage[$umpireID]);
 					//$u = array_multisort();
+					var_dump($u);
+					var_dump($umpireUsage);
 					usort($u, function($a, $b)
 						{
 							global $umpireUsage;
