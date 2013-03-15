@@ -39,9 +39,8 @@
 				},
 				"onOpen": function ( settings, json ) {
 				},
-				"onInitRemove": function(hello) {
-					console.log(hello);
-					$('.DTE_Action_Remove .DTE_Footer_Content .DTE_Form_Buttons button').before('<button onclick="predelete('+this.get('id')+');">Check Dependencies</button>');
+				"onInitRemove": function() {
+					$('.DTE_Action_Remove .DTE_Footer_Content .DTE_Form_Buttons button').before('<button onclick="predelete('+editor.get().sportID+');">Check Dependencies</button>');
 				}
 			}
 		} );
@@ -62,7 +61,7 @@
             ],
 			"oTableTools": {
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
-				"sRowSelect": "multi",
+				"sRowSelect": "single",
 				"aButtons": [
 					{ "sExtends": "editor_create", "editor": editor },
 					{ "sExtends": "editor_edit",   "editor": editor },
