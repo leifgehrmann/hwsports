@@ -414,8 +414,8 @@ class Tms extends MY_Controller {
 
 		foreach($sports as $sport) $sportOptions[$sport['sportID']] = $sport['name'];
 		foreach($tournaments as $tournament) {
-			$tournament['tournamentStart'];
-			$tournamentOptions[$tournament['tournamentID']] = $tournament['name'];
+			$year = new DateTime($tournament['tournamentStart'])->format('Y');
+			$tournamentOptions[$year][$tournament['tournamentID']] = $tournament['name'];
 		}
 		foreach($venues as $venue) $venueOptions[$venue['venueID']] = $venue['name'];
 
