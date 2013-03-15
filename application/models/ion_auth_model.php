@@ -814,6 +814,7 @@ class Ion_auth_model extends CI_Model
 
 		// Users table.
 		$data = array(
+			'centreID'   => $this->centreID,
 		    'username'   => $username,
 		    'password'   => $password,
 		    'email'      => $email,

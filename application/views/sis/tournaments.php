@@ -26,7 +26,7 @@ foreach($yearTournaments as $year){
 	<? foreach($yearTournaments as $year=>$tournaments) { ?>
 		<h2><?=$year?></h2>
 		<div>
-		<? foreach($tournaments as $tournament) { if(!$tournament) continue;?>
+		<? foreach($tournaments as $tournament) { ?>
 			<div class="widget half tournament sportCategoryID-<?=$tournament['sportData']['sportCategoryID']?> sportID-<?=$tournament['sportID']?>">
 				<a href="/sis/tournament/<?=$tournament['tournamentID']?>">
 					<div class="widget-title">

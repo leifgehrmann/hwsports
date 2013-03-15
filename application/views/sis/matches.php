@@ -60,7 +60,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<? foreach($matches as $match) { if(!$match) continue; ?>
+		<? foreach($matches as $match) { ?>
 		<tr class="match sportCategoryID-<?=$match['sportData']['sportCategoryID']?> sportID-<?=$match['sportID']?>">
 			<td><div class="icon"></div></td>
 			<td><?=$match['date']?></td>
