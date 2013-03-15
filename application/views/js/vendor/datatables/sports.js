@@ -33,11 +33,8 @@
 				"onOpen": function ( settings, json ) {
 				},
 				"onInitRemove": function() {
-					var sportID = $('.DTTT_selected').attr('id');
-					alert("initRemove, sportID: "+sportID);
-					
 					$.fancybox({
-						href : '/datatables/predelete/'+sportID,
+						href : '/datatables/predelete/'+$('.DTTT_selected').attr('id'),
 						type : 'ajax'
 					});
 				}
