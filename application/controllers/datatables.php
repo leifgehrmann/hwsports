@@ -41,7 +41,7 @@ class Datatables extends MY_Controller {
 				$newdata = $_POST['data'];
 				$out['error'] = print_r($newdata);
 			break;
-			case: "remove":
+			case "remove":
 				foreach($_POST['data'] as $clientRowString) {
 					$sportID = substr($clientRowString,4);
 					$out['error'] = $this->sports_model->delete($sportID);
