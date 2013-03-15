@@ -463,13 +463,6 @@ class Tms extends MY_Controller {
 	}
 	public function settings()
 	{
-			
-		$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
-		$this->form_validation->set_rules('shortName', 'Short Name', 'required|xss_clean');
-		$this->form_validation->set_rules('address', 'Address', 'required|xss_clean');
-		$this->form_validation->set_rules('headerColour', 'Header Colour', 'required|xss_clean');
-		$this->form_validation->set_rules('backgroundColour', 'Background Colour', 'required|xss_clean');
-		$this->form_validation->set_rules('footerText', 'Footer Text', 'required|xss_clean');
 		
 		$weekdaysShort = array('mon','tue','wed','thu','fri','sat','sun');
 
@@ -497,47 +490,6 @@ class Tms extends MY_Controller {
 			//set the flash data error message if there is one
 			$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
 			
-			$this->data['name'] = array(
-				'name'  => 'name',
-				'id'    => 'name',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('name',(isset($this->data['centre']['name']) ? $this->data['centre']['name'] : '') )
-			);
-			$this->data['shortName'] = array(
-				'name'  => 'shortName',
-				'id'    => 'shortName',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('shortName',(isset($this->data['centre']['shortName']) ? $this->data['centre']['shortName'] : '') )
-			);
-			$this->data['address'] = array(
-				'name'  => 'address',
-				'id'    => 'address',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('address',(isset($this->data['centre']['address']) ? $this->data['centre']['address'] : '') )
-			);
-			$this->data['headerColour'] = array(
-				'name'  => 'headerColour',
-				'id'    => 'headerColour',
-				'type'  => 'text',
-				'style' => 'background-color: #'.(isset($this->data['centre']['headerColour']) ? $this->data['centre']['headerColour'] : 'FFFFFF'),
-				'class' => 'colorpickerinput',
-				'value' => $this->form_validation->set_value('headerColour',(isset($this->data['centre']['headerColour']) ? $this->data['centre']['headerColour'] : '') )
-			);
-			$this->data['backgroundColour'] = array(
-				'name'  => 'backgroundColour',
-				'id'    => 'backgroundColour',
-				'type'  => 'text',
-				'style' => 'background-color: #'.(isset($this->data['centre']['backgroundColour']) ? $this->data['centre']['backgroundColour'] : 'FFFFFF'),
-				'class' => 'colorpickerinput',
-				'value' => $this->form_validation->set_value('backgroundColour',(isset($this->data['centre']['backgroundColour']) ? $this->data['centre']['backgroundColour'] : '') )
-			);
-			$this->data['footerText'] = array(
-				'name'  => 'footerText',
-				'id'    => 'footerText',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('footerText',(isset($this->data['centre']['footerText']) ? $this->data['centre']['footerText'] : '') )
-			);
-			
 			for($i=0;$i<7;$i++){
 				$this->data[$weekdaysShort[$i].'Open'] = array(
 					'name'  => $weekdaysShort[$i].'Open',
@@ -561,6 +513,9 @@ class Tms extends MY_Controller {
 					'value' => $this->form_validation->set_value($weekdaysShort[$i].'CloseTime',(isset($this->data['centre'][$weekdaysShort[$i].'CloseTime']) ? $this->data['centre'][$weekdaysShort[$i].'CloseTime'] : '') )
 				);
 			}
+			$this->data['submit'] = array(
+				'class'  => 'green'
+			);
 
 			$this->view('settings',"settings","Centre Settings",$this->data);
 		}
@@ -629,6 +584,9 @@ class Tms extends MY_Controller {
 				'id'    => 'footerText',
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('footerText',(isset($this->data['centre']['footerText']) ? $this->data['centre']['footerText'] : '') )
+			);
+			$this->data['submit'] = array(
+				'class'  => 'green'
 			);
 			
 			$this->view('appearance',"appearance","Apprearance",$this->data);
