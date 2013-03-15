@@ -59,7 +59,10 @@ class Datatables extends MY_Controller {
 				// For each input ID which is defined as a relational field for this type, remove from input and put into relations
 				$newRelations = array();
 				foreach($this->relations[$type] as $relation) {
-					$newRelations[$relation] = $newData[$relation]; 
+					if(strlen(trim($newData[$relation]))) {
+						// If this input field has a value, add it to the relations array. Otherwise just unset it
+						$newRelations[$relation] = $newData[$relation];
+					}
 					unset($newData[$relation]);
 				}
 				// Do the insert, with an empty $newRelations array if there are no dependents
