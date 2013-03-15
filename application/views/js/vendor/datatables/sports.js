@@ -31,9 +31,9 @@
 				"onEdit": function (json, data) {
 				},
 				"onOpen": function ( settings, json ) {
-					var oldFooter = $('.DTE_Action_Remove .DTE_Footer_Content').html();
+					//var oldFooter = $('.DTE_Action_Remove .DTE_Footer_Content').html();
 					$('.DTE_Action_Remove .DTE_Body_Content').html('Click next to check for other objects which depend on the object you are trying to delete:');
-					$('.DTE_Action_Remove .DTE_Footer_Content').html('<a class="predelete fancybox.ajax" href="/datatables/predelete/sports_8">Next</a>');
+					//$('.DTE_Action_Remove .DTE_Footer_Content').html('<a class="predelete fancybox.ajax" href="/datatables/predelete/sports_8">Next</a>');
 				}
 			}
 		} );
