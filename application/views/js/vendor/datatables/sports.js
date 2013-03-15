@@ -1,12 +1,5 @@
 	var editor; // use a global for the submit and return data rendering in the examples
 	
-	function predelete(id) {
-		$.fancybox({
-			href : '/datatables/predelete/'+id,
-			type : 'ajax'
-		});
-	}
-	
 	$(document).ready(function() {
 		editor = new $.fn.dataTable.Editor( {
 			"ajaxUrl": "/datatables/sports",
@@ -42,7 +35,11 @@
 				"onInitRemove": function() {
 					var sportID = $('.DTTT_selected').attr('id');
 					alert("initRemove, sportID: "+sportID);
-					$('.DTE_Action_Remove .DTE_Footer_Content .DTE_Form_Buttons button').before('<button onclick="predelete('+sportID+');">Check Dependencies</button>');
+					
+					$.fancybox({
+						href : '/datatables/predelete/'+sportID,
+						type : 'ajax'
+					});
 				}
 			}
 		} );
