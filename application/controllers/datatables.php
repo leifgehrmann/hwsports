@@ -35,12 +35,14 @@ class Datatables extends MY_Controller {
 					"fieldErrors":[],
 					"data":[],
 					"aaData":[
-						"DT_RowId":"row_1",
-						"sportID":1,
-						"centreID":1,
-						"name":"hello",
-						"description":"world",
-						"sportCategoryName":"football"
+						{
+							"DT_RowId":"row_1",
+							"sportID":1,
+							"centreID":1,
+							"name":"hello",
+							"description":"world",
+							"sportCategoryName":"football"
+						}
 					]
 				}';
 				//$out['error'] = $sports;
