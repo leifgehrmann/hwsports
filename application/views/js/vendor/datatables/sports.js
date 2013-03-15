@@ -33,7 +33,7 @@
 				"onOpen": function ( settings, json ) {
 					var oldFooter = $('.DTE_Action_Remove .DTE_Footer').html();
 					$('.DTE_Action_Remove .DTE_Body').html('Click next to check for other objects which depend on the object you are trying to delete:');
-					$('.DTE_Action_Remove .DTE_Footer').html('<a href="/datatables/predelete/8">Next</a>');
+					$('.DTE_Action_Remove .DTE_Footer').html('<a class="predelete" href="/datatables/predelete/8">Next</a>');
 				}
 			}
 		} );
