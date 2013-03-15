@@ -54,7 +54,7 @@ class Datatables extends MY_Controller {
 	}
 	
 	public function predelete($model_id) {
-		$modelid = explode('_',$model_id);
+		$modelid = explode('-',$model_id);
 		$model = $modelid[0];
 		$ID = $modelid[1];
 		$this->data['dependencies'] = $this->sports_model->delete($ID);
