@@ -99,7 +99,7 @@ class Sis extends MY_Controller {
 		$this->load->library('table');
 		$this->load->model('tournaments_model');
 		
-		$tournament = $this->tournaments_model->get_tournament($tournamentID);
+		$tournament = $this->tournaments_model->get($tournamentID);
 		if($tournament==FALSE) {
 			$this->session->set_flashdata('message',  "Tournament ID $id does not exist.");
 			redirect("/sis/tournaments", 'refresh');
@@ -153,7 +153,7 @@ class Sis extends MY_Controller {
 		$this->load->model('teams_model');
 	
 		$this->data['tournamentID'] = $tournamentID;
-		$this->data['tournament'] = $tournament = $this->tournaments_model->get_tournament($tournamentID);
+		$this->data['tournament'] = $tournament = $this->tournaments_model->get($tournamentID);
 		if($tournament==FALSE) {
 			$this->session->set_flashdata('message',  "Tournament ID $id does not exist.");
 			redirect("/sis/tournaments", 'refresh');
@@ -220,7 +220,7 @@ class Sis extends MY_Controller {
 		$this->data['tournamentID'] = $tournamentID;
 		$this->data['sectionID'] = $sectionID;
 		
-		$this->data['tournament'] = $tournament = $this->tournaments_model->get_tournament($tournamentID);
+		$this->data['tournament'] = $tournament = $this->tournaments_model->get($tournamentID);
 		$sectionInputs = $this->sports_model->get_sport_category_role_input_section_inputs($sectionID);
 		$teamMemberInputs = array(); 
 		foreach($sectionInputs as $inputID => $input) {
@@ -370,7 +370,7 @@ class Sis extends MY_Controller {
 		$this->data['tournamentID'] = $tournamentID;
 		$this->data['sectionID'] = $sectionID;
 		
-		$this->data['tournament'] = $tournament = $this->tournaments_model->get_tournament($tournamentID);
+		$this->data['tournament'] = $tournament = $this->tournaments_model->get($tournamentID);
 		$sectionInputs = $this->sports_model->get_sport_category_role_input_section_inputs($sectionID);
 		$teamMemberInputs = array(); 
 		foreach($sectionInputs as $inputID => $input) {
