@@ -1,109 +1,57 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class DatatablesServer extends MY_Controller {
+class Datatables extends MY_Controller {
 
 	function __construct() {
 		parent::__construct();
 		
-		$this->load->library('customautoloader');
+		$this->load->model('tournaments_model');
+		$this->load->model('matches_model');
+		$this->load->model('sports_model');
+		$this->load->model('venues_model');
+		$this->load->model('users_model');
+		$this->load->model('teams_model');
+		
+		$out = array (
+				'id' => -1,
+				'error' => '',
+				'fieldErrors' => 
+					array (
+					),
+				'data' => 
+					array (
+					),
+			   );
 
-		//
-		// Database connection
-		//   Database connection it globally available
-		//
-		$this->dtdb = new Database();
-
-		// Leif was here :)
-		$this->dtdb->sql("SET character_set_client=utf8");
-		$this->dtdb->sql("SET character_set_connection=utf8");
-		$this->dtdb->sql("SET character_set_results=utf8");
+		$action = isset($_POST['action']) ? $_POST['action'] : "load";
 	}
 
 	public function sports() {
-		if ( isset($_POST['action']) ) {
-			if($_POST['action']=='remove') {
-				foreach($_POST['data'] as $rowString) {
-					$sportID = substr($rowString,4);
-					$db->sql("DELETE FROM `sportData` WHERE `sportID` = '{$sportID}'");
+		switch ($action) {
+			case "load":
+				$sports = $this->sports_model->get_all();
+				$out['aaData'] = $sports;
+				$out['error'] = print_r($sports);
+			break;
+			case "create":
+				$sports = $this->sports_model->get_all();
+				$out['error'] = print_r($sports);
+			break;
+			case "edit":
+				$newdata = $_POST['data'];
+				$out['error'] = print_r($newdata);
+			break;
+			case: "remove":
+				foreach($_POST['data'] as $clientRowString) {
+					$sportID = substr($clientRowString,4);
+					$out['error'] = $this->sports_model->delete($sportID);
 				}
-			}
+			break;
 		}
 
-		$editor = Editor::inst( $db, 'sports', 'sportID' )
-			->field( 
-				Field::inst( 'sportID' )
-			)
-			->field( 
-				Field::inst( 'centreID' )
-			)
-			->field( 
-				Field::inst( 'sportCategoryID' )
-			);
-			
-		$out = $editor
-			->process($_POST)
-			->data();
-
-		// When there is no 'action' parameter we are getting data, and in this
-		// case we want to send extra data from sportData back to the client
-		if ( !isset($_POST['action']) ) {
-			foreach ( $out['aaData'] as $aaDataID => $sport ) {
-				if($sport['centreID'] != 1) {
-					unset($out['aaData'][$aaDataID]);
-					continue;
-				}
-				
-				$sportDataQueryString = "SELECT " .
-					"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
-					"MAX(CASE WHEN `key`='description' THEN value END ) AS description " .
-					"FROM `sportData` WHERE `sportID` = '{$sport['sportID']}'";
-				$sportData = $db->sql($sportDataQueryString)->fetch();
-				$out['aaData'][$aaDataID] = array_merge($sport, $sportData);
-				
-				$sportCategoryNameQueryString = "SELECT MAX(CASE WHEN `key`='name' THEN value END ) AS name FROM `sportCategoryData` WHERE `sportCategoryID` = '{$sport['sportCategoryID']}'";
-				$sportCategoryName = $db->sql($sportCategoryNameQueryString)->fetch();
-				
-				$out['aaData'][$aaDataID]['sportCategoryName'] = $sportCategoryName['name'];
-			}
-			
-			$sportCategoryDataQueryString = "SELECT `sportCategoryID` AS value, `value` AS label FROM `sportCategoryData` WHERE `key` = 'name'";
-			$sportCategoryData = $db->sql($sportCategoryDataQueryString)->fetchAll();
-			$out['sportCategoryData'] = $sportCategoryData;
-		} elseif($_POST['action']=='create') {
-			$sportID = $db->sql("SELECT MAX(sportID) FROM sports")->fetch();
-			$sportID = $sportID[0];
-			$db->sql("INSERT INTO `sportData` (`sportID`,`key`,`value`) VALUES ('$sportID','name','{$_POST['data']['name']}')");
-			$db->sql("INSERT INTO `sportData` (`sportID`,`key`,`value`) VALUES ('$sportID','description','{$_POST['data']['description']}')");
-			
-			$sportDataQueryString = "SELECT " .
-				"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
-				"MAX(CASE WHEN `key`='description' THEN value END ) AS description " .
-				"FROM `sportData` WHERE `sportID` = '{$sportID}'";
-			$sportData = $db->sql($sportDataQueryString)->fetch();
-			$out['row'] = array_merge($out['row'], $sportData);
-			
-			$sportCategoryNameQueryString = "SELECT MAX(CASE WHEN `key`='name' THEN value END ) AS name FROM `sportCategoryData` WHERE `sportCategoryID` = '{$_POST['data']['sportCategoryID']}'";
-			$sportCategoryName = $db->sql($sportCategoryNameQueryString)->fetch();
-			$out['row']['sportCategoryName'] = $sportCategoryName['name'];
-		} elseif($_POST['action']=='edit') {
-			$db->sql("UPDATE `sportData` SET `value` = '{$_POST['data']['name']}' WHERE `sportID` = '{$_POST['data']['sportID']}' AND `key` = 'name'");
-			$db->sql("UPDATE `sportData` SET `value` = '{$_POST['data']['description']}' WHERE `sportID` = '{$_POST['data']['sportID']}' AND `key` = 'description'");
-			
-			$sportDataQueryString = "SELECT " .
-				"MAX(CASE WHEN `key`='name' THEN value END ) AS name, " .
-				"MAX(CASE WHEN `key`='description' THEN value END ) AS description " .
-				"FROM `sportData` WHERE `sportID` = '{$_POST['data']['sportID']}'";
-			$sportData = $db->sql($sportDataQueryString)->fetch();
-			$out['row'] = array_merge($out['row'], $sportData);
-			
-			$sportCategoryNameQueryString = "SELECT MAX(CASE WHEN `key`='name' THEN value END ) AS name FROM `sportCategoryData` WHERE `sportCategoryID` = '{$_POST['data']['sportCategoryID']}'";
-			$sportCategoryName = $db->sql($sportCategoryNameQueryString)->fetch();
-			$out['row']['sportCategoryName'] = $sportCategoryName['name'];
-		}
-
-		// Send it back to the client
-		echo json_encode( $out );
-	
+		// Send it back to the client, via our plain data dump view
+		$this->data['data'] = json_encode($out);
+		$this->load->view('data', $this->data);
 	}
 	
 	public function venues() {
