@@ -72,7 +72,8 @@
 				{ "mData": "endTime" },
 				{ "mData": "description" },
 				{ "mData": "sportData.name" },
-				{ "mData": "venueData.name" }
+				{ "mData": "venueData.name" },
+				{ "mData": "detailsLink" }
 			],
 			"aoColumnDefs": [
             ],

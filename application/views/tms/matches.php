@@ -12,6 +12,7 @@
 				<th>Description</th>
 				<th>Sport</th>
 				<th>Venue</th>
+				<th width="5%">&nbsp;</th>
 			</tr>
 		</thead>
 	</table>

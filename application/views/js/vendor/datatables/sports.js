@@ -49,7 +49,8 @@
 				{ "mData": "centreID" },
 				{ "mData": "name" },
 				{ "mData": "description" },
-				{ "mData": "sportCategoryData.name" }
+				{ "mData": "sportCategoryData.name" },
+				{ "mData": "detailsLink" }
 			],
 			"aoColumnDefs": [
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
@@ -84,7 +85,7 @@
 				]
 			},
 			"fnInitComplete": function ( settings, json ) {
-				//editor.field('sportCategoryID').update( json.sportCategoryData );
+				editor.field('sportCategoryID').update( json.sportCategoryData );
 			}
 		} );
 		
