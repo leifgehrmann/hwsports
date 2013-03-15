@@ -235,22 +235,24 @@ class Scheduling_model extends MY_Model {
 					// any overlaps NEVERMIND LET'S LET THE UNSET HANDLE THAT
 					// IT IS MUCH EASIER!!!
 
-					// First the array of umpires by order of least use (aka, 1 means less busy than 4)
+					// calculate the array of umpires by order of least use (aka, 1 means less busy than 4)
 					$u = $matchDateTimes[$date][$dateTime]['umpireIDs']; // array of umpires for this match
-					foreach($u as $key=>$umpireID)
-					{
-						$u[$key]['usage'] = $umpireUsage[$umpireID];
-					}
+					//$u = array();
+					//foreach($umpireIDsUsage as $umpireID)
+					//	$u[] = array($umpireID,$umpireUsage[$umpireID]);
+					//$u = array_multisort();
 					usort($u, function($a, $b)
 						{
-							if($a['usage'] == $b['usage'])
+							global $umpireUsage;
+							if($umpireUsage[$a] == $umpireUsage[$b])
 								return 0;
-							return $a['usage'] < $b['usage'] ? -1 : 1;
+							return $umpireUsage[$a] < $umpireUsage[$b] ? -1 : 1;
 						});
+					var_dump($u);
 					$matchUmpireIDs = array();
 					for($i=0;$i<count($u);$i++)
 					{
-						$umpireCount[$u[$i]] = $umpireCount[$u[$i]] + 1;
+						$umpireUsage[$u[$i]] = $umpireUsage[$u[$i]] + 1;
 						$matchUmpireIDs[] = $u[$i];
 					}
 
