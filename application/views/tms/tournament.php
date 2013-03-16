@@ -30,6 +30,7 @@
 					case "postRegistration": $tournamentStatusMessage="This tournament has closed for registration. You may change any of the tournament details below. Before matches can be sceduled, you must moderate the list of competitors below."; break;
 					case "inTournament": $tournamentStatusMessage="This tournament has completed registration and scheduling and is awaiting the start date. You may change any of the tournament details or manage the list of competitors below."; break;
 					case "postTournament": $tournamentStatusMessage="This tournament is in progress. You may change any of the tournament details or manage the list of competitors below, and <a href='/tms/tournament-statistics/'>view statistics here.</a>"; break;
+				}
 				?>
 				<td colspan="4"><p><?=$tournamentStatusMessage?></p></td>
 			</tr>
@@ -57,7 +58,7 @@
 <p>A scheduling form</p>
 <p>A list of matches</p>
 <p>A list of actors (teams, umpires)</p>
-<?=form_open("tms/tournament/$tournamentID", array('id' => 'tournamentForm'))?>
+<?php/*=form_open("tms/tournament/$tournamentID", array('id' => 'tournamentForm'))?>
 <? $formTop = "
 			<h2>Tournament Details:</h2>
 			<p>
@@ -132,7 +133,7 @@
 	<? } ?>
 	<p><?php echo form_submit('submit', 'Update');?></p>
 	<p><a href="/tms/delete_tournament/<?=$tournamentID?>" class="deleteTournament">Delete</a></p>
-<?php echo form_close();?>
+<?php echo form_close();?>*/?>
 
 <script type="text/javascript">
 	$('.date').datetimepicker({
@@ -142,5 +143,3 @@
 		ampm: false
 	});
 </script>
-
-<!-- /#main -->
