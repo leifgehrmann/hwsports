@@ -284,7 +284,7 @@ class Sis extends MY_Controller {
 				$this->data['user']['email'] = $email;
 				$this->data['user']['password'] = "[user specified]";
 			} else {
-				$password = $this->generatePassword();
+				$password = generatePassword();
 				$newUserID = $this->ion_auth->register($username, $password, $email, $additional_data);
 				$this->data['user'] = $additional_data;
 				$this->data['user']['id'] = $newUserID;
@@ -476,35 +476,6 @@ class Sis extends MY_Controller {
 	}
 	public function playground() {
 		$this->view('playground','playground','Branding Playground',$this->data);
-	}
-
-	private function generatePassword($length = 9, $available_sets = 'lud')
-	{
-		$sets = array();
-		if(strpos($available_sets, 'l') !== false)
-			$sets[] = 'abcdefghjkmnpqrstuvwxyz';
-		if(strpos($available_sets, 'u') !== false)
-			$sets[] = 'ABCDEFGHJKMNPQRSTUVWXYZ';
-		if(strpos($available_sets, 'd') !== false)
-			$sets[] = '23456789';
-		if(strpos($available_sets, 's') !== false)
-			$sets[] = '!@#$%&*?';
-
-		$all = '';
-		$password = '';
-		foreach($sets as $set)
-		{
-			$password .= $set[array_rand(str_split($set))];
-			$all .= $set;
-		}
-
-		$all = str_split($all);
-		for($i = 0; $i < $length - count($sets); $i++)
-			$password .= $all[array_rand($all)];
-
-		$password = str_shuffle($password);
-
-		return $password;
 	}
 }
 ?>
