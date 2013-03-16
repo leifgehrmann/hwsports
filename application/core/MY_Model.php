@@ -213,7 +213,7 @@ class MY_Model extends CI_Model {
 		if($testRun) {
 			$rows = $this->db->get_where($primaryTableName, array($objectIDKey => $objectID))->result_array();
 			// Start message showing what will be deleted
-			$testResults[] = ucfirst($primaryTableName)." with $objectIDKey = $objectID, ".count($rows)." rows.\n";
+			$testResults[] = ucfirst($primaryTableName)." with $objectIDKey = $objectID (".count($rows)." rows)\n";
 			foreach($rows as $row) {
 				$rowfields = array();
 				$rowResult = "Table: $primaryTableName; Row: ";
