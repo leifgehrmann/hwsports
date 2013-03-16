@@ -9,13 +9,15 @@ class Datatables extends MY_Controller {
 		$this->load->model('venues_model');
 		$this->load->model('teams_model');
 		$this->load->model('users_model');
+		$this->load->model('groups_model');
 		
 		$this->singulars = array(
 			"matches" => "match",
 			"sports" => "sport",
 			"venues" => "venue",
 			"users" => "user",
-			"teams" => "team"
+			"teams" => "team",
+			"groups" => "group"
 		);
 		
 		$this->relations = array(
@@ -23,7 +25,8 @@ class Datatables extends MY_Controller {
 			"sports" => array("sportID" => NULL,"sportCategoryID" => NULL),
 			"venues" => array("venueID" => NULL),
 			"users" => array("userID" => NULL),
-			"teams" => array("teamID" => NULL)
+			"teams" => array("teamID" => NULL),
+			"groups" => array("groupID" => NULL)
 		);
 		
 		$this->types_models = array(
@@ -31,7 +34,8 @@ class Datatables extends MY_Controller {
 			"sports" => $this->sports_model,
 			"venues" => $this->venues_model,
 			"users" => $this->users_model,
-			"teams" => $this->teams_model
+			"teams" => $this->teams_model,
+			"groups" => $this->groups_model
 		);
 		
 		// Define action even if the use has just loaded the page
