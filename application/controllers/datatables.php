@@ -220,6 +220,6 @@ class Datatables extends MY_Controller {
 		// Execute the delete function of the model for this input, which just does a trial run when the second parameter is omitted.
 		$deleteOutput = $this->types_models[$type]->delete('.$ID.');
 		$this->data['dependencies'] = $deleteOutput;
-		$this->load->view('tms/datatables-predelete.php',$this->data);
+		$this->load->view('tms/delete-confirm.php',$this->data);
 	}
 }
