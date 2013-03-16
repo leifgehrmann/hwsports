@@ -12,16 +12,12 @@
 			<tr>
 				<td><label for="name">Name</label></td>
 				<td><?=form_input($name)?></td>
-				<td rowspan="2"><label for="description">Description</label></td>
-				<td rowspan="2"><?=form_textarea($description)?></td>
-			</tr>
-			<tr>
 				<td><label for="sport">Sport</label></td>
 				<td><a href="/tms/sports/"><?=$tournament['sportData']['name']?></a></td>
 			</tr>
 			<tr>
-				<td colspan="2"><h3>Tournament Period</h3></td>
-				<td colspan="2"><h3>Competitor Registration Period</h3></td>
+				<td><label for="description">Description</label></td>
+				<td rowspan="3"><?=form_textarea($description)?></td>
 			</tr>
 			<tr>
 				<? switch($tournament['status']) { 
@@ -33,6 +29,10 @@
 				}
 				?>
 				<td colspan="4"><p><?=$tournamentStatusMessage?></p></td>
+			</tr>
+			<tr>
+				<td colspan="2"><h3>Tournament Period</h3></td>
+				<td colspan="2"><h3>Competitor Registration Period</h3></td>
 			</tr>
 			<tr>
 				<td><label for="tournamentStart">Start Date</label></td>
@@ -49,7 +49,7 @@
 			
 			<tr>
 				<td colspan="3"></td>
-				<td><?=form_submit('submit', 'Update', array("class"=>"green"));?></td>
+				<td><?=form_submit('submit',array("label"=>"Update", "class"=>"green"));?></td>
 			</tr>
 		</table>
 		<?=form_close();?>
