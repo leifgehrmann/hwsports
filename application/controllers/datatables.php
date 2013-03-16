@@ -166,7 +166,7 @@ class Datatables extends MY_Controller {
 	// Show the user what *exactly* will happen when they click delete
 	public function teamUsers($teamID) {
 		if($this->action == 'create') {
-			$newID = $this->users_model->find_by_email($_POST['email']);
+			$newID = $this->users_model->find_by_email($_POST['data']['email']);
 			if($newID) {
 				$newID = $this->db->insert('teamsUsers', array('teamID'=>$teamID, 'userID'=>$newID['userID']) );
 			}
@@ -182,7 +182,7 @@ class Datatables extends MY_Controller {
 			$this->load->view('data', array('data' => json_encode($out)) );
 		} elseif($this->action == 'remove') {
 			// Get the userID to delete from the teamsUsers table
-			$delete_type_id = explode('-',$_POST['data'][0]);
+			$delete_type_id = explode('-',$_POST['data']['id']);
 			$ID = $delete_type_id[1];
 			$deleteOutput = $this->db->delete('teamsUsers', array('teamID' => $teamID, 'userID' => $ID));
 			// Define the return value based on deletion success
