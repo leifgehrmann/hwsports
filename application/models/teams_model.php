@@ -55,7 +55,7 @@ class Teams_model extends MY_Model {
 	 **/
 	public function insert($data, $relationIDs=array()) {
 		$relationIDs['centreID']=$this->centreID;
-		return $this->insert_object($data, $this->objectIDKey, $this->dataTableName, $relationIDs);
+		return $this->insert_object($data, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relationIDs);
 	}
 
 	/**
