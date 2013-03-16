@@ -115,7 +115,7 @@ class Tournaments_model extends MY_Model {
 		// Check if ID exists
 		if(!$this->get($ID)) return FALSE;
 		// Select all info about actors for this specific tournament - join the roles table so we get info about how to handle the different roles
-		$actorRows = $this->db->select('actorID, roleID, sportCategoryRoleName, actorTable, actorMethod')
+		$actorRows = $this->db->select('actorID, roleID, sportCategoryRoleName, actorTable')
 					->from('tournamentActors')
 					->join('sportCategoryRoles', 'sportCategoryRoles.sportCategoryRoleID = tournamentActors.roleID')
 					->where('tournamentID',$ID)
