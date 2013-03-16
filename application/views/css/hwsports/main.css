@@ -230,6 +230,12 @@ input.color {
                 
 \***************************************/
 
+#content > p,
+#content > h1, #content > h2, #content > h3, #content > h4, #content > h4,
+#content > ul, #content > dl, #content > ol,
+#content > figure, #content > blockquote,
+#content > address, #content > blockquote, #content > pre {clear:both;}
+
 #content h1 { color: #0D44A2; }
 #content h1 div.icon.subsection {
     margin-left: 20px;
