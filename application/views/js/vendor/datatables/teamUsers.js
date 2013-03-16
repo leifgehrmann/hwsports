@@ -9,8 +9,11 @@
 					"name": "userID",
 					"type": "hidden"
 				}, {
-					"label": "Name",
-					"name": "name"
+					"label": "First Name",
+					"name": "firstName"
+				}, {
+					"label": "Last Name",
+					"name": "lastName"
 				}, {
 					"label": "Email",
 					"name": "email"
@@ -46,7 +49,7 @@
 			"sAjaxSource": "/datatables/teamUsers/"+$('#teamID').html(),
 			"aoColumns": [
 				{ "mData": "userID" },
-				{ "mData": "name" },
+				{ "mData": "firstName"+' '+"lastName" },
 				{ "mData": "email" },
 				{ "mData": "phone" },
 				{ "mData": "address" },
