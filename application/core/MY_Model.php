@@ -207,7 +207,7 @@ class MY_Model extends CI_Model {
 				// Now call the delete function on dependent object - we get the ID from the field name (specified in the global array) in the returned row 
 				$deleteResult = $this->delete_object($dependentRow[$field], $field, $table, $testRun);
 				if(!$deleteResult) return FALSE;
-				$testResults[] = $deleteResult;
+				$testResults += $deleteResult;
 			}
 		}
 		
