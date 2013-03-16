@@ -217,6 +217,7 @@ class Datatables extends MY_Controller {
 		$type_id = explode('-',$rowID);
 		$type = $type_id[0];
 		$ID = $type_id[1];
+		die($ID);
 		// Execute the delete function of the model for this input, which just does a trial run when the second parameter is omitted.
 		$deleteOutput = $this->types_models[$type]->delete('.$ID.');
 		$this->data['dependencies'] = $deleteOutput;
