@@ -25,7 +25,7 @@ class Users_model extends MY_Model {
 	 * @return array
 	 **/
 	public function find_by_email($email) {
-		$userRow = $this->db->get_where('users',array('email' => $email))->result_array();
+		$userRow = $this->db->get_where('users',array('email' => $email))->row_array();
 		if(count($userRow)) return $this->get($userRow['userID']);
 		else return false;
 	}
