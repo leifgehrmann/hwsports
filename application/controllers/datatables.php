@@ -165,44 +165,49 @@ class Datatables extends MY_Controller {
 	
 	// Show the user what *exactly* will happen when they click delete
 	public function teamUsers($teamID) {
-		if($this->action == 'create') {
-			$user = $this->users_model->find_by_email($_POST['data']['email']);
-			if($user===FALSE) {
-				$out = array('error' => "Email could not be found in database. Please try again or contact Infusion Systems.");
-				$this->load->view('data', array('data' => json_encode($out)) );
-				return;
-			}
-				
-			if($this->db->insert('teamsUsers', array('teamID'=>$teamID, 'userID'=>$user['userID']) )) {
-				$user['detailsLink'] = "<a href='/tms/user/{$user['userID']}' class='button'>Details</a>";
-				$out = array('id' => "users-{$user['userID']}", 'row' => $user);
-			} else {
-				$out = array('error' => "User could not be added to team. Please try again or contact Infusion Systems.");
-			}
-			$this->load->view('data', array('data' => json_encode($out)) );
-		} elseif($this->action == 'remove') {
-			// Get the userID to delete from the teamsUsers table
-			$delete_type_id = explode('-',$_POST['data']['id']);
-			$ID = $delete_type_id[1];
-			$deleteOutput = $this->db->delete('teamsUsers', array('teamID' => $teamID, 'userID' => $ID));
-			// Define the return value based on deletion success
-			$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
-			$this->load->view('data', array('data' => json_encode($out)) );
-		} elseif($this->action == 'update') {
-			$this->data('users');
-		} else {
-			// Query the teamsUsers table for all users in this team, then add a where clause for each
-			$teamUsersRows = $this->db->get_where('teamsUsers',array('teamID' => $teamID))->result_array();
-			$teamUserCount = count($teamUsersRows);
-			if($teamUserCount) {
-				for($i=0; $i<$teamUserCount; $i++) {
-					if($i==0) $this->db->where(array('userID' => $teamUsersRows[0]['userID']));
-					else $this->db->or_where(array('userID' => $teamUsersRows[$i]['userID']));
+		switch ($this->action) {
+			case "load":
+				// Query the teamsUsers table for all users in this team, then add a where clause for each
+				$teamUsersRows = $this->db->get_where('teamsUsers',array('teamID' => $teamID))->result_array();
+				$teamUserCount = count($teamUsersRows);
+				if($teamUserCount) {
+					for($i=0; $i<$teamUserCount; $i++) {
+						if($i==0) $this->db->where(array('userID' => $teamUsersRows[0]['userID']));
+						else $this->db->or_where(array('userID' => $teamUsersRows[$i]['userID']));
+					}
+				} else {
+					$this->db->where(array('userID' => -1));
 				}
-			} else {
-				$this->db->where(array('userID' => -1));
-			}
-			$this->data('users');
+				$this->data('users');
+			break;
+			case "create":
+				$user = $this->users_model->find_by_email($_POST['data']['email']);
+				if($user===FALSE) {
+					$out = array('error' => "Email could not be found in database. Please try again or contact Infusion Systems.");
+					$this->load->view('data', array('data' => json_encode($out)) );
+					return;
+				}
+					
+				if($this->db->insert('teamsUsers', array('teamID'=>$teamID, 'userID'=>$user['userID']) )) {
+					$user['detailsLink'] = "<a href='/tms/user/{$user['userID']}' class='button'>Details</a>";
+					$out = array('id' => "users-{$user['userID']}", 'row' => $user);
+				} else {
+					$out = array('error' => "User could not be added to team. Please try again or contact Infusion Systems.");
+				}
+				$this->load->view('data', array('data' => json_encode($out)) );
+			break;
+			case "edit":
+				$this->data('users');
+			break;
+			case "remove":
+				// Get the userID to delete from the teamsUsers table
+				$delete_type_id = explode('-',$_POST['data']['id']);
+				$ID = $delete_type_id[1];
+				$deleteOutput = $this->db->delete('teamsUsers', array('teamID' => $teamID, 'userID' => $ID));
+				// Define the return value based on deletion success
+				$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
+				$this->load->view('data', array('data' => json_encode($out)) );
+			break;
 		}
 	}
 	
