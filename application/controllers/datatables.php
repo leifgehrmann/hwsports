@@ -29,8 +29,6 @@ class Datatables extends MY_Controller {
 
 	// $type should be the plural model name; eg sports, venues, matches
 	public function data($type) {
-		
-	
 		// Define $action even if the use has just loaded the page
 		$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "load";
 		// Initialise the output array which will be jsonified to pass to datatables.
@@ -80,9 +78,9 @@ class Datatables extends MY_Controller {
 				}
 				// Do the insert, with an empty $newRelations array if there are no dependents
 				
-				eval('$newID = $this->'.$type.'_model->insert($newData,$newRelations);');
+				$newID = $this->types_models[$type]->insert($newData,$newRelations);
 				if($newID!==FALSE) {
-					eval('$newObject = $this->'.$type.'_model->get($newID);');
+					$newObject = $this->types_models[$type]->get($newID);
 					$newObject['detailsLink'] = "<a href='/tms/{$this->singulars[$type]}/$newID'>Details</a>";
 					$out = array('id' => "$type-$newID", 'row' => $newObject);
 				} else {
@@ -110,9 +108,9 @@ class Datatables extends MY_Controller {
 					unset($updateData[$relation]);
 				}
 				// Perform the update, catch the result
-				eval('$updateSuccess = $this->'.$type.'_model->update($ID, $updateData, $updateRelations);');
+				$updateSuccess = $this->types_models[$type]->update($ID, $updateData, $updateRelations);
 				if($updateSuccess!==FALSE) {
-					eval('$updatedObject = $this->'.$type.'_model->get($ID);');
+					$updatedObject = $this->types_models[$type]->get($ID);
 					$updatedObject['detailsLink'] = "<a href='/tms/{$this->singulars[$type]}/$ID'>Details</a>";
 					$out = array('id' => "$type-$ID", 'row' => $updatedObject);
 				} else {
@@ -125,7 +123,7 @@ class Datatables extends MY_Controller {
 				$delete_type_id = explode('-',$_POST['data'][0]);
 				$ID = $delete_type_id[1];
 				// Execute the delete function of the correct model with the second parameter set to false to confirm deletion
-				eval('$deleteOutput = $this->'.$type.'_model->delete('.$ID.', false);'); 
+				$deleteOutput = $this->types_models[$type]->delete('.$ID.', false); 
 				// Define the return value based on deletion success
 				$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");
 			break;
@@ -163,7 +161,7 @@ class Datatables extends MY_Controller {
 		$type = $type_id[0];
 		$ID = $type_id[1];
 		// Execute the delete function of the model for this input, which just does a trial run when the second parameter is omitted.
-		eval('$deleteOutput = $this->'.$type.'_model->delete('.$ID.');');
+		$deleteOutput = $this->types_models[$type]->delete('.$ID.');
 		$this->data['dependencies'] = $deleteOutput;
 		$this->load->view('tms/datatables-predelete.php',$this->data);
 	}
