@@ -33,12 +33,13 @@ class Datatables extends MY_Controller {
 			"users" => $this->users_model,
 			"teams" => $this->teams_model
 		);
+		
+		// Define action even if the use has just loaded the page
+		$this->action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "load";
 	}
 
 	// $type should be the plural model name; eg sports, venues, matches
-	public function data($type, $where = false) {
-		// Define $action even if the use has just loaded the page
-		$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "load";
+	public function data($type) {
 		// Initialise the output array which will be jsonified to pass to datatables.
 		$out = array (
 			'id' => -1,
@@ -47,7 +48,7 @@ class Datatables extends MY_Controller {
 			'data' => array ()
 		);
 		// Different actions based on different ajax requests
-		switch ($action) {
+		switch ($this->action) {
 			case "load":
 				// Load all objects of type from the correct model. Assume model named based on type exists.
 				$allObjects = $this->types_models[$type]->get_all();
@@ -164,6 +165,32 @@ class Datatables extends MY_Controller {
 	
 	// Show the user what *exactly* will happen when they click delete
 	public function teamUsers($teamID) {
+		if($this->action == 'create') {
+			$user = $this->users_model->find_by_email($_POST['email']);
+			if($user) {
+				$newID = $this->db->insert('teamID'=>$teamID,'userID'=>$user['userID']);
+			}
+			
+			if($newID!==FALSE) {
+				$newObject = $this->users_model->get($newID);
+				$newObject['detailsLink'] = "<a href='/tms/user/$newID' class='button'>Details</a>";
+				$out = array('id' => "$type-$newID", 'row' => $newObject);
+			} else {
+				$out = array('error' => "An error occurred. Please contact Infusion Systems.");
+			}
+
+			$this->load->view('data', array('data' => json_encode($out)) );
+		}
+		if($this->action == 'remove') {
+			// Get the userID to delete from the teamsUsers table
+			$delete_type_id = explode('-',$_POST['data'][0]);
+			$ID = $delete_type_id[1];
+			$deleteOutput = $this->db->delete('teamsUsers', array('teamID' => $teamID, 'userID' => $ID));
+			// Define the return value based on deletion success
+			$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
+			$this->load->view('data', array('data' => json_encode($out)) );
+		}
+		
 		// Query the teamsUsers table for all users in this team, then add a where clause for each
 		$teamUsersRows = $this->db->get_where('teamsUsers',array('teamID' => $teamID))->result_array();
 		$teamUserCount = count($teamUsersRows);

@@ -20,6 +20,17 @@ class Users_model extends MY_Model {
 	}
 	
 	/**
+	 * Searches by email and returns all data about a specific user
+	 *  
+	 * @return array
+	 **/
+	public function find_by_email($email) {
+		$userRow = $this->db->get_where('users',array('email' => $email))->result_array();
+		if(count($userRow)) return $this->get($userRow['userID']);
+		else return false;
+	}
+	
+	/**
 	 * Returns all data about all users at current centre
 	 * 
 	 * @return array

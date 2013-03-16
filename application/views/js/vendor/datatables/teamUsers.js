@@ -35,6 +35,9 @@
 				},
 				"onOpen": function ( settings, json ) {
 				},
+				"onInitCreate": function() {
+					$('.DTE_Field_Name_email').siblings('.DTE_Field').remove();
+				},
 				"onInitRemove": function() {
 					$.fancybox({
 						href : '/datatables/predelete/'+$('.DTTT_selected').attr('id'),
