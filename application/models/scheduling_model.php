@@ -826,8 +826,8 @@ class Scheduling_model extends MY_Model {
 			{
 				// Some how we add data to our schedule matches 
 				$updatedMatch = $match;
-				$updatedMatch['AthleteData'][$athletesPerformed[$athleteIndex]['AthleteID']]['heat'] = $h;
-				$updatedMatch['AthleteData'][$athletesPerformed[$athleteIndex]['AthleteID']]['lane'] = $l;
+				$updatedMatch['ActorData'][$athletesPerformed[$athleteIndex]['AthleteID']]['heat'] = $h;
+				$updatedMatch['ActorData'][$athletesPerformed[$athleteIndex]['AthleteID']]['lane'] = $l;
 				$updatedMatches[] = $updatedMatch;
 				$athleteIndex++;
 				if($athleteIndex==$participantsCount)
