@@ -1,22 +1,21 @@
 <h1>Users</h1>
-<table>
-	<th>
-		<td>ID</td>
-		<td>First Name</td>
-		<td>Last Name</td>
-		<td>Phone</td>
-		<td>Email</td>
-		<td></td>
-		<td></td>
-	</th>
-	<? foreach($users as $user) { ?>
-	<tr>
-		<td><?=$user['userID']?></td>
-		<td><?=$user['firstName']?></td>
-		<td><?=$user['lastName']?></td>
-		<td><?=$user['phone']?></td>
-		<td><?=$user['email']?></td>
-		<td><a class="button" href="/tms/user/<?=$user['userID']?>">View</a></td>
-	</tr>
-	<? } ?>
-</table>
+
+<div id="main">
+	<table cellpadding="0" cellspacing="0" border="0" class="display" id="users" width="100%">
+		<thead>
+			<tr>
+				<th>User ID</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Phone</th>
+				<th>Address</th>
+				<th>About</th>
+				<th width="5%">&nbsp;</th>
+			</tr>
+		</thead>
+	</table>
+	<div class="spacer"></div>
+	<div id="centreID" style="display:none;"><?=$centre['centreID']?></div>
+</div><!-- /#main -->
+
+<script src="/js/vendor/datatables/users.js"></script>

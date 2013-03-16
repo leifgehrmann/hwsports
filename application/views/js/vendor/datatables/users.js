@@ -2,8 +2,8 @@
 	
 	$(document).ready(function() {
 		editor = new $.fn.dataTable.Editor( {
-			"ajaxUrl": "/datatables/teamUsers/"+$('#teamID').html(),
-			"domTable": "#teamUsers",
+			"ajaxUrl": "/datatables/users/"+$('#userID').html(),
+			"domTable": "#users",
 			"fields": [ {
 					"label": "User ID",
 					"name": "userID",
@@ -50,9 +50,9 @@
 			}
 		} );
 
-		$('#teamUsers').dataTable( {
+		$('#users').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
-			"sAjaxSource": "/datatables/teamUsers/"+$('#teamID').html(),
+			"sAjaxSource": "/datatables/users/"+$('#userID').html(),
 			"aoColumns": [
 				{ "mData": "userID" },
 				{ "mData": "firstName" },
