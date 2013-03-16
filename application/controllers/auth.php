@@ -14,7 +14,7 @@ class Auth extends MY_Controller {
 		$this->config->item('use_mongodb', 'ion_auth') ?
 		$this->load->library('mongo_db') :
 
-		$this->load->model('users');
+		$this->load->model('users_model');
 		$this->load->database();
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
