@@ -81,13 +81,27 @@ class Datatables extends MY_Controller {
 				}
 			break;
 			case "edit":
-				// We should only ever have one row selected when delete is pressed, 
-				// so data[0] from the input the type-ID string of the row which is being deleted
-				$edit_type_id = explode('-',$_POST['data'][0]);
+				// Get the ID of the object we are editing
+				$edit_type_id = explode('-',$_POST['id']);
 				$ID = $edit_type_id[1];
 				// Data to update
 				$updateData = $_POST['data'];
-				eval('$updateSuccess = $this->'.$type.'_model->update($ID, $updateData);');
+				// For each input ID which is defined as a relational field for this type, remove from input and put into relations
+				$updateRelations = array();
+				foreach($this->relations[$type] as $relation => $default) {
+					if(strlen(trim($updateData[$relation]))) {
+						// If this input field has a value, add it to the relations array. Otherwise just unset it
+						// This allows for empty primary IDs to be submitted by dataTables (such as no-tournament matches etc)
+						// Since the database will just give them the default value, or auto_increment which is usually what we want
+						$updateRelations[$relation] = $updateData[$relation];
+					} elseif($default!==NULL) {
+						// Set relation ID to a default if none was provided - this covers the issue of tournamentID in matches
+						$updateRelations[$relation] = $default;
+					}
+					unset($updateData[$relation]);
+				}
+				// Perform the update, catch the result
+				eval('$updateSuccess = $this->'.$type.'_model->update($ID, $updateData, $updateRelations);');
 				if($updateSuccess!==FALSE) {
 					eval('$updatedObject = $this->'.$type.'_model->get($ID);');
 					$updatedObject['detailsLink'] = "<a href='/tms/{$this->singulars[$type]}/$ID'>Details</a>";
