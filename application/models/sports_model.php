@@ -121,10 +121,8 @@ class Sports_model extends MY_Model {
 		$output = array();
 		foreach($rolesRows as $rolesRow) {
 			// Get sections for this role, add to output along with role name
-			$output[$rolesRow['sportCategoryRoleID']] = array (
-				'name' => $roleResult['sportCategoryRoleName'],
-				'inputSections' => $this->get_sport_category_role_input_sections($rolesRow['sportCategoryRoleID'])
-			);
+			$output[$rolesRow['sportCategoryRoleID']] = $rolesRow;
+			$output[$rolesRow['sportCategoryRoleID']]['inputSections'] = $this->get_sport_category_role_input_sections($rolesRow['sportCategoryRoleID']);
 		}
 		return $output;
 	}
