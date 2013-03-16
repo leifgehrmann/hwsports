@@ -160,6 +160,29 @@ class Tournaments_model extends MY_Model {
 	}
 
 	/**
+	 * Insert 1 or more venues to the tournamentVenues table - essentially allowing staff to select which venues should be used for scheduling
+	 *  
+	 * @return array
+	 **/
+	public function insert_venues($tournamentID, $venueIDs) {
+		if(!$this->get($tournamentID)) return FALSE;
+		// Lump all inserts into one transaction
+		$this->db->trans_start();
+		
+		foreach($venueIDs as $venueID) {
+			if(!$this->venues_model->get($venueID)) return FALSE;
+			$this->db->$insert = array(
+				'tournamentID'   => $tournamentID,
+				'venueID' => $venueID
+			);
+			// Create the insert - active record sanitizes inputs automatically. Return false if insert fails.
+			if(!$this->db->insert("tournamentVenues", $insert)) return FALSE;			
+		}
+		// Complete transaction, all is well
+		$this->db->trans_complete();
+	}
+
+	/**
 	 * Creates a new tournament with data, using the sport ID as specified.
 	 * Returns the ID of the new object if it was successful.
 	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
