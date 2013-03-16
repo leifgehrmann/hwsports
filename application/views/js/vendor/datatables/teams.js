@@ -43,7 +43,7 @@
 				{ "mData": "teamID" },
 				{ "mData": "name" },
 				{ "mData": "description" },
-				{ "mData": "associationNumber" }
+				{ "mData": "associationNumber" },
 				{ "mData": "detailsLink" }
 			],
 			"aoColumnDefs": [
