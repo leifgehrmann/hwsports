@@ -52,7 +52,7 @@ class Datatables extends MY_Controller {
 						$object['startTime'] = datetime_to_public($object['endTime']);
 						$object['endTime'] = datetime_to_public($object['endTime']);
 					}
-					$object['detailsLink'] = "<a href='/tms/{$this->singulars[$type]}/$ID'>Details</a>";
+					$object['detailsLink'] = "<a href='/tms/{$this->singulars[$type]}/$ID' class="button">Details</a>";
 					// Create / add to the aaData rows array, ready to be jsonified
 					$aaData[] = $object;
 				}
@@ -81,7 +81,7 @@ class Datatables extends MY_Controller {
 				$newID = $this->types_models[$type]->insert($newData,$newRelations);
 				if($newID!==FALSE) {
 					$newObject = $this->types_models[$type]->get($newID);
-					$newObject['detailsLink'] = "<a href='/tms/{$this->singulars[$type]}/$newID'>Details</a>";
+					$newObject['detailsLink'] = "<a href='/tms/{$this->singulars[$type]}/$newID' class="button">Details</a>";
 					$out = array('id' => "$type-$newID", 'row' => $newObject);
 				} else {
 					$out = array('error' => "An error occurred. Please contact Infusion Systems.");
@@ -111,7 +111,7 @@ class Datatables extends MY_Controller {
 				$updateSuccess = $this->types_models[$type]->update($ID, $updateData, $updateRelations);
 				if($updateSuccess!==FALSE) {
 					$updatedObject = $this->types_models[$type]->get($ID);
-					$updatedObject['detailsLink'] = "<a href='/tms/{$this->singulars[$type]}/$ID'>Details</a>";
+					$updatedObject['detailsLink'] = "<a href='/tms/{$this->singulars[$type]}/$ID' class="button">Details</a>";
 					$out = array('id' => "$type-$ID", 'row' => $updatedObject);
 				} else {
 					$out = array('error' => "An error occurred. Please contact Infusion Systems.");
