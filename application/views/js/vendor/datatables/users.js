@@ -2,7 +2,7 @@
 	
 	$(document).ready(function() {
 		editor = new $.fn.dataTable.Editor( {
-			"ajaxUrl": "/datatables/users/"+$('#userID').html(),
+			"ajaxUrl": "/datatables/data/users/",
 			"domTable": "#users",
 			"fields": [ {
 					"label": "User ID",
@@ -52,7 +52,7 @@
 
 		$('#users').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
-			"sAjaxSource": "/datatables/users/"+$('#userID').html(),
+			"sAjaxSource": "/datatables/data/users/",
 			"aoColumns": [
 				{ "mData": "userID" },
 				{ "mData": "firstName" },
