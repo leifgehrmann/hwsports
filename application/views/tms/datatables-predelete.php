@@ -1,4 +1,5 @@
 <style>
+	
 	button {
 		float: right;
 		text-align: center;
@@ -34,6 +35,10 @@
 		background:         linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* W3C */
 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f9f9f9',GradientType=0 ); /* IE6-9 */
 	}
+	
+	#fancyconfirm_cancel {
+		float: left;
+	}
 
 	button:hover {
 		border: 1px solid #666;
@@ -64,5 +69,6 @@
 <div class="dependencies">
 	<h1>Deletion Dependencies:</h1>
 	<pre><?=$dependencies?></pre>
-	<button onclick="$.fancybox.close();">Confirm</button>
+	<button id="fancyconfirm_cancel">Cancel</button>
+	<button id="fancyconfirm_ok">Confirm</button>
 </div>
