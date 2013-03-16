@@ -19,10 +19,18 @@ class Datatables extends MY_Controller {
 			"sports" => array("sportID" => NULL,"sportCategoryID" => NULL),
 			"venues" => array("venueID" => NULL)
 		);
+		
+		$this->types_models = array(
+			"matches" => $this->matches_model,
+			"sports" => $this->sports_model,
+			"venues" => $this->venues_model
+		}
 	}
 
 	// $type should be the plural model name; eg sports, venues, matches
 	public function data($type) {
+		
+	
 		// Define $action even if the use has just loaded the page
 		$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "load";
 		// Initialise the output array which will be jsonified to pass to datatables.
@@ -35,8 +43,8 @@ class Datatables extends MY_Controller {
 		// Different actions based on different ajax requests
 		switch ($action) {
 			case "load":
-				// Load all objects of type from the correct model. Assume model named based on type exists. Eval is scary.
-				eval('$allObjects = $this->'.$type.'_model->get_all();');
+				// Load all objects of type from the correct model. Assume model named based on type exists.
+				$allObjects = $this->types_models[$type]->get_all();
 				// Loop through all objects, process them if required and add them to the output array as datatables rows
 				foreach($allObjects as $ID => $object) {
 					// The DataTables row ID; eg. sports-8 or matches-332
@@ -71,6 +79,7 @@ class Datatables extends MY_Controller {
 					unset($newData[$relation]);
 				}
 				// Do the insert, with an empty $newRelations array if there are no dependents
+				
 				eval('$newID = $this->'.$type.'_model->insert($newData,$newRelations);');
 				if($newID!==FALSE) {
 					eval('$newObject = $this->'.$type.'_model->get($newID);');
