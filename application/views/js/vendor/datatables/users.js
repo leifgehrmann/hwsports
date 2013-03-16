@@ -1,6 +1,7 @@
 	var editor; // use a global for the submit and return data rendering in the examples
-	
+		
 	$(document).ready(function() {
+	
 		editor = new $.fn.dataTable.Editor( {
 			"ajaxUrl": "/datatables/data/users/",
 			"domTable": "#users",
@@ -44,7 +45,18 @@
 				"onInitRemove": function() {
 					$.fancybox({
 						href : '/datatables/predelete/'+$('.DTTT_selected').attr('id'),
-						type : 'ajax'
+						type : 'ajax',
+						modal : true,
+						'beforeShow' : function() {
+							jQuery("#fancycancel").click(function() {
+								$.fancybox.close();
+								$(".DTED_Lightbox_Close").click();
+							});
+							jQuery("#fancyconfirm").click(function() {
+								$.fancybox.close();
+								$("button:contains('Delete')").click();
+							});
+						}
 					});
 				}
 			}
