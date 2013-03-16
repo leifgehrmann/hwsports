@@ -130,7 +130,6 @@ class Sports_model extends MY_Model {
 					$inputs[ $roleInput['sportCategoryRoleInputID'] ] = array (
 						'tableName' => $roleInput['tableName'],
 						'tableKeyName' => $roleInput['tableKeyName'],
-						'keyName' => $roleInput['keyName'],
 						'inputType' => $roleInput['inputType'],
 						'formLabel' => $roleInput['formLabel']
 					);
@@ -168,7 +167,6 @@ class Sports_model extends MY_Model {
 				$output[ $roleInput['sportCategoryRoleInputID'] ] = array (
 					'tableName' => $roleInput['tableName'],
 					'tableKeyName' => $roleInput['tableKeyName'],
-					'keyName' => $roleInput['keyName'],
 					'inputType' => $roleInput['inputType'],
 					'formLabel' => $roleInput['formLabel']
 				);
@@ -182,12 +180,11 @@ class Sports_model extends MY_Model {
 	{
 		$output = array();
 		// Get inputs for this section
-		$roleInputsQuery = $this->db->query("SELECT sportCategoryRoleInputID,keyName,inputType,formLabel FROM `sportCategoryRoleInputs` WHERE `sportCategoryRoleInputSectionID` = ".$this->db->escape( $sportCategoryRoleInputSectionID )." ORDER BY position ASC" );
+		$roleInputsQuery = $this->db->query("SELECT sportCategoryRoleInputID,inputType,formLabel FROM `sportCategoryRoleInputs` WHERE `sportCategoryRoleInputSectionID` = ".$this->db->escape( $sportCategoryRoleInputSectionID )." ORDER BY position ASC" );
 		$roleInputsResult = $roleInputsQuery->result_array();
 		$inputs = array();
 		foreach($roleInputsResult as $roleInput) {
 			$inputs[ $roleInput['sportCategoryRoleInputID'] ] = array (
-				'keyName' => $roleInput['keyName'],
 				'inputType' => $roleInput['inputType'],
 				'formLabel' => $roleInput['formLabel']
 			);
