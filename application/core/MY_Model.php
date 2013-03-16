@@ -191,7 +191,7 @@ class MY_Model extends CI_Model {
 	// Returns: TRUE if update was successful, FALSE otherwise.
 	public function delete_object($objectID, $objectIDKey, $primaryTableName, $testRun=TRUE) {
 		// This string will hold the message showing what will be deleted
-		$testResults = array();
+		$testResults = "";
 		// Lump all data table updates into one transaction in case one fails
 		$this->db->trans_start();
 		// Get the list of tables this object might have dependent rows in
@@ -204,15 +204,16 @@ class MY_Model extends CI_Model {
 			// Loop through all rows which were referencing this object
 			foreach($dependentRows as $dependentRow) {
 				//$testResults[] = "Calling delete object on $table - $field, deleting ID: {$dependentRow[$field]}\n";
-				$testResults[] = "$field {$dependentRow[$field]} from table: $table\n";
 				// Now call the delete function on dependent object - we get the ID from the field name (specified in the global array) in the returned row 
-				$testResults[] = $this->delete_object($dependentRow[$field], $field, $table, $testRun);
+				$testResults .= $this->delete_object($dependentRow[$field], $field, $table, $testRun);
 			}
 		}
 		
 		// We've dealt with any dependents, now we just need to delete the row(s) in our primary table
 		if($testRun) {
 			$rows = $this->db->get_where($primaryTableName, array($objectIDKey => $objectID))->result_array();
+			// Start message showing what will be deleted
+			$testResults .= ucfirst($primaryTableName)." with $objectIDKey = $objectID, ".count($rows)." rows.\n";
 			foreach($rows as $row) {
 				$rowfields = array();
 				$rowResult = "Table: $primaryTableName; Row: ";
@@ -231,8 +232,9 @@ class MY_Model extends CI_Model {
 		$this->db->trans_complete();
 		// Return TRUE: if we got to here it must have all worked
 		if($testRun) {
-			$testResultsUnique = array_unique($testResults);
-			return implode("\n",$testResultsUnique);
+			//$testResultsUnique = array_unique($testResults);
+			//return implode("\n",$testResultsUnique);
+			return $testResults;
 		}
 		else return TRUE;
 	}
