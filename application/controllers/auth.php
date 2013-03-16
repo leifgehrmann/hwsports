@@ -736,21 +736,16 @@ class Auth extends MY_Controller {
 
 		$this->load->view('sis/header',$this->data);
 		$this->load->view('auth/edit_group', $this->data);
-		$this->load->view('sis/footer',$this->data);
+		$this->load->view('sis/footer',$th
+		is->data);
 	}
 
 	function delete_user($deleteid)
 	{
 		$user = $this->ion_auth->user($deleteid)->row();
 
-		if ($this->users_model->delete($deleteid))
-		{
-			// Remove session cookies for logged in user, eliminate zombie problems
-			$this->ion_auth->logout();
-			
-			// Successful deletion, show success message
-			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("/", 'refresh');
+		if ($this->users_model->delete($deleteid)) {
+			echo "User $deleteid has been deleted. <a class='button blue' href='/tms/users'>Back</a>";
 		}
 		else
 		{
