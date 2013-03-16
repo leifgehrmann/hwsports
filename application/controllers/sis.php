@@ -190,10 +190,10 @@ class Sis extends MY_Controller {
 			}
 			
 			if(!empty($userData)) {
-				$this->users_model->update_user($currentUser->userID, $userData);
+				$this->users_model->update($currentUser->userID, $userData);
 			}
 			if(!empty($teamData)) {
-				$teamID = $this->teams_model->insert_team($centreID,$teamData);
+				$teamID = $this->teams_model->insert($teamData);
 				if($this->teams_model->add_team_members($teamID,$teamMembersIDs) == false) {
 					$this->session->set_flashdata('message',  "Adding team members failed.");
 					redirect("/sis/tournaments", 'refresh');
@@ -277,7 +277,7 @@ class Sis extends MY_Controller {
 			}
 			
 			if( $userIDtoUpdate ) {
-				$updateUserResponse = $this->users_model->update_user($userIDtoUpdate,$additional_data);
+				$updateUserResponse = $this->users_model->update($userIDtoUpdate,$additional_data);
 				$this->data['user'] = $additional_data;
 				$this->data['user']['id'] = $userIDtoUpdate;
 				$this->data['user']['email'] = $email;
@@ -387,7 +387,7 @@ class Sis extends MY_Controller {
 			$userID = $this->ion_auth->account_check($this->input->post('identity'), $this->input->post('password'));
 			if ( $userID !== false ) {
 				// log in details valid, get user data
-				$user = $this->users_model->get_user($userID);
+				$user = $this->users_model->get($userID);
 				$this->data['first_name'] = array(
 					'name'  => 'first_name',
 					'id'    => 'first_name',
