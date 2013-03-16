@@ -66,15 +66,9 @@
 	</div>
 </div>
 
-<div>
 <h2>Matches</h2>
-</div>
-<div>
 <h2>Teams</h2>
-</div>
-<div>
 <h2>Umpires</h2>
-</div>
 
 <script type="text/javascript">
 	$('.date').datetimepicker({
