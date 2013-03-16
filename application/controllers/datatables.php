@@ -50,7 +50,7 @@ class Datatables extends MY_Controller {
 		switch ($action) {
 			case "load":
 				// Load all objects of type from the correct model. Assume model named based on type exists.
-				$allObjects = $this->types_models[$type]->get_all();
+				$allObjects = $this->types_models[$type]->get_all($where);
 				// Loop through all objects, process them if required and add them to the output array as datatables rows
 				$aaData = array();
 				foreach($allObjects as $ID => $object) {
@@ -159,8 +159,7 @@ class Datatables extends MY_Controller {
 		}
 		
 		// Send it back to the client, via our plain data dump view
-		$this->data['data'] = json_encode($out);
-		$this->load->view('data', $this->data);
+		$this->load->view('data', json_encode($out));
 	}
 	
 	// Show the user what *exactly* will happen when they click delete
