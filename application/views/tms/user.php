@@ -23,11 +23,11 @@ function preDeleteConfirm(callbackYes,callbackNo) {
 		'href' : '/datatables/predelete/users-<?=$user['userID']?>',
 		'type' : 'ajax',
         'beforeShow' : function() {
-            jQuery("#fancyconfirm_cancel").click(function() {
+            jQuery("#fancycancel").click(function() {
                 $.fancybox.close();
                 callbackNo();
             });
-            jQuery("#fancyConfirm_ok").click(function() {
+            jQuery("#fancyconfirm").click(function() {
                 $.fancybox.close();
                 callbackYes();
             });

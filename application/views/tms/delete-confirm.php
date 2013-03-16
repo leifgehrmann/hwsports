@@ -1,6 +1,6 @@
 <div class="dependencies">
 	<h1>Deletion Dependencies:</h1>
 	<pre><?=$dependencies?></pre>
-	<a href="#" id="fancyconfirm_cancel" style="float: left;" class="button red">Cancel</a>
-	<a href="#" id="fancyconfirm_ok" style="float: right;" class="button green">Confirm</a>
+	<a href="#" id="fancycancel" style="float: left;" class="button red">Cancel</a>
+	<a href="#" id="fancyconfirm" style="float: right;" class="button green">Confirm</a>
 </div>
