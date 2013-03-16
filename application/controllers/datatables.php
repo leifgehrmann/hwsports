@@ -164,8 +164,8 @@ class Datatables extends MY_Controller {
 	
 	// Show the user what *exactly* will happen when they click delete
 	public function teamUsers($teamID) {
-		$where = array('userID' => 1);
-		$this->data('users',$where);
+		$this->db->where(array('userID' => 1));
+		$this->data('users');
 	}
 	
 	// Show the user what *exactly* will happen when they click delete
