@@ -4,7 +4,7 @@
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="groups" width="100%">
 		<thead>
 			<tr>
-				<th>Group ID</th>
+				<th width="5%">Group ID</th>
 				<th>Name</th>
 				<th>Description</th>
 				<th width="5%">&nbsp;</th>
