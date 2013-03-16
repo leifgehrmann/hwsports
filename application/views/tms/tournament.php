@@ -49,15 +49,27 @@
 			
 			<tr>
 				<td colspan="3"></td>
-				<td><?=form_submit(array('name'=>'submit',"label"=>"Update", "class"=>"green"));?></td>
+				<td><?=form_submit(array('name'=>"submit", 'value'=>"Update", 'class'=>"green"));?></td>
 			</tr>
 		</table>
 		<?=form_close();?>
 	</div>
 </div>
-<p>A scheduling form</p>
-<p>A list of matches</p>
-<p>A list of actors (teams, umpires)</p>
+<div class="widget full scheduling">
+	<div class="widget-title">
+		<div class="widget-title-left icon"></div>
+		<div class="widget-title-centre">Scheduling Details</div>
+		<div class="widget-title-right icon"></div>
+	</div>
+	<div class="widget-body">
+		<p>Sport specific stuff may go here</p>
+	</div>
+</div>
+<h2>Matches</h2>
+
+<h2>Teams</h2>
+
+<h2>Umpires</h2>
 
 <script type="text/javascript">
 	$('.date').datetimepicker({
