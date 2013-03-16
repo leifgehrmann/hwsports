@@ -48,6 +48,7 @@ class Datatables extends MY_Controller {
 				// Load all objects of type from the correct model. Assume model named based on type exists.
 				$allObjects = $this->types_models[$type]->get_all();
 				// Loop through all objects, process them if required and add them to the output array as datatables rows
+				$aaData = array();
 				foreach($allObjects as $ID => $object) {
 					// The DataTables row ID; eg. sports-8 or matches-332
 					$object['DT_RowId'] = "$type-$ID";
