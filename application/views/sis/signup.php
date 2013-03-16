@@ -12,7 +12,7 @@
 	<? $counter = 1;
 		foreach($roles as $roleID => $role) {
 			$counter++; ?>
-		<a href="" class="roleButton button <?=($counter%2 ? 'green' : 'red')?>" id="roleButton-<?=$roleID?>"><?=$role['name']?></a>
+		<a href="" class="roleButton button <?=($counter%2 ? 'green' : 'red')?>" id="roleButton-<?=$roleID?>"><?=$role['sportCategoryRoleName']?></a>
 		
 		<div class="roleSections" id="roleSections-<?=$roleID?>" style="display: none">
 			<? 	$sectionCount = 0;
