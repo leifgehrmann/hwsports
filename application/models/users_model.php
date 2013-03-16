@@ -60,7 +60,7 @@ class Users_model extends MY_Model {
 		$password = generatePassword();
 		$email = $data['email'];
 		unset($data['email']);
-		return $this->ion_auth->register($email, $password, $email, $data);
+		return $this->ion_auth->register($email, $password, $email);
 	}
 
 	/**
