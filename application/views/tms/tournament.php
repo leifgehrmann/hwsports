@@ -66,30 +66,51 @@
 	</div>
 </div>
 
-<h2>Matches</h2>
 <div class="tournamentMatches">
-<table cellpadding="0" cellspacing="0" border="0" class="display" id="matches" width="100%">
-	<thead>
-		<tr>
-			<th>ID</th>
-			<th>Name</th>
-			<th>Start Time</th>
-			<th>End Time</th>
-			<th>Description</th>
-			<th>Venue</th>
-			<th width="5%">&nbsp;</th>
-		</tr>
-	</thead>
-</table>
-<div class="spacer"></div>
-<div id="centreID" style="display:none;"><?=$centre['centreID']?></div>
+	<h2>Matches</h2>
+	<p>Displayed below are a list of matches for the tournament. You can edit a match description</p>
+	<pre>IF IT IS A TEAM SPORT, TEAMS A and TEAM B SHOULD BE EDITABLE.</pre>
+	<pre>IF IT IS A NOT A TEAM SPORT, MATCHES THAT HAVEN'T ALREADY OCCURED CAN BE MOVED TO ANOTHER DATE AND TIME. NO RESITRCTIONS SHOULD BE MADE.</pre>
+	<table cellpadding="0" cellspacing="0" border="0" class="display" id="matches" width="100%">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Start Time</th>
+				<th>End Time</th>
+				<th>Description</th>
+				<th>Venue</th>
+				<th width="5%">&nbsp;</th>
+			</tr>
+		</thead>
+	</table>
 </div>
-<h2>Teams</h2>
 <div class="tournamentTeams">
-<p>Or athletes or whatever, point is that we have a series of role to display here each with their own column? </p>
+	<h2>Teams</h2>
+	<table cellpadding="0" cellspacing="0" border="0" class="display" id="matches" width="100%">
+		<thead>
+			<tr>
+				<th>Team</th>
+				<th>Association Number</th>
+				<th>Description</th>
+				<th width="5%">&nbsp;</th>
+			</tr>
+		</thead>
+	</table>
+	<p>Or athletes or whatever, point is that we have a series of roles to display here each with the meta data? </p>
 </div>
-<h2>Umpires</h2>
 <div class="tournamentUmpires">
+	<h2>Umpires</h2>
+	<table cellpadding="0" cellspacing="0" border="0" class="display" id="matches" width="100%">
+		<thead>
+			<tr>
+				<th>Team</th>
+				<th>Association Number</th>
+				<th>Description</th>
+				<th width="5%">&nbsp;</th>
+			</tr>
+		</thead>
+	</table>
 </div>
 
 <script type="text/javascript">
