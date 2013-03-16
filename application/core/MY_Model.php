@@ -235,7 +235,7 @@ class MY_Model extends CI_Model {
 		// Return TRUE: if we got to here it must have all worked
 		if($testRun) {
 			$testResultsUnique = array_unique($testResults);
-			return implode("\n",$testResultsUnique);
+			return $testResultsUnique;
 		}
 		return TRUE;
 	}
