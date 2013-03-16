@@ -16,8 +16,7 @@
 					"name": "description"
 				}, {
 					"label": "Association Number",
-					"name": "association",
-					"type": "select"
+					"name": "association"
 				}
 			],
 			"events": {
