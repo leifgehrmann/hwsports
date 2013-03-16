@@ -8,11 +8,13 @@ class Datatables extends MY_Controller {
 		$this->load->model('sports_model');
 		$this->load->model('venues_model');
 		$this->load->model('teams_model');
+		$this->load->model('users_model');
 		
 		$this->singulars = array(
 			"matches" => "match",
 			"sports" => "sport",
 			"venues" => "venue",
+			"users" => "user",
 			"teams" => "team"
 		);
 		
@@ -20,6 +22,7 @@ class Datatables extends MY_Controller {
 			"matches" => array("matchID" => NULL,"sportID" => NULL,"venueID" => NULL,"tournamentID" => 0),
 			"sports" => array("sportID" => NULL,"sportCategoryID" => NULL),
 			"venues" => array("venueID" => NULL),
+			"users" => array("userID" => NULL),
 			"teams" => array("teamID" => NULL)
 		);
 		
@@ -27,6 +30,7 @@ class Datatables extends MY_Controller {
 			"matches" => $this->matches_model,
 			"sports" => $this->sports_model,
 			"venues" => $this->venues_model,
+			"users" => $this->users_model,
 			"teams" => $this->teams_model
 		);
 	}
@@ -162,8 +166,9 @@ class Datatables extends MY_Controller {
 	// Show the user what *exactly* will happen when they click delete
 	public function teamUsers($teamID) {
 		$where = array('teamID' => $teamID);
-		$this->data('teamsUsers',$where);
+		$this->data('users',$where);
 	}
+	
 	// Show the user what *exactly* will happen when they click delete
 	public function predelete($rowID) {
 		// Get type/model and object ID from type-ID input string
