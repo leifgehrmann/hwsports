@@ -24,7 +24,7 @@ class Datatables extends MY_Controller {
 			"matches" => $this->matches_model,
 			"sports" => $this->sports_model,
 			"venues" => $this->venues_model
-		}
+		);
 	}
 
 	// $type should be the plural model name; eg sports, venues, matches
