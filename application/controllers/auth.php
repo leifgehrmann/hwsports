@@ -744,7 +744,7 @@ class Auth extends MY_Controller {
 		$user = $this->ion_auth->user($deleteid)->row();
 
 		if ($this->users_model->delete($deleteid)) {
-			echo "User $deleteid has been deleted. <a class='button blue' href='/tms/users'>Back</a>";
+			echo "Successfully deleted user: $deleteid.<br /><br /><a class='button blue' href='/tms/users'>Back</a>";
 		} else {
 			//set the flash data error message if there is one
 			$this->data['message'] = ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'));
