@@ -188,6 +188,8 @@ class Datatables extends MY_Controller {
 			// Define the return value based on deletion success
 			$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
 			$this->load->view('data', array('data' => json_encode($out)) );
+		} elseif($this->action == 'update') {
+			$this->data('users');
 		} else {
 			// Query the teamsUsers table for all users in this team, then add a where clause for each
 			$teamUsersRows = $this->db->get_where('teamsUsers',array('teamID' => $teamID))->result_array();
