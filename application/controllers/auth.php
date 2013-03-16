@@ -14,6 +14,7 @@ class Auth extends MY_Controller {
 		$this->config->item('use_mongodb', 'ion_auth') ?
 		$this->load->library('mongo_db') :
 
+		$this->load->model('users');
 		$this->load->database();
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
@@ -742,7 +743,7 @@ class Auth extends MY_Controller {
 	{
 		$user = $this->ion_auth->user($deleteid)->row();
 
-		if ($this->ion_auth->delete_user($deleteid))
+		if ($this->users_model->delete($deleteid))
 		{
 			// Remove session cookies for logged in user, eliminate zombie problems
 			$this->ion_auth->logout();
@@ -783,3 +784,4 @@ class Auth extends MY_Controller {
 	}
 
 }
+
