@@ -237,7 +237,7 @@ class MY_Model extends CI_Model {
 			$testResultsUnique = array_unique($testResults);
 			return implode("\n",$testResultsUnique);
 		}
-		else return TRUE;
+		return TRUE;
 	}
 
 }

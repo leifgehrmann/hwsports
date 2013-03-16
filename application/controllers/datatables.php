@@ -133,7 +133,7 @@ class Datatables extends MY_Controller {
 				$delete_type_id = explode('-',$_POST['data'][0]);
 				$ID = $delete_type_id[1];
 				// Execute the delete function of the correct model with the second parameter set to false to confirm deletion
-				$deleteOutput = $this->types_models[$type]->delete('.$ID.', false); 
+				$deleteOutput = $this->types_models[$type]->delete($ID, false); 
 				// Define the return value based on deletion success
 				$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");
 			break;
