@@ -149,7 +149,7 @@ class MY_Model extends CI_Model {
 		$this->db->trans_complete();
 		
 		// Check for insertion failure
-		if ($this->db->trans_status() === FALSE)
+		if ($this->db->trans_status() === FALSE) {
 			return FALSE;
 		}
 		
