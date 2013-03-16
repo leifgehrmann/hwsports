@@ -67,8 +67,30 @@
 </div>
 
 <h2>Matches</h2>
+<div class="tournamentMatches">
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="matches" width="100%">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Start Time</th>
+			<th>End Time</th>
+			<th>Description</th>
+			<th>Venue</th>
+			<th width="5%">&nbsp;</th>
+		</tr>
+	</thead>
+</table>
+<div class="spacer"></div>
+<div id="centreID" style="display:none;"><?=$centre['centreID']?></div>
+</div>
 <h2>Teams</h2>
+<div class="tournamentTeams">
+<p>Or athletes or whatever, point is that we have a series of role to display here each with their own column? </p>
+</div>
 <h2>Umpires</h2>
+<div class="tournamentUmpires">
+</div>
 
 <script type="text/javascript">
 	$('.date').datetimepicker({
