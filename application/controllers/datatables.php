@@ -159,7 +159,7 @@ class Datatables extends MY_Controller {
 		}
 		
 		// Send it back to the client, via our plain data dump view
-		$this->load->view('data', json_encode($out));
+		$this->load->view('data', array('data' => json_encode($out)) );
 	}
 	
 	// Show the user what *exactly* will happen when they click delete
