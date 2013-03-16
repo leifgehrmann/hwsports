@@ -11,6 +11,12 @@ class Tournaments_model extends MY_Model {
 		$this->objectIDKey = "tournamentID";
 		$this->dataTableName = "tournamentData";
 		$this->relationTableName = "tournaments";
+		
+		
+		$this->actor_tables_models = array(
+			"users" => $this->users_model,
+			"teams" => $this->teams_model
+		);
     }
 
 	/**
@@ -118,8 +124,8 @@ class Tournaments_model extends MY_Model {
 		// We should return an empty array if there are no actors at all, so create it here
 		$actors = array();
 		foreach($actorRows as $actorRow) {
-			// For each actor, use eval with the actorMethod and actorID from the database to get the actual actor data 
-			eval("\$actor = \$this->{$actorRow['actorMethod']}({$actorRow['actorID']});");
+			// For each actor, get the actual actor data, using the model as defined by the global array in the constructor 
+			$actor = $this->actor_tables_models[$actorRow['actorTable']]->get($actorRow['actorID']);
 			// Append the actor to the output array, in a sub array of the role name - therefore from your sport-specific function you might use $actors['Umpire'] to get all the umpires, etc.
 			$actors[$actorRow['sportCategoryRoleName']][$actorRow['actorID']] = $actor;
 		}
