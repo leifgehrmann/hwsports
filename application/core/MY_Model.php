@@ -150,7 +150,6 @@ class MY_Model extends CI_Model {
 		
 		// Check for insertion failure
 		if ($this->db->trans_status() === FALSE) {
-			echo "insert failed"; die();
 			return FALSE;
 		}
 		
@@ -186,6 +185,11 @@ class MY_Model extends CI_Model {
 		}
 		// Complete transaction, all is well
 		$this->db->trans_complete();
+		
+		// Check for insertion failure
+		if ($this->db->trans_status() === FALSE) {
+			return FALSE;
+		}
 		
 		// Return TRUE: if we got to here it must have all worked
 		return TRUE;
