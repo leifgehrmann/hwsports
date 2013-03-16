@@ -83,7 +83,7 @@ class Users_model extends MY_Model {
 		$output = "";
 		$deletedRows = $this->delete_object($ID, $this->objectIDKey, $this->relationTableName, $testRun);
 		if($testRun) {
-			foreach( $deletedRows as $deletedObject ) $output .= "<li>".var_export($deletedObject,1)."</li>";
+			foreach( $deletedRows as $deletedObject ) $output .= "<li>$deletedObject</li>";
 			return $output;
 		}
 		return $deletedRows;
