@@ -21,7 +21,7 @@ function preDeleteConfirm(callbackYes,callbackNo) {
     jQuery.fancybox({
         'modal' : true,
 		'href' : '/datatables/predelete/users-<?=$user['userID']?>',
-		'type' : 'ajax'
+		'type' : 'ajax',
         'beforeShow' : function() {
             jQuery("#fancyconfirm_cancel").click(function() {
                 $.fancybox.close();
