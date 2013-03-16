@@ -168,7 +168,7 @@ class Datatables extends MY_Controller {
 		if($this->action == 'create') {
 			$newID = $this->users_model->find_by_email($_POST['email']);
 			if($newID) {
-				$newID = $this->db->insert('teamID'=>$teamID,'userID'=>$newID['userID']);
+				$newID = $this->db->insert('teamsUsers', array('teamID'=>$teamID, 'userID'=>$newID['userID']) );
 			}
 			
 			if($newID!==FALSE) {
