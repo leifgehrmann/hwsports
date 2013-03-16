@@ -135,7 +135,8 @@ class Sports_model extends MY_Model {
 		// Put all sections in output array, with all of their descendent inputs as value
 		$output = array();
 		foreach($roleInputSectionsRows as $roleInputSectionsRow) {
-			$output['sections'][$roleInputSectionsRow['sportCategoryRoleInputSectionID']] = $this->get_sport_category_role_input_section_inputs($roleInputSectionsRow['sportCategoryRoleInputSectionID']);
+			$output['sections'][$roleInputSectionsRow['sportCategoryRoleInputSectionID']] = $roleInputSectionsRow;
+			$output['sections'][$roleInputSectionsRow['sportCategoryRoleInputSectionID']]['inputs'] = $this->get_sport_category_role_input_section_inputs($roleInputSectionsRow['sportCategoryRoleInputSectionID']);
 		}
 		return $output;
 	}
