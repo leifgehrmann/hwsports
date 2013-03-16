@@ -144,15 +144,10 @@ class Scheduling_model extends MY_Model {
 		// a certain day. We also need to know how many matches
 		// occur at a particular time.
 
-		$scheduledMatches = array();
-		$matchDateTimesSelected = array(); // associated array of date->datetime->data. This will be our final result
-		$matchUsage = array();
-		$matchDateUsed     = array(); // associative array of date to number of matches on that day
-		$matchDateTimeUsed = array(); // associative array of date->datetime to number of matches during that slot
-		$matchDateTeamUsed     = array(); // associative array of date->team to number of matches on that day
-		$matchDateTimeTeamUsed = array(); // associative array of date->datetime->team to number of matches during that slot
+		$scheduledMatches = array(); // Our list of matches that we would like to output
+		$matchDateTimesSelected = array(); // associated array of date->datetime->data. This will be used to check for overlapping events
+		$matchUsage = array(); // associated array of dates, datetimes, and various other things
 		$umpireUsage = array(); // associative array of umpireID to number of matches he/she already manages.
-		$matchDateUsedMax = 0;
 
 		// Turn teams into list of teamIDs
 		$teamIDs = array();
@@ -250,11 +245,6 @@ class Scheduling_model extends MY_Model {
 
 					// calculate the array of umpires by order of least use (aka, 1 means less busy than 4)
 					$u = $matchDateTimes[$date][$dateTime]['umpireIDs']; // array of umpires for this match
-					//$u = array();
-					//foreach($umpireIDsUsage as $umpireID)
-					//	$u[] = array($umpireID,$umpireUsage[$umpireID]);
-					//$u = array_multisort();
-
 					usort($u, function($a, $b)
 						{
 							global $umpireUsage;
@@ -262,7 +252,6 @@ class Scheduling_model extends MY_Model {
 								return 0;
 							return $umpireUsage[$a] < $umpireUsage[$b] ? -1 : 1;
 						});
-					//var_dump($u);
 					$matchUmpireIDs = array();
 					for($i=0;$i<count($u);$i++)
 					{
@@ -283,11 +272,11 @@ class Scheduling_model extends MY_Model {
 					$newMatch['startTime'] = $dateTime;
 					$endTime = new DateTime($dateTime);
 					$endTime->add($matchDuration);
-					$newMatch['name'] = $teams[$teamA]." vs ".$teams[$teamB];
+					$newMatch['name'] = $teams[$teamA]['name']." vs ".$teams[$teamB]['name'];
 					$newMatch['endTime'] = datetime_to_standard($endTime);
-					$newMatch['team'] = array($teamA,$teamB);
+					$newMatch['teams'] = array($teamA,$teamB);
+					$newMatch['umpires'] = $matchUmpireIDs;
 					$newMatch['venue'] = $matchVenueID;
-					$newMatch['umpire'] = $matchUmpireIDs;
 					$matchDateTimesSelected[$date][$dateTime] = array();
 					$matchDateTimesSelected[$date][$dateTime]['teamIDs'] = array($teamA,$teamB);
 					$matchDateTimesSelected[$date][$dateTime]['umpireIDs'] = $matchUmpireIDs;
@@ -351,8 +340,6 @@ class Scheduling_model extends MY_Model {
 						$matchUsage[$date][$dateTime]['teams'][$teamA]['count'] += 1; // $matchDateTimeTeam[$date][$dateTime][$teamA] = $matchDateTimeTeam[$date][$dateTime][$teamA] + 1;
 						$matchUsage[$date][$dateTime]['teams'][$teamB]['count'] += 1; // $matchDateTimeTeam[$date][$dateTime][$teamB] = $matchDateTimeTeam[$date][$dateTime][$teamB] + 1;
 					}
-					//if( $matchDateUsedMax < $matchUsage[$date]['count'] )
-					//	$matchDateUsedMax = $matchUsage[$date]['count'];
 
 					// Stop the loop! We have just added our match!
 					echo "Event was added at ".$dateTime." at the venue ".$matchDateTimesSelected[$date][$dateTime]['venueID']." with the teams ".$matchDateTimesSelected[$date][$dateTime]['teamIDs'][0]." and ".$matchDateTimesSelected[$date][$dateTime]['teamIDs'][1];
@@ -376,6 +363,43 @@ class Scheduling_model extends MY_Model {
 
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/**
 	 * HAS NOT BEEN TESTED
 	 *
@@ -393,6 +417,9 @@ class Scheduling_model extends MY_Model {
 
 		// Get tournament Information
 		$tournament = $this->tournaments_model->get_tournament($tournamentID);
+		$venues     = $this->tournaments_model->get_venues($tournamentID);
+		$actors     = $this->tournaments_model->get_actors($tournamentID);
+		$athletes   = $actors['Athlete'];
 
 		$tournamentStart     = new DateTime($tournament['tournamentStart']);
 		$tournamentEnd       = new DateTime($tournament['tournamentEnd']);
@@ -406,25 +433,290 @@ class Scheduling_model extends MY_Model {
 		}
 
 		$matchDuration = new DateInterval('PT'.$tournament['matchDuration'].'M'); // Match duration is assumed to be in minutes
-		$matchMinimumUmpires = 1; // This is hard coded for now. This is the minimum number of umpires that must be present at a match
-		$matchMaximumPlays = 1; // This is hard coded for now. This is the maximum number of matches a player must play
+		$matchMaximumPlays   = 1; // This is hard coded for now. This is the maximum number of matches a hurdler must play
+		$matchMinimumPlayers = 8; // This is hard coded for now. This is the minimum number of hurdlers that must be playing at once.
 
-		$umpires = array();
-		foreach($umpireIDs as $umpireID)
-		{
-			$umpires[] = $this->users_model->get_umpire($umpireID);
-		}
 		// Calculate number of matches we need
+		$numberOfMatches = ceil(log(count($athletes)/$matchMinimumPlayers)/log(2)+1);
+		$numberOfMatches += 1; // This takes into account the aulifier round.
 
-		// For every individual player
 
-		// Get performance of every individual player
 
-		// Put them in a array
+		// We first want all possible matches datetimes. This method
+		// returns all the possible combinations of start times
+		// and days of the tournament. from here we need to filter 
+		// by venue.
+		$matchDateTimes = $this->get_match_date_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration);
 
-		// Sort that array
+		foreach($matchDateTimes as $date=>$dateTimes)
+		{
+			// For each start time
+			foreach( $dateTimes as $dateTime=>$data )
+			{	
+				// Get start and end intervals of the match
+				$startDateTime = new DateTime($dateTime);
+				$endDateTime = clone $startDateTime;
+				$endDateTime->add($matchDuration);
 
+				// keep a list of venues available for this slot.
+				$matchDateTimes[$date][$dateTime]['venueIDs'] = array();
+				// For each venue
+				foreach( $venues as $venue )
+				{
+					// is the venue available at this time?
+					$venueMatches = $this->matches_model->get_venue_matches($venue['venueID'],$startDateTime,$endDateTime);
+
+					if( count($venueMatches) == 0 )
+						$matchDateTimes[$date][$dateTime]['venueIDs'][] = $venue['venueID'];
+				}
+				// If we didn't find any available venues, well then we ignore it.
+				if( count($matchDateTimes[$date][$dateTime]['venueIDs']) == 0 )
+					unset($matchDateTimes[$date][$dateTime]);
+			}
+			// If there are no possible datetimes for this day, remove the entire day
+			if(count($matchDateTimes[$date]) == 0)
+				unset($matchDateTimes[$date]);
+		}
+
+		$scheduledMatches = array(); // Our list of matches that we would like to output
+		$matchDateTimesSelected = array(); // associated array of date->datetime->data. This will be used to check for overlapping events
+		$matchUsage = array(); // associated array of dates, datetimes, and various other things
+
+		// We set the initial count for every single array to be 0.
+		foreach($matchDateTimes as $date=>$dateTimes)
+		{
+			$matchUsage[$date]['count'] = 0;
+			foreach($dateTimes as $dateTime=>$data)
+			{
+				$matchUsage[$date][$dateTime]['count'] = 0;
+			}
+		}
+
+		// We now iterate through each possible day and time hopefully finding a day that works out just fine.
+		int $matchIndex = 0;
+		for( $matchIndex = 0; $matchIndex < $numberOfMatches; $matchIndex++ )
+		{
+			$added = false; // This will indicate if we could find a place to put this match in.
+			// Get list of days ordered by a fitness function that encourages
+			// the spread of days in a tournament.
+			foreach( $matchUsage as $key => $value )
+				if( $key!="count")
+					$matchUsageDates[$key] = $value;
+			$weightedDates = $this->fitness_generator($matchUsageDates);
+			foreach($weightedDates as $date)
+			{
+				echo "Attempting to add Event at date ".$date." for match ".$combination[0]." and ".$combination[1]."\n";
+
+				// Have we already exceeded the number of matches that we can add already?
+				if($matchMaximumPlays <= $matchUsage[$date]['count']){
+					echo "failed ".$dateTime." because team has already played max number of times"."\n";
+					continue;
+				}
+
+				// Now we need to find our the time slot. Again, we use our fitness generator...
+				$matchUsageDateTimes = array();
+				foreach( $matchUsage[$date] as $key => $value )
+					if( $key!="count")
+						$matchUsageDateTimes[$key] = $value;
+				$weightedDateTimes = $this->fitness_generator($matchUsageDateTimes);
+				foreach($weightedDateTimes as $dateTimeWeight=>$dateTime)
+				{
+					echo "Attempting to add Event at datetime ".$dateTime."\n";
+
+					// Is this match already conflicting with another match where the 
+					// players are already performing?
+					$isOverlapping = false;
+					if(array_key_exists($date,$matchDateTimesSelected))
+						foreach($matchDateTimesSelected[$date] as $dateTimeSelected=>$dateTimeData)
+						{
+							// Are any of the teams that we care about actually playing during that time?
+							if($matchUsage[$date][$dateTimeSelected]['count']==0){
+								echo "failed ".$dateTime." because the hurdlers are already playing at that time but in another venue"."\n";
+								continue;
+							}
+
+							// Do these times even overlap?
+							$dateTimeObject = new DateTime($dateTime);
+							$dateTimeSelectedObject = new DateTime($dateTimeSelected);
+							if($this->is_overlapping($dateTimeObject,$matchDuration,$dateTimeSelectedObject,$matchDuration))
+								$isOverlapping = true;
+						}
+					// If there is a conflict, well we better check another time slot.
+					if($isOverlapping){
+						echo "failed ".$dateTime." because of overlapping"."\n";
+						continue;
+					}
+
+					// We don't really care which venue we choose I guess. If the
+					// staff want to dictate priority, we can implement it here
+					// at some later point.
+					// You know what, lets just RANDOMLY select a venue for fun.
+					$matchVenueID = array_rand($matchDateTimes[$date][$dateTime]['venueIDs']);
+
+					// Hey thats it! Lets add our result to the selected array and a list of scheduled matches:
+					$newMatch = array();
+					$endTime = new DateTime($dateTime);
+					$endTime->add($matchDuration);
+					$newMatch['endTime'] = datetime_to_standard($endTime);
+					$newMatch['venue'] = $matchVenueID;
+					$matchDateTimesSelected[$date][$dateTime] = array();
+					$matchDateTimesSelected[$date][$dateTime]['venueID'] = $matchVenueID;
+					$scheduledMatches[] = $newMatch;
+
+					// Now remove the venue that we selected, and also remove it from
+					// the original available options to avoid conflicting schedules
+					if(array_key_exists($dateTime,$matchDateTimes[$date]))
+					{
+						if(count($matchDateTimes[$date][$dateTime]['venueIDs'])==0)
+						{
+							unset($matchUsage[$date][$dateTime]);
+							unset($matchDateTimes[$date][$dateTime]);
+							echo "removed ".$dateTime."\n";
+						}
+						foreach($matchDateTimes[$date] as $dateTimeAlt=>$dateTimeDataAlt)
+						{
+							// Do these times even overlap? It should at least once
+							$dateTimeObject = new DateTime($dateTime);
+							$dateTimeAltObject = new DateTime($dateTimeAlt);
+							if($this->is_overlapping($dateTimeObject,$matchDuration,$dateTimeAltObject,$matchDuration))
+							{
+								$matchDateTimes[$date][$dateTimeAlt]['venueIDs'] = array_diff( $matchDateTimes[$date][$dateTimeAlt]['venueIDs'], array($matchVenueID));
+								if(count($matchDateTimes[$date][$dateTimeAlt]['venueIDs'])==0){
+									unset($matchUsage[$date][$dateTimeAlt]);
+									unset($matchDateTimes[$date][$dateTimeAlt]);
+									echo "removed ".$dateTime."\n";
+								}
+							}
+						}
+					}
+					// We now need to finally update the statistics
+					$matchUsage[$date]['count'] += 1; 
+					if(array_key_exists($dateTime,$matchDateTimes[$date]))
+						$matchUsage[$date][$dateTime]['count'] += 1;
+
+					// Stop the loop! We have just added our match!
+					echo "Event was added at ".$dateTime." at the venue ".$matchDateTimesSelected[$date][$dateTime]['venueID']."\n";
+					$added = true;
+					break;
+				}
+				// If it wasn't added, we continue the loop of course.
+				// but if it was, we would like to move onto the next team combination.
+				if($added)
+					break;
+			}
+			// This will only occur if the entire thing above did not work.
+			// hopefully that doesn't happen a lot when we do testing. :)
+			if(!$added){
+				echo "Not enough time slots to support this tournament style";
+				return FALSE;
+			}
+		}
+
+		// Now that we have scheduled matches, we should quickly
+		// change the names of all the matches. To do this in
+		// order, we need to sort it.
+		usort($scheduledMatches,function cmp($a, $b)
+			{
+				if ($a['startTime'] == $b['startTime']) return 0;
+				return ($a['startTime'] < $b['startTime']) ? -1 : 1;
+			}
+		);
+
+		// We go through each match, renaming it.
+		$matchIndex = 0;
+		foreach($scheduledMatches as $key=>$match)
+		{
+			if($matchIndex==0)
+				$scheduledMatches[$matchIndex]['name'] = "Qualification Round";
+			else
+				$scheduledMatches[$matchIndex]['name'] = "Round ".$matchIndex;
+			$matchIndex++;
+		}
+
+		// Of course, now that we have schedules, we need to plan the 
+		// first round, which is the qualification round. What we need
+		// to know is which players have no previous performance.
+
+		// So here we somehow get a list of all the performances from
+		// the database for each actor (i.e. user/ hurdler)
+
+		// Here we select all the hurdlers that don't have any
+		// previous performance.
+		$qualificationAthletes = array();
+		foreach($athletes as $athlete)
+			if(!array_key_exists('personalBest',$athlete)){
+				$qualificationAthletes[] = $athlete;
+				// Some how we add data to our schedule matches 
+				$scheduledMatches[0]['Athlete'][] = $qualificationAthletes;
+			}
+
+		// We add these hurdles to the scheduled matches.
+		$scheduledMatches[0]['Athlete'] = $qualificationHurdlers;
+
+		// We want to now calculate the number of heats required
+		// so that we can put people in certain lanes.
+		$venue = $venues[$scheduledMatches['venue']];
+		if(array_key_exists('lanes',$venue))
+			$lanes = $venue['lanes'];
+		else
+			$lanes = 8;
+		$participantsCount = count($qualificationAthletes);
+		$heats = ceil($participantsCount/$lanes)
+		$index = $participantsCount % $heats;
+		$athleteIndex = 0;
+		for(int $h=1;$h<=$heats;$h++)
+		{
+			for(int $l=1;$l<=$lanes-($index<$h ? 1 : 0);$l++)
+			{
+				// Some how we add data to our schedule matches 
+				$scheduledMatches[0]['AthleteData'][$qualificationAthletes[$athleteIndex]]['heat'] = $h;
+				$scheduledMatches[0]['AthleteData'][$qualificationAthletes[$athleteIndex]]['lane'] = $l;
+			}
+			$athleteIndex++;
+		}
+
+		return $scheduledMatches;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	/**
 	 * 
@@ -432,9 +724,153 @@ class Scheduling_model extends MY_Model {
 	 * @param tournamentID		the tournament to continue
 	 * @return return a sequence of updated matches (this can be simply added to add match data)
 	 */
-	private function schedule_running_continue($tournamentID) {
+	public function schedule_running_continue($tournamentID) {
 
+		// Get the current progress so far. i.e. Find out which
+		// match has been completed, then continue to the next
+		// round of work.
+
+		$matches = $this->tournaments_model->get_matches($tournamentID);
+
+		// Sort the matches so that they are sorted in chrological order
+		usort($matches,function cmp($a, $b)
+			{
+				if ($a['startTime'] == $b['startTime']) return 0;
+				return ($a['startTime'] < $b['startTime']) ? -1 : 1;
+			}
+		);
+
+
+		// look through each match and find the first instance where
+		// the completed section has not been done.
+		$index = NULL;
+		foreach($matches as $key=>$match)
+			if(array_key_exists('status',$match))
+				if( $match['status'] != "completed" ) 
+					$index = $key;
+
+		// This will occur if there are no more matches to coninue
+		// which sorta means the tournament is over.
+		if( $index == NULL ){
+
+			// We probably want to submit tournament update information
+			// for instance, who the 3 lucky winners are and the
+			// runner ups.
+
+			return "tournament is already complete!";
+		}
+		
+		// Now that we have found the match. We would like to look at
+		// the previous match and use the results to get a list of
+		// all the players who scored sucessfully. We select those that
+		// have actually have a performance record where we will use those
+		// people in the next round.
+		$athletes = $this->matches_model->get_actors($matches[$index]['matchID'])['Athlete'];
+		$athletesAll = $this->tournaments_model->get_actors($tournamentID)['Athlete'];
+		$athletesPerformed = array();
+		foreach($athletes as $athlete)
+			if(isset('performance',$athlete['matchActorData']))
+				$athletesPerformed[] = $athlete;
+
+		// If an athlete already has performed, but wasn't in the 
+		// qualification round, we would also like to consider them
+		if($index==0)
+			foreach($athletesAll as $athlete)
+				if(isset('personalBest',$athlete['tournamentActorData']))
+					$athletesPerformed[] = $athlete;
+
+
+		// we now sort the athletes by their performance so that we can
+		// put them into position for the next tournament.
+		usort($athletesPerformed,function cmp($a, $b)
+			{
+				if(isset('matchActorData',$a))
+					$af = (float) $a['matchActorData']['performance'];
+				else
+					$af = (float) $a['tournamentActorData']['personalBest'];
+				if(isset('matchActorData',$b))
+					$bf = (float) $b['matchActorData']['performance'];
+				else
+					$bf = (float) $b['tournamentActorData']['personalBest'];
+				if ($af == $bf) return 0;
+				return ($af < $bf) ? 1 : -1;
+			}
+		);
+
+		// Now that we have an ordered array of hurdlers we want to allocate
+		// them into lanes for the next match.
+
+
+		// To do this we get the first match
+		$nextMatch = $matches[$index+1];
+		$updatedMatches = array();
+
+		// We calculate the numberheats that are needed.
+		$venue = $nextMatch['venueData'];
+		if(array_key_exists('lanes',$venue))
+			$lanes = $venue['lanes'];
+		else
+			$lanes = 8;
+		// First we need to trim the number of participants for this round.
+		$newParticipantsCount = ceil(count($athletesPerformed)/(2*$lanes))*$lanes
+		$athletesPerformed = array_slice($athletesPerformed, 0, $newParticipantsCount);
+
+		// We now add the athletes to the new match that we want to update.
+		$participantsCount = count($athletesPerformed);
+		$heats = ceil($participantsCount/$lanes);
+		$index = $participantsCount % $heats;
+		$athleteIndex = 0;
+		for(int $h=1;$h<=$heats;$h++)
+		{
+			for(int $l=1;$l<=$lanes-($index<$h ? 1 : 0);$l++)
+			{
+				// Some how we add data to our schedule matches 
+				$updatedMatch = $match;
+				$updatedMatch['AthleteData'][$athletesPerformed[$athleteIndex]['AthleteID']]['heat'] = $h;
+				$updatedMatch['AthleteData'][$athletesPerformed[$athleteIndex]['AthleteID']]['lane'] = $l;
+				$updatedMatches[] = $updatedMatch;
+				$athleteIndex++;
+				if($athleteIndex==$participantsCount)
+					break;
+			}
+			if($athleteIndex==$participantsCount)
+				break;
+		}
+
+		return $updatedMatches;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	/**
 	 * HAS NOT BEEN TESTED
@@ -494,7 +930,6 @@ class Scheduling_model extends MY_Model {
 	}
 
 	/**
-	 * HAS NOT BEEN TESTED
 	 *
 	 * Returns a list of days
 	 * @param start A datetime for start
@@ -512,6 +947,28 @@ class Scheduling_model extends MY_Model {
 			$date->modify('+1 day');
 		}
 		return $dates;
+	}
+
+
+	/**
+	 * HAS NOT BEEN TESTED
+	 *
+	 * Returns the earliest match
+	 * @param dates 	An array of matches
+	 * @param max 		a datetime string that determines how soon the match should be
+	 * @return the index of the earliest match
+	 **/
+	public function get_earliest_match($matches,$max="0"){
+		$min = ":";
+		$index = -1;
+		foreach($matches as $key=>$match){
+			if($max<$match['startTime'])
+				continue;
+			if($match['startTime']<$min){
+				$min = $match['startTime'];
+				$index = $key;
+			}
+		}
 	}
 
 	/**
