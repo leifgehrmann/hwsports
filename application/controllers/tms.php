@@ -294,7 +294,7 @@ class Tms extends MY_Controller {
 				'id'    => 'description',
 				'type'  => 'text',
 				'style' => 'width:100%;',
-				'cols'  => '5',
+				'rows'  => '5',
 				'value' => $this->form_validation->set_value('description',(isset($tournament['description']) ? $tournament['description'] : '') )
 			);
 			$this->data['registrationStart'] = array(
