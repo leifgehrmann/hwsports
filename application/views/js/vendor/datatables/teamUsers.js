@@ -49,7 +49,7 @@
 			"sAjaxSource": "/datatables/teamUsers/"+$('#teamID').html(),
 			"aoColumns": [
 				{ "mData": "userID" },
-				{ "mData": "firstName"+' '+"lastName" },
+				{ "mData": "firstName" },
 				{ "mData": "email" },
 				{ "mData": "phone" },
 				{ "mData": "address" },
