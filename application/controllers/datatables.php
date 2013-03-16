@@ -165,7 +165,7 @@ class Datatables extends MY_Controller {
 	// Show the user what *exactly* will happen when they click delete
 	public function teamUsers($teamID) {
 		// Query the teamsUsers table for all users in this team, then add a where clause for each
-		$teamUsersRows = $this->db->get_where('teamsUsers',array('teamID',$teamID))->result_array();
+		$teamUsersRows = $this->db->get_where('teamsUsers',array('teamID' => $teamID))->result_array();
 		$teamUserCount = count($teamUsersRows);
 		for($i=0; $i<$teamUserCount; $i++) {
 			if($i==0) $this->db->where(array('userID' => $teamUsersRows[0]['userID']));
