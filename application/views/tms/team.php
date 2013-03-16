@@ -1,7 +1,7 @@
 <h1><?=$team['name']?>: Team Members</h1>
 
 <div id="main">
-	<table cellpadding="0" cellspacing="0" border="0" class="display" id="teamsUsers" width="100%">
+	<table cellpadding="0" cellspacing="0" border="0" class="display" id="teamUsers" width="100%">
 		<thead>
 			<tr>
 				<th>User ID</th>
@@ -19,4 +19,4 @@
 	<div id="centreID" style="display:none;"><?=$centre['centreID']?></div>
 </div><!-- /#main -->
 
-<script src="/js/vendor/datatables/teamsUsers.js"></script>
+<script src="/js/vendor/datatables/teamUsers.js"></script>

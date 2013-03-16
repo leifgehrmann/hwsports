@@ -3,7 +3,7 @@
 	$(document).ready(function() {
 		editor = new $.fn.dataTable.Editor( {
 			"ajaxUrl": "/datatables/teamUsers/"+$('#teamID').html(),
-			"domTable": "#teams",
+			"domTable": "#teamUsers",
 			"fields": [ {
 					"label": "User ID",
 					"name": "userID",
@@ -41,7 +41,7 @@
 			}
 		} );
 
-		$('#teams').dataTable( {
+		$('#teamUsers').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/teamUsers/"+$('#teamID').html(),
 			"aoColumns": [
