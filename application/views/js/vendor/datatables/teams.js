@@ -2,16 +2,11 @@
 	
 	$(document).ready(function() {
 		editor = new $.fn.dataTable.Editor( {
-			"ajaxUrl": "/datatables/data/sports",
-			"domTable": "#sports",
+			"ajaxUrl": "/datatables/data/teams",
+			"domTable": "#teams",
 			"fields": [ {
-					"label": "Sport ID",
-					"name": "sportID",
-					"type": "hidden"
-				}, {
-					"label": "Centre ID",
-					"name": "centreID",
-					"default": $('#centreID').text(),
+					"label": "Team ID",
+					"name": "teamID",
 					"type": "hidden"
 				}, {
 					"label": "Name",
@@ -20,9 +15,8 @@
 					"label": "Description",
 					"name": "description"
 				}, {
-					"label": "Category",
-					"name": "sportCategoryID",
-					"type": "select"
+					"label": "Association Number",
+					"name": "associationNumber"
 				}
 			],
 			"events": {
@@ -52,20 +46,18 @@
 			}
 		} );
 
-		$('#sports').dataTable( {
+		$('#teams').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
-			"sAjaxSource": "/datatables/data/sports",
+			"sAjaxSource": "/datatables/data/teams",
 			"aoColumns": [
-				{ "mData": "sportID" },
-				{ "mData": "centreID" },
+				{ "mData": "teamID" },
 				{ "mData": "name" },
 				{ "mData": "description" },
-				{ "mData": "sportCategoryData.name" },
+				{ "mData": "associationNumber" },
 				{ "mData": "detailsLink" }
 			],
 			"aoColumnDefs": [
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 1 ] } 
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] }
             ],
 			"oTableTools": {
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
@@ -96,7 +88,7 @@
 				]
 			},
 			"fnInitComplete": function ( settings, json ) {
-				editor.field('sportCategoryID').update( json.sportCategories );
+				//editor.field('sportCategoryID').update( json.sportCategories );
 			}
 		} );
 		

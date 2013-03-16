@@ -14,6 +14,7 @@ class Auth extends MY_Controller {
 		$this->config->item('use_mongodb', 'ion_auth') ?
 		$this->load->library('mongo_db') :
 
+		$this->load->model('users_model');
 		$this->load->database();
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
@@ -742,19 +743,10 @@ class Auth extends MY_Controller {
 	{
 		$user = $this->ion_auth->user($deleteid)->row();
 
-		if ($this->ion_auth->delete_user($deleteid))
-		{
-			// Remove session cookies for logged in user, eliminate zombie problems
-			$this->ion_auth->logout();
-			
-			// Successful deletion, show success message
-			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("/", 'refresh');
-		}
-		else
-		{
-			//set the flash data error message if there is one
-			$this->data['message'] = ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'));
+		if ($this->users_model->delete($deleteid)) {
+			echo "Successfully deleted user: $deleteid.<br /><br /><a class='button blue' href='/tms/users'>Back</a>";
+		} else {
+			echo ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'));
 		}
 	}
 
@@ -783,3 +775,4 @@ class Auth extends MY_Controller {
 	}
 
 }
+

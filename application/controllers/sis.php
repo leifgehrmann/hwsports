@@ -161,7 +161,7 @@ class Sis extends MY_Controller {
 		
 		$this->data['roles'] = $roles = $this->sports_model->get_sport_category_roles($tournament['sportData']['sportCategoryID']);
 
-		if( $this->input->post() ) {			
+		if( $this->input->post() ) {
 			$roleID = $this->input->post('role');
 			$roleInputs = $this->sports_model->get_sport_category_role_inputs($roleID);
 			
@@ -172,7 +172,7 @@ class Sis extends MY_Controller {
 			foreach($roleInputs as $roleInput) {
 				// Skip these inputs, they are processed by the addTeamMember method
 				if(strpos($roleInput['inputType'],'tm-') === 0) continue;
-				if($roleInput['keyName']=='teamMembers') {
+				if($roleInput['inputType']=='teamMembers') {
 					$teamMembersIDs = array_map("intval", explode(",", $this->input->post('teamMemberIDs') ));
 				}
 				
@@ -180,20 +180,20 @@ class Sis extends MY_Controller {
 				switch($roleInput['tableName']) {
 					case "userData":
 						// grab value from post data, update userData table with correct table key
-						$userData[$roleInput['tableKeyName']] = $this->input->post($roleInput['keyName']);
+						$userData[$roleInput['tableKeyName']] = $this->input->post($roleInput['tableName'].'_'.$roleInput['tableKeyName']);
 					break;
 					case "teamData":
 						// grab value from post data, add to teamData array with correct table key
-						$teamData[$roleInput['tableKeyName']] = $this->input->post($roleInput['keyName']);
+						$teamData[$roleInput['tableKeyName']] = $this->input->post($roleInput['tableName'].'_'.$roleInput['tableKeyName']);
 					break;
 				}
 			}
 			
 			if(!empty($userData)) {
-				$this->users_model->update_user($currentUser->userID, $userData);
+				$this->users_model->update($currentUser->userID, $userData);
 			}
 			if(!empty($teamData)) {
-				$teamID = $this->teams_model->insert_team($centreID,$teamData);
+				$teamID = $this->teams_model->insert($teamData);
 				if($this->teams_model->add_team_members($teamID,$teamMembersIDs) == false) {
 					$this->session->set_flashdata('message',  "Adding team members failed.");
 					redirect("/sis/tournaments", 'refresh');
@@ -234,16 +234,16 @@ class Sis extends MY_Controller {
 		foreach($teamMemberInputs as $tminput) {
 			switch($tminput['inputType']) {
 				case "text":
-					$this->form_validation->set_rules($tminput['keyName'], $tminput['formLabel'], 'required|xss_clean');
+					$this->form_validation->set_rules($tminput['tableName'].'_'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|xss_clean');
 				break;
 				case "phone":
-					$this->form_validation->set_rules($tminput['keyName'], $tminput['formLabel'], 'required|xss_clean|min_length[8]|max_length[13]');
+					$this->form_validation->set_rules($tminput['tableName'].'_'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|xss_clean|min_length[8]|max_length[13]');
 				break;
 				case "email":
-					$this->form_validation->set_rules($tminput['keyName'], $tminput['formLabel'], 'required|valid_email');
+					$this->form_validation->set_rules($tminput['tableName'].'_'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|valid_email');
 				break;
 				default: 
-					$this->form_validation->set_rules($tminput['keyName'], $tminput['formLabel'], 'required|xss_clean');
+					$this->form_validation->set_rules($tminput['tableName'].'_'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|xss_clean');
 			}
 		}
 		
@@ -273,11 +273,11 @@ class Sis extends MY_Controller {
 				
 			// Grab input data for dynamic inputs
 			foreach($teamMemberInputs as $tminput) {
-				$additional_data[$tminput['keyName']] = $this->input->post($tminput['keyName']);
+				$additional_data[$tminput['tableName'].'_'.$tminput['tableKeyName']] = $this->input->post($tminput['tableName'].'_'.$tminput['tableKeyName']);
 			}
 			
 			if( $userIDtoUpdate ) {
-				$updateUserResponse = $this->users_model->update_user($userIDtoUpdate,$additional_data);
+				$updateUserResponse = $this->users_model->update($userIDtoUpdate,$additional_data);
 				$this->data['user'] = $additional_data;
 				$this->data['user']['id'] = $userIDtoUpdate;
 				$this->data['user']['email'] = $email;
@@ -344,15 +344,14 @@ class Sis extends MY_Controller {
 					default: $type = $tminput['inputType'];
 				}
 			
-				$this->data['extraInputs'][ $tminput['keyName'] ] = array(
-					'keyName'  => $tminput['keyName'],
-					'name'  => $tminput['keyName'],
-					'id'    => $tminput['keyName'],
+				$this->data['extraInputs'][ $tminput['tableName'].'_'.$tminput['tableKeyName'] ] = array(
+					'name'  => $tminput['tableName'].'_'.$tminput['tableKeyName'],
+					'id'    => $tminput['tableName'].'_'.$tminput['tableKeyName'],
 					'type'  => $type,
 					'required' => '',
 					'inputType'  => $tminput['inputType'],
 					'formLabel'  => $tminput['formLabel'],
-					'value' => $this->form_validation->set_value($tminput['keyName']),
+					'value' => $this->form_validation->set_value($tminput['tableName'].'_'.$tminput['tableKeyName']),
 				);
 			}
 
@@ -388,7 +387,7 @@ class Sis extends MY_Controller {
 			$userID = $this->ion_auth->account_check($this->input->post('identity'), $this->input->post('password'));
 			if ( $userID !== false ) {
 				// log in details valid, get user data
-				$user = $this->users_model->get_user($userID);
+				$user = $this->users_model->get($userID);
 				$this->data['first_name'] = array(
 					'name'  => 'first_name',
 					'id'    => 'first_name',
@@ -425,15 +424,14 @@ class Sis extends MY_Controller {
 						default: $type = $tminput['inputType'];
 					}
 				
-					$this->data['extraInputs'][ $tminput['keyName'] ] = array(
-						'keyName'  => $tminput['keyName'],
-						'name'  => $tminput['keyName'],
-						'id'    => $tminput['keyName'],
+					$this->data['extraInputs'][ $tminput['tableName'].'_'.$tminput['tableKeyName'] ] = array(
+						'name'  => $tminput['tableName'].'_'.$tminput['tableKeyName'],
+						'id'    => $tminput['tableName'].'_'.$tminput['tableKeyName'],
 						'type'  => $type,
 						'required' => '',
 						'inputType'  => $tminput['inputType'],
 						'formLabel'  => $tminput['formLabel'],
-						'value' => (isset($user[$tminput['keyName']]) ? $user[$tminput['keyName']] : '')
+						'value' => (isset($user[$tminput['tableName'].'_'.$tminput['tableKeyName']]) ? $user[$tminput['tableName'].'_'.$tminput['tableKeyName']] : '')
 					);
 				}
 				

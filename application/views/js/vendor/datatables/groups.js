@@ -1,17 +1,13 @@
 	var editor; // use a global for the submit and return data rendering in the examples
-	
+		
 	$(document).ready(function() {
+	
 		editor = new $.fn.dataTable.Editor( {
-			"ajaxUrl": "/datatables/data/sports",
-			"domTable": "#sports",
+			"ajaxUrl": "/datatables/data/groups/",
+			"domTable": "#groups",
 			"fields": [ {
-					"label": "Sport ID",
-					"name": "sportID",
-					"type": "hidden"
-				}, {
-					"label": "Centre ID",
-					"name": "centreID",
-					"default": $('#centreID').text(),
+					"label": "Group ID",
+					"name": "groupID",
 					"type": "hidden"
 				}, {
 					"label": "Name",
@@ -19,10 +15,6 @@
 				}, {
 					"label": "Description",
 					"name": "description"
-				}, {
-					"label": "Category",
-					"name": "sportCategoryID",
-					"type": "select"
 				}
 			],
 			"events": {
@@ -31,6 +23,9 @@
 				"onEdit": function (json, data) {
 				},
 				"onOpen": function ( settings, json ) {
+				},
+				"onInitCreate": function() {
+					
 				},
 				"onInitRemove": function() {
 					$.fancybox({
@@ -52,20 +47,16 @@
 			}
 		} );
 
-		$('#sports').dataTable( {
+		$('#groups').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
-			"sAjaxSource": "/datatables/data/sports",
+			"sAjaxSource": "/datatables/data/groups/",
 			"aoColumns": [
-				{ "mData": "sportID" },
-				{ "mData": "centreID" },
+				{ "mData": "groupID" },
 				{ "mData": "name" },
 				{ "mData": "description" },
-				{ "mData": "sportCategoryData.name" },
 				{ "mData": "detailsLink" }
 			],
 			"aoColumnDefs": [
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 1 ] } 
             ],
 			"oTableTools": {
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
@@ -96,7 +87,6 @@
 				]
 			},
 			"fnInitComplete": function ( settings, json ) {
-				editor.field('sportCategoryID').update( json.sportCategories );
 			}
 		} );
 		

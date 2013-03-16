@@ -52,7 +52,18 @@
 				"onInitRemove": function() {
 					$.fancybox({
 						href : '/datatables/predelete/'+$('.DTTT_selected').attr('id'),
-						type : 'ajax'
+						type : 'ajax',
+						modal : true,
+						'beforeShow' : function() {
+							jQuery("#fancycancel").click(function() {
+								$.fancybox.close();
+								$(".DTED_Lightbox_Close").click();
+							});
+							jQuery("#fancyconfirm").click(function() {
+								$.fancybox.close();
+								$("button:contains('Delete')").click();
+							});
+						}
 					});
 				}
 			}
@@ -106,8 +117,8 @@
 				]
 			},
 			"fnInitComplete": function ( settings, json ) {
-				editor.field('sportID').update( json.sportData );
-				editor.field('venueID').update( json.venueData );
+				editor.field('sportID').update( json.sports );
+				editor.field('venueID').update( json.venues );
 			}
 		} );
 

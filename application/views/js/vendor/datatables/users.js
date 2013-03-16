@@ -1,28 +1,32 @@
 	var editor; // use a global for the submit and return data rendering in the examples
-	
+		
 	$(document).ready(function() {
+	
 		editor = new $.fn.dataTable.Editor( {
-			"ajaxUrl": "/datatables/data/sports",
-			"domTable": "#sports",
+			"ajaxUrl": "/datatables/data/users/",
+			"domTable": "#users",
 			"fields": [ {
-					"label": "Sport ID",
-					"name": "sportID",
+					"label": "User ID",
+					"name": "userID",
 					"type": "hidden"
 				}, {
-					"label": "Centre ID",
-					"name": "centreID",
-					"default": $('#centreID').text(),
-					"type": "hidden"
+					"label": "First Name",
+					"name": "firstName"
 				}, {
-					"label": "Name",
-					"name": "name"
+					"label": "Last Name",
+					"name": "lastName"
 				}, {
-					"label": "Description",
-					"name": "description"
+					"label": "Email",
+					"name": "email"
 				}, {
-					"label": "Category",
-					"name": "sportCategoryID",
-					"type": "select"
+					"label": "Phone",
+					"name": "phone"
+				}, {
+					"label": "Address",
+					"name": "address"
+				}, {
+					"label": "Bio",
+					"name": "aboutMe"
 				}
 			],
 			"events": {
@@ -31,6 +35,12 @@
 				"onEdit": function (json, data) {
 				},
 				"onOpen": function ( settings, json ) {
+					if( $('.DTE_Action_Create').length ) {
+						$('.DTE_Field_Name_email').siblings('.DTE_Field').remove();
+					}
+				},
+				"onInitCreate": function() {
+					
 				},
 				"onInitRemove": function() {
 					$.fancybox({
@@ -52,20 +62,20 @@
 			}
 		} );
 
-		$('#sports').dataTable( {
+		$('#users').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
-			"sAjaxSource": "/datatables/data/sports",
+			"sAjaxSource": "/datatables/data/users/",
 			"aoColumns": [
-				{ "mData": "sportID" },
-				{ "mData": "centreID" },
-				{ "mData": "name" },
-				{ "mData": "description" },
-				{ "mData": "sportCategoryData.name" },
+				{ "mData": "userID" },
+				{ "mData": "firstName" },
+				{ "mData": "email" },
+				{ "mData": "phone" },
+				{ "mData": "address" },
+				{ "mData": "aboutMe" },
 				{ "mData": "detailsLink" }
 			],
 			"aoColumnDefs": [
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 1 ] } 
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] }
             ],
 			"oTableTools": {
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
@@ -96,7 +106,6 @@
 				]
 			},
 			"fnInitComplete": function ( settings, json ) {
-				editor.field('sportCategoryID').update( json.sportCategories );
 			}
 		} );
 		

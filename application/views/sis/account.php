@@ -44,7 +44,7 @@
 		</a>
 		<div class="widget-body">
 			<p>You aren't signed up in any tournaments.</p>
-			<a href="/sis/tickets" class="button right normal">Sign up for Tournaments</a>
+			<a href="/sis/tournaments" class="button right normal">Sign up for Tournaments</a>
 		</div>
 	</div>
 	<? if($this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin')){ ?>

@@ -474,9 +474,8 @@ class Tms extends MY_Controller {
 	{
 		$this->load->model('teams_model');
 		$team = $this->teams_model->get($teamID);
-		$this->data['team'] = $user;
-		
-		$this->view('team',"team",$user['name']." | Team",$this->data);
+		$this->data['team'] = $team;
+		$this->view('team',"team",$team['name']." | Team",$this->data);
 	}
 	public function announcements()
 	{

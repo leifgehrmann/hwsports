@@ -117,6 +117,9 @@ class MY_Model extends CI_Model {
 	* Complex example: 	
 	*/
 	public function insert_object($data, $objectIDKey, $dataTableName, $relationTableName = false, $relations = array()) {		
+		// Lump all inserts into one transaction
+		$this->db->trans_start();
+		
 		// If we've been given a relational table and relations to go in that table, we should create the entry in that first to get the ID to use for the data
 		if( $relationTableName && count($relations) ) {
 			// Insert the row in the relation table with all the relations specified, generating an ID using AUTO_INCREMENT 
@@ -131,9 +134,6 @@ class MY_Model extends CI_Model {
 			// This is the actual numerical ID we wish to insert data as
 			$objectID = $maxRow[$objectIDKey]+1;
 		}
-		
-		// Lump all inserts into one transaction
-		$this->db->trans_start();
 		// Loop through input data
 		foreach($data as $key => $value) {
 			// Set the values for the insert
@@ -203,21 +203,25 @@ class MY_Model extends CI_Model {
 			$dependentRows = $this->db->get_where($table, array($objectIDKey => $objectID))->result_array();
 			// Loop through all rows which were referencing this object
 			foreach($dependentRows as $dependentRow) {
-				$testResults[] = "Calling delete object on $table - $field, deleting ID: {$dependentRow[$field]}\n";
+				//$testResults[] = "Calling delete object on $table - $field, deleting ID: {$dependentRow[$field]}\n";
 				// Now call the delete function on dependent object - we get the ID from the field name (specified in the global array) in the returned row 
-				$testResults[] = $this->delete_object($dependentRow[$field], $field, $table, $testRun);
+				$deleteResult = $this->delete_object($dependentRow[$field], $field, $table, $testRun);
+				if(!$deleteResult) return FALSE;
+				$testResults[] = $deleteResult;
 			}
 		}
 		
 		// We've dealt with any dependents, now we just need to delete the row(s) in our primary table
 		if($testRun) {
 			$rows = $this->db->get_where($primaryTableName, array($objectIDKey => $objectID))->result_array();
+			// Start message showing what will be deleted
+			$testResults[] = ucfirst($primaryTableName)." with $objectIDKey = $objectID (".count($rows)." rows)\n";
 			foreach($rows as $row) {
 				$rowfields = array();
 				$rowResult = "Table: $primaryTableName; Row: ";
 				foreach($row as $key=>$value) $rowfields[] = "[$key] = $value";
 				$rowResult .= implode(' | ',$rowfields)." \n";
-				$testResults[] = $rowResult;
+				//$testResults[] = $rowResult;
 			}
 		} else {			
 			// Delete the rows in the table table which reference the deleted object 
@@ -233,7 +237,7 @@ class MY_Model extends CI_Model {
 			$testResultsUnique = array_unique($testResults);
 			return implode("\n",$testResultsUnique);
 		}
-		else return TRUE;
+		return TRUE;
 	}
 
 }

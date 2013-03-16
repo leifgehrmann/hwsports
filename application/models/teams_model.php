@@ -34,9 +34,11 @@ class Teams_model extends MY_Model {
 	 *  
 	 * @return array
 	 **/
-	public function get_all() {
+	public function get_all($where = false) {
 		// Fetch the IDs for everything at the current sports centre
-		$IDRows = $this->db->get_where($this->relationTableName, array('centreID' => $this->centreID))->result_array();
+		if(is_array($where)) $this->db->where( $where );
+		$this->db->where( array('centreID' => $this->centreID) );
+		$IDRows = $this->db->get($this->relationTableName)->result_array();
 		// Create empty array to output if there are no results
 		$all = array();
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
@@ -54,7 +56,8 @@ class Teams_model extends MY_Model {
 	 * @return int
 	 **/
 	public function insert($data, $relationIDs=array()) {
-		return $this->insert_object($data, $this->objectIDKey, $this->dataTableName, $relationIDs);
+		$relationIDs['centreID']=$this->centreID;
+		return $this->insert_object($data, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relationIDs);
 	}
 
 	/**
@@ -64,8 +67,8 @@ class Teams_model extends MY_Model {
 	 *
 	 * @return boolean
 	 **/
-	public function update($ID, $data) {
-		return $this->update_object($ID, $this->objectIDKey, $data, $this->dataTableName);
+	public function update($ID, $data, $relationIDs=array()) {
+		return $this->update_object($ID, $data, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relationIDs);
 	}
 	
 	/**
@@ -78,9 +81,9 @@ class Teams_model extends MY_Model {
 	 **/
 	public function delete($ID, $testRun=TRUE) {
 		$output = "";
-		if($testRun) $output .= "If this delete query is executed, the following objects will be deleted: \n\n";
+		if($testRun) $output .= "To delete this object, the following must also be deleted: \n\n";
 		$output .= $this->delete_object($ID, $this->objectIDKey, $this->relationTableName, $testRun);
-		if($testRun) $output .= "\nIf this looks correct, click 'Confirm'. Otherwise please update or delete dependencies manually.\n\n";
+		if($testRun) $output .= "\nIf this is correct, click 'Confirm'. Otherwise please cancel and edit the above objects first.\n\n";
 		return $output;
 	}
 	

@@ -12,6 +12,38 @@
 	<? } ?>
 	<tr>
 		<td></td>
-		<td><a class="button red" href="/auth/delete_user/<?=$user['userID']?>" target="_blank" >Delete</td>
+		<td><a id="deleteUser" class="button red" href="#">Delete</a></td>
 	</tr>
 </table>
+
+<script>
+function preDeleteConfirm(callbackYes,callbackNo) {
+    jQuery.fancybox({
+        'modal' : true,
+		'href' : '/datatables/predelete/users-<?=$user['userID']?>',
+		'type' : 'ajax',
+        'beforeShow' : function() {
+            jQuery("#fancycancel").click(function() {
+                $.fancybox.close();
+                callbackNo();
+            });
+            jQuery("#fancyconfirm").click(function() {
+                $.fancybox.close();
+                callbackYes();
+            });
+        }
+    });
+}
+
+$(document).ready(function() {
+    $("#deleteUser").click(function() {
+        preDeleteConfirm(function() {
+            jQuery.fancybox({
+				'modal' : true,
+				'href' : '/auth/delete_user/<?=$user['userID']?>',
+				'type' : 'ajax'
+			});
+        }, function() { });
+    });
+});
+</script>

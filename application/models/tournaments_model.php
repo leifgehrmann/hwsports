@@ -11,6 +11,12 @@ class Tournaments_model extends MY_Model {
 		$this->objectIDKey = "tournamentID";
 		$this->dataTableName = "tournamentData";
 		$this->relationTableName = "tournaments";
+		
+		
+		$this->actor_tables_models = array(
+			"users" => $this->users_model,
+			"teams" => $this->teams_model
+		);
     }
 
 	/**
@@ -88,9 +94,11 @@ class Tournaments_model extends MY_Model {
 	 * 
 	 * @return array
 	 **/
-	public function get_all() {
+	public function get_all($where = false) {
 		// Fetch the IDs for everything at the current sports centre
-		$IDRows = $this->db->get_where($this->relationTableName, array('centreID' => $this->centreID))->result_array();
+		if(is_array($where)) $this->db->where( $where );
+		$this->db->where( array('centreID' => $this->centreID) );
+		$IDRows = $this->db->get($this->relationTableName)->result_array();
 		// Create empty array to output if there are no results
 		$all = array();
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
@@ -109,7 +117,7 @@ class Tournaments_model extends MY_Model {
 		// Check if ID exists
 		if(!$this->get($ID)) return FALSE;
 		// Select all info about actors for this specific tournament - join the roles table so we get info about how to handle the different roles
-		$actorRows = $this->db->select('actorID, roleID, sportCategoryRoleName, actorTable, actorMethod')
+		$actorRows = $this->db->select('actorID, roleID, sportCategoryRoleName, actorTable')
 					->from('tournamentActors')
 					->join('sportCategoryRoles', 'sportCategoryRoles.sportCategoryRoleID = tournamentActors.roleID')
 					->where('tournamentID',$ID)
@@ -118,8 +126,8 @@ class Tournaments_model extends MY_Model {
 		// We should return an empty array if there are no actors at all, so create it here
 		$actors = array();
 		foreach($actorRows as $actorRow) {
-			// For each actor, use eval with the actorMethod and actorID from the database to get the actual actor data 
-			eval("\$actor = \$this->{$actorRow['actorMethod']}({$actorRow['actorID']});");
+			// For each actor, get the actual actor data, using the model as defined by the global array in the constructor 
+			$actor = $this->actor_tables_models[$actorRow['actorTable']]->get($actorRow['actorID']);
 			// Append the actor to the output array, in a sub array of the role name - therefore from your sport-specific function you might use $actors['Umpire'] to get all the umpires, etc.
 			$actors[$actorRow['sportCategoryRoleName']][$actorRow['actorID']] = $actor;
 		}
@@ -151,6 +159,29 @@ class Tournaments_model extends MY_Model {
 		}
 		// Return all actors
 		return $venues;
+	}
+
+	/**
+	 * Insert 1 or more venues to the tournamentVenues table - essentially allowing staff to select which venues should be used for scheduling
+	 *  
+	 * @return array
+	 **/
+	public function insert_venues($tournamentID, $venueIDs) {
+		if(!$this->get($tournamentID)) return FALSE;
+		// Lump all inserts into one transaction
+		$this->db->trans_start();
+		
+		foreach($venueIDs as $venueID) {
+			if(!$this->venues_model->get($venueID)) return FALSE;
+			$this->db->$insert = array(
+				'tournamentID'   => $tournamentID,
+				'venueID' => $venueID
+			);
+			// Create the insert - active record sanitizes inputs automatically. Return false if insert fails.
+			if(!$this->db->insert("tournamentVenues", $insert)) return FALSE;			
+		}
+		// Complete transaction, all is well
+		$this->db->trans_complete();
 	}
 
 	/**
@@ -187,9 +218,9 @@ class Tournaments_model extends MY_Model {
 	 **/
 	public function delete($ID, $testRun=TRUE) {
 		$output = "";
-		if($testRun) $output .= "If this delete query is executed, the following objects will be deleted: \n\n";
+		if($testRun) $output .= "To delete this object, the following must also be deleted: \n\n";
 		$output .= $this->delete_object($ID, $this->objectIDKey, $this->relationTableName, $testRun);
-		if($testRun) $output .= "\nIf this looks correct, click 'Confirm'. Otherwise please update or delete dependencies manually.\n\n";
+		if($testRun) $output .= "\nIf this is correct, click 'Confirm'. Otherwise please cancel and edit the above objects first.\n\n";
 		return $output;
 	}
 	
