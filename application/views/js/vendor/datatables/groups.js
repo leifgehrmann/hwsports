@@ -53,10 +53,10 @@
 			"aoColumns": [
 				{ "mData": "groupID" },
 				{ "mData": "name" },
-				{ "mData": "description" }
+				{ "mData": "description" },
+				{ "mData": "detailsLink" }
 			],
 			"aoColumnDefs": [
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] }
             ],
 			"oTableTools": {
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
