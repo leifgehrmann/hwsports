@@ -207,7 +207,7 @@ class MY_Model extends CI_Model {
 				// Now call the delete function on dependent object - we get the ID from the field name (specified in the global array) in the returned row 
 				$deleteResult = $this->delete_object($dependentRow[$field], $field, $table, $testRun);
 				if(!$deleteResult) return FALSE;
-				$testResults[] = $deleteResult;
+				$testResults += $deleteResult;
 			}
 		}
 		
@@ -235,7 +235,7 @@ class MY_Model extends CI_Model {
 		// Return TRUE: if we got to here it must have all worked
 		if($testRun) {
 			$testResultsUnique = array_unique($testResults);
-			return implode("\n",$testResultsUnique);
+			return $testResultsUnique;
 		}
 		return TRUE;
 	}

@@ -1,6 +1,11 @@
 <div class="dependencies">
 	<h1>Deletion Dependencies:</h1>
-	<pre><?=$dependencies?></pre>
+	To delete this object, the following must also be deleted: <br />
+	<ul class='deletionList'>
+		<?=$dependencies?>
+	</ul>
+	If this is correct, click 'Confirm'. Otherwise please cancel and edit the above objects first.<br />
+	<br />
 	<a href="#" id="fancycancel" style="float: left;" class="button red">Cancel</a>
 	<a href="#" id="fancyconfirm" style="float: right;" class="button green">Confirm</a>
 </div>

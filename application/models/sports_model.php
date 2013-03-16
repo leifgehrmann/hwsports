@@ -80,10 +80,12 @@ class Sports_model extends MY_Model {
 	 **/
 	public function delete($ID, $testRun=TRUE) {
 		$output = "";
-		if($testRun) $output .= "To delete this object, the following must also be deleted: \n\n";
-		$output .= $this->delete_object($ID, $this->objectIDKey, $this->relationTableName, $testRun);
-		if($testRun) $output .= "\nIf this is correct, click 'Confirm'. Otherwise please cancel and edit the above objects first.\n\n";
-		return $output;
+		$deletedRows = $this->delete_object($ID, $this->objectIDKey, $this->relationTableName, $testRun);
+		if($testRun) {
+			foreach( $deletedRows as $deletedObject ) $output .= "<li>$deletedObject</li>";
+			return $output;
+		}
+		return $deletedRows;
 	}
 	
 	
@@ -135,8 +137,8 @@ class Sports_model extends MY_Model {
 		// Put all sections in output array, with all of their descendent inputs as value
 		$output = array();
 		foreach($roleInputSectionsRows as $roleInputSectionsRow) {
-			$output['sections'][$roleInputSectionsRow['sportCategoryRoleInputSectionID']] = $roleInputSectionsRow;
-			$output['sections'][$roleInputSectionsRow['sportCategoryRoleInputSectionID']]['inputs'] = $this->get_sport_category_role_input_section_inputs($roleInputSectionsRow['sportCategoryRoleInputSectionID']);
+			$output[$roleInputSectionsRow['sportCategoryRoleInputSectionID']] = $roleInputSectionsRow;
+			$output[$roleInputSectionsRow['sportCategoryRoleInputSectionID']]['inputs'] = $this->get_sport_category_role_input_section_inputs($roleInputSectionsRow['sportCategoryRoleInputSectionID']);
 		}
 		return $output;
 	}
@@ -151,5 +153,18 @@ class Sports_model extends MY_Model {
 			$inputs[ $roleInput['sportCategoryRoleInputID'] ] = $roleInput;
 		}
 		return $inputs;
+	}
+	
+	public function get_sport_category_role_inputs($sportCategoryRoleID) {
+		// Get sections for this role
+		$this->db->where('sportCategoryRoleID',$sportCategoryRoleID);
+		$this->db->order_by('position','asc');
+		$roleInputSectionsRows = $this->db->get('sportCategoryRoleInputSections')->result_array();
+		// Put all sections in output array, with all of their descendent inputs as value
+		$output = array();
+		foreach($roleInputSectionsRows as $roleInputSectionsRow) {
+			$output += $this->get_sport_category_role_input_section_inputs($roleInputSectionsRow['sportCategoryRoleInputSectionID']);
+		}
+		return $output;
 	}
 }

@@ -9,7 +9,7 @@ class Test extends MY_Controller {
 		$this->load->model('users_model');
 		$this->load->model('matches_model');
 		$this->load->model('sports_model');
-		$this->load->model('scheduling_model');
+		//$this->load->model('scheduling_model');
 		$this->load->model('venues_model');
 		header('Content-Encoding: UTF-8');
 		header('Content-type: text/html; charset=UTF-8');

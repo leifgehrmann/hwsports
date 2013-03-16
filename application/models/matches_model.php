@@ -204,9 +204,11 @@ class Matches_model extends MY_Model {
 	 **/
 	public function delete($ID, $testRun=TRUE) {
 		$output = "";
-		if($testRun) $output .= "To delete this object, the following must also be deleted: \n\n";
-		$output .= $this->delete_object($ID, $this->objectIDKey, $this->relationTableName, $testRun);
-		if($testRun) $output .= "\nIf this is correct, click 'Confirm'. Otherwise please cancel and edit the above objects first.\n\n";
-		return $output;
+		$deletedRows = $this->delete_object($ID, $this->objectIDKey, $this->relationTableName, $testRun);
+		if($testRun) {
+			foreach( $deletedRows as $deletedObject ) $output .= "<li>$deletedObject</li>";
+			return $output;
+		}
+		return $deletedRows;
 	}
 }

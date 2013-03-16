@@ -35,9 +35,6 @@
 				"onEdit": function (json, data) {
 				},
 				"onOpen": function ( settings, json ) {
-					if( $('.DTE_Action_Create').length ) {
-						$('.DTE_Field_Name_email').siblings('.DTE_Field').remove();
-					}
 				},
 				"onInitCreate": function() {
 					

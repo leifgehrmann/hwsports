@@ -159,6 +159,7 @@ class Sis extends MY_Controller {
 			redirect("/sis/tournaments", 'refresh');
 		}
 		
+		// Get all role info, includng all sections and descendent inputs
 		$this->data['roles'] = $roles = $this->sports_model->get_sport_category_roles($tournament['sportData']['sportCategoryID']);
 
 		if( $this->input->post() ) {
