@@ -80,9 +80,9 @@ class Sports_model extends MY_Model {
 	 **/
 	public function delete($ID, $testRun=TRUE) {
 		$output = "";
-		if($testRun) $output .= "If this delete query is executed, the following objects will be deleted: \n\n";
+		if($testRun) $output .= "To delete this object, the following must also be deleted: \n\n";
 		$output .= $this->delete_object($ID, $this->objectIDKey, $this->relationTableName, $testRun);
-		if($testRun) $output .= "\nIf this looks correct, click 'Confirm'. Otherwise please update or delete dependencies manually.\n\n";
+		if($testRun) $output .= "\nIf this is correct, click 'Confirm'. Otherwise please cancel and edit the above objects first.\n\n";
 		return $output;
 	}
 	
