@@ -7,23 +7,27 @@ class Datatables extends MY_Controller {
 		$this->load->model('matches_model');
 		$this->load->model('sports_model');
 		$this->load->model('venues_model');
+		$this->load->model('teams_model');
 		
 		$this->singulars = array(
 			"matches" => "match",
 			"sports" => "sport",
 			"venues" => "venue"
+			"teams" => "team"
 		);
 		
 		$this->relations = array(
 			"matches" => array("matchID" => NULL,"sportID" => NULL,"venueID" => NULL,"tournamentID" => 0),
 			"sports" => array("sportID" => NULL,"sportCategoryID" => NULL),
-			"venues" => array("venueID" => NULL)
+			"venues" => array("venueID" => NULL),
+			"teams" => array("teamID" => NULL)
 		);
 		
 		$this->types_models = array(
 			"matches" => $this->matches_model,
 			"sports" => $this->sports_model,
-			"venues" => $this->venues_model
+			"venues" => $this->venues_model,
+			"teams" => $this->teams_model
 		);
 	}
 
