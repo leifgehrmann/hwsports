@@ -36,15 +36,14 @@
 			}
 		} );
 
-		$('#sports').dataTable( {
+		$('#teams').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
-			"sAjaxSource": "/datatables/data/sports",
+			"sAjaxSource": "/datatables/data/teams",
 			"aoColumns": [
-				{ "mData": "sportID" },
-				{ "mData": "centreID" },
+				{ "mData": "teamID" },
 				{ "mData": "name" },
 				{ "mData": "description" },
-				{ "mData": "sportCategoryData.name" },
+				{ "mData": "associationNumber" }
 				{ "mData": "detailsLink" }
 			],
 			"aoColumnDefs": [
@@ -80,7 +79,7 @@
 				]
 			},
 			"fnInitComplete": function ( settings, json ) {
-				editor.field('sportCategoryID').update( json.sportCategories );
+				//editor.field('sportCategoryID').update( json.sportCategories );
 			}
 		} );
 		
