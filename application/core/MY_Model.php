@@ -116,7 +116,7 @@ class MY_Model extends CI_Model {
 	* Basic example: 	insert_object( array("address"=>"14 Parkhead Loan"), 'centreID', 'centreData');
 	* Complex example: 	
 	*/
-	public function insert_object($data, $objectIDKey, $dataTableName, $relationTableName = false, $relations = array()) {		
+	public function insert_object($data, $objectIDKey, $dataTableName, $relationTableName = false, $relations = array()) {
 		// Lump all inserts into one transaction
 		$this->db->trans_start();
 		
@@ -147,6 +147,11 @@ class MY_Model extends CI_Model {
 		}
 		// Complete transaction, all is well
 		$this->db->trans_complete();
+		
+		// Check for insertion failure
+		if ($this->db->trans_status() === FALSE) {
+			return FALSE;
+		}
 		
 		// Return the newly generated ID of this object, ready for referencing with get_object
 		return $objectID;

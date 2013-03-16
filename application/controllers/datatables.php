@@ -91,7 +91,6 @@ class Datatables extends MY_Controller {
 					unset($newData[$relation]);
 				}
 				// Do the insert, with an empty $newRelations array if there are no dependents
-				
 				$newID = $this->types_models[$type]->insert($newData,$newRelations);
 				if($newID!==FALSE) {
 					$newObject = $this->types_models[$type]->get($newID);
