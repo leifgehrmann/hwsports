@@ -777,34 +777,15 @@ class Ion_auth_model extends CI_Model
 	 * @return bool
 	 * @author Mathew
 	 **/
-	public function register($username, $password, $email, $additional_data = array(), $groups = array())
+	public function register($email, $password, $groups = array())
 	{
 		$this->trigger_events('pre_register');
 
 		$manual_activation = $this->config->item('manual_activation', 'ion_auth');
 
-		if ($this->identity_column == 'email' && $this->email_check($email))
-		{
+		if ($this->identity_column == 'email' && $this->email_check($email)) {
 			$this->set_error('account_creation_duplicate_email');
 			return FALSE;
-		}
-		elseif ($this->identity_column == 'username' && $this->username_check($username))
-		{
-			$this->set_error('account_creation_duplicate_username');
-			return FALSE;
-		}
-
-		// If username is taken, use username1 or username2, etc.
-		if ($this->identity_column != 'username')
-		{
-			$original_username = $username;
-			for($i = 0; $this->username_check($username); $i++)
-			{
-				if($i > 0)
-				{
-					$username = $original_username . $i;
-				}
-			}
 		}
 
 		// IP Address
@@ -815,53 +796,33 @@ class Ion_auth_model extends CI_Model
 		// Users table.
 		$data = array(
 			'centreID'   => $this->centreID,
-		    'username'   => $username,
-		    'password'   => $password,
 		    'email'      => $email,
+		    'password'   => $password,
 		    'ip_address' => $ip_address,
 		    'created_on' => time(),
 		    'last_login' => time(),
 		    'active'     => ($manual_activation === false ? 1 : 0)
 		);
 
-		if ($this->store_salt)
-		{
+		if ($this->store_salt) {
 			$data['salt'] = $salt;
 		}
 		
 		// Insert main ion auth login user into users table
 		$this->db->insert($this->tables['users'], $data);
 		// Get user userID
-		$userID = $this->db->insert_id();
-		
-		// Insert all additional user data into userData table
-		foreach ($additional_data as $datakey => $datavalue) {
-			$this->db->insert($this->tables['userData'], Array(
-					'userID' => $userID,
-					'key' => $datakey,
-					'value' => $datavalue,
-				) 
-			);
+		$userID = $this->db->insert_id();	
+		// Add to groups
+		foreach ($groups as $group) {
+			$this->add_to_group($group, $userID);
 		}
-		
-		if (!empty($groups))
-		{
-			//add to groups
-			foreach ($groups as $group)
-			{
-				$this->add_to_group($group, $userID);
-			}
-		}
-
-		//add to default group if not already set
+		// Add to default group if not already set
 		$default_group = $this->where('name', $this->config->item('default_group', 'ion_auth'))->group()->row();
-		if ((isset($default_group->groupID) && !isset($groups)) || (empty($groups) && !in_array($default_group->groupID, $groups)))
-		{
+		if ((isset($default_group->groupID) && !isset($groups)) || (empty($groups) && !in_array($default_group->groupID, $groups))) {
 			$this->add_to_group($default_group->groupID, $userID);
 		}
 
 		$this->trigger_events('post_register');
-
 		return (isset($userID)) ? $userID : FALSE;
 	}
 
