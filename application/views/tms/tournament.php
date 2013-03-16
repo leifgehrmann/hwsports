@@ -17,7 +17,7 @@
 			</tr>
 			<tr>
 				<td><label for="description">Description</label></td>
-				<td rowspan="3"><?=form_textarea($description)?></td>
+				<td colspan="3"><?=form_textarea($description)?></td>
 			</tr>
 			<tr>
 				<? switch($tournament['status']) { 
@@ -49,7 +49,7 @@
 			
 			<tr>
 				<td colspan="3"></td>
-				<td><?=form_submit('submit',array("label"=>"Update", "class"=>"green"));?></td>
+				<td><?=form_submit(array('name'=>'submit',"label"=>"Update", "class"=>"green"));?></td>
 			</tr>
 		</table>
 		<?=form_close();?>
