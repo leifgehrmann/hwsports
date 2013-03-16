@@ -32,7 +32,7 @@ class Datatables extends MY_Controller {
 	}
 
 	// $type should be the plural model name; eg sports, venues, matches
-	public function data($type) {
+	public function data($type, $where = false) {
 		// Define $action even if the use has just loaded the page
 		$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "load";
 		// Initialise the output array which will be jsonified to pass to datatables.
@@ -159,6 +159,11 @@ class Datatables extends MY_Controller {
 		$this->load->view('data', $this->data);
 	}
 	
+	// Show the user what *exactly* will happen when they click delete
+	public function teamUsers($teamID) {
+		$where = array('teamID' => $teamID);
+		$this->data('teamsUsers',$where);
+	}
 	// Show the user what *exactly* will happen when they click delete
 	public function predelete($rowID) {
 		// Get type/model and object ID from type-ID input string

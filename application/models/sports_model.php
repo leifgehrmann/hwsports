@@ -33,9 +33,11 @@ class Sports_model extends MY_Model {
 	 * 
 	 * @return array
 	 **/
-	public function get_all() {
+	public function get_all($where = false) {
 		// Fetch the IDs for everything at the current sports centre
-		$IDRows = $this->db->get_where($this->relationTableName, array('centreID' => $this->centreID))->result_array();
+		if(is_array($where)) $this->db->where( $where );
+		$this->db->where( array('centreID' => $this->centreID) );
+		$IDRows = $this->db->get($this->relationTableName)->result_array();
 		// Create empty array to output if there are no results
 		$all = array();
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
