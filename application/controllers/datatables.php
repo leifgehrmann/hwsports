@@ -173,7 +173,7 @@ class Datatables extends MY_Controller {
 				else $this->db->or_where(array('userID' => $teamUsersRows[$i]['userID']));
 			}
 		} else {
-			$this->db->where(array('true' => 'false'));
+			$this->db->where(array('userID' => -1));
 		}
 		$this->data('users');
 	}
