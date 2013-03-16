@@ -180,8 +180,7 @@ class Datatables extends MY_Controller {
 			}
 
 			$this->load->view('data', array('data' => json_encode($out)) );
-		}
-		if($this->action == 'remove') {
+		} elseif($this->action == 'remove') {
 			// Get the userID to delete from the teamsUsers table
 			$delete_type_id = explode('-',$_POST['data'][0]);
 			$ID = $delete_type_id[1];
@@ -189,20 +188,20 @@ class Datatables extends MY_Controller {
 			// Define the return value based on deletion success
 			$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
 			$this->load->view('data', array('data' => json_encode($out)) );
-		}
-		
-		// Query the teamsUsers table for all users in this team, then add a where clause for each
-		$teamUsersRows = $this->db->get_where('teamsUsers',array('teamID' => $teamID))->result_array();
-		$teamUserCount = count($teamUsersRows);
-		if($teamUserCount) {
-			for($i=0; $i<$teamUserCount; $i++) {
-				if($i==0) $this->db->where(array('userID' => $teamUsersRows[0]['userID']));
-				else $this->db->or_where(array('userID' => $teamUsersRows[$i]['userID']));
-			}
 		} else {
-			$this->db->where(array('userID' => -1));
+			// Query the teamsUsers table for all users in this team, then add a where clause for each
+			$teamUsersRows = $this->db->get_where('teamsUsers',array('teamID' => $teamID))->result_array();
+			$teamUserCount = count($teamUsersRows);
+			if($teamUserCount) {
+				for($i=0; $i<$teamUserCount; $i++) {
+					if($i==0) $this->db->where(array('userID' => $teamUsersRows[0]['userID']));
+					else $this->db->or_where(array('userID' => $teamUsersRows[$i]['userID']));
+				}
+			} else {
+				$this->db->where(array('userID' => -1));
+			}
+			$this->data('users');
 		}
-		$this->data('users');
 	}
 	
 	// Show the user what *exactly* will happen when they click delete
