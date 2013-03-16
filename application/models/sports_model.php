@@ -149,7 +149,7 @@ class Sports_model extends MY_Model {
 		$roleInputsRows = $this->db->get('sportCategoryRoleInputs')->result_array();
 		$inputs = array();
 		foreach($roleInputsRows as $roleInput) {
-			$inputs[ $roleInput['sportCategoryRoleInputID'] ] = $roleInput
+			$inputs[ $roleInput['sportCategoryRoleInputID'] ] = $roleInput;
 		}
 		return $inputs;
 	}
