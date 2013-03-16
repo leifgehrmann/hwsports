@@ -166,19 +166,19 @@ class Datatables extends MY_Controller {
 	// Show the user what *exactly* will happen when they click delete
 	public function teamUsers($teamID) {
 		if($this->action == 'create') {
-			$newID = $this->users_model->find_by_email($_POST['data']['email']);
-			if($newID) {
-				$newID = $this->db->insert('teamsUsers', array('teamID'=>$teamID, 'userID'=>$newID['userID']) );
+			$user = $this->users_model->find_by_email($_POST['data']['email']);
+			if($user===FALSE) {
+				$out = array('error' => "Email could not be found in database. Please try again or contact Infusion Systems.");
+				$this->load->view('data', array('data' => json_encode($out)) );
+				return;
 			}
-			
-			if($newID!==FALSE) {
-				$newObject = $this->users_model->get($newID);
-				$newObject['detailsLink'] = "<a href='/tms/user/$newID' class='button'>Details</a>";
-				$out = array('id' => "users-$newID", 'row' => $newObject);
+				
+			if($this->db->insert('teamsUsers', array('teamID'=>$teamID, 'userID'=>$user['userID']) )) {
+				$user['detailsLink'] = "<a href='/tms/user/{$user['userID']}' class='button'>Details</a>";
+				$out = array('id' => "users-{$user['userID']}", 'row' => $user);
 			} else {
-				$out = array('error' => "Email could not be found in database.  contact Infusion Systems.");
+				$out = array('error' => "User could not be added to team. Please try again or contact Infusion Systems.");
 			}
-
 			$this->load->view('data', array('data' => json_encode($out)) );
 		} elseif($this->action == 'remove') {
 			// Get the userID to delete from the teamsUsers table
