@@ -4,12 +4,12 @@ class Test extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		//$this->load->model('tournaments_model');
+		$this->load->model('tournaments_model');
 		$this->load->model('teams_model');
 		$this->load->model('users_model');
 		$this->load->model('matches_model');
 		$this->load->model('sports_model');
-		$this->load->model('scheduling_model');
+		//$this->load->model('scheduling_model');
 		$this->load->model('venues_model');
 		header('Content-Encoding: UTF-8');
 		header('Content-type: text/html; charset=UTF-8');
