@@ -12,7 +12,7 @@ class Datatables extends MY_Controller {
 		$this->singulars = array(
 			"matches" => "match",
 			"sports" => "sport",
-			"venues" => "venue"
+			"venues" => "venue",
 			"teams" => "team"
 		);
 		
