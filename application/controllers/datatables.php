@@ -167,9 +167,13 @@ class Datatables extends MY_Controller {
 		// Query the teamsUsers table for all users in this team, then add a where clause for each
 		$teamUsersRows = $this->db->get_where('teamsUsers',array('teamID' => $teamID))->result_array();
 		$teamUserCount = count($teamUsersRows);
-		for($i=0; $i<$teamUserCount; $i++) {
-			if($i==0) $this->db->where(array('userID' => $teamUsersRows[0]['userID']));
-			else $this->db->or_where(array('userID' => $teamUsersRows[$i]['userID']));
+		if($teamUserCount) {
+			for($i=0; $i<$teamUserCount; $i++) {
+				if($i==0) $this->db->where(array('userID' => $teamUsersRows[0]['userID']));
+				else $this->db->or_where(array('userID' => $teamUsersRows[$i]['userID']));
+			}
+		} else {
+			$this->db->where(array('true' => 'false'));
 		}
 		$this->data('users');
 	}
