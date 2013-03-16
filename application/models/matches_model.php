@@ -191,7 +191,7 @@ class Matches_model extends MY_Model {
 	 * @return boolean
 	 **/
 	public function update($ID, $data, $relationIDs=array()) {
-		return $this->update_object($ID, $this->objectIDKey, $data, $this->dataTableName, $this->relationTableName, $relationIDs);
+		return $this->update_object($ID, $data, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relationIDs);
 	}
 
 	/**
