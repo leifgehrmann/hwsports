@@ -62,7 +62,7 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<? if(array_key_exists('scheduled',$tournament['scheduled'])) { ?>
+		<? if(array_key_exists('scheduled',$tournament)) { ?>
 		<?=form_open("tms/tournament/$tournamentID", array('id' => 'schedulingDetailsForm'), array('formID' => 'schedulingDetailsForm'), array('formAction' => 'update'))?>
 		<table>
 			<tr>
@@ -72,48 +72,16 @@
 			<tr>
 				<td><h3>Venues</h3><p><p>Select the venues that you want the matches to take place at.</p></p></td>
 				<td>
-					<select data-placeholder="Select Venues..." class="chzn-select" multiple>
+					<? if( count($venues) != 0 ){ )?>
+					<select name="venues" data-placeholder="Select Venues..." class="chzn-select" multiple>
 						<option value=""></option> 
-						<option value="United States">United States</option> 
-						<option value="United Kingdom">United Kingdom</option> 
-						<option value="Afghanistan">Afghanistan</option> 
-						<option value="Aland Islands">Aland Islands</option> 
-						<option value="Albania">Albania</option> 
-						<option value="Algeria">Algeria</option> 
-						<option value="American Samoa">American Samoa</option> 
-						<option value="Andorra">Andorra</option> 
-						<option value="Angola">Angola</option> 
-						<option value="Anguilla">Anguilla</option> 
-						<option value="Antarctica">Antarctica</option> 
-						<option value="Antigua and Barbuda">Antigua and Barbuda</option> 
-						<option value="Argentina">Argentina</option> 
-						<option value="Armenia">Armenia</option> 
-						<option value="Aruba">Aruba</option> 
-						<option value="Australia">Australia</option> 
-						<option value="Austria">Austria</option> 
-						<option value="Azerbaijan">Azerbaijan</option> 
-						<option value="Bahamas">Bahamas</option> 
-						<option value="Bahrain">Bahrain</option> 
-						<option value="Bangladesh">Bangladesh</option> 
-						<option value="Barbados">Barbados</option> 
-						<option value="Belarus">Belarus</option> 
-						<option value="Belgium">Belgium</option> 
-						<option value="Belize">Belize</option> 
-						<option value="Benin">Benin</option> 
-						<option value="Bermuda">Bermuda</option> 
-						<option value="Bhutan">Bhutan</option> 
-						<option value="Bolivia, Plurinational State of">Bolivia, Plurinational State of</option> 
-						<option value="Bonaire, Sint Eustatius and Saba">Bonaire, Sint Eustatius and Saba</option> 
-						<option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option> 
-						<option value="Botswana">Botswana</option> 
-						<option value="Bouvet Island">Bouvet Island</option> 
-						<option value="Brazil">Brazil</option> 
-						<option value="British Indian Ocean Territory">British Indian Ocean Territory</option> 
-						<option value="Brunei Darussalam">Brunei Darussalam</option> 
-						<option value="Bulgaria">Bulgaria</option> 
-						<option value="Burkina Faso">Burkina Faso</option> 
-						<option value="Burundi">Burundi</option>
+						<? foreach($venues as $venue) { ?>
+						<option value="<?=$venue['venueID']?>"><?=$venue['name']?></option> 
+						<? } ?>
 					</select>
+					<? } else { ?>
+					<p>There are no venues to add. To add venues, <a href="/tms/venues/">click here</a>.</p>
+					<? } ?>
 				</td>
 			</tr>
 		</table>

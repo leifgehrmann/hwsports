@@ -190,6 +190,7 @@ class Tms extends MY_Controller {
 			$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
 		
 			$this->data['tournaments'] = $this->tournaments_model->get_all();
+			$this->data['venues'] = $this->venues_model->get_all();
 		
 			$this->data['sports'] = array();
 			foreach( $this->sports_model->get_all() as $sport) {				
