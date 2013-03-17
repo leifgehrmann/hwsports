@@ -65,9 +65,7 @@
 	<div class="widget-body">
 		<?=form_open("tms/tournament/$tournamentID", array('id' => 'schedulingDetailsForm'), array('formID' => 'schedulingDetailsForm'))?>
 		<ul>
-			<li>Match Duration (Minutes Numeric)</li>
 			<li>Start Times For each weekday</li>
-			<li>Venues</li>
 			<li>Button to save preferences</li>
 			<li>Button to clear all scheduled matches (if there are any matches)</li>
 			<li>Button to schedule matches</li>
@@ -75,13 +73,13 @@
 		</ul>
 		<table>
 			<tr>
-				<td>Match Duration</td>
-				<td colspan="3"><input type="text" value="bla"/></td>
+				<td width="25%">Match Duration</td>
+				<td width="75%"><input type="text" value="bla"/></td>
 			</tr>
 			<tr>
 				<td><h3>Venues</h3><p><p>Select the venues that you want the matches to take place at.</p></p></td>
 				<td>
-					<select data-placeholder="Select Venues..." class="chzn-select">
+					<select data-placeholder="Select Venues..." class="chzn-select" multiple>
 						<option value=""></option> 
 						<option value="United States">United States</option> 
 						<option value="United Kingdom">United Kingdom</option> 
@@ -126,13 +124,35 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="4"><h3>Match Start Times</h3></td>
+				<td colspan="2"><h3>Match Start Times</h3></td>
 			</tr>
 			<tr>
-				<td colspan="2"><p>For each day of the week you can select a specific start time you want particular match to start at. The automatic scheduler will use this dates to add in the specific fields.</p></td>
+				<td>Monday</td>
+				<td></td>
 			</tr>
 			<tr>
-				<td colspan="2"><p>Select the venues that you want the matches to take place at.</p></td>
+				<td>Tuesday</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Wednesday</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Thursday</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Friday</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Saturday</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Sunday</td>
+				<td></td>
 			</tr>
 		</table>
 		<?=form_close();?>
