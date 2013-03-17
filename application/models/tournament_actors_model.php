@@ -38,7 +38,7 @@ class Tournament_actors_model extends MY_Model {
 		if(!$actor) return FALSE;
 		// Now get the tournamentActorData using our lovely dry code
 		$actorData = $this->get_object($ID, $this->objectIDKey, $this->dataTableName);
-		if(!$actorData) return FALSE;
+		if(!is_array($actorData)) return FALSE;
 		
 		return $actor + $actorData;
 	}
