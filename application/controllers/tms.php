@@ -199,7 +199,7 @@ class Tms extends MY_Controller {
 
 			foreach($tournamentDetailsForm as $input){
 				if(array_key_exists('type',$input)){
-					if($input=="date"){
+					if($input['type']=="date"){
 						$this->data[$input['name']] = array(
 							'name'  => $input['name'],
 							'id'    => $input['name'],
