@@ -26,6 +26,13 @@ class MY_Controller extends CI_Controller {
 			$this->load->model($modelName);
 		}
 		
+		// Define other models so we can access objects from the database
+		$this->objects_models = array(
+			"users" => $this->users_model,
+			"teams" => $this->teams_model,
+			"tournament_actors" => $this->tournament_actors_model
+		);
+		
 		if($centreSite) {
 			// Get Sports Centre ID from slug/domain
 			$query = $this->db->query("SELECT `centreID` FROM `centreData` WHERE `key` = 'slug' AND `value` = '{$this->data['slug']}' LIMIT 1");
