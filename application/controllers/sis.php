@@ -130,17 +130,10 @@ class Sis extends MY_Controller {
 			$this->session->set_flashdata('message_warning',  "You must be logged in to sign up for a tournament: Please log in below:");
 			redirect('/auth/login','refresh'); 
 		}
-		$centreID = $this->data['centre']['centreID'];
 		
-
-
-
-
-	
-		$this->data['tournamentID'] = $tournamentID;
 		$this->data['tournament'] = $tournament = $this->tournaments_model->get($tournamentID);
 		if($tournament==FALSE) {
-			$this->session->set_flashdata('message',  "Tournament ID $id does not exist.");
+			$this->session->set_flashdata('message',  "Tournament ID $tournamentID does not exist.");
 			redirect("/sis/tournaments", 'refresh');
 		}
 		
@@ -200,9 +193,6 @@ class Sis extends MY_Controller {
 	//create a new team member user account
 	function addTeamMember($tournamentID,$sectionID)
 	{
-
-
-
 		$this->data['tournamentID'] = $tournamentID;
 		$this->data['sectionID'] = $sectionID;
 		

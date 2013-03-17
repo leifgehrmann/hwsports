@@ -40,8 +40,8 @@ class Tournament_actors_model extends MY_Model {
 		// Now get the tournamentActorData using our lovely dry code
 		$actorData = $this->get_object($ID, $this->objectIDKey, $this->dataTableName);
 		if(!is_array($actorData)) return FALSE;
-		
-		return $actor + $actorData;
+		// Append tournamentActorData to data retrieved from user->get or team->get etc
+		return $actorData + $actorData;
 	}
 
 	/**
@@ -66,14 +66,13 @@ class Tournament_actors_model extends MY_Model {
 
 
 	/**
-	 * Creates a new tournament with data, using the sport ID as specified.
+	 * Creates a new tournament actor with data, using the tournament ID as specified.
 	 * Returns the ID of the new object if it was successful.
 	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
 	 *  
 	 * @return int
 	 **/
 	public function insert($data, $relationIDs=array()) {
-		$relationIDs['centreID']=$this->centreID;
 		return $this->insert_object($data, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relationIDs);
 	}
 
@@ -84,8 +83,8 @@ class Tournament_actors_model extends MY_Model {
 	 *
 	 * @return boolean
 	 **/
-	public function update($ID, $data, $relationIDs=array()) {
-		return $this->update_object($ID, $data, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relationIDs);
+	public function update($ID, $data) {
+		return $this->update_object($ID, $data, $this->objectIDKey, $this->dataTableName);
 	}
 
 	/**
