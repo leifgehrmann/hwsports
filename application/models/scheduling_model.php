@@ -788,11 +788,11 @@ class Scheduling_model extends MY_Model {
 		// put them into position for the next tournament.
 		usort($athletesPerformed,function($a, $b)
 			{
-				if(isset('matchActorData',$a))
+				if(array_key_exists('matchActorData',$a))
 					$af = (float) $a['matchActorData']['performance'];
 				else
 					$af = (float) $a['tournamentActorData']['personalBest'];
-				if(isset('matchActorData',$b))
+				if(array_key_exists('matchActorData',$b))
 					$bf = (float) $b['matchActorData']['performance'];
 				else
 					$bf = (float) $b['tournamentActorData']['personalBest'];
@@ -824,9 +824,9 @@ class Scheduling_model extends MY_Model {
 		$heats = ceil($participantsCount/$lanes);
 		$index = $participantsCount % $heats;
 		$athleteIndex = 0;
-		for(int $h=1;$h<=$heats;$h++)
+		for($h=1;$h<=$heats;$h++)
 		{
-			for(int $l=1;$l<=$lanes-($index<$h ? 1 : 0);$l++)
+			for($l=1;$l<=$lanes-($index<$h ? 1 : 0);$l++)
 			{
 				// Some how we add data to our schedule matches 
 				$updatedMatch = $match;
