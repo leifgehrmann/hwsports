@@ -23,7 +23,7 @@ class MY_Loader extends CI_Loader {
 
     function model($model, $name = '', $db_conn = FALSE)
     {
-		if($this->is_model_loaded($file)) return;
+		if($this->is_model_loaded($model)) return;
         // Call the default method otherwise
         parent::model($model, $name, $db_conn);
     }
