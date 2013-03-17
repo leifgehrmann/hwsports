@@ -4,13 +4,6 @@ class Test extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-
-
-
-
-
-
-
 		header('Content-Encoding: UTF-8');
 		header('Content-type: text/html; charset=UTF-8');
 	}
