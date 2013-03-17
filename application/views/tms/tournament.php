@@ -219,9 +219,9 @@
 			alert("A");
 			var startTimes = $('#'+weekdays[x]+'StartTimes');
 			alert("B");
-			alert(startTimes.innerHTML);
+			alert(startTimes.html());
 			$(startTimes).append('<p><input type="text" name="'+weekdays[x]+'StartTimes[]" value="" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>');
-			alert(startTimes.innerHTML);
+			alert(startTimes.html());
 			alert("C");
 			return false;
 		});
