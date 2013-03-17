@@ -47,7 +47,7 @@
 										<td>
 											<? switch( $input['inputType'] ) {
 												case "textarea": ?> <textarea id="<?=$input['tableName']?>_<?=$input['tableKeyName']?>" name="<?=$input['tableName']?>_<?=$input['tableKeyName']?>" required><?=isset($currentUser[$input['tableKeyName']]) ? $currentUser[$input['tableKeyName']] : ""?></textarea><br /> <? break;
-												case "text": case "phone": case "email": ?> <input type="text" id="<?=$input['tableName']?>_<?=$input['tableKeyName']?>" name="<?=$input['tableName']?>_<?=$input['tableKeyName']?>" required><?=isset($currentUser[$input['tableKeyName']]) ? $currentUser[$input['tableKeyName']] : ""?></input><br /> <? break;
+												case "text": case "phone": case "email": ?> <input type="text" id="<?=$input['tableName']?>_<?=$input['tableKeyName']?>" name="<?=$input['tableName']?>_<?=$input['tableKeyName']?>" value="<?=isset($currentUser[$input['tableKeyName']]) ? $currentUser[$input['tableKeyName']] : ""?>" required></input><br /> <? break;
 												case "checkbox": ?> <input type="checkbox" id="<?=$input['tableName']?>_<?=$input['tableKeyName']?>" name="<?=$input['tableName']?>_<?=$input['tableKeyName']?>" value="1" required></input><br /> <? break; 
 											} ?>
 										</td>
