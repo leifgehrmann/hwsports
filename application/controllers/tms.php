@@ -67,8 +67,8 @@ class Tms extends MY_Controller {
 		$maxTimeString = datetime_to_standard($maxTime);
 
 		// Create the where query for tournaments
-		$where_less_than_today = array($minTimeString.' <' => 'endTime', 'startTime <' => $todayString);
-		$where_greater_than_today = array($todayString.' <' => 'endTime', 'startTime <' => $maxTimeString);
+		$where_less_than_today = array($minTimeString.' <' => 'tournamentEnd', 'tournamentStart <' => $todayString);
+		$where_greater_than_today = array($todayString.' <' => 'tournamentEnd', 'tournamentStart <' => $maxTimeString);
 
 		// Get all the tournaments and matches from the database.
 		$latestMatches = $this->matches_model->get_all(FALSE,$today); // Get all matches that have occured and today's matches
