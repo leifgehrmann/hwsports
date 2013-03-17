@@ -223,6 +223,9 @@ input.color {
 .chzn-container * {
     line-height: normal;
 }
+.chzn-container input[type='text'] {
+    line-height: normal;
+}
 
 /***************************************\
 
