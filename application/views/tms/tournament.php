@@ -63,7 +63,7 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<?=form_open("tms/tournament/$tournamentID", array('id' => 'schedulingDetailsForm'), array('formID' => 'schedulingDetailsForm'))?>
+		<?=form_open("tms/tournament/$tournamentID", array('id' => 'schedulingDetailsForm'), array('formID' => 'schedulingDetailsForm'), array('formAction' => 'update'))?>
 		<table>
 			<tr>
 				<td width="40%"><h3>Match Duration</h3><p>Enter in the number of minutes that each match will take.</p></td>
@@ -119,7 +119,9 @@
 		</table>
 		<table>
 			<tr>
-				<td colspan="4"><h3>Match Start Times</h3></td>
+				<td colspan="4"><h3>Match Start Times</h3><p>The start times are used to tell the scheduler when the matches should take place.
+					For example you may want to have the start time on Monday to be at 10:00 and 14:00 but on Friday have them only occur at 12:00.</p>
+				<p>Fields that are left blank ignored.</p></td>
 			</tr>
 			<?
 				$i=0;
@@ -133,9 +135,9 @@
 					<a class="button green" href="#" id="<?=$weekday?>StartTimesAdd">Add another start time</a>
 				</td>
 			<? if($i%2==1){ ?></tr><? } ?>
-			<?=$weekday?><?=$i?>
 			<? $i++; } ?>
 		</table>
+		<td><?=form_submit(array('name'=>"submit", 'value'=>"Update", 'class'=>"green"));?></td>
 		<?=form_close();?>
 		<p>If it is wattball, we need to have a form which has the following details:</p>
 		<ul>
@@ -145,7 +147,6 @@
 			<li>Button to save preferences</li>
 			<li>Button to clear all scheduled matches (if there are any matches)</li>
 			<li>Button to schedule matches</li>
-			<li>Button</li>
 		</ul>
 		<p>If it is running, we need to have a form which has the following details</p>
 		<ul>
