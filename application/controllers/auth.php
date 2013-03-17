@@ -248,20 +248,18 @@ class Auth extends MY_Controller {
 		{
 			// get identity for that email
 			$config_tables = $this->config->item('tables', 'ion_auth');
-			$identity = $this->db->where('email', $this->input->post('email'))->limit('1')->get($config_tables['users'])->row();
-
-			//run the forgotten password method to email an activation code to the user
-			$forgotten = $this->ion_auth->forgotten_password($identity->{$this->config->item('identity', 'ion_auth')});
-
-			if ($forgotten)
-			{
-				//if there were no errors
-				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect("auth/login", 'refresh'); //we should display a confirmation page here instead of the login page
-			}
-			else
-			{
-				$this->session->set_flashdata('message', $this->ion_auth->errors());
+			if($this->users_model->find_by_email($this->input->post('email'))) {
+				//run the forgotten password method to email an activation code to the user
+				if( $this->ion_auth->forgotten_password($this->input->post('email')) ) {
+					//if there were no errors
+					$this->session->set_flashdata('message', $this->ion_auth->messages());
+					redirect("auth/login", 'refresh'); //we should display a confirmation page here instead of the login page
+				} else {
+					$this->session->set_flashdata('message', $this->ion_auth->errors());
+					redirect("auth/forgot_password", 'refresh');
+				}
+			} else {
+				$this->session->set_flashdata('message', 'This email does not exist in the database. Please try again.');
 				redirect("auth/forgot_password", 'refresh');
 			}
 		}
