@@ -29,7 +29,7 @@ class MY_Loader extends CI_Loader {
 			//echo "model $model already loaded, skipping<br />\n"; 
 			return;
 		} else {
-			//echo "model $model being loaded for the first time<br />\n"; 
+			echo "model $model being loaded for the first time"; 
 		}
         // Call the default method otherwise
         parent::model($model, $name, $db_conn);
