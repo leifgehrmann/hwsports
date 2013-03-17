@@ -24,10 +24,10 @@ class MY_Loader extends CI_Loader {
     function model($model, $name = '', $db_conn = FALSE)
     {
 		if($this->is_model_loaded($model)) {
-			//echo "model $model already loaded, skipping<br />\n"; 
+			echo "model $model already loaded, skipping<br />\n"; 
 			return;
 		} else {		
-			//echo "model $model being loaded for the first time<br />\n"; 
+			echo "model $model being loaded for the first time<br />\n"; 
 		}
         // Call the default method otherwise
         parent::model($model, $name, $db_conn);
