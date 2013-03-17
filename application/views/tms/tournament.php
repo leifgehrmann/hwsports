@@ -36,15 +36,15 @@
 			</tr>
 			<tr>
 				<td><label for="tournamentStart">Start Date</label></td>
-				<td><?=form_input($tournamentStart)?></td>
+				<td><?=!in_array($tournament['status'],array("inTournament","postTournament")) ? form_input($tournamentStart) : datetime_to_public($tournament['tournamentStart']) ?></td>
 				<td><label for="registrationStart">Start Date</label></td>
-				<td><?=form_input($registrationStart)?></td>
+				<td><?=in_array($tournament['status'],array("preRegistration")) ? form_input($registrationStart) : datetime_to_public($tournament['registrationStart']) ?></td>
 			</tr>
 			<tr>
 				<td><label for="tournamentEnd">End Date</label></td>
-				<td><?=form_input($tournamentEnd)?></td>
+				<td><?=!in_array($tournament['status'],array("postTournament")) ? form_input($tournamentEnd) : datetime_to_public($tournament['tournamentEnd']) ?></td>
 				<td><label for="registrationEnd">End Date</label></td>
-				<td><?=form_input($registrationEnd)?></td>
+				<td><?=!in_array($tournament['status'],array("inTournament","postTournament","postRegistration")) ? form_input($registrationEnd) : datetime_to_public($tournament['registrationEnd']) ?></td>
 			</tr>
 			
 			<tr>
@@ -62,7 +62,26 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<p>Sport specific stuff may go here</p>
+		<p>If it is wattball, we need to have a form which has the following details:</p>
+		<ul>
+			<li>Match Duration (Minutes)</li>
+			<li>Start Times For each weekday</li>
+			<li>Venues</li>
+			<li>Button to save preferences</li>
+			<li>Button to clear all scheduled matches (if there are any matches)</li>
+			<li>Button to schedule matches</li>
+			<li>Button</li>
+		</ul>
+		<p>If it is running, we need to have a form which has the following details</p>
+		<ul>
+			<li>Match Duration (Minutes)</li>
+			<li>Start Times</li>
+			<li>Venues with lane number (if it is defined)</li>
+			<li>Button to save preferences</li>
+			<li>Button to clear all scheduled matches (if there are any matches)</li>
+			<li>Button to schedule matches</li>
+			<li>Button to prepare next match (If there are any incomplete matches)</li>
+		</ul>
 	</div>
 </div>
 <div class="clearfix"></div>

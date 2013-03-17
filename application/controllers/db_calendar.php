@@ -388,7 +388,7 @@ class Db_Calendar extends MY_Controller {
 		// Fetch stuff from the database
 		switch ($eventType) {
 			case "match":
-				$eventData = $this->matches_model->get_match($id);
+				$eventData = $this->matches_model->get($id);
 				if($eventData['tournamentID']!=0) {
 					$tournamentData = $this->tournaments_model->get($eventData['tournamentID']);
 				}
