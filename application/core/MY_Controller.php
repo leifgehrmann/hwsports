@@ -34,6 +34,13 @@ class MY_Controller extends CI_Controller {
 			$this->centreID = $this->data['centre']['centreID'];
 		}
 		
+		// Define other models so we can access objects from the database
+		$this->objects_models = array(
+			"users" => $this->users_model,
+			"teams" => $this->teams_model,
+			"tournament_actors" => $this->tournament_actors_model
+		);
+		
 		function obj2arr($obj) {
 			if(is_object($obj)) $obj = (array) $obj;
 			if(is_array($obj)) {
@@ -105,13 +112,6 @@ class MY_Controller extends CI_Controller {
 			return $password;
 		}
 	}
-	
-	// Define other models so we can access objects from the database
-	$this->objects_models = array(
-		"users" => $this->users_model,
-		"teams" => $this->teams_model,
-		"tournament_actors" => $this->tournament_actors_model
-	);
 }
 
 ?>
