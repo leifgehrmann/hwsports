@@ -65,13 +65,11 @@
 			"aoColumns": [
 				{ "mData": "userID" },
 				{ "mData": "firstName" },
+				{ "mData": "lastName" },
 				{ "mData": "email" },
-				{ "mData": "phone",
-				  "sDefaultContent": "" },
-				{ "mData": "address",
-				  "sDefaultContent": ""},
-				{ "mData": "aboutMe",
-				  "sDefaultContent": "" },
+				{ "mData": "phone", "sDefaultContent": "" },
+				{ "mData": "address", "sDefaultContent": "" },
+				{ "mData": "aboutMe", "sDefaultContent": "" },
 				{ "mData": "detailsLink" }
 			],
 			"aoColumnDefs": [
