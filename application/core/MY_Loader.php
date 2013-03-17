@@ -6,6 +6,8 @@ class MY_Loader extends CI_Loader {
 	{
 		$ci =& get_instance();      
 		$load_arr = (array) $ci->load;
+		
+		echo "is_model_loaded checking for model: $model in array:"; var_dump($load_arr);
 
 		$mod_arr = array();
 		foreach ($load_arr as $key => $value)
@@ -26,7 +28,7 @@ class MY_Loader extends CI_Loader {
 		if($this->is_model_loaded($model)) {
 			echo "model $model already loaded, skipping<br />\n"; 
 			return;
-		} else {		
+		} else {
 			echo "model $model being loaded for the first time<br />\n"; 
 		}
         // Call the default method otherwise
