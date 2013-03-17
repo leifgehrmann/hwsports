@@ -216,6 +216,8 @@
 	var weekdays =["monday","tuesday","wednesday","thursday","friday","saturday","sunday"];
 	for (var x=0;x<weekdays.length;x++){
 		$('#'+weekdays[x]+'StartTimesAdd').live('click', function() {
+			alert("HELLO?");
+			console.log("HELLO?");
 			var z = -1;
 			for(var y=0;y<weekdays.length;y++){
 				console.log($(this).attr("id"));
