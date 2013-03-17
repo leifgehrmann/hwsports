@@ -66,9 +66,12 @@
 				{ "mData": "userID" },
 				{ "mData": "firstName" },
 				{ "mData": "email" },
-				{ "mData": "phone" },
-				{ "mData": "address" },
-				{ "mData": "aboutMe" },
+				{ "mData": "phone",
+				  "sDefaultContent": "" },
+				{ "mData": "address",
+				  "sDefaultContent": ""},
+				{ "mData": "aboutMe",
+				  "sDefaultContent": "" },
 				{ "mData": "detailsLink" }
 			],
 			"aoColumnDefs": [

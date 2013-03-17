@@ -428,11 +428,7 @@ class Auth extends MY_Controller {
 	}
 
 	//create a new user account
-	function register()
-	{
-		$this->data['title'] = "Registration";
-		$this->data['page'] = "register";
-
+	function register() {
 		//validate form input
 		$this->form_validation->set_rules('firstName', 'First Name', 'required|xss_clean');
 		$this->form_validation->set_rules('lastName', 'Last Name', 'required|xss_clean');
@@ -448,8 +444,7 @@ class Auth extends MY_Controller {
 
 			$userdata = array(
 				'firstName' => $this->input->post('firstName'),
-				'lastName'  => $this->input->post('lastName'),
-				'phone'      => $this->input->post('phone')
+				'lastName'  => $this->input->post('lastName')
 			);
 			
 			$userID = $this->users_model->insert($email, $password, $userdata);
@@ -482,12 +477,6 @@ class Auth extends MY_Controller {
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('email'),
 		);
-		$this->data['phone'] = array(
-			'name'  => 'phone',
-			'id'    => 'phone',
-			'type'  => 'text',
-			'value' => $this->form_validation->set_value('phone'),
-		);
 		$this->data['password'] = array(
 			'name'  => 'password',
 			'id'    => 'password',
@@ -501,9 +490,7 @@ class Auth extends MY_Controller {
 			'value' => $this->form_validation->set_value('password_confirm'),
 		);
 
-		$this->load->view('sis/header',$this->data);
-		$this->load->view('auth/register', $this->data);
-		$this->load->view('sis/footer',$this->data);
+		$this->view('auth/register','register','Registration',$this->data);
 	}
 
 	//edit a user

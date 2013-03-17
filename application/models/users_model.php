@@ -57,10 +57,17 @@ class Users_model extends MY_Model {
 	 * @return int
 	 **/
 	public function insert($email, $password, $data) {
+		// Lump all data table updates into one transaction in case one fails, so we can rollback and don't end up with users with no data 
+		$this->db->trans_begin();
 		$userID = $this->ion_auth->register($email, $password);
-		if($userID) {
-			return $this->update($userID, $data);
+		if($userID) {	
+			$userDataStatus = $this->update($userID, $data);
+			if ($userDataStatus && ($this->db->trans_status() !== FALSE) ) {
+				$this->db->trans_commit();
+				return $userID;
+			}
 		}
+		$this->db->trans_rollback();
 		return false;
 	}
 
