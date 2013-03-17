@@ -2,12 +2,8 @@
 
 class MY_Loader extends CI_Loader {
 
-	function is_model_loaded($model)
-	{
-		$ci =& get_instance();      
-		$load_arr = (array) $ci->load;
-		
-		//echo "is_model_loaded checking for model: $model in array:<br /><pre>";var_dump($load_arr,1);
+	function is_model_loaded($model) {
+		echo "is_model_loaded checking for model: $model in array:<br /><pre>";var_dump($this->_ci_models,1); 
 
 		$mod_arr = array();
 		foreach ($load_arr as $key => $value)
@@ -23,8 +19,7 @@ class MY_Loader extends CI_Loader {
 		return FALSE;
 	}
 
-    function model($model, $name = '', $db_conn = FALSE)
-    {
+    function model($model, $name = '', $db_conn = FALSE) {
 		if($this->is_model_loaded($model)) {
 			//echo "model $model already loaded, skipping<br />\n"; 
 			return;
