@@ -105,6 +105,13 @@ class MY_Controller extends CI_Controller {
 			return $password;
 		}
 	}
+	
+	// Define other models so we can access objects from the database
+	$this->objects_models = array(
+		"users" => $this->users_model,
+		"teams" => $this->teams_model,
+		"tournament_actors" => $this->tournament_actors_model
+	);
 }
 
 ?>
