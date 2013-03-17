@@ -269,7 +269,8 @@ class MY_Model extends CI_Model {
 				return FALSE;
 			}
 
-			if( !($startTime < $elementEndTime && $elementStartTime < $endTime) ) unset($inputArray[$inputArrayKey])
+			if( !($startTime < $elementEndTime && $elementStartTime < $endTime) ) 
+				unset($inputArray[$inputArrayKey]);
 		}
 		return $inputArray;
 	}
