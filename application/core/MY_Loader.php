@@ -36,7 +36,7 @@ class MY_Loader extends CI_Loader {
                     $object_name = NULL;
                 }
 				
-				if(is_model_loaded($file)) return;
+				if($this->is_model_loaded($file)) return;
                 parent::model($file, $object_name);
             }
             return;
