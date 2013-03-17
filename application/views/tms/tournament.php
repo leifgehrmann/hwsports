@@ -65,9 +65,7 @@
 	<div class="widget-body">
 		<?=form_open("tms/tournament/$tournamentID", array('id' => 'schedulingDetailsForm'), array('formID' => 'schedulingDetailsForm'))?>
 		<ul>
-			<li>Match Duration (Minutes Numeric)</li>
 			<li>Start Times For each weekday</li>
-			<li>Venues</li>
 			<li>Button to save preferences</li>
 			<li>Button to clear all scheduled matches (if there are any matches)</li>
 			<li>Button to schedule matches</li>
