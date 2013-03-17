@@ -786,7 +786,7 @@ class Scheduling_model extends MY_Model {
 
 		// we now sort the athletes by their performance so that we can
 		// put them into position for the next tournament.
-		usort($athletesPerformed,function cmp($a, $b)
+		usort($athletesPerformed,function($a, $b)
 			{
 				if(isset('matchActorData',$a))
 					$af = (float) $a['matchActorData']['performance'];
