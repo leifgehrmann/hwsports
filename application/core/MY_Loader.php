@@ -7,7 +7,7 @@ class MY_Loader extends CI_Loader {
 		$ci =& get_instance();      
 		$load_arr = (array) $ci->load;
 		
-		echo "is_model_loaded checking for model: $model in array:<br />"; nl2br(var_export($load_arr,1));
+		echo "is_model_loaded checking for model: $model in array:<br />".nl2br(var_export($load_arr,1));
 
 		$mod_arr = array();
 		foreach ($load_arr as $key => $value)
