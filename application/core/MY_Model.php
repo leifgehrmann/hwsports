@@ -34,7 +34,7 @@ class MY_Model extends CI_Model {
 			'tournamentActors' => array()
 		);
 		
-		public function datetime_range($inputArray, $startTime, $endTime, $startKey, $endKey) {
+		function datetime_range($inputArray, $startTime, $endTime, $startKey, $endKey) {
 			try {
 				$startTime = is_object($startTime) ? $startTime : new DateTime($startTime);
 				$endTime = is_object($endTime) ? $endTime : new DateTime($endTime);
