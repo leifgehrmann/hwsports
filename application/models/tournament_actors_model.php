@@ -9,10 +9,6 @@ class Tournament_actors_model extends MY_Model {
 		$this->objectIDKey = "tournamentActorID";
 		$this->dataTableName = "tournamentActorData";
 		$this->relationTableName = "tournamentActors";
-		
-		$this->load->model("users_model");
-		$this->load->model("teams_model");
-		$this->load->model("sports_model");
     }
 
 	/**

@@ -21,6 +21,11 @@ class MY_Controller extends CI_Controller {
 				redirect('http://infusionsports.co.uk');
 		}
 		
+		// Load all models
+		foreach( array('centre_model', 'groups_model', 'ion_auth_model', 'matches_model', 'results_model', 'scheduling_model', 'sports_model', 'teams_model', 'tournaments_model', 'tournament_actors_model', 'users_model', 'venues_model') as $modelName ) {
+			$this->load->model($modelName);
+		}
+		
 		if($centreSite) {
 			// Get Sports Centre ID from slug/domain
 			$query = $this->db->query("SELECT `centreID` FROM `centreData` WHERE `key` = 'slug' AND `value` = '{$this->data['slug']}' LIMIT 1");
@@ -33,6 +38,13 @@ class MY_Controller extends CI_Controller {
 			$this->data['centre'] = $this->centre_model->get( $row['centreID'] );
 			$this->centreID = $this->data['centre']['centreID'];
 		}
+		
+		// Define other models so we can access objects from the database
+		$this->objects_models = array(
+			"users" => $this->users_model,
+			"teams" => $this->teams_model,
+			"tournament_actors" => $this->tournament_actors_model
+		);
 		
 		function obj2arr($obj) {
 			if(is_object($obj)) $obj = (array) $obj;
@@ -105,13 +117,6 @@ class MY_Controller extends CI_Controller {
 			return $password;
 		}
 	}
-	
-	// Define other models so we can access objects from the database
-	$this->objects_models = array(
-		"users" => $this->users_model,
-		"teams" => $this->teams_model,
-		"tournament_actors" => $this->tournament_actors_model
-	);
 }
 
 ?>
