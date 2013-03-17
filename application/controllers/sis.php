@@ -141,31 +141,16 @@ class Sis extends MY_Controller {
 		$this->data['roles'] = $roles = $this->sports_model->get_sport_category_roles($tournament['sportData']['sportCategoryID']);
 
 		if( $this->input->post() ) {
-			var_dump($_POST);die();
 			$roleID = $this->input->post('role');
 			$roleInputs = $this->sports_model->get_sport_category_role_inputs($roleID);
 			
-			$userData = array();
-			$teamData = array();
-			$teamMembers = array();
-			
-			foreach($roleInputs as $roleInput) {
+			// Loop through each input and handle it
+			foreach($roleInputs as $key => $roleInput) {
 				// Skip these inputs, they are processed by the addTeamMember method
-				if(strpos($roleInput['inputType'],'tm-') === 0) continue;
+				if(strpos($roleInput['inputType'],'tm-') === 0) unset($roleInputs[$key]);
 				if($roleInput['inputType']=='teamMembers') {
 					$teamMembersIDs = array_map("intval", explode(",", $this->input->post('teamMemberIDs') ));
-				}
-				
-				// So far we only need to handle two input types, userData and teamData, but this is easily extensible
-				switch($roleInput['tableName']) {
-					case "userData":
-						// grab value from post data, update userData table with correct table key
-						$userData[$roleInput['tableKeyName']] = $this->input->post($roleInput['tableName'].'_'.$roleInput['tableKeyName']);
-					break;
-					case "teamData":
-						// grab value from post data, add to teamData array with correct table key
-						$teamData[$roleInput['tableKeyName']] = $this->input->post($roleInput['tableName'].'_'.$roleInput['tableKeyName']);
-					break;
+					
 				}
 			}
 			
@@ -211,13 +196,13 @@ class Sis extends MY_Controller {
 		foreach($teamMemberInputs as $tminput) {
 			switch($tminput['inputType']) {
 				case "phone":
-					$this->form_validation->set_rules($tminput['tableName'].'_'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|xss_clean|min_length[8]|max_length[13]');
+					$this->form_validation->set_rules($tminput['objectName'].'_'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|xss_clean|min_length[8]|max_length[13]');
 				break;
 				case "email":
-					$this->form_validation->set_rules($tminput['tableName'].'_'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|valid_email');
+					$this->form_validation->set_rules($tminput['objectName'].'_'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|valid_email');
 				break;
 				default: 
-					$this->form_validation->set_rules($tminput['tableName'].'_'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|xss_clean');
+					$this->form_validation->set_rules($tminput['objectName'].'_'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|xss_clean');
 			}
 		}
 		
@@ -247,7 +232,7 @@ class Sis extends MY_Controller {
 				
 			// Grab input data for dynamic inputs
 			foreach($teamMemberInputs as $tminput) {
-				$additional_data[$tminput['tableName'].'_'.$tminput['tableKeyName']] = $this->input->post($tminput['tableName'].'_'.$tminput['tableKeyName']);
+				$additional_data[$tminput['objectName'].'_'.$tminput['tableKeyName']] = $this->input->post($tminput['objectName'].'_'.$tminput['tableKeyName']);
 			}
 			
 			if( $userIDtoUpdate ) {
@@ -318,14 +303,14 @@ class Sis extends MY_Controller {
 					default: $type = $tminput['inputType'];
 				}
 			
-				$this->data['extraInputs'][ $tminput['tableName'].'_'.$tminput['tableKeyName'] ] = array(
-					'name'  => $tminput['tableName'].'_'.$tminput['tableKeyName'],
-					'id'    => $tminput['tableName'].'_'.$tminput['tableKeyName'],
+				$this->data['extraInputs'][ $tminput['objectName'].'_'.$tminput['tableKeyName'] ] = array(
+					'name'  => $tminput['objectName'].'_'.$tminput['tableKeyName'],
+					'id'    => $tminput['objectName'].'_'.$tminput['tableKeyName'],
 					'type'  => $type,
 					'required' => '',
 					'inputType'  => $tminput['inputType'],
 					'formLabel'  => $tminput['formLabel'],
-					'value' => $this->form_validation->set_value($tminput['tableName'].'_'.$tminput['tableKeyName']),
+					'value' => $this->form_validation->set_value($tminput['objectName'].'_'.$tminput['tableKeyName']),
 				);
 			}
 
@@ -398,14 +383,14 @@ class Sis extends MY_Controller {
 						default: $type = $tminput['inputType'];
 					}
 				
-					$this->data['extraInputs'][ $tminput['tableName'].'_'.$tminput['tableKeyName'] ] = array(
-						'name'  => $tminput['tableName'].'_'.$tminput['tableKeyName'],
-						'id'    => $tminput['tableName'].'_'.$tminput['tableKeyName'],
+					$this->data['extraInputs'][ $tminput['objectName'].'_'.$tminput['tableKeyName'] ] = array(
+						'name'  => $tminput['objectName'].'_'.$tminput['tableKeyName'],
+						'id'    => $tminput['objectName'].'_'.$tminput['tableKeyName'],
 						'type'  => $type,
 						'required' => '',
 						'inputType'  => $tminput['inputType'],
 						'formLabel'  => $tminput['formLabel'],
-						'value' => (isset($user[$tminput['tableName'].'_'.$tminput['tableKeyName']]) ? $user[$tminput['tableName'].'_'.$tminput['tableKeyName']] : '')
+						'value' => (isset($user[$tminput['objectName'].'_'.$tminput['tableKeyName']]) ? $user[$tminput['objectName'].'_'.$tminput['tableKeyName']] : '')
 					);
 				}
 				
