@@ -216,13 +216,10 @@
 	var weekdays =["monday","tuesday","wednesday","thursday","friday","saturday","sunday"];
 	for (var x=0;x<weekdays.length;x++){
 		$('#'+weekdays[x]+'StartTimesAdd').live('click', function() {
-			alert("A");
+			alert(weekdays[x]);
 			startTimes = $('#'+weekdays[x]+'StartTimes');
-			alert("B");
-			alert(startTimes.html());
 			startTimes.append('<p><input type="text" name="'+weekdays[x]+'StartTimes[]" value="" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>');
-			alert(startTimes.html());
-			alert("C");
+
 			return false;
 		});
 	}
