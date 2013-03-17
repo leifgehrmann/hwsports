@@ -127,7 +127,7 @@
 				<td><?=ucfirst($weekday)?></td>
 				<td>
 					<div id="<?=$weekday?>StartTimes"><p><input type="text" name="<?=$weekday?>StartTimes[]" value="" placeholder="HH:MM" /></p></div>				
-					<a class="button green" href="#" id="<?=$weekday?>StartTimesAdd">+</a>
+					<a class="button green" href="#" id="<?=$weekday?>StartTimesAdd">Add another start time</a>
 				</td>
 			</tr>
 			<? } ?>
@@ -216,8 +216,9 @@
 	var weekdays =["monday","tuesday","wednesday","thursday","friday","saturday","sunday"];
 	for (var x=0;x<weekdays.length;x++){
 		$('#'+weekdays[x]+'StartTimesAdd').live('click', function() {
+			alert("BINGO");
 			var startTimes = $('#'+weekdays[x]+'StartTimes');
-			$('<p><input type="text" name="'+weekdays[x]+'StartTimes[]" value="" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left: 20px;top:0px;">Remove</a></p>').appendTo(startTimes);
+			$('<p><input type="text" name="'+weekdays[x]+'StartTimes[]" value="" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>').appendTo(startTimes);
 			return false;
 		});
 	}
