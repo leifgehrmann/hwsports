@@ -223,10 +223,6 @@ class Tms extends MY_Controller {
 	
 	public function tournament($tournamentID)
 	{
-		
-
-
-		
 		$this->data['tournamentID'] = $tournamentID;
 		$this->data['tournament'] = $tournament = $this->tournaments_model->get($tournamentID);
 		if($tournament==FALSE) {
@@ -292,13 +288,11 @@ class Tms extends MY_Controller {
 			$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
 			
 			$venues = $this->venues_model->get_all();
-
-
 			$this->data['venues'] = $this->venues_model->get_all();
 
 			// If scheduled is not already defined, then just simply say it isn't scheduled.
 			if(!array_key_exists('scheduled',$tournament)){
-				$this->tournaments_model->update($tournamentID, array('scheduled','false'));
+				$this->tournaments_model->update($tournamentID, array('scheduled' => 'false'));
 				$this->data['tournament']['scheduled'] = 'false';
 			}
 		
