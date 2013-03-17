@@ -21,8 +21,6 @@ class Tms extends MY_Controller {
 			$authorized = True;
 		} else if ( $this->ion_auth->in_group('centreadmin') && $this->data['centre']['centreID'])*/
 
-		$this->load->model('ion_auth_model');
-		
 		if ( $this->ion_auth->in_group('admin') || $this->ion_auth->in_group('centreadmin') ) {
 			$this->data['currentUser'] = $currentUser = $this->ion_auth->user()->row();
 			$query = $this->db->query("SELECT `key`,`value` FROM `userData` WHERE `userID` = '{$currentUser->userID}'");
