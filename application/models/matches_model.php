@@ -50,52 +50,26 @@ class Matches_model extends MY_Model {
 	 **/
 	public function get_all($startTime=FALSE,$endTime=FALSE) {
 
+		// Fetch the IDs for everything at the current sports centre
+		$IDRows = $this->db->select($this->objectIDKey)
+						   ->from($this->relationTableName)
+						   ->join('venues', 'matches.venueID = venues.venueID')
+						   ->where('centreID', $this->centreID)
+						   ->get()->result_array();
+		// Create empty array to output if there are no results
+		$all = array();
+		// Loop through all result rows, get the ID and use that to put all the data into the output array 
+		foreach($IDRows as $IDRow) {
+			$all[$IDRow[$this->objectIDKey]] = $this->get($IDRow[$this->objectIDKey]);
+		}
+
 		if($startTime==FALSE && $endTime == FALSE) {
-			// Fetch the IDs for everything at the current sports centre
-			$where = array('centreID' => $this->centreID);
-			$IDRows = $this->db->select($this->objectIDKey)
-							   ->from($this->relationTableName)
-							   ->join('venues', 'matches.venueID = venues.venueID')
-							   ->where($where)
-							   ->get()->result_array();
-			// Create empty array to output if there are no results
-			$all = array();
-			// Loop through all result rows, get the ID and use that to put all the data into the output array 
-			foreach($IDRows as $IDRow) {
-				$all[$IDRow[$this->objectIDKey]] = $this->get($IDRow[$this->objectIDKey]);
-			}
 			return $all;
 		} else {
 			// Set up extremes for comparison if we aren't given an end time, or have a FALSE startTime, allowing for 
 			$startTime = ( $startTime ? $startTime : new DateTime('1st January 0001'));
 			$endTime = ( $endTime ? $endTime : new DateTime('31st December 9999'));
-
-			try {
-				$startTime = ( is_object($startTime) ? $startTime : new DateTime($startTime));
-				$endTime = ( is_object($endTime) ? $endTime : new DateTime($endTime));
-			} catch (Exception $e) {
-				log_message('error', "ERROR: Invalid input date. Debug Exception: ".$e->getMessage());
-				return FALSE;
-			}
-
-			$matches = $this->get_all();
-			if($matches == FALSE) return FALSE;
-
-			$filtered = array();
-			foreach($matches as $match) {
-
-				try {
-					$matchStartTime = new DateTime($match['startTime']);
-					$matchEndTime 	= new DateTime($match['endTime']);
-				} catch (Exception $e) {
-					log_message('error', "ERROR: Invalid date in database. Debug Exception: ".$e->getMessage());
-					return FALSE;
-				}
-
-				if( $startTime < $matchEndTime && $matchStartTime < $endTime )
-					$filtered[$match['matchID']] = $match;
-			}
-			return $filtered;
+			return datetime_range($all, $startTime, $endTime, 'startTime', 'endTime');
 		}
 	}
 
