@@ -22,9 +22,9 @@ class MY_Controller extends CI_Controller {
 		}
 		
 		// Load all models
-		$this->load->model(
-			array('centre_model', 'groups_model', 'ion_auth_model', 'matches_model', 'results_model', 'scheduling_model', 'sports_model', 'teams_model', 'tournaments_model', 'tournament_actors_model', 'users_model', 'venues_model')
-		);
+		foreach( array('centre_model', 'groups_model', 'ion_auth_model', 'matches_model', 'results_model', 'scheduling_model', 'sports_model', 'teams_model', 'tournaments_model', 'tournament_actors_model', 'users_model', 'venues_model') as $modelName ) {
+			$this->load->model($modelName);
+		}
 		
 		if($centreSite) {
 			// Get Sports Centre ID from slug/domain

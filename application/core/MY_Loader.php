@@ -37,6 +37,9 @@ class MY_Loader extends CI_Loader {
                 }
 				
 				if($this->is_model_loaded($file)) return;
+				
+				echo "model $file being loaded for the first time"; die();
+				
                 parent::model($file, $object_name);
             }
             return;
