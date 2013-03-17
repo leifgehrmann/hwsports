@@ -33,17 +33,6 @@ class MY_Model extends CI_Model {
 			'tournamentVenues' => array(),
 			'tournamentActors' => array()
 		);
-		// Load all models
-		foreach( array('centre_model', 'groups_model', 'matches_model', 'results_model', 'scheduling_model', 'sports_model', 'teams_model', 'tournaments_model', 'tournament_actors_model', 'users_model', 'venues_model') as $modelName ) {
-			$this->load->model($modelName);
-		}
-		
-		// Define other models so we can access objects from the database
-		$this->objects_models = array(
-			"users" => $this->users_model,
-			"teams" => $this->teams_model,
-			"tournament_actors" => $this->tournament_actors_model
-		);
     }
 	
 	/* Queries an object from the database
