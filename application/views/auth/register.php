@@ -6,11 +6,11 @@
 <table>
 	<tr>
 		<td>First Name:</td>
-		<td><?php echo form_input($first_name);?></td>
+		<td><?php echo form_input($firstName);?></td>
 	</tr>
 	<tr>
 		<td>Last Name:</td>
-		<td><?php echo form_input($last_name);?></td>
+		<td><?php echo form_input($lastName);?></td>
 	</tr>
 	<tr>
 		<td>Email:</td>
