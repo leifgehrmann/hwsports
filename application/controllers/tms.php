@@ -298,7 +298,7 @@ class Tms extends MY_Controller {
 
 			// If scheduled is not already defined, then just simply say it isn't scheduled.
 			if(!array_key_exists('scheduled',$tournament)){
-				$this->tournaments_model->update($tournamentID, array('scheduled','false'))
+				$this->tournaments_model->update($tournamentID, array('scheduled','false'));
 				$this->data['tournament']['scheduled'] = 'false';
 			}
 		
