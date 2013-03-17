@@ -615,12 +615,12 @@ class Scheduling_model extends MY_Model {
 		// Now that we have scheduled matches, we should quickly
 		// change the names of all the matches. To do this in
 		// order, we need to sort it.
-		usort($scheduledMatches,function cmp($a, $b)
+		/*usort($scheduledMatches,function cmp($a, $b)
 			{
 				if ($a['startTime'] == $b['startTime']) return 0;
 				return ($a['startTime'] < $b['startTime']) ? -1 : 1;
 			}
-		);
+		);*/
 
 		// We go through each match, renaming it.
 		$matchIndex = 0;
