@@ -118,21 +118,57 @@ class Tms extends MY_Controller {
 	public function tournaments()
 	{	
 
-
-		
-		$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
-		$this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
-		$this->form_validation->set_rules('sport', 'Sport', 'required|xss_clean');
-		$this->form_validation->set_rules('registrationStart', 'registrationStart', 'required|xss_clean|callback_datetime_check[registrationStart]');
-		$this->form_validation->set_rules('registrationEnd', 'registrationEnd', 'required|xss_clean|callback_datetime_check[registrationEnd]');
-		$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_datetime_check[tournamentStart]');
-		$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_datetime_check[tournamentEnd]');
-		
-		// Change dates from public, timepicker-friendly format to database-friendly ISO format.
-		if($this->input->post('registrationStart')) $_POST['registrationStart'] = datetime_to_standard($this->input->post('registrationStart'));
-		if($this->input->post('registrationEnd')) $_POST['registrationEnd'] = datetime_to_standard($this->input->post('registrationEnd'));
-		if($this->input->post('tournamentStart')) $_POST['tournamentStart'] = datetime_to_standard($this->input->post('tournamentStart'));
-		if($this->input->post('tournamentEnd')) $_POST['tournamentEnd'] = datetime_to_standard($this->input->post('tournamentEnd'));
+		$tournamentDetailsForm = array(
+			array(
+				'name'=>'name',
+				'label'=>'Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'description',
+				'label'=>'Description',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'sport',
+				'label'=>'Sport',
+				'restrict'=>'required|xss_clean',
+			),
+			array(
+				'name'=>'registrationStart',
+				'label'=>'Registration Start Date',
+				'restrict'=>'required|xss_clean|callback_datetime_check[registrationStart]',
+				'type'=>'date'
+			),
+			array(
+				'name'=>'registrationEnd',
+				'label'=>'Registration End Date',
+				'restrict'=>'required|xss_clean|callback_datetime_check[registrationEnd]',
+				'type'=>'date'
+			),
+			array(
+				'name'=>'tournamentStart',
+				'label'=>'Tournament Start Date',
+				'restrict'=>'required|xss_clean|callback_datetime_check[tournamentStart]',
+				'type'=>'date'
+			),
+			array(
+				'name'=>'tournamentEnd',
+				'label'=>'Tournament End Date',
+				'restrict'=>'required|xss_clean|callback_datetime_check[tournamentEnd]',
+				'type'=>'date'
+			)
+		)
+	
+		foreach($tournamentDetailsForm as $input){
+			$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+			if($input['label']==date){
+				// Change dates from public, timepicker-friendly format to database-friendly ISO format.
+				if($this->input->post($input['name']) $_POST[$input['name']] = datetime_to_standard($this->input->post($input['name']));
+			}
+		}
 		
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
@@ -162,50 +198,26 @@ class Tms extends MY_Controller {
 			}
 			ksort($this->data['sports']);
 
-
-			
-			$this->data['name'] = array(
-				'name'  => 'name',
-				'id'    => 'name',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('name')
-			);
-			
-			$this->data['description'] = array(
-				'name'  => 'description',
-				'id'    => 'description',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('description')
-			);
-			$this->data['registrationStart'] = array(
-				'name'  => 'registrationStart',
-				'id'    => 'registrationStart',
-				'type'  => 'text',
-				'class' => 'date',
-				'value' => datetime_to_public( $this->form_validation->set_value('registrationStart') )
-			);
-			$this->data['registrationEnd'] = array(
-				'name'  => 'registrationEnd',
-				'id'    => 'registrationEnd',
-				'type'  => 'text',
-				'class' => 'date',
-				'value' => datetime_to_public( $this->form_validation->set_value('registrationEnd') )
-			);
-			$this->data['tournamentStart'] = array(
-				'name'  => 'tournamentStart',
-				'id'    => 'tournamentStart',
-				'type'  => 'text',
-				'class' => 'date',
-				'value' => datetime_to_public( $this->form_validation->set_value('tournamentStart') )
-			);
-			$this->data['tournamentEnd'] = array(
-				'name'  => 'tournamentEnd',
-				'id'    => 'tournamentEnd',
-				'type'  => 'text',
-				'class' => 'date',
-				'value' => datetime_to_public( $this->form_validation->set_value('tournamentEnd') )
-			);
-			
+			foreach($tournamentDetailsForm as $input){
+				if(array_key_exists('type',$input){
+					if($input=="date"){
+						$this->data[$input['name']] = array(
+							'name'  => $input['name'],
+							'id'    => $input['name'],
+							'type'  => 'text',
+							'class' => 'date',
+							'value' => datetime_to_public( $this->form_validation->set_value($input['name']) )
+						);
+					} else {
+						$this->data[$input['name']] = array(
+							'name'  => $input['name'],
+							'id'    => $input['name'],
+							'type'  => $input['type'],
+							'value' => $this->form_validation->set_value('name')
+						);
+					}
+				}
+			}
 		}
 		$this->view('tournaments',"tournaments","Tournaments",$this->data);
 	}

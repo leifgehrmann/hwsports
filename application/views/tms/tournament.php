@@ -62,6 +62,7 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
+		<?=form_open("tms/tournament/$tournamentID", array('id' => 'schedulingDetailsForm'))?>
 		<p>If it is wattball, we need to have a form which has the following details:</p>
 		<ul>
 			<li>Match Duration (Minutes)</li>
