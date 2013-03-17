@@ -12,6 +12,8 @@ class Tournaments_model extends MY_Model {
 		$this->dataTableName = "tournamentData";
 		$this->relationTableName = "tournaments";
 		
+		$this->load->model("users_model");
+		$this->load->model("teams_model");
 		
 		$this->actor_tables_models = array(
 			"users" => $this->users_model,

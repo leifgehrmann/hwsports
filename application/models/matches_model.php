@@ -69,7 +69,7 @@ class Matches_model extends MY_Model {
 			// Set up extremes for comparison if we aren't given an end time, or have a FALSE startTime, allowing for 
 			$startTime = ( $startTime ? $startTime : new DateTime('1st January 0001'));
 			$endTime = ( $endTime ? $endTime : new DateTime('31st December 9999'));
-			return datetime_filtered($all, $startTime, $endTime, 'startTime', 'endTime');
+			return datetime_range($all, $startTime, $endTime, 'startTime', 'endTime');
 		}
 	}
 

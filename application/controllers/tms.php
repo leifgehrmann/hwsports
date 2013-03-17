@@ -58,12 +58,21 @@ class Tms extends MY_Controller {
 		// Note we want to say that today is everything until this afternoon.
 		$today = new DateTime();
 		$today->setTime ( 23, 59, 59 );
+		$todayString = datetime_to_standard($today);
+		$minTime = new DateTime('1st January 0001');
+		$maxTime = new DateTime('31st December 9999');
+		$minTimeString = datetime_to_standard($minTime);
+		$maxTimeString = datetime_to_standard($maxTime);
+
+		// Create the where query for tournaments
+		$where_less_than_today = array($minTimeString.' <' => 'tournamentEnd', 'tournamentStart <' => $todayString);
+		$where_greater_than_today = array($todayString.' <' => 'tournamentEnd', 'tournamentStart <' => $maxTimeString);
 
 		// Get all the tournaments and matches from the database.
 		$latestMatches = $this->matches_model->get_all(FALSE,$today); // Get all matches that have occured and today's matches
 		$upcomingMatches = $this->matches_model->get_all($today,FALSE); // Get all tournaments that occur after today
-		$latestTournaments = $this->tournaments_model->get_all(FALSE,$today); // Get all matches that have occured and today's matches
-		$upcomingTournaments  = $this->tournaments_model->get_all($today,FALSE); // Get all tournaments that occur after today
+		$latestTournaments = $this->tournaments_model->get_all($where_less_than_today); // Get all matches that have occured and today's matches
+		$upcomingTournaments  = $this->tournaments_model->get_all($where_greater_than_today); // Get all tournaments that occur after today
 
 		// We want to remove the matches that already exist in the latest matches
 		foreach($upcomingMatches as $u=>$uMatch){
@@ -104,8 +113,8 @@ class Tms extends MY_Controller {
 		usort($upcomingMatches, "cmpMatches");
 		usort($latestTournaments, "cmpTournaments");
 		usort($upcomingTournaments, "cmpTournaments");
-		$latestMatches 			= array_slice($latestMatches, -0, 5);
-		$upcomingMatches 		= array_slice($upcomingMatches, -0, 5);
+		$latestMatches 			= array_slice($latestMatches, -0, 10);
+		$upcomingMatches 		= array_slice($upcomingMatches, -0, 10);
 		$latestTournaments 		= array_slice($latestTournaments, -0, 5);
 		$upcomingTournaments 	= array_slice($upcomingTournaments, -0, 5);
 		$this->data['latestMatches'] 		= $latestMatches;

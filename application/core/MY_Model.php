@@ -161,7 +161,7 @@ class MY_Model extends CI_Model {
 	// Required: $objectID, $data, $objectIDKey, $dataTableName. 
 	// Example usage: update_object(1, array("address"=>"14 Parkhead Loan"), "centreID", 'centreData');
 	// Returns: TRUE if update was successful, FALSE otherwise.
-	public function update_object($objectID, $data, $objectIDKey, $dataTableName, $relationTableName = false, $relationIDs = array()) {		
+	public function update_object($objectID, $data, $objectIDKey, $dataTableName, $relationTableName = false, $relationIDs = array()) {
 		// If we've been given a relational table and relations to go in that table, we should update the entry in that first in case of foreign key restraints
 		if( $relationTableName && count($relationIDs) ) {
 			// Update the correct row in the relation table with the new relation IDs specified 
@@ -250,4 +250,27 @@ class MY_Model extends CI_Model {
 		return TRUE;
 	}
 
+	
+	function datetime_range($inputArray, $startTime, $endTime, $startKey, $endKey) {
+		try {
+			$startTime = ( is_object($startTime) ? $startTime : new DateTime($startTime));
+			$endTime = ( is_object($endTime) ? $endTime : new DateTime($endTime));
+		} catch (Exception $e) {
+			log_message('error', "ERROR: Invalid input date. Debug Exception: ".$e->getMessage());
+			return FALSE;
+		}
+		
+		foreach($inputArray as $inputArrayKey => $element) {
+			try {
+				$elementStartTime = ( is_object($element[$startKey]) ? $element[$startKey] : new DateTime($element[$startKey]));
+				$elementEndTime = ( is_object($element[$endKey) ? $element[$endKey : new DateTime($element[$endKey));
+			} catch (Exception $e) {
+				log_message('error', "ERROR: Invalid date in database. Debug Exception: ".$e->getMessage());
+				return FALSE;
+			}
+
+			if( !($startTime < $elementEndTime && $elementStartTime < $endTime) ) unset($inputArray[$inputArrayKey])
+		}
+		return $inputArray;
+	}
 }

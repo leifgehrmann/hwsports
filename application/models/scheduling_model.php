@@ -493,7 +493,7 @@ class Scheduling_model extends MY_Model {
 		}
 
 		// We now iterate through each possible day and time hopefully finding a day that works out just fine.
-		int $matchIndex = 0;
+		$matchIndex = 0;
 		for( $matchIndex = 0; $matchIndex < $numberOfMatches; $matchIndex++ )
 		{
 			$added = false; // This will indicate if we could find a place to put this match in.
@@ -615,10 +615,12 @@ class Scheduling_model extends MY_Model {
 		// Now that we have scheduled matches, we should quickly
 		// change the names of all the matches. To do this in
 		// order, we need to sort it.
-		usort($scheduledMatches,function cmp($a, $b)
+		usort($scheduledMatches,function ($a, $b)
 			{
-				if ($a['startTime'] == $b['startTime']) return 0;
-				return ($a['startTime'] < $b['startTime']) ? -1 : 1;
+				$af = $a['startTime'];
+				$bf = $b['startTime'];
+				if ($af == $bf) return 0;
+				return ($af < $bf) ? -1 : 1;
 			}
 		);
 
@@ -659,14 +661,14 @@ class Scheduling_model extends MY_Model {
 		if(array_key_exists('lanes',$venue))
 			$lanes = $venue['lanes'];
 		else
-			$lanes = 8;
+			$lanes = 8; // We just assume for now that the number of lanes is 8. This probably should be modified.
 		$participantsCount = count($qualificationAthletes);
-		$heats = ceil($participantsCount/$lanes)
+		$heats = ceil($participantsCount/$lanes);
 		$index = $participantsCount % $heats;
 		$athleteIndex = 0;
-		for(int $h=1;$h<=$heats;$h++)
+		for($h=1;$h<=$heats;$h++)
 		{
-			for(int $l=1;$l<=$lanes-($index<$h ? 1 : 0);$l++)
+			for($l=1;$l<=$lanes-($index<$h ? 1 : 0);$l++)
 			{
 				// Some how we add data to our schedule matches 
 				$scheduledMatches[0]['AthleteData'][$qualificationAthletes[$athleteIndex]]['heat'] = $h;
@@ -733,7 +735,7 @@ class Scheduling_model extends MY_Model {
 		$matches = $this->tournaments_model->get_matches($tournamentID);
 
 		// Sort the matches so that they are sorted in chrological order
-		usort($matches,function cmp($a, $b)
+		usort($matches,function($a, $b)
 			{
 				if ($a['startTime'] == $b['startTime']) return 0;
 				return ($a['startTime'] < $b['startTime']) ? -1 : 1;
@@ -765,30 +767,32 @@ class Scheduling_model extends MY_Model {
 		// all the players who scored sucessfully. We select those that
 		// have actually have a performance record where we will use those
 		// people in the next round.
-		$athletes = $this->matches_model->get_actors($matches[$index]['matchID'])['Athlete'];
-		$athletesAll = $this->tournaments_model->get_actors($tournamentID)['Athlete'];
+		$athletes = $this->matches_model->get_actors($matches[$index]['matchID']);
+		$athletes = $athletes['Athlete'];
+		$athletesAll = $this->tournaments_model->get_actors($tournamentID);
+		$athletesAll = $athletesAll['Athlete'];
 		$athletesPerformed = array();
 		foreach($athletes as $athlete)
-			if(isset('performance',$athlete['matchActorData']))
+			if(array_key_exists('performance',$athlete['matchActorData']))
 				$athletesPerformed[] = $athlete;
 
 		// If an athlete already has performed, but wasn't in the 
 		// qualification round, we would also like to consider them
 		if($index==0)
 			foreach($athletesAll as $athlete)
-				if(isset('personalBest',$athlete['tournamentActorData']))
+				if(array_key_exists('personalBest',$athlete['tournamentActorData']))
 					$athletesPerformed[] = $athlete;
 
 
 		// we now sort the athletes by their performance so that we can
 		// put them into position for the next tournament.
-		usort($athletesPerformed,function cmp($a, $b)
+		usort($athletesPerformed,function($a, $b)
 			{
-				if(isset('matchActorData',$a))
+				if(array_key_exists('matchActorData',$a))
 					$af = (float) $a['matchActorData']['performance'];
 				else
 					$af = (float) $a['tournamentActorData']['personalBest'];
-				if(isset('matchActorData',$b))
+				if(array_key_exists('matchActorData',$b))
 					$bf = (float) $b['matchActorData']['performance'];
 				else
 					$bf = (float) $b['tournamentActorData']['personalBest'];
@@ -812,7 +816,7 @@ class Scheduling_model extends MY_Model {
 		else
 			$lanes = 8;
 		// First we need to trim the number of participants for this round.
-		$newParticipantsCount = ceil(count($athletesPerformed)/(2*$lanes))*$lanes
+		$newParticipantsCount = ceil(count($athletesPerformed)/(2*$lanes))*$lanes;
 		$athletesPerformed = array_slice($athletesPerformed, 0, $newParticipantsCount);
 
 		// We now add the athletes to the new match that we want to update.
@@ -820,9 +824,9 @@ class Scheduling_model extends MY_Model {
 		$heats = ceil($participantsCount/$lanes);
 		$index = $participantsCount % $heats;
 		$athleteIndex = 0;
-		for(int $h=1;$h<=$heats;$h++)
+		for($h=1;$h<=$heats;$h++)
 		{
-			for(int $l=1;$l<=$lanes-($index<$h ? 1 : 0);$l++)
+			for($l=1;$l<=$lanes-($index<$h ? 1 : 0);$l++)
 			{
 				// Some how we add data to our schedule matches 
 				$updatedMatch = $match;
