@@ -141,7 +141,7 @@
 		</table>
 		<?=form_close();?>
 		<? } else { ?>
-			<? if($tournament['sportData']) ?>
+			<? if($tournament['sportData']) { ?>
 
 			<? } ?>
 		<? } ?>
