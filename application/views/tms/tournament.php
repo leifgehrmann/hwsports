@@ -216,14 +216,9 @@
 	var weekdays =["monday","tuesday","wednesday","thursday","friday","saturday","sunday"];
 	for (var x=0;x<weekdays.length;x++){
 		$('#'+weekdays[x]+'StartTimesAdd').live('click', function() {
-			alert("HELLO?");
 			var z = -1;
 			for(var y=0;y<weekdays.length;y++){
-				alert($(this).attr("id"));
-				alert(weekdays[y]+'StartTimesAdd');
 				if( $(this).attr("id") == weekdays[y]+'StartTimesAdd' ){
-					alert($(this).attr("id"));
-					alert(y);
 					z = y;
 					break;
 				}
