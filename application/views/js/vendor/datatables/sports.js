@@ -33,6 +33,7 @@
 				"onOpen": function ( settings, json ) {
 				},
 				"onInitRemove": function() {
+					$('.DTED_Lightbox_Wrapper').css('visibility','hidden');
 					$.fancybox({
 						href : '/datatables/predelete/'+$('.DTTT_selected').attr('id'),
 						type : 'ajax',
