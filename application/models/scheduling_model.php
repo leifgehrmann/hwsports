@@ -816,7 +816,7 @@ class Scheduling_model extends MY_Model {
 		else
 			$lanes = 8;
 		// First we need to trim the number of participants for this round.
-		$newParticipantsCount = ceil(count($athletesPerformed)/(2*$lanes))*$lanes
+		$newParticipantsCount = ceil(count($athletesPerformed)/(2*$lanes))*$lanes;
 		$athletesPerformed = array_slice($athletesPerformed, 0, $newParticipantsCount);
 
 		// We now add the athletes to the new match that we want to update.
