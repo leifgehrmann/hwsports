@@ -615,12 +615,14 @@ class Scheduling_model extends MY_Model {
 		// Now that we have scheduled matches, we should quickly
 		// change the names of all the matches. To do this in
 		// order, we need to sort it.
-		/*usort($scheduledMatches,function cmp($a, $b)
+		usort($scheduledMatches,function cmp($a, $b)
 			{
-				if ($a['startTime'] == $b['startTime']) return 0;
-				return ($a['startTime'] < $b['startTime']) ? -1 : 1;
+				$af = $a['startTime'];
+				$bf = $b['startTime'];
+				if ($af == $bf) return 0;
+				return ($af < $bf) ? -1 : 1;
 			}
-		);*/
+		);
 
 		// We go through each match, renaming it.
 		$matchIndex = 0;
@@ -664,9 +666,9 @@ class Scheduling_model extends MY_Model {
 		$heats = ceil($participantsCount/$lanes);
 		$index = $participantsCount % $heats;
 		$athleteIndex = 0;
-		for(int $h=1;$h<=$heats;$h++)
+		for($h=1;$h<=$heats;$h++)
 		{
-			for(int $l=1;$l<=$lanes-($index<$h ? 1 : 0);$l++)
+			for($l=1;$l<=$lanes-($index<$h ? 1 : 0);$l++)
 			{
 				// Some how we add data to our schedule matches 
 				$scheduledMatches[0]['AthleteData'][$qualificationAthletes[$athleteIndex]]['heat'] = $h;
