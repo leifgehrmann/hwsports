@@ -33,30 +33,6 @@ class MY_Model extends CI_Model {
 			'tournamentVenues' => array(),
 			'tournamentActors' => array()
 		);
-		
-		public function datetime_range($inputArray, $startTime, $endTime, $startKey, $endKey) {
-			try {
-				$startTime = is_object($startTime) ? $startTime : new DateTime($startTime);
-				$endTime = is_object($endTime) ? $endTime : new DateTime($endTime);
-			} catch (Exception $e) {
-				log_message('error', "ERROR: Invalid input date. Debug Exception: ".$e->getMessage());
-				return FALSE;
-			}
-			
-			foreach($inputArray as $inputArrayKey => $element) {
-				try {
-					$elementStartTime = is_object($element[$startKey]) ? $element[$startKey] : new DateTime($element[$startKey]);
-					$elementEndTime = is_object($element[$endKey]) ? $element[$endKey] : new DateTime($element[$endKey]);
-				} catch (Exception $e) {
-					log_message('error', "ERROR: Invalid date in database. Debug Exception: ".$e->getMessage());
-					return FALSE;
-				}
-
-				if( !($startTime < $elementEndTime && $elementStartTime < $endTime) ) 
-					unset($inputArray[$inputArrayKey]);
-			}
-			return $inputArray;
-		}
     }
 
 	/* Queries an object from the database
@@ -274,4 +250,27 @@ class MY_Model extends CI_Model {
 		return TRUE;
 	}
 	
+	public function datetime_range($inputArray, $startTime, $endTime, $startKey, $endKey) {
+		try {
+			$startTime = is_object($startTime) ? $startTime : new DateTime($startTime);
+			$endTime = is_object($endTime) ? $endTime : new DateTime($endTime);
+		} catch (Exception $e) {
+			log_message('error', "ERROR: Invalid input date. Debug Exception: ".$e->getMessage());
+			return FALSE;
+		}
+		
+		foreach($inputArray as $inputArrayKey => $element) {
+			try {
+				$elementStartTime = is_object($element[$startKey]) ? $element[$startKey] : new DateTime($element[$startKey]);
+				$elementEndTime = is_object($element[$endKey]) ? $element[$endKey] : new DateTime($element[$endKey]);
+			} catch (Exception $e) {
+				log_message('error', "ERROR: Invalid date in database. Debug Exception: ".$e->getMessage());
+				return FALSE;
+			}
+
+			if( !($startTime < $elementEndTime && $elementStartTime < $endTime) ) 
+				unset($inputArray[$inputArrayKey]);
+		}
+		return $inputArray;
+	}
 }
