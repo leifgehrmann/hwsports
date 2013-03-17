@@ -120,15 +120,6 @@ class Sis extends MY_Controller {
 	{
 		//set the flash data error message if there is one
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		
-		$this->data['currentUser'] = $currentUser = $this->ion_auth->user()->row();
-		if(!empty($currentUser)) {
-			$query = $this->db->query("SELECT `key`,`value` FROM `userData` WHERE `userID` = '{$currentUser->userID}'");
-			foreach($query->result_array() as $userDataRow) {
-				$currentUser->$userDataRow['key'] = $userDataRow['value'];
-			}
-		}
-		
 		$this->view('account','account','Account',$this->data);
 	}
 	
@@ -139,7 +130,6 @@ class Sis extends MY_Controller {
 			$this->session->set_flashdata('message_warning',  "You must be logged in to sign up for a tournament: Please log in below:");
 			redirect('/auth/login','refresh'); 
 		}
-		$this->data['currentUser'] = $currentUser = $this->ion_auth->user()->row();	
 		$centreID = $this->data['centre']['centreID'];
 		
 
@@ -186,7 +176,7 @@ class Sis extends MY_Controller {
 			}
 			
 			if(!empty($userData)) {
-				$this->users_model->update($currentUser->userID, $userData);
+				$this->users_model->update($currentUser['userID'], $userData);
 			}
 			if(!empty($teamData)) {
 				$teamID = $this->teams_model->insert($teamData);

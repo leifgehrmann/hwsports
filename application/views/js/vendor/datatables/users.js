@@ -23,10 +23,12 @@
 					"name": "phone"
 				}, {
 					"label": "Address",
-					"name": "address"
+					"name": "address",
+					"type": "textarea"
 				}, {
 					"label": "Bio",
-					"name": "aboutMe"
+					"name": "aboutMe",
+					"type": "textarea"
 				}
 			],
 			"events": {
