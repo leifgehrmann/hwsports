@@ -32,8 +32,7 @@ class MY_Controller extends CI_Controller {
 			// Make all centre data accessible from all controllers and views
 			$this->data['centre'] = $this->centre_model->get( $row['centreID'] );
 			$this->centreID = $this->data['centre']['centreID'];
-		}	
-		
+		}
 		
 		function obj2arr($obj) {
 			if(is_object($obj)) $obj = (array) $obj;
@@ -106,6 +105,13 @@ class MY_Controller extends CI_Controller {
 			return $password;
 		}
 	}
+	
+	// Define other models so we can access objects from the database
+	$this->objects_models = array(
+		"users" => $this->users_model,
+		"teams" => $this->teams_model,
+		"tournament_actors" => $this->tournament_actors_model
+	);
 }
 
 ?>

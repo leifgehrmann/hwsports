@@ -34,7 +34,14 @@ class MY_Model extends CI_Model {
 			'tournamentActors' => array()
 		);
     }
-
+	
+	// Define other models so we can access objects from the database
+	$this->objects_models = array(
+		"users" => $this->users_model,
+		"teams" => $this->teams_model,
+		"tournament_actors" => $this->tournament_actors_model
+	);
+	
 	/* Queries an object from the database
 	* Required: 		Int $objectID, String $objectIDKey, String $dataTableName. 
 	* Optional: 		String $relationTableName, Array $relations
@@ -63,16 +70,16 @@ class MY_Model extends CI_Model {
 		$dataKeysRows = $this->db->select('key')->from($dataTableName)->where($objectIDKey,$objectID)->get()->result_array();
 		// Get all the key names into an indexed array
 		$dataKeys = array_map( function($row) { return $row['key']; }, $dataKeysRows );
-		// If we have no data about this tournament, return FALSE to make logic easier in controller 
-		if(count($dataKeys)==0) return FALSE;
+		// If we have no data about this tournament, return empty array 
+		if(count($dataKeys)==0) return array();
 		// Create SQL selection segments for each key in the data, ready to implode with commas into a full SQL query 
-		foreach($dataKeys as $dataKey) $dataQueryStringParts[] = "MAX(CASE WHEN `key`='$dataKey' THEN value END ) AS $dataKey";
+		foreach($dataKeys as $dataKey) $dataQueryStringParts[] = "MAX(CASE WHEN `key`='$dataKey' THEN `value` END ) AS `$dataKey`";
 		// Build and execute query to actually select data from data table
 		$dataQueryString = "SELECT ".implode(', ', $dataQueryStringParts)." 
 						    FROM `".mysql_real_escape_string($dataTableName)."` 
 							 WHERE `".mysql_real_escape_string($objectIDKey)."` = '".mysql_real_escape_string($objectID)."'";
 		$dataQuery = $this->db->query($dataQueryString);
-		// No data was returned by the query, something must have gone wrong
+		// We had some data keys but no data was returned by the query, something must have gone wrong
 		if ($dataQuery->num_rows() == 0) return FALSE;
 		// Put the returned data in the data variable ready to add more to and eventually output 
 		$object = $dataQuery->row_array();
