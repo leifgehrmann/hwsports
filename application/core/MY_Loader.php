@@ -7,7 +7,7 @@ class MY_Loader extends CI_Loader {
 		$ci =& get_instance();      
 		$load_arr = (array) $ci->load;
 		
-		echo "is_model_loaded checking for model: $model in array:<br /><pre>";var_dump($load_arr,1);
+		//echo "is_model_loaded checking for model: $model in array:<br /><pre>";var_dump($load_arr,1);
 
 		$mod_arr = array();
 		foreach ($load_arr as $key => $value)
@@ -26,10 +26,10 @@ class MY_Loader extends CI_Loader {
     function model($model, $name = '', $db_conn = FALSE)
     {
 		if($this->is_model_loaded($model)) {
-			echo "model $model already loaded, skipping<br />\n"; 
+			//echo "model $model already loaded, skipping<br />\n"; 
 			return;
 		} else {
-			echo "model $model being loaded for the first time<br />\n"; 
+			//echo "model $model being loaded for the first time<br />\n"; 
 		}
         // Call the default method otherwise
         parent::model($model, $name, $db_conn);
