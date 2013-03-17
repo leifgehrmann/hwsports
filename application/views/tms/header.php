@@ -55,6 +55,8 @@
 			// Set the width of the content to be equals to the window width minus the menu width
 			// and 20px margin. We area also going to make the widget change size dynamically.
 			var width = $(window).width()-200-20*2;
+			if( width<700 )
+				width = 700;
 			var width_full = width;
 			var width_threefourth = Math.floor((width-20)/4)*3;
 			var width_half = Math.floor((width-20)/2);
