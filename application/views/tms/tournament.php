@@ -132,7 +132,7 @@
 					<div id="<?=$weekday?>StartTimes"><p><input type="text" style="width:70px" name="<?=$weekday?>StartTimes[]" value="" placeholder="HH:MM" /></p></div>				
 					<a class="button green" href="#" id="<?=$weekday?>StartTimesAdd">Add another start time</a>
 				</td>
-			<? if($i%2==0){ ?></tr><? } ?>
+			<? if($i%2==1){ ?></tr><? } ?>
 			<?=$weekday?><?=$i?>
 			<? $i++; } ?>
 		</table>
