@@ -773,14 +773,14 @@ class Scheduling_model extends MY_Model {
 		$athletesAll = $athletesAll['Athlete'];
 		$athletesPerformed = array();
 		foreach($athletes as $athlete)
-			if(isset('performance',$athlete['matchActorData']))
+			if(array_key_exists('performance',$athlete['matchActorData']))
 				$athletesPerformed[] = $athlete;
 
 		// If an athlete already has performed, but wasn't in the 
 		// qualification round, we would also like to consider them
 		if($index==0)
 			foreach($athletesAll as $athlete)
-				if(isset('personalBest',$athlete['tournamentActorData']))
+				if(array_key_exists('personalBest',$athlete['tournamentActorData']))
 					$athletesPerformed[] = $athlete;
 
 
