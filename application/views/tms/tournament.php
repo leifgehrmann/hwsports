@@ -246,9 +246,8 @@
 		});
 	}
 	$('.removeInputButton').live('click', function() { 
-		var count = $(this).parent().parent('p').length;
-		alert(count);
-		if( count > 2 ) {
+		var count = $(this).parent().siblings('p').length;
+		if( count > 0 ) {
 			$(this).parents('p').remove();
 		}
 		return false;
