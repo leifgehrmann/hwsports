@@ -767,8 +767,10 @@ class Scheduling_model extends MY_Model {
 		// all the players who scored sucessfully. We select those that
 		// have actually have a performance record where we will use those
 		// people in the next round.
-		$athletes = ($this->matches_model->get_actors($matches[$index]['matchID']))['Athlete'];
-		$athletesAll = ($this->tournaments_model->get_actors($tournamentID))['Athlete'];
+		$athletes = $this->matches_model->get_actors($matches[$index]['matchID']);
+		$athletes = $athletes['Athlete'];
+		$athletesAll = $this->tournaments_model->get_actors($tournamentID);
+		$athletesAll = $athletesAll['Athlete'];
 		$athletesPerformed = array();
 		foreach($athletes as $athlete)
 			if(isset('performance',$athlete['matchActorData']))
