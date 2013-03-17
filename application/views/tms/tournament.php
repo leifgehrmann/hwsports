@@ -116,21 +116,24 @@
 					</select>
 				</td>
 			</tr>
+		</table>
+		<table>
 			<tr>
-				<td colspan="2"><h3>Match Start Times</h3></td>
+				<td colspan="4"><h3>Match Start Times</h3></td>
 			</tr>
 			<?
+				$i=0;
 				$weekdays = array("monday","tuesday","wednesday","thursday","friday","saturday","sunday");
 				foreach($weekdays as $weekday)
 			{ ?>
-			<tr>
+			<? if($i%2==0){ ?><tr><? } ?>
 				<td><?=ucfirst($weekday)?></td>
 				<td>
-					<div id="<?=$weekday?>StartTimes"><p><input type="text" name="<?=$weekday?>StartTimes[]" value="" placeholder="HH:MM" /></p></div>				
+					<div id="<?=$weekday?>StartTimes"><p><input type="text" style="width:70px" name="<?=$weekday?>StartTimes[]" value="" placeholder="HH:MM" /></p></div>				
 					<a class="button green" href="#" id="<?=$weekday?>StartTimesAdd">Add another start time</a>
 				</td>
-			</tr>
-			<? } ?>
+			<? if($i%2==0){ ?></tr><? } ?>
+			<? $i++; } ?>
 		</table>
 		<?=form_close();?>
 		<p>If it is wattball, we need to have a form which has the following details:</p>
@@ -225,7 +228,7 @@
 			}
 			console.log(z);
 			startTimes = $('#'+weekdays[z]+'StartTimes');
-			startTimes.append('<p><input type="text" name="'+weekdays[z]+'StartTimes[]" value="" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>');
+			startTimes.append('<p><input type="text" name="'+weekdays[z]+'StartTimes[]" value="" style="width:70px" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>');
 
 			return false;
 		});
