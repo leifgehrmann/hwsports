@@ -212,7 +212,7 @@ class Tms extends MY_Controller {
 							'name'  => $input['name'],
 							'id'    => $input['name'],
 							'type'  => $input['type'],
-							'value' => $this->form_validation->set_value('name')
+							'value' => $this->form_validation->set_value($input['type'])
 						);
 					}
 				}
@@ -222,125 +222,250 @@ class Tms extends MY_Controller {
 	}
 	
 	public function tournament($tournamentID)
-	{
+	{	
+		var_dump($this->input->post('venues[]'));
+
+		// These are all the possible form fields that will be displayed
+		$tournamentDetailsForm = array(
+			array(
+				'name'=>'name',
+				'label'=>'Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'description',
+				'label'=>'Description',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'sport',
+				'label'=>'Sport',
+				'restrict'=>'required|xss_clean',
+			),
+			array(
+				'name'=>'registrationStart',
+				'label'=>'Registration Start Date',
+				'restrict'=>'required|xss_clean|callback_datetime_check[registrationStart]',
+				'type'=>'date'
+			),
+			array(
+				'name'=>'registrationEnd',
+				'label'=>'Registration End Date',
+				'restrict'=>'required|xss_clean|callback_datetime_check[registrationEnd]',
+				'type'=>'date'
+			),
+			array(
+				'name'=>'tournamentStart',
+				'label'=>'Tournament Start Date',
+				'restrict'=>'required|xss_clean|callback_datetime_check[tournamentStart]',
+				'type'=>'date'
+			),
+			array(
+				'name'=>'tournamentEnd',
+				'label'=>'Tournament End Date',
+				'restrict'=>'required|xss_clean|callback_datetime_check[tournamentEnd]',
+				'type'=>'date'
+			)
+		);
+		$schedulingDetailsForm = array(
+			array(
+				'name'=>'matchDuraction',
+				'label'=>'Match Duration',
+				'restrict'=>'required|xss_clean|is_natural_no_zero',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'venues',
+				'label'=>'Venues',
+				'restrict'=>'required|xss_clean'
+			),
+			array(
+				'name'=>'mondayStartTimes',
+				'label'=>'Monday Start Times',
+				'restrict'=>'required|xss_clean|callback_startTimes_check[mondayStartTimes]'
+			),
+			array(
+				'name'=>'tuesdayStartTimes',
+				'label'=>'Tuesday Start Times',
+				'restrict'=>'required|xss_clean|callback_startTimes_check[tuesdayStartTimes]'
+			),
+			array(
+				'name'=>'wednesdayStartTimes',
+				'label'=>'Wednesday Start Times',
+				'restrict'=>'required|xss_clean|callback_startTimes_check[wednesdayStartTimes]'
+			),
+			array(
+				'name'=>'thursdayStartTimes',
+				'label'=>'Thursday Start Times',
+				'restrict'=>'required|xss_clean|callback_startTimes_check[thursdayStartTimes]'
+			),
+			array(
+				'name'=>'fridayStartTimes',
+				'label'=>'Friday Start Times',
+				'restrict'=>'required|xss_clean|callback_startTimes_check[fridayStartTimes]'
+			),
+			array(
+				'name'=>'saturdayStartTimes',
+				'label'=>'Saturday Start Times',
+				'restrict'=>'required|xss_clean|callback_startTimes_check[saturdayStartTimes]'
+			),
+			array(
+				'name'=>'sundayStartTimes',
+				'label'=>'Sunday Start Times',
+				'restrict'=>'required|xss_clean|callback_startTimes_check[sundayStartTimes]'
+			)
+		);
+
+
+		// Does the tournament even exist?
 		$this->data['tournamentID'] = $tournamentID;
 		$this->data['tournament'] = $tournament = $this->tournaments_model->get($tournamentID);
 		if($tournament==FALSE) {
 			$this->session->set_flashdata('message_error',  "Tournament ID $id does not exist.");
 			redirect("/tms/tournaments", 'refresh');
 		}
-					
-		$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
-		$this->form_validation->set_rules('description', 'Description', 'required|xss_clean');		
-		
-		switch($tournament['status']) { 
-			case "preRegistration": 
-				$this->form_validation->set_rules('registrationStart', 'registrationStart', 'required|xss_clean|callback_datetime_check[registrationStart]');
-				$this->form_validation->set_rules('registrationEnd', 'registrationEnd', 'required|xss_clean|callback_datetime_check[registrationEnd]');
-				$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_datetime_check[tournamentStart]');
-				$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_datetime_check[tournamentEnd]');	
-			break; 
-			case "inRegistration": 
-				$this->form_validation->set_rules('registrationEnd', 'registrationEnd', 'required|xss_clean|callback_datetime_check[registrationEnd]');
-				$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_datetime_check[tournamentStart]');
-				$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_datetime_check[tournamentEnd]');	
-			break; 
-			case "postRegistration": 
-				$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_datetime_check[tournamentStart]');
-				$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_datetime_check[tournamentEnd]');	
-			break; 
-			case "preTournament": 
-				$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_datetime_check[tournamentStart]');
-				$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_datetime_check[tournamentEnd]');	
-			break; 
-			case "inTournament": 
-				$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_datetime_check[tournamentEnd]');	
-			break; 
-			case "postTournament": 
-			break;
-			default: 
-				$this->form_validation->set_rules('registrationStart', 'registrationStart', 'required|xss_clean|callback_datetime_check[registrationStart]');
-				$this->form_validation->set_rules('registrationEnd', 'registrationEnd', 'required|xss_clean|callback_datetime_check[registrationEnd]');
-				$this->form_validation->set_rules('tournamentStart', 'tournamentStart', 'required|xss_clean|callback_datetime_check[tournamentStart]');
-				$this->form_validation->set_rules('tournamentEnd', 'tournamentEnd', 'required|xss_clean|callback_datetime_check[tournamentEnd]');	
-			break; 	
-		} 
-		
-		// Change dates from public, timepicker-friendly format to database-friendly ISO format.
-		if($this->input->post('registrationStart')) $_POST['registrationStart'] = datetime_to_standard($this->input->post('registrationStart'));
-		if($this->input->post('registrationEnd')) $_POST['registrationEnd'] = datetime_to_standard($this->input->post('registrationEnd'));
-		if($this->input->post('tournamentStart')) $_POST['tournamentStart'] = datetime_to_standard($this->input->post('tournamentStart'));
-		if($this->input->post('tournamentEnd')) $_POST['tournamentEnd'] = datetime_to_standard($this->input->post('tournamentEnd'));
-		
-		if ($this->form_validation->run() == true) {
-			$newdata = $_POST;
-			
-			if($this->tournaments_model->update($tournamentID, $newdata)) {
-				// Successful update, show success message
-				$this->session->set_flashdata('message_success',  'Successfully Updated Tournament.');
-			} else {
-				$this->session->set_flashdata('message_error',  'Failed to update tournament. Please contact Infusion Systems.');
-			}
-			redirect("/tms/tournament/$tournamentID", 'refresh');
-		} else {
-			//set the flash data error message if there is one
-			$this->data['message_success'] = $this->session->flashdata('message_success');
-			$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
-			
-			$venues = $this->venues_model->get_all();
-			$this->data['venues'] = $this->venues_model->get_all();
 
-			// If scheduled is not already defined, then just simply say it isn't scheduled.
-			if(!array_key_exists('scheduled',$tournament)){
-				$this->tournaments_model->update($tournamentID, array('scheduled' => 'false'));
-				$this->data['tournament']['scheduled'] = 'false';
+		$formID = $this->input->post('formID');
+		if($formID=="tournamentDetailsForm"){
+			$newdata = $_POST;
+			// For each of the input types we will validate it.
+			foreach($tournamentDetailsForm as $input){
+				$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+				if($input['label']=='date'){
+					// Change dates from public, timepicker-friendly format to database-friendly ISO format.
+					if($this->input->post($input['name'])) $newdata[$input['name']] = datetime_to_standard($this->input->post($input['name']));
+				}
 			}
-		
-			$this->data['name'] = array(
-				'name'  => 'name',
-				'id'    => 'name',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('name',(isset($tournament['name']) ? $tournament['name'] : '') )
-			);
-			$this->data['description'] = array(
-				'name'  => 'description',
-				'id'    => 'description',
-				'type'  => 'text',
-				'style' => 'width:100%;',
-				'rows'  => '5',
-				'value' => $this->form_validation->set_value('description',(isset($tournament['description']) ? $tournament['description'] : '') )
-			);
-			$this->data['registrationStart'] = array(
-				'name'  => 'registrationStart',
-				'id'    => 'registrationStart',
-				'type'  => 'text',
-				'class' => 'date',
-				'value' => datetime_to_public( $this->form_validation->set_value('registrationStart',(isset($tournament['registrationStart']) ? $tournament['registrationStart'] : '') ) )
-			);
-			$this->data['registrationEnd'] = array(
-				'name'  => 'registrationEnd',
-				'id'    => 'registrationEnd',
-				'type'  => 'text',
-				'class' => 'date',
-				'value' => datetime_to_public( $this->form_validation->set_value('registrationEnd',(isset($tournament['registrationEnd']) ? $tournament['registrationEnd'] : '') ) )
-			);
-			$this->data['tournamentStart'] = array(
-				'name'  => 'tournamentStart',
-				'id'    => 'tournamentStart',
-				'type'  => 'text',
-				'class' => 'date',
-				'value' => datetime_to_public( $this->form_validation->set_value('tournamentStart',(isset($tournament['tournamentStart']) ? $tournament['tournamentStart'] : '') ) )
-			);
-			$this->data['tournamentEnd'] = array(
-				'name'  => 'tournamentEnd',
-				'id'    => 'tournamentEnd',
-				'type'  => 'text',
-				'class' => 'date',
-				'value' => datetime_to_public( $this->form_validation->set_value('tournamentEnd',(isset($tournament['tournamentEnd']) ? $tournament['tournamentEnd'] : '') ) )
-			);
+			if ($this->form_validation->run() == true) {
+				if($this->tournaments_model->update($tournamentID, $newdata)) {
+					// Successful update, show success message
+					$this->session->set_flashdata('message_success',  'Successfully updated tournament.');
+				} else {
+					$this->session->set_flashdata('message_error',  'Failed to update tournament. Please contact Infusion Systems.');
+				}
+				redirect("/tms/tournament/$tournamentID", 'refresh');
+			}
+		} else if($formID=="schedulingDetailsForm"){
+			$formAction = $this->input->post('formAction');
+			if($formAction=="save") {
+				// We need to validate the scheduling details stuff.
+				// For each of the input types we will validate it.
+				foreach($schedulingDetailsForm as $input)
+					$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+				if ($this->form_validation->run() == true) {
+					$tournamentUpdate = array();
+					$tournamentUpdate['matchDuration'] = $this->input->post('matchDuration');
+					$weekdays = array('monday','tuesday','wednesday','thursday','friday','saturday','sunday');
+					foreach($weekdays as $weekday)
+						$tournamentUpdate[$weekday.'StartTimes'] = implode(",",$this->input->post($weekday.'StartTimes'));
+					$this->tournaments_model_>update_venues($tournamentID,$venueIDs);
+					if($this->tournaments_model->update($tournamentID, $matchData)) {
+						// Successful update, show success message
+						$this->session->set_flashdata('message_success',  'Successfully updated scheduling details.');
+					} else {
+						$this->session->set_flashdata('message_error',  'Failed to update scheduling details. Please contact Infusion Systems.');
+					}
+					redirect("/tms/tournament/$tournamentID", 'refresh');
+				}
+			}
+
+
+			} else if($formAction=="schedule") {
+
+			}
+		}
+
+		// Do the actual setting of variables here...
+		$venues = $this->venues_model->get_all();
+		$this->data['venues'] = $this->venues_model->get_all();
+
+		// If scheduled is not already defined, then just simply say it isn't scheduled.
+		if(!array_key_exists('scheduled',$tournament)){
+			$this->tournaments_model->update($tournamentID, array('scheduled' => 'false'));
+			$this->data['tournament']['scheduled'] = 'false';
+		}
+
+		foreach($tournamentDetailsForm as $input){
+			if(array_key_exists('type',$input)){
+				if($input['type']=="venues"){
+					$this->data[$input['name']] = array(
+						'name'  => $input['name'],
+						'id'    => $input['name'],
+						'type'  => 'text',
+						'class' => 'date',
+						'value' => datetime_to_public( $this->form_validation->set_value($input['name']) )
+					);
+				} else if($input['type']=="date"){
+					$this->data[$input['name']] = array(
+						'name'  => $input['name'],
+						'id'    => $input['name'],
+						'type'  => 'text',
+						'class' => 'date',
+
+						'value' => datetime_to_public( $this->form_validation->set_value($input['name']) )
+					);
+				} else {
+					$this->data[$input['name']] = array(
+						'name'  => $input['name'],
+						'id'    => $input['name'],
+						'type'  => $input['type'],
+						'value' => $this->form_validation->set_value($input['type'],(isset($tournament[$input['type']]) ? $tournament[$input['type']] : '') )
+						'value' => $this->form_validation->set_value($input['type'])
+					);
+				}
+			}
+		}
+	
+		$this->data['name'] = array(
+			'name'  => 'name',
+			'id'    => 'name',
+			'type'  => 'text',
+			'value' => $this->form_validation->set_value('name',(isset($tournament['name']) ? $tournament['name'] : '') )
+		);
+		$this->data['description'] = array(
+			'name'  => 'description',
+			'id'    => 'description',
+			'type'  => 'text',
+			'style' => 'width:100%;',
+			'rows'  => '5',
+			'value' => $this->form_validation->set_value('description',(isset($tournament['description']) ? $tournament['description'] : '') )
+		);
+		$this->data['registrationStart'] = array(
+			'name'  => 'registrationStart',
+			'id'    => 'registrationStart',
+			'type'  => 'text',
+			'class' => 'date',
+			'value' => datetime_to_public( $this->form_validation->set_value('registrationStart',(isset($tournament['registrationStart']) ? $tournament['registrationStart'] : '') ) )
+		);
+		$this->data['registrationEnd'] = array(
+			'name'  => 'registrationEnd',
+			'id'    => 'registrationEnd',
+			'type'  => 'text',
+			'class' => 'date',
+			'value' => datetime_to_public( $this->form_validation->set_value('registrationEnd',(isset($tournament['registrationEnd']) ? $tournament['registrationEnd'] : '') ) )
+		);
+		$this->data['tournamentStart'] = array(
+			'name'  => 'tournamentStart',
+			'id'    => 'tournamentStart',
+			'type'  => 'text',
+			'class' => 'date',
+			'value' => datetime_to_public( $this->form_validation->set_value('tournamentStart',(isset($tournament['tournamentStart']) ? $tournament['tournamentStart'] : '') ) )
+		);
+		$this->data['tournamentEnd'] = array(
+			'name'  => 'tournamentEnd',
+			'id'    => 'tournamentEnd',
+			'type'  => 'text',
+			'class' => 'date',
+			'value' => datetime_to_public( $this->form_validation->set_value('tournamentEnd',(isset($tournament['tournamentEnd']) ? $tournament['tournamentEnd'] : '') ) )
+		);
 			
 		}
-		
+
+		//set the flash data error message if there is one
+		$this->data['message_success'] = $this->session->flashdata('message_success');
+		$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
 		$this->view('tournament',"tournament","Tournament",$this->data);
 	}
 	
@@ -674,8 +799,18 @@ class Tms extends MY_Controller {
 			// Sanity checks passed, assume valid date
 			return TRUE;	
 		} catch (Exception $e) {
-			$this->form_validation->set_message('datetime_check', 'The %s field must contain a valid date in the ISO 8601 format: YYYY-MM-DDThh:mm:ssTZD (eg 1997-07-16T19:20:30+0100) Provided: '.var_export($strDateTime,1).' Debug Exception: '.$e->getMessage() );
+			$this->form_validation->set_message('datetime_check', 'The %s field must contain a valid date in the ISO 8601 format: YYYY-MM-DDThh:mm:ssTZD (e.g. 1997-07-16T19:20:30+0100) Provided: '.var_export($strDateTime,1).' Debug Exception: '.$e->getMessage() );
 			return FALSE;
+		}
+
+		public function startTimes_check($startTimes){
+			foreach($startTimes as $time) {
+				if(!preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/", $time)){
+					$this->form_validation->set_message('datetime_check', 'The %s field must contain a valid time of day in the format: hh:mm (e.g. 19:20) Provided: '.var_export($strDateTime,1).' Debug Exception: '.$e->getMessage() );
+					return FALSE;
+				}
+			}
+			return TRUE;
 		}
 	}
 
