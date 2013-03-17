@@ -51,9 +51,23 @@
 			}
 		});*/
 
-		$(window).resize(function() {
+		function resizeElements() {
+			// Set the width of the content to be equals to the window width minus the menu width
+			// and 20px margin. We area also going to make the widget change size dynamically.
 			var width = $(window).width()-200-20*2;
+			var width_full = width;
+			var width_threefourth = Math.floor((width-20)/4)*3;
+			var width_half = Math.floor((width-20)/2);
+			var width_fourth = Math.floor((width-20)/4);
 			$( '#content' ).width(width);
+			$( '.widget.full'           ).width(width_full);
+			$( '.widget.threefourth'    ).width(width_threefourth);
+			$( '.widget.half'           ).width(width_half);
+			$( '.widget.fourth'         ).width(width_fourth);
+		}
+
+		$(window).resize(function() {
+			resizeElements();
 		});
 
 		$(document).ready(function() {
@@ -78,24 +92,13 @@
 				$(this).css('margin-bottom',(20-($(this).height()%20))+'px');
 			});
 
-			// Set the width of the content to be equals to the window width minus the menu width
-			// and 20px margin. We area also going to make the widget change size dynamically.
-			var width = $(window).width()-200-20*2;
-			var width_full = width;
-			var width_threefourth = Math.floor((width-20)/4)*3;
-			var width_half = Math.floor((width-20)/2);
-			var width_fourth = Math.floor((width-20)/4);
-			$( '#content' ).width(width);
-			$( '.widget.full'           ).width(width_full);
-			$( '.widget.threefourth'    ).width(width_threefourth);
-			$( '.widget.half'           ).width(width_half);
-			$( '.widget.fourth'         ).width(width_fourth);
-
 			// toggle the unselected menu items.
 			$('.toggleMenuItem:not(.selected)').each(function(){
 				$(this).find(".close").toggle();
 				$(this).next().toggle();
 			});
+
+			resizeElements();
 			
 			// when a user clicks on a menu item, 
 			// toggle it's visability and the X
