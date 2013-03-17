@@ -6,7 +6,7 @@
 
 	<h2>Sign Up for <?=$tournament['name']?>:</h2>
 	
-	<form action="/sis/signup/<?=$tournamentID?>" id="signupForm" method="POST">
+	<form action="/sis/signup/<?=$tournament['tournamentID']?>" id="signupForm" method="POST">
 	
 	<h3 id="actionHeading">Select role:</h3>
 	<? $counter = 1;
@@ -36,8 +36,8 @@
 									<tfoot class="functions">
 										<tr>
 											<td colspan="4">
-												<a href="/sis/addTeamMember/<?=$tournamentID?>/<?=$sectionID?>" class="button green addTeamMember fancybox.ajax">Add Player<br />(Create New Account)</a>
-												<a href="/sis/addLoginTeamMember/<?=$tournamentID?>/<?=$sectionID?>" class="button blue addTeamMember addLoginTeamMember fancybox.ajax">Add Player<br />(Existing Account)</a>
+												<a href="/sis/addTeamMember/<?=$tournament['tournamentID']?>/<?=$sectionID?>" class="button green addTeamMember fancybox.ajax">Add Player<br />(Create New Account)</a>
+												<a href="/sis/addLoginTeamMember/<?=$tournament['tournamentID']?>/<?=$sectionID?>" class="button blue addTeamMember addLoginTeamMember fancybox.ajax">Add Player<br />(Existing Account)</a>
 											</td>
 										</tr>
 									</tfoot>
