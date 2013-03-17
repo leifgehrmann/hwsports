@@ -96,9 +96,8 @@ class Tournaments_model extends MY_Model {
 	 * 
 	 * @return array
 	 **/
-	public function get_all($where = false) {
+	public function get_all($startTime = FALSE, $endTime = FALSE) {
 		// Fetch the IDs for everything at the current sports centre
-		if(is_array($where)) $this->db->where( $where );
 		$this->db->where( array('centreID' => $this->centreID) );
 		$IDRows = $this->db->get($this->relationTableName)->result_array();
 		// Create empty array to output if there are no results
@@ -106,6 +105,12 @@ class Tournaments_model extends MY_Model {
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
 		foreach($IDRows as $IDRow) {
 			$all[$IDRow[$this->objectIDKey]] = $this->get($IDRow[$this->objectIDKey]);
+		}
+
+		if($startTime != FALSE || $endTime != FALSE){
+			$startTime = ( $startTime ? $startTime : new DateTime('1st January 0001'));
+			$endTime = ( $endTime ? $endTime : new DateTime('31st December 9999'));
+			$all = $datetime_range($all,$startTime,$endTime);
 		}
 		return $all;
 	}
