@@ -61,13 +61,13 @@ class Users_model extends MY_Model {
 	}
 	
 	/**
-	 * Creates a new user with data, using the sport ID as specified.
+	 * Registers a new user, with the specified email, password and userData
 	 * Returns the ID of the new object if it was successful.
 	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
 	 *  
 	 * @return int
 	 **/
-	public function insert($email, $password, $data) {
+	public function register($email, $password, $data) {
 		// Lump all data table updates into one transaction in case one fails, so we can rollback and don't end up with users with no data 
 		$this->db->trans_begin();
 		$userID = $this->ion_auth->register($email, $password);
@@ -79,6 +79,26 @@ class Users_model extends MY_Model {
 			}
 		}
 		$this->db->trans_rollback();
+		return false;
+	}
+	
+	/**
+	 * Creates a new user with data, using the standard insert format. Takes email and password out of input array
+	 * Returns the ID of the new object if it was successful.
+	 * Returns FALSE on any error or insertion failure (including foreign key restraints).
+	 *  
+	 * @return int
+	 **/
+	public function insert($data, $relationIDs=array()) {
+		if(isset($data['email'])) {
+			$email = $data['email']; unset($data['email']);
+			if( isset($data['password']) ) {
+				$password = $data['password']; unset($data['password']);
+			} else {
+				$password = generatePassword();
+			}
+			return $this->register($email,$password,$data);
+		}
 		return false;
 	}
 

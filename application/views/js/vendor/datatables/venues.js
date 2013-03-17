@@ -69,6 +69,7 @@
 					}
 				},
 				"onInitRemove": function() {
+					$('.DTED_Lightbox_Wrapper.').hide();
 					$.fancybox({
 						href : '/datatables/predelete/'+$('.DTTT_selected').attr('id'),
 						type : 'ajax',
