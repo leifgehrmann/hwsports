@@ -925,6 +925,9 @@ a:hover div.widget-title-right.icon { -webkit-animation: imove .5s; }
 div.DTED_Lightbox_Wrapper div.DTE_Field_Type_text input {
     padding:10px;
 }
+.DTE_Field img.ui-datepicker-trigger {
+    margin-right:20px;
+}
 
 
 
