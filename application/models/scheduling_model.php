@@ -12,9 +12,9 @@ class Scheduling_model extends MY_Model {
 	public function schedule_football_family($tournamentID)
 	{
 		echo "<pre>";
-		$this->load->model('users_model');
-		$this->load->model('matches_model');
-		$this->load->model('tournaments_model');
+
+
+
 
 		// Get tournament Information
 		$tournament = $this->tournaments_model->get($tournamentID);
@@ -411,9 +411,9 @@ class Scheduling_model extends MY_Model {
 
 	public function schedule_running($tournamentID)
 	{
-		$this->load->model('users_model');
-		$this->load->model('matches_model');
-		$this->load->model('tournaments_model');
+
+
+
 
 		// Get tournament Information
 		$tournament = $this->tournaments_model->get_tournament($tournamentID);

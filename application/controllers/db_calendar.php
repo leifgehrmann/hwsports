@@ -7,9 +7,9 @@ class Db_Calendar extends MY_Controller {
 		parent::__construct();
 		
 		$this->load->library('table');
-		$this->load->model('tournaments_model');
-		$this->load->model('matches_model');
-		$this->load->model('sports_model');
+
+
+
 	}
 
 

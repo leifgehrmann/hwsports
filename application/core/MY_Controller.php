@@ -28,7 +28,7 @@ class MY_Controller extends CI_Controller {
 			$row = $query->row_array();
 				
 			// Give us access to centre database methods
-			$this->load->model('centre_model');
+
 			
 			// Make all centre data accessible from all controllers and views
 			$this->data['centre'] = $this->centre_model->get( $row['centreID'] );

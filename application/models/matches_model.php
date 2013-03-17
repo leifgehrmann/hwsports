@@ -129,7 +129,7 @@ class Matches_model extends MY_Model {
 	{
 		if($startTime==FALSE && $endTime == FALSE) {
 			// verify that the venue exists
-			$this->load->model('venues_model');
+
 			if($this->venues_model->get($venueID) == FALSE) return FALSE;
 
 			// Query to return the IDs for everything which takes place at the specified sports centre

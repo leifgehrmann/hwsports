@@ -4,7 +4,7 @@ class Db_venues extends MY_Controller {
 	public function __construct()
 	{
 	    parent::__construct();
-	    $this->load->model('venues_model');
+
 	}
 
 	/*

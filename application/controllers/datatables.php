@@ -4,12 +4,12 @@ class Datatables extends MY_Controller {
 
 	function __construct() {
 		parent::__construct();
-		$this->load->model('matches_model');
-		$this->load->model('sports_model');
-		$this->load->model('venues_model');
-		$this->load->model('teams_model');
-		$this->load->model('users_model');
-		$this->load->model('groups_model');
+
+
+
+
+
+
 		
 		$this->singulars = array(
 			"matches" => "match",

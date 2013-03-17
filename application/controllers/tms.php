@@ -51,8 +51,8 @@ class Tms extends MY_Controller {
 
 	public function index()
 	{
-		$this->load->model('tournaments_model');
-		$this->load->model('matches_model');
+
+
 
 		// Get todays date as a string
 		// Note we want to say that today is everything until this afternoon.
@@ -117,8 +117,8 @@ class Tms extends MY_Controller {
 	}
 	public function tournaments()
 	{	
-		$this->load->model('tournaments_model');
-		$this->load->model('sports_model');
+
+
 		
 		$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
 		$this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
@@ -213,8 +213,8 @@ class Tms extends MY_Controller {
 	public function tournament($tournamentID)
 	{
 		
-		$this->load->model('tournaments_model');
-		$this->load->model('sports_model');
+
+
 		
 		$this->data['tournamentID'] = $tournamentID;
 		$this->data['tournament'] = $tournament = $this->tournaments_model->get($tournamentID);
@@ -334,7 +334,7 @@ class Tms extends MY_Controller {
 	
 	public function delete_tournament($tournamentID)
 	{
-		$this->load->model('tournaments_model');
+
 
 		if($this->tournaments_model->delete($tournamentID) ) {
 			// Successful delete, show success message
@@ -374,7 +374,7 @@ class Tms extends MY_Controller {
 	public function venue($venueID)
 	{
 		$this->load->library('table');
-		$this->load->model('venues_model');
+
 
 		// Get data for this venue
 		$this->data['venue'] = $this->venues_model->get($venueID);
@@ -389,7 +389,7 @@ class Tms extends MY_Controller {
 	public function match($matchID)
 	{
 		$this->load->library('table');
-		$this->load->model('matches_model');
+
 
 		// Get data for this venue
 		$this->data['match'] = $this->matches_model->get($matchID);
@@ -404,9 +404,9 @@ class Tms extends MY_Controller {
 	}
 	public function calendar()
 	{
-		$this->load->model('sports_model');
-		$this->load->model('tournaments_model');
-		$this->load->model('venues_model');
+
+
+
 			
 		$viewOptions['all'] = "All Events";
 		$sportOptions['all'] = "All";
@@ -450,7 +450,7 @@ class Tms extends MY_Controller {
 	}
 	public function users()
 	{	
-		$this->load->model('users_model');
+
 		$users = $this->users_model->get_all();
 		$this->data['users'] = $users;
 		
@@ -458,7 +458,7 @@ class Tms extends MY_Controller {
 	}
 	public function user($userID)
 	{
-		$this->load->model('users_model');
+
 		$user = $this->users_model->get($userID);
 		$this->data['user'] = $user;
 		
@@ -466,7 +466,7 @@ class Tms extends MY_Controller {
 	}
 	public function teams()
 	{	
-		$this->load->model('teams_model');
+
 		$teams = $this->teams_model->get_all();
 		$this->data['teams'] = $teams;
 		
@@ -474,14 +474,14 @@ class Tms extends MY_Controller {
 	}
 	public function team($teamID)
 	{
-		$this->load->model('teams_model');
+
 		$team = $this->teams_model->get($teamID);
 		$this->data['team'] = $team;
 		$this->view('team',"team",$team['name']." | Team",$this->data);
 	}
 	public function announcements()
 	{
-		$this->load->model('announcements_model');
+
 		$announcements = $this->announcements_model->get_all();
 		$this->data['announcements'] = $announcements;
 
@@ -489,7 +489,7 @@ class Tms extends MY_Controller {
 	}
 	public function announcement($announcementID)
 	{
-		$this->load->model('announcements_model');
+
 		$announcement = $this->announcements_model->get($announcementID);
 		$this->data['announcement'] = $announcement;
 

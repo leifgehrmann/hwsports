@@ -10,16 +10,25 @@ class Auth extends MY_Controller {
 		$this->load->library('form_validation');
 		$this->load->helper('url');
 
-		// Load MongoDB library instead of native db driver if required
-		$this->config->item('use_mongodb', 'ion_auth') ?
-		$this->load->library('mongo_db') :
-
-		$this->load->model('users_model');
-		$this->load->database();
-
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 	}
 
+	/**
+	 * A short hand method to basically print out the page with a certain pageid and title
+	 *
+	 * @param view 		The view to load
+	 * @param page 		The page ID it will have
+	 * @param title 	
+	 * @param data 		passed in data
+	 */
+	public function view($view,$page,$title,$data){
+		$data['title'] = $title;
+		$data['page'] = $page;
+		$this->load->view('sis/header',$data);
+		$this->load->view($view,$data);
+		$this->load->view('sis/footer',$data);
+	}
+	
 	//redirect if needed, otherwise display the user list
 	function list_users()
 	{
@@ -425,79 +434,76 @@ class Auth extends MY_Controller {
 		$this->data['page'] = "register";
 
 		//validate form input
-		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
-		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
+		$this->form_validation->set_rules('firstName', 'First Name', 'required|xss_clean');
+		$this->form_validation->set_rules('lastName', 'Last Name', 'required|xss_clean');
 		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
 		$this->form_validation->set_rules('phone', 'Phone', 'required|xss_clean|min_length[8]|max_length[13]');
 		$this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
 		$this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'required');
 
-		if ($this->form_validation->run() == true)
-		{
-			$username = $email = $this->input->post('email');
+		if ($this->form_validation->run() == true) {
+			$email = $this->input->post('email');
 			$password = $this->input->post('password');
 			$centreID = $this->data['centre']['centreID'];
 
-			$additional_data = array(
-				'centreID' => $centreID,
-				'firstName' => $this->input->post('first_name'),
-				'lastName'  => $this->input->post('last_name'),
+			$userdata = array(
+				'firstName' => $this->input->post('firstName'),
+				'lastName'  => $this->input->post('lastName'),
 				'phone'      => $this->input->post('phone')
 			);
+			
+			$userID = $this->users_model->insert($email, $password, $userdata);
+			if($userID) {
+				// Successful creation, show success message
+				$this->session->set_flashdata('message', $this->ion_auth->messages());
+				redirect("/", 'refresh');
+			}
 		}
-		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data))
-		{
-			// Successful creation, show success message
-			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("/", 'refresh');
-		}
-		else
-		{
-			//display the create user form
-			//set the flash data error message if there is one
-			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
+	
+		//display the create user form
+		//set the flash data error message if there is one
+		$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
 
-			$this->data['first_name'] = array(
-				'name'  => 'first_name',
-				'id'    => 'first_name',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('first_name'),
-			);
-			$this->data['last_name'] = array(
-				'name'  => 'last_name',
-				'id'    => 'last_name',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('last_name'),
-			);
-			$this->data['email'] = array(
-				'name'  => 'email',
-				'id'    => 'email',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('email'),
-			);
-			$this->data['phone'] = array(
-				'name'  => 'phone',
-				'id'    => 'phone',
-				'type'  => 'text',
-				'value' => $this->form_validation->set_value('phone'),
-			);
-			$this->data['password'] = array(
-				'name'  => 'password',
-				'id'    => 'password',
-				'type'  => 'password',
-				'value' => $this->form_validation->set_value('password'),
-			);
-			$this->data['password_confirm'] = array(
-				'name'  => 'password_confirm',
-				'id'    => 'password_confirm',
-				'type'  => 'password',
-				'value' => $this->form_validation->set_value('password_confirm'),
-			);
+		$this->data['firstName'] = array(
+			'name'  => 'firstName',
+			'id'    => 'firstName',
+			'type'  => 'text',
+			'value' => $this->form_validation->set_value('firstName'),
+		);
+		$this->data['lastName'] = array(
+			'name'  => 'lastName',
+			'id'    => 'lastName',
+			'type'  => 'text',
+			'value' => $this->form_validation->set_value('lastName'),
+		);
+		$this->data['email'] = array(
+			'name'  => 'email',
+			'id'    => 'email',
+			'type'  => 'text',
+			'value' => $this->form_validation->set_value('email'),
+		);
+		$this->data['phone'] = array(
+			'name'  => 'phone',
+			'id'    => 'phone',
+			'type'  => 'text',
+			'value' => $this->form_validation->set_value('phone'),
+		);
+		$this->data['password'] = array(
+			'name'  => 'password',
+			'id'    => 'password',
+			'type'  => 'password',
+			'value' => $this->form_validation->set_value('password'),
+		);
+		$this->data['password_confirm'] = array(
+			'name'  => 'password_confirm',
+			'id'    => 'password_confirm',
+			'type'  => 'password',
+			'value' => $this->form_validation->set_value('password_confirm'),
+		);
 
-			$this->load->view('sis/header',$this->data);
-			$this->load->view('auth/register', $this->data);
-			$this->load->view('sis/footer',$this->data);
-		}
+		$this->load->view('sis/header',$this->data);
+		$this->load->view('auth/register', $this->data);
+		$this->load->view('sis/footer',$this->data);
 	}
 
 	//edit a user
@@ -524,8 +530,8 @@ class Auth extends MY_Controller {
 		}
 
 		//validate form input
-		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
-		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
+		$this->form_validation->set_rules('firstName', 'First Name', 'required|xss_clean');
+		$this->form_validation->set_rules('lastName', 'Last Name', 'required|xss_clean');
 		$this->form_validation->set_rules('phone', 'Third Part of Phone', 'required|xss_clean|min_length[8]|max_length[12]');
 		$this->form_validation->set_rules('groups', 'Groups', 'xss_clean');
 		
@@ -538,8 +544,8 @@ class Auth extends MY_Controller {
 			}
 
 			$data = array(
-				'first_name' => $this->input->post('first_name'),
-				'last_name'  => $this->input->post('last_name'),
+				'firstName' => $this->input->post('firstName'),
+				'lastName'  => $this->input->post('lastName'),
 				'phone'      => $this->input->post('phone')
 			);
 			
@@ -587,17 +593,17 @@ class Auth extends MY_Controller {
 		$this->data['groups'] = $groups;
 		$this->data['currentGroups'] = $currentGroups;
 
-		$this->data['first_name'] = array(
-			'name'  => 'first_name',
-			'id'    => 'first_name',
+		$this->data['firstName'] = array(
+			'name'  => 'firstName',
+			'id'    => 'firstName',
 			'type'  => 'text',
-			'value' => $this->form_validation->set_value('first_name', $user->first_name),
+			'value' => $this->form_validation->set_value('firstName', $user->firstName),
 		);
-		$this->data['last_name'] = array(
-			'name'  => 'last_name',
-			'id'    => 'last_name',
+		$this->data['lastName'] = array(
+			'name'  => 'lastName',
+			'id'    => 'lastName',
 			'type'  => 'text',
-			'value' => $this->form_validation->set_value('last_name', $user->last_name),
+			'value' => $this->form_validation->set_value('lastName', $user->lastName),
 		);
 		$this->data['phone'] = array(
 			'name'  => 'phone',

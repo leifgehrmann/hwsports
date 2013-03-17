@@ -41,7 +41,7 @@ class Sis extends MY_Controller {
 
 	public function matches()
 	{			
-		$this->load->model('matches_model');
+
 		
 		$matches = $this->matches_model->get_all();
 		foreach($matches as $key => $match) {
@@ -58,7 +58,7 @@ class Sis extends MY_Controller {
 	{
 		$this->load->library('table');
 		
-		$this->load->model('matches_model');
+
 		
 		$match = $this->matches_model->get($matchID);
 		if($match==FALSE) {
@@ -88,7 +88,7 @@ class Sis extends MY_Controller {
 
 	public function tournaments()
 	{	
-		$this->load->model('tournaments_model');	
+
 		$this->data['tournaments'] = $this->tournaments_model->get_all();
 		
 		$this->view('tournaments','tournaments','Tournaments',$this->data);
@@ -97,7 +97,7 @@ class Sis extends MY_Controller {
 	public function tournament($tournamentID)
 	{
 		$this->load->library('table');
-		$this->load->model('tournaments_model');
+
 		
 		$tournament = $this->tournaments_model->get($tournamentID);
 		if($tournament==FALSE) {
@@ -147,10 +147,10 @@ class Sis extends MY_Controller {
 		$this->data['currentUser'] = $currentUser = $this->ion_auth->user()->row();	
 		$centreID = $this->data['centre']['centreID'];
 		
-		$this->load->model('tournaments_model');
-		$this->load->model('sports_model');
-		$this->load->model('users_model');
-		$this->load->model('teams_model');
+
+
+
+
 	
 		$this->data['tournamentID'] = $tournamentID;
 		$this->data['tournament'] = $tournament = $this->tournaments_model->get($tournamentID);
@@ -215,9 +215,9 @@ class Sis extends MY_Controller {
 	//create a new team member user account
 	function addTeamMember($tournamentID,$sectionID)
 	{
-		$this->load->model('tournaments_model');
-		$this->load->model('sports_model');
-		$this->load->model('users_model');
+
+
+
 		$this->data['tournamentID'] = $tournamentID;
 		$this->data['sectionID'] = $sectionID;
 		
@@ -364,9 +364,9 @@ class Sis extends MY_Controller {
 	//create a new team member user account
 	function addLoginTeamMember($tournamentID,$sectionID)
 	{	
-		$this->load->model('tournaments_model');
-		$this->load->model('sports_model');
-		$this->load->model('users_model');
+
+
+
 		$this->data['tournamentID'] = $tournamentID;
 		$this->data['sectionID'] = $sectionID;
 		

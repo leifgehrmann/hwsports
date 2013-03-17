@@ -56,11 +56,12 @@ class Users_model extends MY_Model {
 	 *  
 	 * @return int
 	 **/
-	public function insert($data, $relationIDs=array()) {
-		$password = generatePassword();
-		$email = $data['email'];
-		unset($data['email']);
-		return $this->ion_auth->register($email, $password, $email);
+	public function insert($email, $password, $data) {
+		$userID = $this->ion_auth->register($email, $password);
+		if($userID) {
+			return $this->update($userID, $data);
+		}
+		return false;
 	}
 
 	/**
