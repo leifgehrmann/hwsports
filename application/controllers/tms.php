@@ -385,9 +385,6 @@ class Tms extends MY_Controller {
 		// point updated the data.
 		$this->data['tournament'] = $tournament = $this->tournaments_model->get($tournamentID);
 
-		$venues = $this->venues_model->get_all();
-		$this->data['venues'] = $this->venues_model->get_all();
-
 		// If scheduled is not already defined, then just simply say it isn't scheduled.
 		if(!array_key_exists('scheduled',$tournament)){
 			$this->tournaments_model->update($tournamentID, array('scheduled' => 'false'));
@@ -446,6 +443,7 @@ class Tms extends MY_Controller {
 				$this->data[$weekday.'StartTimes'] = $this->form_validation->set_value('matchDuration',(isset($tournament[$weekday.'StartTimes']) ? explode(',',$tournament[$weekday.'StartTimes']) : '') );
 			$venueOptions = array();
 			$venueOptions['']] = ''; // Empty Selection
+			$venues = $this->venues_model->get_all();
 			foreach($venues as $venue)
 				$venueOptions[$venue['venueID']] = $venue['name'];
 			$this->data['venueOptions'] = $venueOptions;
