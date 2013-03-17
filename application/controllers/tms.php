@@ -222,8 +222,8 @@ class Tms extends MY_Controller {
 	}
 	
 	public function tournament($tournamentID)
-	{	
-		var_dump($this->input->post('venues[]'));
+	{
+		$weekdays = array('monday','tuesday','wednesday','thursday','friday','saturday','sunday');
 
 		// These are all the possible form fields that will be displayed
 		$tournamentDetailsForm = array(
@@ -357,7 +357,6 @@ class Tms extends MY_Controller {
 				if ($this->form_validation->run() == true) {
 					$tournamentUpdate = array();
 					$tournamentUpdate['matchDuration'] = $this->input->post('matchDuration');
-					$weekdays = array('monday','tuesday','wednesday','thursday','friday','saturday','sunday');
 					foreach($weekdays as $weekday)
 						$tournamentUpdate[$weekday.'StartTimes'] = implode(",",$this->input->post($weekday.'StartTimes'));
 					$this->tournaments_model_>update_venues($tournamentID,$venueIDs);
@@ -369,53 +368,27 @@ class Tms extends MY_Controller {
 					}
 					redirect("/tms/tournament/$tournamentID", 'refresh');
 				}
-			}
-
-
 			} else if($formAction=="schedule") {
-
+				// Probably use the scheduling model based on what we want to execute.
+				
+				// sødjshflasdijfgalndisufcaiosfugeipw
+			} else if($formAction=="scheduleNext") {
+				// Probably use the scheduling model based on what we want to execute.
+				
+				// fkjfisdjlkadjhflkjasbdhfljbh
 			}
 		}
 
 		// Do the actual setting of variables here...
-		$venues = $this->venues_model->get_all();
-		$this->data['venues'] = $this->venues_model->get_all();
+
+		// We reload the tournament data because we already have hopefully at this
+		// point updated the data.
+		$this->data['tournament'] = $tournament = $this->tournaments_model->get($tournamentID);
 
 		// If scheduled is not already defined, then just simply say it isn't scheduled.
 		if(!array_key_exists('scheduled',$tournament)){
 			$this->tournaments_model->update($tournamentID, array('scheduled' => 'false'));
 			$this->data['tournament']['scheduled'] = 'false';
-		}
-
-		foreach($tournamentDetailsForm as $input){
-			if(array_key_exists('type',$input)){
-				if($input['type']=="venues"){
-					$this->data[$input['name']] = array(
-						'name'  => $input['name'],
-						'id'    => $input['name'],
-						'type'  => 'text',
-						'class' => 'date',
-						'value' => datetime_to_public( $this->form_validation->set_value($input['name']) )
-					);
-				} else if($input['type']=="date"){
-					$this->data[$input['name']] = array(
-						'name'  => $input['name'],
-						'id'    => $input['name'],
-						'type'  => 'text',
-						'class' => 'date',
-
-						'value' => datetime_to_public( $this->form_validation->set_value($input['name']) )
-					);
-				} else {
-					$this->data[$input['name']] = array(
-						'name'  => $input['name'],
-						'id'    => $input['name'],
-						'type'  => $input['type'],
-						'value' => $this->form_validation->set_value($input['type'],(isset($tournament[$input['type']]) ? $tournament[$input['type']] : '') )
-						'value' => $this->form_validation->set_value($input['type'])
-					);
-				}
-			}
 		}
 	
 		$this->data['name'] = array(
@@ -460,7 +433,20 @@ class Tms extends MY_Controller {
 			'class' => 'date',
 			'value' => datetime_to_public( $this->form_validation->set_value('tournamentEnd',(isset($tournament['tournamentEnd']) ? $tournament['tournamentEnd'] : '') ) )
 		);
-			
+		if($tournament['scheduled']=='false'){
+			$this->data['tournamentEnd'] = array(
+				'name'  => 'matchDuration',
+				'id'    => 'matchDuration',
+				'value' => $this->form_validation->set_value('matchDuration',(isset($tournament['matchDuration']) ? $tournament['matchDuration'] : '') )
+			);
+			foreach($weekdays as $weekday)
+				$this->data[$weekday.'StartTimes'] = $this->form_validation->set_value('matchDuration',(isset($tournament[$weekday.'StartTimes']) ? explode(',',$tournament[$weekday.'StartTimes']) : '') );
+			$venueOptions = array();
+			$venueOptions['']] = ''; // Empty Selection
+			$venues = $this->venues_model->get_all();
+			foreach($venues as $venue)
+				$venueOptions[$venue['venueID']] = $venue['name'];
+			$this->data['venueOptions'] = $venueOptions;
 		}
 
 		//set the flash data error message if there is one
