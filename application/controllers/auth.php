@@ -448,7 +448,7 @@ class Auth extends MY_Controller {
 			if($userID) {
 				// Successful creation, show success message
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect("/", 'refresh');
+				redirect("/auth/login", 'refresh');
 			}
 		}
 	
