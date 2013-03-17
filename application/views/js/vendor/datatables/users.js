@@ -42,7 +42,7 @@
 					
 				},
 				"onInitRemove": function() {
-					$('.DTED_Lightbox_Wrapper').hide();
+					$('.DTED_Lightbox_Wrapper').css('visibility','hidden');
 					$.fancybox({
 						href : '/datatables/predelete/'+$('.DTTT_selected').attr('id'),
 						type : 'ajax',
@@ -51,10 +51,12 @@
 							jQuery("#fancycancel").click(function() {
 								$.fancybox.close();
 								$(".DTED_Lightbox_Close").click();
+								$('.DTED_Lightbox_Wrapper').css('visibility','visible');
 							});
 							jQuery("#fancyconfirm").click(function() {
 								$.fancybox.close();
-								$("button:contains('Delete')").click();
+								$("button:contains('Delete')").click();								
+								$('.DTED_Lightbox_Wrapper').css('visibility','visible');
 							});
 						}
 					});
