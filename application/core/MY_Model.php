@@ -34,10 +34,12 @@ class MY_Model extends CI_Model {
 			'tournamentActors' => array()
 		);
 		
-		
+		// Load all models
+		$this->load->model(array(
+			'users_model','teams_model','tournament_actors_model'
+		));
 		
 		// Define other models so we can access objects from the database
-		$CI =& get_instance();
 		$this->objects_models = array(
 			"users" => $CI->users_model,
 			"teams" => $CI->teams_model,
