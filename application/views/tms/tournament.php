@@ -43,10 +43,8 @@
 			<tr>
 				<td><label for="tournamentEnd">End Date</label></td>
 				<td><?=!in_array($tournament['status'],array("postTournament")) ? form_input($tournamentEnd) : datetime_to_public($tournament['tournamentEnd']) ?></td>
-				<td><?=form_input($tournamentEnd)?></td>
 				<td><label for="registrationEnd">End Date</label></td>
 				<td><?=!in_array($tournament['status'],array("inTournament","postTournament","postRegistration")) ? form_input($registrationEnd) : datetime_to_public($tournament['registrationEnd']) ?></td>
-				<td><?=form_input($registrationEnd)?></td>
 			</tr>
 			
 			<tr>
