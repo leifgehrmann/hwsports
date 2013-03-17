@@ -50,7 +50,7 @@ class Auth extends MY_Controller {
 			$this->data['users'] = $this->ion_auth->users()->result();
 			foreach ($this->data['users'] as $k => $user)
 			{
-				$this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
+				$this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->userID)->result();
 			}
 					
 			$this->load->view('sis/header',$this->data);
@@ -185,7 +185,7 @@ class Auth extends MY_Controller {
 				'name'  => 'user_id',
 				'id'    => 'user_id',
 				'type'  => 'hidden',
-				'value' => $user->id,
+				'value' => $user->userID,
 			);
 
 			//render
@@ -312,7 +312,7 @@ class Auth extends MY_Controller {
 					'name'  => 'user_id',
 					'id'    => 'user_id',
 					'type'  => 'hidden',
-					'value' => $user->id,
+					'value' => $user->userID,
 				);
 				$this->data['csrf'] = $this->_get_csrf_nonce();
 				$this->data['code'] = $code;
@@ -559,7 +559,7 @@ class Auth extends MY_Controller {
 
 			if ($this->form_validation->run() === TRUE)
 			{
-				$this->ion_auth->update($user->id, $data);
+				$this->ion_auth->update($user->userID, $data);
 
 				//check to see if we are creating the user
 				//redirect them back to the admin page
