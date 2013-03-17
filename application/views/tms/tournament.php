@@ -67,7 +67,7 @@
 		<table>
 			<tr>
 				<td width="40%"><h3>Match Duration</h3><p>Enter in the number of minutes that each match will take.</p></td>
-				<td width="60%"><input type="text" value="40"/>Minutes</td>
+				<td width="60%"><input type="text" value="40"/></td>
 			</tr>
 			<tr>
 				<td><h3>Venues</h3><p><p>Select the venues that you want the matches to take place at.</p></p></td>
@@ -119,39 +119,18 @@
 			<tr>
 				<td colspan="2"><h3>Match Start Times</h3></td>
 			</tr>
+			<?
+				$weekdays = array("monday","tuesday","wednesday","thursday","friday","saturday","sunday");
+				foreach($weekdays as $weekday)
+			{ ?>
 			<tr>
-				<td>Monday</td>
+				<td><?=ucfirst($weekday)?></td>
 				<td>
-					<div id="mondayStartTimes">
-						<p><input type="text" id="monday_start" name="mondayStartTimes" value="" placeholder="HH:MM" /></p>
-					</div>				
-					<a class="button green" href="#" id="mondayStartTimesAdd">+</a>
+					<div id="<?=$weekday?>StartTimes"><p><input type="text" name="<?=$weekday?>StartTimes[]" value="" placeholder="HH:MM" /></p></div>				
+					<a class="button green" href="#" id="<?=$weekday?>StartTimesAdd">+</a>
 				</td>
 			</tr>
-			<tr>
-				<td>Tuesday</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>Wednesday</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>Thursday</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>Friday</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>Saturday</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>Sunday</td>
-				<td></td>
-			</tr>
+			<? } ?>
 		</table>
 		<?=form_close();?>
 		<p>If it is wattball, we need to have a form which has the following details:</p>
@@ -237,11 +216,8 @@
 	var weekdays =["monday","tuesday","wednesday","thursday","friday","saturday","sunday"];
 	for (var x=0;x<weekdays.length;x++){
 		$('#'+weekdays[x]+'StartTimesAdd').live('click', function() {
-			var startTimes = $('#mondayStartTimes');
-			//eval(weekdays[x]+'StartTimesCount' + i + ' = ' + i $('#mondayStartTimes p').size() + 1);
-			//var i =;
-			$('<p><input type="text" name="'+weekdays[x]+'StartTimes[]" value="" placeholder="HH:MM" /><a class="button red removeInputButton" href="#">-</a></p>').appendTo(startTimes);
-			//i++;
+			var startTimes = $('#'+weekdays[x]+'StartTimes');
+			$('<p><input type="text" name="'+weekdays[x]+'StartTimes[]" value="" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left: 20px;top:0px;">Remove</a></p>').appendTo(startTimes);
 			return false;
 		});
 	}
