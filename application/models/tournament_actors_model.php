@@ -37,6 +37,7 @@ class Tournament_actors_model extends MY_Model {
 		$actorData = $this->get_object($ID, $this->objectIDKey, $this->dataTableName);
 		// This actor ID doesn't exist
 		if(!$actor) return FALSE;
+		if(!$actorData) return FALSE;
 		
 		return $actor + $actorData;
 	}
