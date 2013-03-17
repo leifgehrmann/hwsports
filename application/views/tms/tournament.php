@@ -65,7 +65,7 @@
 		<p>Sport specific stuff may go here</p>
 	</div>
 </div>
-
+<div class="clearfix"></div>
 <div class="tournamentMatches">
 	<h2>Matches</h2>
 	<p>Displayed below are a list of matches for the tournament. You can edit a match description</p>
