@@ -220,8 +220,8 @@
 			var z = -1;
 			for(var y=0;y<weekdays.length;y++){
 				alert($(this).attr("id"));
-				alert('#'+weekdays[y]+'StartTimesAdd');
-				if( $(this).attr("id") == '#'+weekdays[y]+'StartTimesAdd' ){
+				alert(weekdays[y]+'StartTimesAdd');
+				if( $(this).attr("id") == weekdays[y]+'StartTimesAdd' ){
 					alert($(this).attr("id"));
 					alert(y);
 					z = y;
