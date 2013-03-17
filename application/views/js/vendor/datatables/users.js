@@ -27,7 +27,8 @@
 					"type": "textarea"
 				}, {
 					"label": "Bio",
-					"name": "aboutMe"
+					"name": "aboutMe",
+					"type": "textarea"
 				}
 			],
 			"events": {

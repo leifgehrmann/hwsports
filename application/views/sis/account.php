@@ -12,8 +12,8 @@
 		<div class="widget-body">
 			<p><b>Name:</b> <?=$currentUser['firstName']?> <?=$currentUser['lastName']?></p>
 			<p><b>Email:</b> <?=$currentUser['email']?></p>
-			<? if(isset($currentUser['bio'])) { ?>
-			<p><b>Bio:</b> <?=$currentUser['bio']?></p>
+			<? if(isset($currentUser['aboutMe'])) { ?>
+			<p><b>Bio:</b> <?=$currentUser['aboutMe']?></p>
 			<? } ?>
 			<a href="/auth/edit_user" class="button right normal">Edit Profile</a>
 		</div>
