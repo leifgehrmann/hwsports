@@ -8,11 +8,6 @@ class Tournaments_model extends MY_Model {
 		$this->objectIDKey = "tournamentID";
 		$this->dataTableName = "tournamentData";
 		$this->relationTableName = "tournaments";
-		
-		$this->actor_tables_models = array(
-			"users" => $this->users_model,
-			"teams" => $this->teams_model
-		);
     }
 
 	/**
