@@ -615,14 +615,14 @@ class Scheduling_model extends MY_Model {
 		// Now that we have scheduled matches, we should quickly
 		// change the names of all the matches. To do this in
 		// order, we need to sort it.
-		function cmpStartTime($a, $b)
-		{
-			$af = $a['startTime'];
-			$bf = $b['startTime'];
-			if ($af == $bf) return 0;
-			return ($af < $bf) ? -1 : 1;
-		}
-		usort($scheduledMatches,"cmpStartTimes");
+		usort($scheduledMatches,function ($a, $b)
+			{
+				$af = $a['startTime'];
+				$bf = $b['startTime'];
+				if ($af == $bf) return 0;
+				return ($af < $bf) ? -1 : 1;
+			}
+		);
 
 		// We go through each match, renaming it.
 		$matchIndex = 0;
@@ -735,7 +735,7 @@ class Scheduling_model extends MY_Model {
 		$matches = $this->tournaments_model->get_matches($tournamentID);
 
 		// Sort the matches so that they are sorted in chrological order
-		usort($matches,function cmp($a, $b)
+		usort($matches,function($a, $b)
 			{
 				if ($a['startTime'] == $b['startTime']) return 0;
 				return ($a['startTime'] < $b['startTime']) ? -1 : 1;
