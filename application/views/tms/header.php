@@ -15,6 +15,7 @@
 	<link rel='stylesheet' type="text/css" href="/css/vendor/datatables/dataTables.editor.css">
 	<link rel='stylesheet' type="text/css" href="/css/vendor/datatables/dataTables.ColVis.css">
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/vendor/colorpicker/colorpicker.css" />
+    <link rel='stylesheet' type="text/css" href="/css/vendor/chosen/chosen.css">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,700,300">
 
 	<!-- Custom styles -->
@@ -32,6 +33,7 @@
 	<script charset="utf-8" src="/js/vendor/datatables/dataTables.ColReorderWithResize.js"></script>
 	<script charset="utf-8" src="/js/vendor/datatables/dataTables.ColVis.js"></script>
 	<script charset="utf-8" src="/js/vendor/colorpicker/colorpicker.js"></script>
+    <script charset="utf-8" src="/js/vendor/chosen/chosen.jquery.js"></script>
 
 	<script>
 

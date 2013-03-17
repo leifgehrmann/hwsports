@@ -7,7 +7,8 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<?=form_open("tms/tournament/$tournamentID", array('id' => 'tournamentDetailsForm'))?>
+		<?=form_open("tms/tournament/$tournamentID", array('id' => 'tournamentDetailsForm'), array('formID' => 'tournamentDetailsForm'))?>
+		<
 		<table>
 			<tr>
 				<td><label for="name">Name</label></td>
@@ -62,7 +63,79 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<?=form_open("tms/tournament/$tournamentID", array('id' => 'schedulingDetailsForm'))?>
+		<?=form_open("tms/tournament/$tournamentID", array('id' => 'schedulingDetailsForm'), array('formID' => 'schedulingDetailsForm'))?>
+		<ul>
+			<li>Match Duration (Minutes Numeric)</li>
+			<li>Start Times For each weekday</li>
+			<li>Venues</li>
+			<li>Button to save preferences</li>
+			<li>Button to clear all scheduled matches (if there are any matches)</li>
+			<li>Button to schedule matches</li>
+			<li>Button</li>
+		</ul>
+		<table>
+			<tr>
+				<td>Match Duration</td>
+				<td colspan="3"><input type="text" value="bla"/></td>
+			</tr>
+			<tr>
+				<td><h3>Venues</h3><p><p>Select the venues that you want the matches to take place at.</p></p></td>
+				<td>
+					<select data-placeholder="Select Venues..." class="chzn-select">
+						<option value=""></option> 
+						<option value="United States">United States</option> 
+						<option value="United Kingdom">United Kingdom</option> 
+						<option value="Afghanistan">Afghanistan</option> 
+						<option value="Aland Islands">Aland Islands</option> 
+						<option value="Albania">Albania</option> 
+						<option value="Algeria">Algeria</option> 
+						<option value="American Samoa">American Samoa</option> 
+						<option value="Andorra">Andorra</option> 
+						<option value="Angola">Angola</option> 
+						<option value="Anguilla">Anguilla</option> 
+						<option value="Antarctica">Antarctica</option> 
+						<option value="Antigua and Barbuda">Antigua and Barbuda</option> 
+						<option value="Argentina">Argentina</option> 
+						<option value="Armenia">Armenia</option> 
+						<option value="Aruba">Aruba</option> 
+						<option value="Australia">Australia</option> 
+						<option value="Austria">Austria</option> 
+						<option value="Azerbaijan">Azerbaijan</option> 
+						<option value="Bahamas">Bahamas</option> 
+						<option value="Bahrain">Bahrain</option> 
+						<option value="Bangladesh">Bangladesh</option> 
+						<option value="Barbados">Barbados</option> 
+						<option value="Belarus">Belarus</option> 
+						<option value="Belgium">Belgium</option> 
+						<option value="Belize">Belize</option> 
+						<option value="Benin">Benin</option> 
+						<option value="Bermuda">Bermuda</option> 
+						<option value="Bhutan">Bhutan</option> 
+						<option value="Bolivia, Plurinational State of">Bolivia, Plurinational State of</option> 
+						<option value="Bonaire, Sint Eustatius and Saba">Bonaire, Sint Eustatius and Saba</option> 
+						<option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option> 
+						<option value="Botswana">Botswana</option> 
+						<option value="Bouvet Island">Bouvet Island</option> 
+						<option value="Brazil">Brazil</option> 
+						<option value="British Indian Ocean Territory">British Indian Ocean Territory</option> 
+						<option value="Brunei Darussalam">Brunei Darussalam</option> 
+						<option value="Bulgaria">Bulgaria</option> 
+						<option value="Burkina Faso">Burkina Faso</option> 
+						<option value="Burundi">Burundi</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4"><h3>Match Start Times</h3></td>
+			</tr>
+			<tr>
+				<td colspan="2"><p>For each day of the week you can select a specific start time you want particular match to start at. The automatic scheduler will use this dates to add in the specific fields.</p></td>
+			</tr>
+			<tr>
+				<td colspan="2"><p>Select the venues that you want the matches to take place at.</p></td>
+			</tr>
+		</table>
+		<?=form_close();?>
 		<p>If it is wattball, we need to have a form which has the following details:</p>
 		<ul>
 			<li>Match Duration (Minutes)</li>
@@ -140,4 +213,6 @@
 		timeFormat: 'HH:mm',
 		ampm: false
 	});
+	 $(".chzn-select").chosen();
+	 $(".chzn-select-deselect").chosen({allow_single_deselect:true});
 </script>
