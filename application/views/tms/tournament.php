@@ -72,7 +72,7 @@
 			<tr>
 				<td><h3>Venues</h3><p><p>Select the venues that you want the matches to take place at.</p></p></td>
 				<td>
-					<? if( count($venues) != 0 ){ )?>
+					<? if( count($venues) != 0 ){ ?>
 					<select name="venues" data-placeholder="Select Venues..." class="chzn-select" multiple>
 						<option value=""></option> 
 						<? foreach($venues as $venue) { ?>
