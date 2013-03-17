@@ -439,7 +439,7 @@ class Tms extends MY_Controller {
 				'id'    => 'matchDuration',
 				'value' => $this->form_validation->set_value('matchDuration',(isset($tournament['matchDuration']) ? $tournament['matchDuration'] : '') )
 			);
-			foreach($weekday)
+			foreach($weekdays as $weekday)
 				$this->data[$weekday.'StartTimes'] = $this->form_validation->set_value('matchDuration',(isset($tournament[$weekday.'StartTimes']) ? explode(',',$tournament[$weekday.'StartTimes']) : '') );
 			$venueOptions = array();
 			$venueOptions['']] = ''; // Empty Selection
