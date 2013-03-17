@@ -6,7 +6,7 @@ class Tournament_actors_model extends MY_Model {
 		// Load models we might be referencing
 		
 		// Basic variables which apply to all table operations
-		$this->objectIDKey = "actorID";
+		$this->objectIDKey = "tournamentActorID";
 		$this->dataTableName = "tournamentActorData";
 		$this->relationTableName = "tournamentActors";
 		
@@ -32,7 +32,6 @@ class Tournament_actors_model extends MY_Model {
 									->join('sportCategoryRoles', 'sportCategoryRoles.sportCategoryRoleID = tournamentActors.roleID')
 									->where('tournamentActorID',$ID)
 									->get()->row_array();
-									return $tournamentActor;
 		if(!$tournamentActor) return FALSE;
 		// For each actor, get the actual actor data, using the model as defined by the global array in the constructor 
 		$actor = $this->actor_tables_models[$tournamentActor['actorTable']]->get($tournamentActor['actorID']);
