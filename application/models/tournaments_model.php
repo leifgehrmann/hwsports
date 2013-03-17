@@ -110,7 +110,7 @@ class Tournaments_model extends MY_Model {
 		if($startTime != FALSE || $endTime != FALSE){
 			$startTime = ( $startTime ? $startTime : new DateTime('1st January 0001'));
 			$endTime = ( $endTime ? $endTime : new DateTime('31st December 9999'));
-			$all = $datetime_range($all,$startTime,$endTime);
+			return $datetime_range($all,$startTime,$endTime,'tournamentStart','tournamentEnd');
 		}
 		return $all;
 	}
