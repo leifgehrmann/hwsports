@@ -441,9 +441,9 @@ class Tms extends MY_Controller {
 			);
 			foreach($weekdays as $weekday)
 				$this->data[$weekday.'StartTimes'] = $this->form_validation->set_value('matchDuration',(isset($tournament[$weekday.'StartTimes']) ? explode(',',$tournament[$weekday.'StartTimes']) : '') );
-			$venueOptions = array();
-			$venueOptions['']] = ''; // Empty Selection
 			$venues = $this->venues_model->get_all();
+			$venueOptions = array();
+			$venueOptions[''] = ''; // Empty Selection
 			foreach($venues as $venue)
 				$venueOptions[$venue['venueID']] = $venue['name'];
 			$this->data['venueOptions'] = $venueOptions;
