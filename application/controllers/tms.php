@@ -190,7 +190,6 @@ class Tms extends MY_Controller {
 			$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
 		
 			$this->data['tournaments'] = $this->tournaments_model->get_all();
-			$this->data['venues'] = $this->venues_model->get_all();
 		
 			$this->data['sports'] = array();
 			foreach( $this->sports_model->get_all() as $sport) {				
@@ -292,8 +291,16 @@ class Tms extends MY_Controller {
 			$this->data['message_success'] = $this->session->flashdata('message_success');
 			$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
 			
-			$sport = $this->sports_model->get( $tournament['sportID'] );
-			$this->data['tournament']['sportName'] = $sport['name'];
+			$venues = $this->venues_model->get_all();
+
+
+			$this->data['venues'] = $this->venues_model->get_all();
+
+			// If scheduled is not already defined, then just simply say it isn't scheduled.
+			if(!array_key_exists('scheduled',$tournament)){
+				$this->tournaments_model->update($tournamentID, array('scheduled','false'))
+				$this->data['tournament']['scheduled'] = 'false';
+			}
 		
 			$this->data['name'] = array(
 				'name'  => 'name',
