@@ -446,7 +446,7 @@ class Auth extends MY_Controller {
 				'lastName'  => $this->input->post('lastName')
 			);
 			
-			$userID = $this->users_model->insert($email, $password, $userdata);
+			$userID = $this->users_model->register($email, $password, $userdata);
 			if($userID) {
 				// Successful creation, show success message
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
