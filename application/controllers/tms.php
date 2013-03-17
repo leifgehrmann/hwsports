@@ -117,7 +117,6 @@ class Tms extends MY_Controller {
 	}
 	public function tournaments()
 	{	
-
 		$tournamentDetailsForm = array(
 			array(
 				'name'=>'name',
@@ -160,7 +159,7 @@ class Tms extends MY_Controller {
 				'restrict'=>'required|xss_clean|callback_datetime_check[tournamentEnd]',
 				'type'=>'date'
 			)
-		)
+		);
 	
 		foreach($tournamentDetailsForm as $input){
 			$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
