@@ -66,7 +66,7 @@ class MY_Model extends CI_Model {
 		// If we have no data about this tournament, return FALSE to make logic easier in controller 
 		if(count($dataKeys)==0) return FALSE;
 		// Create SQL selection segments for each key in the data, ready to implode with commas into a full SQL query 
-		foreach($dataKeys as $dataKey) $dataQueryStringParts[] = "MAX(CASE WHEN `key`='$dataKey' THEN value END ) AS $dataKey";
+		foreach($dataKeys as $dataKey) $dataQueryStringParts[] = "MAX(CASE WHEN `key`='$dataKey' THEN `value` END ) AS `$dataKey`";
 		// Build and execute query to actually select data from data table
 		$dataQueryString = "SELECT ".implode(', ', $dataQueryStringParts)." 
 						    FROM `".mysql_real_escape_string($dataTableName)."` 
