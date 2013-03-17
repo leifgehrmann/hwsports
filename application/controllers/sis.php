@@ -2,6 +2,13 @@
 
 class Sis extends MY_Controller {
 
+	function __construct()
+	{
+		parent::__construct();
+
+		$this->data['currentUser'] = $currentUser = $this->users_model->get_logged_in();
+	}
+	
 	/**
 	 * A short hand method to basically print out the page with a certain pageid and title
 	 *
@@ -22,15 +29,6 @@ class Sis extends MY_Controller {
 		
 		//set the flash data error message if there is one
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		
-		$this->data['currentUser'] = $currentUser = $this->ion_auth->user()->row();
-		if(!empty($currentUser)) {
-			$query = $this->db->query("SELECT `key`,`value` FROM `userData` WHERE `userID` = '{$currentUser->userID}'");
-			foreach($query->result_array() as $userDataRow) {
-				$currentUser->$userDataRow['key'] = $userDataRow['value'];
-			}
-		}
-		
 		$this->view('home','sishome','Home',$this->data);
 	}
 
@@ -39,10 +37,7 @@ class Sis extends MY_Controller {
 		$this->view('calendar','calendar','Calendar',$this->data);
 	}
 
-	public function matches()
-	{			
-
-		
+	public function matches() {			
 		$matches = $this->matches_model->get_all();
 		foreach($matches as $key => $match) {
 			$matches[$key]['date'] = datetime_to_public_date($match['startTime']);

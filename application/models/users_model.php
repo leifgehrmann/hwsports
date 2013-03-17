@@ -20,6 +20,17 @@ class Users_model extends MY_Model {
 	}
 	
 	/**
+	 * Returns all data about currently logged in user, or false if not logged in
+	 *  
+	 * @return array
+	 **/
+	public function get_logged_in() {
+		$ID = $this->ion_auth->user()->row()->id;
+		if($ID) return $this->get($ID);
+		return false;
+	}
+	
+	/**
 	 * Searches by email and returns all data about a specific user
 	 *  
 	 * @return array
