@@ -224,8 +224,8 @@
 					break;
 				}
 			}
-			startTimes = $('#'+weekdays[x]+'StartTimes');
-			startTimes.append('<p><input type="text" name="'+weekdays[x]+'StartTimes[]" value="" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>');
+			startTimes = $('#'+weekdays[z]+'StartTimes');
+			startTimes.append('<p><input type="text" name="'+weekdays[z]+'StartTimes[]" value="" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>');
 
 			return false;
 		});
