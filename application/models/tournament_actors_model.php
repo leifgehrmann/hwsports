@@ -35,6 +35,7 @@ class Tournament_actors_model extends MY_Model {
 		if(!$tournamentActor) return FALSE;
 		// For each actor, get the actual actor data, using the model as defined by the global array in the constructor 
 		$actor = $this->actor_tables_models[$tournamentActor['actorTable']]->get($tournamentActor['actorID']);
+		$actor['sportCategoryRoleName'] = $tournamentActor['sportCategoryRoleName'];
 		if(!$actor) return FALSE;
 		// Now get the tournamentActorData using our lovely dry code
 		$actorData = $this->get_object($ID, $this->objectIDKey, $this->dataTableName);
@@ -57,7 +58,8 @@ class Tournament_actors_model extends MY_Model {
 		$all = array();
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
 		foreach($IDRows as $IDRow) {
-			$all[$IDRow[$this->objectIDKey]] = $this->get($IDRow[$this->objectIDKey]);
+			$tournamentActor = $this->get($IDRow[$this->objectIDKey]);
+			$all[$tournamentActor['sportCategoryRoleName']][$IDRow[$this->objectIDKey]] = $tournamentActor;
 		}
 		return $all;
 	}
