@@ -5,12 +5,12 @@
 		<thead>
 			<tr>
 				<th>User ID</th>
-				<th width="15%">First Name</th>
-				<th width="15%">Last Name</th>
+				<th width="10%">First Name</th>
+				<th width="10%">Last Name</th>
 				<th width="15%">Email</th>
 				<th width="15%">Phone</th>
 				<th width="20%">Address</th>
-				<th width="15%">About</th>
+				<th width="25%">About</th>
 				<th width="5%">&nbsp;</th>
 			</tr>
 		</thead>
