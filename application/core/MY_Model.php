@@ -37,6 +37,7 @@ class MY_Model extends CI_Model {
 		
 		
 		// Define other models so we can access objects from the database
+		$CI =& get_instance();
 		$this->objects_models = array(
 			"users" => $CI->users_model,
 			"teams" => $CI->teams_model,
