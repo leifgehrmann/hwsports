@@ -64,17 +64,10 @@
 	</div>
 	<div class="widget-body">
 		<?=form_open("tms/tournament/$tournamentID", array('id' => 'schedulingDetailsForm'), array('formID' => 'schedulingDetailsForm'))?>
-		<ul>
-			<li>Start Times For each weekday</li>
-			<li>Button to save preferences</li>
-			<li>Button to clear all scheduled matches (if there are any matches)</li>
-			<li>Button to schedule matches</li>
-			<li>Button</li>
-		</ul>
 		<table>
 			<tr>
-				<td width="25%">Match Duration</td>
-				<td width="75%"><input type="text" value="bla"/></td>
+				<td width="40%"><h3>Match Duration</h3><p>Enter in the number of minutes that each match will take.</p></td>
+				<td width="60%"><input type="text" value="40"/>Minutes</td>
 			</tr>
 			<tr>
 				<td><h3>Venues</h3><p><p>Select the venues that you want the matches to take place at.</p></p></td>
@@ -128,7 +121,12 @@
 			</tr>
 			<tr>
 				<td>Monday</td>
-				<td></td>
+				<td>
+					<div id="mondayStartTimes">
+						<p><input type="text" id="monday_start" name="mondayStartTimes" value="" placeholder="HH:MM" /></p>
+					</div>				
+					<a class="button green" href="#" id="mondayStartTimesAdd">+</a>
+				</td>
 			</tr>
 			<tr>
 				<td>Tuesday</td>
@@ -235,4 +233,23 @@
 	});
 	 $(".chzn-select").chosen();
 	 $(".chzn-select-deselect").chosen({allow_single_deselect:true});
+
+	var weekdays =["monday","tuesday","wednesday","thursday","friday","saturday","sunday"];
+	for (var x=0;x<weekdays.length;x++){
+		$('#'+weekdays[x]+'StartTimesAdd').live('click', function() {
+			var startTimes = $('#mondayStartTimes');
+			var i = $('#mondayStartTimes p').size() + 1;
+			$('<p><input type="text" name="'+weekdays[x]+'StartTimes[]" value="" placeholder="HH:MM" /><a class="button red removeInputButton" href="#">-</a></p>').appendTo(startTimes);
+			i++;
+			return false;
+		});
+	}
+	$('.removeInputButton').live('click', function() { 
+		if( i > 2 ) {
+			$(this).parents('p').remove();
+			i--;
+		}
+		return false;
+	});
+
 </script>
