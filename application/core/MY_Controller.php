@@ -7,7 +7,6 @@ class MY_Controller extends CI_Controller {
     public function __construct() {
 
         parent::__construct();
-
 		
 		$centreSite = TRUE;
 		switch($_SERVER['HTTP_HOST']) {
