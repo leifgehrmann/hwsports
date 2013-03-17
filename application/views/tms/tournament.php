@@ -8,7 +8,6 @@
 	</div>
 	<div class="widget-body">
 		<?=form_open("tms/tournament/$tournamentID", array('id' => 'tournamentDetailsForm'), array('formID' => 'tournamentDetailsForm'))?>
-		<
 		<table>
 			<tr>
 				<td><label for="name">Name</label></td>
@@ -63,6 +62,7 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
+		<? if(array_key_exists('scheduled',$tournament['scheduled'])) { ?>
 		<?=form_open("tms/tournament/$tournamentID", array('id' => 'schedulingDetailsForm'), array('formID' => 'schedulingDetailsForm'), array('formAction' => 'update'))?>
 		<table>
 			<tr>
@@ -131,14 +131,20 @@
 			<? if($i%2==0){ ?><tr><? } ?>
 				<td valign="top"><?=ucfirst($weekday)?></td>
 				<td>
-					<div id="<?=$weekday?>StartTimes"><p><input type="text" style="width:70px" name="<?=$weekday?>StartTimes[]" value="" placeholder="HH:MM" /></p></div>				
+					<div id="<?=$weekday?>StartTimes"><p><input type="text" style="width:70px" name="<?=$weekday?>StartTimes[]" value="" placeholder="HH:MM" /></p></div>
 					<a class="button green" href="#" id="<?=$weekday?>StartTimesAdd">Add another start time</a>
 				</td>
 			<? if($i%2==1){ ?></tr><? } ?>
 			<? $i++; } ?>
+			<?=form_submit(array('name'=>"submit", 'value'=>"Schedule Matches", 'class'=>"green", 'onclick'=>'$("schedulingDetailsForm input[name=\'formAction\']).val("schedule")'));?>
+			<?=form_submit(array('name'=>"submit", 'value'=>"Save Preferences", 'class'=>"green", 'onclick'=>'$("schedulingDetailsForm input[name=\'formAction\']).val("save")'));?>
 		</table>
-		<td><?=form_submit(array('name'=>"submit", 'value'=>"Update", 'class'=>"green"));?></td>
 		<?=form_close();?>
+		<? } else { ?>
+			<? if($tournament['sportData']) ?>
+
+			<? } ?>
+		<? } ?>
 		<p>If it is wattball, we need to have a form which has the following details:</p>
 		<ul>
 			<li>Match Duration (Minutes)</li>
