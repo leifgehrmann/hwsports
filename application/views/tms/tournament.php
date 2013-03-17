@@ -247,8 +247,7 @@
 	}
 	$('.removeInputButton').live('click', function() { 
 		var count = $(this).parent().siblings('p').length;
-		alert(count);
-		if( count > 2 ) {
+		if( count > 0 ) {
 			$(this).parents('p').remove();
 		}
 		return false;
