@@ -218,12 +218,16 @@
 		$('#'+weekdays[x]+'StartTimesAdd').live('click', function() {
 			var z = -1;
 			for(var y=0;y<weekdays.length;y++){
+				console.log($(this).attr("id"));
+				console.log('#'+weekdays[y]+'StartTimesAdd');
 				if( $(this).attr("id") == '#'+weekdays[y]+'StartTimesAdd' ){
-					weekday = $(this).attr("id");
+					console.log($(this).attr("id"));
+					console.log(y);
 					z = y;
 					break;
 				}
 			}
+			console.log(z);
 			startTimes = $('#'+weekdays[z]+'StartTimes');
 			startTimes.append('<p><input type="text" name="'+weekdays[z]+'StartTimes[]" value="" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>');
 
