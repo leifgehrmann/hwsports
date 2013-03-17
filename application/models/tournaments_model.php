@@ -169,9 +169,9 @@ class Tournaments_model extends MY_Model {
 	}
 
 	/**
-	 * Insert 1 or more venues to the tournamentVenues table - essentially allowing staff to select which venues should be used for scheduling
+	 * Inserts the venues into the tournamentVenues table, which allows staff the manage a list of venues that are used.
 	 *  
-	 * @return array
+	 * @return boolean
 	 **/
 	public function insert_venues($tournamentID, $venueIDs) {
 		if(!$this->get($tournamentID)) return FALSE;
@@ -189,6 +189,54 @@ class Tournaments_model extends MY_Model {
 		}
 		// Complete transaction, all is well
 		$this->db->trans_complete();
+		return TRUE;
+	}
+
+	/**
+	 * Updates the tournament to use a list of venues
+	 *  
+	 * @return boolean
+	 **/
+	public function update_venues($tournamentID, $venueIDs) {
+		if(!$this->get($tournamentID)) return FALSE;
+		// Lump all inserts into one transaction
+		
+		$venues = $this->get_venues($tournamentID);
+		$venuesToDelete = array();
+		foreach($venues as $venue)
+			$venuesToDelete[] = $venue['venueID'];
+		$this->db->trans_start();
+		if(!$this->delete_venues($venuesToDelete))
+			return FALSE;
+		if(!$this->insert_venues($venueIDs))
+			return FALSE;
+		// Complete transaction, all is well
+		$this->db->trans_complete();
+		return TRUE;
+	}
+
+	/**
+	 * Deletes 1 or more venues to the tournamentVenues table - essentially allowing staff to select which venues should be used for scheduling
+	 *  
+	 * @return array
+	 **/
+	public function delete_venues($tournamentID, $venueIDs) {
+		if(!$this->get($tournamentID)) return FALSE;
+		// Lump all inserts into one transaction
+		$this->db->trans_start();
+		
+		foreach($venueIDs as $venueID) {
+			if(!$this->venues_model->get($venueID)) return FALSE;
+			$this->db->$delete = array(
+				'tournamentID'   => $tournamentID,
+				'venueID' => $venueID
+			);
+			// Create the delete - active record sanitizes inputs automatically. Return false if delete fails.
+			if(!$this->db->delete("tournamentVenues", $delete)) return FALSE;			
+		}
+		// Complete transaction, all is well
+		$this->db->trans_complete();
+		return TRUE;
 	}
 
 	/**

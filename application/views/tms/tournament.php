@@ -67,18 +67,19 @@
 		<table>
 			<tr>
 				<td width="40%"><h3>Match Duration</h3><p>Enter in the number of minutes that each match will take.</p></td>
-				<td width="60%"><input type="text" value="40"/></td>
+				<td width="60%"><? form_input($matchDuration) ?></td>
 			</tr>
 			<tr>
 				<td><h3>Venues</h3><p><p>Select the venues that you want the matches to take place at.</p></p></td>
 				<td>
-					<? if( count($venues) != 0 ){ ?>
-					<select name="venues" data-placeholder="Select Venues..." class="chzn-select" multiple>
-						<option value=""></option> 
-						<? foreach($venues as $venue) { ?>
-						<option value="<?=$venue['venueID']?>"><?=$venue['name']?></option> 
-						<? } ?>
-					</select>
+					<? if( count($venues) != 0 ){ 
+						$venueOptions = array();
+						$venueOptions['']] = ''; // Empty Selection
+						foreach($venues as $venue) {
+							$venueOptions[$venue['venueID']] = $venue['name'];
+						}
+					?>
+					<?form_multiselect('venues[]',$venueOptions,$venueSelections,array('class'=>'chzn-select','data-placeholder'=>'Select Venues...','style'='width:200px;'))?>
 					<? } else { ?>
 					<p>There are no venues to add. To add venues, <a href="/tms/venues/">click here</a>.</p>
 					<? } ?>
@@ -104,24 +105,26 @@
 				</td>
 			<? if($i%2==1){ ?></tr><? } ?>
 			<? $i++; } ?>
-			<?=form_submit(array('name'=>"submit", 'value'=>"Schedule Matches", 'class'=>"green", 'onclick'=>'$("schedulingDetailsForm input[name=\'formAction\']).val("schedule")'));?>
-			<?=form_submit(array('name'=>"submit", 'value'=>"Save Preferences", 'class'=>"green", 'onclick'=>'$("schedulingDetailsForm input[name=\'formAction\']).val("save")'));?>
 		</table>
+		<?=form_submit(array('name'=>"submit", 'value'=>"Save preferences", 'class'=>"green margin-left right", 'onclick'=>'$("schedulingDetailsForm input[name=\'formAction\']).val("save")'));?>
+		<?=form_submit(array('name'=>"submit", 'value'=>"Schedule matches", 'class'=>"blue right", 'onclick'=>'$("schedulingDetailsForm input[name=\'formAction\']).val("schedule")'));?>
 		<?=form_close();?>
 		<? } else { ?>
-			<? if($tournament['sportData']) { ?>
-
+			<? if( $tournament['sportData']['sportCategoryID'] == "46" ) { ?>
+				<table><tr>
+					<td><p>The matches have been scheduled and are displayed below. Once you have completed a match i.e. filled in the results you can press the button to schedule the next match</p></td>
+					<td><?=form_submit(array('name'=>"submit", 'value'=>"Schedule next match", 'class'=>"green", 'onclick'=>'$("schedulingDetailsForm input[name=\'formAction\']).val("schedule")'));?></td>
+				</tr></table>
+				<h3>Rescheduling</h3>
+				<p>To reschedule individual matches you can use the table below.</p>
+				<p>To reschedule the entire tournament you must clear all matches in the table below.</p>
+			<? } else { ?>
+				<p>The matches have been scheduled and are displayed below.</p>
+				<h3>Rescheduling</h3>
+				<p>To reschedule individual matches you can use the table below.</p>
+				<p>To reschedule the entire tournament you must clear all matches in the table below.</p>
 			<? } ?>
 		<? } ?>
-		<p>If it is wattball, we need to have a form which has the following details:</p>
-		<ul>
-			<li>Match Duration (Minutes)</li>
-			<li>Start Times For each weekday</li>
-			<li>Venues</li>
-			<li>Button to save preferences</li>
-			<li>Button to clear all scheduled matches (if there are any matches)</li>
-			<li>Button to schedule matches</li>
-		</ul>
 		<p>If it is running, we need to have a form which has the following details</p>
 		<ul>
 			<li>Match Duration (Minutes)</li>
