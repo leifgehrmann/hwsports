@@ -238,16 +238,17 @@
 	for (var x=0;x<weekdays.length;x++){
 		$('#'+weekdays[x]+'StartTimesAdd').live('click', function() {
 			var startTimes = $('#mondayStartTimes');
-			var i = $('#mondayStartTimes p').size() + 1;
+			//eval(weekdays[x]+'StartTimesCount' + i + ' = ' + i $('#mondayStartTimes p').size() + 1);
+			//var i =;
 			$('<p><input type="text" name="'+weekdays[x]+'StartTimes[]" value="" placeholder="HH:MM" /><a class="button red removeInputButton" href="#">-</a></p>').appendTo(startTimes);
-			i++;
+			//i++;
 			return false;
 		});
 	}
 	$('.removeInputButton').live('click', function() { 
-		if( i > 2 ) {
+		var count = $(this).parent().parent('p');
+		if( count > 2 ) {
 			$(this).parents('p').remove();
-			i--;
 		}
 		return false;
 	});
