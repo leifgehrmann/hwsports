@@ -163,7 +163,7 @@ class Tms extends MY_Controller {
 	
 		foreach($tournamentDetailsForm as $input){
 			$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
-			if($input['label']==date){
+			if($input['label']=='date'){
 				// Change dates from public, timepicker-friendly format to database-friendly ISO format.
 				if($this->input->post($input['name'])) $_POST[$input['name']] = datetime_to_standard($this->input->post($input['name']));
 			}
