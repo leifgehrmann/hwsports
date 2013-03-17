@@ -444,8 +444,7 @@ class Auth extends MY_Controller {
 
 			$userdata = array(
 				'firstName' => $this->input->post('firstName'),
-				'lastName'  => $this->input->post('lastName'),
-				'phone'      => $this->input->post('phone')
+				'lastName'  => $this->input->post('lastName')
 			);
 			
 			$userID = $this->users_model->insert($email, $password, $userdata);
@@ -477,12 +476,6 @@ class Auth extends MY_Controller {
 			'id'    => 'email',
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('email'),
-		);
-		$this->data['phone'] = array(
-			'name'  => 'phone',
-			'id'    => 'phone',
-			'type'  => 'text',
-			'value' => $this->form_validation->set_value('phone'),
 		);
 		$this->data['password'] = array(
 			'name'  => 'password',
