@@ -659,9 +659,9 @@ class Scheduling_model extends MY_Model {
 		if(array_key_exists('lanes',$venue))
 			$lanes = $venue['lanes'];
 		else
-			$lanes = 8;
+			$lanes = 8; // We just assume for now that the number of lanes is 8. This probably should be modified.
 		$participantsCount = count($qualificationAthletes);
-		$heats = ceil($participantsCount/$lanes)
+		$heats = ceil($participantsCount/$lanes);
 		$index = $participantsCount % $heats;
 		$athleteIndex = 0;
 		for(int $h=1;$h<=$heats;$h++)
