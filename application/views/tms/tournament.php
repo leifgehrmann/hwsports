@@ -36,16 +36,16 @@
 			</tr>
 			<tr>
 				<td><label for="tournamentStart">Start Date</label></td>
-				<td><?=(!in_array($tournament['status'],array("inTournament","postTournament")) ? form_input($tournamentStart) : datetime_to_public($tournament['tournamentStart']) ?></td>
+				<td><?=!in_array($tournament['status'],array("inTournament","postTournament")) ? form_input($tournamentStart) : datetime_to_public($tournament['tournamentStart']) ?></td>
 				<td><label for="registrationStart">Start Date</label></td>
-				<td><?=(in_array($tournament['status'],array("preRegistration")) ? form_input($registrationStart) : datetime_to_public($tournament['registrationStart']) ?></td>
+				<td><?=in_array($tournament['status'],array("preRegistration")) ? form_input($registrationStart) : datetime_to_public($tournament['registrationStart']) ?></td>
 			</tr>
 			<tr>
 				<td><label for="tournamentEnd">End Date</label></td>
-				<td><?=(!in_array($tournament['status'],array("postTournament")) ? form_input($tournamentEnd) : datetime_to_public($tournament['tournamentEnd']) ?></td>
+				<td><?=!in_array($tournament['status'],array("postTournament")) ? form_input($tournamentEnd) : datetime_to_public($tournament['tournamentEnd']) ?></td>
 				<td><?=form_input($tournamentEnd)?></td>
 				<td><label for="registrationEnd">End Date</label></td>
-				<td><?=(!in_array($tournament['status'],array("inTournament","postTournament","postRegistration")) ? form_input($registrationEnd) : datetime_to_public($tournament['registrationEnd']) ?></td>
+				<td><?=!in_array($tournament['status'],array("inTournament","postTournament","postRegistration")) ? form_input($registrationEnd) : datetime_to_public($tournament['registrationEnd']) ?></td>
 				<td><?=form_input($registrationEnd)?></td>
 			</tr>
 			
