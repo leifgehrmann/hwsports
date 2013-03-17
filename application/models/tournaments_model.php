@@ -121,25 +121,7 @@ class Tournaments_model extends MY_Model {
 	 * @return array
 	 **/
 	public function get_actors($ID) {
-		// Check if ID exists
-		if(!$this->get($ID)) return FALSE;
-		// Select all info about actors for this specific tournament - join the roles table so we get info about how to handle the different roles
-		$actorRows = $this->db->select('actorID, roleID, sportCategoryRoleName, actorTable')
-					->from('tournamentActors')
-					->join('sportCategoryRoles', 'sportCategoryRoles.sportCategoryRoleID = tournamentActors.roleID')
-					->where('tournamentID',$ID)
-					->get()
-					->result_array();
-		// We should return an empty array if there are no actors at all, so create it here
-		$actors = array();
-		foreach($actorRows as $actorRow) {
-			// For each actor, get the actual actor data, using the model as defined by the global array in the constructor 
-			$actor = $this->actor_tables_models[$actorRow['actorTable']]->get($actorRow['actorID']);
-			// Append the actor to the output array, in a sub array of the role name - therefore from your sport-specific function you might use $actors['Umpire'] to get all the umpires, etc.
-			$actors[$actorRow['sportCategoryRoleName']][$actorRow['actorID']] = $actor;
-		}
-		// Return all actors
-		return $actors;
+		return $this->tournament_actors_model->get_all($ID);
 	}
 
 	/**
