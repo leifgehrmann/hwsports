@@ -433,7 +433,6 @@ class Auth extends MY_Controller {
 		$this->form_validation->set_rules('firstName', 'First Name', 'required|xss_clean');
 		$this->form_validation->set_rules('lastName', 'Last Name', 'required|xss_clean');
 		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
-		$this->form_validation->set_rules('phone', 'Phone', 'required|xss_clean|min_length[8]|max_length[13]');
 		$this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
 		$this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'required');
 
