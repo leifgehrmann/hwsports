@@ -26,7 +26,7 @@ class Users_model extends MY_Model {
 	 **/
 	public function get_logged_in() {
 		$logged_in = $this->ion_auth->user()->row();
-		if($logged_in ) return $this->get($logged_in['id']);
+		if($logged_in) return $this->get($logged_in['userID']);
 		return false;
 	}
 	

@@ -1,5 +1,5 @@
 <? if($this->ion_auth->logged_in()){ ?>
-<h1>Welcome <?=$currentUser->firstName?> <?=$currentUser->lastName?></h1>
+<h1>Welcome <?=$currentUser['firstName']?> <?=$currentUser['lastName']?></h1>
 <div>
 	<div class="widget half profile">
 		<a href="/auth/edit_user">
@@ -10,10 +10,10 @@
 			</div>
 		</a>
 		<div class="widget-body">
-			<p><b>Name:</b> <?=$currentUser->firstName?> <?=$currentUser->lastName?></p>
-			<p><b>Email:</b> <?=$currentUser->email?></p>
-			<? if(!empty($currentUser->bio)) { ?>
-			<p><b>Bio:</b> <?=$currentUser->bio?></p>
+			<p><b>Name:</b> <?=$currentUser['firstName']?> <?=$currentUser['lastName']?></p>
+			<p><b>Email:</b> <?=$currentUser['email']?></p>
+			<? if(isset($currentUser['bio'])) { ?>
+			<p><b>Bio:</b> <?=$currentUser['bio']?></p>
 			<? } ?>
 			<a href="/auth/edit_user" class="button right normal">Edit Profile</a>
 		</div>
