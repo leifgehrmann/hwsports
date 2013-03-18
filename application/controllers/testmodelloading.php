@@ -7,5 +7,6 @@ class Testmodelloading extends MY_Controller {
 	
 	public function index() {
 		echo "index loaded";
+		var_dump($this->users_model->get_all());
 	}
 }
