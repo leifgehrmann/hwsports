@@ -12,11 +12,12 @@ class MY_Loader extends CI_Loader {
 	}
 
 	function model($model, $name = '', $db_conn = FALSE) {
-		var_dump("THE NAME IS ".name);
+		if($name=='test')
+			die();
 		if($this->is_model_loaded($model)) {
 			//echo "model $model already loaded, skipping<br />\n"; 
 			return;
-		}
+		} 
 		
 		// echo "model $model being loaded for the first time"; 
 
