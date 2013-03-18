@@ -108,7 +108,7 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('model1', 'model2');
 |
 */
-$autoload['model'] = array('centre_model', 'groups_model', 'matches_model', 'results_model', 'scheduling_model', 'sports_model', 'teams_model', 'tournaments_model', 'tournament_actors_model', 'users_model', 'venues_model');
+$autoload['model'] = array('ion_auth_model', 'centre_model', 'groups_model', 'matches_model', 'results_model', 'scheduling_model', 'sports_model', 'teams_model', 'tournaments_model', 'tournament_actors_model', 'users_model', 'venues_model');
 
 
 /* End of file autoload.php */
