@@ -3,7 +3,7 @@
 class MY_Loader extends CI_Loader {
 
 	function is_model_loaded($model) {
-		//echo "is_model_loaded checking for model: $model in array:<br /><pre>";var_dump($this->_ci_models);echo "</pre>"; 
+		echo "is_model_loaded checking for model: $model in array:<br /><pre>";var_dump($this->_ci_models);echo "</pre>"; 
 		
 		if (in_array($model, $this->_ci_models))
 			return TRUE;
