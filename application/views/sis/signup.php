@@ -21,39 +21,6 @@
 					<h3 class="sectionHeading" id="sectionHeading-<?=$sectionID?>"><?=$section['label']?></h3>
 					<div class="sectionBody" id="sectionBody-<?=$sectionID?>">
 						<table>
-						<? foreach($section['inputs'] as $inputID => $input) {
-								if(strpos($input['inputType'],'tm-') !== false) continue; 
-								if($input['inputType'] == "teamMembers") { ?>
-									<thead class="columns">
-										<tr>
-											<td>User ID</td>
-											<td>Name</td>
-											<td>Email</td>
-											<td>Password</td>
-										</tr>
-									</thead>
-									<tbody class="teamMembers"></tbody>
-									<tfoot class="functions">
-										<tr>
-											<td colspan="4">
-												<a href="/sis/addTeamMember/<?=$tournament['tournamentID']?>/<?=$sectionID?>" class="button green addTeamMember fancybox.ajax">Add Player<br />(Create New Account)</a>
-												<a href="/sis/addLoginTeamMember/<?=$tournament['tournamentID']?>/<?=$sectionID?>" class="button blue addTeamMember addLoginTeamMember fancybox.ajax">Add Player<br />(Existing Account)</a>
-											</td>
-										</tr>
-									</tfoot>
-								<? } else { ?>
-									<tr>
-										<td><?=$input['formLabel']?></td>
-										<td>
-											<? switch( $input['inputType'] ) {
-												case "textarea": ?> <textarea id="<?=$input['tableName']?>_<?=$input['tableKeyName']?>" name="<?=$input['tableName']?>_<?=$input['tableKeyName']?>" required><?=isset($currentUser[$input['tableKeyName']]) ? $currentUser[$input['tableKeyName']] : ""?></textarea><br /> <? break;
-												case "text": case "phone": case "email": ?> <input type="text" id="<?=$input['tableName']?>_<?=$input['tableKeyName']?>" name="<?=$input['tableName']?>_<?=$input['tableKeyName']?>" value="<?=isset($currentUser[$input['tableKeyName']]) ? $currentUser[$input['tableKeyName']] : ""?>" required></input><br /> <? break;
-												case "checkbox": ?> <input type="checkbox" id="<?=$input['tableName']?>_<?=$input['tableKeyName']?>" name="<?=$input['tableName']?>_<?=$input['tableKeyName']?>" value="1" required></input><br /> <? break; 
-											} ?>
-										</td>
-									</tr>
-								<? } ?>
-						<? } ?> 
 						</table>
 						<?if( $sectionCount == 1 ) {
 							echo "<div class='navButtons'><a href='#' class='button nextButton normal'>Next</a></div>";
