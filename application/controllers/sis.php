@@ -141,6 +141,7 @@ class Sis extends MY_Controller {
 		$this->data['roles'] = $roles = $this->sports_model->get_sport_category_roles($tournament['sportData']['sportCategoryID']);
 
 		if( $this->input->post() ) {
+			var_dump($_POST); die();
 			$roleID = $this->input->post('role');
 			$roleInputs = $this->sports_model->get_sport_category_role_inputs($roleID);
 			
@@ -155,7 +156,6 @@ class Sis extends MY_Controller {
 			
 			$this->session->set_flashdata('message',  "Signup successful!");
 			redirect("/sis/tournaments", 'refresh');
-					
 		} else {
 			$this->view('signup','signup','Signup',$this->data);
 		}
