@@ -327,6 +327,7 @@ class CI_Loader {
 			$this->_ci_models[] = $name;
 
 			echo "$model should be added to the array of models  <br />";
+			die();
 			return;
 		}
 
