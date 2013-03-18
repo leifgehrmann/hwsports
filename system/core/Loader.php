@@ -235,13 +235,13 @@ class CI_Loader {
 		if (is_array($model)) {
 			foreach ($model as $babe) {
 			// If the requested model has already been loaded, skip this array entry
-				if (in_array($name, $this->_ci_models)) continue;
+				if (in_array($babe, $this->_ci_models)) continue;
 				$this->model($babe);
 			}
 			return;
 		} else {
 			// If the requested model has already been loaded, return
-			if (in_array($name, $this->_ci_models)) return;
+			if (in_array($model, $this->_ci_models)) return;
 		}
 
 		if ($model == '')
