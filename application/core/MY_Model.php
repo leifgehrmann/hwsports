@@ -1,8 +1,6 @@
 <?php
 class MY_Model extends CI_Model {
 
-    var $controller;
-
 	public function __construct() {
         parent::__construct();
 		
@@ -38,12 +36,10 @@ class MY_Model extends CI_Model {
 		
 		// Define other models so we can access objects from the database
 		
-		$this->controller = & get_instance();
-
 		$this->objects_models = array(
-			"users" => $this->controller->users_model,
-			"teams" => $this->controller->teams_model,
-			"tournament_actors" => $this->controller->tournament_actors_model
+			"users" => $users_model,
+			"teams" => $teams_model,
+			"tournament_actors" => $tournament_actors_model
 		);
     }
 	
