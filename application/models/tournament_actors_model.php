@@ -1,5 +1,5 @@
 <?php
-class Tournament_actors_model extends CI_Model {
+class Tournament_actors_model extends MY_Model {
 	
 	public function __construct() {
         parent::__construct();
