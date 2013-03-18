@@ -182,13 +182,13 @@ class Sis extends MY_Controller {
 		foreach($teamMemberInputs as $tminput) {
 			switch($tminput['inputType']) {
 				case "phone":
-					$this->form_validation->set_rules($tminput['objectName'].'_'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|xss_clean|min_length[8]|max_length[13]');
+					$this->form_validation->set_rules($tminput['objectName'].':'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|xss_clean|min_length[8]|max_length[13]');
 				break;
 				case "email":
-					$this->form_validation->set_rules($tminput['objectName'].'_'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|valid_email');
+					$this->form_validation->set_rules($tminput['objectName'].':'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|valid_email');
 				break;
 				default: 
-					$this->form_validation->set_rules($tminput['objectName'].'_'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|xss_clean');
+					$this->form_validation->set_rules($tminput['objectName'].':'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|xss_clean');
 			}
 		}
 		
@@ -218,7 +218,7 @@ class Sis extends MY_Controller {
 				
 			// Grab input data for dynamic inputs
 			foreach($teamMemberInputs as $tminput) {
-				$additional_data[$tminput['objectName'].'_'.$tminput['tableKeyName']] = $this->input->post($tminput['objectName'].'_'.$tminput['tableKeyName']);
+				$additional_data[$tminput['objectName'].':'.$tminput['tableKeyName']] = $this->input->post($tminput['objectName'].':'.$tminput['tableKeyName']);
 			}
 			
 			if( $userIDtoUpdate ) {
@@ -289,14 +289,14 @@ class Sis extends MY_Controller {
 					default: $type = $tminput['inputType'];
 				}
 			
-				$this->data['extraInputs'][ $tminput['objectName'].'_'.$tminput['tableKeyName'] ] = array(
-					'name'  => $tminput['objectName'].'_'.$tminput['tableKeyName'],
-					'id'    => $tminput['objectName'].'_'.$tminput['tableKeyName'],
+				$this->data['extraInputs'][ $tminput['objectName'].':'.$tminput['tableKeyName'] ] = array(
+					'name'  => $tminput['objectName'].':'.$tminput['tableKeyName'],
+					'id'    => $tminput['objectName'].':'.$tminput['tableKeyName'],
 					'type'  => $type,
 					'required' => '',
 					'inputType'  => $tminput['inputType'],
 					'formLabel'  => $tminput['formLabel'],
-					'value' => $this->form_validation->set_value($tminput['objectName'].'_'.$tminput['tableKeyName']),
+					'value' => $this->form_validation->set_value($tminput['objectName'].':'.$tminput['tableKeyName']),
 				);
 			}
 
@@ -369,14 +369,14 @@ class Sis extends MY_Controller {
 						default: $type = $tminput['inputType'];
 					}
 				
-					$this->data['extraInputs'][ $tminput['objectName'].'_'.$tminput['tableKeyName'] ] = array(
-						'name'  => $tminput['objectName'].'_'.$tminput['tableKeyName'],
-						'id'    => $tminput['objectName'].'_'.$tminput['tableKeyName'],
+					$this->data['extraInputs'][ $tminput['objectName'].':'.$tminput['tableKeyName'] ] = array(
+						'name'  => $tminput['objectName'].':'.$tminput['tableKeyName'],
+						'id'    => $tminput['objectName'].':'.$tminput['tableKeyName'],
 						'type'  => $type,
 						'required' => '',
 						'inputType'  => $tminput['inputType'],
 						'formLabel'  => $tminput['formLabel'],
-						'value' => (isset($user[$tminput['objectName'].'_'.$tminput['tableKeyName']]) ? $user[$tminput['objectName'].'_'.$tminput['tableKeyName']] : '')
+						'value' => (isset($user[$tminput['objectName'].':'.$tminput['tableKeyName']]) ? $user[$tminput['objectName'].':'.$tminput['tableKeyName']] : '')
 					);
 				}
 				
