@@ -12,15 +12,16 @@ class MY_Loader extends CI_Loader {
 	}
 
 	function model($model, $name = '', $db_conn = FALSE) {
+		var_dump("THE NAME IS ".name);
 		if($this->is_model_loaded($model)) {
 			//echo "model $model already loaded, skipping<br />\n"; 
 			return;
 		}
 		
-		//echo "model $model being loaded for the first time"; 
+		// echo "model $model being loaded for the first time"; 
 
 		// Call the default method otherwise
-		parent::model($model."THIS SHOULD NOT BE HERE", $name, $db_conn);
+		parent::model($model, $name."test", $db_conn);
 	}
 }
 
