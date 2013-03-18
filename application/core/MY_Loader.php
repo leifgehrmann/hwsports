@@ -4,7 +4,7 @@ class MY_Loader extends CI_Loader {
 
 	function is_model_loaded($model) {
 
-		var_dump($this->config->item('loaded_ci_models'));
+		//var_dump($this->config->item('loaded_ci_models'));
 
 		//echo "is_model_loaded checking for model: $model in array:<br /><pre>";var_dump($this);echo "</pre>"; 
 		
@@ -16,24 +16,25 @@ class MY_Loader extends CI_Loader {
 
 	function model($model, $name = '', $db_conn = FALSE) {
 
-		$CI =& get_instance();
-		var_dump($CI);
-		die();
 		if($this->is_model_loaded($model)) {
 			//echo "model $model already loaded, skipping<br />\n"; 
 			return;
 		} 
 
-		$loaded_models = $this->config->item('loaded_ci_models');
-		$loaded_models[] = $model;
-		$this->config->set_item('loaded_ci_models', $loaded_models);
-		echo "loaded $model into";var_dump($this->config->item('loaded_ci_models'));echo "</pre>"; 
-		die();
+		//$loaded_models = $this->config->item('loaded_ci_models');
+		//$loaded_models[] = $model;
+		//$this->config->set_item('loaded_ci_models', $loaded_models);
+		//echo "loaded $model into";var_dump($this->config->item('loaded_ci_models'));echo "</pre>"; 
+		//die();
 		
 		// echo "model $model being loaded for the first time"; 
 
 		// Call the default method otherwise
 		parent::model($model, $name."test", $db_conn);
+
+		$CI =& get_instance();
+		var_dump($CI);
+		die();
 	}
 }
 
