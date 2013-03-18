@@ -63,6 +63,10 @@ class Ion_auth
 		$this->lang->load('ion_auth');
 		$this->load->helper('cookie');
 
+		// Load IonAuth MongoDB model if it's set to use MongoDB,
+		// We assign the model object to "ion_auth_model" variable.
+		$this->load->model('ion_auth_model');
+		
 		$this->_cache_user_in_group =& $this->ion_auth_model->_cache_user_in_group;
 
 		//auto-login the user if they are remembered
