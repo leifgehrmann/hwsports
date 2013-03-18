@@ -239,14 +239,10 @@ class CI_Loader {
 			return;
 		}
 
-		// echo "$model is not an array <br />";
-
 		if ($model == '')
 		{
 			return;
 		}
-
-		// echo "$model is not empty <br />";
 
 		$path = '';
 
@@ -260,21 +256,15 @@ class CI_Loader {
 			$model = substr($model, $last_slash + 1);
 		}
 
-		// echo "$model has the path: $path <br />";
-
 		if ($name == '')
 		{
 			$name = $model;
 		}
 
-		// echo "$name is not blank <br />";
-
 		if (in_array($name, $this->_ci_models, TRUE))
 		{
 			return;
 		}
-
-		// echo "$name is not int the _ci_models array<br />";
 
 		$CI =& get_instance();
 		if (isset($CI->$name))
@@ -282,11 +272,7 @@ class CI_Loader {
 			show_error('The model name you are loading is the name of a resource that is already being used: '.$name);
 		}
 
-		// echo "$name is not an alredy existing resource <br />";
-
 		$model = strtolower($model);
-
-		// echo "$model should now be in lowercase <br />";
 
 		foreach ($this->_ci_model_paths as $mod_path)
 		{
@@ -294,8 +280,6 @@ class CI_Loader {
 			{
 				continue;
 			}
-
-			// echo "$model does exist in this path <br />";
 
 			if ($db_conn !== FALSE AND ! class_exists('CI_DB'))
 			{
@@ -307,30 +291,19 @@ class CI_Loader {
 				$CI->load->database($db_conn, FALSE, TRUE);
 			}
 
-			// echo "$model does have a database connection  <br />";
-
 			if ( ! class_exists('CI_Model'))
 			{
 				load_class('Model', 'core');
 			}
 
-			//echo "The CI_Model class is either loaded or not  <br />";
-
 			require_once($mod_path.'models/'.$path.$model.'.php');
-
-			// echo "The file ".$mod_path.'models/'.$path.$model.'.php'." is loaded  <br />";
 
 			$model = ucfirst($model);
 
-			// echo "$model should be installed now  <br />";
-
 			$this->_ci_models[] = $name;
-
-			// echo "The $model should now have an uppercase first char  <br />";
 
 			$CI->$name = new $model();
 
-			// echo "$model should be added to the array of models  <br />";
 			return;
 		}
 
