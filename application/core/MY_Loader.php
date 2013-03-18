@@ -4,7 +4,7 @@ class MY_Loader extends CI_Loader {
 
 	function is_model_loaded($model) {
 
-		var_dump($config['loaded_ci_models']);
+		var_dump($this->$config->item('loaded_ci_models'));
 
 		//echo "is_model_loaded checking for model: $model in array:<br /><pre>";var_dump($this);echo "</pre>"; 
 		
@@ -16,13 +16,17 @@ class MY_Loader extends CI_Loader {
 
 	function model($model, $name = '', $db_conn = FALSE) {
 
+
+
 		if($this->is_model_loaded($model)) {
 			//echo "model $model already loaded, skipping<br />\n"; 
 			return;
 		} 
 
-		$config['loaded_ci_models'][] = $model;
-		echo "loaded $model into";var_dump($config['loaded_ci_models']);echo "</pre>"; 
+		$loaded_models = $this->$config->item('loaded_ci_models');
+		$loaded_models[] = $model;
+		$this->config->set_item('loaded_ci_models', $loaded_models);
+		echo "loaded $model into";var_dump($this->$config->item('loaded_ci_models'));echo "</pre>"; 
 		die();
 		
 		// echo "model $model being loaded for the first time"; 
