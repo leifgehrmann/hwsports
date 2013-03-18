@@ -4,6 +4,9 @@ class MY_Loader extends CI_Loader {
 
 	function is_model_loaded($model) {
 
+		$CI =& get_instance();
+		echo "<br/><pre>"; var_dump($CI);echo "</pre>";
+
 		//var_dump($this->config->item('loaded_ci_models'));
 
 		//echo "is_model_loaded checking for model: $model in array:<br /><pre>";var_dump($this);echo "</pre>"; 
@@ -30,7 +33,7 @@ class MY_Loader extends CI_Loader {
 		// echo "model $model being loaded for the first time"; 
 
 		// Call the default method otherwise
-		parent::model($model, $name."test", $db_conn);
+		parent::model($model, $name, $db_conn);
 
 		$CI =& get_instance();
 		var_dump($CI);
