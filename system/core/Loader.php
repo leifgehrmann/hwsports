@@ -318,7 +318,11 @@ class CI_Loader {
 
 			require_once($mod_path.'models/'.$path.$model.'.php');
 
+			echo "The file ".$mod_path.'models/'.$path.$model.'.php'." is loaded  <br />";
+
 			$model = ucfirst($model);
+
+			echo "The $model should now have an uppercase first char  <br />";
 
 			$CI->$name = new $model();
 
