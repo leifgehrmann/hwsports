@@ -51,6 +51,7 @@ class Tournament_actors_model extends MY_Model {
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
 		foreach($IDRows as $IDRow) {
 			$tournamentActor = $this->get($IDRow[$this->objectIDKey]);
+			if(!$tournamentActor) return FALSE;
 			$all[$tournamentActor['sportCategoryRoleName']][$IDRow[$this->objectIDKey]] = $tournamentActor;
 		}
 		return $all;
