@@ -322,13 +322,13 @@ class CI_Loader {
 
 			$model = ucfirst($model);
 
-			echo "The $model should now have an uppercase first char  <br />";
-
-			$CI->$name = new $model();
-
 			echo "$model should be installed now  <br />";
 
 			$this->_ci_models[] = $name;
+
+			echo "The $model should now have an uppercase first char  <br />";
+
+			$CI->$name = new $model();
 
 			echo "$model should be added to the array of models  <br />";
 			die();
