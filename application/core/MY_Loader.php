@@ -2,32 +2,21 @@
 
 class MY_Loader extends CI_Loader {
 
-	function is_model_loaded($model)
-	{
-		$ci =& get_instance();      
-		$load_arr = (array) $ci->load;
-
-		$mod_arr = array();
-		foreach ($load_arr as $key => $value)
-		{
-			if (substr(trim($key), 2, 50) == "_ci_models")
-				$mod_arr = $value;
-		}
-		//print_r($mod_arr);die;
-
-		if (in_array($model, $mod_arr))
+	function is_model_loaded($model) {
+		//echo "is_model_loaded checking for model: $model in array:<br /><pre>";var_dump($this->_ci_models);echo "</pre>"; 
+		
+		if (in_array($model, $this->_ci_models))
 			return TRUE;
 
 		return FALSE;
 	}
 
-    function model($model, $name = '', $db_conn = FALSE)
-    {
+    function model($model, $name = '', $db_conn = FALSE) {
 		if($this->is_model_loaded($model)) {
 			//echo "model $model already loaded, skipping<br />\n"; 
 			return;
-		} else {		
-			//echo "model $model being loaded for the first time<br />\n"; 
+		} else {
+			//echo "model $model being loaded for the first time"; 
 		}
         // Call the default method otherwise
         parent::model($model, $name, $db_conn);
