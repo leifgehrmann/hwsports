@@ -22,7 +22,7 @@ class Tournament_actors_model extends MY_Model {
 									->from('tournamentActors')
 									->join('sportCategoryRoles', 'sportCategoryRoles.sportCategoryRoleID = tournamentActors.roleID')
 									->where('tournamentActorID',$ID)
-									->get()->result_array();
+									->get()->row_array();
 									echo "get output:\n: "; var_dump($tournamentActor); 
 		if($tournamentActor===FALSE) return FALSE;
 		// For each actor, get the actual actor data, using the model as defined by the global array in the constructor 
