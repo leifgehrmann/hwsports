@@ -72,7 +72,7 @@
 			<tr>
 				<td><h3>Venues</h3><p><p>Select the venues that you want the matches to take place at.</p></p></td>
 				<td>
-					<? if( count($venues) != 0 ) { ?>
+					<? if( count($venueOptions) != 0 ) { ?>
 					<?form_multiselect('venues[]',$venueOptions,$venueSelections,array('class'=>'chzn-select','data-placeholder'=>'Select Venues...','style'=>'width:200px;'))?>
 					<? } else { ?>
 					<p>There are no venues to add. To add venues, <a href="/tms/venues/">click here</a>.</p>
