@@ -16,8 +16,9 @@ class MY_Loader extends CI_Loader {
 
 	function model($model, $name = '', $db_conn = FALSE) {
 
-
-
+		$CI =& get_instance();
+		var_dump($CI);
+		die();
 		if($this->is_model_loaded($model)) {
 			//echo "model $model already loaded, skipping<br />\n"; 
 			return;
