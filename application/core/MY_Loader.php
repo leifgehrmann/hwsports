@@ -33,10 +33,9 @@ class MY_Loader extends CI_Loader {
 		// echo "model $model being loaded for the first time"; 
 
 		// Call the default method otherwise
+		die();
 		parent::model($model, $name, $db_conn);
 
-		$CI =& get_instance();
-		var_dump($CI);
 		die();
 	}
 }
