@@ -3,7 +3,7 @@
 class MY_Loader extends CI_Loader {
 
 	function is_model_loaded($model) {
-		echo "is_model_loaded checking for model: $model in array:<br /><pre>";var_dump($this->_ci_models);echo "</pre>"; 
+		echo "is_model_loaded checking for model: $model in array:<br /><pre>";var_dump($this);echo "</pre>"; 
 		
 		if (in_array($model, $this->_ci_models))
 			return TRUE;
@@ -15,9 +15,10 @@ class MY_Loader extends CI_Loader {
 		if($this->is_model_loaded($model)) {
 			//echo "model $model already loaded, skipping<br />\n"; 
 			return;
-		} else {
-			//echo "model $model being loaded for the first time"; 
 		}
+		
+		//echo "model $model being loaded for the first time"; 
+		
         // Call the default method otherwise
         parent::model($model, $name, $db_conn);
     }
