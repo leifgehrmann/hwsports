@@ -358,6 +358,17 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+/*
+|--------------------------------------------------------------------------
+| Loaded Models
+|--------------------------------------------------------------------------
+|
+| This should be an array of all the models that are loaded into the
+| system. As models are loaded, this should be updated. 
+|
+*/
+$config['loaded_ci_models'] = array();
+
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
