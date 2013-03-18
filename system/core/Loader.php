@@ -99,7 +99,7 @@ class CI_Loader {
 	 * @var array
 	 * @access protected
 	 */
-	protected $_ci_models			= array('MONKEY');
+	protected $_ci_models			= array();
 	/**
 	 * List of loaded helpers
 	 *
@@ -146,7 +146,7 @@ class CI_Loader {
 	{
 		$this->_ci_classes = array();
 		$this->_ci_loaded_files = array();
-		$this->_ci_models = array('MONKEY');
+		$this->_ci_models = array();
 		$this->_base_classes =& is_loaded();
 
 		$this->_ci_autoloader();
@@ -239,10 +239,14 @@ class CI_Loader {
 			return;
 		}
 
+		echo "$model is not an array <br />";
+
 		if ($model == '')
 		{
 			return;
 		}
+
+		echo "$model is not empty <br />";
 
 		$path = '';
 
@@ -256,15 +260,21 @@ class CI_Loader {
 			$model = substr($model, $last_slash + 1);
 		}
 
+		echo "$model has the path: $path <br />";
+
 		if ($name == '')
 		{
 			$name = $model;
 		}
 
+		echo "$name is not blank <br />";
+
 		if (in_array($name, $this->_ci_models, TRUE))
 		{
 			return;
 		}
+
+		echo "$name is not int the _ci_models array<br />";
 
 		$CI =& get_instance();
 		if (isset($CI->$name))
@@ -272,7 +282,11 @@ class CI_Loader {
 			show_error('The model name you are loading is the name of a resource that is already being used: '.$name);
 		}
 
+		echo "$name is not an alredy existing resource <br />";
+
 		$model = strtolower($model);
+
+		echo "$model should now be in lowercase <br />";
 
 		foreach ($this->_ci_model_paths as $mod_path)
 		{
@@ -280,6 +294,8 @@ class CI_Loader {
 			{
 				continue;
 			}
+
+			echo "$model does exist in this path <br />";
 
 			if ($db_conn !== FALSE AND ! class_exists('CI_DB'))
 			{
@@ -291,10 +307,14 @@ class CI_Loader {
 				$CI->load->database($db_conn, FALSE, TRUE);
 			}
 
+			echo "$model does have a database connection  <br />";
+
 			if ( ! class_exists('CI_Model'))
 			{
 				load_class('Model', 'core');
 			}
+
+			echo "The CI_Model class is either loaded or not  <br />";
 
 			require_once($mod_path.'models/'.$path.$model.'.php');
 
@@ -302,7 +322,11 @@ class CI_Loader {
 
 			$CI->$name = new $model();
 
+			echo "$model should be installed now  <br />";
+
 			$this->_ci_models[] = $name;
+
+			echo "$model should be added to the array of models  <br />";
 			return;
 		}
 
