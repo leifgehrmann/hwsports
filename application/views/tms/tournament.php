@@ -119,16 +119,6 @@
 				<p>To reschedule the entire tournament you must clear all matches in the table below.</p>
 			<? } ?>
 		<? } ?>
-		<p>If it is running, we need to have a form which has the following details</p>
-		<ul>
-			<li>Match Duration (Minutes)</li>
-			<li>Start Times</li>
-			<li>Venues with lane number (if it is defined)</li>
-			<li>Button to save preferences</li>
-			<li>Button to clear all scheduled matches (if there are any matches)</li>
-			<li>Button to schedule matches</li>
-			<li>Button to prepare next match (If there are any incomplete matches)</li>
-		</ul>
 	</div>
 </div>
 <div class="clearfix"></div>

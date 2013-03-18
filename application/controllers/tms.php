@@ -434,19 +434,30 @@ class Tms extends MY_Controller {
 			'value' => datetime_to_public( $this->form_validation->set_value('tournamentEnd',(isset($tournament['tournamentEnd']) ? $tournament['tournamentEnd'] : '') ) )
 		);
 		if($tournament['scheduled']=='false'){
-			$this->data['tournamentEnd'] = array(
+			$this->data['matchDuration'] = array(
 				'name'  => 'matchDuration',
 				'id'    => 'matchDuration',
 				'value' => $this->form_validation->set_value('matchDuration',(isset($tournament['matchDuration']) ? $tournament['matchDuration'] : '') )
 			);
 			foreach($weekdays as $weekday)
 				$this->data[$weekday.'StartTimes'] = $this->form_validation->set_value('matchDuration',(isset($tournament[$weekday.'StartTimes']) ? explode(',',$tournament[$weekday.'StartTimes']) : '') );
+
+			// Get all tournament venues
+			$venues = $this->tournaments_model->get_venues();
+			$venueSelections = array();
+			foreach($venues as $venue)
+				$venueSelections[$venue['venueID']] = $venue['name'];
+
+			// Get all venues
 			$venues = $this->venues_model->get_all();
 			$venueOptions = array();
 			$venueOptions[''] = ''; // Empty Selection
 			foreach($venues as $venue)
 				$venueOptions[$venue['venueID']] = $venue['name'];
+
+			// Send the venue data
 			$this->data['venueOptions'] = $venueOptions;
+			$this->data['venueSelections'] = $venueSelections;
 		}
 
 		//set the flash data error message if there is one
