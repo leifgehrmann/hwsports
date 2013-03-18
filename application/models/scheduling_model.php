@@ -1,5 +1,5 @@
 <?php
-class Scheduling_model extends MY_Model {
+class Scheduling_model extends CI_Model {
 
 	/**
 	 * HAS NOT BEEN TESTED

@@ -1,5 +1,5 @@
 <?php
-class Venues_model extends MY_Model {
+class Venues_model extends CI_Model {
 
 	public function __construct() {
         parent::__construct();

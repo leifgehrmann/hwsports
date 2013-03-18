@@ -1,5 +1,5 @@
 <?php
-class Groups_model extends MY_Model {
+class Groups_model extends CI_Model {
 
 	public function __construct() {
         parent::__construct();
