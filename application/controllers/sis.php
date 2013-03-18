@@ -150,21 +150,7 @@ class Sis extends MY_Controller {
 				if(strpos($roleInput['inputType'],'tm-') === 0) unset($roleInputs[$key]);
 				if($roleInput['inputType']=='teamMembers') {
 					$teamMembersIDs = array_map("intval", explode(",", $this->input->post('teamMemberIDs') ));
-					
 				}
-			}
-			
-			if(!empty($userData)) {
-				$this->users_model->update($currentUser['userID'], $userData);
-			}
-			if(!empty($teamData)) {
-				$teamID = $this->teams_model->insert($teamData);
-				if($this->teams_model->add_team_members($teamID,$teamMembersIDs) == false) {
-					$this->session->set_flashdata('message',  "Adding team members failed.");
-					redirect("/sis/tournaments", 'refresh');
-				}
-			} else {
-				$teamID = false;
 			}
 			
 			$this->session->set_flashdata('message',  "Signup successful!");
