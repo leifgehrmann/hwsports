@@ -443,7 +443,7 @@ class Tms extends MY_Controller {
 				$this->data[$weekday.'StartTimes'] = $this->form_validation->set_value('matchDuration',(isset($tournament[$weekday.'StartTimes']) ? explode(',',$tournament[$weekday.'StartTimes']) : '') );
 
 			// Get all tournament venues
-			$venues = $this->tournaments_model->get_venues();
+			$venues = $this->tournaments_model->get_venues($tournamentID);
 			$venueSelections = array();
 			foreach($venues as $venue)
 				$venueSelections[$venue['venueID']] = $venue['name'];
