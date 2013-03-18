@@ -99,7 +99,7 @@ class CI_Loader {
 	 * @var array
 	 * @access protected
 	 */
-	protected $_ci_models			= array();
+	protected $_ci_models			= array('MONKEY');
 	/**
 	 * List of loaded helpers
 	 *
