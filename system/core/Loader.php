@@ -261,6 +261,7 @@ class CI_Loader {
 			$name = $model;
 		}
 
+		// So this should already be checking if a model is loaded before re-loading it...?
 		if (in_array($name, $this->_ci_models, TRUE))
 		{
 			return;
