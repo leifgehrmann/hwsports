@@ -296,7 +296,7 @@ class CI_Loader {
 				load_class('Model', 'core');
 			}
 
-			require_once($mod_path.'models/'.$path.$model.'.php');
+			require($mod_path.'models/'.$path.$model.'.php');
 
 			$model = ucfirst($model);
 
