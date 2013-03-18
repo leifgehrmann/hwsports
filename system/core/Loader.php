@@ -331,7 +331,6 @@ class CI_Loader {
 			$CI->$name = new $model();
 
 			echo "$model should be added to the array of models  <br />";
-			die();
 			return;
 		}
 
