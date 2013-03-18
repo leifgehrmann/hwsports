@@ -147,11 +147,15 @@ class Sis extends MY_Controller {
 			
 			// Loop through each input and handle it
 			foreach($roleInputs as $key => $roleInput) {
+				
+			
 				// Skip these inputs, they are processed by the addTeamMember method
 				if(strpos($roleInput['inputType'],'tm-') === 0) unset($roleInputs[$key]);
 				if($roleInput['inputType']=='teamMembers') {
+					// Get the user IDs of all team members who are to be added to the team into an indexed array
 					$teamMembersIDs = array_map("intval", explode(",", $this->input->post('teamMemberIDs') ));
 				}
+				
 			}
 			
 			$this->session->set_flashdata('message',  "Signup successful!");
@@ -308,9 +312,6 @@ class Sis extends MY_Controller {
 	//create a new team member user account
 	function addLoginTeamMember($tournamentID,$sectionID)
 	{	
-
-
-
 		$this->data['tournamentID'] = $tournamentID;
 		$this->data['sectionID'] = $sectionID;
 		

@@ -598,41 +598,41 @@ class Ion_auth_model extends MY_Model
 	}
 
 	/**
-	 * Checks username
+	 * Checks email
 	 *
 	 * @return bool
 	 * @author Mathew
 	 **/
-	public function username_check($username = '')
+	public function email_check($email = '')
 	{
-		$this->trigger_events('username_check');
+		$this->trigger_events('email_check');
 
-		if (empty($username))
+		if (empty($email))
 		{
 			return FALSE;
 		}
 
 		$this->trigger_events('extra_where');
 
-		return $this->db->where('username', $username)
+		return $this->db->where('email', $email)
 		                ->count_all_results($this->tables['users']) > 0;
 	}
 
 	/**
-	 * Checks username and password - if username is valid identity and password is correct for that account, returns true. Otherwise false. 
+	 * Checks email and password - if email is valid identity and password is correct for that account, returns true. Otherwise false. 
 	 *
 	 * @return bool
 	 * @author Andrew
 	 **/
-	public function account_check($username = '', $password = '')
+	public function account_check($email = '', $password = '')
 	{
-		if (empty($username) OR empty($password)) {
+		if (empty($email) OR empty($password)) {
 			return FALSE;
 		}
 
 		$this->trigger_events('extra_where');						
-		$query = $this->db->select($this->identity_column . ', username, email, userID, password, active, last_login')
-		                  ->where($this->identity_column, $this->db->escape_str($username))
+		$query = $this->db->select($this->identity_column . ', email, email, userID, password, active, last_login')
+		                  ->where($this->identity_column, $this->db->escape_str($email))
 		                  ->limit(1)
 		                  ->get($this->tables['users']);
 		if ($query->num_rows() === 1) {
@@ -844,7 +844,7 @@ class Ion_auth_model extends MY_Model
 
 		$this->trigger_events('extra_where');
 
-		// OLD LINE $query = $this->db->select($this->identity_column . ', username, email, userID, password, active, last_login')
+		// OLD LINE $query = $this->db->select($this->identity_column . ', email, email, userID, password, active, last_login')
 		$query = $this->db->select($this->identity_column . ', email, userID, password, active, last_login')
 		                  ->where($this->identity_column, $this->db->escape_str($identity))
 		                  ->limit(1)
@@ -868,7 +868,7 @@ class Ion_auth_model extends MY_Model
 
 				$session_data = array(
 				    'identity'             => $user->{$this->identity_column},
-				    // OLD LINE 'username'             => $user->username,
+				    // OLD LINE 'email'             => $user->email,
 				    'email'                => $user->email,
 				    'user_id'              => $user->userID, //everyone likes to overwrite userID so we'll use user_id
 				    'old_last_login'       => $user->last_login
@@ -1398,7 +1398,7 @@ class Ion_auth_model extends MY_Model
 		// Filter the data passed
 		$data = $this->_filter_data($this->tables['users'], $data);
 
-		if (array_key_exists('username', $data) || array_key_exists('password', $data) || array_key_exists('email', $data))
+		if (array_key_exists('email', $data) || array_key_exists('password', $data) || array_key_exists('email', $data))
 		{
 			if (array_key_exists('password', $data))
 			{
