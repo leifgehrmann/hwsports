@@ -28,10 +28,6 @@
 				<td><?php echo form_input($email);?></td>
 			</tr>
 			<tr>
-				<td>Phone: </td>
-				<td><?php echo form_input($phone);?></td>
-			</tr>
-			<tr>
 			</tr>
 		</tbody>
 		<tbody class="extraInputs">

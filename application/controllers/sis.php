@@ -185,9 +185,6 @@ class Sis extends MY_Controller {
 		// Set up form validation rules for any input type
 		foreach($teamMemberInputs as $tminput) {
 			switch($tminput['inputType']) {
-				case "phone":
-					$this->form_validation->set_rules($tminput['objectName'].':'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|xss_clean|min_length[8]|max_length[13]');
-				break;
 				case "email":
 					$this->form_validation->set_rules($tminput['objectName'].':'.$tminput['tableKeyName'], $tminput['formLabel'], 'required|valid_email');
 				break;
@@ -200,7 +197,6 @@ class Sis extends MY_Controller {
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
 		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
-		$this->form_validation->set_rules('phone', 'Phone', 'required|xss_clean|min_length[8]|max_length[13]');
 		
 		// This variable will contain ID of newly created user if this function succeeds
 		$newUserID = false;
@@ -215,9 +211,7 @@ class Sis extends MY_Controller {
 			$additional_data = array(
 				'centreID' => $centreID,
 				'firstName' => $this->input->post('first_name'),
-				'lastName'  => $this->input->post('last_name'),
-				'phone'      => $this->input->post('phone'),
-				'address'      => $this->input->post('address')
+				'lastName'  => $this->input->post('last_name')
 			);
 				
 			// Grab input data for dynamic inputs
@@ -278,25 +272,14 @@ class Sis extends MY_Controller {
 				'required' => '',
 				'value' => $this->form_validation->set_value('email'),
 			);
-			$this->data['phone'] = array(
-				'name'  => 'phone',
-				'id'    => 'phone',
-				'type'  => 'tel',
-				'required' => '',
-				'value' => $this->form_validation->set_value('phone'),
-			);
 			
 			// Add extra inputs as required by sport category
-			foreach($teamMemberInputs as $tminput) {				
-				switch($tminput['inputType']) {
-					case "phone": $type = 'tel'; break;
-					default: $type = $tminput['inputType'];
-				}
+			foreach($teamMemberInputs as $tminput) {		
 			
 				$this->data['extraInputs'][ $tminput['objectName'].':'.$tminput['tableKeyName'] ] = array(
 					'name'  => $tminput['objectName'].':'.$tminput['tableKeyName'],
 					'id'    => $tminput['objectName'].':'.$tminput['tableKeyName'],
-					'type'  => $type,
+					'type'  => $tminput['inputType'],
 					'required' => '',
 					'inputType'  => $tminput['inputType'],
 					'formLabel'  => $tminput['formLabel'],
@@ -355,25 +338,14 @@ class Sis extends MY_Controller {
 					'required' => '',
 					'value' => $this->input->post('identity')
 				);
-				$this->data['phone'] = array(
-					'name'  => 'phone',
-					'id'    => 'phone',
-					'type'  => 'tel',
-					'required' => '',
-					'value' => (isset($user['phone']) ? $user['phone'] : '')
-				);
 								
 				// Add extra inputs as required by sport category
 				foreach($teamMemberInputs as $tminput) {
-					switch($tminput['inputType']) {
-						case "phone": $type = 'tel'; break;
-						default: $type = $tminput['inputType'];
-					}
 				
 					$this->data['extraInputs'][ $tminput['objectName'].':'.$tminput['tableKeyName'] ] = array(
 						'name'  => $tminput['objectName'].':'.$tminput['tableKeyName'],
 						'id'    => $tminput['objectName'].':'.$tminput['tableKeyName'],
-						'type'  => $type,
+						'type'  => $tminput['inputType'],
 						'required' => '',
 						'inputType'  => $tminput['inputType'],
 						'formLabel'  => $tminput['formLabel'],
