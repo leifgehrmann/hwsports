@@ -230,7 +230,7 @@ class CI_Loader {
 	 */
 	public function model($model, $name = '', $db_conn = FALSE)
 	{
-		echo "<pre>System core Loader, model() function called, given input variable: $model\n _ci_models contains:  \n"; var_dump($this->_ci_models); echo "</pre><br />"; 
+		//echo "<pre>System core Loader, model() function called, given input variable: $model\n _ci_models contains:  \n"; var_dump($this->_ci_models); echo "</pre><br />"; 
 		// If the input is an array, let's loop through all the inputs and if they aren't already loaded, load them
 		if (is_array($model)) {
 			foreach ($model as $babe) {
