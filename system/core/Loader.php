@@ -231,13 +231,17 @@ class CI_Loader {
 	public function model($model, $name = '', $db_conn = FALSE)
 	{
 		echo "<pre>System core Loader, model() function called, given input variable: $model\n _ci_models contains:  \n"; var_dump($this->_ci_models); echo "</pre><br />"; 
-		if (is_array($model))
-		{
-			foreach ($model as $babe)
-			{
+		// If the input is an array, let's loop through all the inputs and if they aren't already loaded, load them
+		if (is_array($model)) {
+			foreach ($model as $babe) {
+			// If the requested model has already been loaded, skip this array entry
+				if (in_array($name, $this->_ci_models)) continue;
 				$this->model($babe);
 			}
 			return;
+		} else {
+			// If the requested model has already been loaded, return
+			if (in_array($name, $this->_ci_models)) return;
 		}
 
 		if ($model == '')
@@ -260,12 +264,6 @@ class CI_Loader {
 		if ($name == '')
 		{
 			$name = $model;
-		}
-
-		// So this should already be checking if a model is loaded before re-loading it...?
-		if (in_array($name, $this->_ci_models, TRUE))
-		{
-			return;
 		}
 
 		$CI =& get_instance();
