@@ -271,7 +271,7 @@ class Tms extends MY_Controller {
 		);
 		$schedulingDetailsForm = array(
 			array(
-				'name'=>'matchDuraction',
+				'name'=>'matchDuration',
 				'label'=>'Match Duration',
 				'restrict'=>'required|xss_clean|is_natural_no_zero',
 				'type'=>'text'
