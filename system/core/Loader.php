@@ -230,7 +230,7 @@ class CI_Loader {
 	 */
 	public function model($model, $name = '', $db_conn = FALSE)
 	{
-		echo "<pre>System core Loader, model() function called, given input variable: "; var_dump($model); echo "</pre><br />"; 
+		echo "<pre>System core Loader, model() function called, given input variable: $model\n _ci_models contains:  \n {$this->_ci_models}</pre><br />"; 
 		if (is_array($model))
 		{
 			foreach ($model as $babe)
