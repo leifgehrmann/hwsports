@@ -631,7 +631,7 @@ class Ion_auth_model extends MY_Model
 		}
 
 		$this->trigger_events('extra_where');						
-		$query = $this->db->select($this->identity_column . ', email, email, userID, password, active, last_login')
+		$query = $this->db->select('*')
 		                  ->where($this->identity_column, $this->db->escape_str($email))
 		                  ->limit(1)
 		                  ->get($this->tables['users']);
