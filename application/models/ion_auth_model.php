@@ -645,27 +645,6 @@ class Ion_auth_model extends MY_Model
 	}
 
 	/**
-	 * Checks email
-	 *
-	 * @return bool
-	 * @author Mathew
-	 **/
-	public function email_check($email = '')
-	{
-		$this->trigger_events('email_check');
-
-		if (empty($email))
-		{
-			return FALSE;
-		}
-
-		$this->trigger_events('extra_where');
-
-		return $this->db->where('email', $email)
-		                ->count_all_results($this->tables['users']) > 0;
-	}
-
-	/**
 	 * Identity check
 	 *
 	 * @return bool
