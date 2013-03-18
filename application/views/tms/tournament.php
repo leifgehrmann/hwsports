@@ -67,13 +67,13 @@
 		<table>
 			<tr>
 				<td width="40%"><h3>Match Duration</h3><p>Enter in the number of minutes that each match will take.</p></td>
-				<td width="60%"><? form_input($matchDuration) ?></td>
+				<td width="60%"><?= form_input($matchDuration) ?></td>
 			</tr>
 			<tr>
 				<td><h3>Venues</h3><p><p>Select the venues that you want the matches to take place at.</p></p></td>
 				<td>
 					<? if( count($venueOptions) != 0 ) { ?>
-					<?=form_multiselect('venues',$venueOptions,$venueSelections,"class='chzn-select' data-placeholder='Select Venues...' style='width:50%;'")?>
+					<?=form_multiselect('venues',$venueOptions,$venueSelections,"class='chzn-select' data-placeholder='Select Venues...' style='width:300px;'")?>
 					<? } else { ?>
 					<p>There are no venues to add. To add venues, <a href="/tms/venues/">click here</a>.</p>
 					<? } ?>
