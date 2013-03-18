@@ -20,8 +20,8 @@ class MY_Loader extends CI_Loader {
 		//echo "model $model being loaded for the first time"; 
 
         // Call the default method otherwise
-        echo "<br/><pre>";var_dump(parent);echo "</pre>";
-        echo "<br/><pre>";var_dump(get_class_methods(parent));echo "</pre>";
+        //echo "<br/><pre>";var_dump(parent);echo "</pre>";
+        //echo "<br/><pre>";var_dump(get_class_methods(parent));echo "</pre>";
         parent::model($model, $name, $db_conn);
     }
 }
