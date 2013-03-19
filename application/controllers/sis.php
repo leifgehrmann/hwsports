@@ -186,12 +186,11 @@ class Sis extends MY_Controller {
 				// Split object:key by colon to get object and key to add
 				$inputKey = explode(':',$inputKey); 
 				$object = $inputKey[0]; $key = $inputKey[1];
-				var_dump($inputKey); 
+				//var_dump($inputKey); 
 				// Put value into sub array based on object name so we can add data in bulk later
 				$objectData[$object][$key] = $value;
 			}
-			var_dump($objectData);
-			die();
+			//var_dump($objectData); die();
 			
 			// Just in case the insert fails
 			$tournamentActorID = FALSE;
@@ -257,8 +256,8 @@ class Sis extends MY_Controller {
 		}
 		
 		// Set up validation for standard inputs
-		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
-		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
+		$this->form_validation->set_rules('firstName', 'First Name', 'required|xss_clean');
+		$this->form_validation->set_rules('lastName', 'Last Name', 'required|xss_clean');
 		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
 		
 		// This variable will contain ID of newly created user if this function succeeds
@@ -267,31 +266,29 @@ class Sis extends MY_Controller {
 		
 		// Set up input data
 		if ( $this->form_validation->run() ) {
-			$username = $email = $this->input->post('email');
-			$centreID = $this->data['centre']['centreID'];
+			$email = $this->input->post('email');
 			$userIDtoUpdate = $this->input->post('updateUser');
 
-			$additional_data = array(
-				'centreID' => $centreID,
-				'firstName' => $this->input->post('first_name'),
-				'lastName'  => $this->input->post('last_name')
+			$userData = array(
+				'firstName' => $this->input->post('firstName'),
+				'lastName'  => $this->input->post('lastName')
 			);
 				
 			// Grab input data for dynamic inputs
 			foreach($teamMemberInputs as $tminput) {
-				$additional_data[$tminput['objectName'].':'.$tminput['tableKeyName']] = $this->input->post($tminput['objectName'].':'.$tminput['tableKeyName']);
+				$userData[$tminput['tableKeyName']] = $this->input->post($tminput['objectName'].':'.$tminput['tableKeyName']);
 			}
 			
 			if( $userIDtoUpdate ) {
-				$updateUserResponse = $this->users_model->update($userIDtoUpdate,$additional_data);
-				$this->data['user'] = $additional_data;
+				$updateUserResponse = $this->users_model->update($userIDtoUpdate,$userData);
+				$this->data['user'] = $userData;
 				$this->data['user']['id'] = $userIDtoUpdate;
 				$this->data['user']['email'] = $email;
 				$this->data['user']['password'] = "[user specified]";
 			} else {
 				$password = generatePassword();
-				$newUserID = $this->ion_auth->register($username, $password, $email, $additional_data);
-				$this->data['user'] = $additional_data;
+				$newUserID = $this->users_model->register($email,$password,$userData);
+				$this->data['user'] = $userData;
 				$this->data['user']['id'] = $newUserID;
 				$this->data['user']['email'] = $email;
 				$this->data['user']['password'] = $password;
@@ -313,19 +310,19 @@ class Sis extends MY_Controller {
 			//display the add team member form
 			//set the flash data error message if there is one
 
-			$this->data['first_name'] = array(
-				'name'  => 'first_name',
-				'id'    => 'first_name',
+			$this->data['firstName'] = array(
+				'name'  => 'firstName',
+				'id'    => 'firstName',
 				'type'  => 'text',
 				'required' => '',
-				'value' => $this->form_validation->set_value('first_name'),
+				'value' => $this->form_validation->set_value('firstName'),
 			);
-			$this->data['last_name'] = array(
-				'name'  => 'last_name',
-				'id'    => 'last_name',
+			$this->data['lastName'] = array(
+				'name'  => 'lastName',
+				'id'    => 'lastName',
 				'type'  => 'text',
 				'required' => '',
-				'value' => $this->form_validation->set_value('last_name'),
+				'value' => $this->form_validation->set_value('lastName'),
 			);
 			$this->data['email'] = array(
 				'name'  => 'email',
@@ -371,24 +368,24 @@ class Sis extends MY_Controller {
 		}
 		
 		//validate form input
-		$this->form_validation->set_rules('identity', 'Identity', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		
 		if ($this->form_validation->run() == true) {
-			$userID = $this->ion_auth->account_check($this->input->post('identity'), $this->input->post('password'));
+			$userID = $this->ion_auth->account_check($this->input->post('email'), $this->input->post('password'));
 			if ( $userID !== false ) {
 				// log in details valid, get user data
 				$user = $this->users_model->get($userID);
-				$this->data['first_name'] = array(
-					'name'  => 'first_name',
-					'id'    => 'first_name',
+				$this->data['firstName'] = array(
+					'name'  => 'firstName',
+					'id'    => 'firstName',
 					'type'  => 'text',
 					'required' => '',
 					'value' => (isset($user['firstName']) ? $user['firstName'] : '')
 				);
-				$this->data['last_name'] = array(
-					'name'  => 'last_name',
-					'id'    => 'last_name',
+				$this->data['lastName'] = array(
+					'name'  => 'lastName',
+					'id'    => 'lastName',
 					'type'  => 'text',
 					'required' => '',
 					'value' => (isset($user['lastName']) ? $user['lastName'] : '')
@@ -398,7 +395,7 @@ class Sis extends MY_Controller {
 					'id'    => 'email',
 					'type'  => 'email',
 					'required' => '',
-					'value' => $this->input->post('identity')
+					'value' => $this->input->post('email')
 				);
 								
 				// Add extra inputs as required by sport category
@@ -428,8 +425,8 @@ class Sis extends MY_Controller {
 			}
 		} else {
 			//the user is not logging in so display the login page
-			$this->data['identity'] = array('name' => 'identity',
-				'id' => 'identity',
+			$this->data['email'] = array('name' => 'email',
+				'id' => 'email',
 				'type' => 'text'
 			);
 			$this->data['password'] = array('name' => 'password',

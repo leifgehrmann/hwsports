@@ -25,12 +25,13 @@
 											<td>Name</td>
 											<td>Email</td>
 											<td>Password</td>
+											<td></td>
 										</tr>
 									</thead>
 									<tbody class="teamMembers"></tbody>
 									<tfoot class="functions">
 										<tr>
-											<td colspan="4">
+											<td colspan="5">
 												<a href="/sis/addTeamMember/<?=$tournament['tournamentID']?>/<?=$sectionID?>" class="button green addTeamMember fancybox.ajax">Add Player<br />(Create New Account)</a>
 												<a href="/sis/addLoginTeamMember/<?=$tournament['tournamentID']?>/<?=$sectionID?>" class="button blue addTeamMember addLoginTeamMember fancybox.ajax">Add Player<br />(Existing Account)</a>
 											</td>

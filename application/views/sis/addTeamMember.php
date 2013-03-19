@@ -1,7 +1,7 @@
 <div class="fancyform">
 	<? if(!empty($success)) { ?>
 	<script type="text/javascript">
-	$('tbody.teamMembers').append('<tr><td class="teamMemberUserID"><?=$user['id']?></td><td><?=$user['firstName'].' '.$user['lastName']?></td><td><?=$user['email']?></td><td><?=$user['password']?></td></tr>');
+	$('tbody.teamMembers').append('<tr class="teamMemberRow"><td class="teamMemberUserID"><?=$user['id']?></td><td><?=$user['firstName'].' '.$user['lastName']?></td><td><?=$user['email']?></td><td><?=$user['password']?></td><td><a href="#" onclick="$(this).parents(\"tr\").remove();" class="deleteTeamMember">(X)</a></td></tr>');
 	$.fancybox.close();
 	</script>
 	<? } else { ?>
@@ -19,9 +19,9 @@
 		<tbody class="standardInputs">
 			<tr>
 				<td>First Name:</td>
-				<td><?php echo form_input($first_name);?></td>
+				<td><?php echo form_input($firstName);?></td>
 				<td>Last Name: </td>
-				<td><?php echo form_input($last_name);?></td>
+				<td><?php echo form_input($lastName);?></td>
 			</tr>
 			<tr>
 			</tr>
