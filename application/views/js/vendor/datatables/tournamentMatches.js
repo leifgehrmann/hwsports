@@ -48,8 +48,6 @@
 				"onEdit": function (json, data) {
 				},
 				"onOpen": function ( settings, json ) {
-				},
-				"onInitRemove": function() {
 				}
 			}
 		} );
