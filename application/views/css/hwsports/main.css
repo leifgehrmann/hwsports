@@ -564,6 +564,36 @@ div.icon.dalek-white									{ background-position: -580px -540px; }
 .sportCategoryID-45 div.icon { background-position: -560px -420px; } /* Miscellaneous */
 .sportCategoryID-46 div.icon { background-position: -400px -260px; } /* Running */
 
+.sportID-9	div.icon					{ background-position: -380px -260px; } /* Hurdling */
+
+/* For titles*/
+#content h1 div.icon.subsection 						{ background-position:  -20px  -80px; }
+
+/* For widgets */
+div.widget-title div.icon                               { background-position:   20px   20px; }
+div.widget-title div.icon.chevron                       { background-position: -120px  -60px; }
+div.widget-title div.icon.announcement                  { background-position: -160px -280px; }
+a div.widget-title-right.icon 							{ background-position: -120px  -60px; }
+div.widget.scheduling       div.widget-title-left.icon  { background-position: -40px  -280px; }
+div.widget.announcement     div.widget-title-left.icon  { background-position: -40px  -600px; }
+div.widget.tournaments      div.widget-title-left.icon  { background-position: -40px  -300px; }
+div.widget.tournament       div.widget-title-left.icon 	{ background-position: -40px  -300px; }
+div.widget.matches          div.widget-title-left.icon  { background-position: -40px  -320px; }
+div.widget.match            div.widget-title-left.icon 	{ background-position: -40px  -320px; }
+div.widget.welcome-message  div.widget-title-left.icon 	{ background-position: -40px  -260px; }
+div.widget.subscribe        div.widget-title-left.icon 	{ background-position: -40px  -460px; }
+div.widget.profile          div.widget-title-left.icon 	{ background-position: -40px  -380px; }
+div.widget.signup           div.widget-title-left.icon 	{ background-position: -40px  -460px; }
+div.widget.tickets          div.widget-title-left.icon 	{ background-position: -40px  -340px; }
+div.widget.participation    div.widget-title-left.icon 	{ background-position: -40px  -460px; }
+div.widget.tms              div.widget-title-left.icon 	{ background-position: -40px  -480px; }
+
+/* Used to overide generic icons, for example show football instead of just tournament cup */
+div.widget-title div.icon.sport-wattball 				{ background-position: -320px -220px; }
+div.widget-title div.icon.sport-hurdling 				{ background-position: -380px -220px; }
+div.widget-title div.icon.chevron 		 				{ background-position: -120px  -60px; }
+div.widget-title div.icon.news			 				{ background-position: -160px -280px; }
+
 /* For sport icons */
 .sportCategoryID-1 div.widget-title-left.icon	{ background-position: -560px -280px; } /* Airsports */
 .sportCategoryID-2 div.widget-title-left.icon	{ background-position: -420px -360px; } /* Archery variants */
@@ -612,36 +642,7 @@ div.icon.dalek-white									{ background-position: -580px -540px; }
 .sportCategoryID-45 div.widget-title-left.icon	{ background-position: -560px -440px; } /* Miscellaneous */
 .sportCategoryID-46 div.widget-title-left.icon	{ background-position: -400px -280px; } /* Running */
 
-.sportID-9	div.icon					{ background-position: -380px -260px; } /* Hurdling */
 .sportID-9 	div.widget-title-left.icon	{ background-position: -380px -280px; } /* Hurdling */
-
-/* For titles*/
-#content h1 div.icon.subsection 						{ background-position:  -20px  -80px; }
-
-/* For widgets */
-div.widget-title div.icon                               { background-position:   20px   20px; }
-div.widget-title div.icon.chevron                       { background-position: -120px  -60px; }
-div.widget-title div.icon.announcement                  { background-position: -160px -280px; }
-a div.widget-title-right.icon 							{ background-position: -120px  -60px; }
-div.widget.scheduling       div.widget-title-left.icon  { background-position: -40px  -280px; }
-div.widget.announcement     div.widget-title-left.icon  { background-position: -40px  -600px; }
-div.widget.tournaments      div.widget-title-left.icon  { background-position: -40px  -300px; }
-div.widget.tournament       div.widget-title-left.icon 	{ background-position: -40px  -300px; }
-div.widget.matches          div.widget-title-left.icon  { background-position: -40px  -320px; }
-div.widget.match            div.widget-title-left.icon 	{ background-position: -40px  -320px; }
-div.widget.welcome-message  div.widget-title-left.icon 	{ background-position: -40px  -260px; }
-div.widget.subscribe        div.widget-title-left.icon 	{ background-position: -40px  -460px; }
-div.widget.profile          div.widget-title-left.icon 	{ background-position: -40px  -380px; }
-div.widget.signup           div.widget-title-left.icon 	{ background-position: -40px  -460px; }
-div.widget.tickets          div.widget-title-left.icon 	{ background-position: -40px  -340px; }
-div.widget.participation    div.widget-title-left.icon 	{ background-position: -40px  -460px; }
-div.widget.tms              div.widget-title-left.icon 	{ background-position: -40px  -480px; }
-
-/* Used to overide generic icons, for example show football instead of just tournament cup */
-div.widget-title div.icon.sport-wattball 				{ background-position: -320px -220px; }
-div.widget-title div.icon.sport-hurdling 				{ background-position: -380px -220px; }
-div.widget-title div.icon.chevron 		 				{ background-position: -120px  -60px; }
-div.widget-title div.icon.news			 				{ background-position: -160px -280px; }
 
 /* For fullcalendar */
 .fc .tournament div.fc-event-inner::before 				{ background-position: -40px  -300px; }
