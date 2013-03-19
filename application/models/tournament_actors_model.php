@@ -79,7 +79,7 @@ class Tournament_actors_model extends MY_Model {
 	}
 
 	/**
-	 * Deletes a tournament with data.
+	 * Deletes a tournamentActor with data.
 	 * Also deletes all objects which depend on it. 
 	 * If $testRun is TRUE, no deletion occurs. Instead, a string is returned showing all deletions which would occur otherwise.
 	 * Returns TRUE on success.
