@@ -345,7 +345,7 @@ class Sis extends MY_Controller {
 					'required' => '',
 					'inputType'  => $tminput['inputType'],
 					'formLabel'  => $tminput['formLabel'],
-					'value' => $this->form_validation->set_value($tminput['objectName'].':'.$tminput['tableKeyName']) ),
+					'value' => $this->form_validation->set_value($tminput['objectName'].':'.$tminput['tableKeyName']),
 				);
 			}
 
