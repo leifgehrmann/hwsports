@@ -1,7 +1,7 @@
-	var editor; // use a global for the submit and return data rendering in the examples
+	var tournamentUmpiresEditor; // use a global for the submit and return data rendering in the examples
 	
 	$(document).ready(function() {
-		editor = new $.fn.dataTable.Editor( {
+		tournamentUmpiresEditor = new $.fn.dataTable.Editor( {
 			"ajaxUrl": "/datatables/tournamentUmpires/"+$('#tournamentID').html(),
 			"domTable": "#tournamentUmpires",
 			"fields": [ {
@@ -66,9 +66,9 @@
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
 				"sRowSelect": "single",
 				"aButtons": [
-					{ "sExtends": "editor_create", "sButtonText": "Add Umpire to Tournament", "editor": editor },
-					{ "sExtends": "editor_edit", "sButtonText": "Edit User", "editor": editor },
-					{ "sExtends": "editor_remove", "sButtonText": "Remove from Tournament", "editor": editor },
+					{ "sExtends": "editor_create", "sButtonText": "Add Umpire to Tournament", "editor": tournamentUmpiresEditor },
+					{ "sExtends": "editor_edit", "sButtonText": "Edit User", "editor": tournamentUmpiresEditor },
+					{ "sExtends": "editor_remove", "sButtonText": "Remove from Tournament", "editor": tournamentUmpiresEditor },
 					"select_all", 
 					"select_none",
 					{

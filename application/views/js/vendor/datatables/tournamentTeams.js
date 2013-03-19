@@ -1,7 +1,7 @@
-	var editor; // use a global for the submit and return data rendering in the examples
+	var tournamentTeamsEditor; // use a global for the submit and return data rendering in the examples
 	
 	$(document).ready(function() {
-		editor = new $.fn.dataTable.Editor( {
+		tournamentTeamsEditor = new $.fn.dataTable.Editor( {
 			"ajaxUrl": "/datatables/tournamentTeams/"+$('#tournamentID').html(),
 			"domTable": "#tournamentTeams",
 			"fields": [ {
@@ -46,9 +46,9 @@
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
 				"sRowSelect": "single",
 				"aButtons": [
-					{ "sExtends": "editor_create", "editor": editor },
-					{ "sExtends": "editor_edit",   "editor": editor },
-					{ "sExtends": "editor_remove", "editor": editor },
+					{ "sExtends": "editor_create", "editor": tournamentTeamsEditor },
+					{ "sExtends": "editor_edit",   "editor": tournamentTeamsEditor },
+					{ "sExtends": "editor_remove", "editor": tournamentTeamsEditor },
 					"select_all", 
 					"select_none",
 					{
@@ -71,7 +71,6 @@
 				]
 			},
 			"fnInitComplete": function ( settings, json ) {
-				//editor.field('sportCategoryID').update( json.sportCategories );
 			}
 		} );
 		
