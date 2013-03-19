@@ -6,8 +6,7 @@
 			"domTable": "#tournamentTeams",
 			"fields": [ {
 					"label": "Team ID",
-					"name": "teamID",
-					"type": "hidden"
+					"name": "teamID"
 				}, {
 					"label": "Name",
 					"name": "name"
@@ -25,6 +24,9 @@
 				"onEdit": function (json, data) {
 				},
 				"onOpen": function ( settings, json ) {
+					if( $('.DTE_Action_Create').length ) {
+						$('.DTE_Field_Name_teamID').siblings('.DTE_Field').remove();
+					}
 				}
 			}
 		} );

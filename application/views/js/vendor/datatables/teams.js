@@ -6,8 +6,7 @@
 			"domTable": "#teams",
 			"fields": [ {
 					"label": "Team ID",
-					"name": "teamID",
-					"type": "hidden"
+					"name": "teamID"
 				}, {
 					"label": "Name",
 					"name": "name"
