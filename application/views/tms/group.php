@@ -15,6 +15,7 @@
 		</thead>
 	</table>
 	<div class="spacer"></div>
+	<div id="groupID" style="display:none;"><?=$team['groupID']?></div>
 </div><!-- /#main -->
 
 <script src="/js/vendor/datatables/groupUsers.js"></script>
