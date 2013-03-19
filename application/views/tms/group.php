@@ -1,12 +1,13 @@
 <h1>Users in Group: "<?=$group['name']?>"</h1>
-<a href="/tms/fixGroups/<?=$group['groupID']?>">Fix permissions</a>(Add ungrouped users to this group)<br />
+<a href="/tms/fixGroups/<?=$group['groupID']?>">Fix permissions</a> (Add ungrouped users to this group)<br />
 <br />
 <div id="main">
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="groupUsers" width="100%">
 		<thead>
 			<tr>
 				<th>User ID</th>
-				<th>Name</th>
+				<th>First Name</th>
+				<th>Last Name</th>
 				<th>Email</th>
 				<th>Phone</th>
 				<th>Address</th>
