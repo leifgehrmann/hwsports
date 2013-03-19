@@ -31,6 +31,12 @@ class Tms extends MY_Controller {
 			//redirect them to the sis homepage
 			redirect('/', 'refresh');
 		}
+		
+		$this->data['message'] = $this->session->flashdata('message');
+		$this->data['message_information'] = $this->session->flashdata('message_information');
+		$this->data['message_success'] = $this->session->flashdata('message_success');
+		$this->data['message_warning'] = $this->session->flashdata('message_warning');
+		$this->data['message_error'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message_error')));
 	}
 
 	/**
@@ -197,10 +203,7 @@ class Tms extends MY_Controller {
 			}
 			redirect("/tms/tournament/$tournamentID", 'refresh');
 		} else {
-			//display the create user form
-			//set the flash data error message if there is one
-			$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
-		
+			//display the create user form		
 			$this->data['tournaments'] = $this->tournaments_model->get_all();
 		
 			$this->data['sports'] = array();
@@ -471,10 +474,7 @@ class Tms extends MY_Controller {
 			$this->data['venueOptions'] = $venueOptions;
 			$this->data['venueSelections'] = $venueSelections;
 		}
-
-		//set the flash data error message if there is one
-		$this->data['message_success'] = $this->session->flashdata('message_success');
-		$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
+		
 		$this->view('tournament',"tournament","Tournament",$this->data);
 	}
 	
@@ -695,8 +695,6 @@ class Tms extends MY_Controller {
 			redirect("/tms/settings", 'refresh');
 		} else {
 			//display the create user form
-			//set the flash data error message if there is one
-			$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
 			
 			for($i=0;$i<7;$i++){
 				$this->data[$weekdaysShort[$i].'Open'] = array(
@@ -747,8 +745,6 @@ class Tms extends MY_Controller {
 			redirect("/tms/appearance", 'refresh');
 		} else {
 			//display the create user form
-			//set the flash data error message if there is one
-			$this->data['message_error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message_error') );
 			
 			$this->data['name'] = array(
 				'name'  => 'name',
