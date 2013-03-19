@@ -211,7 +211,7 @@ class Sis extends MY_Controller {
 						// and add the tournament-specific data for this user to the tournamentActorData
 						$tournamentActorRelations = array(
 							'tournamentID' => $tournamentID,
-							'actorID' => $this->currentUser['userID'],
+							'actorID' => (isset($teamID) ? $teamID : $this->currentUser['userID']),
 							'roleID' => $roleID
 						);
 						if($this->objects_models['tournament_actors']->check_if_actor($tournamentID,$this->currentUser['userID'],$roleID)) {
