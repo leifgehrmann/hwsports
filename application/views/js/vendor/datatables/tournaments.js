@@ -77,7 +77,13 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 				{ "mData": "sportData.name" },
 				{ "mData": "detailsLink" }
 			],
+			"fnRowCallback": function( nRow, aData, iDisplayIndex ) {
+				nRow.className = "sportCategoryID-18";
+				return nRow;
+			},
 			"aoColumnDefs": [
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 3 ] },
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 4 ] },
             ],
 			"oTableTools": {
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
