@@ -161,102 +161,6 @@ class Datatables extends MY_Controller {
 	}
 	
 	// Handle filtered user tables slightly differently as we're only showing a subset of the users based on a where clause, and we only want to add new users by email search 
-	public function teamUsers($teamID) {
-		switch ($this->action) {
-			case "load":
-				// Query the teamsUsers table for all users in this team, then add a where clause for each
-				$teamUsersRows = $this->db->get_where('teamsUsers',array('teamID' => $teamID))->result_array();
-				$teamUserCount = count($teamUsersRows);
-				if($teamUserCount) {
-					for($i=0; $i<$teamUserCount; $i++) {
-						if($i==0) $this->db->where(array('userID' => $teamUsersRows[0]['userID']));
-						else $this->db->or_where(array('userID' => $teamUsersRows[$i]['userID']));
-					}
-				} else {
-					$this->db->where(array('userID' => -1));
-				}
-				$this->data('users');
-			break;
-			case "create":
-				$user = $this->users_model->find_by_email($_POST['data']['email']);
-				if($user===FALSE) {
-					$out = array('error' => "Email could not be found in database. Please try again or contact Infusion Systems.");
-					$this->load->view('data', array('data' => json_encode($out)) );
-					return;
-				}
-					
-				if($this->db->insert('teamsUsers', array('teamID'=>$teamID, 'userID'=>$user['userID']) )) {
-					$user['detailsLink'] = "<a href='/tms/user/{$user['userID']}' class='button'>Details</a>";
-					$out = array('id' => "users-{$user['userID']}", 'row' => $user);
-				} else {
-					$out = array('error' => "User could not be added to team. Please try again or contact Infusion Systems.");
-				}
-				$this->load->view('data', array('data' => json_encode($out)) );
-			break;
-			case "edit":
-				$this->data('users');
-			break;
-			case "remove":
-				// Get the userID to delete from the teamsUsers table
-				$delete_type_id = explode('-',$_POST['data']['id']);
-				$ID = $delete_type_id[1];
-				$deleteOutput = $this->db->delete('teamsUsers', array('teamID' => $teamID, 'userID' => $ID));
-				// Define the return value based on deletion success
-				$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
-				$this->load->view('data', array('data' => json_encode($out)) );
-			break;
-		}
-	}
-	
-	// Handle filtered user tables slightly differently as we're only showing a subset of the users based on a where clause, and we only want to add new users by email search 
-	public function groupUsersOld($groupID) {
-		switch ($this->action) {
-			case "load":
-				// Query the usersGroups table for all users in this team, then add a where clause for each
-				$groupUsersRows = $this->db->get_where('usersGroups',array('groupID' => $groupID))->result_array();
-				$groupUserCount = count($groupUsersRows);
-				if($groupUserCount) {
-					for($i=0; $i<$groupUserCount; $i++) {
-						if($i==0) $this->db->where(array('userID' => $groupUsersRows[0]['userID']));
-						else $this->db->or_where(array('userID' => $groupUsersRows[$i]['userID']));
-					}
-				} else {
-					$this->db->where(array('userID' => -1));
-				}
-				$this->data('users');
-			break;
-			case "create":
-				$user = $this->users_model->find_by_email($_POST['data']['email']);
-				if($user===FALSE) {
-					$out = array('error' => "Email could not be found in database. Please try again or contact Infusion Systems.");
-					$this->load->view('data', array('data' => json_encode($out)) );
-					return;
-				}
-					
-				if($this->db->insert('usersGroups', array('groupID'=>$groupID, 'userID'=>$user['userID']) )) {
-					$user['detailsLink'] = "<a href='/tms/user/{$user['userID']}' class='button'>Details</a>";
-					$out = array('id' => "users-{$user['userID']}", 'row' => $user);
-				} else {
-					$out = array('error' => "User could not be added to team. Please try again or contact Infusion Systems.");
-				}
-				$this->load->view('data', array('data' => json_encode($out)) );
-			break;
-			case "edit":
-				$this->data('users');
-			break;
-			case "remove":
-				// Get the userID to delete from the usersGroups table
-				$delete_type_id = explode('-',$_POST['data']['id']);
-				$ID = $delete_type_id[1];
-				$deleteOutput = $this->db->delete('usersGroups', array('groupID' => $groupID, 'userID' => $ID));
-				// Define the return value based on deletion success
-				$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
-				$this->load->view('data', array('data' => json_encode($out)) );
-			break;
-		}
-	}
-	
-	// Handle filtered user tables slightly differently as we're only showing a subset of the users based on a where clause, and we only want to add new users by email search 
 	public function filtered_users($filtered_userIDs,$relationTable,$relations,$userIDKey="userID") {
 		switch ($this->action) {
 			case "load":
@@ -314,10 +218,24 @@ class Datatables extends MY_Controller {
 	public function groupUsers($groupID) {
 		$relationTable = 'usersGroups';
 		$relations = array('groupID' => $groupID);
-		$usersGroupsRows = $this->db->get_where($relationTable,$relations)->result_array();
+		$filteredRows = $this->db->get_where($relationTable,$relations)->result_array();
 		$filtered_userIDs = array();
-		foreach($usersGroupsRows as $usersGroupsRow) {
-			$filtered_userIDs[] = $usersGroupsRow['userID'];
+		foreach($filteredRows as $filteredRow) {
+			$filtered_userIDs[] = $filteredRow['userID'];
+		}
+		$this->filtered_users($filtered_userIDs,$relationTable,$relations);
+	}
+	
+	// Handle datatables requests for the teamsUsers table, which displays users in a specific team, using the many to many table "teamsUsers" with fields "teamID" and "userID"
+	// The idea here is to use the main data method above as much as possible, as if we were simply dealing with the users table,
+	// but filter the initial output by teamID from teamsUsers first. The create function should also be vetoed, and act only as a simple insert into "teamsUsers". Same for delete.
+	public function teamUsers($teamID) {
+		$relationTable = 'teamsUsers';
+		$relations = array('teamID' => $teamID);
+		$filteredRows = $this->db->get_where($relationTable,$relations)->result_array();
+		$filtered_userIDs = array();
+		foreach($filteredRows as $filteredRow) {
+			$filtered_userIDs[] = $filteredRow['userID'];
 		}
 		$this->filtered_users($filtered_userIDs,$relationTable,$relations);
 	}
