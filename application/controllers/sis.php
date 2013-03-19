@@ -7,6 +7,12 @@ class Sis extends MY_Controller {
 		parent::__construct();
 
 		$this->data['currentUser'] = $currentUser = $this->users_model->get_logged_in();
+		
+		$this->data['message'] = $this->session->flashdata('message');
+		$this->data['message_information'] = $this->session->flashdata('message_information');
+		$this->data['message_success'] = $this->session->flashdata('message_success');
+		$this->data['message_warning'] = $this->session->flashdata('message_warning');
+		$this->data['message_error'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
 	}
 	
 	/**
@@ -40,7 +46,6 @@ class Sis extends MY_Controller {
 	public function index() {
 		
 		//set the flash data error message if there is one
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		$this->view('home','sishome','Home',$this->data);
 	}
 
@@ -131,7 +136,6 @@ class Sis extends MY_Controller {
 	public function account()
 	{
 		//set the flash data error message if there is one
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		$this->view('account','account','Account',$this->data);
 	}
 	
@@ -299,7 +303,6 @@ class Sis extends MY_Controller {
 		} else {
 			//display the add team member form
 			//set the flash data error message if there is one
-			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
 
 			$this->data['first_name'] = array(
 				'name'  => 'first_name',
@@ -416,12 +419,6 @@ class Sis extends MY_Controller {
 			}
 		} else {
 			//the user is not logging in so display the login page
-			$this->data['message'] = $this->session->flashdata('message');
-			$this->data['message_information'] = $this->session->flashdata('message_information');
-			$this->data['message_success'] = $this->session->flashdata('message_success');
-			$this->data['message_warning'] = $this->session->flashdata('message_warning');
-			$this->data['message_error'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message_error');
-			
 			$this->data['identity'] = array('name' => 'identity',
 				'id' => 'identity',
 				'type' => 'text'
