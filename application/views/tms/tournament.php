@@ -127,47 +127,59 @@
 	<p>Displayed below are a list of matches for the tournament. You can edit a match description</p>
 	<pre>IF IT IS A TEAM SPORT, TEAMS A and TEAM B SHOULD BE EDITABLE.</pre>
 	<pre>IF IT IS A NOT A TEAM SPORT, MATCHES THAT HAVEN'T ALREADY OCCURED CAN BE MOVED TO ANOTHER DATE AND TIME. NO RESITRCTIONS SHOULD BE MADE.</pre>
-	<table cellpadding="0" cellspacing="0" border="0" class="display" id="matches" width="100%">
+
+	<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentMatches" width="100%">
 		<thead>
 			<tr>
 				<th>ID</th>
 				<th>Name</th>
+				<th>Tournament</th>
 				<th>Start Time</th>
 				<th>End Time</th>
 				<th>Description</th>
+				<th>Sport</th>
 				<th>Venue</th>
 				<th width="5%">&nbsp;</th>
 			</tr>
 		</thead>
 	</table>
+	<script src="/js/vendor/datatables/tournamentMatches.js"></script>
 </div>
 <div class="tournamentTeams">
 	<h2>Teams</h2>
-	<table cellpadding="0" cellspacing="0" border="0" class="display" id="matches" width="100%">
+		<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentTeams" width="100%">
 		<thead>
 			<tr>
-				<th>Team</th>
-				<th>Association Number</th>
-				<th>Description</th>
+				<th width="30%">Team ID</th>
+				<th width="30%">Name</th>
+				<th width="30%">Description</th>
+				<th width="30%">Association Number</th>
 				<th width="5%">&nbsp;</th>
 			</tr>
 		</thead>
 	</table>
-	<p>Or athletes or whatever, point is that we have a series of roles to display here each with the meta data? </p>
+	<script src="/js/vendor/datatables/tournamentTeams.js"></script>
 </div>
 <div class="tournamentUmpires">
 	<h2>Umpires</h2>
-	<table cellpadding="0" cellspacing="0" border="0" class="display" id="matches" width="100%">
+	<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentUmpires" width="100%">
 		<thead>
 			<tr>
-				<th>Team</th>
-				<th>Association Number</th>
-				<th>Description</th>
+				<th>User ID</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Phone</th>
+				<th>Address</th>
+				<th>About</th>
 				<th width="5%">&nbsp;</th>
 			</tr>
 		</thead>
 	</table>
+	<script src="/js/vendor/datatables/tournamentUmpires.js"></script>
 </div>
+
+<div id="tournamentID" style="display:none;"><?=$tournamentID?></div>
 
 <script type="text/javascript">
 	$('.date').datetimepicker({

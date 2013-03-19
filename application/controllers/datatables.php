@@ -216,28 +216,43 @@ class Datatables extends MY_Controller {
 	// The idea here is to use the main data method above as much as possible, as if we were simply dealing with the users table,
 	// but filter the initial output by groupID from usersGroups first. The create function should also be vetoed, and act only as a simple insert into "usersGroups". Same for delete.
 	public function groupUsers($groupID) {
+		$userIDKey = 'userID';
 		$relationTable = 'usersGroups';
 		$relations = array('groupID' => $groupID);
 		$filteredRows = $this->db->get_where($relationTable,$relations)->result_array();
 		$filtered_userIDs = array();
 		foreach($filteredRows as $filteredRow) {
-			$filtered_userIDs[] = $filteredRow['userID'];
+			$filtered_userIDs[] = $filteredRow[$userIDKey];
 		}
-		$this->filtered_users($filtered_userIDs,$relationTable,$relations);
+		$this->filtered_users($filtered_userIDs,$relationTable,$relations,$userIDKey);
 	}
 	
 	// Handle datatables requests for the teamsUsers table, which displays users in a specific team, using the many to many table "teamsUsers" with fields "teamID" and "userID"
 	// The idea here is to use the main data method above as much as possible, as if we were simply dealing with the users table,
 	// but filter the initial output by teamID from teamsUsers first. The create function should also be vetoed, and act only as a simple insert into "teamsUsers". Same for delete.
 	public function teamUsers($teamID) {
+		$userIDKey = 'userID';
 		$relationTable = 'teamsUsers';
 		$relations = array('teamID' => $teamID);
 		$filteredRows = $this->db->get_where($relationTable,$relations)->result_array();
 		$filtered_userIDs = array();
 		foreach($filteredRows as $filteredRow) {
-			$filtered_userIDs[] = $filteredRow['userID'];
+			$filtered_userIDs[] = $filteredRow[$userIDKey];
 		}
-		$this->filtered_users($filtered_userIDs,$relationTable,$relations);
+		$this->filtered_users($filtered_userIDs,$relationTable,$relations,$userIDKey);
+	}
+	
+	// Handle datatables requests for the tournamentActors table, referencing the umpire role (roleID 1) which displays umpires in a specific tournament, with cool tournamentActor relations.
+	public function $tournamentUmpires($tournamentID) {
+		$userIDKey = 'actorID';
+		$relationTable = 'tournamentActors';
+		$relations = array('tournamentID' => $tournamentID, 'roleID' => 1);
+		$filteredRows = $this->db->get_where($relationTable,$relations)->result_array();
+		$filtered_userIDs = array();
+		foreach($filteredRows as $filteredRow) {
+			$filtered_userIDs[] = $filteredRow[$userIDKey];
+		}
+		$this->filtered_users($filtered_userIDs,$relationTable,$relations,$userIDKey);
 	}
 	
 	// Show the user what *exactly* will happen when they click delete
