@@ -69,8 +69,6 @@
 					{ "sExtends": "editor_create", "sButtonText": "Add User as Umpire", "editor": tournamentUmpiresEditor },
 					{ "sExtends": "editor_edit", "sButtonText": "Edit User", "editor": tournamentUmpiresEditor },
 					{ "sExtends": "editor_remove", "sButtonText": "Remove from Tournament", "editor": tournamentUmpiresEditor },
-					"select_all", 
-					"select_none",
 					{
 						"sExtends":    "collection",
 						"sButtonText": "Export",
