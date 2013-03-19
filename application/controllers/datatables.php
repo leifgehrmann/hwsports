@@ -70,6 +70,7 @@ class Datatables extends MY_Controller {
 					}
 					if(isset($object['sportData'])) {
 						$object['sportIcon'] = "<div class='icon sportCategoryID-".$object['sportData']['sportCategoryID']." sportID-".$object['sportData']['sportID']."'></div>";
+						$object['class'] = "sportCategoryID-".$object['sportData']['sportCategoryID']." sportID-".$object['sportData']['sportID'];
 					}
 					$object['detailsLink'] = "<a href='/tms/{$this->singulars[$type]}/$ID' class='button'>Details</a>";
 					// Create / add to the aaData rows array, ready to be jsonified
