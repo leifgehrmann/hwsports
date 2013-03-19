@@ -68,6 +68,7 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 			"aoColumns": [
 				{ "mData": "userID" },
 				{ "mData": "firstName" },
+				{ "mData": "lastName" },
 				{ "mData": "email" },
 				{ "mData": "phone", "sDefaultContent": "" },
 				{ "mData": "address", "sDefaultContent": "" },
