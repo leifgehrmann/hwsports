@@ -184,6 +184,8 @@ class Sis extends MY_Controller {
 				$objectData[$object][$key] = $value;
 			}
 			
+			var_dump($objectData); die();
+			
 			// Just in case the insert fails
 			$tournamentActorID = FALSE;
 			
