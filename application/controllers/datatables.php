@@ -243,7 +243,7 @@ class Datatables extends MY_Controller {
 	}
 	
 	// Handle datatables requests for the tournamentActors table, referencing the umpire role (roleID 1) which displays umpires in a specific tournament, with cool tournamentActor relations.
-	public function $tournamentUmpires($tournamentID) {
+	public function tournamentUmpires($tournamentID) {
 		$userIDKey = 'actorID';
 		$relationTable = 'tournamentActors';
 		$relations = array('tournamentID' => $tournamentID, 'roleID' => 1);
