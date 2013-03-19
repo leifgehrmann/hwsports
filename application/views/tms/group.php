@@ -1,4 +1,4 @@
-<h1><?=$group['name']?>: Group Users</h1>
+<h1>Users in Group: "<?=$group['name']?>"</h1>
 
 <div id="main">
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="groupUsers" width="100%">
