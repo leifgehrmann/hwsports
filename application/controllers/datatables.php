@@ -299,7 +299,7 @@ class Datatables extends MY_Controller {
 				// This input array should already have whatever other IDs are required in the many-to-many table (such as groupID=>1)
 				$deleteData = $relations;
 				// Add the user ID to the insert data
-				$deleteData[$userIDKey] = $user['userID'];
+				$deleteData[$userIDKey] = $ID;
 				$deleteOutput = $this->db->delete($relationTable, $deleteData);
 				// Define the return value based on deletion success
 				$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
