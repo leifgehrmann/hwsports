@@ -214,6 +214,10 @@ class Tms extends MY_Controller {
 
 			foreach($tournamentDetailsForm as $input){
 				if(array_key_exists('type',$input)){
+					if($input['name']=="description"){
+						$this->data[$input['name']]['style'] = 'width:100%;';
+						$this->data[$input['name']]['rows'] = '5';
+					}
 					if($input['type']=="date"){
 						$this->data[$input['name']] = array(
 							'name'  => $input['name'],

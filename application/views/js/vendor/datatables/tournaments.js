@@ -62,7 +62,7 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 			}
 		} );
 
-		$('#matches').dataTable( {
+		$('#tournaments').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/data/tournaments",
 			"aoColumns": [
