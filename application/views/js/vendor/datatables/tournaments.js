@@ -82,8 +82,8 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 				return nRow;
 			},
 			"aoColumnDefs": [
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 3 ] },
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 4 ] },
+				{ "bSortable": false, "aTargets": [ 0, 7 ] },
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 3, 4 ] }
             ],
 			"oTableTools": {
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",

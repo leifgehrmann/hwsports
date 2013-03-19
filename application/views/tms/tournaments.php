@@ -5,7 +5,7 @@
 		<thead>
 			<tr>
 				<th width="2%">&nbsp;</th>
-				<th>ID</th>
+				<th width="3%">ID</th>
 				<th>Name</th>
 				<th>Start Time</th>
 				<th>End Time</th>
