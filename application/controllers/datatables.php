@@ -209,7 +209,7 @@ class Datatables extends MY_Controller {
 	}
 	
 	// Handle filtered user tables slightly differently as we're only showing a subset of the users based on a where clause, and we only want to add new users by email search 
-	public function groupUsers($groupID) {
+	public function groupUsersOld($groupID) {
 		switch ($this->action) {
 			case "load":
 				// Query the usersGroups table for all users in this team, then add a where clause for each
@@ -257,24 +257,14 @@ class Datatables extends MY_Controller {
 	}
 	
 	// Handle filtered user tables slightly differently as we're only showing a subset of the users based on a where clause, and we only want to add new users by email search 
-	public function filtered_users($relationTable,$where) {
+	public function filtered_users($filtered_userIDs,$relationTable,$relations,$userIDKey="userID") {
 		switch ($this->action) {
 			case "load":
-				// Query the usersGroups table for all users in this team, then add a where clause for each
-				$filteredUsersRows = $this->db->get_where($relationTable,$where)->result_array();
-				var_dump($filteredUsersRows); die();
-				
-				$names = array('Frank', 'Todd', 'James');
-				$this->db->where_in('username', $names);
-
-				if(count($filteredUsersRows)) {
-					// For each matched row, add a where clause
-					for($i=0; $i<$groupUserCount; $i++) {
-						if($i==0) $this->db->where(array('userID' => $filteredUsersRows[0]['userID']));
-						else $this->db->or_where(array('userID' => $filteredUsersRows[$i]['userID']));
-					}
+				if(count($filtered_userIDs)) {
+					// Only output users with IDs which were in the supplied userID array
+					$this->db->where_in('userID', $filtered_userIDs);
 				} else {
-					// No data matches this query, set impossible where clause so data function returns empty data set to datatables
+					// No userIDs were provided, set impossible where clause so data function returns empty data set to datatables
 					$this->db->where(array('userID' => -1));
 				}
 				$this->data('users');
@@ -286,12 +276,16 @@ class Datatables extends MY_Controller {
 					$this->load->view('data', array('data' => json_encode($out)) );
 					return;
 				}
-					
-				if($this->db->insert('usersGroups', array('groupID'=>$groupID, 'userID'=>$user['userID']) )) {
+				// This input array should already have whatever other IDs are required in the many-to-many table (such as groupID=>1)
+				$insertData = $relations;
+				// Add the user ID to the insert data
+				$insertData[$userIDKey] = $user['userID'];
+				
+				if($this->db->insert($relationTable, $insertData)) {
 					$user['detailsLink'] = "<a href='/tms/user/{$user['userID']}' class='button'>Details</a>";
 					$out = array('id' => "users-{$user['userID']}", 'row' => $user);
 				} else {
-					$out = array('error' => "User could not be added to team. Please try again or contact Infusion Systems.");
+					$out = array('error' => "User could not be added. Please try again or contact Infusion Systems.");
 				}
 				$this->load->view('data', array('data' => json_encode($out)) );
 			break;
@@ -299,15 +293,33 @@ class Datatables extends MY_Controller {
 				$this->data('users');
 			break;
 			case "remove":
-				// Get the userID to delete from the usersGroups table
+				// Get the userID to delete from the many-to-many table
 				$delete_type_id = explode('-',$_POST['data']['id']);
 				$ID = $delete_type_id[1];
-				$deleteOutput = $this->db->delete('usersGroups', array('groupID' => $groupID, 'userID' => $ID));
+				// This input array should already have whatever other IDs are required in the many-to-many table (such as groupID=>1)
+				$deleteData = $relations;
+				// Add the user ID to the insert data
+				$deleteData[$userIDKey] = $user['userID'];
+				$deleteOutput = $this->db->delete($relationTable, $deleteData);
 				// Define the return value based on deletion success
 				$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
 				$this->load->view('data', array('data' => json_encode($out)) );
 			break;
 		}
+	}
+	
+	// Handle datatables requests for the groupUsers table, which displays users in a specific group, using the many to many table "usersGroups" with fields "groupID" and "userID"
+	// The idea here is to use the main data method above as much as possible, as if we were simply dealing with the users table,
+	// but filter the initial output by groupID from usersGroups first. The create function should also be vetoed, and act only as a simple insert into "usersGroups". Same for delete.
+	public function groupUsers($groupID) {
+		$relationTable = 'usersGroups';
+		$relations = array('groupID' => $groupID);
+		$usersGroupsRows = $this->db->get_where($relationTable,$relations)->result_array();
+		$filtered_userIDs = array();
+		foreach($usersGroupsRows as $usersGroupsRow) {
+			$filtered_userIDs[] = $usersGroupsRow['userID'];
+		}
+		$this->filtered_users($filtered_userIDs,$relationTable,$relations);
 	}
 	
 	// Show the user what *exactly* will happen when they click delete
