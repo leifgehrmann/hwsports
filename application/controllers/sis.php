@@ -12,7 +12,7 @@ class Sis extends MY_Controller {
 		$this->data['message_information'] = $this->session->flashdata('message_information');
 		$this->data['message_success'] = $this->session->flashdata('message_success');
 		$this->data['message_warning'] = $this->session->flashdata('message_warning');
-		$this->data['message_error'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
+		$this->data['message_error'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message_error')));
 	}
 	
 	/**
