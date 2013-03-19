@@ -66,9 +66,9 @@
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
 				"sRowSelect": "single",
 				"aButtons": [
-					{ "sExtends": "editor_create", "editor": editor },
-					{ "sExtends": "editor_edit",   "editor": editor },
-					{ "sExtends": "editor_remove", "editor": editor },
+					{ "sExtends": "editor_create", "sButtonText": "Add User to Group", "editor": editor },
+					{ "sExtends": "editor_edit", "sButtonText": "Edit User", "editor": editor },
+					{ "sExtends": "editor_remove", "sButtonText": "Remove from Group", "editor": editor },
 					"select_all", 
 					"select_none",
 					{
