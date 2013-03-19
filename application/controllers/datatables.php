@@ -294,7 +294,7 @@ class Datatables extends MY_Controller {
 			break;
 			case "remove":
 				// Get the userID to delete from the many-to-many table
-				$delete_type_id = explode('-',$_POST['data']['id']);
+				$delete_type_id = explode('-',$_POST['data']);
 				$ID = $delete_type_id[1];
 				// This input array should already have whatever other IDs are required in the many-to-many table (such as groupID=>1)
 				$deleteData = $relations;
