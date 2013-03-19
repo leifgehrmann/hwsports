@@ -2,8 +2,8 @@
 	
 	$(document).ready(function() {
 		editor = new $.fn.dataTable.Editor( {
-			"ajaxUrl": "/datatables/teamUsers/"+$('#teamID').html(),
-			"domTable": "#teamUsers",
+			"ajaxUrl": "/datatables/groupUsers/"+$('#groupID').html(),
+			"domTable": "#groupUsers",
 			"fields": [ {
 					"label": "User ID",
 					"name": "userID",
@@ -62,9 +62,9 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 			}
 		} );
 
-		$('#teamUsers').dataTable( {
+		$('#groupUsers').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
-			"sAjaxSource": "/datatables/teamUsers/"+$('#teamID').html(),
+			"sAjaxSource": "/datatables/groupUsers/"+$('#groupID').html(),
 			"aoColumns": [
 				{ "mData": "userID" },
 				{ "mData": "firstName" },
