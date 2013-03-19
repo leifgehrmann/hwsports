@@ -606,10 +606,11 @@ class Tms extends MY_Controller {
 		$counter = 0;
 		foreach($users as $user) {
 			if($user['groups']===FALSE) {
-				if($this->db->insert('usersGroups', array('groupID'=>$groupID, 'userID'=>$user['userID']) ))
-					$counter++
-				else 
+				if($this->db->insert('usersGroups', array('groupID'=>$groupID, 'userID'=>$user['userID']) )) {
+					$counter++;
+				} else { 
 					$this->flash_redirect("message_error","/tms/groups","Adding userID {$user['userID']} to group $groupID failed");
+				}
 			}
 		}
 		$this->flash_redirect("message_success","/tms/group/$groupID","Successfully added $counter orphaned users to group");
