@@ -78,8 +78,8 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 				{ "mData": "detailsLink" }
 			],
 			"aoColumnDefs": [
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 2 ] },
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 3 ] },
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 4 ] },
             ],
 			"oTableTools": {
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
