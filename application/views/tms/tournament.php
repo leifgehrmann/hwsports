@@ -128,6 +128,7 @@
 	<pre>IF IT IS A TEAM SPORT, TEAMS A and TEAM B SHOULD BE EDITABLE.</pre>
 	<pre>IF IT IS A NOT A TEAM SPORT, MATCHES THAT HAVEN'T ALREADY OCCURED CAN BE MOVED TO ANOTHER DATE AND TIME. NO RESITRCTIONS SHOULD BE MADE.</pre>
 
+	<br />
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentMatches" width="100%">
 		<thead>
 			<tr>
@@ -149,7 +150,8 @@
 <br />
 <div class="tournamentTeams">
 	<h2>Teams</h2>
-		<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentTeams" width="100%">
+	<br />
+	<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentTeams" width="100%">
 		<thead>
 			<tr>
 				<th width="30%">Team ID</th>
@@ -166,6 +168,7 @@
 <br />
 <div class="tournamentUmpires">
 	<h2>Umpires</h2>
+	<br />
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentUmpires" width="100%">
 		<thead>
 			<tr>
