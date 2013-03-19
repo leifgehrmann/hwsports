@@ -186,7 +186,7 @@ class Sis extends MY_Controller {
 				// Split object:key by colon to get object and key to add
 				$inputKey = explode(':',$inputKey); 
 				$object = $inputKey[0]; $key = $inputKey[1];
-				var_dump($object); die();
+				var_dump($inputKey); die();
 				// Put value into sub array based on object name so we can add data in bulk later
 				$objectData[$object][$key] = $value;
 			}
