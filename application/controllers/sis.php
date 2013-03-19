@@ -155,14 +155,14 @@ class Sis extends MY_Controller {
 
 		// We have post data, let's process it
 		if( $this->input->post() ) {
-			$objectData= array();
-			
+
 			// Loop through input data and deal with it bit by bit
 			foreach($_POST as $inputKey => $value) {
 				// Get the role ID
-				if($inputKey == 'role') 
+				if($inputKey == 'role') {
 					$roleID = $value;
 					continue;
+				}
 				// Get team member IDs from CSV if we've got some
 				if($inputKey == 'teamMemberIDs') {
 					$teamMemberIDs = array_map("intval", explode(",", $this->input->post('teamMemberIDs') ));
