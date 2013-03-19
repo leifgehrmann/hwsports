@@ -263,7 +263,7 @@ class Datatables extends MY_Controller {
 	
 	// Handle datatables requests for the tournamentActors table, referencing the team role (roleID 2) which displays teams in a specific tournament, with cool tournamentActor relations.
 	public function tournamentTeams($tournamentID) {
-		$loadIDKey = 'userID';
+		$loadIDKey = 'teamID';
 		$updateIDKey = 'actorID';
 		$relationTable = 'tournamentActors';
 		$relations = array('tournamentID' => $tournamentID, 'roleID' => 2);
