@@ -214,6 +214,9 @@ class Sis extends MY_Controller {
 							'actorID' => $this->currentUser['userID'],
 							'roleID' => $roleID
 						);
+						if($this->objects_models['tournament_actors']->check_if_actor($tournamentID,$this->currentUser['userID'],$roleID)) {
+							$this->flash_redirect('message_error','/sis/tournaments','Signup failed as you have already signed up for this role. If you are experiencing difficulty, please contact Infusion Sports');
+						}
 						$tournamentActorID = $this->objects_models['tournament_actors']->insert($data, $tournamentActorRelations);
 					break;
 				}

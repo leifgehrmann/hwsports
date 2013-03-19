@@ -55,6 +55,10 @@ class Tournament_actors_model extends MY_Model {
 		return $all;
 	}
 
+	// Check if a specific user or team is already an actor for a specific tournament
+	public function check_if_actor($tournamentID,$actorID,$roleID) {
+		return ( $this->db->get_where($this->relationTableName, array('tournamentID'=>$tournamentID,'actorID'=>$actorID,'roleID'=>$roleID))->row_array() ? TRUE : FALSE );
+	}
 
 	/**
 	 * Creates a new tournament actor with data, using the tournament ID as specified.
