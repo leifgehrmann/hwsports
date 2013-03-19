@@ -256,6 +256,60 @@ class Datatables extends MY_Controller {
 		}
 	}
 	
+	// Handle filtered user tables slightly differently as we're only showing a subset of the users based on a where clause, and we only want to add new users by email search 
+	public function filtered_users($relationTable,$where) {
+		switch ($this->action) {
+			case "load":
+				// Query the usersGroups table for all users in this team, then add a where clause for each
+				$filteredUsersRows = $this->db->get_where($relationTable,$where)->result_array();
+				var_dump($filteredUsersRows); die();
+				
+				$names = array('Frank', 'Todd', 'James');
+				$this->db->where_in('username', $names);
+
+				if(count($filteredUsersRows)) {
+					// For each matched row, add a where clause
+					for($i=0; $i<$groupUserCount; $i++) {
+						if($i==0) $this->db->where(array('userID' => $filteredUsersRows[0]['userID']));
+						else $this->db->or_where(array('userID' => $filteredUsersRows[$i]['userID']));
+					}
+				} else {
+					// No data matches this query, set impossible where clause so data function returns empty data set to datatables
+					$this->db->where(array('userID' => -1));
+				}
+				$this->data('users');
+			break;
+			case "create":
+				$user = $this->users_model->find_by_email($_POST['data']['email']);
+				if($user===FALSE) {
+					$out = array('error' => "Email could not be found in database. Please try again or contact Infusion Systems.");
+					$this->load->view('data', array('data' => json_encode($out)) );
+					return;
+				}
+					
+				if($this->db->insert('usersGroups', array('groupID'=>$groupID, 'userID'=>$user['userID']) )) {
+					$user['detailsLink'] = "<a href='/tms/user/{$user['userID']}' class='button'>Details</a>";
+					$out = array('id' => "users-{$user['userID']}", 'row' => $user);
+				} else {
+					$out = array('error' => "User could not be added to team. Please try again or contact Infusion Systems.");
+				}
+				$this->load->view('data', array('data' => json_encode($out)) );
+			break;
+			case "edit":
+				$this->data('users');
+			break;
+			case "remove":
+				// Get the userID to delete from the usersGroups table
+				$delete_type_id = explode('-',$_POST['data']['id']);
+				$ID = $delete_type_id[1];
+				$deleteOutput = $this->db->delete('usersGroups', array('groupID' => $groupID, 'userID' => $ID));
+				// Define the return value based on deletion success
+				$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
+				$this->load->view('data', array('data' => json_encode($out)) );
+			break;
+		}
+	}
+	
 	// Show the user what *exactly* will happen when they click delete
 	public function predelete($rowID) {
 		// Get type/model and object ID from type-ID input string
