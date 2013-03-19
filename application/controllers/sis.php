@@ -172,9 +172,9 @@ class Sis extends MY_Controller {
 					$teamMemberIDs = array_map("intval", explode(",", $this->input->post('teamMemberIDs') ));
 					$teamID = $this->teams_model->insert(array());
 					if($teamID === FALSE)  
-						$this->error_redirect('message_error','/sis/tournaments','Creating team failed');
+						$this->flash_redirect('message_error','/sis/tournaments','Creating team failed');
 					if($this->teams_model->add_team_members($teamID,$teamMemberIDs) === FALSE)  
-						$this->error_redirect('message_error','/sis/tournaments','Adding members to team failed');
+						$this->flash_redirect('message_error','/sis/tournaments','Adding members to team failed');
 					// Done with teamMemberIDs, skip to next POST input
 					continue;
 				}
@@ -193,11 +193,11 @@ class Sis extends MY_Controller {
 					case "users":
 						// Update the current logged in user with the new userData 
 						if($this->objects_models[$object]->update($currentUser->userID, $data) === FALSE)  
-							$this->error_redirect('message_error','/sis/tournaments','Adding additional data to user failed');
+							$this->flash_redirect('message_error','/sis/tournaments','Adding additional data to user failed');
 					break;
 					case "teams":
 						if($this->objects_models[$object]->update($teamID, $data) === FALSE)  
-							$this->error_redirect('message_error','/sis/tournaments','Adding additional data to team failes');
+							$this->flash_redirect('message_error','/sis/tournaments','Adding additional data to team failes');
 					case "tournament_actors":
 						// Add this user as an actor with the correct role in this specific tournament,
 						// and add the tournament-specific data for this user to the tournamentActorData
@@ -208,7 +208,7 @@ class Sis extends MY_Controller {
 						);
 						$tournamentActorID = $this->objects_models['tournament_actors']->insert($data, $tournamentActorRelations);
 						if($tournamentActorID === FALSE) 
-							$this->error_redirect('message_error','/sis/tournaments','Creating new tournamentActor failed');
+							$this->flash_redirect('message_error','/sis/tournaments','Creating new tournamentActor failed');
 					break;
 				}
 			}
