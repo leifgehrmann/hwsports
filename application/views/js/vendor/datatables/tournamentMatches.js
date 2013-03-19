@@ -19,7 +19,8 @@
 				}, {
 					"label": "Tournament",
 					"name": "tournamentID",
-					"type": "hidden"
+					"type": "hidden",
+					"default": $('#tournamentID').html()
 				}, {
 					"label": "Name",
 					"name": "name"
