@@ -67,7 +67,9 @@ class Groups_model extends MY_Model {
 	 * @return boolean
 	 **/
 	public function delete($ID, $testRun=TRUE) {
-		$this->db->delete('usersGroups', array($this->objectIDKey => $ID) );
+		if($testRun) {
+			return "<li>Group with {$this->objectIDKey} = $ID (1 row)</li>";
+		}
 		return $this->db->delete($this->dataTableName, array($this->objectIDKey => $ID) );
 	}
 	
