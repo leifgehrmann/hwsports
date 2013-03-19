@@ -181,7 +181,7 @@ class Sis extends MY_Controller {
 			}
 			
 			// Just in case the insert fails
-			$tournamentActorID = FALSE:
+			$tournamentActorID = FALSE;
 			
 			// Now we have all the input data categorised by object, submit it to the correct places in the DB using the relevant model
 			foreach($objectData as $object => $data) {
