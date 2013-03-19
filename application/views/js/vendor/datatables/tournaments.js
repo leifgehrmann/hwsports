@@ -11,7 +11,7 @@
 				}, {
 					"label": "Sport",
 					"name": "sportID",
-					"type": "select"
+					"type": "hidden"
 				}, {
 					"label": "Name",
 					"name": "name"
@@ -21,14 +21,16 @@
 					"type": "datetime",
 					"dateFormat": $.datepicker.ISO_8601,
 					"timeFormat": "HH:mm",
-					"separator": " "
+					"separator": " ",
+					"type": "hidden"
 				}, {
 					"label": "End Time",
 					"name": "tournamentEnd",
 					"type": "datetime",
 					"dateFormat": $.datepicker.ISO_8601,
 					"timeFormat": "HH:mm",
-					"separator": " "
+					"separator": " ",
+					"type": "hidden"
 				}, {
 					"label": "Description",
 					"name": "description"
