@@ -218,7 +218,7 @@ class Users_model extends MY_Model {
 	 **/
 	public function get_groups($ID) {
 		// Get the group of a user ID, if one exists
-		$groupsRows = $this->db->get_where('usersGroups', array($this->objectIDKey => $ID) )->results_array();
+		$groupsRows = $this->db->get_where('usersGroups', array($this->objectIDKey => $ID) )->result_array();
 		if($groupsRows) {
 			foreach($groupsRows as $groupsRow) {
 				$groups[$groupsRow['groupID']] = $groupsRow['groupID'];
