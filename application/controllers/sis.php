@@ -2,6 +2,8 @@
 
 class Sis extends MY_Controller {
 
+	$currentUser;
+	
 	function __construct()
 	{
 		parent::__construct();
