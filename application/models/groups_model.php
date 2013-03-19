@@ -68,8 +68,9 @@ class Groups_model extends MY_Model {
 	 **/
 	public function delete($ID, $testRun=TRUE) {
 		if($testRun) {
-			return "<li>Group with {$this->objectIDKey} = $ID (1 row)</li>";
+			return "<li>All users in this group which are not part of any other group will be orphaned. Please use the fix permissions feature from another group to reassign users to groups after this deletion.</li>";
 		}
+		$this->db->delete('usersGroups', array($this->objectIDKey => $ID) );
 		return $this->db->delete($this->dataTableName, array($this->objectIDKey => $ID) );
 	}	
 }
