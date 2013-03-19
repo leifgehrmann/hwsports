@@ -1,7 +1,7 @@
 <div class="fancyform">
 	<? if(!empty($success)) { ?>
 	<script type="text/javascript">
-	$('tbody.teamMembers').append('<tr class="teamMemberRow"><td class="teamMemberUserID"><?=$user['id']?></td><td><?=$user['firstName'].' '.$user['lastName']?></td><td><?=$user['email']?></td><td><?=$user['password']?></td><td><a href="#" onclick="$(this).parents(\"tr\").remove();" class="deleteTeamMember">(X)</a></td></tr>');
+	$('tbody.teamMembers').append('<tr class="teamMemberRow"><td class="teamMemberUserID"><?=$user['id']?></td><td><?=$user['firstName'].' '.$user['lastName']?></td><td><?=$user['email']?></td><td><?=$user['password']?></td><td><a href="#" onclick="$(this).parents(\'tr\').remove();" class="deleteTeamMember">(X)</a></td></tr>');
 	$.fancybox.close();
 	</script>
 	<? } else { ?>
