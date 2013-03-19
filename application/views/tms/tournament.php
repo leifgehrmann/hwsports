@@ -145,6 +145,8 @@
 	</table>
 	<script src="/js/vendor/datatables/tournamentMatches.js"></script>
 </div>
+<br />
+<br />
 <div class="tournamentTeams">
 	<h2>Teams</h2>
 		<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentTeams" width="100%">
@@ -160,6 +162,8 @@
 	</table>
 	<script src="/js/vendor/datatables/tournamentTeams.js"></script>
 </div>
+<br />
+<br />
 <div class="tournamentUmpires">
 	<h2>Umpires</h2>
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentUmpires" width="100%">
@@ -178,7 +182,8 @@
 	</table>
 	<script src="/js/vendor/datatables/tournamentUmpires.js"></script>
 </div>
-
+<br />
+<br />
 <div id="tournamentID" style="display:none;"><?=$tournamentID?></div>
 
 <script type="text/javascript">
