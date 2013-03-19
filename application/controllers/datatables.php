@@ -215,7 +215,6 @@ class Datatables extends MY_Controller {
 				// Query the usersGroups table for all users in this team, then add a where clause for each
 				$groupUsersRows = $this->db->get_where('usersGroups',array('groupID' => $groupID))->result_array();
 				$groupUserCount = count($groupUsersRows);
-				var_dump($groupUserCount); die();
 				if($groupUserCount) {
 					for($i=0; $i<$groupUserCount; $i++) {
 						if($i==0) $this->db->where(array('userID' => $groupUsersRows[0]['userID']));
