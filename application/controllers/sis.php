@@ -170,9 +170,14 @@ class Sis extends MY_Controller {
 				// Get team member IDs from CSV if we've got some
 				if($inputKey == 'teamMemberIDs') {
 					$teamMemberIDs = array_map("intval", explode(",", $this->input->post('teamMemberIDs') ));
-					$teamID = $this->teams_model->insert(array());
+					// Add team leader (current user) to team
+					$teamMemberIDs[] = $this->currentUser['userID'];
+					// Create team, for now only inserting one bit of teamData, the team leader's user ID
+					$teamID = $this->teams_model->insert(array('teamLeader'=>$this->currentUser['userID']));
+					// Ensure team was created before proceeding
 					if($teamID === FALSE)  
 						$this->flash_redirect('message_error','/sis/tournaments','Creating team failed');
+					// Add all team member IDs to teamsUsers table, check for success before continuing
 					if($this->teams_model->add_team_members($teamID,$teamMemberIDs) === FALSE)  
 						$this->flash_redirect('message_error','/sis/tournaments','Adding members to team failed');
 					// Done with teamMemberIDs, skip to next POST input
