@@ -6,7 +6,7 @@ class Sis extends MY_Controller {
 	{
 		parent::__construct();
 
-		$this->data['currentUser'] = $currentUser = $this->users_model->get_logged_in();
+		$this->data['currentUser'] = $this->currentUser = $this->users_model->get_logged_in();
 		
 		$this->data['message'] = $this->session->flashdata('message');
 		$this->data['message_information'] = $this->session->flashdata('message_information');
@@ -193,7 +193,7 @@ class Sis extends MY_Controller {
 				switch($object) {
 					case "users":
 						// Update the current logged in user with the new userData 
-						if($this->objects_models[$object]->update($currentUser->userID, $data) === FALSE)  
+						if($this->objects_models[$object]->update($this->currentUser->userID, $data) === FALSE)  
 							$this->flash_redirect('message_error','/sis/tournaments','Adding additional data to user failed');
 					break;
 					case "teams":
@@ -204,7 +204,7 @@ class Sis extends MY_Controller {
 						// and add the tournament-specific data for this user to the tournamentActorData
 						$tournamentActorRelations = array(
 							'tournamentID' => $tournamentID,
-							'actorID' => $currentUser->userID,
+							'actorID' => $this->currentUser->userID,
 							'roleID' => $roleID
 						);
 						$tournamentActorID = $this->objects_models['tournament_actors']->insert($data, $tournamentActorRelations);
