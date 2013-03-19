@@ -100,7 +100,7 @@ class Teams_model extends MY_Model {
 			$this->db->insert("teamsUsers", array($this->objectIDKey => $ID, "userID" => $userID) ); 
 		}
 		$this->db->trans_complete();
-		return ($this->db->affected_rows() ? TRUE : FALSE);
+		return ($this->db->trans_status() === FALSE ? FALSE : TRUE);
 	}
 	
 }
