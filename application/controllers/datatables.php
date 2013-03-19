@@ -6,6 +6,7 @@ class Datatables extends MY_Controller {
 		parent::__construct();
 		
 		$this->singulars = array(
+			"tournaments" => "tournament",
 			"matches" => "match",
 			"sports" => "sport",
 			"venues" => "venue",
@@ -17,6 +18,7 @@ class Datatables extends MY_Controller {
 		$this->relations = array(
 			"matches" => array("matchID" => NULL,"sportID" => NULL,"venueID" => NULL,"tournamentID" => 0),
 			"sports" => array("sportID" => NULL,"sportCategoryID" => NULL),
+			"tournaments" => array("tournamentID" => NULL),
 			"venues" => array("venueID" => NULL),
 			"users" => array("userID" => NULL),
 			"teams" => array("teamID" => NULL),
@@ -24,6 +26,7 @@ class Datatables extends MY_Controller {
 		);
 		
 		$this->types_models = array(
+			"tournaments" => $this->tournaments_model,
 			"matches" => $this->matches_model,
 			"sports" => $this->sports_model,
 			"venues" => $this->venues_model,
@@ -59,6 +62,14 @@ class Datatables extends MY_Controller {
 					if(isset($object['startTime']) && isset($object['endTime'])) {
 						$object['startTime'] = datetime_to_public($object['endTime']);
 						$object['endTime'] = datetime_to_public($object['endTime']);
+					} else if(isset($object['tournamentStart']) && isset($object['tournamentEnd']) && isset($object['registrationStart']) && isset($object['registrationEnd'])) {
+						$object['tournamentStart'] = datetime_to_public($object['tournamentStart']);
+						$object['tournamentEnd'] = datetime_to_public($object['tournamendEnd']);
+						$object['registrationStart'] = datetime_to_public($object['registrationStart']);
+						$object['registrationEnd'] = datetime_to_public($object['registrationEnd']);
+					}
+					if(isset($object['sportData'])) {
+						$object['sportIcon'] = "<div class='icon sportCategoryID-".$object['sportData']['sportCategoryID']." sportID-".$object['sportData']['sportID']."'></div>";
 					}
 					$object['detailsLink'] = "<a href='/tms/{$this->singulars[$type]}/$ID' class='button'>Details</a>";
 					// Create / add to the aaData rows array, ready to be jsonified
@@ -88,6 +99,9 @@ class Datatables extends MY_Controller {
 				$newID = $this->types_models[$type]->insert($newData,$newRelations);
 				if($newID!==FALSE) {
 					$newObject = $this->types_models[$type]->get($newID);
+					if(isset($newObject['sportData'])) {
+						$newObject['sportIcon'] = "<div class='icon sportCategoryID-".$newObject['sportData']['sportCategoryID']." sportID-".$newObject['sportData']['sportID']."'></div>";
+					}
 					$newObject['detailsLink'] = "<a href='/tms/{$this->singulars[$type]}/$newID' class='button'>Details</a>";
 					$out = array('id' => "$type-$newID", 'row' => $newObject);
 				} else {
@@ -118,6 +132,9 @@ class Datatables extends MY_Controller {
 				$updateSuccess = $this->types_models[$type]->update($ID, $updateData, $updateRelations);
 				if($updateSuccess!==FALSE) {
 					$updatedObject = $this->types_models[$type]->get($ID);
+					if(isset($updatedObject['sportData'])) {
+						$updatedObject['sportIcon'] = "<div class='icon sportCategoryID-".$updatedObject['sportData']['sportCategoryID']." sportID-".$updatedObject['sportData']['sportID']."'></div>";
+					}
 					$updatedObject['detailsLink'] = "<a href='/tms/{$this->singulars[$type]}/$ID' class='button'>Details</a>";
 					$out = array('id' => "$type-$ID", 'row' => $updatedObject);
 				} else {
