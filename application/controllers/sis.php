@@ -219,7 +219,7 @@ class Sis extends MY_Controller {
 			
 			if($tournamentActorID === FALSE) 
 				$this->flash_redirect('message_error','/sis/tournaments','Creating new tournamentActor failed');
-			$this->flash_redirect('message_success','/sis/tournaments',"Signup successfull!");
+			$this->flash_redirect('message_success','/sis/tournaments',"Signup successful! Once the registration period is over, you will receive confirmation and further instructions.");
 		} else {
 			$this->view('signup','signup','Signup',$this->data);
 		}
