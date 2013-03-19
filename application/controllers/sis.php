@@ -25,6 +25,18 @@ class Sis extends MY_Controller {
 		$this->load->view('sis/footer',$data);
 	}
 
+	/**
+	 * A short hand method to redirect user with message
+	 *
+	 * @param status 	Type of flash message to display (error, success)
+	 * @param page 		The page to redirect to
+	 * @param message	Message to display 	
+	 */
+	public function flash_redirect($status,$page,$message){
+		$this->session->set_flashdata($status, $message);
+		redirect($page, 'refresh');
+	}
+
 	public function index() {
 		
 		//set the flash data error message if there is one
@@ -131,35 +143,65 @@ class Sis extends MY_Controller {
 			redirect('/auth/login','refresh'); 
 		}
 		
+		// Give tournament data to the view
 		$this->data['tournament'] = $tournament = $this->tournaments_model->get($tournamentID);
 		if($tournament==FALSE) {
 			$this->session->set_flashdata('message',  "Tournament ID $tournamentID does not exist.");
 			redirect("/sis/tournaments", 'refresh');
 		}
 		
-		// Get all role info, includng all sections and descendent inputs
+		// Get all role info, includng all sections and descendent inputs, so the view can output markup
 		$this->data['roles'] = $roles = $this->sports_model->get_sport_category_roles($tournament['sportData']['sportCategoryID']);
 
+		// We have post data, let's process it
 		if( $this->input->post() ) {
-			var_dump($_POST); die();
-			$roleID = $this->input->post('role');
-			$roleInputs = $this->sports_model->get_sport_category_role_inputs($roleID);
-			
-			// Loop through each input and handle it
-			foreach($roleInputs as $key => $roleInput) {
-				
-			
-				// Skip these inputs, they are processed by the addTeamMember method
-				if(strpos($roleInput['inputType'],'tm-') === 0) unset($roleInputs[$key]);
-				if($roleInput['inputType']=='teamMembers') {
-					// Get the user IDs of all team members who are to be added to the team into an indexed array
-					$teamMembersIDs = array_map("intval", explode(",", $this->input->post('teamMemberIDs') ));
+			// Loop through input data and deal with it bit by bit
+			foreach($this->input->post() as $inputKey => $value) {
+				// Get the role ID
+				if($inputKey == 'role') 
+					$roleID = $value;
+				// Get team member IDs from CSV if we've got some
+				if($inputKey == 'teamMemberIDs') {
+					$teamMemberIDs = array_map("intval", explode(",", $this->input->post('teamMemberIDs') ));
+					$teamID = $this->teams_model->insert(array());
+					if($teamID === FALSE)  
+						$this->error_redirect('message_error','/sis/tournaments','Creating team failed');
+					if($this->teams_model->add_team_members($teamID,$teamMemberIDs) === FALSE)  
+						$this->error_redirect('message_error','/sis/tournaments','Adding members to team failed');
 				}
-				
+				// Split object:key by colon to get object and key to add
+				sscanf($inputKey, "%s:%s", $object, $key);
+				// Put value into sub array based on object name so we can add data in bulk later
+				$objectData[$object][$key] = $value;
 			}
 			
-			$this->session->set_flashdata('message',  "Signup successful!");
-			redirect("/sis/tournaments", 'refresh');
+			// Now we have all the input data categorised by object, submit it to the correct places in the DB using the relevant model
+			foreach($objectData as $object => $data) {
+				switch($object) {
+					case "users":
+						// Update the current logged in user with the new userData 
+						if($this->objects_models[$object]->update($currentUser->userID, $data) === FALSE)  
+							$this->error_redirect('message_error','/sis/tournaments','Adding additional data to user failed');
+					break;
+					case "teams":
+						if($this->objects_models[$object]->update($teamID, $data) === FALSE)  
+							$this->error_redirect('message_error','/sis/tournaments','Adding additional data to team failes');
+					case "tournament_actors":
+						// Add this user as an actor with the correct role in this specific tournament,
+						// and add the tournament-specific data for this user to the tournamentActorData
+						$tournamentActorRelations = array(
+							'tournamentID' => $tournamentID,
+							'actorID' => $currentUser->userID,
+							'roleID' => $roleID
+						);
+						$tournamentActorID = $this->objects_models['tournament_actors']->insert($data, $tournamentActorRelations);
+						if($tournamentActorID === FALSE) 
+							$this->error_redirect('message_error','/sis/tournaments','Creating new tournamentActor failed');
+					break;
+				}
+			}
+			
+			$this->flash_redirect('message_success','/sis/tournaments',"Signup successfull! New tournamentActorID: $tournamentActorID");
 		} else {
 			$this->view('signup','signup','Signup',$this->data);
 		}
