@@ -179,7 +179,7 @@ class Sis extends MY_Controller {
 					continue;
 				}
 				// Split object:key by colon to get object and key to add
-				sscanf($inputKey, "%s:%s", $object, $key);
+				sscanf($inputKey, "%s[:]%s", $object, $key);
 				// Put value into sub array based on object name so we can add data in bulk later
 				$objectData[$object][$key] = $value;
 			}
