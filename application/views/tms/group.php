@@ -1,5 +1,6 @@
 <h1>Users in Group: "<?=$group['name']?>"</h1>
 <a href="/tms/fixGroups/<?=$group['groupID']?>">Add all users without a group (fix permissions)</a><br />
+<br />
 <div id="main">
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="groupUsers" width="100%">
 		<thead>
