@@ -208,12 +208,12 @@ class Sis extends MY_Controller {
 							'roleID' => $roleID
 						);
 						$tournamentActorID = $this->objects_models['tournament_actors']->insert($data, $tournamentActorRelations);
-						if($tournamentActorID === FALSE) 
-							$this->flash_redirect('message_error','/sis/tournaments','Creating new tournamentActor failed');
 					break;
 				}
 			}
 			
+			if($tournamentActorID === FALSE) 
+				$this->flash_redirect('message_error','/sis/tournaments','Creating new tournamentActor failed');
 			$this->flash_redirect('message_success','/sis/tournaments',"Signup successfull! New tournamentActorID: $tournamentActorID");
 		} else {
 			$this->view('signup','signup','Signup',$this->data);
