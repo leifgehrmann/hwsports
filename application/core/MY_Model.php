@@ -31,7 +31,8 @@ class MY_Model extends CI_Model {
 			'teamsUsers' => array(),
 			'tournamentData' => array(),
 			'tournamentVenues' => array(),
-			'tournamentActors' => array('tournamentActorData'=>'tournamentActorID')
+			'tournamentActors' => array('tournamentActorData'=>'tournamentActorID'),
+			'tournamentActorData' => array()
 		);
     }
 	
