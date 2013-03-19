@@ -161,40 +161,45 @@ class Datatables extends MY_Controller {
 	}
 	
 	// Handle filtered user tables slightly differently as we're only showing a subset of the users based on a where clause, and we only want to add new users by email search 
-	public function filtered_users($filtered_userIDs,$relationTable,$relations,$userIDKey="userID") {
+	public function filtered_data($filtered_IDs,$relationTable,$relations,$IDKey,$object) {
 		switch ($this->action) {
 			case "load":
-				if(count($filtered_userIDs)) {
-					// Only output users with IDs which were in the supplied userID array
-					$this->db->where_in('userID', $filtered_userIDs);
+				if(count($filtered_IDs)) {
+					// Only output data with IDs which were in the supplied ID array
+					$this->db->where_in($IDKey, $filtered_IDs);
 				} else {
-					// No userIDs were provided, set impossible where clause so data function returns empty data set to datatables
-					$this->db->where(array('userID' => -1));
+					// No IDs were provided, set impossible where clause so data function returns empty data set to datatables
+					$this->db->where(array($IDKey => -1));
 				}
-				$this->data('users');
+				$this->data($object);
 			break;
 			case "create":
-				$user = $this->users_model->find_by_email($_POST['data']['email']);
-				if($user===FALSE) {
-					$out = array('error' => "Email could not be found in database. Please try again or contact Infusion Systems.");
-					$this->load->view('data', array('data' => json_encode($out)) );
-					return;
-				}
 				// This input array should already have whatever other IDs are required in the many-to-many table (such as groupID=>1)
 				$insertData = $relations;
-				// Add the user ID to the insert data
-				$insertData[$userIDKey] = $user['userID'];
-				
-				if($this->db->insert($relationTable, $insertData)) {
-					$user['detailsLink'] = "<a href='/tms/user/{$user['userID']}' class='button'>Details</a>";
-					$out = array('id' => "users-{$user['userID']}", 'row' => $user);
+				// Get ID of user object to add to relations table if relevant
+				if($object == "users") {
+					$user = $this->users_model->find_by_email($_POST['data']['email']);
+					if($user===FALSE) {
+						$out = array('error' => "Email could not be found in database. Please try again or contact Infusion Systems.");
+						$this->load->view('data', array('data' => json_encode($out)) );
+						return;
+					}
+					// Add the user ID to the insert data
+					$insertData[$IDKey] = $user['userID'];
+					// Insert user
+					if($this->db->insert($relationTable, $insertData)) {
+						$user['detailsLink'] = "<a href='/tms/user/{$user['userID']}' class='button'>Details</a>";
+						$out = array('id' => "users-{$user['userID']}", 'row' => $user);
+					} else {
+						$out = array('error' => "User could not be added. Please try again or contact Infusion Systems.");
+					}
+					$this->load->view('data', array('data' => json_encode($out)) );
 				} else {
-					$out = array('error' => "User could not be added. Please try again or contact Infusion Systems.");
+					$this->data($object);
 				}
-				$this->load->view('data', array('data' => json_encode($out)) );
 			break;
 			case "edit":
-				$this->data('users');
+				$this->data($object);
 			break;
 			case "remove":
 				// Get the userID to delete from the many-to-many table
@@ -203,7 +208,7 @@ class Datatables extends MY_Controller {
 				// This input array should already have whatever other IDs are required in the many-to-many table (such as groupID=>1)
 				$deleteData = $relations;
 				// Add the user ID to the insert data
-				$deleteData[$userIDKey] = $ID;
+				$deleteData[$IDKey] = $ID;
 				$deleteOutput = $this->db->delete($relationTable, $deleteData);
 				// Define the return value based on deletion success
 				$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
@@ -216,43 +221,69 @@ class Datatables extends MY_Controller {
 	// The idea here is to use the main data method above as much as possible, as if we were simply dealing with the users table,
 	// but filter the initial output by groupID from usersGroups first. The create function should also be vetoed, and act only as a simple insert into "usersGroups". Same for delete.
 	public function groupUsers($groupID) {
-		$userIDKey = 'userID';
+		$IDKey = 'userID';
 		$relationTable = 'usersGroups';
 		$relations = array('groupID' => $groupID);
 		$filteredRows = $this->db->get_where($relationTable,$relations)->result_array();
-		$filtered_userIDs = array();
+		$filtered_IDs = array();
 		foreach($filteredRows as $filteredRow) {
-			$filtered_userIDs[] = $filteredRow[$userIDKey];
+			$filtered_IDs[] = $filteredRow[$IDKey];
 		}
-		$this->filtered_users($filtered_userIDs,$relationTable,$relations,$userIDKey);
+		$this->filtered_data($filtered_IDs,$relationTable,$relations,$IDKey,'users');
 	}
 	
 	// Handle datatables requests for the teamsUsers table, which displays users in a specific team, using the many to many table "teamsUsers" with fields "teamID" and "userID"
 	// The idea here is to use the main data method above as much as possible, as if we were simply dealing with the users table,
 	// but filter the initial output by teamID from teamsUsers first. The create function should also be vetoed, and act only as a simple insert into "teamsUsers". Same for delete.
 	public function teamUsers($teamID) {
-		$userIDKey = 'userID';
+		$IDKey = 'userID';
 		$relationTable = 'teamsUsers';
 		$relations = array('teamID' => $teamID);
 		$filteredRows = $this->db->get_where($relationTable,$relations)->result_array();
-		$filtered_userIDs = array();
+		$filtered_IDs = array();
 		foreach($filteredRows as $filteredRow) {
-			$filtered_userIDs[] = $filteredRow[$userIDKey];
+			$filtered_IDs[] = $filteredRow[$IDKey];
 		}
-		$this->filtered_users($filtered_userIDs,$relationTable,$relations,$userIDKey);
+		$this->filtered_data($filtered_IDs,$relationTable,$relations,$IDKey,'users');
 	}
 	
 	// Handle datatables requests for the tournamentActors table, referencing the umpire role (roleID 1) which displays umpires in a specific tournament, with cool tournamentActor relations.
 	public function tournamentUmpires($tournamentID) {
-		$userIDKey = 'actorID';
+		$IDKey = 'actorID';
 		$relationTable = 'tournamentActors';
 		$relations = array('tournamentID' => $tournamentID, 'roleID' => 1);
 		$filteredRows = $this->db->get_where($relationTable,$relations)->result_array();
-		$filtered_userIDs = array();
+		$filtered_IDs = array();
 		foreach($filteredRows as $filteredRow) {
-			$filtered_userIDs[] = $filteredRow[$userIDKey];
+			$filtered_IDs[] = $filteredRow[$IDKey];
 		}
-		$this->filtered_users($filtered_userIDs,$relationTable,$relations,$userIDKey);
+		$this->filtered_data($filtered_IDs,$relationTable,$relations,$IDKey,'users');
+	}
+	
+	// Handle datatables requests for the tournamentActors table, referencing the team role (roleID 2) which displays teams in a specific tournament, with cool tournamentActor relations.
+	public function tournamentTeams($tournamentID) {
+		$IDKey = 'actorID';
+		$relationTable = 'tournamentActors';
+		$relations = array('tournamentID' => $tournamentID, 'roleID' => 2);
+		$filteredRows = $this->db->get_where($relationTable,$relations)->result_array();
+		$filtered_IDs = array();
+		foreach($filteredRows as $filteredRow) {
+			$filtered_IDs[] = $filteredRow[$IDKey];
+		}
+		$this->filtered_data($filtered_IDs,$relationTable,$relations,$IDKey,'teams');
+	}
+	
+	// Handle datatables requests for the tournamentActors table, referencing the team role (roleID 2) which displays teams in a specific tournament, with cool tournamentActor relations.
+	public function tournamentMatches($tournamentID) {
+		$IDKey = 'matchID';
+		$relationTable = 'matches';
+		$relations = array('tournamentID' => $tournamentID);
+		$filteredRows = $this->db->get_where($relationTable,$relations)->result_array();
+		$filtered_IDs = array();
+		foreach($filteredRows as $filteredRow) {
+			$filtered_IDs[] = $filteredRow[$IDKey];
+		}
+		$this->filtered_data($filtered_IDs,$relationTable,$relations,$IDKey,'matches');
 	}
 	
 	// Show the user what *exactly* will happen when they click delete
