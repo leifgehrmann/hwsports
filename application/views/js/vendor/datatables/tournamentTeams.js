@@ -48,11 +48,9 @@
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
 				"sRowSelect": "single",
 				"aButtons": [
-					{ "sExtends": "editor_create", "editor": tournamentTeamsEditor },
-					{ "sExtends": "editor_edit",   "editor": tournamentTeamsEditor },
-					{ "sExtends": "editor_remove", "editor": tournamentTeamsEditor },
-					"select_all", 
-					"select_none",
+					{ "sExtends": "editor_create", "sButtonText": "Add Team to Tournament", "editor": tournamentTeamsEditor },
+					{ "sExtends": "editor_edit",  "sButtonText": "Edit Team",   "editor": tournamentTeamsEditor },
+					{ "sExtends": "editor_remove", "sButtonText": "Remove Team from Tournament",  "editor": tournamentTeamsEditor },
 					{
 						"sExtends":    "collection",
 						"sButtonText": "Export",

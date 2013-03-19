@@ -76,11 +76,9 @@
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
 				"sRowSelect": "single",
 				"aButtons": [
-					{ "sExtends": "editor_create", "editor": tournamentMatchesEditor },
-					{ "sExtends": "editor_edit",   "editor": tournamentMatchesEditor },
-					{ "sExtends": "editor_remove", "editor": tournamentMatchesEditor },
-					"select_all", 
-					"select_none",
+					{ "sExtends": "editor_create", "sButtonText": "Create Tournament Match", "editor": tournamentMatchesEditor },
+					{ "sExtends": "editor_edit",  "sButtonText": "Edit Match", "editor": tournamentMatchesEditor },
+					{ "sExtends": "editor_remove", "sButtonText": "Delete Match", "editor": tournamentMatchesEditor },
 					{
 						"sExtends":    "collection",
 						"sButtonText": "Export",
