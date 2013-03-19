@@ -64,7 +64,7 @@ class Datatables extends MY_Controller {
 						$object['endTime'] = datetime_to_public($object['endTime']);
 					} else if(isset($object['tournamentStart']) && isset($object['tournamentEnd']) && isset($object['registrationStart']) && isset($object['registrationEnd'])) {
 						$object['tournamentStart'] = datetime_to_public($object['tournamentStart']);
-						$object['tournamentEnd'] = datetime_to_public($object['tournamendEnd']);
+						$object['tournamentEnd'] = datetime_to_public($object['tournamentEnd']);
 						$object['registrationStart'] = datetime_to_public($object['registrationStart']);
 						$object['registrationEnd'] = datetime_to_public($object['registrationEnd']);
 					}
