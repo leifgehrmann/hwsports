@@ -18,4 +18,6 @@
 	<div id="groupID" style="display:none;"><?=$group['groupID']?></div>
 </div><!-- /#main -->
 
+<a href="/tms/fixGroups/<?=$group['groupID']?>">Add all users without a group (fix permissions)</a>
+
 <script src="/js/vendor/datatables/groupUsers.js"></script>

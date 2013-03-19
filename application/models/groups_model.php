@@ -71,6 +71,5 @@ class Groups_model extends MY_Model {
 			return "<li>Group with {$this->objectIDKey} = $ID (1 row)</li>";
 		}
 		return $this->db->delete($this->dataTableName, array($this->objectIDKey => $ID) );
-	}
-	
+	}	
 }

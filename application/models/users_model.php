@@ -16,7 +16,9 @@ class Users_model extends MY_Model {
 	 **/
 	public function get($ID) {
 		// Get all the userData
-		return $this->get_object($ID, $this->objectIDKey, $this->dataTableName, $this->relationTableName);
+		$user = $this->get_object($ID, $this->objectIDKey, $this->dataTableName, $this->relationTableName);
+		$user['groups'] = $this->get_groups($ID);
+		return $user;
 	}
 	
 	/**
@@ -207,5 +209,21 @@ class Users_model extends MY_Model {
 			}
 		
 		return $tournamentIDs;
+	}
+	
+	/**
+	 * Returns groups a user is in, as array
+	 *  
+	 * @return array
+	 **/
+	public function get_groups($ID) {
+		// Get the group of a user ID, if one exists
+		$groupsRows = $this->db->get_where('usersGroups', array($this->objectIDKey => $ID) )->results_array();
+		if($groupsRows) {
+			foreach($groupsRows as $groupsRow) {
+				$groups[$groupsRow['groupID']] = $groupsRow['groupID'];
+			}
+			return $groups;
+		} else return false;
 	}
 }

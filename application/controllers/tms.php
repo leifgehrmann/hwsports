@@ -49,6 +49,18 @@ class Tms extends MY_Controller {
 		$this->load->view('tms/footer',$data);
 	}
 
+	/**
+	 * A short hand method to redirect user with message
+	 *
+	 * @param status 	Type of flash message to display (error, success)
+	 * @param page 		The page to redirect to
+	 * @param message	Message to display 	
+	 */
+	public function flash_redirect($status,$page,$message){
+		$this->session->set_flashdata($status, $message);
+		redirect($page, 'refresh');
+	}
+
 	public function index()
 	{
 
@@ -585,10 +597,22 @@ class Tms extends MY_Controller {
 	}
 	public function group($groupID)
 	{
-
 		$group = $this->groups_model->get($groupID);
 		$this->data['group'] = $group;
 		$this->view('group',"group",$group['name']." | group",$this->data);
+	}
+	public function fixGroups($groupID) {
+		$users = $this->users_model->get_all();
+		$counter = 0;
+		foreach($users as $user) {
+			if($user['groups']===FALSE) {
+				if($this->db->insert('usersGroups', array('groupID'=>$groupID, 'userID'=>$user['userID']) ))
+					$counter++
+				else 
+					$this->flash_redirect("message_error","/tms/groups","Adding userID {$user['userID']} to group $groupID failed");
+			}
+		}
+		$this->flash_redirect("message_success","/tms/group/$groupID","Successfully added $counter orphaned users to group");
 	}
 	public function users()
 	{	
