@@ -74,6 +74,7 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/data/matches",
 			"aoColumns": [
+				{ "mData": "sportIcon" },
 				{ "mData": "matchID" },
 				{ "mData": "name" },
 				{ 
@@ -87,7 +88,13 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 				{ "mData": "venueData.name" },
 				{ "mData": "detailsLink" }
 			],
+			"fnRowCallback": function( nRow, aData, iDisplayIndex ) {
+				nRow.className += " "+aData['className'];
+				return nRow;
+			},
 			"aoColumnDefs": [
+				{ "bSortable": false, "aTargets": [ 0, 7 ] },
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 3, 4 ] }
             ],
 			"oTableTools": {
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
