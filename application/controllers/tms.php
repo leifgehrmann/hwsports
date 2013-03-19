@@ -583,6 +583,13 @@ class Tms extends MY_Controller {
 		$this->data['groups'] = $this->ion_auth->groups()->result();
 		$this->view('groups',"groups","Groups",$this->data);
 	}
+	public function group($groupID)
+	{
+
+		$group = $this->groups_model->get($groupID);
+		$this->data['group'] = $group;
+		$this->view('group',"group",$group['name']." | group",$this->data);
+	}
 	public function users()
 	{	
 
