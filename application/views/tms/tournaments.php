@@ -1,33 +1,22 @@
 <h1>Tournaments</h1>
 
-<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournaments" width="100%">
-	<thead>
-		<tr>
-			<th width="2%">&nbsp;</th>
-			<th>ID</th>
-			<th>Name</th>
-			<th>Start Time</th>
-			<th>End Time</th>
-			<th>Description</th>
-			<th>Sport</th>
-			<th width="5%">&nbsp;</th>
-		</tr>
-	</thead>
-</table>
-<script src="/js/vendor/datatables/tournaments.js"></script>
-
-<!--<h2>Existing Tournaments</h2>-->
-<!--<div id="tournamentSelect">
-	<? if(count($tournaments)>0) {
-		foreach($tournaments as $tournament) { 
-			echo "<a href='/tms/tournament/{$tournament['tournamentID']}'>{$tournament['name']}</a><br />\n";
-		}
-	   } else {
-			echo "No tournaments exist yet.";
-	   } ?>
+<div>
+	<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournaments" width="100%">
+		<thead>
+			<tr>
+				<th width="2%">&nbsp;</th>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Start Time</th>
+				<th>End Time</th>
+				<th>Description</th>
+				<th>Sport</th>
+				<th width="5%">&nbsp;</th>
+			</tr>
+		</thead>
+	</table>
+	<script src="/js/vendor/datatables/tournaments.js"></script>
 </div>
-<br />
-<br />-->
 
 <?php echo form_open("tms/tournaments", array('id' => 'tournamentsForm'));?>
 	<h2>Create a New Tournament</h2>
