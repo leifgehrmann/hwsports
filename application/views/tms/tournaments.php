@@ -3,10 +3,8 @@
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="tournaments" width="100%">
 	<thead>
 		<tr>
-			<th>ID</th>
+			<th width="2%">&nbsp;</th>
 			<th>Name</th>
-			<th>Start Time</th>
-			<th>End Time</th>
 			<th>Description</th>
 			<th>Sport</th>
 			<th width="5%">&nbsp;</th>
