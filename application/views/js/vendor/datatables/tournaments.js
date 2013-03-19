@@ -78,7 +78,7 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 				{ "mData": "detailsLink" }
 			],
 			"fnRowCallback": function( nRow, aData, iDisplayIndex ) {
-				nRow.className = "sportCategoryID-18";
+				nRow.className += " "+aData['className'];
 				return nRow;
 			},
 			"aoColumnDefs": [
