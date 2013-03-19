@@ -4,7 +4,10 @@
 	<thead>
 		<tr>
 			<th width="2%">&nbsp;</th>
+			<th>ID</th>
 			<th>Name</th>
+			<th>Start Time</th>
+			<th>End Time</th>
 			<th>Description</th>
 			<th>Sport</th>
 			<th width="5%">&nbsp;</th>

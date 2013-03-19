@@ -68,6 +68,7 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/data/tournaments",
 			"aoColumns": [
+				{ "mData": "sportIcon" }
 				{ "mData": "tournamentID" },
 				{ "mData": "name" },
 				{ "mData": "tournamentStart" },
