@@ -13,10 +13,10 @@ class MY_Model extends CI_Model {
 			'sports' => array('matches'=>'matchID','tournaments'=>'tournamentID','sportData'=>'sportID'),
 			'venues' => array('matches'=>'matchID','tournamentVenues'=>'venueID','venueData'=>'venueID'),
 			'tournaments' => array('tickets'=>'ticketID','matches'=>'matchID','tournamentVenues'=>'tournamentID','tournamentActors'=>'tournamentID','tournamentData'=>'tournamentID'),
-			'teams' => array('teamsUsers'=>'teamID','teamData'=>'teamID'),
+			'teams' => array('teamsUsers'=>'teamID','teamData'=>'teamID','tournamentActors'=>'tournamentActorID'),
 			'matches' => array('tickets'=>'ticketID','matchActors'=>'matchActorID','matchData'=>'matchID'),
 			'tickets' => array('ticketData'=>'ticketID'),
-			'users' => array('teamsUsers'=>'userID','tickets'=>'ticketID','usersGroups'=>'userID','userData'=>'userID'),
+			'users' => array('teamsUsers'=>'userID','tickets'=>'ticketID','usersGroups'=>'userID','userData'=>'userID','tournamentActors'=>'tournamentActorID'),
 			'matchActors' => array('matchActorResults'=>'resultID'),
 			'matchActorResults' => array('matchActorResultData'=>'resultID'),
 			// Empty arrays for tables which have no dependents
@@ -31,7 +31,7 @@ class MY_Model extends CI_Model {
 			'teamsUsers' => array(),
 			'tournamentData' => array(),
 			'tournamentVenues' => array(),
-			'tournamentActors' => array()
+			'tournamentActors' => array('tournamentActorData'=>'tournamentActorID')
 		);
     }
 	
@@ -210,7 +210,20 @@ class MY_Model extends CI_Model {
 		foreach( $dependents as $table=>$field ) {
 			// Search this table for our object key/ID - if it exists, we want to delete whatever object was referencing our object
 			//var_dump("Searching table: $table for field: $objectIDKey set to value: $objectID"); 
-			$dependentRows = $this->db->get_where($table, array($objectIDKey => $objectID))->result_array();
+			// Exception in logic for dependency where field contains word "actor" as actorID should be cross checked with roleID to delete correct actors
+			if(stripos($field,'actor')!==FALSE) {
+				// Find rows in the dependent table (actors table, such as tournamentActors or resultsActors) which reference this object's ID in the "actorID" field
+				// and also have a roleID which has an actorTable which references this object
+				$dependentRows = $this->db->select('*')
+					->from($table)
+					->join('sportCategoryRoles', "sportCategoryRoles.sportCategoryRoleID = $table.roleID")
+					->where('actorID',$objectID)
+					->where('actorTable',$primaryTableName)
+					->get()->result_array();
+			} else {
+				// Find the rows in the dependent table which have this object's ID key and value - this assumes fields are named correctly (such as userID in usersGroups table)
+				$dependentRows = $this->db->get_where($table, array($objectIDKey => $objectID))->result_array();
+			}
 			// Loop through all rows which were referencing this object
 			foreach($dependentRows as $dependentRow) {
 				//$testResults[] = "Calling delete object on $table - $field, deleting ID: {$dependentRow[$field]}\n";
