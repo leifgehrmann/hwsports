@@ -481,9 +481,9 @@ class Tms extends MY_Controller {
 			foreach($weekdays as $day)
 			{	
 				$startTimes[$day] = array();
-				if(array_key_exists($day.'StartTimes',$tournament))
+				if(array_key_exists('startTimes'.ucfirst($day),$tournament))
 				{
-					$times = explode(",",$tournament[$day.'StartTimes']);
+					$times = explode(",",$tournament['startTimes'.ucfirst($day)]);
 					foreach($times as $time)
 					{
 						$startTimes[$day][] = $time;
