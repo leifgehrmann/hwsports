@@ -373,7 +373,7 @@ class Tms extends MY_Controller {
 			if($formAction=="update") {
 				var_dump($this->input->post('venues'));
 				var_dump($this->input->post('matchDuration'));
-				var_dump($this->input->post('MondayStartTimes'));
+				var_dump($this->input->post('startTimes'));
 				// We need to validate the scheduling details stuff.
 				// For each of the input types we will validate it.
 				foreach($schedulingDetailsForm as $input)
@@ -382,7 +382,7 @@ class Tms extends MY_Controller {
 					$tournamentUpdate = array();
 					$tournamentUpdate['matchDuration'] = $this->input->post('matchDuration');
 					foreach($weekdays as $weekday)
-						$tournamentUpdate['startTimes'.ucfirst($weekday)] = implode(",",$this->input->post($weekday.'StartTimes'));
+						$tournamentUpdate['startTimes'.ucfirst($weekday)] = implode(",",$this->input->post('startTimes'.ucfirst($weekday)));
 					$this->tournaments_model_>update_venues($tournamentID,$venueIDs);
 					if($this->tournaments_model->update($tournamentID, $matchData)) {
 						// Successful update, show success message

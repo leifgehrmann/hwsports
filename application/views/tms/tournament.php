@@ -94,17 +94,17 @@
 			<? if($i%2==0){ ?><tr><? } ?>
 				<td valign="top"><?=ucfirst($weekday)?></td>
 				<td valign="top">
-					<div id="<?=$weekday?>StartTimes">
+					<div id="startTimes<?=ucfirst($weekday)?>">
 						<? 
 						$x=0;
 						foreach($startTimes[$weekday] as $time) { ?>
 							<? if($x==0) { ?>
-							<p><input type="text" style="width:70px" name="<?=$weekday?>StartTimes[]" value="<?=$time?>" placeholder="HH:MM" /></p></div>
+							<p><input type="text" style="width:70px" name="startTimes<?=ucfirst($weekday)?>[]" value="<?=$time?>" placeholder="HH:MM" /></p></div>
 							<? } else {?>
-							<p><input type="text" name="<?=$weekday?>StartTimes[]" value="<?=$time?>" style="width:70px" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>
+							<p><input type="text" name="startTimes<?=ucfirst($weekday)?>[]" value="<?=$time?>" style="width:70px" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>
 							<? } ?>
 						<? $x++;} ?>
-					<a class="button green" href="#" id="<?=$weekday?>StartTimesAdd">Add another start time</a>
+					<a class="button green" href="#" id="startTimes<?=ucfirst($weekday)?>Add">Add another start time</a>
 				</td>
 			<? if($i%2==1){ ?></tr><? } ?>
 			<? $i++; } ?>
@@ -195,22 +195,26 @@
 		timeFormat: 'HH:mm',
 		ampm: false
 	});
-	 $(".chzn-select").chosen();
-	 $(".chzn-select-deselect").chosen({allow_single_deselect:true});
+	$(".chzn-select").chosen();
+	$(".chzn-select-deselect").chosen({allow_single_deselect:true});
+	function ucfirst(string)
+	{
+    	return string.charAt(0).toUpperCase() + string.slice(1);
+	}
 
 	var weekdays =["monday","tuesday","wednesday","thursday","friday","saturday","sunday"];
 	for (var x=0;x<weekdays.length;x++){
-		$('#'+weekdays[x]+'StartTimesAdd').live('click', function() {
+		$('#startTimes'+ucfirst(weekdays[x])+'Add').live('click', function() {
 			var z = -1;
 			for(var y=0;y<weekdays.length;y++){
-				if( $(this).attr("id") == weekdays[y]+'StartTimesAdd' ){
+				if( $(this).attr("id") == 'startTimes'+ucfirst(weekdays[y])+'Add' ){
 					z = y;
 					break;
 				}
 			}
 			console.log(z);
-			startTimes = $('#'+weekdays[z]+'StartTimes');
-			startTimes.append('<p><input type="text" name="'+weekdays[z]+'StartTimes[]" value="" style="width:70px" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>');
+			startTimes = $('#startTimes'+ucfirst(weekdays[z]));
+			startTimes.append('<p><input type="text" name="startTimes'+ucfirst(weekdays[z])+'[]" value="" style="width:70px" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>');
 
 			return false;
 		});
