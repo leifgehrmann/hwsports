@@ -93,7 +93,7 @@
 			{ ?>
 			<? if($i%2==0){ ?><tr><? } ?>
 				<td valign="top"><?=ucfirst($weekday)?></td>
-				<td>
+				<td valign="top">
 					<div id="<?=$weekday?>StartTimes">
 						<? 
 						$x=0;
