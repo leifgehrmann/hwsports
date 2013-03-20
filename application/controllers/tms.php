@@ -308,8 +308,8 @@ class Tms extends MY_Controller {
 
 		$formID = $this->input->post('form');
 		$formAction = $this->input->post('action');
-		var_dump($this->input->post('form'));
-		var_dump($this->input->post('action'));
+		//var_dump($this->input->post('form'));
+		//var_dump($this->input->post('action'));
 		if($formID=="tournamentDetailsForm"){
 			$newdata = $_POST;
 			// For each of the input types we will validate it.
@@ -336,12 +336,12 @@ class Tms extends MY_Controller {
 				foreach($schedulingDetailsForm as $input)
 					$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
 				if ($this->form_validation->run() == true) {
-					var_dump($this->input->post('venues'));
-					var_dump($this->input->post('matchDuration'));
+					//var_dump($this->input->post('venues'));
+					//var_dump($this->input->post('matchDuration'));
 					$tournamentUpdate = array();
 					$tournamentUpdate['matchDuration'] = $this->input->post('matchDuration');
 					foreach($weekdays as $weekday){
-						var_dump($this->input->post('startTimes'.ucfirst($weekday)));
+						//var_dump($this->input->post('startTimes'.ucfirst($weekday)));
 						$tournamentUpdate['startTimes'.ucfirst($weekday)] = implode(",",$this->input->post('startTimes'.ucfirst($weekday)));
 					}
 					$this->tournaments_model->update_venues($tournamentID,$this->input->post('venues'));
