@@ -12,7 +12,7 @@ class MY_Model extends CI_Model {
 			'centreData' => array('sports'=>'sportID','venues'=>'venueID','tournaments'=>'tournamentID','teams'=>'teamID'),
 			'sports' => array('matches'=>'matchID','tournaments'=>'tournamentID','sportData'=>'sportID'),
 			'venues' => array('matches'=>'matchID','tournamentVenues'=>'venueID','venueData'=>'venueID'),
-			'tournaments' => array('tickets'=>'ticketID','matches'=>'matchID','tournamentVenues'=>'tournamentID','tournamentActors'=>'tournamentID','tournamentData'=>'tournamentID'),
+			'tournaments' => array('tickets'=>'ticketID','matches'=>'matchID','tournamentVenues'=>'tournamentID','tournamentActors'=>'tournamentActorID','tournamentData'=>'tournamentID'),
 			'teams' => array('teamsUsers'=>'teamID','teamData'=>'teamID','tournamentActors'=>'tournamentActorID'),
 			'matches' => array('tickets'=>'ticketID','matchActors'=>'matchActorID','matchData'=>'matchID'),
 			'tickets' => array('ticketData'=>'ticketID'),

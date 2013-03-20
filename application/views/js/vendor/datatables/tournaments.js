@@ -111,9 +111,6 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 						]
 					}
 				]
-			},
-			"fnInitComplete": function ( settings, json ) {
-				editor.field('sportID').update( json.sports );
 			}
 		} );
 
