@@ -294,46 +294,6 @@ class Tms extends MY_Controller {
 				'label'=>'Match Duration',
 				'restrict'=>'required|xss_clean|is_natural_no_zero',
 				'type'=>'text'
-			),
-			array(
-				'name'=>'venues',
-				'label'=>'Venues',
-				'restrict'=>'required|xss_clean'
-			),
-			array(
-				'name'=>'mondayStartTimes',
-				'label'=>'Monday Start Times',
-				'restrict'=>'required|xss_clean|callback_startTimes_check[mondayStartTimes]'
-			),
-			array(
-				'name'=>'tuesdayStartTimes',
-				'label'=>'Tuesday Start Times',
-				'restrict'=>'required|xss_clean|callback_startTimes_check[tuesdayStartTimes]'
-			),
-			array(
-				'name'=>'wednesdayStartTimes',
-				'label'=>'Wednesday Start Times',
-				'restrict'=>'required|xss_clean|callback_startTimes_check[wednesdayStartTimes]'
-			),
-			array(
-				'name'=>'thursdayStartTimes',
-				'label'=>'Thursday Start Times',
-				'restrict'=>'required|xss_clean|callback_startTimes_check[thursdayStartTimes]'
-			),
-			array(
-				'name'=>'fridayStartTimes',
-				'label'=>'Friday Start Times',
-				'restrict'=>'required|xss_clean|callback_startTimes_check[fridayStartTimes]'
-			),
-			array(
-				'name'=>'saturdayStartTimes',
-				'label'=>'Saturday Start Times',
-				'restrict'=>'required|xss_clean|callback_startTimes_check[saturdayStartTimes]'
-			),
-			array(
-				'name'=>'sundayStartTimes',
-				'label'=>'Sunday Start Times',
-				'restrict'=>'required|xss_clean|callback_startTimes_check[sundayStartTimes]'
 			)
 		);
 
