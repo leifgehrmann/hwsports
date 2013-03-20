@@ -100,14 +100,14 @@
 			<? if($i%2==1){ ?></tr><? } ?>
 			<? $i++; } ?>
 		</table>
-		<?=form_submit(array('name'=>"submit", 'value'=>"Save preferences", 'class'=>"green margin-left right", 'onsubmit'=>"$('#schedulingDetailsForm input[name=\'action\']').val('save')"));?>
-		<?=form_submit(array('name'=>"submit", 'value'=>"Schedule matches", 'class'=>"blue right", 'onsubmit'=>"$('#schedulingDetailsForm input[name=\'action\']').val('schedule'); return false;"));?>
+		<?=form_submit(array('name'=>"submit", 'value'=>"Save preferences", 'class'=>"green margin-left right", 'onclick'=>"$('#schedulingDetailsForm input[name=\'action\']').val('save'); return false;"));?>
+		<?=form_submit(array('name'=>"submit", 'value'=>"Schedule matches", 'class'=>"blue right", 'onclick'=>"$('#schedulingDetailsForm input[name=\'action\']').val('schedule'); return false;"));?>
 		<?=form_close();?>
 		<? } else { ?>
 			<? if( $tournament['sportData']['sportCategoryID'] == "46" ) { ?>
 				<table><tr>
 					<td><p>The matches have been scheduled and are displayed below. Once you have completed a match i.e. filled in the results you can press the button to schedule the next match</p></td>
-					<td><?=form_submit(array('name'=>"submit", 'value'=>"Schedule next match", 'class'=>"green", 'onsubmit'=>"$('#schedulingDetailsForm input[name=\'action\']').val('schedule')"));?></td>
+					<td><?=form_submit(array('name'=>"submit", 'value'=>"Schedule next match", 'class'=>"green", 'onclick'=>"$('#schedulingDetailsForm input[name=\'action\']').val('schedule'); return false;"));?></td>
 				</tr></table>
 				<h3>Rescheduling</h3>
 				<p>To reschedule individual matches you can use the table below.</p>
