@@ -348,6 +348,8 @@ class Tms extends MY_Controller {
 
 		$formID = $this->input->post('form');
 		$formAction = $this->input->post('action');
+		var_dump($this->input->post('form'));
+		var_dump($this->input->post('action'));
 		if($formID=="tournamentDetailsForm"){
 			$newdata = $_POST;
 			// For each of the input types we will validate it.
@@ -368,10 +370,7 @@ class Tms extends MY_Controller {
 				redirect("/tms/tournament/$tournamentID", 'refresh');
 			}
 		} else if($formID=="schedulingDetailsForm"){
-			$formAction = $this->input->post('action');
 			if($formAction=="save") {
-				var_dump($this->input->post('form'));
-				var_dump($this->input->post('action'));
 				var_dump($this->input->post('venues'));
 				var_dump($this->input->post('matchDuration'));
 				var_dump($this->input->post('startTimesMonday'));
