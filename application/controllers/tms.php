@@ -859,7 +859,7 @@ class Tms extends MY_Controller {
 	public function startTimes_check($startTimes){
 		foreach($startTimes as $time) {
 			if(!preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/", $time)){
-				$this->form_validation->set_message('datetime_check', 'The %s field must contain a valid time of day in the format: hh:mm (e.g. 19:20) Provided: '.var_export($strDateTime,1).' Debug Exception: '.$e->getMessage() );
+				$this->form_validation->set_message('datetime_check', 'The %s field must contain a valid time of day in the format: hh:mm (e.g. 19:20) Provided: '.var_export($strDateTime,1) );
 				return FALSE;
 			}
 		}
