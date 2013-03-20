@@ -7,7 +7,7 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<?=form_open("tms/tournament/$tournamentID", array('id' => 'tournamentDetailsForm'), array('formID' => 'tournamentDetailsForm'))?>
+		<?=form_open("tms/tournament/$tournamentID", array('id' => 'tournamentDetailsForm'))?>
 		<table>
 			<tr>
 				<td><label for="name">Name</label></td>
@@ -63,7 +63,7 @@
 	</div>
 	<div class="widget-body">
 		<? if( $tournament['scheduled'] == "false" ) { ?>
-		<?=form_open("tms/tournament/$tournamentID", array('id' => 'schedulingDetailsForm'), array('formID' => 'schedulingDetailsForm'), array('formAction' => 'update'))?>
+		<?=form_open("tms/tournament/$tournamentID", array('id' => 'schedulingDetailsForm', 'action'=>'update'))?>
 		<table>
 			<tr>
 				<td width="40%"><h3>Match Duration</h3><p>Enter in the number of minutes that each match will take.</p></td>
@@ -100,14 +100,14 @@
 			<? if($i%2==1){ ?></tr><? } ?>
 			<? $i++; } ?>
 		</table>
-		<?=form_submit(array('name'=>"submit", 'value'=>"Save preferences", 'class'=>"green margin-left right", 'onclick'=>'$("schedulingDetailsForm input[name=\'formAction\']).val("save")'));?>
-		<?=form_submit(array('name'=>"submit", 'value'=>"Schedule matches", 'class'=>"blue right", 'onclick'=>'$("schedulingDetailsForm input[name=\'formAction\']).val("schedule")'));?>
+		<?=form_submit(array('name'=>"submit", 'value'=>"Save preferences", 'class'=>"green margin-left right", 'onclick'=>'$("#schedulingDetailsForm input[name=\'action\']).val("save")'));?>
+		<?=form_submit(array('name'=>"submit", 'value'=>"Schedule matches", 'class'=>"blue right", 'onclick'=>'$("#schedulingDetailsForm input[name=\'action\']).val("schedule")'));?>
 		<?=form_close();?>
 		<? } else { ?>
 			<? if( $tournament['sportData']['sportCategoryID'] == "46" ) { ?>
 				<table><tr>
 					<td><p>The matches have been scheduled and are displayed below. Once you have completed a match i.e. filled in the results you can press the button to schedule the next match</p></td>
-					<td><?=form_submit(array('name'=>"submit", 'value'=>"Schedule next match", 'class'=>"green", 'onclick'=>'$("schedulingDetailsForm input[name=\'formAction\']).val("schedule")'));?></td>
+					<td><?=form_submit(array('name'=>"submit", 'value'=>"Schedule next match", 'class'=>"green", 'onclick'=>'$("#schedulingDetailsForm input[name=\'action\']).val("schedule")'));?></td>
 				</tr></table>
 				<h3>Rescheduling</h3>
 				<p>To reschedule individual matches you can use the table below.</p>
@@ -121,14 +121,11 @@
 		<? } ?>
 	</div>
 </div>
-<div class="clearfix"></div>
 <div class="tournamentMatches">
 	<h2>Matches</h2>
 	<p>Displayed below are a list of matches for the tournament. You can edit a match description</p>
 	<pre>IF IT IS A TEAM SPORT, TEAMS A and TEAM B SHOULD BE EDITABLE.</pre>
 	<pre>IF IT IS A NOT A TEAM SPORT, MATCHES THAT HAVEN'T ALREADY OCCURED CAN BE MOVED TO ANOTHER DATE AND TIME. NO RESITRCTIONS SHOULD BE MADE.</pre>
-
-	<br />
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentMatches" width="100%">
 		<thead>
 			<tr>
@@ -146,11 +143,7 @@
 	</table>
 	<script src="/js/vendor/datatables/tournamentMatches.js"></script>
 </div>
-<br />
-<br />
 <div class="tournamentTeams">
-	<h2>Teams</h2>
-	<br />
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentTeams" width="100%">
 		<thead>
 			<tr>
@@ -164,11 +157,8 @@
 	</table>
 	<script src="/js/vendor/datatables/tournamentTeams.js"></script>
 </div>
-<br />
-<br />
+<h2>Umpires</h2>
 <div class="tournamentUmpires">
-	<h2>Umpires</h2>
-	<br />
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentUmpires" width="100%">
 		<thead>
 			<tr>
