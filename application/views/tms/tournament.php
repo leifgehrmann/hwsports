@@ -96,7 +96,6 @@
 				<td>
 					<div id="<?=$weekday?>StartTimes">
 						<? 
-						$times=explode(",",$startTimes[$weekday];
 						$x=0;
 						for($startTimes[$weekday] as $time) { ?>
 							<? if($x==0) { ?>
