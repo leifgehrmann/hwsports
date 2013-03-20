@@ -101,7 +101,7 @@
 			<? $i++; } ?>
 		</table>
 		<?=form_submit(array('name'=>"submit", 'value'=>"Save preferences", 'class'=>"green margin-left right", 'onsubmit'=>'$("#schedulingDetailsForm input[name=\'action\']").val("save")'));?>
-		<?=form_submit(array('name'=>"submit", 'value'=>"Schedule matches", 'class'=>"blue right", 'onsubmit'=>'$("#schedulingDetailsForm input[name=\'action\']").val("schedule")'));?>
+		<?=form_submit(array('name'=>"submit", 'value'=>"Schedule matches", 'class'=>"blue right", 'onsubmit'=>"$('#schedulingDetailsForm input[name=\'action\']').val('schedule')"));?>
 		<?=form_close();?>
 		<? } else { ?>
 			<? if( $tournament['sportData']['sportCategoryID'] == "46" ) { ?>
