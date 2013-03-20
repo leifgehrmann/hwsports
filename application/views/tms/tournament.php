@@ -100,7 +100,7 @@
 			<? if($i%2==1){ ?></tr><? } ?>
 			<? $i++; } ?>
 		</table>
-		<?=form_submit(array('name'=>"submit", 'value'=>"Save preferences", 'class'=>"green margin-left right", 'onclick'=>"$('#schedulingDetailsForm input[name=\'action\']').val('save');"));?>
+		<?=form_submit(array('name'=>"submit", 'value'=>"Update preferences", 'class'=>"green margin-left right", 'onclick'=>"$('#schedulingDetailsForm input[name=\'action\']').val('update');"));?>
 		<?=form_submit(array('name'=>"submit", 'value'=>"Schedule matches", 'class'=>"blue right", 'onclick'=>"$('#schedulingDetailsForm input[name=\'action\']').val('schedule');"));?>
 		<?=form_close();?>
 		<? } else { ?>

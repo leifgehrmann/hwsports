@@ -467,7 +467,7 @@ class Tms extends MY_Controller {
 			$venues = $this->tournaments_model->get_venues($tournamentID);
 			$venueSelections = array();
 			foreach($venues as $venue)
-				$venueSelections[$venue['venueID']] = $venue['name'];
+				$venueSelections[] = $venue['venueID'];
 
 			// Get all venues
 			$venues = $this->venues_model->get_all();
