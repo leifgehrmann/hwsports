@@ -476,9 +476,27 @@ class Tms extends MY_Controller {
 			foreach($venues as $venue)
 				$venueOptions[$venue['venueID']] = $venue['name'];
 
+			// Get the startTimes for the tournament
+			$startTimes = array();
+			foreach($weekdays as $day)
+			{	
+				$startTimes[$day] = array();
+				if(array_key_exists($day.'StartTimes',$tournament))
+				{
+					$times = explode(",",$tournament[$day.'StartTimes']);
+					foreach($times as $time)
+					{
+						$startTimes[$day][] = $time;
+					}
+				}
+			}
+
 			// Send the venue data
 			$this->data['venueOptions'] = $venueOptions;
 			$this->data['venueSelections'] = $venueSelections;
+
+			// Send the start times
+			$this->data['startTimes'] = $startTimes;			
 		}
 		
 		$this->view('tournament',"tournament","Tournament",$this->data);

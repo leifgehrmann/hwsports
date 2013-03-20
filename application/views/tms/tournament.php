@@ -94,7 +94,17 @@
 			<? if($i%2==0){ ?><tr><? } ?>
 				<td valign="top"><?=ucfirst($weekday)?></td>
 				<td>
-					<div id="<?=$weekday?>StartTimes"><p><input type="text" style="width:70px" name="<?=$weekday?>StartTimes[]" value="" placeholder="HH:MM" /></p></div>
+					<div id="<?=$weekday?>StartTimes">
+						<? 
+						$times=explode(",",$startTimes[$weekday];
+						$x=0;
+						for($startTimes[$weekday] as $time) { ?>
+							<? if($x==0) { ?>
+							<p><input type="text" style="width:70px" name="<?=$weekday?>StartTimes[]" value="<?=$time?>" placeholder="HH:MM" /></p></div>
+							<? } else {?>
+							<p><input type="text" name="<?=$weekday?>StartTimes[]" value="<?=$time?>" style="width:70px" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>
+							<? } ?>
+						<? $x++;} ?>
 					<a class="button green" href="#" id="<?=$weekday?>StartTimesAdd">Add another start time</a>
 				</td>
 			<? if($i%2==1){ ?></tr><? } ?>
