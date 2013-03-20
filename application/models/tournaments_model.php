@@ -177,9 +177,9 @@ class Tournaments_model extends MY_Model {
 		foreach($venues as $venue)
 			$venuesToDelete[] = $venue['venueID'];
 		$this->db->trans_start();
-		if(!$this->delete_venues($venuesToDelete))
+		if(!$this->delete_venues($tournamentID, $venuesToDelete))
 			return FALSE;
-		if(!$this->insert_venues($venueIDs))
+		if(!$this->insert_venues($tournamentID, $venueIDs))
 			return FALSE;
 		// Complete transaction, all is well
 		$this->db->trans_complete();
