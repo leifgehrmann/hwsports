@@ -97,7 +97,7 @@
 					<div id="<?=$weekday?>StartTimes">
 						<? 
 						$x=0;
-						for($startTimes[$weekday] as $time) { ?>
+						foreach($startTimes[$weekday] as $time) { ?>
 							<? if($x==0) { ?>
 							<p><input type="text" style="width:70px" name="<?=$weekday?>StartTimes[]" value="<?=$time?>" placeholder="HH:MM" /></p></div>
 							<? } else {?>
