@@ -107,7 +107,7 @@
 			<? if( $tournament['sportData']['sportCategoryID'] == "46" ) { ?>
 				<table><tr>
 					<td><p>The matches have been scheduled and are displayed below. Once you have completed a match i.e. filled in the results you can press the button to schedule the next match</p></td>
-					<td><?=form_submit(array('name'=>"submit", 'value'=>"Schedule next match", 'class'=>"green", 'onsubmit'=>'$("#schedulingDetailsForm input[name=\'action\']").val("schedule")'));?></td>
+					<td><?=form_submit(array('name'=>"submit", 'value'=>"Schedule next match", 'class'=>"green", 'onsubmit'=>'$(\"#schedulingDetailsForm input[name=\'action\']\").val(\"schedule\")'));?></td>
 				</tr></table>
 				<h3>Rescheduling</h3>
 				<p>To reschedule individual matches you can use the table below.</p>
