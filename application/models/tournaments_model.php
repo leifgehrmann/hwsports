@@ -151,7 +151,7 @@ class Tournaments_model extends MY_Model {
 		
 		foreach($venueIDs as $venueID) {
 			if(!$this->venues_model->get($venueID)) return FALSE;
-			$this->db->$insert = array(
+			$insert = array(
 				'tournamentID'   => $tournamentID,
 				'venueID' => $venueID
 			);
@@ -198,7 +198,7 @@ class Tournaments_model extends MY_Model {
 		
 		foreach($venueIDs as $venueID) {
 			if(!$this->venues_model->get($venueID)) return FALSE;
-			$this->db->$delete = array(
+			$delete = array(
 				'tournamentID'   => $tournamentID,
 				'venueID' => $venueID
 			);
