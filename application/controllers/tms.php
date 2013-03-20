@@ -347,6 +347,8 @@ class Tms extends MY_Controller {
 		}
 
 		$formID = $this->input->post('formID');
+		var_dump($this->input->post('formID'));
+		var_dump($this->input->post('formAction'));
 		if($formID=="tournamentDetailsForm"){
 			$newdata = $_POST;
 			// For each of the input types we will validate it.

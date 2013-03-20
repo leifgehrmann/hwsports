@@ -446,10 +446,6 @@ body .DTED_Lightbox_Content{
 body .DTED_Lightbox_Content button{
 	border-radius: 0px !important;
 }
-#content .dataTables_filter input {
-	padding:6px;
-	width:auto;	
-}
 
 .message {
 	margin-top: 20px;
