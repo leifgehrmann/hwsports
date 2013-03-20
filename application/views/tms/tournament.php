@@ -63,7 +63,7 @@
 	</div>
 	<div class="widget-body">
 		<? if( $tournament['scheduled'] == "false" ) { ?>
-		<?=form_open("tms/tournament/$tournamentID", array('id' => 'schedulingDetailsForm', 'action'=>'update'))?>
+		<?=form_open("tms/tournament/$tournamentID", array('id' => 'schedulingDetailsForm'), array('action'=>'update'))?>
 		<table>
 			<tr>
 				<td width="40%"><h3>Match Duration</h3><p>Enter in the number of minutes that each match will take.</p></td>
@@ -121,8 +121,8 @@
 		<? } ?>
 	</div>
 </div>
+<h2>Matches</h2>
 <div class="tournamentMatches">
-	<h2>Matches</h2>
 	<p>Displayed below are a list of matches for the tournament. You can edit a match description</p>
 	<pre>IF IT IS A TEAM SPORT, TEAMS A and TEAM B SHOULD BE EDITABLE.</pre>
 	<pre>IF IT IS A NOT A TEAM SPORT, MATCHES THAT HAVEN'T ALREADY OCCURED CAN BE MOVED TO ANOTHER DATE AND TIME. NO RESITRCTIONS SHOULD BE MADE.</pre>
