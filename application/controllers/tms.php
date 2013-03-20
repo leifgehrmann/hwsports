@@ -345,7 +345,7 @@ class Tms extends MY_Controller {
 						$tournamentUpdate['startTimes'.ucfirst($weekday)] = implode(",",$this->input->post('startTimes'.ucfirst($weekday)));
 					}
 					$this->tournaments_model->update_venues($tournamentID,$this->input->post('venues'));
-					if($this->tournaments_model->update($tournamentID, $matchData)) {
+					if($this->tournaments_model->update($tournamentID, $tournamentUpdate)) {
 						// Successful update, show success message
 						$this->session->set_flashdata('message_success',  'Successfully updated scheduling details.');
 					} else {
