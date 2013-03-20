@@ -371,9 +371,9 @@ class Tms extends MY_Controller {
 			}
 		} else if($formID=="schedulingDetailsForm"){
 			if($formAction=="update") {
-				var_dump($this->input->post('venues[]'));
+				var_dump($this->input->post('venues'));
 				var_dump($this->input->post('matchDuration'));
-				var_dump($this->input->post('MondayStartTimes[]'));
+				var_dump($this->input->post('MondayStartTimes'));
 				// We need to validate the scheduling details stuff.
 				// For each of the input types we will validate it.
 				foreach($schedulingDetailsForm as $input)
