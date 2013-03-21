@@ -95,6 +95,9 @@ class Scheduling_model extends MY_Model {
 				}
 				// Are there enough umpires? Well good! Lets select them!
 				// Also, if there aren't enough, we remove the match.
+
+				var_dump($countedUmpireIDs);
+				
 				if(count($countedUmpireIDs) > $matchMinimumUmpires)
 					$matchDateTimes[$date][$dateTime]['umpireIDs'] = $countedUmpireIDs;
 				else
