@@ -341,9 +341,10 @@ class Tms extends MY_Controller {
 					$tournamentUpdate = array();
 					$tournamentUpdate['matchDuration'] = $this->input->post('matchDuration');
 					foreach($weekdays as $weekday){
-						var_dump($this->input->post('startTimes'.ucfirst($weekday)));
-						if(!$this->input->post('startTimes'.ucfirst($weekday)))
+						if($this->input->post('startTimes'.ucfirst($weekday)))
 							$tournamentUpdate['startTimes'.ucfirst($weekday)] = implode(",",$this->input->post('startTimes'.ucfirst($weekday)));
+						else
+							$tournamentUpdate['startTimes'.ucfirst($weekday)] = "";
 					}
 					$this->tournaments_model->update_venues($tournamentID,$this->input->post('venues'));
 					if($this->tournaments_model->update($tournamentID, $tournamentUpdate)) {
