@@ -173,7 +173,8 @@ class Scheduling_model extends MY_Model {
 
 		// Assuming for now that we only want round robins for now:
 		$combinations = $this->round_robin($teamIDs);
-
+		echo "The following teams combinations are being considered: "."\n";
+		var_dump($combinations);
 		// For every single combination of a game we want.
 		foreach($combinations as $combination)
 		{
