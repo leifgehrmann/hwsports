@@ -48,6 +48,7 @@ class Scheduling_model extends MY_Model {
 		$venues 	= $this->tournaments_model->get_venues($tournamentID);
 		// Check if an umpire exists and that there are venues for the tournament.
 		if(!isset($actors['Umpire'])) return "There are no umpires in the tournament.";
+		if(count($actors['Umpire'])==0) return "There are no umpires in the tournament.";
 		if(!$venues) return "There are no venues that the tournament can take place at.";
 		if(count($venues)==0) return "There are no venues that the tournament can take place at.";
 		$umpires    = $actors['Umpire'];
