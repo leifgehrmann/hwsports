@@ -71,7 +71,7 @@
 				{ "mData": "detailsLink" }
 			],
 			"aoColumnDefs": [
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] }
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
 				{ "bVisible": false, "aTargets": [ 2, 5 ] }
             ],
 			"oTableTools": {

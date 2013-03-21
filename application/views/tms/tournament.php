@@ -134,9 +134,8 @@
 	</div>
 </div>
 <h2>Matches</h2>
+<p>Displayed below are a list of matches for the tournament.</p>
 <div class="tournamentMatches">
-	<p>Displayed below are a list of matches for the tournament.</p>
-	
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentMatches" width="100%">
 		<thead>
 			<tr>
@@ -154,6 +153,8 @@
 	</table>
 	<script src="/js/vendor/datatables/tournamentMatches.js"></script>
 </div>
+<h2>Teams</h2>
+<p>Displayed below are a list of teams for the tournament. </p>
 <div class="tournamentTeams">
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentTeams" width="100%">
 		<thead>
@@ -169,6 +170,7 @@
 	<script src="/js/vendor/datatables/tournamentTeams.js"></script>
 </div>
 <h2>Umpires</h2>
+<p>Displayed below are a list of umpires for the tournament. </p>
 <div class="tournamentUmpires">
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentUmpires" width="100%">
 		<thead>
