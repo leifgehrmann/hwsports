@@ -39,6 +39,9 @@ class Scheduling_model extends MY_Model {
 		$matchMaximumTeamPlays = 1; // This is hard coded for now. This is the maximum number of matches a player must play
 		$matchMaximumPlays = 1; // This is hard coded for now. This is the maximum number of matches that can occur in a day
 
+		if(isset($actors['Umpire']))
+			return "There are no umpires so no schedule!!!!!!";
+
 		$umpires  = $actors['Umpire'];
 		$teams    = $actors['Team'];
 
@@ -985,9 +988,9 @@ class Scheduling_model extends MY_Model {
 		$endTimeB->add($durationB);
 
 		// Date range A is before B, but A ends after B starts, hence overlapping
-		if($startTimeA < $startTimeB && $endTimeA > $startTimeB) return true; 
+		if($startTimeA <= $startTimeB && $endTimeA >= $startTimeB) return true; 
 		// Date range B is before A, but B ends after A starts, hence overlapping
-		if($startTimeB < $startTimeA && $endTimeB > $startTimeA) return true; 
+		if($startTimeB <= $startTimeA && $endTimeB >= $startTimeA) return true; 
 
 		// Date range A is within B, hence overlapping
 		if($startTimeA > $startTimeB && $endTimeB > $endTimeA) return true; 
