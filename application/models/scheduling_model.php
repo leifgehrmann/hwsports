@@ -5,7 +5,7 @@ class Scheduling_model extends MY_Model {
 	 * HAS NOT BEEN TESTED
 	 *
 	 * $tournamentID is int(11)
-	 * returns true if the scheduling went well.
+	 * returns an array of matches if the scheduling went well.
 	 * an error string if it didn't go well.
 	 * @return an array of matches 
 	 **/
@@ -45,6 +45,8 @@ class Scheduling_model extends MY_Model {
 		foreach($umpires as $index=>$umpire){
 			$umpires[$index]['tournamentActorData'] = $this->tournament_actors_model->get($umpire['tournamentActorID']);
 		}
+		var_dump($umpires);
+		var_dump($teams);
 		
 		// If tournament is round robin...
 
