@@ -13,9 +13,6 @@ class Scheduling_model extends MY_Model {
 	{
 		echo "<pre>";
 
-
-
-
 		// Get tournament Information
 		$tournament = $this->tournaments_model->get($tournamentID);
 		$actors 	= $this->tournaments_model->get_actors($tournamentID);
@@ -44,6 +41,10 @@ class Scheduling_model extends MY_Model {
 
 		$umpires  = $actors['Umpire'];
 		$teams    = $actors['Team'];
+
+		foreach($umpires as $index=>$umpire){
+			$umpires[$index]['tournamentActorData'] = $this->tournament_actors_model->get($umpire['tournamentActorID']);
+		}
 		
 		// If tournament is round robin...
 
@@ -85,10 +86,10 @@ class Scheduling_model extends MY_Model {
 				$countedUmpireIDs = array();
 				// For each umpire
 				foreach( $umpires as $umpire ){
-					if( !isset($umpire['available'.$weekday]) )
+					if( !isset($umpire['tournamentActorData']['available'.$weekday]) )
 						continue;
 					// is the umpire available at that weekday/time?
-					if( $umpire['available'.$weekday] == '1' )
+					if( $umpire['tournamentActorData']['available'.$weekday] == '1' )
 						$countedUmpireIDs[] = $umpire['userID'];
 				}
 				// Are there enough umpires? Well good! Lets select them!
