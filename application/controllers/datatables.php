@@ -211,6 +211,21 @@ class Datatables extends MY_Controller {
 					} else {
 						$out = array('error' => "User could not be added. Please try again or contact Infusion Systems.");
 					}
+					// Add availability data
+					if(isset($_POST['data']['availabilityMonday'])) {
+						$tournamentActorID = $this->db->insert_id();
+						$this->tournament_actors_model->update($tournamentActorID, 
+							array(
+								'availableMonday'=>$_POST['data']['availableMonday'],
+								'availableTuesday'=>$_POST['data']['availableTuesday'],
+								'availableWednesday'=>$_POST['data']['availableWednesday'],
+								'availableThursday'=>$_POST['data']['availableThursday'],
+								'availableFriday'=>$_POST['data']['availableFriday'],
+								'availableSaturday'=>$_POST['data']['availableSaturday'],
+								'availableSunday'=>$_POST['data']['availableSunday']
+							)
+						);
+					}
 					$this->load->view('data', array('data' => json_encode($out)) );
 				} else {
 					$this->data($object);

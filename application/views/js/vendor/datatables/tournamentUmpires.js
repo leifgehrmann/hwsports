@@ -26,6 +26,41 @@
 				}, {
 					"label": "Bio",
 					"name": "aboutMe"
+				}, {
+					"label": "availableMonday",
+					"name": "availableMonday",
+					"type": "hidden",
+					"default": "1"
+				}, {
+					"label": "availableTuesday",
+					"name": "availableTuesday",
+					"type": "hidden",
+					"default": "1"
+				}, {
+					"label": "availableWednesday",
+					"name": "availableWednesday",
+					"type": "hidden",
+					"default": "1"
+				}, {
+					"label": "availableThursday",
+					"name": "availableThursday",
+					"type": "hidden",
+					"default": "1"
+				}, {
+					"label": "availableFriday",
+					"name": "availableFriday",
+					"type": "hidden",
+					"default": "1"
+				}, {
+					"label": "availableSaturday",
+					"name": "availableSaturday",
+					"type": "hidden",
+					"default": "1"
+				}, {
+					"label": "availableSunday",
+					"name": "availableSunday",
+					"type": "hidden",
+					"default": "1"
 				}
 			],
 			"events": {
@@ -35,7 +70,7 @@
 				},
 				"onOpen": function ( settings, json ) {
 					if( $('.DTE_Action_Create').length ) {
-						$('.DTE_Field_Name_email').siblings('.DTE_Field').remove();
+						$('.DTE_Field_Name_email').siblings('.DTE_Field').hide();
 					}
 				},
 				"onInitCreate": function() {
