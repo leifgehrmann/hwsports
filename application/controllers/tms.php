@@ -336,17 +336,26 @@ class Tms extends MY_Controller {
 				foreach($schedulingDetailsForm as $input)
 					$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
 				if ($this->form_validation->run() == true) {
-					//var_dump($this->input->post('venues'));
-					//var_dump($this->input->post('matchDuration'));
+
+					// Create the update array
 					$tournamentUpdate = array();
+
+					// Update the match duration
 					$tournamentUpdate['matchDuration'] = $this->input->post('matchDuration');
+
+					// Update the starttime for each weekday
 					foreach($weekdays as $weekday){
 						if($this->input->post('startTimes'.ucfirst($weekday)))
 							$tournamentUpdate['startTimes'.ucfirst($weekday)] = implode(",",$this->input->post('startTimes'.ucfirst($weekday)));
 						else
 							$tournamentUpdate['startTimes'.ucfirst($weekday)] = "";
 					}
-					$this->tournaments_model->update_venues($tournamentID,$this->input->post('venues'));
+
+					// Update the tournament venues
+					if($this->input->post('venues'))
+						$this->tournaments_model->update_venues($tournamentID,$this->input->post('venues'));
+
+					// Now update the tournament
 					if($this->tournaments_model->update($tournamentID, $tournamentUpdate)) {
 						// Successful update, show success message
 						$this->session->set_flashdata('message_success',  'Successfully updated scheduling details.');
