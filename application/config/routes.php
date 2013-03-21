@@ -41,6 +41,7 @@
 $route['js/(:any)'] = "assets/load";
 $route['css/(:any)'] = "assets/load";
 $route['img/(:any)'] = "assets/load";
+$route['swf/(:any)'] = "assets/load";
 $route['default_controller'] = ($_SERVER['HTTP_HOST']=="infusionsports.co.uk" ? "product" : "sis");
 $route['404_override'] = '';
 
