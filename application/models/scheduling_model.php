@@ -972,16 +972,27 @@ class Scheduling_model extends MY_Model {
 	 * This is really just the improve the readability of these checks, so we don't get mixed up with LT/GT symbols
 	 * 
 	 * @param startTimeA 	datetime object
-	 * @param endTimeA 		datetime object
+	 * @param durationA		date interval
 	 * @param startTimeB 	datetime object
-	 * @param endTimeB 		datetime object
+	 * @param durationB		date interval
 	 * @return bool(true) if B starts before A ends, bool(false) if not
 	 **/
-	public function is_overlapping( $startTimeA, $endTimeA, $startTimeB, $endTimeB ) {
+	public function is_overlapping( $startTimeA, $durationA, $startTimeB, $durationB ) {
+
+		$endTimeA = clone $startTimeA;
+		$endTimeB = clone $startTimeB;
+		$endTimeA->add($durationA);
+		$endTimeB->add($durationB);
+
 		// Date range A is before B, but A ends after B starts, hence overlapping
 		if($startTimeA < $startTimeB && $endTimeA > $startTimeB) return true; 
 		// Date range B is before A, but B ends after A starts, hence overlapping
 		if($startTimeB < $startTimeA && $endTimeB > $startTimeA) return true; 
+
+		// Date range A is within B, hence overlapping
+		if($startTimeA > $startTimeB && $endTimeB > $endTimeA) return true; 
+		// Date range B is within A, hence overlapping
+		if($startTimeB > $startTimeA && $endTimeA > $endTimeB) return true; 
 		// Otherwise, no overlap
 		return false;
 	}
