@@ -58,8 +58,6 @@ class Scheduling_model extends MY_Model {
 		// 3. FILTER BY VENUES (this will create large permutations)
 		// 4. 
 
-
-
 		// We first want all possible matches datetimes. This method
 		// returns all the possible combinations of start times
 		// and days of the tournament. From here we need to
@@ -178,7 +176,6 @@ class Scheduling_model extends MY_Model {
 		foreach( $umpires as $umpire )
 			$umpireUsage[$umpire['userID']] = 0;
 
-
 		// Assuming for now that we only want round robins for now:
 		$combinations = $this->round_robin($teamIDs);
 		echo "The following teams combinations are being considered: "."\n";
@@ -273,8 +270,6 @@ class Scheduling_model extends MY_Model {
 					// at some later point.
 					// You know what, lets just RANDOMLY select a venue for fun.
 					$matchVenueID = array_rand($matchDateTimes[$date][$dateTime]['venueIDs']);
-
-
 
 					// Hey thats it! Let's add our result to the selected array and a list of scheduled matches:
 					$newMatch = array();
@@ -372,43 +367,6 @@ class Scheduling_model extends MY_Model {
 
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	/**
 	 * HAS NOT BEEN TESTED
 	 *
@@ -420,9 +378,6 @@ class Scheduling_model extends MY_Model {
 
 	public function schedule_running($tournamentID)
 	{
-
-
-
 
 		// Get tournament Information
 		$tournament = $this->tournaments_model->get_tournament($tournamentID);
@@ -448,8 +403,6 @@ class Scheduling_model extends MY_Model {
 		// Calculate number of matches we need
 		$numberOfMatches = ceil(log(count($athletes)/$matchMinimumPlayers)/log(2)+1);
 		$numberOfMatches += 1; // This takes into account the aulifier round.
-
-
 
 		// We first want all possible matches datetimes. This method
 		// returns all the possible combinations of start times
@@ -689,46 +642,6 @@ class Scheduling_model extends MY_Model {
 		return $scheduledMatches;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	/**
 	 * 
 	 * 
@@ -750,7 +663,6 @@ class Scheduling_model extends MY_Model {
 				return ($a['startTime'] < $b['startTime']) ? -1 : 1;
 			}
 		);
-
 
 		// look through each match and find the first instance where
 		// the completed section has not been done.
@@ -792,7 +704,6 @@ class Scheduling_model extends MY_Model {
 				if(array_key_exists('personalBest',$athlete['tournamentActorData']))
 					$athletesPerformed[] = $athlete;
 
-
 		// we now sort the athletes by their performance so that we can
 		// put them into position for the next tournament.
 		usort($athletesPerformed,function($a, $b)
@@ -812,7 +723,6 @@ class Scheduling_model extends MY_Model {
 
 		// Now that we have an ordered array of hurdlers we want to allocate
 		// them into lanes for the next match.
-
 
 		// To do this we get the first match
 		$nextMatch = $matches[$index+1];
@@ -852,38 +762,6 @@ class Scheduling_model extends MY_Model {
 
 		return $updatedMatches;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	/**
 	 * HAS NOT BEEN TESTED
@@ -961,7 +839,6 @@ class Scheduling_model extends MY_Model {
 		}
 		return $dates;
 	}
-
 
 	/**
 	 * HAS NOT BEEN TESTED
@@ -1091,57 +968,47 @@ class Scheduling_model extends MY_Model {
 		return $order;
 	}
 	/**
-	 * HAS NOT BEEN TESTED
-	 *
-	 * are these two events overlapping?
+	 * Check if two date ranges overlap. Takes 4 input parameters, all DateTime objects.
+	 * This is really just the improve the readability of these checks, so we don't get mixed up with LT/GT symbols
 	 * 
 	 * @param startTimeA 	datetime object
-	 * @param durationA 	datetime object
+	 * @param endTimeA 		datetime object
 	 * @param startTimeB 	datetime object
-	 * @param durationB 	datetime object
-	 * @return boolean
+	 * @param endTimeB 		datetime object
+	 * @return bool(true) if B starts before A ends, bool(false) if not
 	 **/
-	public function is_overlapping( $startTimeA, $durationA, $startTimeB, $durationB )
-	{
-		// 
-		$endTimeA = clone $startTimeA;
-		$endTimeB = clone $startTimeB;
-		$endTimeA->add($durationA);
-		$endTimeB->add($durationB);
-		
-		if($endTimeA < $startTimeB || $endTimeB < $startTimeA)
-			return false;
-		return true;
+	public function is_overlapping( $startTimeA, $endTimeA, $startTimeB, $endTimeB ) {
+		// Date range A is before B, but A ends after B starts, hence overlapping
+		if($startTimeA < $startTimeB && $endTimeA > $startTimeB) return true; 
+		// Date range B is before A, but B ends after A starts, hence overlapping
+		if($startTimeB < $startTimeA && $endTimeB > $startTimeA) return true; 
+		// Otherwise, no overlap
+		return false;
 	}
 	/**
-	 * HAS NOT BEEN TESTED
-	 *
 	 * Return a value from 0-6, indicating the weekday index
-	 * starting from Monday and ending on sunday.
-	 * -1 is returned if it isn't a valid weekday
+	 * starting from Monday and ending on Sunday.
+	 * Can be in the format "Monday", "monday", or "mon".
+	 * bool(false) is returned if it isn't a valid weekday
 	 * 
 	 * @param weekday, a string
 	 * @return an integer
 	 **/
-	public function get_weekday_index($weekday)
-	{
+	public function get_weekday_index($weekday) {
 		$weekday = strtolower(substr($weekday, 0, 3));
 		$weekdays = array('mon','tue','wed','thu','fri','sat','sun');
 		$index = array_search($weekday,$weekdays);
 		return $index;
 	}
 	/**
-	 * HAS NOT BEEN TESTED
-	 *
 	 * Returns the weekday string based on an integer.
 	 * extra care is made for the index, so that we can
-	 * do values greater than 6 and less than  0
+	 * do values greater than 6 and less than 0. 0 returns "Monday", as does 7. -1 returns "Sunday".
 	 * 
 	 * @param weekday, an integer
-	 * @return a string
+	 * @return String weekday
 	 **/
-	public function get_weekday_string($weekday)
-	{
+	public function get_weekday_string($weekday) {
 		$weekdays = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday');
 		if($weekday<0)
 			$weekday = ($weekday%7+7)%7;
