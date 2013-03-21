@@ -134,6 +134,9 @@ class Scheduling_model extends MY_Model {
 				unset($matchDateTimes[$date]);
 		}
 
+		echo "The following days and combinations of dates are being considered: "."\n";
+		var_dump($matchDateTimes);
+
 		// We now want to create our individual matches for each
 		// combination of matches. We want to make sure that no
 		// team exceeds the number of times it can play in a day
@@ -170,6 +173,7 @@ class Scheduling_model extends MY_Model {
 		}
 		foreach( $umpires as $umpire )
 			$umpireUsage[$umpire['userID']] = 0;
+
 
 		// Assuming for now that we only want round robins for now:
 		$combinations = $this->round_robin($teamIDs);
