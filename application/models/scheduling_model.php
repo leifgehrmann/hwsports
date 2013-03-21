@@ -39,7 +39,7 @@ class Scheduling_model extends MY_Model {
 		$matchMaximumTeamPlays = 1; // This is hard coded for now. This is the maximum number of matches a player must play
 		$matchMaximumPlays = 1; // This is hard coded for now. This is the maximum number of matches that can occur in a day
 
-		if(isset($actors['Umpire']))
+		if(!isset($actors['Umpire']))
 			return "There are no umpires so no schedule!!!!!!";
 
 		$umpires  = $actors['Umpire'];
