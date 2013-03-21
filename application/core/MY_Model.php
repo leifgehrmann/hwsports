@@ -210,9 +210,11 @@ class MY_Model extends CI_Model {
 		// Iterate through dependents to process corresponding entries from - these should be in a specific order to satisfy foreign keys
 		foreach( $dependents as $table=>$field ) {
 			// Search this table for our object key/ID - if it exists, we want to delete whatever object was referencing our object
-			//var_dump("Searching table: $table for field: $objectIDKey set to value: $objectID"); 
+			//var_dump("Searching table: $table for field: $objectIDKey set to value: $objectID");
+			
 			// Exception in logic for dependency where field contains word "actor" as actorID should be cross checked with roleID to delete correct actors
-			if( (stripos($field,'actor')!==FALSE) && (stripos($primaryTableName,'actor')===FALSE) ) {
+			if( ($primaryTableName=="users" || $primaryTableName=="teams") && (stripos($field,'ActorID')!==FALSE) ) {
+
 				// Find rows in the dependent table (actors table, such as tournamentActors or resultsActors) which reference this object's ID in the "actorID" field
 				// and also have a roleID which has an actorTable which references this object
 				$dependentRows = $this->db->select('*')
