@@ -15,16 +15,16 @@ class Scheduling_model extends MY_Model {
 
 		// Get tournament Information
 		$tournament = $this->tournaments_model->get($tournamentID);
-		$actors 	= $this->tournaments_model->get_actors($tournamentID);
-		$venues 	= $this->tournaments_model->get_venues($tournamentID);
 
+		// If the tournament does not exist, exit.
 		if($tournament==FALSE)
-			return FALSE;
+			return "Tournament does not exist.";
 
+		// Get the start and end date of the tournament.
 		$tournamentStart     = new DateTime($tournament['tournamentStart']);
 		$tournamentEnd       = new DateTime($tournament['tournamentEnd']);
 
-		// Returns an associative array of weekday start times.
+		// Returns an associative array of weekday start times of the tournament.
 		// This is for every day of the week.
 		for( $i=0; $i<7; $i++ )
 		{
@@ -32,34 +32,37 @@ class Scheduling_model extends MY_Model {
 			$matchWeekdayStartTimes[$weekday] = ( array_key_exists('startTimes'.$weekday,$tournament) ? explode(',',$tournament['startTimes'.$weekday]) : array() );
 		}
 
+		// Set how kong a particular matche will take
+		if(!isset($tournament['matchDuration'])) return "The match duration was not specified.";
 		$matchDuration = new DateInterval('PT'.$tournament['matchDuration'].'M'); // Match duration is assumed to be in minutes
+
+		// Default parameters that can be implemented for much finer control.
 		$matchUmpiresBoolean = true; // This is hard coded for now. This is whether we need umpires or not.
 		$matchMinimumUmpires = 1; // This is hard coded for now. This is the minimum number of umpires that must be present at a match
 		$matchMaximumUmpires = 1; // This is hard coded for now. This is the maximum number of umpires that can be present at a match
 		$matchMaximumTeamPlays = 1; // This is hard coded for now. This is the maximum number of matches a player must play
 		$matchMaximumPlays = 1; // This is hard coded for now. This is the maximum number of matches that can occur in a day
 
-		if(!isset($actors['Umpire']))
-			return "There are no umpires so no schedule!!!!!!";
-
-		$umpires  = $actors['Umpire'];
-		$teams    = $actors['Team'];
-
-		foreach($umpires as $index=>$umpire){
+		// Get venue and actor data
+		$actors 	= $this->tournaments_model->get_actors($tournamentID);
+		$venues 	= $this->tournaments_model->get_venues($tournamentID);
+		// Check if an umpire exists and that there are venues for the tournament.
+		if(!isset($actors['Umpire'])) return "There are no umpires in the tournament.";
+		if(!$venues) return "There are no venues that the tournament can take place at."
+		if(count($venues)==0) return "There are no venues that the tournament can take place at."
+		$umpires    = $actors['Umpire'];
+		$teams      = $actors['Team'];
+		// Add tournamentActorData
+		foreach($umpires as $index=>$umpire)
 			$umpires[$index]['tournamentActorData'] = $this->tournament_actors_model->get($umpire['tournamentActorID']);
-		}
 		
-		// If tournament is round robin...
+		// If tournament is round robin we use this algorithm. 
+		// Since we are only implmenting round robins, there is
+		// no need to have a conditional.
 
-		// Things to consider
-		// * At least n Umpires more be present for a match
-		// * Matches should be spread across the tournament time period
-		// * Teams should only play n times a day
-
-		// 1. GET ALL POSSIBLE MATCHES
-		// 2. FILTER BY UMPIRE AVAILABILITY
-		// 3. FILTER BY VENUES (this will create large permutations)
-		// 4. 
+		// 1. Get all possible matches for each start time of each weekday throughout the tournament
+		// 2. Filter the possible matches if no umpires are available for a particular date/time
+		// 3. Filter the leftover matches if a venue is alreasy occupied by another match.
 
 		// We first want all possible matches datetimes. This method
 		// returns all the possible combinations of start times
@@ -192,6 +195,7 @@ class Scheduling_model extends MY_Model {
 
 			// Get list of days ordered by a fitness function that encourages
 			// the spread of days in a tournament.
+			$matchUsageDates = array();
 			foreach( $matchUsage as $key => $value )
 				if($key!="teams" && $key!="count")
 					$matchUsageDates[$key] = $value;
