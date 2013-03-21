@@ -6,7 +6,8 @@
 			"domTable": "#tournamentTeams",
 			"fields": [ {
 					"label": "Team ID",
-					"name": "teamID"
+					"name": "teamID",
+					"type": "hidden"
 				}, {
 					"label": "Name",
 					"name": "name"

@@ -135,9 +135,8 @@
 </div>
 <h2>Matches</h2>
 <div class="tournamentMatches">
-	<p>Displayed below are a list of matches for the tournament. You can edit a match description</p>
-	<pre>IF IT IS A TEAM SPORT, TEAMS A and TEAM B SHOULD BE EDITABLE.</pre>
-	<pre>IF IT IS A NOT A TEAM SPORT, MATCHES THAT HAVEN'T ALREADY OCCURED CAN BE MOVED TO ANOTHER DATE AND TIME. NO RESITRCTIONS SHOULD BE MADE.</pre>
+	<p>Displayed below are a list of matches for the tournament.</p>
+	
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentMatches" width="100%">
 		<thead>
 			<tr>

@@ -71,6 +71,8 @@
 				{ "mData": "detailsLink" }
 			],
 			"aoColumnDefs": [
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] }
+				{ "bVisible": false, "aTargets": [ 2, 5 ] }
             ],
 			"oTableTools": {
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
@@ -99,7 +101,7 @@
 				]
 			},
 			"fnInitComplete": function ( settings, json ) {
-				tournamentMatchesEditor.field('sportID').update( json.sports );
+				// tournamentMatchesEditor.field('sportID').update( json.sports );
 				tournamentMatchesEditor.field('venueID').update( json.venues );
 			}
 		} );
