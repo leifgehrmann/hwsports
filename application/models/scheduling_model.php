@@ -5,7 +5,7 @@ class Scheduling_model extends MY_Model {
 	 * HAS NOT BEEN TESTED
 	 *
 	 * $tournamentID is int(11)
-	 * returns true if the scheduling went well.
+	 * returns an array of matches if the scheduling went well.
 	 * an error string if it didn't go well.
 	 * @return an array of matches 
 	 **/
@@ -41,6 +41,10 @@ class Scheduling_model extends MY_Model {
 
 		$umpires  = $actors['Umpire'];
 		$teams    = $actors['Team'];
+
+		foreach($umpires as $index=>$umpire){
+			$umpires[$index]['tournamentActorData'] = $this->tournament_actors_model->get($umpire['tournamentActorID']);
+		}
 		
 		// If tournament is round robin...
 
@@ -60,7 +64,6 @@ class Scheduling_model extends MY_Model {
 		// filter it down by umpires, venues, and team competitions
 		$matchDateTimes = $this->get_match_date_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration);
 		echo "Matches dates "."\n";
-		var_dump($matchDateTimes);
 		// We now check if an umpire is available for a particular
 		// match. It it isn't, we just remove it from the list of choices.
 		// For each day...
@@ -80,15 +83,16 @@ class Scheduling_model extends MY_Model {
 				$countedUmpireIDs = array();
 				// For each umpire
 				foreach( $umpires as $umpire ){
-					if( !isset($umpire['available'.$weekday]) )
+					if( !isset($umpire['tournamentActorData']['available'.$weekday]) )
 						continue;
 					// is the umpire available at that weekday/time?
-					if( $umpire['available'.$weekday] == '1' )
+					if( $umpire['tournamentActorData']['available'.$weekday] == '1' )
 						$countedUmpireIDs[] = $umpire['userID'];
 				}
 				// Are there enough umpires? Well good! Lets select them!
 				// Also, if there aren't enough, we remove the match.
-				if(count($countedUmpireIDs) > $matchMinimumUmpires)
+
+				if(count($countedUmpireIDs) >= $matchMinimumUmpires)
 					$matchDateTimes[$date][$dateTime]['umpireIDs'] = $countedUmpireIDs;
 				else
 					unset($matchDateTimes[$date][$dateTime]);
