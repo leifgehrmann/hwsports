@@ -45,8 +45,6 @@ class Scheduling_model extends MY_Model {
 		foreach($umpires as $index=>$umpire){
 			$umpires[$index]['tournamentActorData'] = $this->tournament_actors_model->get($umpire['tournamentActorID']);
 		}
-		var_dump($umpires);
-		var_dump($teams);
 		
 		// If tournament is round robin...
 
