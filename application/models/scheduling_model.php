@@ -86,6 +86,7 @@ class Scheduling_model extends MY_Model {
 				$countedUmpireIDs = array();
 				// For each umpire
 				foreach( $umpires as $umpire ){
+					var_dump('available'.$weekday." ".$umpire['tournamentActorData']['available'.$weekday]);
 					if( !isset($umpire['tournamentActorData']['available'.$weekday]) )
 						continue;
 					// is the umpire available at that weekday/time?
