@@ -158,8 +158,8 @@ class Scheduling_model extends MY_Model {
 
 		// Turn teams into list of teamIDs
 		$teamIDs = array();
-		foreach($teams as $team){
-			$teamIDs[] = $team['teamID'];
+		foreach($teams as $team) {
+			$teamIDs[] = $team['tournamentActorID'];
 		}
 
 		// We set the initial count for every single array to be 0.
