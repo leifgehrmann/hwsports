@@ -72,20 +72,20 @@ class Db_Calendar extends MY_Controller {
 			$tournamentsAll = $this->tournaments_model->get_all();
 			foreach ($tournamentsAll as $tournament )
 				if($sportIDs=="all") // If we want only a particular sport
-					$tournaments[] = $tournament;
+					$tournaments[$tournament['tournamentID']] = $tournament;
 				else
 					if(in_array($tournament['sportID'],$sportIDs))
-						$tournaments[] = $tournament;
+						$tournaments[$tournament['tournamentID']] = $tournament;
 		} else if($tournamentIDs=="none") {
 
 		} else { // If we want only particular tournaments
 			foreach ($tournamentIDs as $tournamentID ){
 				$tournament = $this->tournaments_model->get($tournamentID);
 				if($sportIDs=="all") // If we want only a particular sport
-					$tournaments[] = $tournament;
+					$tournaments[$tournament['tournamentID']] = $tournament;
 				else
 					if(in_array($tournament['sportID'],$sportIDs))
-						$tournaments[] = $tournament;
+						$tournaments[$tournament['tournamentID']] = $tournament;
 			}
 		}
 
@@ -106,17 +106,17 @@ class Db_Calendar extends MY_Controller {
 			foreach ($matchesAll as $match ){
 				if($sportIDs=="all") // If we want only a particular sport
 					if($venueIDs=="all") // If we want only a particular venue
-						$matches[] = $match;
+						$matches[$match['matchID']] = $match;
 					else
 						if(in_array($match['venueID'],$venueIDs))
-							$matches[] = $match;
+							$matches[$match['matchID']] = $match;
 				else
 					if(in_array($match['sportID'],$sportIDs))
 						if($venueIDs=="all") // If we want only a particular venue
-							$matches[] = $match;
+							$matches[$match['matchID']] = $match;
 						else
 							if(in_array($match['venueID'],$venueIDs))
-								$matches[] = $match;
+								$matches[$match['matchID']] = $match;
 			}
 		} else if($matchIDs=="none") {
 
@@ -125,17 +125,17 @@ class Db_Calendar extends MY_Controller {
 				$match = $this->matches_model->get($matchID);
 				if($sportIDs=="all") // If we want only a particular sport
 					if($venueIDs=="all") // If we want only a particular venue
-						$matches[] = $match;
+						$matches[$match['matchID']] = $match;
 					else
 						if(in_array($match['venueID'],$venueIDs))
-							$matches[] = $match;
+							$matches[$match['matchID']] = $match;
 				else
 					if(in_array($match['sportID'],$sportIDs))
 						if($venueIDs=="all") // If we want only a particular venue
-							$matches[] = $match;
+							$matches[$match['matchID']] = $match;
 						else
 							if(in_array($match['venueID'],$venueIDs))
-								$matches[] = $match;
+								$matches[$match['matchID']] = $match;
 			}
 		}
 
