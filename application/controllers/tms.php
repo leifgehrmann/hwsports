@@ -191,7 +191,7 @@ class Tms extends MY_Controller {
 			$newData = array_intersect_key($_POST, $tournamentDetailsForm);
 			$newData['scheduled'] = 0;
 			$relationIDs = array(
-				'sportID' => $newdata['sport']
+				'sportID' => $_POST['sport'];
 			);
 			
 			$tournamentID = $this->tournaments_model->insert($newdata,$relationIDs);
