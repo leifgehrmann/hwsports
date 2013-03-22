@@ -59,7 +59,7 @@ class Datatables extends MY_Controller {
 					// The DataTables row ID; eg. sports-8 or matches-332
 					$object['DT_RowId'] = "$type-$ID";
 					// Format date/time objects for the public
-					if(isset($object['startTime']) && isset($object['endTime'])) {
+					if(isset($object['startTime']) && isset($object['startTime'])) {
 						$object['startTime'] = datetime_to_public($object['endTime']);
 						$object['endTime'] = datetime_to_public($object['endTime']);
 					} else if(isset($object['tournamentStart']) && isset($object['tournamentEnd']) && isset($object['registrationStart']) && isset($object['registrationEnd'])) {
