@@ -50,6 +50,7 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 		$('#teams').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/data/teams",
+			"aaSorting": [[ 1, "asc" ]],
 			"aoColumns": [
 				{ "mData": "teamID" },
 				{ "mData": "name" },

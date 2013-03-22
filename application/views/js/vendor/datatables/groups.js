@@ -51,6 +51,7 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 		$('#groups').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/data/groups/",
+			"aaSorting": [[ 1, "asc" ]],
 			"aoColumns": [
 				{ "mData": "groupID" },
 				{ "mData": "name" },

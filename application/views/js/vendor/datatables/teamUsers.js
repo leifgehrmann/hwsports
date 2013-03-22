@@ -49,6 +49,7 @@
 		$('#teamUsers').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/teamUsers/"+$('#teamID').html(),
+			"aaSorting": [[ 2, "asc" ]],
 			"aoColumns": [
 				{ "mData": "userID" },
 				{ "mData": "firstName" },

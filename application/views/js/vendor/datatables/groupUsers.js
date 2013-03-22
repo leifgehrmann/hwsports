@@ -49,6 +49,7 @@
 		$('#groupUsers').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/groupUsers/"+$('#groupID').html(),
+			"aaSorting": [[ 2, "asc" ]],
 			"aoColumns": [
 				{ "mData": "userID" },
 				{ "mData": "firstName" },

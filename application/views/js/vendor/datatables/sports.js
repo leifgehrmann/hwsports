@@ -56,6 +56,7 @@
 		$('#sports').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/data/sports",
+			"aaSorting": [[ 2, "asc" ]],
 			"aoColumns": [
 				{ "mData": "sportID" },
 				{ "mData": "centreID" },

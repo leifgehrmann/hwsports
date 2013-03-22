@@ -84,6 +84,7 @@
 		$('#tournamentUmpires').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/tournamentUmpires/"+$('#tournamentID').html(),
+			"aaSorting": [[ 2, "asc" ]],
 			"aoColumns": [
 				{ "mData": "userID" },
 				{ "mData": "firstName" },

@@ -49,6 +49,7 @@
 		$('#tournamentAthletes').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/tournamentAthletes/"+$('#tournamentID').html(),
+			"aaSorting": [[ 2, "asc" ]],
 			"aoColumns": [
 				{ "mData": "userID" },
 				{ "mData": "firstName" },

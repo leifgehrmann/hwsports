@@ -56,7 +56,7 @@
 		$('#tournamentMatches').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/tournamentMatches/"+$('#tournamentID').html(),
-			"aaSorting": [[ 3, "desc" ]],
+			"aaSorting": [[ 3, "asc" ]],
 			"aoColumns": [
 				{ "mData": "matchID" },
 				{ "mData": "name" },
