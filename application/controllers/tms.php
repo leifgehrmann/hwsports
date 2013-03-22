@@ -368,7 +368,7 @@ class Tms extends MY_Controller {
 							'startTime' => $match['startTime'],
 							'endTime' => $match['endTime'],
 							'name' => $match['name']
-						)
+						);
 						$matchRelations = array(
 							'tournamentID' => $tournamentID,
 							'venueID' => $match['venueID'],
