@@ -102,9 +102,9 @@
 						$x=0;
 						foreach($startTimes[$weekday] as $time) { ?>
 							<? if($x==0) { ?>
-							<p><input type="text" style="width:70px" name="startTimes<?=ucfirst($weekday)?>[]" value="<?=$time?>" placeholder="HH:MM" /></p></div>
+							<p><input type="text" class="time" style="width:70px" name="startTimes<?=ucfirst($weekday)?>[]" value="<?=$time?>" placeholder="HH:MM" /></p></div>
 							<? } else {?>
-							<p><input type="text" name="startTimes<?=ucfirst($weekday)?>[]" value="<?=$time?>" style="width:70px" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>
+							<p><input type="text" class="time" name="startTimes<?=ucfirst($weekday)?>[]" value="<?=$time?>" style="width:70px" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>
 							<? } ?>
 						<? $x++;} ?>
 					<a class="button green" href="#" id="startTimes<?=ucfirst($weekday)?>Add">Add another start time</a>
@@ -193,7 +193,13 @@
 <div id="tournamentID" style="display:none;"><?=$tournamentID?></div>
 
 <script type="text/javascript">
-	$('.date').datetimepicker({
+	$('input .date').datetimepicker({
+		dateFormat: $.datepicker.ISO_8601,
+		separator: ' ',
+		timeFormat: 'HH:mm',
+		ampm: false
+	});
+	$('input .time').datetimepicker({
 		dateFormat: $.datepicker.ISO_8601,
 		separator: ' ',
 		timeFormat: 'HH:mm',
@@ -218,7 +224,7 @@
 			}
 			console.log(z);
 			startTimes = $('#startTimes'+ucfirst(weekdays[z]));
-			startTimes.append('<p><input type="text" name="startTimes'+ucfirst(weekdays[z])+'[]" value="" style="width:70px" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>');
+			startTimes.append('<p><input type="text" class="time" name="startTimes'+ucfirst(weekdays[z])+'[]" value="" style="width:70px" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>');
 
 			return false;
 		});

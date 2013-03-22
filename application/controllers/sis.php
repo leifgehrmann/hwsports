@@ -179,6 +179,7 @@ class Sis extends MY_Controller {
 
 		
 		$tournament = $this->tournaments_model->get($tournamentID);
+		$tournament = $this->tournaments_model->get_all($tournamentID);
 		if($tournament==FALSE) {
 			$this->session->set_flashdata('message',  "Tournament ID $id does not exist.");
 			redirect("/sis/tournaments", 'refresh');
