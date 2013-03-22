@@ -135,7 +135,7 @@
 		<p><a href="/tms/tournaments/" class="button right blue">View All Tournaments</a></p>
 	</div>
 </div>
-<div class="widget half icons">
+<!--<div class="widget half icons">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
 		<div class="widget-title-centre">Happy small icons</div>
@@ -151,7 +151,7 @@
 			</div>
 		<? } ?>
 	</div>
-</div>
+</div>-->
 
 
 

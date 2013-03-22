@@ -112,9 +112,6 @@ class Sis extends MY_Controller {
 		$this->data['latestTournaments'] 	= $latestTournaments;
 		$this->data['upcomingTournaments'] 	= $upcomingTournaments;
 
-
-
-
 		//set the flash data error message if there is one
 		$this->view('home','sishome','Home',$this->data);
 	}
