@@ -382,7 +382,7 @@ class Tms extends MY_Controller {
 						}
 						// Insert the teams for the match
 						foreach($match['matchActors']['teamIDs'] as $teamID) {
-							$matchRelations = array('matchID'=>$matchID,'roleID'=>$roleIDs['team'],'actorID'=>$team);
+							$matchRelations = array('matchID'=>$matchID,'roleID'=>$roleIDs['team'],'actorID'=>$teamID);
 							if($this->match_actors_model->insert($matchRelations)===FALSE) {
 								$this->session->set_flashdata('message_error', 'Failed to insert match actor. Please contact Infusion Systems.');
 								redirect("/tms/tournament/$tournamentID", 'refresh');
