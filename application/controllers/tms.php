@@ -329,7 +329,7 @@ class Tms extends MY_Controller {
 				}
 				redirect("/tms/tournament/$tournamentID", 'refresh');
 			} else {
-				$data['message_error'] = $this->session->flashdata('message_error');
+				$data['message_error'] = validation_errors();
 			}
 		} else if($formID=="schedulingDetailsForm"){
 			if($formAction=="update") {
