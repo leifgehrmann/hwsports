@@ -241,6 +241,9 @@ class Sis extends MY_Controller {
 					// Add team leader (current user) to team
 					$teamMemberIDs[] = $this->currentUser['userID'];
 					// Create team, for now only inserting one bit of teamData, the team leader's user ID
+					
+					echo "creating a new team!"; 
+					
 					$teamID = $this->teams_model->insert(array('teamLeader'=>$this->currentUser['userID']));
 					// Ensure team was created before proceeding
 					if($teamID === FALSE)  
@@ -258,7 +261,7 @@ class Sis extends MY_Controller {
 				// Put value into sub array based on object name so we can add data in bulk later
 				$objectData[$object][$key] = $value;
 			}
-			//var_dump($objectData); die();
+			var_dump($objectData); die();
 			
 			// Add this user as an actor with the correct role in this specific tournament,
 			// and add the tournament-specific data for this user to the tournamentActorData
