@@ -86,7 +86,7 @@
 				<td valign="top">
 					<div id="startTimes<?=ucfirst($weekday)?>">
 						<? if(count($startTimes[$weekday])==0){ ?>
-						<p><input type="text" style="width:70px" name="startTimes<?=ucfirst($weekday)?>[]" value="" placeholder="HH:MM" /></p></div>
+						<p><input type="text" class="time" style="width:70px" name="startTimes<?=ucfirst($weekday)?>[]" value="" placeholder="HH:MM" /></p></div>
 						<? } ?>
 						<? 
 						$x=0;
