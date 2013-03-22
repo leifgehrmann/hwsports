@@ -224,6 +224,10 @@
 			console.log(z);
 			startTimes = $('#startTimes'+ucfirst(weekdays[z]));
 			startTimes.append('<p><input type="text" class="time" name="startTimes'+ucfirst(weekdays[z])+'[]" value="" style="width:70px" placeholder="HH:MM" /><a class="button red removeInputButton" href="#" style="margin-left:20px;top:0px;">Remove</a></p>');
+			$('input.time').timepicker({
+				timeFormat: 'HH:mm',
+				ampm: false
+			});
 
 			return false;
 		});
