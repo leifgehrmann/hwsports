@@ -136,13 +136,13 @@ class Tms extends MY_Controller {
 	public function tournaments()
 	{	
 		$tournamentDetailsForm = array(
-			array(
+			'name' => array(
 				'name'=>'name',
 				'label'=>'Name',
 				'restrict'=>'required|xss_clean',
 				'type'=>'text'
 			),
-			array(
+			'description' => array(
 				'name'=>'description',
 				'label'=>'Description',
 				'restrict'=>'required|xss_clean',
@@ -153,25 +153,25 @@ class Tms extends MY_Controller {
 				'label'=>'Sport',
 				'restrict'=>'required|xss_clean',
 			),
-			array(
+			'registrationStart' => array(
 				'name'=>'registrationStart',
 				'label'=>'Registration Start Date',
 				'restrict'=>'required|xss_clean|callback_datetime_check[registrationStart]',
 				'type'=>'date'
 			),
-			array(
+			'registrationEnd' => array(
 				'name'=>'registrationEnd',
 				'label'=>'Registration End Date',
 				'restrict'=>'required|xss_clean|callback_datetime_check[registrationEnd]',
 				'type'=>'date'
 			),
-			array(
+			'tournamentStart' => array(
 				'name'=>'tournamentStart',
 				'label'=>'Tournament Start Date',
 				'restrict'=>'required|xss_clean|callback_datetime_check[tournamentStart]',
 				'type'=>'date'
 			),
-			array(
+			'tournamentEnd' => array(
 				'name'=>'tournamentEnd',
 				'label'=>'Tournament End Date',
 				'restrict'=>'required|xss_clean|callback_datetime_check[tournamentEnd]',
@@ -188,8 +188,8 @@ class Tms extends MY_Controller {
 		}
 		
 		if ($this->form_validation->run() == true) {
-			$newdata = $_POST;
-			unset($newdata['submit']);
+			$newData = array_intersect_key($_POST, $tournamentDetailsForm);
+			$newData['scheduled'] = 0;
 			$relationIDs = array(
 				'sportID' => $newdata['sport']
 			);
@@ -680,7 +680,9 @@ class Tms extends MY_Controller {
 		}
 		
 		if ($this->form_validation->run() == true) {
-			$newdata = $_POST;
+			$newdata = array(
+				
+			);
 			// If checkbox is unticked, it returns no value - this means FALSE
 			for($i=0;$i<7;$i++)
 				if(!isset($newdata[$weekdaysShort[$i].'Open'])) $newdata[$weekdaysShort[$i].'Open'] = 0;
