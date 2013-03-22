@@ -11,6 +11,7 @@
 		<a href="sis/help" class="button blue">More Information</a>
 	</div>
 </div>
+<div>
 <div class="widget half matches">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
@@ -134,6 +135,7 @@
 		<? } ?>
 		<p><a href="/tms/tournaments/" class="button right blue">View All Tournaments</a></p>
 	</div>
+</div>
 </div>
 <? /*
 <!--<div class="widget half icons">
