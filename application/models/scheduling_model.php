@@ -418,14 +418,6 @@ class Scheduling_model extends MY_Model {
 			$matchWeekdayStartTimes[$weekday]    = explode(',',$tournament['startTimes'.$weekday]);
 		}
 
-		$matchDuration = new DateInterval('PT'.$tournament['matchDuration'].'M'); // Match duration is assumed to be in minutes
-		$matchMaximumPlays   = 1; // This is hard coded for now. This is the maximum number of matches a hurdler must play
-		$matchMinimumPlayers = 8; // This is hard coded for now. This is the minimum number of hurdlers that must be playing at once.
-
-		// Calculate number of matches we need
-		$numberOfMatches = ceil(log(count($athletes)/$matchMinimumPlayers)/log(2)+1);
-		$numberOfMatches += 1; // This takes into account the aulifier round.
-
 		// Get actor and venue data
 		$venues     = $this->tournaments_model->get_venues($tournamentID);
 		$actors     = $this->tournaments_model->get_actors($tournamentID);
@@ -436,6 +428,14 @@ class Scheduling_model extends MY_Model {
 		// Add tournamentActorData
 		foreach($athletes as $index=>$athlete)
 			$athletes[$index]['tournamentActorData'] = $this->tournament_actors_model->get($athlete['tournamentActorID']);
+
+		$matchDuration = new DateInterval('PT'.$tournament['matchDuration'].'M'); // Match duration is assumed to be in minutes
+		$matchMaximumPlays   = 1; // This is hard coded for now. This is the maximum number of matches a hurdler must play
+		$matchMinimumPlayers = 8; // This is hard coded for now. This is the minimum number of hurdlers that must be playing at once.
+
+		// Calculate number of matches we need
+		$numberOfMatches = ceil(log(count($athletes)/$matchMinimumPlayers)/log(2)+1);
+		$numberOfMatches += 1; // This takes into account the aulifier round.
 
 		// We first want all possible matches datetimes. This method
 		// returns all the possible combinations of start times
