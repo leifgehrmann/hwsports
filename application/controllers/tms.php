@@ -328,9 +328,6 @@ class Tms extends MY_Controller {
 					$this->session->set_flashdata('message_error',  'Failed to update tournament. Please contact Infusion Systems.');
 				}
 				redirect("/tms/tournament/$tournamentID", 'refresh');
-			} else {
-				var_dump("WHY THIS WORK");
-				$data['message_error'] = validation_errors();
 			}
 		} else if($formID=="schedulingDetailsForm"){
 			if($formAction=="update") {
