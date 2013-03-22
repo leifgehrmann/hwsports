@@ -55,6 +55,7 @@
 		<?=form_close();?>
 	</div>
 </div>
+<? if( $tournament['status'] == 'postRegistration' ) { ?>
 <div class="widget full scheduling">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
@@ -133,6 +134,7 @@
 		<? } ?>
 	</div>
 </div>
+<? } ?>
 <h2>Matches</h2>
 <p>Displayed below are a list of matches for the tournament.</p>
 <div class="tournamentMatches">
