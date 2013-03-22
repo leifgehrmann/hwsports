@@ -215,7 +215,7 @@ class MY_Model extends CI_Model {
 			//var_dump("Searching table: $table for field: $objectIDKey set to value: $objectID");
 			
 			// Exception in logic for dependency where field contains word "actor" as actorID should be cross checked with roleID to delete correct actors
-			/*if( ($primaryTableName=="users" || $primaryTableName=="teams") && (stripos($field,'ActorID')!==FALSE) ) {
+			if( ($primaryTableName=="users" || $primaryTableName=="teams") && (stripos($field,'ActorID')!==FALSE) ) {
 				// Find rows in the dependent table (actors table, such as tournamentActors or resultsActors) which reference this object's ID in the "actorID" field
 				// and also have a roleID which has an actorTable which references this object
 				$dependentRows = $this->db->select('*')
@@ -224,10 +224,10 @@ class MY_Model extends CI_Model {
 					->where('actorID',$objectID)
 					->where('actorTable',$primaryTableName)
 					->get()->result_array();
-			} else {*/
+			} else {
 				// Find the rows in the dependent table which have this object's ID key and value - this assumes fields are named correctly (such as userID in usersGroups table)
 				$dependentRows = $this->db->get_where($table, array($objectIDKey => $objectID))->result_array();
-			//}
+			}
 			// Loop through all rows which were referencing this object
 			foreach($dependentRows as $dependentRow) {
 				//$testResults[] = "Procesing dependent row: ".print_r($dependentRow)."\n";
@@ -262,8 +262,9 @@ class MY_Model extends CI_Model {
 		$this->db->trans_complete();
 		// Return TRUE: if we got to here it must have all worked
 		if($testRun) {
-			$testResultsUnique = array_unique($testResults);
-			return $testResultsUnique;
+			//$testResultsUnique = array_unique($testResults);
+			//return $testResultsUnique;
+			return $testResults;
 		}
 		return TRUE;
 	}
