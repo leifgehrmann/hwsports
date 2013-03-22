@@ -332,7 +332,7 @@ class Datatables extends MY_Controller {
 	}
 	
 	// Handle datatables requests for the tournamentActors table, referencing the athlete role for this tournament which displays umpires in a specific tournament, with cool tournamentActor relations.
-	public function tournamentUmpires($tournamentID) {
+	public function tournamentAthletes($tournamentID) {
 		$tournament = $this->tournaments_model->get($tournamentID);
 		$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
 		$loadIDKey = 'userID';
