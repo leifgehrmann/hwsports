@@ -227,7 +227,7 @@ class Sis extends MY_Controller {
 		// We have post data, let's process it
 		if( $this->input->post() ) {
 
-			var_dump($_POST); 
+			//var_dump($_POST); 
 			// Loop through input data and deal with it bit by bit
 			foreach($_POST as $inputKey => $value) {
 				// Get the role ID
@@ -258,7 +258,7 @@ class Sis extends MY_Controller {
 				// Put value into sub array based on object name so we can add data in bulk later
 				$objectData[$object][$key] = $value;
 			}
-			var_dump($objectData); die();
+			//var_dump($objectData); die();
 			
 			// Add this user as an actor with the correct role in this specific tournament,
 			// and add the tournament-specific data for this user to the tournamentActorData
