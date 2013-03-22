@@ -442,6 +442,7 @@ class Scheduling_model extends MY_Model {
 		// and days of the tournament. from here we need to filter 
 		// by venue.
 		$matchDateTimes = $this->get_match_date_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration);
+		var_dump($matchDateTimes);
 
 		foreach($matchDateTimes as $date=>$dateTimes)
 		{
@@ -472,6 +473,8 @@ class Scheduling_model extends MY_Model {
 			if(count($matchDateTimes[$date]) == 0)
 				unset($matchDateTimes[$date]);
 		}
+
+		var_dump($matchDateTimes);
 
 		$scheduledMatches = array(); // Our list of matches that we would like to output
 		$matchDateTimesSelected = array(); // associated array of date->datetime->data. This will be used to check for overlapping events
