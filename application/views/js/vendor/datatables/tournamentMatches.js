@@ -74,7 +74,6 @@
 			],
 			"aoColumnDefs": [
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
-				{ "asSorting": [ "asc" ], "aTargets": [ 3 ] },
 				{ "bVisible": false, "aTargets": [ 2, 5 ] }
             ],
 			"oTableTools": {
