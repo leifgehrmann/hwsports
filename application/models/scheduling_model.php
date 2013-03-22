@@ -109,7 +109,7 @@ class Scheduling_model extends MY_Model {
 				unset($matchDateTimes[$date]);
 		}
 		echo "Matches dates with umpires "."\n";
-		var_dump($matchDateTimes);
+		//var_dump($matchDateTimes);
 		// We now check if a venue is occupied with some other match.
 		// If it isn't, we say that this particular venue works at the
 		// particular time on this particular day.
@@ -144,7 +144,7 @@ class Scheduling_model extends MY_Model {
 		}
 		echo "Matches dates "."\n";
 		echo "The following days and combinations of dates are being considered: "."\n";
-		var_dump($matchDateTimes);
+		//var_dump($matchDateTimes);
 
 		// We now want to create our individual matches for each
 		// combination of matches. We want to make sure that no
@@ -186,7 +186,7 @@ class Scheduling_model extends MY_Model {
 		// Assuming for now that we only want round robins for now:
 		$combinations = $this->round_robin($teamIDs);
 		echo "The following teams combinations are being considered: "."\n";
-		var_dump($combinations);
+		//var_dump($combinations);
 		// For every single combination of a game we want.
 		foreach($combinations as $combination)
 		{
