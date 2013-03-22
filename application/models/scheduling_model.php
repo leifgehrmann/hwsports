@@ -574,6 +574,7 @@ class Scheduling_model extends MY_Model {
 					$newMatch = array();
 					$endTime = new DateTime($dateTime);
 					$endTime->add($matchDuration);
+					$newMatch['startTime'] = datetime_to_standard($dateTime);
 					$newMatch['endTime'] = datetime_to_standard($endTime);
 					$newMatch['venue'] = $matchVenueID;
 					$matchDateTimesSelected[$date][$dateTime] = array();
