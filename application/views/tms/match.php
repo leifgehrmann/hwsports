@@ -9,7 +9,7 @@
 
 	echo "<table>";
 	for($i=0;$i<count($fields);$i++){
-		if(!isset($match'description']))
+		if(!isset($match[$fields]))
 			continue;
 		echo "\t<tr>";
 		echo "\t\t<th style='width:{$widths[0]}'>{$labels[$i]}</th>";
