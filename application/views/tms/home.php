@@ -76,9 +76,9 @@
 				$end = datetime_to_public_date($tournament['tournamentEnd']);
 			?>
 			<div class="tournament 
-				tournamentID-<?=$match['tournamentID']?> 
-				sportID-<?=$match['sportID']?> 
-				sportCategoryID-<?=$match['sportData']['sportCategoryID']?> 
+				tournamentID-<?=$tournament['tournamentID']?> 
+				sportID-<?=$tournament['sportID']?> 
+				sportCategoryID-<?=$tournament['sportData']['sportCategoryID']?> 
 			">
 				<div class="icon left margin-right"></div>
 				<p>
@@ -107,9 +107,9 @@
 				$end = datetime_to_public_date($tournament['tournamentEnd']);
 			?>
 			<div class="tournament 
-				tournamentID-<?=$match['tournamentID']?> 
-				sportID-<?=$match['sportID']?> 
-				sportCategoryID-<?=$match['sportData']['sportCategoryID']?> 
+				tournamentID-<?=$tournament['tournamentID']?> 
+				sportID-<?=$tournament['sportID']?> 
+				sportCategoryID-<?=$tournament['sportData']['sportCategoryID']?> 
 			">
 				<div class="icon left margin-right"></div>
 				<p>
