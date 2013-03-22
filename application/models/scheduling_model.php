@@ -435,7 +435,10 @@ class Scheduling_model extends MY_Model {
 		$matchMinimumPlayers = 8; // This is hard coded for now. This is the minimum number of hurdlers that must be playing at once.
 
 		// Calculate number of matches we need
-		$numberOfMatches = ceil(log(count($athletes)/$matchMinimumPlayers+0.01)/log(2)+1);
+		if(count($athletes)<$matchMinimumPlayers)
+			$numberOfMatches = 1;
+		else
+			$numberOfMatches = ceil(log(count($athletes)/$matchMinimumPlayers)/log(2)+1);
 		$numberOfMatches += 1; // This takes into account the aulifier round.
 		if($debug){
 			echo "Number of athletes: ".count($athletes);
@@ -509,7 +512,7 @@ class Scheduling_model extends MY_Model {
 		for( $matchIndex = 0; $matchIndex < $numberOfMatches; $matchIndex++ )
 		{
 			if($debug) echo "adding match ".$matchIndex."out of ".$numberOfMatches;
-			
+
 			$added = false; // This will indicate if we could find a place to put this match in.
 			// Get list of days ordered by a fitness function that encourages
 			// the spread of days in a tournament.
