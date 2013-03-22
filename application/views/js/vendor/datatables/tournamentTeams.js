@@ -6,8 +6,7 @@
 			"domTable": "#tournamentTeams",
 			"fields": [ {
 					"label": "Team ID",
-					"name": "teamID",
-					"type": "hidden"
+					"name": "teamID"
 				}, {
 					"label": "Name",
 					"name": "name"
@@ -43,7 +42,6 @@
 				{ "mData": "detailsLink" }
 			],
 			"aoColumnDefs": [
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] }
             ],
 			"oTableTools": {
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
