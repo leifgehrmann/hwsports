@@ -492,6 +492,7 @@ class Scheduling_model extends MY_Model {
 		}
 
 		// We now iterate through each possible day and time hopefully finding a day that works out just fine.
+		echo "Number of matches to add: ".$numberOfMatches;
 		$matchIndex = 0;
 		for( $matchIndex = 0; $matchIndex < $numberOfMatches; $matchIndex++ )
 		{
