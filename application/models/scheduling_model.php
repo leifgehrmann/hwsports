@@ -436,7 +436,7 @@ class Scheduling_model extends MY_Model {
 
 		// Calculate number of matches we need
 		if(count($athletes)<$matchMinimumPlayers)
-			$numberOfMatches = 1;
+			$numberOfMatches = 10;
 		else
 			$numberOfMatches = ceil(log(count($athletes)/$matchMinimumPlayers)/log(2)+1);
 		$numberOfMatches += 1; // This takes into account the aulifier round.
