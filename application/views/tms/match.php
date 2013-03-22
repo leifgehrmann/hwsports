@@ -9,7 +9,7 @@
 
 	echo "<table>";
 	for($i=0;$i<count($fields);$i++){
-		if(!isset($this->data['match'][$fields]))
+		if(!isset($this->data['match'][$fields[$i]]))
 			continue;
 		echo "\t<tr>";
 		echo "\t\t<th style='width:{$widths[0]}'>{$labels[$i]}</th>";
