@@ -144,25 +144,24 @@
 	<script src="/js/vendor/datatables/tournamentMatches.js"></script>
 </div>
 <? foreach($roles as $roleID=>$roleName) { ?>
-	<? switch($roleName) {
-		case "team":
-	?>
+	<? if($roleName=="team") { ?>
 		<h2>Teams</h2>
 		<p>Displayed below are a list of teams for the tournament. </p>
 		<div class="tournamentTeams">
-		<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentTeams" width="100%">
-			<thead>
-				<tr>
-					<th width="30%">Team ID</th>
-					<th width="30%">Name</th>
-					<th width="30%">Description</th>
-					<th width="30%">Association Number</th>
-					<th width="5%">&nbsp;</th>
-				</tr>
-			</thead>
-		</table>
-		<script src="/js/vendor/datatables/tournamentTeams.js"></script>
-		<? break; case "umpire": ?>
+			<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentTeams" width="100%">
+				<thead>
+					<tr>
+						<th width="30%">Team ID</th>
+						<th width="30%">Name</th>
+						<th width="30%">Description</th>
+						<th width="30%">Association Number</th>
+						<th width="5%">&nbsp;</th>
+					</tr>
+				</thead>
+			</table>
+			<script src="/js/vendor/datatables/tournamentTeams.js"></script>
+		</div>
+	<? } else if($roleName=="umpire") { ?>
 		<h2>Umpires</h2>
 		<p>Displayed below are a list of umpires for the tournament. </p>
 		<div class="tournamentUmpires">
@@ -182,7 +181,7 @@
 			</table>
 			<script src="/js/vendor/datatables/tournamentUmpires.js"></script>
 		</div>
-		<? break; case "athlete": ?>
+	<? } else if($roleName=="athlete") { ?>
 		<h2>Umpires</h2>
 		<p>Displayed below are a list of athletes for the tournament. </p>
 		<div class="tournamentAthletes">
@@ -202,8 +201,7 @@
 			</table>
 			<script src="/js/vendor/datatables/tournamentAthletes.js"></script>
 		</div>
-	<? break; } ?>
-</div>
+	<? } ?>
 <? } ?>
 
 <div id="tournamentID" style="display:none;"><?=$tournamentID?></div>
