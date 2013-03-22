@@ -20,7 +20,7 @@
 				<td colspan="3"><?=form_textarea($description)?></td>
 			</tr>
 			<tr>
-				<? switch($tournament['status']) { 
+				<? switch($tournament['status']) {
 					case "preRegistration": $tournamentStatusMessage="This tournament has not yet opened for registration. You may change any of the details below."; break;
 					case "inRegistration": $tournamentStatusMessage="This tournament is open for registration. You may change any of the tournament details or manage the list of competitors to date."; break;
 					case "postRegistration": $tournamentStatusMessage="This tournament has closed for registration. You may change any of the tournament details below. Before matches can be sceduled, you must moderate the list of competitors below."; break;
@@ -36,15 +36,15 @@
 			</tr>
 			<tr>
 				<td><label for="tournamentStart">Start Date</label></td>
-				<td><?=!in_array($tournament['status'],array("inTournament","postTournament")) ? form_input($tournamentStart) : datetime_to_public($tournament['tournamentStart']) ?></td>
+				<td><?=form_input($tournamentStart)?></td>
 				<td><label for="registrationStart">Start Date</label></td>
-				<td><?=in_array($tournament['status'],array("preRegistration")) ? form_input($registrationStart) : datetime_to_public($tournament['registrationStart']) ?></td>
+				<td><?=form_input($registrationStart)?></td>
 			</tr>
 			<tr>
 				<td><label for="tournamentEnd">End Date</label></td>
-				<td><?=!in_array($tournament['status'],array("postTournament")) ? form_input($tournamentEnd) : datetime_to_public($tournament['tournamentEnd']) ?></td>
+				<td><?=form_input($tournamentEnd)?></td>
 				<td><label for="registrationEnd">End Date</label></td>
-				<td><?=!in_array($tournament['status'],array("inTournament","postTournament","postRegistration")) ? form_input($registrationEnd) : datetime_to_public($tournament['registrationEnd']) ?></td>
+				<td><?=form_input($registrationEnd)?></td>
 			</tr>
 			
 			<tr>
