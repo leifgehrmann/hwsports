@@ -75,8 +75,8 @@
 					{ "sExtends": "editor_create", "editor": editor },
 					{ "sExtends": "editor_edit",   "editor": editor },
 					{ "sExtends": "editor_remove", "editor": editor },
-					"select_all", 
-					"select_none",
+					//"select_all", 
+					//"select_none",
 					{
 						"sExtends":    "collection",
 						"sButtonText": "Export",

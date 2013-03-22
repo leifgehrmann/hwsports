@@ -69,8 +69,8 @@
 					{ "sExtends": "editor_create", "sButtonText": "Add User to Team", "editor": editor },
 					{ "sExtends": "editor_edit", "sButtonText": "Edit User", "editor": editor },
 					{ "sExtends": "editor_remove", "sButtonText": "Remove from Team", "editor": editor },
-					"select_all", 
-					"select_none",
+					//"select_all", 
+					//"select_none",
 					{
 						"sExtends":    "collection",
 						"sButtonText": "Export",

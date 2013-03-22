@@ -181,7 +181,7 @@
         						</li>
         					</a>
 
-        					<a href="/tms/announcements" title="View and create announcements" class="<?=($page=='announcements' ? 'selected' : '')?>">
+        					<!--<a href="/tms/announcements" title="View and create announcements" class="<?=($page=='announcements' ? 'selected' : '')?>">
         						<li>
         							<div class="icon announcements"></div>Announcements
         						</li>
@@ -203,7 +203,7 @@
         								<div class="icon ticketreports"></div>Reports
         							</li>
         						</a>
-        					</ul>
+        					</ul>-->
 
         					<a class="toggleMenuItem <?=(($page=='users'||$page=='teams'||$page=='groups'||$page=='user'||$page=='team'||$page=='group') ? 'selected' : '')?>">
         						<li><div class="icon usersgroups"></div>Users &amp; Groups<div class="icon close"></div></li>

@@ -92,8 +92,8 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 				"aButtons": [
 					{ "sExtends": "editor_edit",   "editor": editor },
 					{ "sExtends": "editor_remove", "editor": editor },
-					"select_all", 
-					"select_none",
+					//"select_all", 
+					//"select_none",
 					{
 						"sExtends":    "collection",
 						"sButtonText": "Export",

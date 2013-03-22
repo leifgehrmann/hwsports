@@ -92,6 +92,7 @@
 		$('#venues').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/data/venues",
+			"aaSorting": [[ 3, "desc" ]],
 			"aoColumns": [
 				{ "mData": "lat" },
 				{ "mData": "lng" },
@@ -102,9 +103,7 @@
 				{ "mData": "detailsLink" }
 			],
 			"aoColumnDefs": [
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 1 ] },
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 2 ] }
+				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0, 1, 2 ] }
             ],
 			"oTableTools": {
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
@@ -113,8 +112,8 @@
 					{ "sExtends": "editor_create", "editor": editor },
 					{ "sExtends": "editor_edit",   "editor": editor },
 					{ "sExtends": "editor_remove", "editor": editor },
-					"select_all", 
-					"select_none",
+					//"select_all", 
+					//"select_none",
 					{
 						"sExtends":    "collection",
 						"sButtonText": "Export",
