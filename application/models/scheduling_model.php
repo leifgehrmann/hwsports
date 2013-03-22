@@ -441,9 +441,9 @@ class Scheduling_model extends MY_Model {
 			$numberOfMatches = ceil(log(count($athletes)/$matchMinimumPlayers)/log(2)+1);
 		$numberOfMatches += 1; // This takes into account the aulifier round.
 		if($debug){
-			echo "Number of athletes: ".count($athletes);
-			echo "Minimum matches per day: ".$matchMinimumPlayers;
-			echo "Total number of matches: ".$numberOfMatches;
+			echo "Number of athletes: ".count($athletes)."\n";
+			echo "Minimum matches per day: ".$matchMinimumPlayers."\n";
+			echo "Total number of matches: ".$numberOfMatches."\n";
 		}
 
 		// We first want all possible matches datetimes. This method
@@ -452,7 +452,7 @@ class Scheduling_model extends MY_Model {
 		// by venue.
 		$matchDateTimes = $this->get_match_date_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration);
 		if($debug){
-			echo "all possible dates times";
+			echo "all possible dates times"."\n";
 			var_dump($matchDateTimes);
 		}
 
@@ -487,7 +487,7 @@ class Scheduling_model extends MY_Model {
 		}
 
 		if($debug){
-			echo "dates times with venues";
+			echo "dates times with venues"."\n";
 			var_dump($matchDateTimes);
 		}
 
@@ -522,7 +522,7 @@ class Scheduling_model extends MY_Model {
 			$weightedDates = $this->fitness_generator($matchUsageDates);
 			foreach($weightedDates as $date)
 			{
-				if($debug) echo "Attempting to add Event at date ".$date." for match ".$combination[0]." and ".$combination[1]."\n";
+				if($debug) echo "Attempting to add Event at date ".$date." for match "."\n";
 
 				// Have we already exceeded the number of matches that we can add already?
 				if($matchMaximumPlays <= $matchUsage[$date]['count']){
