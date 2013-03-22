@@ -1,9 +1,9 @@
 <h1><a href="/sis/tournaments">Tournaments</a><div class="icon subsection"></div><?=$tournament['name']?></h1>
 
 <? if ( $tournament['status'] == "inRegistration" ) { ?>
-<table>
+<table class="">
 	<tr>
-		<td>Registration ends at <?=datetime_to_public_date($tournament['registrationEnd'])?> at <?=datetime_to_public_time($tournament['registrationEnd'])?>.</td>
+		<td><div class="icon subscribe margin-right"></div><p>Registration ends on <?=datetime_to_public_date($tournament['registrationEnd'])?> at <?=datetime_to_public_time($tournament['registrationEnd'])?>.</p></td>
 		<td><a href='/sis/signup/<?=$tournament['tournamentID']?>' class='button green'>Sign Up Now!</a></td>
 	</tr>
 </table>
