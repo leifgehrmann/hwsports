@@ -288,7 +288,7 @@ class Tms extends MY_Controller {
 				'type'=>'date'
 			)
 		);
-		$schedulingDetailsForm = array(
+		$scheduleMatchesForm = array(
 			array(
 				'name'=>'matchDuration',
 				'label'=>'Match Duration',
@@ -329,11 +329,11 @@ class Tms extends MY_Controller {
 				}
 				redirect("/tms/tournament/$tournamentID", 'refresh');
 			}
-		} else if($formID=="schedulingDetailsForm"){
-			if($formAction=="update") {
+		} else if($formID=="scheduleMatchesForm"){
+			//if($formAction=="update") {
 				// We need to validate the scheduling details stuff.
 				// For each of the input types we will validate it.
-				foreach($schedulingDetailsForm as $input)
+				foreach($scheduleMatchesForm as $input)
 					$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
 				if ($this->form_validation->run() == true) {
 
@@ -364,7 +364,7 @@ class Tms extends MY_Controller {
 					}
 					redirect("/tms/tournament/$tournamentID", 'refresh');
 				}
-			} else if($formAction=="schedule") {
+			//} else if($formAction=="schedule") {
 				// Probably use the scheduling model based on what we want to execute.
 
 				if($tournament['sportData']['sportCategoryID']==18){
@@ -400,11 +400,11 @@ class Tms extends MY_Controller {
 					// This execute the running scheduler
 					$this->scheduling_model->schedule_running($tournamentID);
 				}
-			} else if($formAction=="scheduleNext") {
+			/*} else if($formAction=="scheduleNext") {
 				// Probably use the scheduling model based on what we want to execute.
 				
 				// fkjfisdjlkadjhflkjasbdhfljbh
-			}
+			}*/
 		}
 
 		// Do the actual setting of variables here...

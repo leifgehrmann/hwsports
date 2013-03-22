@@ -59,12 +59,12 @@
 <div class="widget full scheduling">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
-		<div class="widget-title-centre">Scheduling Details</div>
+		<div class="widget-title-centre">Schedule Matches</div>
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
 		<? if( $tournament['scheduled'] == FALSE ) { ?>
-		<?=form_open("tms/tournament/$tournamentID", array('id' => 'schedulingDetailsForm'), array('form'=>'schedulingDetailsForm', 'action'=>'update'))?>
+		<?=form_open("tms/tournament/$tournamentID", array('id' => 'scheduleMatchesForm'), array('form'=>'scheduleMatchesForm', 'action'=>'update'))?>
 		<table>
 			<tr>
 				<td width="40%"><h3>Match Duration</h3><p>Enter in the number of minutes that each match will take.</p></td>
@@ -113,7 +113,7 @@
 			<? if($i%2==1){ ?></tr><? } ?>
 			<? $i++; } ?>
 		</table>
-		<?=form_submit(array('name'=>"submit", 'value'=>"Update preferences", 'class'=>"green margin-left right", 'onclick'=>"$('#schedulingDetailsForm input[name=\'action\']').val('update');"));?>
+		<?=/*form_submit(array('name'=>"submit", 'value'=>"Update preferences", 'class'=>"green margin-left right", 'onclick'=>"$('#schedulingDetailsForm input[name=\'action\']').val('update');"));*/?>
 		<?=form_submit(array('name'=>"submit", 'value'=>"Schedule matches", 'class'=>"blue right", 'onclick'=>"$('#schedulingDetailsForm input[name=\'action\']').val('schedule');"));?>
 		<?=form_close();?>
 		<? } else { ?>
