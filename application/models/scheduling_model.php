@@ -47,12 +47,14 @@ class Scheduling_model extends MY_Model {
 		$actors 	= $this->tournaments_model->get_actors($tournamentID);
 		$venues 	= $this->tournaments_model->get_venues($tournamentID);
 		// Check if an umpire exists and that there are venues for the tournament.
-		if(!isset($actors['Umpire'])) return "There are no umpires in the tournament.";
-		if(count($actors['Umpire'])==0) return "There are no umpires in the tournament.";
+		if(!isset($actors['umpire'])) return "There are no umpires in the tournament.";
+		if(count($actors['umpire'])==0) return "There are no umpires in the tournament.";
 		if(!$venues) return "There are no venues that the tournament can take place at.";
 		if(count($venues)==0) return "There are no venues that the tournament can take place at.";
-		$umpires    = $actors['Umpire'];
-		$teams      = $actors['Team'];
+		$umpires    = $actors['umpire'];
+		$umpiresRoleID = $actors['team'][0]['sportCategoryRoleID'];
+		$teams      = $actors['team'];
+		$teamsRoleID   = $actors['umpire'][0]['sportCategoryRoleID'];
 		// Add tournamentActorData
 		foreach($umpires as $index=>$umpire)
 			$umpires[$index]['tournamentActorData'] = $this->tournament_actors_model->get($umpire['tournamentActorID']);
@@ -277,7 +279,7 @@ class Scheduling_model extends MY_Model {
 					// staff want to dictate priority, we can implement it here
 					// at some later point.
 					// You know what, lets just RANDOMLY select a venue for fun.
-					$matchVenueID = array_rand($matchDateTimes[$date][$dateTime]['venueIDs']);
+					$matchVenueID = $matchDateTimes[$date][$dateTime]['venueIDs'][array_rand($matchDateTimes[$date][$dateTime]['venueIDs'])];
 
 					// Hey thats it! Let's add our result to the selected array and a list of scheduled matches:
 					$newMatch = array();
@@ -286,9 +288,9 @@ class Scheduling_model extends MY_Model {
 					$endTime->add($matchDuration);
 					$newMatch['name'] = $teams[$teamA]['name']." vs ".$teams[$teamB]['name'];
 					$newMatch['endTime'] = datetime_to_standard($endTime);
-					$newMatch['teams'] = array($teamA,$teamB);
-					$newMatch['umpires'] = $matchUmpireIDs;
-					$newMatch['venue'] = $matchVenueID;
+					$newMatch['actors']['teamIDs'] = array($teamA,$teamB);
+					$newMatch['actors']['umpireIDs'] = $matchUmpireIDs;
+					$newMatch['venueID'] = $matchVenueID;
 					$matchDateTimesSelected[$date][$dateTime] = array();
 					$matchDateTimesSelected[$date][$dateTime]['teamIDs'] = array($teamA,$teamB);
 					$matchDateTimesSelected[$date][$dateTime]['umpireIDs'] = $matchUmpireIDs;
