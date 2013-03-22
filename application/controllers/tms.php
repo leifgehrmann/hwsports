@@ -325,81 +325,75 @@ class Tms extends MY_Controller {
 				redirect("/tms/tournament/$tournamentID", 'refresh');
 			}
 		} else if($formID=="scheduleMatchesForm"){
-			//if($formAction=="update") {
-				// We need to validate the scheduling details stuff.
-				// For each of the input types we will validate it.
-				foreach($scheduleMatchesForm as $input)
-					$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
-				if ($this->form_validation->run() == true) {
+			// We need to validate the scheduling details stuff.
+			// For each of the input types we will validate it.
+			foreach($scheduleMatchesForm as $input)
+				$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+			if ($this->form_validation->run() == true) {
 
-					// Create the update array
-					$tournamentUpdate = array();
+				// Create the update array
+				$tournamentUpdate = array();
 
-					// Update the match duration
-					$tournamentUpdate['matchDuration'] = $this->input->post('matchDuration');
+				// Update the match duration
+				$tournamentUpdate['matchDuration'] = $this->input->post('matchDuration');
 
-					// Update the starttime for each weekday
-					foreach($weekdays as $weekday){
-						if($this->input->post('startTimes'.ucfirst($weekday)))
-							$tournamentUpdate['startTimes'.ucfirst($weekday)] = implode(",",$this->input->post('startTimes'.ucfirst($weekday)));
-						else
-							$tournamentUpdate['startTimes'.ucfirst($weekday)] = "";
-					}
-
-					// Update the tournament venues
-					if($this->input->post('venues'))
-						$this->tournaments_model->update_venues($tournamentID,$this->input->post('venues'));
-
-					// Now update the tournament
-					if($this->tournaments_model->update($tournamentID, $tournamentUpdate)) {
-						// Successful update, show success message
-						$this->session->set_flashdata('message_success',  'Successfully updated scheduling details.');
-					} else {
-						$this->session->set_flashdata('message_error',  'Failed to update scheduling details. Please contact Infusion Systems.');
-					}
-					redirect("/tms/tournament/$tournamentID", 'refresh');
+				// Update the starttime for each weekday
+				foreach($weekdays as $weekday){
+					if($this->input->post('startTimes'.ucfirst($weekday)))
+						$tournamentUpdate['startTimes'.ucfirst($weekday)] = implode(",",$this->input->post('startTimes'.ucfirst($weekday)));
+					else
+						$tournamentUpdate['startTimes'.ucfirst($weekday)] = "";
 				}
-			//} else if($formAction=="schedule") {
-				// Probably use the scheduling model based on what we want to execute.
 
-				if($tournament['sportData']['sportCategoryID']==18){
+				// Update the tournament venues
+				if($this->input->post('venues'))
+					$this->tournaments_model->update_venues($tournamentID,$this->input->post('venues'));
 
-					// We would like to get an array of roleIDs so that we can insert them into
-					// the actors table.
-					$actors = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
-
-					// This execute the football family scheduler
-					$matches = $this->scheduling_model->schedule_football_family($tournamentID);
-					foreach($matches as $match){
-
-						// Insert the match
-						$insertMatch['startTime'] = $match['startTime'];
-						$insertMatch['endTime'] = $match['endTime'];
-						$insertMatch['name'] = $match['name'];
-						$relation = array('tournamentID'=>$tournamentID,'venueID'=>$match['venueID'],'sportID'=>$tournament['sportID']);
-						$matchID = $this->matches_model->insert($insertMatch,$relation);
-
-						// Insert the teams for the match
-						foreach($match['matchActors']['teamIDs'] as $teamID){
-							$relation = array('matchID'=>$matchID,'roleID'=>$actors['team'],'actorID'=>$team);
-							$this->match_actors_model->insert($relation);
-						}
-
-						// Insert the umpire/s for the match
-						foreach($match['matchActors']['umpireIDs'] as $umpireID){
-							$relation = array('matchID'=>$matchID,'roleID'=>$actors['umpire'],'actorID'=>$umpireID);
-							$this->match_actors_model->insert($relation);
-						}
-					}
-				} else if($tournament['sportData']['sportCategoryID']==46){
-					// This execute the running scheduler
-					$this->scheduling_model->schedule_running($tournamentID);
+				// Now update the tournament
+				if($this->tournaments_model->update($tournamentID, $tournamentUpdate)) {
+					// Successful update, show success message
+					$this->session->set_flashdata('message_success',  'Successfully updated scheduling details.');
+				} else {
+					$this->session->set_flashdata('message_error',  'Failed to update scheduling details. Please contact Infusion Systems.');
 				}
-			/*} else if($formAction=="scheduleNext") {
-				// Probably use the scheduling model based on what we want to execute.
-				
-				// fkjfisdjlkadjhflkjasbdhfljbh
-			}*/
+				redirect("/tms/tournament/$tournamentID", 'refresh');
+			
+			// Probably use the scheduling model based on what we want to execute.
+
+			if($tournament['sportData']['sportCategoryID']==18){
+
+				// We would like to get an array of roleIDs so that we can insert them into
+				// the actors table.
+				$actors = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
+
+				// This execute the football family scheduler
+				$matches = $this->scheduling_model->schedule_football_family($tournamentID);
+				foreach($matches as $match){
+
+					// Insert the match
+					$insertMatch['startTime'] = $match['startTime'];
+					$insertMatch['endTime'] = $match['endTime'];
+					$insertMatch['name'] = $match['name'];
+					$relation = array('tournamentID'=>$tournamentID,'venueID'=>$match['venueID'],'sportID'=>$tournament['sportID']);
+					$matchID = $this->matches_model->insert($insertMatch,$relation);
+
+					// Insert the teams for the match
+					foreach($match['matchActors']['teamIDs'] as $teamID){
+						$relation = array('matchID'=>$matchID,'roleID'=>$actors['team'],'actorID'=>$team);
+						$this->match_actors_model->insert($relation);
+					}
+
+					// Insert the umpire/s for the match
+					foreach($match['matchActors']['umpireIDs'] as $umpireID){
+						$relation = array('matchID'=>$matchID,'roleID'=>$actors['umpire'],'actorID'=>$umpireID);
+						$this->match_actors_model->insert($relation);
+					}
+				}
+
+			} else if($tournament['sportData']['sportCategoryID']==46){
+				// This execute the running scheduler
+				$this->scheduling_model->schedule_running($tournamentID);
+			}
 		}
 
 		// Do the actual setting of variables here...
