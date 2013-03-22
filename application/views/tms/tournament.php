@@ -193,6 +193,7 @@
 <div id="tournamentID" style="display:none;"><?=$tournamentID?></div>
 
 <script type="text/javascript">
+	$(document).ready(function() {
 	$('input .date').datetimepicker({
 		dateFormat: $.datepicker.ISO_8601,
 		separator: ' ',
@@ -233,6 +234,7 @@
 			$(this).parents('p').remove();
 		}
 		return false;
+	});
 	});
 
 </script>
