@@ -106,10 +106,10 @@
 		<?=form_close();?>
 		<? } else { ?>
 			<? if( $tournament['sportData']['sportCategoryID'] == "46" ) { ?>
-				<table><tr>
-					<td><p>The matches have been scheduled and are displayed below. Once you have completed a match i.e. filled in the results you can press the button to schedule the next match</p></td>
+				<!--<table><tr>
+					<td><p>The matches have been scheduled and are displayed below. Once you have completed a match (i.e. filled in the results) you can press the button to schedule the next match</p></td>
 					<td><?=form_submit(array('name'=>"submit", 'value'=>"Schedule next match", 'class'=>"green", 'onclick'=>"$('#schedulingDetailsForm input[name=\'action\']').val('schedule');"));?></td>
-				</tr></table>
+				</tr></table>-->
 				<h3>Rescheduling</h3>
 				<p>To reschedule individual matches you can use the table below.</p>
 				<p>To reschedule the entire tournament you must clear all matches in the table below.</p>
