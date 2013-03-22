@@ -324,15 +324,8 @@ class Tms extends MY_Controller {
 				}
 				redirect("/tms/tournament/$tournamentID", 'refresh');
 			}
-<<<<<<< HEAD
 		} else if($formID=="scheduleMatchesForm"){
 			//if($formAction=="update") {
-=======
-			
-			$this->data['message_error'] = validation_errors();
-		} else if($formID=="schedulingDetailsForm"){
-			if($formAction=="update") {
->>>>>>> 1f3968d5996e9c49d2e3fc13a5a2bb6f399b1482
 				// We need to validate the scheduling details stuff.
 				// For each of the input types we will validate it.
 				foreach($scheduleMatchesForm as $input)
