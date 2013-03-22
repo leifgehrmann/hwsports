@@ -401,10 +401,11 @@ class Scheduling_model extends MY_Model {
 	{
 
 		// Get tournament Information
-		$tournament = $this->tournaments_model->get_tournament($tournamentID);
-		$venues     = $this->tournaments_model->get_venues($tournamentID);
-		$actors     = $this->tournaments_model->get_actors($tournamentID);
-		$athletes   = $actors['Athlete'];
+		$tournament = $this->tournaments_model->get($tournamentID);
+
+		// If the tournament does not exist, exit.
+		if($tournament==FALSE)
+			return "Tournament does not exist.";
 
 		$tournamentStart     = new DateTime($tournament['tournamentStart']);
 		$tournamentEnd       = new DateTime($tournament['tournamentEnd']);
@@ -424,6 +425,17 @@ class Scheduling_model extends MY_Model {
 		// Calculate number of matches we need
 		$numberOfMatches = ceil(log(count($athletes)/$matchMinimumPlayers)/log(2)+1);
 		$numberOfMatches += 1; // This takes into account the aulifier round.
+
+		// Get actor and venue data
+		$venues     = $this->tournaments_model->get_venues($tournamentID);
+		$actors     = $this->tournaments_model->get_actors($tournamentID);
+		// Check if an umpire exists and that there are venues for the tournament.
+		if(!$venues) return "There are no venues that the tournament can take place at.";
+		if(count($venues)==0) return "There are no venues that the tournament can take place at.";
+		$athletes    = $actors['athlete'];
+		// Add tournamentActorData
+		foreach($athletes as $index=>$athlete)
+			$athletes[$index]['tournamentActorData'] = $this->tournament_actors_model->get($athlete['tournamentActorID']);
 
 		// We first want all possible matches datetimes. This method
 		// returns all the possible combinations of start times
@@ -627,16 +639,16 @@ class Scheduling_model extends MY_Model {
 
 		// Here we select all the hurdlers that don't have any
 		// previous performance.
-		$qualificationAthletes = array();
+		/*$qualificationAthletes = array();
 		foreach($athletes as $athlete)
 			if(!array_key_exists('personalBest',$athlete)){
 				$qualificationAthletes[] = $athlete;
 				// Some how we add data to our schedule matches 
-				$scheduledMatches[0]['Athlete'][] = $qualificationAthletes;
-			}
+				$scheduledMatches[0]['matchActorData']['athleteIDs'][] = $qualificationAthletes;
+			}*/
 
 		// We add these hurdles to the scheduled matches.
-		$scheduledMatches[0]['Athlete'] = $qualificationHurdlers;
+		/*$scheduledMatches[0]['matchActorData']['athleteIDs'] = $qualificationHurdlers;
 
 		// We want to now calculate the number of heats required
 		// so that we can put people in certain lanes.
@@ -654,11 +666,11 @@ class Scheduling_model extends MY_Model {
 			for($l=1;$l<=$lanes-($index<$h ? 1 : 0);$l++)
 			{
 				// Some how we add data to our schedule matches 
-				$scheduledMatches[0]['AthleteData'][$qualificationAthletes[$athleteIndex]]['heat'] = $h;
-				$scheduledMatches[0]['AthleteData'][$qualificationAthletes[$athleteIndex]]['lane'] = $l;
+				$scheduledMatches[0]['matchActorData']['athlete'][$qualificationAthletes[$athleteIndex]]['heat'] = $h;
+				$scheduledMatches[0]['matchActorData']['athlete'][$qualificationAthletes[$athleteIndex]]['lane'] = $l;
 			}
 			$athleteIndex++;
-		}
+		}*/
 
 		return $scheduledMatches;
 	}
