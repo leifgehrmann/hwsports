@@ -212,7 +212,7 @@ class Datatables extends MY_Controller {
 						$out = array('error' => "User could not be added. Please try again or contact Infusion Systems.");
 					}
 					// Add availability data
-					if(isset($_POST['data']['availabilityMonday'])) {
+					if(isset($_POST['data']['availableMonday'])) {
 						$tournamentActorID = $this->db->insert_id();
 						$this->tournament_actors_model->update($tournamentActorID, 
 							array(
