@@ -323,7 +323,7 @@ class Tms extends MY_Controller {
 				}
 				redirect("/tms/tournament/$tournamentID", 'refresh');
 			}
-		} else if($formID=="scheduleMatchesForm"){
+		} else if($formID=="scheduleMatchesForm") {
 			// We need to validate the scheduling details stuff.
 			// For each of the input types we will validate it.
 			foreach($scheduleMatchesForm as $input)
@@ -409,19 +409,8 @@ class Tms extends MY_Controller {
 					$this->scheduling_model->schedule_running($tournamentID);
 				}
 			}
-
-		// Do the actual setting of variables here...
-
-		// We reload the tournament data because we already have hopefully at this
-		// point updated the data.
-		$this->data['tournament'] = $tournament = $this->tournaments_model->get($tournamentID);
-
-		// If scheduled is not already defined, then just simply say it isn't scheduled.
-		if(!array_key_exists('scheduled',$tournament)){
-			$this->tournaments_model->update($tournamentID, array('scheduled' => 'false'));
-			$this->data['tournament']['scheduled'] = 'false';
 		}
-	
+		// Set the values for the tournament details form
 		$this->data['name'] = array(
 			'name'  => 'name',
 			'id'    => 'name',
@@ -464,57 +453,54 @@ class Tms extends MY_Controller {
 			'class' => 'date',
 			'value' => datetime_to_public( $this->form_validation->set_value('tournamentEnd',(isset($tournament['tournamentEnd']) ? $tournament['tournamentEnd'] : '') ) )
 		);
-		if($tournament['scheduled']==FALSE){
-			$this->data['matchDuration'] = array(
-				'name'  => 'matchDuration',
-				'id'    => 'matchDuration',
-				'value' => $this->form_validation->set_value('matchDuration',(isset($tournament['matchDuration']) ? $tournament['matchDuration'] : '') )
-			);
-			foreach($weekdays as $weekday)
-				$this->data[$weekday.'StartTimes'] = $this->form_validation->set_value('matchDuration',(isset($tournament[$weekday.'StartTimes']) ? explode(',',$tournament[$weekday.'StartTimes']) : '') );
+		// Set the values for the schedule matches form
+		$this->data['matchDuration'] = array(
+			'name'  => 'matchDuration',
+			'id'    => 'matchDuration',
+			'value' => $this->form_validation->set_value('matchDuration',(isset($tournament['matchDuration']) ? $tournament['matchDuration'] : '') )
+		);
+		foreach($weekdays as $weekday)
+			$this->data[$weekday.'StartTimes'] = $this->form_validation->set_value('matchDuration',(isset($tournament[$weekday.'StartTimes']) ? explode(',',$tournament[$weekday.'StartTimes']) : '') );
 
-			// Get all tournament venues
-			$venues = $this->tournaments_model->get_venues($tournamentID);
-			$venueSelections = array();
-			foreach($venues as $venue)
-				$venueSelections[] = $venue['venueID'];
+		// Get all tournament venues
+		$venues = $this->tournaments_model->get_venues($tournamentID);
+		$venueSelections = array();
+		foreach($venues as $venue)
+			$venueSelections[] = $venue['venueID'];
 
-			// Get all venues
-			$venues = $this->venues_model->get_all();
-			$venueOptions = array();
-			$venueOptions[''] = ''; // Empty Selection
-			foreach($venues as $venue)
-				$venueOptions[$venue['venueID']] = $venue['name'];
+		// Get all venues
+		$venues = $this->venues_model->get_all();
+		$venueOptions = array();
+		$venueOptions[''] = ''; // Empty Selection
+		foreach($venues as $venue)
+			$venueOptions[$venue['venueID']] = $venue['name'];
 
-			// Get the startTimes for the tournament
-			$startTimes = array();
-			foreach($weekdays as $day)
-			{	
-				$startTimes[$day] = array();
-				if(array_key_exists('startTimes'.ucfirst($day),$tournament))
+		// Get the startTimes for the tournament
+		$startTimes = array();
+		foreach($weekdays as $day)
+		{	
+			$startTimes[$day] = array();
+			if(array_key_exists('startTimes'.ucfirst($day),$tournament))
+			{
+				$times = explode(",",$tournament['startTimes'.ucfirst($day)]);
+				foreach($times as $time)
 				{
-					$times = explode(",",$tournament['startTimes'.ucfirst($day)]);
-					foreach($times as $time)
-					{
-						$startTimes[$day][] = $time;
-					}
+					$startTimes[$day][] = $time;
 				}
 			}
-
-			// Send the venue data
-			$this->data['venueOptions'] = $venueOptions;
-			$this->data['venueSelections'] = $venueSelections;
-
-			// Send the start times
-			$this->data['startTimes'] = $startTimes;			
 		}
+
+		// Send the venue data
+		$this->data['venueOptions'] = $venueOptions;
+		$this->data['venueSelections'] = $venueSelections;
+
+		// Send the start times
+		$this->data['startTimes'] = $startTimes;
 		
 		$this->view('tournament',"tournament","Tournament",$this->data);
 	}
 	
-	
-	public function delete_tournament($tournamentID)
-	{
+	public function delete_tournament($tournamentID) {
 
 
 		if($this->tournaments_model->delete($tournamentID) ) {
