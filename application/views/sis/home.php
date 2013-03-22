@@ -42,7 +42,7 @@
 		<p><a href="/tms/matches/" class="button right blue">View All Matches</a></p>
 	</div>
 </div>
-<div class="widget half matches">
+<? /*<div class="widget half matches">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
 		<div class="widget-title-centre">Upcoming Matches</div>
@@ -301,3 +301,4 @@ $(document).ready(function(){
 		</tr>
 	</tbody>
 </table>-->
+*/ ?>
