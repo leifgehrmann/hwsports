@@ -40,6 +40,7 @@
 				right: 'month,agendaWeek,agendaDay'
 			},
 			events: '/db_calendar/getAllEventsTMS/',
+			ignoreTimezone: true,
 			editable: true,
 			eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
 				//console.log(match);
