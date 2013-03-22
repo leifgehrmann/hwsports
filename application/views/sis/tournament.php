@@ -1,20 +1,14 @@
-<h1><a href="/sis/tournaments">Tournaments</a> &gt; <?=$tournament['name']?></h1>
-<?php
-	$tmpl = array (
-		'table_open'          => '<table cellspacing="0">',
-		'heading_cell_start'  => '<td>',
-		'heading_cell_end'    => '</td>',
-	);
-	$this->table->set_template($tmpl);
+<h1><a href="/sis/tournaments">Tournaments</a><div class="icon subsection"></div><?=$tournament['name']?></h1>
 
-	echo $this->table->generate($tournamentTable);
-
-	if ( $tournament['status'] == "inRegistration" ) { ?>
-		<div class="tournament-signup-button">
-			<a href='/sis/signup/<?=$tournament['tournamentID']?>' class='button green'>Sign Up Now!</a>
-		</div>
-	<? } ?>
-<br />
+<? if ( $tournament['status'] == "inRegistration" ) { ?>
+<table>
+	<tr>
+		<td>Registration ends at <?=datetime_to_public_date($tournament['registrationEnd'])?> at <?=datetime_to_public_time($tournament['registrationEnd'])?>.</td>
+		<td><a href='/sis/signup/<?=$tournament['tournamentID']?>' class='button green'>Sign Up Now!</a></td>
+	</tr>
+</table>
+<? } ?>
+<p><?=$tournament['description']?></p>
 <h2>Calendar</h2>
 <p>Click the entries for details on individual matches</p>
 
