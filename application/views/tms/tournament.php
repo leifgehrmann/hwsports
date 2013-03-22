@@ -194,13 +194,13 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-	$('input .date').datetimepicker({
+	$('input.date').datetimepicker({
 		dateFormat: $.datepicker.ISO_8601,
 		separator: ' ',
 		timeFormat: 'HH:mm',
 		ampm: false
 	});
-	$('input .time').timepicker({
+	$('input.time').timepicker({
 		timeFormat: 'HH:mm',
 		ampm: false
 	});
