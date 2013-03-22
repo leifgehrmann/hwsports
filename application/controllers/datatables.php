@@ -227,6 +227,39 @@ class Datatables extends MY_Controller {
 						);
 					}
 					$this->load->view('data', array('data' => json_encode($out)) );
+				} else if($object == "teams") {
+					$roleID = 1;
+					$team = $this->teams_model->get($_POST['data']['teamID']);
+					// Check if team ID exists
+					if($team===FALSE) {
+						$out = array('error' => "Team ID {$_POST['data']['teamID']} does not exist. Please try again or contact Infusion Systems.");
+						$this->load->view('data', array('data' => json_encode($out)) );
+						return;
+					}
+					// Check if team ID is already in this tournament
+					if($this->objects_models['tournament_actors']->check_if_actor($insertData['tournamentID'],$_POST['data']['teamID'],$roleID)) {
+						$out = array('error' => "Team ID {$_POST['data']['teamID']} is already in this tournment. Please try again or contact Infusion Systems.");
+						$this->load->view('data', array('data' => json_encode($out)) );
+						return;
+					}
+					// Set up tournamentActor row to add team ID as team role to this tournament
+					$tournamentActorRelations = array(
+						'tournamentID' => $insertData['tournamentID'],
+						'actorID' => $_POST['data']['teamID'],
+						'roleID' => $roleID
+					);
+					// Create the tournamentActor with relations but no data
+					$tournamentActorID = $this->objects_models['tournament_actors']->insert(array(), $tournamentActorRelations);
+					// Check if tournamentActorID was created
+					if($tournamentActorID===FALSE) {
+						$out = array('error' => "Team ID {$_POST['data']['teamID']} could not be created. Please try again or contact Infusion Systems.");
+						$this->load->view('data', array('data' => json_encode($out)) );
+						return;
+					}
+					// Add the team details link to the output row
+					$team['detailsLink'] = "<a href='/tms/user/{$_POST['data']['teamID']}' class='button'>Details</a>";
+					$out = array('id' => "teams-{$_POST['data']['teamID']}", 'row' => $team);
+					$this->load->view('data', array('data' => json_encode($out)) );
 				} else {
 					$this->data($object);
 				}
