@@ -13,6 +13,41 @@
 	</tr>
 </table>
 <? } ?>
+<h2>Matches</h2>
+<table class="full matches">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Date</th>
+			<th>Start</th>
+			<th>End</th>
+			<th>Title</th>
+			<th>Venue</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<? foreach($matches as $match) { ?>
+		<tr class="match sportCategoryID-<?=$match['sportData']['sportCategoryID']?> sportID-<?=$match['sportID']?>">
+			<td><div class="icon"></div></td>
+			<td><?=$match['date']?></td>
+			<td><?=$match['startTime']?></td>
+			<td><?=$match['endTime']?></td>
+			<td><?=$match['name']?></td>
+			<td><?=$match['venueData']['name']?></td>
+			<td><a href="/sis/match/<?=$match['matchID']?>">View Details</a></td>
+		</tr>
+		<? } ?>
+	</tbody>
+</table>
+
+
+<script>
+$(document).ready(function(){
+	$('table.matches').dataTable();
+});
+</script>
+
 <h2>Calendar</h2>
 <p>Click the entries for details on individual matches</p>
 
