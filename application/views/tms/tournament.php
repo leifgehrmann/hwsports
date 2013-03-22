@@ -199,9 +199,7 @@
 		timeFormat: 'HH:mm',
 		ampm: false
 	});
-	$('input .time').datetimepicker({
-		dateFormat: $.datepicker.ISO_8601,
-		separator: ' ',
+	$('input .time').timepicker({
 		timeFormat: 'HH:mm',
 		ampm: false
 	});
