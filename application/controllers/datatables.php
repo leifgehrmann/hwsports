@@ -228,7 +228,9 @@ class Datatables extends MY_Controller {
 					}
 					$this->load->view('data', array('data' => json_encode($out)) );
 				} else if($object == "teams") {
-					$roleID = 1;
+					$tournament = $this->tournaments_model->get($insertData['tournamentID']);
+					$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],false);
+					$roleID = $roleIDs['team'];
 					$team = $this->teams_model->get($_POST['data']['teamID']);
 					// Check if team ID exists
 					if($team===FALSE) {
