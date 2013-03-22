@@ -260,7 +260,7 @@ class Sis extends MY_Controller {
 				// Put value into sub array based on object name so we can add data in bulk later
 				$objectData[$object][$key] = $value;
 			}
-			//var_dump($objectData); die();
+			var_dump($objectData); die();
 			
 			// Just in case the insert fails
 			$tournamentActorID = FALSE;
@@ -275,7 +275,8 @@ class Sis extends MY_Controller {
 					break;
 					case "teams":
 						if($this->objects_models[$object]->update($teamID, $data) === FALSE)  
-							$this->flash_redirect('message_error','/sis/tournaments','Adding additional data to team failes');
+							$this->flash_redirect('message_error','/sis/tournaments','Adding additional data to team failed');
+					break;
 					case "tournament_actors":
 						// Add this user as an actor with the correct role in this specific tournament,
 						// and add the tournament-specific data for this user to the tournamentActorData
