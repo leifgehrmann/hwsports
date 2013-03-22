@@ -274,7 +274,7 @@ class Sis extends MY_Controller {
 			$tournamentActorID = $this->objects_models['tournament_actors']->insert(array(), $tournamentActorRelations);
 			if($tournamentActorID === FALSE) 
 				$this->flash_redirect('message_error','/sis/tournaments','Creating new tournamentActor failed');
-			
+			/*
 			// Now we have all the input data categorised by object, submit it to the correct places in the DB using the relevant model
 			foreach($objectData as $object => $data) {
 				switch($object) {
@@ -293,7 +293,7 @@ class Sis extends MY_Controller {
 					break;
 				}
 			}
-			
+			*/
 			$this->flash_redirect('message_success','/sis/tournaments',"Signup successful! Once the registration period is over, you will receive confirmation and further instructions.");
 		} else {
 			$this->view('signup','signup','Signup',$this->data);
