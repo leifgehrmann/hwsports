@@ -159,8 +159,8 @@ class Db_Calendar extends MY_Controller {
 					'id' => "match-".$match['matchID']
 				),
 				'title' => $match['name'],
-				'start' => $startTime->format("U"),
-				'end' => $endTime->format("U"),
+				'start' => datetime_to_standard($startTime),
+				'end' => datetime_to_standard($endTime),
 				'allDay' => false,
 				'className' => 	'match'.
 								' matchID-'.$match['matchID'].
