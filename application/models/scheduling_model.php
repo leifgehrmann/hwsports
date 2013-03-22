@@ -231,6 +231,19 @@ class Scheduling_model extends MY_Model {
 						foreach($matchDateTimesSelected[$date] as $dateTimeSelected=>$dateTimeData)
 						{
 							// Are any of the teams that we care about actually playing during that time?
+							if(!isset($matchUsage[$date])) {
+								echo "failed because matchUsage does not contain date: $date"."\n"; die();
+							}
+							if(!isset($matchUsage[$date][$dateTimeSelected])) {
+								echo "failed because matchUsage[$date] does not contain dateTimeSelected: $dateTimeSelected"."\n"; die();
+							}
+							if(!isset($matchUsage[$date][$dateTimeSelected]['teams'][$teamA])) {
+								echo "failed because $matchUsage[$date][$dateTimeSelected]['teams'] does not contain teamA: $teamA"."\n"; die();
+							}
+							if(!isset($matchUsage[$date][$dateTimeSelected]['teams'][$teamB])) {
+								echo "failed because $matchUsage[$date][$dateTimeSelected]['teams'] does not contain teamB: $teamB"."\n"; die();
+							}
+							
 							if($matchUsage[$date][$dateTimeSelected]['teams'][$teamA]==0 && $matchUsage[$date][$dateTimeSelected]['teams'][$teamB]==0){
 								echo "failed ".$dateTime." because team is already playing at that time"."\n";
 								continue;
