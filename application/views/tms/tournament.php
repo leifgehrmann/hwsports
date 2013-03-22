@@ -143,43 +143,69 @@
 	</table>
 	<script src="/js/vendor/datatables/tournamentMatches.js"></script>
 </div>
-<h2>Teams</h2>
-<p>Displayed below are a list of teams for the tournament. </p>
-<div class="tournamentTeams">
-	<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentTeams" width="100%">
-		<thead>
-			<tr>
-				<th width="30%">Team ID</th>
-				<th width="30%">Name</th>
-				<th width="30%">Description</th>
-				<th width="30%">Association Number</th>
-				<th width="5%">&nbsp;</th>
-			</tr>
-		</thead>
-	</table>
-	<script src="/js/vendor/datatables/tournamentTeams.js"></script>
+<? foreach($roles as $roleID=>$roleName) { ?>
+	<? switch($roleName) {
+		case "team":
+	?>
+		<h2>Teams</h2>
+		<p>Displayed below are a list of teams for the tournament. </p>
+		<div class="tournamentTeams">
+		<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentTeams" width="100%">
+			<thead>
+				<tr>
+					<th width="30%">Team ID</th>
+					<th width="30%">Name</th>
+					<th width="30%">Description</th>
+					<th width="30%">Association Number</th>
+					<th width="5%">&nbsp;</th>
+				</tr>
+			</thead>
+		</table>
+		<script src="/js/vendor/datatables/tournamentTeams.js"></script>
+		<? break; case "umpire": ?>
+		<h2>Umpires</h2>
+		<p>Displayed below are a list of umpires for the tournament. </p>
+		<div class="tournamentUmpires">
+			<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentUmpires" width="100%">
+				<thead>
+					<tr>
+						<th>User ID</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email</th>
+						<th>Phone</th>
+						<th>Address</th>
+						<th>About</th>
+						<th width="5%">&nbsp;</th>
+					</tr>
+				</thead>
+			</table>
+			<script src="/js/vendor/datatables/tournamentUmpires.js"></script>
+		</div>
+		<? break; case "athlete": ?>
+		<h2>Umpires</h2>
+		<p>Displayed below are a list of athletes for the tournament. </p>
+		<div class="tournamentAthletes">
+			<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentAthletes" width="100%">
+				<thead>
+					<tr>
+						<th>User ID</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email</th>
+						<th>Phone</th>
+						<th>Address</th>
+						<th>About</th>
+						<th width="5%">&nbsp;</th>
+					</tr>
+				</thead>
+			</table>
+			<script src="/js/vendor/datatables/tournamentAthletes.js"></script>
+		</div>
+	<? break; } ?>
 </div>
-<h2>Umpires</h2>
-<p>Displayed below are a list of umpires for the tournament. </p>
-<div class="tournamentUmpires">
-	<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentUmpires" width="100%">
-		<thead>
-			<tr>
-				<th>User ID</th>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>Email</th>
-				<th>Phone</th>
-				<th>Address</th>
-				<th>About</th>
-				<th width="5%">&nbsp;</th>
-			</tr>
-		</thead>
-	</table>
-	<script src="/js/vendor/datatables/tournamentUmpires.js"></script>
-</div>
-<br />
-<br />
+<? } ?>
+
 <div id="tournamentID" style="display:none;"><?=$tournamentID?></div>
 
 <script type="text/javascript">
