@@ -18,8 +18,8 @@
 	<script src="/js/vendor/datatables/tournaments.js"></script>
 </div>
 
+<h2>Create a New Tournament</h2>
 <?php echo form_open("tms/tournaments", array('id' => 'tournamentsForm'));?>
-	<h2>Create a New Tournament</h2>
 	<table>
 		<tr>
 			<td><label for="name">Name:</label></td>
