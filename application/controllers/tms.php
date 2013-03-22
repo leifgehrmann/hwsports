@@ -188,8 +188,8 @@ class Tms extends MY_Controller {
 		}
 		
 		if ($this->form_validation->run() == true) {
-			$newData = array_intersect_key($_POST, $tournamentDetailsForm);
-			$newData['scheduled'] = 0;
+			$newdata = array_intersect_key($_POST, $tournamentDetailsForm);
+			$newdata['scheduled'] = 0;
 			$relationIDs = array(
 				'sportID' => $_POST['sport']
 			);
