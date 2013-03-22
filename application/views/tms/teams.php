@@ -4,7 +4,7 @@
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="teams" width="100%">
 		<thead>
 			<tr>
-				<th width="30%">Team ID</th>
+				<th width="8%">Team ID</th>
 				<th width="30%">Name</th>
 				<th width="30%">Description</th>
 				<th width="30%">Association Number</th>
