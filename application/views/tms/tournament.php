@@ -201,6 +201,8 @@
 			</table>
 			<script src="/js/vendor/datatables/tournamentAthletes.js"></script>
 		</div>
+	<? } else { ?>
+		<?=$roleName?>rolnema dfksjdfosdhf <?=$roleID?>
 	<? } ?>
 <? } ?>
 
