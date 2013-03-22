@@ -45,6 +45,73 @@ class Sis extends MY_Controller {
 
 	public function index() {
 		
+		// Get todays date as a string
+		// Note we want to say that today is everything until this afternoon.
+		$today = new DateTime();
+		$today->setTime ( 23, 59, 59 );
+
+		// Get all the tournaments and matches from the database.
+		$latestMatches = $this->matches_model->get_all(FALSE,$today); // Get all matches that have occured and today's matches
+		$upcomingMatches = $this->matches_model->get_all($today,FALSE); // Get all tournaments that occur after today
+		$latestTournaments = $this->tournaments_model->get_all(FALSE, $today); // Get all matches that have occured and today's matches
+		$upcomingTournaments  = $this->tournaments_model->get_all($today,FALSE); // Get all tournaments that occur after today
+
+		// Remove matches that are not in a tournament
+		foreach($latestMatches as $i=>$match)
+			if($match['tournamentID']==0)
+				unset($latestMatches[$i]);
+		foreach($upcomingMatches as $i=>$match)
+			if($match['tournamentID']==0)
+				unset($upcomingMatches[$i]);
+
+		// We want to remove the matches that already exist in the latest matches
+		foreach($upcomingMatches as $u=>$uMatch){
+			if($today<new DateTime($uMatch['startTime']))
+				continue;
+			foreach($latestMatches as $i=>$lMatch){
+				if($uMatch['matchID']==$lMatch['matchID']){
+					unset($upcomingMatches[$u]);
+					break;
+				}
+			}
+		}
+		// We want to remove the tournaments that already exist in the latest tournaments
+		foreach($upcomingTournaments as $u=>$uTournament){
+			if($today<new DateTime($uTournament['tournamentStart']))
+				continue;
+			foreach($latestTournaments as $i=>$lTournament){
+				if($uTournament['tournamentID']==$lTournament['tournamentID']){
+					unset($upcomingTournaments[$u]);
+					break;
+				}
+			}
+		}
+		function cmpMatches($a, $b){
+			$a = new DateTime($a['endTime']);
+			$b = new DateTime($b['endTime']);
+			if ($a == $b) { return 0; }
+			return ($a < $b) ? -1 : 1;
+		}
+		function cmpTournaments($a, $b){
+			$a = new DateTime($a['tournamentEnd']);
+			$b = new DateTime($b['tournamentEnd']);
+			if ($a == $b) { return 0; }
+			return ($a < $b) ? -1 : 1;
+		}
+
+		usort($latestMatches, "cmpMatches");
+		usort($upcomingMatches, "cmpMatches");
+		usort($latestTournaments, "cmpTournaments");
+		usort($upcomingTournaments, "cmpTournaments");
+		$latestMatches 			= array_slice($latestMatches, -0, 10);
+		$upcomingMatches 		= array_slice($upcomingMatches, -0, 10);
+		$latestTournaments 		= array_slice($latestTournaments, -0, 5);
+		$upcomingTournaments 	= array_slice($upcomingTournaments, -0, 5);
+		$this->data['latestMatches'] 		= $latestMatches;
+		$this->data['upcomingMatches'] 		= $upcomingMatches;
+		$this->data['latestTournaments'] 	= $latestTournaments;
+		$this->data['upcomingTournaments'] 	= $upcomingTournaments;
+
 		//set the flash data error message if there is one
 		$this->view('home','sishome','Home',$this->data);
 	}
