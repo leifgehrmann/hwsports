@@ -240,8 +240,7 @@ class Tms extends MY_Controller {
 		$this->view('tournaments',"tournaments","Tournaments",$this->data);
 	}
 	
-	public function tournament($tournamentID)
-	{
+	public function tournament($tournamentID) {
 		$weekdays = array('monday','tuesday','wednesday','thursday','friday','saturday','sunday');
 
 		// These are all the possible form fields that will be displayed
@@ -330,13 +329,10 @@ class Tms extends MY_Controller {
 			foreach($scheduleMatchesForm as $input)
 				$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
 			if ($this->form_validation->run() == true) {
-
 				// Create the update array
-				$tournamentUpdate = array();
-
-				// Update the match duration
-				$tournamentUpdate['matchDuration'] = $this->input->post('matchDuration');
-
+				$tournamentUpdate = array(
+					'matchDuration' => $this->input->post('matchDuration')
+				);
 				// Update the starttime for each weekday
 				foreach($weekdays as $weekday){
 					if($this->input->post('startTimes'.ucfirst($weekday)))
@@ -344,57 +340,75 @@ class Tms extends MY_Controller {
 					else
 						$tournamentUpdate['startTimes'.ucfirst($weekday)] = "";
 				}
-
-				// Update the tournament venues
-				if($this->input->post('venues'))
-					$this->tournaments_model->update_venues($tournamentID,$this->input->post('venues'));
-
+				// Venues have been selected, try to update them
+				if($this->input->post('venues')) {
+					if($this->tournaments_model->update_venues($tournamentID,$this->input->post('venues'))===FALSE) {
+						$this->session->set_flashdata('message_error', 'Failed to update venues. Please contact Infusion Systems.');
+						redirect("/tms/tournament/$tournamentID", 'refresh');
+					}
+				}
 				// Now update the tournament
-				if($this->tournaments_model->update($tournamentID, $tournamentUpdate)) {
-					// Successful update, show success message
-					$this->session->set_flashdata('message_success',  'Successfully updated scheduling details.');
-				} else {
-					$this->session->set_flashdata('message_error',  'Failed to update scheduling details. Please contact Infusion Systems.');
+				if($this->tournaments_model->update($tournamentID, $tournamentUpdate)===FALSE) {
+					$this->session->set_flashdata('message_error', 'Failed to update scheduling details. Please contact Infusion Systems.');
+					redirect("/tms/tournament/$tournamentID", 'refresh');
 				}
-				redirect("/tms/tournament/$tournamentID", 'refresh');
 			
-			// Probably use the scheduling model based on what we want to execute.
-
-			if($tournament['sportData']['sportCategoryID']==18){
-
-				// We would like to get an array of roleIDs so that we can insert them into
-				// the actors table.
-				$actors = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
-
-				// This execute the football family scheduler
-				$matches = $this->scheduling_model->schedule_football_family($tournamentID);
-				foreach($matches as $match){
-
-					// Insert the match
-					$insertMatch['startTime'] = $match['startTime'];
-					$insertMatch['endTime'] = $match['endTime'];
-					$insertMatch['name'] = $match['name'];
-					$relation = array('tournamentID'=>$tournamentID,'venueID'=>$match['venueID'],'sportID'=>$tournament['sportID']);
-					$matchID = $this->matches_model->insert($insertMatch,$relation);
-
-					// Insert the teams for the match
-					foreach($match['matchActors']['teamIDs'] as $teamID){
-						$relation = array('matchID'=>$matchID,'roleID'=>$actors['team'],'actorID'=>$team);
-						$this->match_actors_model->insert($relation);
+				// Probably use the scheduling model based on what we want to execute.
+				if($tournament['sportData']['sportCategoryID']==18){
+					// We would like to get an array of roleIDs so that we can insert them into the actors table.
+					$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
+					// This execute the football family scheduler
+					$scheduledMatches = $this->scheduling_model->schedule_football_family($tournamentID);
+					if(!is_array($scheduledMatches)) {
+						$this->session->set_flashdata('message_error', $scheduledMatches);
+						redirect("/tms/tournament/$tournamentID", 'refresh');
 					}
-
-					// Insert the umpire/s for the match
-					foreach($match['matchActors']['umpireIDs'] as $umpireID){
-						$relation = array('matchID'=>$matchID,'roleID'=>$actors['umpire'],'actorID'=>$umpireID);
-						$this->match_actors_model->insert($relation);
+					foreach($scheduledMatches as $match){
+						$matchData = array(
+							'startTime' => $match['startTime'],
+							'endTime' => $match['endTime'],
+							'name' => $match['name']
+						)
+						$matchRelations = array(
+							'tournamentID' => $tournamentID,
+							'venueID' => $match['venueID'],
+							'sportID' => $tournament['sportID']
+						);
+						// Insert the match
+						$matchID = $this->matches_model->insert($matchData,$matchRelations);
+						if($matchID===FALSE) {
+							$this->session->set_flashdata('message_error', 'Failed to insert match. Please contact Infusion Systems.');
+							redirect("/tms/tournament/$tournamentID", 'refresh');
+						}
+						// Insert the teams for the match
+						foreach($match['matchActors']['teamIDs'] as $teamID) {
+							$matchRelations = array('matchID'=>$matchID,'roleID'=>$roleIDs['team'],'actorID'=>$team);
+							if($this->match_actors_model->insert($matchRelations)===FALSE) {
+								$this->session->set_flashdata('message_error', 'Failed to insert match actor. Please contact Infusion Systems.');
+								redirect("/tms/tournament/$tournamentID", 'refresh');
+							}
+						}
+						// Insert the umpires for the match
+						foreach($match['matchActors']['umpireIDs'] as $umpireID) {
+							$matchRelations = array('matchID'=>$matchID,'roleID'=>$roleIDs['umpire'],'actorID'=>$umpireID);
+							if($this->match_actors_model->insert($matchRelations)===FALSE) {
+								$this->session->set_flashdata('message_error', 'Failed to insert match actor. Please contact Infusion Systems.');
+								redirect("/tms/tournament/$tournamentID", 'refresh');
+							}
+						}
 					}
+					if($this->tournaments_model->update($tournamentID,array('scheduled'=>'1'))===FALSE) {
+						$this->session->set_flashdata('message_error', 'Failed to set tournament to scheduled. Please contact Infusion Systems.');
+						redirect("/tms/tournament/$tournamentID", 'refresh');
+					}
+					// Wow, we finally got here.
+					$this->session->set_flashdata('message_success', 'Successfully scheduled tournament!');
+					redirect("/tms/tournament/$tournamentID", 'refresh');
+				} else if($tournament['sportData']['sportCategoryID']==46){
+					// This execute the running scheduler
+					$this->scheduling_model->schedule_running($tournamentID);
 				}
-
-			} else if($tournament['sportData']['sportCategoryID']==46){
-				// This execute the running scheduler
-				$this->scheduling_model->schedule_running($tournamentID);
 			}
-		}
 
 		// Do the actual setting of variables here...
 
