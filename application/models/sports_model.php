@@ -140,7 +140,7 @@ class Sports_model extends MY_Model {
 		$output = array();
 		foreach($rolesRows as $rolesRow) {
 			// Get sections for this role, add to output along with role name
-			$output[$rolesRow['sportCategoryRoleID']] = $rolesRow;
+			$output[$rolesRow['sportCategoryRoleID']] = $rolesRow['sportCategoryRoleName'];
 		}
 		return $output;
 	}
