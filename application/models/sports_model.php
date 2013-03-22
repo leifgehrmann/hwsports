@@ -130,6 +130,21 @@ class Sports_model extends MY_Model {
 		return $output;
 	}
 	
+	// We know the sport category ID, get an associative array of all data about all roles, with all of their input sections and inputs inside 
+	public function get_sport_category_roles_simple($sportCategoryID,$indexByRoleID=true)
+	{
+		// Get roles for this sportCategoryID
+		$this->db->where('sportCategoryID',$sportCategoryID);
+		$rolesRows = $this->db->get('sportCategoryRoles')->result_array();
+		// Put all roles in output array, with all of their descendent sections and inputs
+		$output = array();
+		foreach($rolesRows as $rolesRow) {
+			// Get sections for this role, add to output along with role name
+			$output[$rolesRow['sportCategoryRoleID']] = $rolesRow['sportCategoryRoleName'];
+		}
+		return $indexByRoleID ? $output : array_flip($output);
+	}
+	
 	// We know the role ID, get an associative array of all data about all input sections and inputs inside
 	public function get_sport_category_role_input_sections($sportCategoryRoleID) {
 		// Get sections for this role
