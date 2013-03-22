@@ -407,6 +407,43 @@ class Tms extends MY_Controller {
 				} else if($tournament['sportData']['sportCategoryID']==46){
 					// This execute the running scheduler
 					$this->scheduling_model->schedule_running($tournamentID);
+					if(!is_array($scheduledMatches)) {
+						$this->session->set_flashdata('message_error', $scheduledMatches);
+						redirect("/tms/tournament/$tournamentID", 'refresh');
+					}
+					foreach($scheduledMatches as $match){
+						$matchData = array(
+							'startTime' => $match['startTime'],
+							'endTime' => $match['endTime'],
+							'name' => $match['name']
+						);
+						$matchRelations = array(
+							'tournamentID' => $tournamentID,
+							'venueID' => $match['venueID'],
+							'sportID' => $tournament['sportID']
+						);
+						// Insert the match
+						$matchID = $this->matches_model->insert($matchData,$matchRelations);
+						if($matchID===FALSE) {
+							$this->session->set_flashdata('message_error', 'Failed to insert match. Please contact Infusion Systems.');
+							redirect("/tms/tournament/$tournamentID", 'refresh');
+						}
+						// Insert the athletes for the match
+						foreach($match['matchActors']['athleteIDs'] as $athleteID) {
+							$matchRelations = array('matchID'=>$matchID,'roleID'=>$roleIDs['athlete'],'actorID'=>$athleteID);
+							if($this->match_actors_model->insert($matchRelations)===FALSE) {
+								$this->session->set_flashdata('message_error', 'Failed to insert match actor. Please contact Infusion Systems.');
+								redirect("/tms/tournament/$tournamentID", 'refresh');
+							}
+						}
+					}
+					if($this->tournaments_model->update($tournamentID,array('scheduled'=>'1'))===FALSE) {
+						$this->session->set_flashdata('message_error', 'Failed to set tournament to scheduled. Please contact Infusion Systems.');
+						redirect("/tms/tournament/$tournamentID", 'refresh');
+					}
+					// Wow, we finally got here.
+					$this->session->set_flashdata('message_success', 'Successfully scheduled tournament!');
+					redirect("/tms/tournament/$tournamentID", 'refresh');
 				}
 			}
 		}
