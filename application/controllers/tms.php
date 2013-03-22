@@ -366,8 +366,40 @@ class Tms extends MY_Controller {
 				}
 			} else if($formAction=="schedule") {
 				// Probably use the scheduling model based on what we want to execute.
-				
-				// sødjshflasdijfgalndisufcaiosfugeipw
+
+				if($tournament['sportData']['sportCategoryID']==18){
+
+					// We would like to get an array of roleIDs so that we can insert them into
+					// the actors table.
+					$actors = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
+
+					// This execute the football family scheduler
+					$matches = $this->scheduling_model->schedule_football_family($tournamentID);
+					foreach($matches as $match){
+
+						// Insert the match
+						$insertMatch['startTime'] = $match['startTime'];
+						$insertMatch['endTime'] = $match['endTime'];
+						$insertMatch['name'] = $match['name'];
+						$relation = array('tournamentID'=>$tournamentID,'venueID'=>$match['venueID'],'sportID'=>$tournament['sportID']);
+						$matchID = $this->matches_model->insert($insertMatch,$relation);
+
+						// Insert the teams for the match
+						foreach($match['matchActors']['teamIDs'] as $teamID){
+							$relation = array('matchID'=>$matchID,'roleID'=>$actors['team'],'actorID'=>$team);
+							$this->match_actors_model->insert($relation);
+						}
+
+						// Insert the umpire/s for the match
+						foreach($match['matchActors']['umpireIDs'] as $umpireID){
+							$relation = array('matchID'=>$matchID,'roleID'=>$actors['umpire'],'actorID'=>$umpireID);
+							$this->match_actors_model->insert($relation);
+						}
+					}
+				} else if($tournament['sportData']['sportCategoryID']==46){
+					// This execute the running scheduler
+					$this->scheduling_model->schedule_running($tournamentID);
+				}
 			} else if($formAction=="scheduleNext") {
 				// Probably use the scheduling model based on what we want to execute.
 				
