@@ -411,7 +411,7 @@ class Tms extends MY_Controller {
 			}
 		}
 
-		$this->data['roles'] = $this->sports_model->get_sport_category_roles_simple($tournamentID);
+		$this->data['roles'] = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCateogryID']);
 
 		// Set the values for the tournament details form
 		$this->data['name'] = array(
