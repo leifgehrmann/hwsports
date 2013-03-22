@@ -442,6 +442,7 @@ class Scheduling_model extends MY_Model {
 		// and days of the tournament. from here we need to filter 
 		// by venue.
 		$matchDateTimes = $this->get_match_date_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration);
+		echo "<pre/>";
 		var_dump($matchDateTimes);
 
 		foreach($matchDateTimes as $date=>$dateTimes)
@@ -474,7 +475,6 @@ class Scheduling_model extends MY_Model {
 				unset($matchDateTimes[$date]);
 		}
 
-		echo "<pre/>";
 		var_dump($matchDateTimes);
 
 		$scheduledMatches = array(); // Our list of matches that we would like to output
@@ -495,6 +495,7 @@ class Scheduling_model extends MY_Model {
 		$matchIndex = 0;
 		for( $matchIndex = 0; $matchIndex < $numberOfMatches; $matchIndex++ )
 		{
+			echo "adding match ".$matchIndex."out of ".$numberOfMatches;
 			$added = false; // This will indicate if we could find a place to put this match in.
 			// Get list of days ordered by a fitness function that encourages
 			// the spread of days in a tournament.
