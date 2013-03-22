@@ -44,7 +44,7 @@
 		<?=form_close();?>
 	</div>
 </div>
-<? if( $tournament['status'] == 'postRegistration' && count($matches) > 0 ) { ?>
+<? if( $tournament['status'] == 'postRegistration' ) { ?>
 <div class="widget full scheduling">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
@@ -52,7 +52,7 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<? if( $tournament['scheduled'] == FALSE ) { ?>
+		<? if( $tournament['scheduled'] == FALSE || count($matches) == 0 ) { ?>
 		<?=form_open("tms/tournament/$tournamentID", array('id' => 'scheduleMatchesForm'), array('form'=>'scheduleMatchesForm', 'action'=>'update'))?>
 		<table>
 			<tr>
