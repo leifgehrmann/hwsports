@@ -227,6 +227,7 @@ class Sis extends MY_Controller {
 		// We have post data, let's process it
 		if( $this->input->post() ) {
 
+			//var_dump($_POST); 
 			// Loop through input data and deal with it bit by bit
 			foreach($_POST as $inputKey => $value) {
 				// Get the role ID
@@ -257,7 +258,6 @@ class Sis extends MY_Controller {
 				// Put value into sub array based on object name so we can add data in bulk later
 				$objectData[$object][$key] = $value;
 			}
-			//var_dump($objectData); die();
 			
 			// Add this user as an actor with the correct role in this specific tournament,
 			// and add the tournament-specific data for this user to the tournamentActorData
@@ -273,6 +273,8 @@ class Sis extends MY_Controller {
 			$tournamentActorID = $this->objects_models['tournament_actors']->insert(array(), $tournamentActorRelations);
 			if($tournamentActorID === FALSE) 
 				$this->flash_redirect('message_error','/sis/tournaments','Creating new tournamentActor failed');
+			
+			//var_dump($objectData); die();
 			
 			// Now we have all the input data categorised by object, submit it to the correct places in the DB using the relevant model
 			foreach($objectData as $object => $data) {
