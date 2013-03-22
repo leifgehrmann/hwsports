@@ -11,7 +11,7 @@
 
 	if ( $tournament['status'] == "inRegistration" ) { ?>
 		<div class="tournament-signup-button">
-			<a href='/sis/signup/<?=$tournament['tournamentID']?>' class='tournamentSignupButton'>Sign Up Now!</a>
+			<a href='/sis/signup/<?=$tournament['tournamentID']?>' class='button green'>Sign Up Now!</a>
 		</div>
 	<? } ?>
 <h2>Calendar</h2>
