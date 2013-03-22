@@ -52,9 +52,7 @@ class Scheduling_model extends MY_Model {
 		if(!$venues) return "There are no venues that the tournament can take place at.";
 		if(count($venues)==0) return "There are no venues that the tournament can take place at.";
 		$umpires    = $actors['umpire'];
-		$umpiresRoleID = $actors['team'][0]['sportCategoryRoleID'];
 		$teams      = $actors['team'];
-		$teamsRoleID   = $actors['umpire'][0]['sportCategoryRoleID'];
 		// Add tournamentActorData
 		foreach($umpires as $index=>$umpire)
 			$umpires[$index]['tournamentActorData'] = $this->tournament_actors_model->get($umpire['tournamentActorID']);
