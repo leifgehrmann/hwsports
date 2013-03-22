@@ -330,7 +330,7 @@ class Tms extends MY_Controller {
 				redirect("/tms/tournament/$tournamentID", 'refresh');
 			}
 		} else if($formID=="schedulingDetailsForm"){
-			//if($formAction=="update") {
+			if($formAction=="update") {
 				// We need to validate the scheduling details stuff.
 				// For each of the input types we will validate it.
 				foreach($schedulingDetailsForm as $input)
@@ -363,8 +363,8 @@ class Tms extends MY_Controller {
 						$this->session->set_flashdata('message_error',  'Failed to update scheduling details. Please contact Infusion Systems.');
 					}
 					redirect("/tms/tournament/$tournamentID", 'refresh');
-			//	}
-			if($formAction=="schedule") {
+				}
+			} else if($formAction=="schedule") {
 				// Probably use the scheduling model based on what we want to execute.
 
 				if($tournament['sportData']['sportCategoryID']==18){
