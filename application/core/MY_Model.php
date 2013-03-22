@@ -262,9 +262,8 @@ class MY_Model extends CI_Model {
 		$this->db->trans_complete();
 		// Return TRUE: if we got to here it must have all worked
 		if($testRun) {
-			//$testResultsUnique = array_unique($testResults);
-			//return $testResultsUnique;
-			return $testResults;
+			$testResultsUnique = array_unique($testResults);
+			return $testResultsUnique;
 		}
 		return TRUE;
 	}
