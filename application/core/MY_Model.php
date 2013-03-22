@@ -209,7 +209,7 @@ class MY_Model extends CI_Model {
 		$dependents = $this->table_dependents[$primaryTableName];
 		// Iterate through dependents to process corresponding entries from - these should be in a specific order to satisfy foreign keys
 		foreach( $dependents as $table=>$field ) {
-			$testResults[] = "Procesing dependent table: $table and field: $field\n";
+			//$testResults[] = "Procesing dependent table: $table and field: $field\n";
 			
 			// Search this table for our object key/ID - if it exists, we want to delete whatever object was referencing our object
 			//var_dump("Searching table: $table for field: $objectIDKey set to value: $objectID");
@@ -231,7 +231,7 @@ class MY_Model extends CI_Model {
 			// Loop through all rows which were referencing this object
 			foreach($dependentRows as $dependentRow) {
 				//$testResults[] = "Procesing dependent row: ".print_r($dependentRow)."\n";
-				$testResults[] = "Calling delete object on $table - $field, deleting ID: {$dependentRow[$field]}\n";
+				//$testResults[] = "Calling delete object on $table - $field, deleting ID: {$dependentRow[$field]}\n";
 				// Now call the delete function on dependent object - we get the ID from the field name (specified in the global array) in the returned row 
 				$deleteResult = $this->delete_object($dependentRow[$field], $field, $table, $testRun);
 				if(!$deleteResult) return FALSE;
