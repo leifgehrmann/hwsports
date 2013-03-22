@@ -288,8 +288,8 @@ class Scheduling_model extends MY_Model {
 					$endTime->add($matchDuration);
 					$newMatch['name'] = $teams[$teamA]['name']." vs ".$teams[$teamB]['name'];
 					$newMatch['endTime'] = datetime_to_standard($endTime);
-					$newMatch['actors']['teamIDs'] = array($teamA,$teamB);
-					$newMatch['actors']['umpireIDs'] = $matchUmpireIDs;
+					$newMatch['matchActors']['teamIDs'] = array($teamA,$teamB);
+					$newMatch['matchActors']['umpireIDs'] = $matchUmpireIDs;
 					$newMatch['venueID'] = $matchVenueID;
 					$matchDateTimesSelected[$date][$dateTime] = array();
 					$matchDateTimesSelected[$date][$dateTime]['teamIDs'] = array($teamA,$teamB);

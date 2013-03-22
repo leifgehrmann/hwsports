@@ -381,18 +381,18 @@ class Tms extends MY_Controller {
 						$insertMatch['startTime'] = $match['startTime'];
 						$insertMatch['endTime'] = $match['endTime'];
 						$insertMatch['name'] = $match['name'];
-						$relation = array('tournamentID'=>$tournamentID,'venueID'=>$,'sportID'=>$tournament['sportID']);
+						$relation = array('tournamentID'=>$tournamentID,'venueID'=>$match['venueID'],'sportID'=>$tournament['sportID']);
 						$matchID = $this->matches_model->insert($insertMatch,$relation);
 
 						// Insert the teams for the match
-						foreach($match['team'] as $team){
+						foreach($match['matchActors']['teamIDs'] as $teamID){
 							$relation = array('matchID'=>$matchID,'roleID'=>$actors['team'],'actorID'=>$team);
 							$this->match_actors_model->insert($relation);
 						}
 
 						// Insert the umpire/s for the match
-						foreach($match['umpire'] as $umpire){
-							$relation = array('matchID'=>$matchID,'roleID'=>$actors['umpire'],'actorID'=>$umpire);
+						foreach($match['matchActors']['umpireIDs'] as $umpireID){
+							$relation = array('matchID'=>$matchID,'roleID'=>$actors['umpire'],'actorID'=>$umpireID);
 							$this->match_actors_model->insert($relation);
 						}
 					}
