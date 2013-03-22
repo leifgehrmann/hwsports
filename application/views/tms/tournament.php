@@ -143,7 +143,7 @@
 	</table>
 	<script src="/js/vendor/datatables/tournamentMatches.js"></script>
 </div>
-<? foreach($roles as $roleID=>$roleName) { ?>
+<? var_dump($roles); foreach($roles as $roleID=>$roleName) { ?>
 	<? if($roleName=="team") { ?>
 		<h2>Teams</h2>
 		<p>Displayed below are a list of teams for the tournament. </p>
