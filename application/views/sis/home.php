@@ -1,5 +1,5 @@
 
-<div class="widget full welcome-message">
+<? /*<div class="widget full welcome-message">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
 		<div class="widget-title-centre">Welcome to Riccarton Tournaments</div>
@@ -301,3 +301,4 @@ $(document).ready(function(){
 		</tr>
 	</tbody>
 </table>-->
+*/ ?>
