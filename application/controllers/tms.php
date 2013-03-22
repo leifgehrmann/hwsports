@@ -461,7 +461,7 @@ class Tms extends MY_Controller {
 			'class' => 'date',
 			'value' => datetime_to_public( $this->form_validation->set_value('tournamentEnd',(isset($tournament['tournamentEnd']) ? $tournament['tournamentEnd'] : '') ) )
 		);
-		if($tournament['scheduled']=='false'){
+		if($tournament['scheduled']==FALSE){
 			$this->data['matchDuration'] = array(
 				'name'  => 'matchDuration',
 				'id'    => 'matchDuration',
