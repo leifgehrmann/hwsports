@@ -14,6 +14,7 @@
 			<a href='/sis/signup/<?=$tournament['tournamentID']?>' class='button green'>Sign Up Now!</a>
 		</div>
 	<? } ?>
+<br />
 <h2>Calendar</h2>
 <p>Click the entries for details on individual matches</p>
 
