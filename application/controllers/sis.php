@@ -257,7 +257,7 @@ class Sis extends MY_Controller {
 				// Put value into sub array based on object name so we can add data in bulk later
 				$objectData[$object][$key] = $value;
 			}
-			var_dump($objectData); die();
+			//var_dump($objectData); die();
 			
 			// Add this user as an actor with the correct role in this specific tournament,
 			// and add the tournament-specific data for this user to the tournamentActorData
