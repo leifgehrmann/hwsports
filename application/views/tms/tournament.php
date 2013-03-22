@@ -62,7 +62,7 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<? if( $tournament['scheduled'] == "false" ) { ?>
+		<? if( $tournament['scheduled'] == FALSE ) { ?>
 		<?=form_open("tms/tournament/$tournamentID", array('id' => 'schedulingDetailsForm'), array('form'=>'schedulingDetailsForm', 'action'=>'update'))?>
 		<table>
 			<tr>
