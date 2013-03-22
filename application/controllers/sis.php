@@ -192,8 +192,20 @@ class Sis extends MY_Controller {
 			}
 			var_dump($objectData); die();
 			
-			// Just in case the insert fails
-			$tournamentActorID = FALSE;
+			// Add this user as an actor with the correct role in this specific tournament,
+			// and add the tournament-specific data for this user to the tournamentActorData
+			if($this->objects_models['tournament_actors']->check_if_actor($tournamentID,$this->currentUser['userID'],$roleID)) {
+				$this->flash_redirect('message_error','/sis/tournaments','Signup failed as you have already signed up for this role. If you are experiencing difficulty, please contact Infusion Sports');
+			}
+			$tournamentActorRelations = array(
+				'tournamentID' => $tournamentID,
+				'actorID' => (isset($teamID) ? $teamID : $this->currentUser['userID']),
+				'roleID' => $roleID
+			);
+			// Create the tournamentActor with relations but no data
+			$tournamentActorID = $this->objects_models['tournament_actors']->insert(array(), $tournamentActorRelations);
+			if($tournamentActorID === FALSE) 
+				$this->flash_redirect('message_error','/sis/tournaments','Creating new tournamentActor failed');
 			
 			// Now we have all the input data categorised by object, submit it to the correct places in the DB using the relevant model
 			foreach($objectData as $object => $data) {
@@ -208,23 +220,12 @@ class Sis extends MY_Controller {
 							$this->flash_redirect('message_error','/sis/tournaments','Adding additional data to team failed');
 					break;
 					case "tournament_actors":
-						// Add this user as an actor with the correct role in this specific tournament,
-						// and add the tournament-specific data for this user to the tournamentActorData
-						$tournamentActorRelations = array(
-							'tournamentID' => $tournamentID,
-							'actorID' => (isset($teamID) ? $teamID : $this->currentUser['userID']),
-							'roleID' => $roleID
-						);
-						if($this->objects_models['tournament_actors']->check_if_actor($tournamentID,$this->currentUser['userID'],$roleID)) {
-							$this->flash_redirect('message_error','/sis/tournaments','Signup failed as you have already signed up for this role. If you are experiencing difficulty, please contact Infusion Sports');
-						}
-						$tournamentActorID = $this->objects_models['tournament_actors']->insert($data, $tournamentActorRelations);
+						if($this->objects_models[$object]->update($tournamentActorID, $data) === FALSE)  
+							$this->flash_redirect('message_error','/sis/tournaments','Adding additional data to tournament actor failed');
 					break;
 				}
 			}
 			
-			if($tournamentActorID === FALSE) 
-				$this->flash_redirect('message_error','/sis/tournaments','Creating new tournamentActor failed');
 			$this->flash_redirect('message_success','/sis/tournaments',"Signup successful! Once the registration period is over, you will receive confirmation and further instructions.");
 		} else {
 			$this->view('signup','signup','Signup',$this->data);
