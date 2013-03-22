@@ -20,17 +20,6 @@
 				<td colspan="3"><?=form_textarea($description)?></td>
 			</tr>
 			<tr>
-				<? switch($tournament['status']) {
-					case "preRegistration": $tournamentStatusMessage="This tournament has not yet opened for registration. You may change any of the details below."; break;
-					case "inRegistration": $tournamentStatusMessage="This tournament is open for registration. You may change any of the tournament details or manage the list of competitors to date."; break;
-					case "postRegistration": $tournamentStatusMessage="This tournament has closed for registration. You may change any of the tournament details below. Before matches can be sceduled, you must moderate the list of competitors below."; break;
-					case "inTournament": $tournamentStatusMessage="This tournament has completed registration and scheduling and is awaiting the start date. You may change any of the tournament details or manage the list of competitors below."; break;
-					case "postTournament": $tournamentStatusMessage="This tournament is in progress. You may change any of the tournament details or manage the list of competitors below, and <a href='/tms/tournament-statistics/'>view statistics here.</a>"; break;
-				}
-				?>
-				<td colspan="4"><p><?=$tournamentStatusMessage?></p></td>
-			</tr>
-			<tr>
 				<td colspan="2"><h3>Tournament Period</h3></td>
 				<td colspan="2"><h3>Competitor Registration Period</h3></td>
 			</tr>

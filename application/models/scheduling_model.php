@@ -228,33 +228,34 @@ class Scheduling_model extends MY_Model {
 					// more than once a day if we ignored the rules above)
 					$isOverlapping = false;
 					if(array_key_exists($date,$matchDateTimesSelected))
-						foreach($matchDateTimesSelected[$date] as $dateTimeSelected=>$dateTimeData)
-						{
-							// Are any of the teams that we care about actually playing during that time?
-							if(!isset($matchUsage[$date])) {
-								echo "failed because matchUsage does not contain date: $date"."\n"; die();
-							}
-							if(!isset($matchUsage[$date][$dateTimeSelected])) {
-								echo "failed because matchUsage[$date] does not contain dateTimeSelected: $dateTimeSelected"."\n"; die();
-							}
-							if(!isset($matchUsage[$date][$dateTimeSelected]['teams'][$teamA])) {
-								echo "failed because $matchUsage[$date][$dateTimeSelected]['teams'] does not contain teamA: $teamA"."\n"; die();
-							}
-							if(!isset($matchUsage[$date][$dateTimeSelected]['teams'][$teamB])) {
-								echo "failed because $matchUsage[$date][$dateTimeSelected]['teams'] does not contain teamB: $teamB"."\n"; die();
-							}
-							
-							if($matchUsage[$date][$dateTimeSelected]['teams'][$teamA]==0 && $matchUsage[$date][$dateTimeSelected]['teams'][$teamB]==0){
-								echo "failed ".$dateTime." because team is already playing at that time"."\n";
-								continue;
-							}
+						if(array_key_exists($dateTime,$matchDateTimesSelected[$date]))
+							foreach($matchDateTimesSelected[$date] as $dateTimeSelected=>$dateTimeData)
+							{
+								// Are any of the teams that we care about actually playing during that time?
+								if(!isset($matchUsage[$date])) {
+									echo "failed because matchUsage does not contain date: $date"."\n"; die();
+								}
+								if(!isset($matchUsage[$date][$dateTimeSelected])) {
+									echo "failed because matchUsage[$date] does not contain dateTimeSelected: $dateTimeSelected"."\n"; die();
+								}
+								if(!isset($matchUsage[$date][$dateTimeSelected]['teams'][$teamA])) {
+									echo "failed because $matchUsage[$date][$dateTimeSelected]['teams'] does not contain teamA: $teamA"."\n"; die();
+								}
+								if(!isset($matchUsage[$date][$dateTimeSelected]['teams'][$teamB])) {
+									echo "failed because $matchUsage[$date][$dateTimeSelected]['teams'] does not contain teamB: $teamB"."\n"; die();
+								}
+								
+								if($matchUsage[$date][$dateTimeSelected]['teams'][$teamA]==0 && $matchUsage[$date][$dateTimeSelected]['teams'][$teamB]==0){
+									echo "failed ".$dateTime." because team is already playing at that time"."\n";
+									continue;
+								}
 
-							// Do these times even overlap?
-							$dateTimeObject = new DateTime($dateTime);
-							$dateTimeSelectedObject = new DateTime($dateTimeSelected);
-							if($this->is_overlapping($dateTimeObject,$matchDuration,$dateTimeSelectedObject,$matchDuration))
-								$isOverlapping = true;
-						}
+								// Do these times even overlap?
+								$dateTimeObject = new DateTime($dateTime);
+								$dateTimeSelectedObject = new DateTime($dateTimeSelected);
+								if($this->is_overlapping($dateTimeObject,$matchDuration,$dateTimeSelectedObject,$matchDuration))
+									$isOverlapping = true;
+							}
 					// If there is a conflict, well we better check another time slot.
 					if($isOverlapping){
 						echo "failed ".$dateTime." because of overlapping"."\n";
