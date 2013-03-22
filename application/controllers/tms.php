@@ -259,11 +259,6 @@ class Tms extends MY_Controller {
 				'type'=>'text'
 			),
 			array(
-				'name'=>'sport',
-				'label'=>'Sport',
-				'restrict'=>'required|xss_clean',
-			),
-			array(
 				'name'=>'registrationStart',
 				'label'=>'Registration Start Date',
 				'restrict'=>'required|xss_clean|callback_datetime_check[registrationStart]',
