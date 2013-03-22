@@ -1,20 +1,53 @@
-<h1><a href="/sis/tournaments">Tournaments</a> &gt; <?=$tournament['name']?></h1>
-<?php
-	$tmpl = array (
-		'table_open'          => '<table cellspacing="0">',
-		'heading_cell_start'  => '<td>',
-		'heading_cell_end'    => '</td>',
-	);
-	$this->table->set_template($tmpl);
+<h1><a href="/sis/tournaments">Tournaments</a><div class="icon subsection"></div><?=$tournament['name']?></h1>
 
-	echo $this->table->generate($tournamentTable);
+<? if ( $tournament['status'] == "inRegistration" ) { ?>
+<p><b>Start:</b><?=datetime_to_public_date($tournament['tournamentStart'])?> &ndash; <b>End:</b><?=datetime_to_public_date($tournament['tournamentEnd'])?></p>
+<p><?=$tournament['description']?></p>
+<table>
+	<tr>
+		<td><h2><div class="icon subscribe margin-right"></div>Sign up for <?=$tournament['name']?>!</h2></td>
+		<td rowspan="2"><a href='/sis/signup/<?=$tournament['tournamentID']?>' class='button green'>Sign Up Now!</a></td>
+	</tr>
+	<tr>
+		<td><p>Registration ends on <?=datetime_to_public_date($tournament['registrationEnd'])?> at <?=datetime_to_public_time($tournament['registrationEnd'])?>.</p></td>
+	</tr>
+</table>
+<? } ?>
+<h2>Matches</h2>
+<table class="full matches">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Date</th>
+			<th>Start</th>
+			<th>End</th>
+			<th>Title</th>
+			<th>Venue</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<? foreach($matches as $match) { ?>
+		<tr class="match sportCategoryID-<?=$match['sportData']['sportCategoryID']?> sportID-<?=$match['sportID']?>">
+			<td><div class="icon"></div></td>
+			<td><?=$match['date']?></td>
+			<td><?=$match['startTime']?></td>
+			<td><?=$match['endTime']?></td>
+			<td><?=$match['name']?></td>
+			<td><?=$match['venueData']['name']?></td>
+			<td><a href="/sis/match/<?=$match['matchID']?>">View Details</a></td>
+		</tr>
+		<? } ?>
+	</tbody>
+</table>
 
-	if ( $tournament['status'] == "inRegistration" ) { ?>
-		<div class="tournament-signup-button">
-			<a href='/sis/signup/<?=$tournament['tournamentID']?>' class='button green'>Sign Up Now!</a>
-		</div>
-	<? } ?>
-<br />
+
+<script>
+$(document).ready(function(){
+	$('table.matches').dataTable();
+});
+</script>
+
 <h2>Calendar</h2>
 <p>Click the entries for details on individual matches</p>
 
