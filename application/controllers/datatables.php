@@ -315,12 +315,30 @@ class Datatables extends MY_Controller {
 		$this->filtered_data($filtered_IDs,$relationTable,$relations,$loadIDKey,$updateIDKey,'users');
 	}
 	
-	// Handle datatables requests for the tournamentActors table, referencing the umpire role (roleID 1) which displays umpires in a specific tournament, with cool tournamentActor relations.
+	// Handle datatables requests for the tournamentActors table, referencing the umpire role for this tournament which displays umpires in a specific tournament, with cool tournamentActor relations.
 	public function tournamentUmpires($tournamentID) {
+		$tournament = $this->tournaments_model->get($tournamentID);
+		$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
 		$loadIDKey = 'userID';
 		$updateIDKey = 'actorID';
 		$relationTable = 'tournamentActors';
-		$relations = array('tournamentID' => $tournamentID, 'roleID' => 1);
+		$relations = array('tournamentID' => $tournamentID, 'roleID' => $roleIDs['umpire']);
+		$filteredRows = $this->db->get_where($relationTable,$relations)->result_array();
+		$filtered_IDs = array();
+		foreach($filteredRows as $filteredRow) {
+			$filtered_IDs[] = $filteredRow[$updateIDKey];
+		}
+		$this->filtered_data($filtered_IDs,$relationTable,$relations,$loadIDKey,$updateIDKey,'users');
+	}
+	
+	// Handle datatables requests for the tournamentActors table, referencing the athlete role for this tournament which displays umpires in a specific tournament, with cool tournamentActor relations.
+	public function tournamentUmpires($tournamentID) {
+		$tournament = $this->tournaments_model->get($tournamentID);
+		$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
+		$loadIDKey = 'userID';
+		$updateIDKey = 'actorID';
+		$relationTable = 'tournamentActors';
+		$relations = array('tournamentID' => $tournamentID, 'roleID' => $roleIDs['athlete']);
 		$filteredRows = $this->db->get_where($relationTable,$relations)->result_array();
 		$filtered_IDs = array();
 		foreach($filteredRows as $filteredRow) {
@@ -331,10 +349,12 @@ class Datatables extends MY_Controller {
 	
 	// Handle datatables requests for the tournamentActors table, referencing the team role (roleID 2) which displays teams in a specific tournament, with cool tournamentActor relations.
 	public function tournamentTeams($tournamentID) {
+		$tournament = $this->tournaments_model->get($tournamentID);
+		$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
 		$loadIDKey = 'teamID';
 		$updateIDKey = 'actorID';
 		$relationTable = 'tournamentActors';
-		$relations = array('tournamentID' => $tournamentID, 'roleID' => 2);
+		$relations = array('tournamentID' => $tournamentID, 'roleID' => $roleIDs['team']);
 		$filteredRows = $this->db->get_where($relationTable,$relations)->result_array();
 		$filtered_IDs = array();
 		foreach($filteredRows as $filteredRow) {
