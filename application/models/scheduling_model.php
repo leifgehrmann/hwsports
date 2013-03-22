@@ -436,7 +436,7 @@ class Scheduling_model extends MY_Model {
 
 		// Calculate number of matches we need
 		if(count($athletes)<$matchMinimumPlayers)
-			$numberOfMatches = 10;
+			$numberOfMatches = 1;
 		else
 			$numberOfMatches = ceil(log(count($athletes)/$matchMinimumPlayers)/log(2)+1);
 		$numberOfMatches += 1; // This takes into account the aulifier round.
@@ -526,7 +526,7 @@ class Scheduling_model extends MY_Model {
 
 				// Have we already exceeded the number of matches that we can add already?
 				if($matchMaximumPlays <= $matchUsage[$date]['count']){
-					if($debug) echo "failed ".$dateTime." because team has already played max number of times"."\n";
+					if($debug) echo "failed ".$dateTime." because athletes have already played max number of times for that day"."\n";
 					continue;
 				}
 
@@ -548,7 +548,7 @@ class Scheduling_model extends MY_Model {
 						{
 							// Are any of the teams that we care about actually playing during that time?
 							if($matchUsage[$date][$dateTimeSelected]['count']==0){
-								if($debug) echo "failed ".$dateTime." because the hurdlers are already playing at that time but in another venue"."\n";
+								if($debug) echo "failed ".$dateTime." because the athletes are already playing at that time but in another venue"."\n";
 								continue;
 							}
 
@@ -568,7 +568,7 @@ class Scheduling_model extends MY_Model {
 					// staff want to dictate priority, we can implement it here
 					// at some later point.
 					// You know what, lets just RANDOMLY select a venue for fun.
-					$matchVenueID = array_rand($matchDateTimes[$date][$dateTime]['venueIDs']);
+					$matchVenueID = $matchDateTimes[$date][$dateTime]['venueIDs'][array_rand($matchDateTimes[$date][$dateTime]['venueIDs'])];
 
 					// Hey thats it! Lets add our result to the selected array and a list of scheduled matches:
 					$newMatch = array();
