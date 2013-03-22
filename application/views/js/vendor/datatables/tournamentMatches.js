@@ -65,7 +65,9 @@
 				},
 				{ "mData": "startTime" },
 				{ "mData": "endTime" },
-				{ "mData": "description" },
+				{ "mData": "description",
+				  "sDefaultContent": "None"
+				},
 				{ "mData": "sportData.name" },
 				{ "mData": "venueData.name" },
 				{ "mData": "detailsLink" }
