@@ -209,6 +209,8 @@ class MY_Model extends CI_Model {
 		$dependents = $this->table_dependents[$primaryTableName];
 		// Iterate through dependents to process corresponding entries from - these should be in a specific order to satisfy foreign keys
 		foreach( $dependents as $table=>$field ) {
+			$testResults[] = "Procesing dependent table: $table and field: $field\n";
+		
 			// Search this table for our object key/ID - if it exists, we want to delete whatever object was referencing our object
 			//var_dump("Searching table: $table for field: $objectIDKey set to value: $objectID");
 			
