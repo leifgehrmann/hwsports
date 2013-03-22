@@ -295,8 +295,8 @@ class Tms extends MY_Controller {
 		// Does the tournament even exist?
 		$this->data['tournamentID'] = $tournamentID;
 		$this->data['tournament'] = $tournament = $this->tournaments_model->get($tournamentID);
-		if($tournament==FALSE) {
-			$this->session->set_flashdata('message_error',  "Tournament ID $id does not exist.");
+		if($tournament===FALSE) {
+			$this->session->set_flashdata('message_error',  "Tournament ID $tournamentID does not exist.");
 			redirect("/tms/tournaments", 'refresh');
 		}
 
