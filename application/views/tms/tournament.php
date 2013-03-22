@@ -44,7 +44,7 @@
 		<?=form_close();?>
 	</div>
 </div>
-<? if( $tournament['status'] == 'postRegistration' ) { ?>
+<? if( $tournament['status'] == 'postRegistration' && count($matches) > 0 ) { ?>
 <div class="widget full scheduling">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
