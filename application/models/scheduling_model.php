@@ -11,7 +11,7 @@ class Scheduling_model extends MY_Model {
 	 **/
 	public function schedule_football_family($tournamentID)
 	{
-		echo "<pre>";
+		//echo "<pre>";
 
 		// Get tournament Information
 		$tournament = $this->tournaments_model->get($tournamentID);
@@ -70,7 +70,7 @@ class Scheduling_model extends MY_Model {
 		// and days of the tournament. From here we need to
 		// filter it down by umpires, venues, and team competitions
 		$matchDateTimes = $this->get_match_date_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration);
-		echo "Matches dates "."\n";
+		//echo "Matches dates "."\n";
 		// We now check if an umpire is available for a particular
 		// match. It it isn't, we just remove it from the list of choices.
 		// For each day...
@@ -108,7 +108,7 @@ class Scheduling_model extends MY_Model {
 			if(count($matchDateTimes[$date]) == 0)
 				unset($matchDateTimes[$date]);
 		}
-		echo "Matches dates with umpires "."\n";
+		//echo "Matches dates with umpires "."\n";
 		//var_dump($matchDateTimes);
 		// We now check if a venue is occupied with some other match.
 		// If it isn't, we say that this particular venue works at the
@@ -142,8 +142,8 @@ class Scheduling_model extends MY_Model {
 			if(count($matchDateTimes[$date]) == 0)
 				unset($matchDateTimes[$date]);
 		}
-		echo "Matches dates "."\n";
-		echo "The following days and combinations of dates are being considered: "."\n";
+		//echo "Matches dates "."\n";
+		//echo "The following days and combinations of dates are being considered: "."\n";
 		//var_dump($matchDateTimes);
 
 		// We now want to create our individual matches for each
@@ -185,7 +185,7 @@ class Scheduling_model extends MY_Model {
 
 		// Assuming for now that we only want round robins for now:
 		$combinations = $this->round_robin($teamIDs);
-		echo "The following teams combinations are being considered: "."\n";
+		//echo "The following teams combinations are being considered: "."\n";
 		//var_dump($combinations);
 		// For every single combination of a game we want.
 		foreach($combinations as $combination)
@@ -203,14 +203,14 @@ class Scheduling_model extends MY_Model {
 			$weightedDates = $this->fitness_generator($matchUsageDates);
 			foreach($weightedDates as $date)
 			{
-				echo "Attempting to add Event at date ".$date." for teams ".$combination[0]." and ".$combination[1]."\n";
+				//echo "Attempting to add Event at date ".$date." for teams ".$combination[0]." and ".$combination[1]."\n";
 				// Has either team A or team B already played on this day the maximum number of times?
 				if($matchMaximumPlays <= $matchUsage[$date]['teams'][$teamA]['count']){
-					echo "failed ".$dateTime." because team has already played max number of times"."\n";
+					//echo "failed ".$dateTime." because team has already played max number of times"."\n";
 					continue;
 				}
 				if($matchMaximumPlays <= $matchUsage[$date]['teams'][$teamB]['count']){
-					echo "failed ".$dateTime." because team has already played max number of times"."\n";
+					//echo "failed ".$dateTime." because team has already played max number of times"."\n";
 					continue;
 				}
 
@@ -222,7 +222,7 @@ class Scheduling_model extends MY_Model {
 				$weightedDateTimes = $this->fitness_generator($matchUsageDateTimes);
 				foreach($weightedDateTimes as $dateTimeWeight=>$dateTime)
 				{
-					echo "Attempting to add Event at datetime ".$dateTime."\n";
+					//echo "Attempting to add Event at datetime ".$dateTime."\n";
 					// Is this match already conflicting with another match where the 
 					// same team is performing (It could be the case that a team can play
 					// more than once a day if we ignored the rules above)
@@ -233,20 +233,20 @@ class Scheduling_model extends MY_Model {
 							{
 								// Are any of the teams that we care about actually playing during that time?
 								if(!isset($matchUsage[$date])) {
-									echo "failed because matchUsage does not contain date: $date"."\n"; die();
+									return "failed because matchUsage does not contain date: $date"."\n";
 								}
 								if(!isset($matchUsage[$date][$dateTimeSelected])) {
-									echo "failed because matchUsage[$date] does not contain dateTimeSelected: $dateTimeSelected"."\n"; die();
+									return "failed because matchUsage[$date] does not contain dateTimeSelected: $dateTimeSelected"."\n";
 								}
 								if(!isset($matchUsage[$date][$dateTimeSelected]['teams'][$teamA])) {
-									echo "failed because $matchUsage[$date][$dateTimeSelected]['teams'] does not contain teamA: $teamA"."\n"; die();
+									return "failed because $matchUsage[$date][$dateTimeSelected]['teams'] does not contain teamA: $teamA"."\n"; 
 								}
 								if(!isset($matchUsage[$date][$dateTimeSelected]['teams'][$teamB])) {
-									echo "failed because $matchUsage[$date][$dateTimeSelected]['teams'] does not contain teamB: $teamB"."\n"; die();
+									return "failed because $matchUsage[$date][$dateTimeSelected]['teams'] does not contain teamB: $teamB"."\n"; 
 								}
 								
 								if($matchUsage[$date][$dateTimeSelected]['teams'][$teamA]==0 && $matchUsage[$date][$dateTimeSelected]['teams'][$teamB]==0){
-									echo "failed ".$dateTime." because team is already playing at that time"."\n";
+									//echo "failed ".$dateTime." because team is already playing at that time"."\n";
 									continue;
 								}
 
@@ -258,7 +258,7 @@ class Scheduling_model extends MY_Model {
 							}
 					// If there is a conflict, well we better check another time slot.
 					if($isOverlapping){
-						echo "failed ".$dateTime." because of overlapping"."\n";
+						//echo "failed ".$dateTime." because of overlapping"."\n";
 						continue;
 					}
 					
@@ -323,7 +323,7 @@ class Scheduling_model extends MY_Model {
 							if(count($matchDateTimes[$date][$dateTimeAlt]['umpireIDs'])==0){
 								unset($matchUsage[$date][$dateTimeAlt]);
 								unset($matchDateTimes[$date][$dateTimeAlt]);
-								echo "removed ".$dateTime."\n";
+								//echo "removed ".$dateTime."\n";
 							}
 						}
 					}
@@ -336,7 +336,7 @@ class Scheduling_model extends MY_Model {
 						{
 							unset($matchUsage[$date][$dateTime]);
 							unset($matchDateTimes[$date][$dateTime]);
-							echo "removed ".$dateTime."\n";
+							//echo "removed ".$dateTime."\n";
 						}
 						foreach($matchDateTimes[$date] as $dateTimeAlt=>$dateTimeDataAlt)
 						{
@@ -349,7 +349,7 @@ class Scheduling_model extends MY_Model {
 								if(count($matchDateTimes[$date][$dateTimeAlt]['venueIDs'])==0){
 									unset($matchUsage[$date][$dateTimeAlt]);
 									unset($matchDateTimes[$date][$dateTimeAlt]);
-									echo "removed ".$dateTime."\n";
+									//echo "removed ".$dateTime."\n";
 								}
 							}
 						}
@@ -368,7 +368,7 @@ class Scheduling_model extends MY_Model {
 					}
 
 					// Stop the loop! We have just added our match!
-					echo "Event was added at ".$dateTime." at the venue ".$matchDateTimesSelected[$date][$dateTime]['venueID']." with the teams ".$matchDateTimesSelected[$date][$dateTime]['teamIDs'][0]." and ".$matchDateTimesSelected[$date][$dateTime]['teamIDs'][1];
+					//echo "Event was added at ".$dateTime." at the venue ".$matchDateTimesSelected[$date][$dateTime]['venueID']." with the teams ".$matchDateTimesSelected[$date][$dateTime]['teamIDs'][0]." and ".$matchDateTimesSelected[$date][$dateTime]['teamIDs'][1];
 					$added = true;
 					break;
 				}
@@ -380,8 +380,7 @@ class Scheduling_model extends MY_Model {
 			// This will only occur if the entire thing above did not work.
 			// hopefully that doesn't happen a lot when we do testing. :)
 			if(!$added){
-				echo "Not enough time slots to support this tournament style";
-				return FALSE;
+				return "Not enough time slots to support this tournament style";
 			}
 		}
 
@@ -489,11 +488,11 @@ class Scheduling_model extends MY_Model {
 			$weightedDates = $this->fitness_generator($matchUsageDates);
 			foreach($weightedDates as $date)
 			{
-				echo "Attempting to add Event at date ".$date." for match ".$combination[0]." and ".$combination[1]."\n";
+				//echo "Attempting to add Event at date ".$date." for match ".$combination[0]." and ".$combination[1]."\n";
 
 				// Have we already exceeded the number of matches that we can add already?
 				if($matchMaximumPlays <= $matchUsage[$date]['count']){
-					echo "failed ".$dateTime." because team has already played max number of times"."\n";
+					//echo "failed ".$dateTime." because team has already played max number of times"."\n";
 					continue;
 				}
 
@@ -505,7 +504,7 @@ class Scheduling_model extends MY_Model {
 				$weightedDateTimes = $this->fitness_generator($matchUsageDateTimes);
 				foreach($weightedDateTimes as $dateTimeWeight=>$dateTime)
 				{
-					echo "Attempting to add Event at datetime ".$dateTime."\n";
+					//echo "Attempting to add Event at datetime ".$dateTime."\n";
 
 					// Is this match already conflicting with another match where the 
 					// players are already performing?
@@ -515,7 +514,7 @@ class Scheduling_model extends MY_Model {
 						{
 							// Are any of the teams that we care about actually playing during that time?
 							if($matchUsage[$date][$dateTimeSelected]['count']==0){
-								echo "failed ".$dateTime." because the hurdlers are already playing at that time but in another venue"."\n";
+								//echo "failed ".$dateTime." because the hurdlers are already playing at that time but in another venue"."\n";
 								continue;
 							}
 
@@ -527,7 +526,7 @@ class Scheduling_model extends MY_Model {
 						}
 					// If there is a conflict, well we better check another time slot.
 					if($isOverlapping){
-						echo "failed ".$dateTime." because of overlapping"."\n";
+						//echo "failed ".$dateTime." because of overlapping"."\n";
 						continue;
 					}
 
@@ -555,7 +554,7 @@ class Scheduling_model extends MY_Model {
 						{
 							unset($matchUsage[$date][$dateTime]);
 							unset($matchDateTimes[$date][$dateTime]);
-							echo "removed ".$dateTime."\n";
+							//echo "removed ".$dateTime."\n";
 						}
 						foreach($matchDateTimes[$date] as $dateTimeAlt=>$dateTimeDataAlt)
 						{
@@ -568,7 +567,7 @@ class Scheduling_model extends MY_Model {
 								if(count($matchDateTimes[$date][$dateTimeAlt]['venueIDs'])==0){
 									unset($matchUsage[$date][$dateTimeAlt]);
 									unset($matchDateTimes[$date][$dateTimeAlt]);
-									echo "removed ".$dateTime."\n";
+									//echo "removed ".$dateTime."\n";
 								}
 							}
 						}
@@ -579,7 +578,7 @@ class Scheduling_model extends MY_Model {
 						$matchUsage[$date][$dateTime]['count'] += 1;
 
 					// Stop the loop! We have just added our match!
-					echo "Event was added at ".$dateTime." at the venue ".$matchDateTimesSelected[$date][$dateTime]['venueID']."\n";
+					//echo "Event was added at ".$dateTime." at the venue ".$matchDateTimesSelected[$date][$dateTime]['venueID']."\n";
 					$added = true;
 					break;
 				}
@@ -591,7 +590,7 @@ class Scheduling_model extends MY_Model {
 			// This will only occur if the entire thing above did not work.
 			// hopefully that doesn't happen a lot when we do testing. :)
 			if(!$added){
-				echo "Not enough time slots to support this tournament style";
+				//echo "Not enough time slots to support this tournament style";
 				return FALSE;
 			}
 		}
