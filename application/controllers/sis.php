@@ -274,7 +274,7 @@ class Sis extends MY_Controller {
 			if($tournamentActorID === FALSE) 
 				$this->flash_redirect('message_error','/sis/tournaments','Creating new tournamentActor failed');
 			
-			var_dump($objectData); die();
+			//var_dump($objectData); die();
 			
 			// Now we have all the input data categorised by object, submit it to the correct places in the DB using the relevant model
 			foreach($objectData as $object => $data) {
