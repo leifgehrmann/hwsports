@@ -1,5 +1,5 @@
 
-<? /*<div class="widget full welcome-message">
+<div class="widget full welcome-message">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
 		<div class="widget-title-centre">Welcome to Riccarton Tournaments</div>
@@ -42,7 +42,7 @@
 		<p><a href="/tms/matches/" class="button right blue">View All Matches</a></p>
 	</div>
 </div>
-<div class="widget half matches">
+<? /*<div class="widget half matches">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
 		<div class="widget-title-centre">Upcoming Matches</div>
