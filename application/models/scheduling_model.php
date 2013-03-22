@@ -602,8 +602,7 @@ class Scheduling_model extends MY_Model {
 			// This will only occur if the entire thing above did not work.
 			// hopefully that doesn't happen a lot when we do testing. :)
 			if(!$added){
-				//echo "Not enough time slots to support this tournament style";
-				return FALSE;
+				return "Not enough time slots to support this tournament style";
 			}
 		}
 
