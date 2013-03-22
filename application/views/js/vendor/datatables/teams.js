@@ -6,7 +6,8 @@
 			"domTable": "#teams",
 			"fields": [ {
 					"label": "Team ID",
-					"name": "teamID"
+					"name": "teamID",
+					"type": "hidden"
 				}, {
 					"label": "Name",
 					"name": "name"
@@ -57,7 +58,6 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 				{ "mData": "detailsLink" }
 			],
 			"aoColumnDefs": [
-				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] }
             ],
 			"oTableTools": {
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
