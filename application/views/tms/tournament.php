@@ -143,7 +143,7 @@
 	</table>
 	<script src="/js/vendor/datatables/tournamentMatches.js"></script>
 </div>
-<? var_dump($roles); foreach($roles as $roleID=>$roleName) { ?>
+<? foreach($roles as $roleID=>$roleName) { ?>
 	<? if($roleName=="team") { ?>
 		<h2>Teams</h2>
 		<p>Displayed below are a list of teams for the tournament. </p>
@@ -182,7 +182,7 @@
 			<script src="/js/vendor/datatables/tournamentUmpires.js"></script>
 		</div>
 	<? } else if($roleName=="athlete") { ?>
-		<h2>Umpires</h2>
+		<h2>Athletes</h2>
 		<p>Displayed below are a list of athletes for the tournament. </p>
 		<div class="tournamentAthletes">
 			<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentAthletes" width="100%">
