@@ -258,7 +258,6 @@ class Sis extends MY_Controller {
 				// Put value into sub array based on object name so we can add data in bulk later
 				$objectData[$object][$key] = $value;
 			}
-			//var_dump($objectData); die();
 			
 			// Add this user as an actor with the correct role in this specific tournament,
 			// and add the tournament-specific data for this user to the tournamentActorData
@@ -274,7 +273,9 @@ class Sis extends MY_Controller {
 			$tournamentActorID = $this->objects_models['tournament_actors']->insert(array(), $tournamentActorRelations);
 			if($tournamentActorID === FALSE) 
 				$this->flash_redirect('message_error','/sis/tournaments','Creating new tournamentActor failed');
-			/*
+			
+			var_dump($objectData); die();
+			
 			// Now we have all the input data categorised by object, submit it to the correct places in the DB using the relevant model
 			foreach($objectData as $object => $data) {
 				switch($object) {
@@ -293,7 +294,7 @@ class Sis extends MY_Controller {
 					break;
 				}
 			}
-			*/
+			
 			$this->flash_redirect('message_success','/sis/tournaments',"Signup successful! Once the registration period is over, you will receive confirmation and further instructions.");
 		} else {
 			$this->view('signup','signup','Signup',$this->data);
