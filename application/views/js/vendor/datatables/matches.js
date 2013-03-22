@@ -73,6 +73,7 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 		$('#matches').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/data/matches",
+			"aaSorting": [[ 4, "desc" ]],
 			"aoColumns": [
 				{ "mData": "sportIcon" },
 				{ "mData": "matchID" },

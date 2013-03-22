@@ -67,6 +67,7 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 		$('#tournaments').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/data/tournaments",
+			"aaSorting": [[ 3, "desc" ]],
 			"aoColumns": [
 				{ "mData": "sportIcon" },
 				{ "mData": "tournamentID" },
