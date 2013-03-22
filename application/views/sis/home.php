@@ -95,14 +95,14 @@
 			">
 				<div class="icon left margin-right"></div>
 				<p>
-					<a href="/tms/tournament/<?=$tournament['tournamentID']?>"><?=$tournament['name']?></a><br/>
+					<a href="/sis/tournament/<?=$tournament['tournamentID']?>"><?=$tournament['name']?></a><br/>
 					<span style="display: inline-block;padding-left: 40px;">Starts: <?=$start?></span><br/>
 					<span style="display: inline-block;padding-left: 40px;">Ends: <?=$end?></span>
 				</p>
 			</div>
 			<? } ?>
 		<? } ?>
-		<p><a href="/tms/tournaments/" class="button right blue">View All Tournaments</a></p>
+		<p><a href="/sis/tournaments/" class="button right blue">View All Tournaments</a></p>
 	</div>
 </div>
 <div class="widget half tournaments">
@@ -126,14 +126,14 @@
 			">
 				<div class="icon left margin-right"></div>
 				<p>
-					<a href="/tms/tournament/<?=$tournament['tournamentID']?>"><?=$tournament['name']?></a><br/>
+					<a href="/sis/tournament/<?=$tournament['tournamentID']?>"><?=$tournament['name']?></a><br/>
 					<span style="display: inline-block;padding-left: 40px;">Starts: <?=$start?></span><br/>
 					<span style="display: inline-block;padding-left: 40px;">Ends: <?=$end?></span>
 				</p>
 			</div>
 			<? } ?>
 		<? } ?>
-		<p><a href="/tms/tournaments/" class="button right blue">View All Tournaments</a></p>
+		<p><a href="/sis/tournaments/" class="button right blue">View All Tournaments</a></p>
 	</div>
 </div>
 </div>
