@@ -4,7 +4,7 @@
 	<tr>
 		<td>Name</td>
 		<td><?=form_input($name)?></td>
-		<td>Sport Cateogyr</td>
+		<td>Sport Category:</td>
 		<td><?=$sport['sportCategoryData']['name']?></td>
 	</tr>
 	<tr>
@@ -13,7 +13,7 @@
 	</tr>
 	<tr>
 		<td colspan="3"></td>
-		<td><?=form_submit(array('name'=>"submit", 'value'=>"Update Venue", 'class'=>"right green"));?></td>
+		<td><?=form_submit(array('name'=>"submit", 'value'=>"Update Sport", 'class'=>"right green"));?></td>
 	</tr>
 </table>
 <?=form_close();?>
