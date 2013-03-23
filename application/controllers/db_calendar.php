@@ -89,10 +89,6 @@ class Db_Calendar extends MY_Controller {
 			}
 		}
 
-		echo "<pre>";var_dump($venueIDs);
-		var_dump($sportIDs);
-		var_dump($tournamentIDs);
-
 		// We select all the matches with the appropriate sport.
 		if($matchIDs=="all"){ // If we want all matches
 			$matchesAll = array();
@@ -107,45 +103,53 @@ class Db_Calendar extends MY_Controller {
 			} else {
 				$matchesAll = $this->matches_model->get_all();
 			}
-			foreach ($matchesAll as $match ){
-				if($sportIDs=="all") // If we want only a particular sport
-					if($venueIDs=="all") // If we want only a particular venue
+			foreach ($matchesAll as $match ) {
+				if($sportIDs=="all") { // If we want only a particular sport
+					if($venueIDs=="all") { // If we want only a particular venue
 						$matches[$match['matchID']] = $match;
-					else
-						if(in_array($match['venueID'],$venueIDs))
+					} else {
+						if(in_array($match['venueID'],$venueIDs)) {
 							$matches[$match['matchID']] = $match;
-				else
-					if(in_array($match['sportID'],$sportIDs))
-						if($venueIDs=="all") // If we want only a particular venue
+						}
+					}
+				} else {
+					if(in_array($match['sportID'],$sportIDs)) {
+						if($venueIDs=="all") { // If we want only a particular venue
 							$matches[$match['matchID']] = $match;
-						else
-							if(in_array($match['venueID'],$venueIDs))
+						} else {
+							if(in_array($match['venueID'],$venueIDs)) {
 								$matches[$match['matchID']] = $match;
+							}
+						}
+					}
+				}
 			}
 		} else if($matchIDs=="none") {
 
 		} else { // If we only want particular matches
-			foreach ($matchIDs as $matchID ){
+			foreach ($matchIDs as $matchID ) {
 				$match = $this->matches_model->get($matchID);
-				if($sportIDs=="all") // If we want only a particular sport
-					if($venueIDs=="all") // If we want only a particular venue
+				if($sportIDs=="all") { // If we want only a particular sport
+					if($venueIDs=="all") { // If we want only a particular venue
 						$matches[$match['matchID']] = $match;
-					else
-						if(in_array($match['venueID'],$venueIDs))
+					} else {
+						if(in_array($match['venueID'],$venueIDs)) {
 							$matches[$match['matchID']] = $match;
-				else
-					if(in_array($match['sportID'],$sportIDs))
-						if($venueIDs=="all") // If we want only a particular venue
+						}
+					}
+				} else {
+					if(in_array($match['sportID'],$sportIDs)) {
+						if($venueIDs=="all") { // If we want only a particular venue
 							$matches[$match['matchID']] = $match;
-						else
-							if(in_array($match['venueID'],$venueIDs))
+						} else {
+							if(in_array($match['venueID'],$venueIDs)){
 								$matches[$match['matchID']] = $match;
+							}
+						}
+					}
+				}
 			}
 		}
-		echo "<pre>";var_dump($matches);
-
-
-
 
 		// Inserting all the matches
 		foreach($matches as $match) {
