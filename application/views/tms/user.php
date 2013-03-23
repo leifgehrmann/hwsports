@@ -24,7 +24,7 @@
 	</tr>
 	<tr>
 		<td colspan="3"></td>
-		<td><?=form_submit(array('name'=>"userDetails", 'value'=>"Update User", 'class'=>"right green"));?></td>
+		<td><?=form_submit(array('name'=>"submit", 'value'=>"Update User", 'class'=>"right green"));?></td>
 	</tr>
 </table>
 <?=form_close();?>
@@ -48,7 +48,7 @@
 	</tr>
 	<tr>
 		<td colspan="3"></td>
-		<td><?=form_submit(array('name'=>"emergencyDetails", 'value'=>"Update Emergency Contact", 'class'=>"right green"));?></td>
+		<td><?=form_submit(array('name'=>"submit", 'value'=>"Update Emergency Contact", 'class'=>"right green"));?></td>
 	</tr>
 </table>
 <?=form_close();?>
