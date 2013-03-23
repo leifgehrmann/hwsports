@@ -967,17 +967,19 @@ class Tms extends MY_Controller {
 			redirect("/tms/user/$userID", 'refresh');
 		}
 
-		foreach($teamDetailsForm as $input){
-			if(array_key_exists('type',$input)){
-				$this->data[$input['name']] = array(
-					'name'  => $input['name'],
-					'id'    => $input['name'],
-					'type'  => $input['type'],
-					'value' => $this->form_validation->set_value($input['type'], (isset($team[$input['name']]) ? $team[$input['name']] : ''))
-				);
-				if($input['name']=="description"){
-					$this->data[$input['name']]['style'] = 'width:100%;';
-					$this->data[$input['name']]['rows'] = '5';
+		foreach(array($userDetailsForm, $emergencyDetailsForm) as $form){
+			foreach($form as $input){
+				if(array_key_exists('type',$input)){
+					$this->data[$input['name']] = array(
+						'name'  => $input['name'],
+						'id'    => $input['name'],
+						'type'  => $input['type'],
+						'value' => $this->form_validation->set_value($input['type'], (isset($team[$input['name']]) ? $team[$input['name']] : ''))
+					);
+					if($input['name']=="description"){
+						$this->data[$input['name']]['style'] = 'width:100%;';
+						$this->data[$input['name']]['rows'] = '5';
+					}
 				}
 			}
 		}
