@@ -271,6 +271,28 @@ class Db_Calendar extends MY_Controller {
 	 *
 	 */
 
+	// This is for the calendar page
+	public function getAllEventsTMSselect(
+		$showTournamentMatchesOnly='all', 
+		$sportID='all', 
+		$tournamentID='all', 
+		$venueID='all'
+	) {
+		$query = array();
+		// We specify where the urls go
+		if($showTournamentMatchesOnly=='tournaments')
+			$query['showTournamentMatchesOnly']	= true;
+		else
+			$query['showTournamentMatchesOnly']	= false;
+		$query['sportID']			= array($sportID);
+		$query['tournamentIDs']		= array($tournamentID);
+		$query['venueIDs']			= array($venueID);
+		$query['tournamentUrl']		= "/tms/tournament/";
+		$query['matchUrl']			= "/tms/match/";
+		$query['registrationUrl']	= "/tms/tournament/";
+		$this->getEvents($query);
+	}
+
 	// This is for /tms/calendar/
 	// Returns all the matches, tournaments and registration periods
 	public function getAllEventsTMS() {

@@ -122,8 +122,8 @@ class Tms extends MY_Controller {
 		usort($upcomingMatches, "cmpMatches");
 		usort($latestTournaments, "cmpTournaments");
 		usort($upcomingTournaments, "cmpTournaments");
-		$latestMatches 			= array_slice($latestMatches, -0, 10);
-		$upcomingMatches 		= array_slice($upcomingMatches, -0, 10);
+		$latestMatches 			= array_slice($latestMatches, -0, 5);
+		$upcomingMatches 		= array_slice($upcomingMatches, -0, 5);
 		$latestTournaments 		= array_slice($latestTournaments, -0, 5);
 		$upcomingTournaments 	= array_slice($upcomingTournaments, -0, 5);
 		$this->data['latestMatches'] 		= $latestMatches;
@@ -614,9 +614,17 @@ class Tms extends MY_Controller {
 	}
 	public function calendar()
 	{
+		// If stuff has been submitted via the form...
+		$viewSelect 		= $this->input->post('viewSelect');
+		$sportSelect 		= $this->input->post('sportSelect');
+		$tournamentSelect 	= $this->input->post('tournamentSelect');
+		$venueSelect 		= $this->input->post('venueSelect');
 
-
-
+		// fall back values in case form was not loaded.
+		if(!$viewSelect) 		$viewSelect 		= "all";
+		if(!$sportSelect) 		$sportSelect 		= "all";
+		if(!$tournamentSelect) 	$tournamentSelect 	= "all";
+		if(!$venueSelect) 		$venueSelect 		= "all";
 			
 		$viewOptions['all'] = "All Events";
 		$sportOptions['all'] = "All";

@@ -39,7 +39,7 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			events: '/db_calendar/getAllEventsTMS/',
+			events: '/db_calendar/getAllEventsTMSselect/<?=$viewSelection?>/<?=$sportSelection?>/<?=$tournamentSelection?>/<?=$venueSelection?>',
 			editable: true,
 			eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
 				//console.log(match);
