@@ -1,4 +1,4 @@
-<? $this->datetime_to_public_date =& get_instance(); ?>
+<? $this->method_call =& get_instance(); ?>
 <h1>Dashboard</h1>
 <div class="widget half matches">
 	<div class="widget-title">
@@ -11,8 +11,8 @@
 			<p>There are no recent or current matches.</p>
 		<? } else {
 			foreach($latestMatches as $match){ 
-				$date = $this->datetime_to_public_date($match['startTime']);
-				$time = $this->datetime_to_public_time($match['startTime']);
+				$date = $this->method_call->datetime_to_public_date($match['startTime']);
+				$time = $this->method_call->datetime_to_public_time($match['startTime']);
 			?>
 			<div class="match 
 				matchID-<?=$match['matchID']?> 
@@ -42,8 +42,8 @@
 			<p>There are no upcoming matches.</p>
 		<? } else {
 			foreach($upcomingMatches as $match){ 
-				$date = $this->datetime_to_public_date($match['startTime']);
-				$time = $this->datetime_to_public_time($match['startTime']);
+				$date = $this->method_call->datetime_to_public_date($match['startTime']);
+				$time = $this->method_call->datetime_to_public_time($match['startTime']);
 			?>
 			<div class="match 
 				matchID-<?=$match['matchID']?> 
@@ -73,8 +73,8 @@
 			<p>There are no recent or currently running tournaments.</p>
 		<? } else {
 			foreach($latestTournaments as $tournament){ 
-				$start = $this->datetime_to_public_date($tournament['tournamentStart']);
-				$end = $this->datetime_to_public_date($tournament['tournamentEnd']);
+				$start = $this->method_call->datetime_to_public_date($tournament['tournamentStart']);
+				$end = $this->method_call->datetime_to_public_date($tournament['tournamentEnd']);
 			?>
 			<div class="tournament 
 				tournamentID-<?=$tournament['tournamentID']?> 
@@ -104,8 +104,8 @@
 			<p>There are no upcoming tournaments.</p>
 		<? } else {
 			foreach($upcomingTournaments as $tournament){ 
-				$start = $this->datetime_to_public_date($tournament['tournamentStart']);
-				$end = $this->datetime_to_public_date($tournament['tournamentEnd']);
+				$start = $this->method_call->datetime_to_public_date($tournament['tournamentStart']);
+				$end = $this->method_call->datetime_to_public_date($tournament['tournamentEnd']);
 			?>
 			<div class="tournament 
 				tournamentID-<?=$tournament['tournamentID']?> 
