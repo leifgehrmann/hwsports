@@ -295,6 +295,10 @@ class Tms extends MY_Controller {
 			)
 		);
 
+			// For each of the input types we will validate it.
+			foreach($tournamentDetailsForm as $input){
+				$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+			}
 
 		// Does the tournament even exist?
 		$this->data['tournamentID'] = $tournamentID;
@@ -310,14 +314,6 @@ class Tms extends MY_Controller {
 		//var_dump($this->input->post('action'));
 		if($formID=="tournamentDetailsForm"){
 			$newdata = $_POST;
-			// For each of the input types we will validate it.
-			foreach($tournamentDetailsForm as $input){
-				$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
-				if($input['type']=='date'){
-					// Change dates from public, timepicker-friendly format to database-friendly ISO format.
-					if($this->input->post($input['name'])) $newdata[$input['name']] = $this->datetime_to_standard($this->input->post($input['name']));
-				}
-			}
 			if ($this->form_validation->run() == true) {
 				if($this->tournaments_model->update($tournamentID, $newdata)) {
 					// Successful update, show success message
