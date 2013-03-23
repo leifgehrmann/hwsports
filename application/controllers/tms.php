@@ -974,7 +974,7 @@ class Tms extends MY_Controller {
 						'name'  => $input['name'],
 						'id'    => $input['name'],
 						'type'  => $input['type'],
-						'value' => $this->form_validation->set_value($input['type'], (isset($team[$input['name']]) ? $team[$input['name']] : ''))
+						'value' => $this->form_validation->set_value($input['type'], (isset($user[$input['name']]) ? $user[$input['name']] : ''))
 					);
 					if($input['name']=="description"){
 						$this->data[$input['name']]['style'] = 'width:100%;';
