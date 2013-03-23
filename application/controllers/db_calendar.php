@@ -86,7 +86,7 @@ class Db_Calendar extends MY_Controller {
 				$tournament = $this->tournaments_model->get($tournamentID);
 				if($sportIDs=="all") { // If we want only a particular sport
 					$tournaments[$tournament['tournamentID']] = $tournament;
-				} else {
+				} else {
 					if(in_array($tournament['sportID'],$sportIDs)) {
 						$tournaments[$tournament['tournamentID']] = $tournament;
 					}
