@@ -16,12 +16,12 @@
 <div class="widget half matches">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
-		<div class="widget-title-centre">Past Matches</div>
+		<div class="widget-title-centre">Recent Matches</div>
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
 		<? if(count($pastMatches)==0) { ?>
-			<p>There are no recent or current matches.</p>
+			<p>There are no recent matches.</p>
 		<? } else {
 			foreach($pastMatches as $match){ 
 				$date = $this->method_call->datetime_to_public_date($match['startTime']);

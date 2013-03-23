@@ -76,17 +76,8 @@ class Sis extends MY_Controller {
 				}
 			}
 		}
-		// We want to remove the tournaments that already exist in the latest tournaments
-		/*foreach($upcomingTournaments as $u=>$uTournament){
-			if($now<new DateTime($uTournament['tournamentStart']))
-				continue;
-			foreach($pastTournaments as $i=>$lTournament){
-				if($uTournament['tournamentID']==$lTournament['tournamentID']){
-					unset($upcomingTournaments[$u]);
-					break;
-				}
-			}
-		}*/
+
+		// We want to select the tournaments that are in a certain time range.
 		$upcomingTournaments = array();
 		$pastTournaments = array();
 		foreach($allTournaments as $tournament) {

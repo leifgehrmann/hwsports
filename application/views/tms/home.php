@@ -3,14 +3,14 @@
 <div class="widget half matches">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
-		<div class="widget-title-centre">Latest Matches</div>
+		<div class="widget-title-centre">Recent Matches</div>
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<? if(count($latestMatches)==0) { ?>
-			<p>There are no recent or current matches.</p>
+		<? if(count($pastMatches)==0) { ?>
+			<p>There are no recent matches.</p>
 		<? } else {
-			foreach($latestMatches as $match){ 
+			foreach($pastMatches as $match){ 
 				$date = $this->method_call->datetime_to_public_date($match['startTime']);
 				$time = $this->method_call->datetime_to_public_time($match['startTime']);
 			?>
@@ -69,10 +69,10 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<? if(count($latestTournaments)==0) { ?>
-			<p>There are no recent or currently running tournaments.</p>
+		<? if(count($pastTournaments)==0) { ?>
+			<p>There are no currently running tournaments.</p>
 		<? } else {
-			foreach($latestTournaments as $tournament){ 
+			foreach($pastTournaments as $tournament){ 
 				$start = $this->method_call->datetime_to_public_date($tournament['tournamentStart']);
 				$end = $this->method_call->datetime_to_public_date($tournament['tournamentEnd']);
 			?>
