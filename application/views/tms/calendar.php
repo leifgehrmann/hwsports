@@ -6,27 +6,27 @@
 	<li>Tournament matches are coloured as <span style="color:rgb(123, 209, 72);font-weight:bold;">green</span>.</li>
 	<li>Standard bookings are coloured as <span style="color:rgb(123, 209, 72);font-weight:bold;">brown</span>.</li>
 </ul>
-<?php echo form_open("tms/calendar", array('id' => 'filterForm'));?>
+<?= form_open("tms/calendar", array('id' => 'filterForm'));?>
 <h2>Filter Category</h2>
 <table style="width:100%;">
 	<tr>
 		<td>View</td>
-		<td><?php echo form_dropdown('viewSelection', $viewOptions, $viewSelection ); ?></td>
+		<td><?= form_dropdown('viewSelection', $viewOptions, $viewSelection ); ?></td>
 		<td>Sport</td>
-		<td><?php echo form_dropdown('sportSelection', $sportOptions, $sportSelection ); ?></td>
+		<td><?= form_dropdown('sportSelection', $sportOptions, $sportSelection ); ?></td>
 	</tr>
 	<tr>
 		<td>Tournament</td>
-		<td><?php echo form_dropdown('tournamentSelection', $tournamentOptions, $tournamentSelection ); ?></td>
+		<td><?= form_dropdown('tournamentSelection', $tournamentOptions, $tournamentSelection ); ?></td>
 		<td>Venue</td>
-		<td><?php echo form_dropdown('venueSelection', $venueOptions, $venueSelection ); ?></td>
+		<td><?= form_dropdown('venueSelection', $venueOptions, $venueSelection ); ?></td>
 	</tr>
 	<tr>
 		<td colspan="3"></td>
-		<td><?php echo form_submit('submit', 'Submit Changes', array('class' => 'green')); ?></td>
+		<td><?= form_submit('submit', 'Submit Changes', array('class' => 'green')); ?></td>
 	</tr>
 </table>
-<?php echo form_close();?>
+<?= form_close();?>
 <div id='calendar'></div>
 <script type='text/javascript' src='/js/vendor/fullcalendar/_loader.js'></script>
 <script type='text/javascript'>
