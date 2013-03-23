@@ -2,7 +2,6 @@
 
 <a href="/tms/fixGroups/<?=$group['groupID']?>">Fix permissions</a> (Add ungrouped users to this group)<br />
 
-<h2>Users in the Group</h2>
 <div id="main">
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="groupUsers" width="100%">
 		<thead>

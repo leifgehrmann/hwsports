@@ -878,7 +878,111 @@ class Tms extends MY_Controller {
 	}
 	public function user($userID)
 	{
+		$userDetailsForm = array(
+			array(
+				'name'=>'firstName',
+				'label'=>'First Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'lastName',
+				'label'=>'Last Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'email',
+				'label'=>'Email',
+				'restrict'=>'required|valid_email',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'phone',
+				'label'=>'Phone',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'address',
+				'label'=>'Address',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			)
+		);
+		$emergencyDetailsForm = array(
+			array(
+				'name'=>'emergencyName',
+				'label'=>'Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'emergencyEmail',
+				'label'=>'Email',
+				'restrict'=>'required|valid_email',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'emergencyPhone',
+				'label'=>'Phone',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'emergencyAddress',
+				'label'=>'Address',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			)
+		);
+		// Does the match even exist?
+		$this->data['userID'] = $userID;
+		$this->data['user'] = $team = $this->users_model->get($userID);
+		if($user===FALSE) {
+			$this->session->set_flashdata('message_error',  "User ID $userID does not exist.");
+			redirect("/tms/users", 'refresh');
+		}
 
+		// We validate the data from the form
+		$newdata = $_POST;
+		// For each of the input types we will validate it.
+		$submitValue = $this->input->post('submit'));
+		if($submitValue == 'Update User'){
+			foreach($userDetailsForm as $input){
+				$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+			}
+		} else if ($submitValue == 'Update Emergency Contact'){
+			foreach($emergencyDetailsForm as $input){
+				$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+			}
+		}
+		if ($submitValue && $this->form_validation->run() == true) {
+			if($this->users_model->update($userID, $newdata)) {
+				// Successful update, show success message
+				$this->session->set_flashdata('message_success',  'Successfully updated user.');
+			} else {
+				$this->session->set_flashdata('message_error',  'Failed to update user. Please contact Infusion Systems.');
+			}
+			redirect("/tms/user/$userID", 'refresh');
+		}
+
+		foreach($teamDetailsForm as $input){
+			if(array_key_exists('type',$input)){
+				$this->data[$input['name']] = array(
+					'name'  => $input['name'],
+					'id'    => $input['name'],
+					'type'  => $input['type'],
+					'value' => $this->form_validation->set_value($input['type'], (isset($team[$input['name']]) ? $team[$input['name']] : ''))
+				);
+				if($input['name']=="description"){
+					$this->data[$input['name']]['style'] = 'width:100%;';
+					$this->data[$input['name']]['rows'] = '5';
+				}
+			}
+		}
+		$this->data['team'] = $team;
+		$this->view('team',"team",$team['name']." | Team",$this->data);
 		$user = $this->users_model->get($userID);
 		$this->data['user'] = $user;
 		
