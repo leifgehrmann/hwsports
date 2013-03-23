@@ -142,7 +142,7 @@ class Db_Calendar extends MY_Controller {
 							$matches[$match['matchID']] = $match;
 						}
 					}
-				} else {
+				} else {
 					if(in_array($match['sportID'],$sportIDs)) {
 						if($venueIDs=="all") { // If we want only a particular venue
 							$matches[$match['matchID']] = $match;
