@@ -202,7 +202,13 @@ class Sis extends MY_Controller {
 		$this->view('ticketsinfo','ticketsinfo','Tickets',$this->data);
 	}
 	public function account()
-	{
+		if($this->ion_auth->logged_in()){
+			$this->data['user'] = $this->users_model->get($currentUser['userID']);
+			$this->data['user']['teams'] = $this->users_model->team_memberships($currentUser['userID']);
+			$this->data['user']['tournaments'] = $this->users_model->tournament_memberships($currentUser['userID']);
+		} else {
+			redirect('/','refresh');
+		}
 		//set the flash data error message if there is one
 		$this->view('account','account','Account',$this->data);
 	}
