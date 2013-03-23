@@ -586,6 +586,7 @@ div.widget.subscribe        div.widget-title-left.icon 	{ background-position: -
 div.widget.profile          div.widget-title-left.icon 	{ background-position: -40px  -380px; }
 div.widget.signup           div.widget-title-left.icon 	{ background-position: -40px  -460px; }
 div.widget.tickets          div.widget-title-left.icon 	{ background-position: -40px  -340px; }
+div.widget.teams            div.widget-title-left.icon  { background-position: -40px  -400px; }
 div.widget.participation    div.widget-title-left.icon 	{ background-position: -40px  -460px; }
 div.widget.tms              div.widget-title-left.icon 	{ background-position: -40px  -480px; }
 

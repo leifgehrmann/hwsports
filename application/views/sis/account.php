@@ -19,7 +19,7 @@
 			<a href="/auth/edit_user" class="button right normal">Edit Profile</a>
 		</div>
 	</div>
-	<div class="widget half tickets">
+	<!--<div class="widget half tickets">
 		<a href="/sis/userTickets">
 			<div class="widget-title">
 				<div class="widget-title-left icon"></div>
@@ -34,17 +34,48 @@
 			<a href="/sis/userTickets" class="button margin-right normal">View All Tickets</a>
 			<a href="/sis/tickets" class="button green">Buy Tickets</a>
 		</div>
+	</div>-->
+	<div class="widget half teams">
+		<div class="widget-title">
+			<div class="widget-title-left icon"></div>
+			<div class="widget-title-centre">Team Membership</div>
+			<div class="widget-title-right icon"></div>
+		</div>
+		<div class="widget-body">
+			<? if(count($user['teams'])==0) { ?>
+			<p>You aren't a member in any of the teams.</p>
+			<? } else { ?>
+			<? foreach($user['teams'] as $team) { ?>
+			<div class="team teamID-<?=$team['teamID']?>">
+			<p>
+				<a href="/sis/team/<?=$team['teamID']?>"><?=$team['name']?></a>
+			</p>
+			</div>
+			<? } ?>
+			<? } ?>
+		</div>
 	</div>
 	<div class="widget half participation">
-		<a href="/sis/enrolment">
+		<a href="/sis/tournaments">
 			<div class="widget-title">
 				<div class="widget-title-left icon"></div>
-				<div class="widget-title-centre">Participation</div>
+				<div class="widget-title-centre">Tournament Participation</div>
 				<div class="widget-title-right icon"></div>
 			</div>
 		</a>
 		<div class="widget-body">
-			<p>You aren't signed up in any tournaments.</p>
+			<? if(count($user['tournaments'])==0) { ?>
+			<p>You are not signed up in any of the tournaments.</p>
+			<? } else { ?>
+			<? foreach($user['tournaments'] as $tournament) { ?>
+			<div class="tournament tournamentID-<?=$tournament['tournamentID']?> sportID-<?=$tournament['sportID']?> sportCategoryID-<?=$tournament['sportData']['sportCategoryID']?>">
+			<p>
+				<div class="icon"></div>
+				<a href="/sis/tournament/<?=$tournament['tournamentID']?>"><?=$tournament['name']?></a>
+			</p>
+			</div>
+			<? } ?>
+			<? } ?>
 			<a href="/sis/tournaments" class="button right normal">Sign up for Tournaments</a>
 		</div>
 	</div>
