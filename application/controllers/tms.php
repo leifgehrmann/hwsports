@@ -938,7 +938,7 @@ class Tms extends MY_Controller {
 		);
 		// Does the match even exist?
 		$this->data['userID'] = $userID;
-		$this->data['user'] = $team = $this->users_model->get($userID);
+		$this->data['user'] = $user = $this->users_model->get($userID);
 		if($user===FALSE) {
 			$this->session->set_flashdata('message_error',  "User ID $userID does not exist.");
 			redirect("/tms/users", 'refresh');
