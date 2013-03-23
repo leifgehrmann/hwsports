@@ -106,8 +106,8 @@ class Sis extends MY_Controller {
 		usort($upcomingMatches, "cmpMatches");
 		usort($latestTournaments, "cmpTournaments");
 		usort($upcomingTournaments, "cmpTournaments");
-		$latestMatches 			= array_slice($latestMatches, -0, 10);
-		$upcomingMatches 		= array_slice($upcomingMatches, -0, 10);
+		$latestMatches 			= array_slice($latestMatches, -0, 5);
+		$upcomingMatches 		= array_slice($upcomingMatches, -0, 5);
 		$latestTournaments 		= array_slice($latestTournaments, -0, 5);
 		$upcomingTournaments 	= array_slice($upcomingTournaments, -0, 5);
 		$this->data['latestMatches'] 		= $latestMatches;
