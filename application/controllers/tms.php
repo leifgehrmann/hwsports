@@ -894,8 +894,64 @@ class Tms extends MY_Controller {
 	}
 	public function team($teamID)
 	{
+		$teamDetailsForm = array(
+			array(
+				'name'=>'name',
+				'label'=>'Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'associationNumber',
+				'label'=>'Association Number',
+				'restrict'=>'xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'description',
+				'label'=>'Description',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			)
+		);
+		// Does the match even exist?
+		$this->data['teamID'] = $teamID;
+		$this->data['team'] = $team = $this->teams_model->get($teamID);
+		if($team===FALSE) {
+			$this->session->set_flashdata('message_error',  "Team ID $teamID does not exist.");
+			redirect("/tms/teams", 'refresh');
+		}
 
-		$team = $this->teams_model->get($teamID);
+		// We validate the data from the form
+		$newdata = $_POST;
+		// For each of the input types we will validate it.
+		foreach($teamDetailsForm as $input){
+			$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+		}
+		if ($this->form_validation->run() == true) {
+			if($this->teams_model->update($teamID, $newdata)) {
+				// Successful update, show success message
+				$this->session->set_flashdata('message_success',  'Successfully updated team.');
+			} else {
+				$this->session->set_flashdata('message_error',  'Failed to update team. Please contact Infusion Systems.');
+			}
+			redirect("/tms/team/$teamID", 'refresh');
+		}
+
+		foreach($teamDetailsForm as $input){
+			if(array_key_exists('type',$input)){
+				$this->data[$input['name']] = array(
+					'name'  => $input['name'],
+					'id'    => $input['name'],
+					'type'  => $input['type'],
+					'value' => $this->form_validation->set_value($input['type'], (isset($team[$input['name']]) ? $team[$input['name']] : ''))
+				);
+				if($input['name']=="description"){
+					$this->data[$input['name']]['style'] = 'width:100%;';
+					$this->data[$input['name']]['rows'] = '5';
+				}
+			}
+		}
 		$this->data['team'] = $team;
 		$this->view('team',"team",$team['name']." | Team",$this->data);
 	}
