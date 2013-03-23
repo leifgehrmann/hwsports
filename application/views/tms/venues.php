@@ -1,4 +1,4 @@
-<h1>Venue List</h1>
+<h1>Venues</h1>
 
 <div id='mapcontainer'></div>
 <div id="venuemap"></div>
