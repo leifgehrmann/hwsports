@@ -74,7 +74,7 @@ class Sis extends MY_Controller {
 
 		// We want to remove the matches that already exist in the latest matches
 		foreach($upcomingMatches as $u=>$uMatch){
-			if($today<new DateTime($uMatch['startTime']))
+			if($now<new DateTime($uMatch['startTime']))
 				continue;
 			foreach($pastMatches as $i=>$lMatch){
 				if($uMatch['matchID']==$lMatch['matchID']){
@@ -85,7 +85,7 @@ class Sis extends MY_Controller {
 		}
 		// We want to remove the tournaments that already exist in the latest tournaments
 		foreach($upcomingTournaments as $u=>$uTournament){
-			if($today<new DateTime($uTournament['tournamentStart']))
+			if($now<new DateTime($uTournament['tournamentStart']))
 				continue;
 			foreach($pastTournaments as $i=>$lTournament){
 				if($uTournament['tournamentID']==$lTournament['tournamentID']){
