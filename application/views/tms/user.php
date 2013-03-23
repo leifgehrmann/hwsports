@@ -62,8 +62,13 @@
 
 <? if(count($user['tournaments'])>0) { ?>
 <h2>Tournament Participation</h2>
-<? foreach($user['tournaments'] as $tournament){ ?>
-<p><a href="/tms/tournament/<?=$tournament['tournamentID']?>"><?=$tournament['name']?></a></p>
+<? foreach($user['tournaments'] as $tournament) { ?>
+<div class="tournament tournamentID-<?=$tournament['tournamentID']?> sportID-<?=$tournament['sportID']?> sportCategoryID-<?=$tournament['sportData']['sportCategoryID']?>">
+<p>
+	<div class="icon"></div>
+	<a href="/tms/tournament/<?=$tournament['tournamentID']?>"><?=$tournament['name']?></a>
+</p>
+</div>
 <? } ?>
 <? } ?>
 
