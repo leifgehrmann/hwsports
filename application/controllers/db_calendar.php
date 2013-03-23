@@ -68,24 +68,29 @@ class Db_Calendar extends MY_Controller {
 		$matches 			= array();
 
 		// We select all the tournaments with the appropriate sport.
-		if($tournamentIDs=="all"){ // If we want all tournaments
+		if($tournamentIDs=="all") { // If we want all tournaments
 			$tournamentsAll = $this->tournaments_model->get_all();
-			foreach ($tournamentsAll as $tournament )
-				if($sportIDs=="all") // If we want only a particular sport
+			foreach ($tournamentsAll as $tournament ) {
+				if($sportIDs=="all") {  // If we want only a particular sport
 					$tournaments[$tournament['tournamentID']] = $tournament;
-				else
-					if(in_array($tournament['sportID'],$sportIDs))
+				} else {
+					if(in_array($tournament['sportID'],$sportIDs)) {
 						$tournaments[$tournament['tournamentID']] = $tournament;
+					}
+				}
+			}
 		} else if($tournamentIDs=="none") {
 
 		} else { // If we want only particular tournaments
-			foreach ($tournamentIDs as $tournamentID ){
+			foreach ($tournamentIDs as $tournamentID ) {
 				$tournament = $this->tournaments_model->get($tournamentID);
-				if($sportIDs=="all") // If we want only a particular sport
+				if($sportIDs=="all") { // If we want only a particular sport
 					$tournaments[$tournament['tournamentID']] = $tournament;
-				else
-					if(in_array($tournament['sportID'],$sportIDs))
+				} else {
+					if(in_array($tournament['sportID'],$sportIDs)) {
 						$tournaments[$tournament['tournamentID']] = $tournament;
+					}
+				}
 			}
 		}
 
