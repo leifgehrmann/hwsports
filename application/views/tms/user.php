@@ -10,7 +10,7 @@
 	</tr>
 	<tr>
 		<td>Email</td>
-		<td>$user['email']</td>
+		<td><?=$user['email']?></td>
 		<td>Phone</td>
 		<td><?=form_input($firstName)?></td>
 	</tr>
@@ -38,7 +38,7 @@
 	</tr>
 	<tr>
 		<td>Email</td>
-		<td>$user['emergencyEmail']</td>
+		<td><?=form_input($emergencyEmail)?></td>
 		<td>Phone</td>
 		<td><?=form_input($emergencyPhone)?></td>
 	</tr>
