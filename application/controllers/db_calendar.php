@@ -67,12 +67,6 @@ class Db_Calendar extends MY_Controller {
 		$tournaments 		= array();
 		$matches 			= array();
 
-		var_dump($query);
-		var_dump($showTournamentMatchesOnly);
-		var_dump($venueIDs);
-		var_dump($sportIDs);
-		var_dump($tournamentIDs);
-
 		// We select all the tournaments with the appropriate sport.
 		if($tournamentIDs=="all") { // If we want all tournaments
 			$tournamentsAll = $this->tournaments_model->get_all();
@@ -304,13 +298,7 @@ class Db_Calendar extends MY_Controller {
 			$query['showTournamentMatchesOnly']	= true;
 		else if($showTournamentMatchesOnly=='all')
 			$query['showTournamentMatchesOnly']	= false;
-		var_dump($sportID);
-		var_dump($tournamentID);
-		var_dump($venueID);
-		var_dump($sportID!='all') ;
-		var_dump($tournamentID!='all') ;
-		var_dump($venueID!='all') ;
-		$query['sportID']			= ($sportID!='all') 		? array($sportID) 		: 'all';
+		$query['sportIDs']			= ($sportID!='all') 		? array($sportID) 		: 'all';
 		$query['tournamentIDs']		= ($tournamentID!='all') 	? array($tournamentID) 	: 'all';
 		$query['venueIDs']			= ($venueID!='all') 		? array($venueID) 		: 'all';
 		$query['tournamentUrl']		= "/tms/tournament/";
