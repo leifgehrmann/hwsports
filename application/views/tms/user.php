@@ -54,7 +54,7 @@
 <?=form_close();?>
 
 <h2>Team Membership</h2>
-<? if(count($user['team'])>0) { ?>
+<? if(count($user['teams'])>0) { ?>
 <? foreach($user['teams'] as $team){ ?>
 <p><a href="/tms/team/<?=$team['teamID']?>"><?=$team['name']?></a></p>
 <? } ?>
