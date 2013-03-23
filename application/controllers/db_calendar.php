@@ -109,24 +109,17 @@ class Db_Calendar extends MY_Controller {
 				$matchesAll = $this->matches_model->get_all();
 			}
 			foreach ($matchesAll as $match ) {
-				if($sportIDs=="all") { // If we want only a particular sport
-					if($venueIDs=="all") { // If we want only a particular venue
-						$matches[$match['matchID']] = $match;
-					} else {
-						if(in_array($match['venueID'],$venueIDs)) {
-							$matches[$match['matchID']] = $match;
-						}
-					}
-				} else {
-					if(in_array($match['sportID'],$sportIDs)) {
-						if($venueIDs=="all") { // If we want only a particular venue
-							$matches[$match['matchID']] = $match;
-						} else {
-							if(in_array($match['venueID'],$venueIDs)) {
-								$matches[$match['matchID']] = $match;
-							}
-						}
-					}
+				$inSport = FALSE;
+				if($sportIDs=="all") { $inSport = TRUE;
+				} else if(in_array($match['sportID'],$sportIDs)) { $inSport = TRUE; }
+				$inVenue = FALSE;
+				if($venueIDs=="all") { $inVenue = TRUE;
+				} else if(in_array($match['venueID'],$venueIDs)) { $inVenue = TRUE; }
+				$inTournament = FALSE;
+				if($tournamentIDs=="all") { $inTournament = TRUE;
+				} else if(in_array($match['tournamentID'],$tournamentIDs)) { $inVenue = TRUE; }
+				if($inSport&&$inVenue&&$inTournament) {
+					$matches[$match['matchID']] = $match;
 				}
 			}
 		} else if($matchIDs=="none") {
@@ -134,24 +127,17 @@ class Db_Calendar extends MY_Controller {
 		} else { // If we only want particular matches
 			foreach ($matchIDs as $matchID ) {
 				$match = $this->matches_model->get($matchID);
-				if($sportIDs=="all") { // If we want only a particular sport
-					if($venueIDs=="all") { // If we want only a particular venue
-						$matches[$match['matchID']] = $match;
-					} else {
-						if(in_array($match['venueID'],$venueIDs)) {
-							$matches[$match['matchID']] = $match;
-						}
-					}
-				} else {
-					if(in_array($match['sportID'],$sportIDs)) {
-						if($venueIDs=="all") { // If we want only a particular venue
-							$matches[$match['matchID']] = $match;
-						} else {
-							if(in_array($match['venueID'],$venueIDs)){
-								$matches[$match['matchID']] = $match;
-							}
-						}
-					}
+				$inSport = FALSE;
+				if($sportIDs=="all") { $inSport = TRUE;
+				} else if(in_array($match['sportID'],$sportIDs)) { $inSport = TRUE; }
+				$inVenue = FALSE;
+				if($venueIDs=="all") { $inVenue = TRUE;
+				} else if(in_array($match['venueID'],$venueIDs)) { $inVenue = TRUE; }
+				$inTournament = FALSE;
+				if($tournamentIDs=="all") { $inTournament = TRUE;
+				} else if(in_array($match['tournamentID'],$tournamentIDs)) { $inVenue = TRUE; }
+				if($inSport&&$inVenue&&$inTournament) {
+					$matches[$match['matchID']] = $match;
 				}
 			}
 		}
