@@ -292,4 +292,60 @@ class MY_Model extends CI_Model {
 		return $inputArray;
 	}
 
+	public function datetime_to_standard($inDateTime) {
+		try{
+			if(empty($inDateTime)) return $inDateTime;
+			if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_FORMAT);
+			$dateTime = new DateTime($inDateTime);
+			return $dateTime->format(DATE_TIME_FORMAT);
+		} catch (Exception $e) {
+			//$this->form_validation->set_message('datetime_check', $e->getMessage());
+			return $inDateTime;
+		}
+	}
+	public function datetime_to_unix($inDateTime) {
+		try{
+			if(empty($inDateTime)) return $inDateTime;
+			if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_UNIX_FORMAT);
+			$dateTime = new DateTime($inDateTime);
+			return $dateTime->format(DATE_TIME_UNIX_FORMAT);
+		} catch (Exception $e) {
+			//$this->form_validation->set_message('datetime_check', $e->getMessage());
+			return $inDateTime;
+		}
+	}
+	public function datetime_to_public($inDateTime) {
+		try{
+			if(empty($inDateTime)) return $inDateTime;
+			if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_DATE_TIME_FORMAT);
+			$dateTime = new DateTime($inDateTime);
+			return $dateTime->format(PUBLIC_DATE_TIME_FORMAT);
+		} catch (Exception $e) {
+			//$this->form_validation->set_message('datetime_check', $e->getMessage());
+			return $inDateTime;
+		}
+	}
+	public function datetime_to_public_date($inDateTime) {
+		try{
+			if(empty($inDateTime)) return $inDateTime;
+			if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_DATE_FORMAT);
+			$dateTime = new DateTime($inDateTime);
+			return $dateTime->format(PUBLIC_DATE_FORMAT);
+		} catch (Exception $e) {
+			//$this->form_validation->set_message('datetime_check', $e->getMessage());
+			return $inDateTime;
+		}
+	}
+	public function datetime_to_public_time($inDateTime) {
+		try{
+			if(empty($inDateTime)) return $inDateTime;
+			if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_TIME_FORMAT);
+			$dateTime = new DateTime($inDateTime);
+			return $dateTime->format(PUBLIC_TIME_FORMAT);
+		} catch (Exception $e) {
+			//$this->form_validation->set_message('datetime_check', $e->getMessage());
+			return $inDateTime;
+		}
+	}
+	
 }

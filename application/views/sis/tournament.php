@@ -31,9 +31,9 @@
 		<? foreach($matches as $match) { ?>
 		<tr class="match sportCategoryID-<?=$match['sportData']['sportCategoryID']?> sportID-<?=$match['sportID']?>">
 			<td><div class="icon"></div></td>
-			<td><?=$match['date']?></td>
-			<td><?=$match['startTime']?></td>
-			<td><?=$match['endTime']?></td>
+			<td><?=$this->method_call->datetime_to_public_date($match['startTime'])?></td>
+			<td><?=$this->method_call->datetime_to_public_time($match['startTime'])?></td>
+			<td><?=$this->method_call->datetime_to_public_time($match['endTime'])?></td>
 			<td><?=$match['name']?></td>
 			<td><?=$match['venueData']['name']?></td>
 			<td><a href="/sis/match/<?=$match['matchID']?>">View Details</a></td>
@@ -65,7 +65,7 @@ $(document).ready(function(){
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			events: '/db_calendar/getTournamentMatches/<?=$tournament['tournamentID']?>',
+			events: '/db_calendar/getTournamentEventsSIS/<?=$tournament['tournamentID']?>',
 			editable: false
 		});
 		

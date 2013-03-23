@@ -185,10 +185,8 @@ class Sis extends MY_Controller {
 	public function tournament($tournamentID)
 	{
 		$this->load->library('table');
-
-		
 		$tournament = $this->tournaments_model->get($tournamentID);
-		$tournament = $this->tournaments_model->get_all($tournamentID);
+		$this->data['matches'] = $this->matches_model->get_tournament_matches($tournamentID);
 		if($tournament==FALSE) {
 			$this->session->set_flashdata('message',  "Tournament ID $id does not exist.");
 			redirect("/sis/tournaments", 'refresh');
@@ -213,9 +211,9 @@ class Sis extends MY_Controller {
 	public function account()
 	{
 		if($this->ion_auth->logged_in()){
-			$this->data['user'] = $this->users_model->get($currentUser['userID']);
-			$this->data['user']['teams'] = $this->users_model->team_memberships($currentUser['userID']);
-			$this->data['user']['tournaments'] = $this->users_model->tournament_memberships($currentUser['userID']);
+			$this->data['user'] = $this->users_model->get($this->currentUser['userID']);
+			$this->data['user']['teams'] = $this->users_model->team_memberships($this->currentUser['userID']);
+			$this->data['user']['tournaments'] = $this->users_model->tournament_memberships($this->currentUser['userID']);
 		} else {
 			redirect('/','refresh');
 		}

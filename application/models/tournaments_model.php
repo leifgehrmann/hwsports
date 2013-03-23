@@ -55,7 +55,7 @@ class Tournaments_model extends MY_Model {
 			($today < $tournamentStartDate) && ($today < $tournamentEndDate) ) {
 			
 			// If the competitor list has been moderated, we are pre-start, not post-registration: all we are waiting for is the start date, no other staff interaction is required.
-			if( isset($tournament['competitorsModerated']) && ( $tournament['competitorsModerated'] == "true" ) ) {
+			if( isset($tournament['scheduled']) && ( $tournament['scheduled'] == "1" ) ) {
 				$tournament['status'] = "preTournament";
 			} else {
 				// postRegistration means we need staff to moderate the competitor list
