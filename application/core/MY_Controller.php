@@ -68,7 +68,7 @@ class MY_Controller extends CI_Controller {
 			$dateTime = new DateTime($inDateTime);
 			return $dateTime->format(DATE_TIME_FORMAT);
 		} catch (Exception $e) {
-			$this->form_validation->set_message('datetime_check', $e->getMessage());
+			//$this->form_validation->set_message('datetime_check', $e->getMessage());
 			return $inDateTime;
 		}
 	}
@@ -79,7 +79,7 @@ class MY_Controller extends CI_Controller {
 			$dateTime = new DateTime($inDateTime);
 			return $dateTime->format(DATE_TIME_UNIX_FORMAT);
 		} catch (Exception $e) {
-			$this->form_validation->set_message('datetime_check', $e->getMessage());
+			//$this->form_validation->set_message('datetime_check', $e->getMessage());
 			return $inDateTime;
 		}
 	}
@@ -90,7 +90,7 @@ class MY_Controller extends CI_Controller {
 			$dateTime = new DateTime($inDateTime);
 			return $dateTime->format(PUBLIC_DATE_TIME_FORMAT);
 		} catch (Exception $e) {
-			$this->form_validation->set_message('datetime_check', $e->getMessage());
+			//$this->form_validation->set_message('datetime_check', $e->getMessage());
 			return $inDateTime;
 		}
 	}
@@ -101,7 +101,7 @@ class MY_Controller extends CI_Controller {
 			$dateTime = new DateTime($inDateTime);
 			return $dateTime->format(PUBLIC_DATE_FORMAT);
 		} catch (Exception $e) {
-			$this->form_validation->set_message('datetime_check', $e->getMessage());
+			//$this->form_validation->set_message('datetime_check', $e->getMessage());
 			return $inDateTime;
 		}
 	}
@@ -112,7 +112,7 @@ class MY_Controller extends CI_Controller {
 			$dateTime = new DateTime($inDateTime);
 			return $dateTime->format(PUBLIC_TIME_FORMAT);
 		} catch (Exception $e) {
-			$this->form_validation->set_message('datetime_check', $e->getMessage());
+			//$this->form_validation->set_message('datetime_check', $e->getMessage());
 			return $inDateTime;
 		}
 	}
