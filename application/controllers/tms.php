@@ -943,6 +943,14 @@ class Tms extends MY_Controller {
 			$this->session->set_flashdata('message_error',  "User ID $userID does not exist.");
 			redirect("/tms/users", 'refresh');
 		}
+		// Get all information about this user
+		$this->data['user']['teamIDs'] = array();
+		$this->data['user']['team']    = array();
+		
+		$this->data['user']['teamIDs'] = $this->users_model->team_memberships($userID);
+		foreach($this->data['user']['teamIDs'] as $teamID) {
+			$this->data['user']['team'][] = $this->teams_model->get($teamID);
+		}
 
 		// We validate the data from the form
 		$newdata = $_POST;

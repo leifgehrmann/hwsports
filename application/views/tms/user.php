@@ -12,7 +12,7 @@
 		<td>Email</td>
 		<td><?=$user['email']?></td>
 		<td>Phone</td>
-		<td><?=form_input($firstName)?></td>
+		<td><?=form_input($phone)?></td>
 	</tr>
 	<tr>
 		<td>Address</td>
@@ -53,7 +53,19 @@
 </table>
 <?=form_close();?>
 
-<h2>Tournament User Details</h2>
+<? if(count($user['team'])>0) { ?>
+<h2>Team Participation</h2>
+<? foreach($user['team'] as $team){ ?>
+<p><a href="/tms/team/<?=$team['teamID']?>"><?=$team['name']?></a></p>
+<? } ?>
+<? } ?>
+
+<? if(count($user['team'])>0) { ?>
+<h2>Tournament Participation</h2>
+<? foreach($user['team'] as $team){ ?>
+<p><a href="/tms/team/<?=$team['teamID']?>"><?=$team['name']?></a></p>
+<? } ?>
+<? } ?>
 
 
 <!--<td><a id="deleteUser" class="button red" href="#">Delete</a></td>-->

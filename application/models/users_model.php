@@ -174,8 +174,15 @@ class Users_model extends MY_Model {
 	 *
 	 * @return array
 	 **/
-	public function tournament_memberships($userID,$centreID){
-		$tournamentIDs = array();
+	public function tournament_memberships($userID){
+		$tournaments = $this->tournaments_model->get_all();
+		$centreID = $this->centreID;
+
+		for($tournaments as $tournament)
+			$tournament['actorsData'] = $this->tournaments_model->get_actors($tournament['tournamentID']);
+		foreach($roleID) {
+			check_if_actor();
+		}
 
 		// Get a list of all teams that the user is associated with.
 		$teams = $this->team_memberships($userID);
