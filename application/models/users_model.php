@@ -157,16 +157,16 @@ class Users_model extends MY_Model {
 	 * @return array
 	 **/
 	public function team_memberships($userID){
-		$output = array();
-		$queryString = 	"SELECT teamID FROM usersTeams WHERE userID = ".$this->db->escape($userID);
-		$queryData = $this->db->query($queryString);
-		$output = $queryData->result_array();
-
-		$teams = array();
-		foreach($output as $row)
-			$teams[] = $row['teamID'];
-
-		return $teams;
+		// Search teamsUsers for userID and get a list of team IDs
+		$this->db->where( array('userID' => $userID) );
+		$IDRows = $this->db->get('teamsUsers')->result_array();
+		// Create empty array to output if there are no results
+		$all = array();
+		// Loop through all result rows, get the ID and use that to put all the data into the output array 
+		foreach($IDRows as $IDRow) {
+			$all[$IDRow['teamID']] = $this->teams_model->get($IDRow['teamID']);
+		}
+		return $all;
 	}
 	/**
 	 * returns an array of tournamentIDs that the user
