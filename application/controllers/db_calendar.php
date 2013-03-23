@@ -282,11 +282,11 @@ class Db_Calendar extends MY_Controller {
 		// We specify where the urls go
 		if($showTournamentMatchesOnly=='tournaments')
 			$query['showTournamentMatchesOnly']	= true;
-		else
+		else if($showTournamentMatchesOnly=='all')
 			$query['showTournamentMatchesOnly']	= false;
-		$query['sportID']			= array($sportID);
-		$query['tournamentIDs']		= array($tournamentID);
-		$query['venueIDs']			= array($venueID);
+		$query['sportID']			= ($sportID!='all') 		? array($sportID) 		: 'all';
+		$query['tournamentIDs']		= ($tournamentID!='all') 	? array($tournamentID) 	: 'all';
+		$query['venueIDs']			= ($venueID!='all') 		? array($venueID) 		: 'all';
 		$query['tournamentUrl']		= "/tms/tournament/";
 		$query['matchUrl']			= "/tms/match/";
 		$query['registrationUrl']	= "/tms/tournament/";
