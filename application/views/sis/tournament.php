@@ -65,7 +65,7 @@ $(document).ready(function(){
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			events: '/db_calendar/getTournamentMatches/<?=$tournament['tournamentID']?>',
+			events: '/db_calendar/getTournamentEventsSIS/<?=$tournament['tournamentID']?>',
 			editable: false
 		});
 		
