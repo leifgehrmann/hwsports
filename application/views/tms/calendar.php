@@ -11,6 +11,10 @@
 <table style="width:100%;">
 	<tr>
 		<td>View</td>
+		<?var_dump($viewSelection);
+		var_dump($sportSelection);
+		var_dump($tournamentSelection);
+		var_dump($venueSelection);?>
 		<td><?= form_dropdown('viewSelection', $viewOptions, $viewSelection ); ?></td>
 		<td>Sport</td>
 		<td><?= form_dropdown('sportSelection', $sportOptions, $sportSelection ); ?></td>

@@ -619,19 +619,12 @@ class Tms extends MY_Controller {
 		$sportSelection 		= $this->input->post('sportSelection');
 		$tournamentSelection 	= $this->input->post('tournamentSelection');
 		$venueSelection 		= $this->input->post('venueSelection');
-		var_dump($viewSelection);
-		var_dump($sportSelection);
-		var_dump($tournamentSelection);
-		var_dump($venueSelection);
+
 		// fall back values in case form was not loaded.
 		if(!$viewSelection) 		$viewSelection 			= "all";
 		if(!$sportSelection) 		$sportSelection 		= "all";
 		if(!$tournamentSelection) 	$tournamentSelection 	= "all";
 		if(!$venueSelection) 		$venueSelection 		= "all";
-		var_dump($viewSelection);
-		var_dump($sportSelection);
-		var_dump($tournamentSelection);
-		var_dump($venueSelection);
 			
 		$viewOptions['all'] = "All Events";
 		$sportOptions['all'] = "All";
