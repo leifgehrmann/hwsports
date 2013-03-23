@@ -89,6 +89,10 @@ class Db_Calendar extends MY_Controller {
 			}
 		}
 
+		echo "<pre>";var_dump($venueIDs);
+		var_dump($sportIDs);
+		var_dump($tournamentIDs);
+
 		// We select all the matches with the appropriate sport.
 		if($matchIDs=="all"){ // If we want all matches
 			$matchesAll = array();
