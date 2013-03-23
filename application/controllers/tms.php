@@ -628,6 +628,10 @@ class Tms extends MY_Controller {
 		if(!$sportSelection) 		$sportSelection 		= "all";
 		if(!$tournamentSelection) 	$tournamentSelection 	= "all";
 		if(!$venueSelection) 		$venueSelection 		= "all";
+		var_dump($viewSelection);
+		var_dump($sportSelection);
+		var_dump($tournamentSelection);
+		var_dump($venueSelection);
 			
 		$viewOptions['all'] = "All Events";
 		$sportOptions['all'] = "All";
