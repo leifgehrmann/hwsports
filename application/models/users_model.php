@@ -157,16 +157,16 @@ class Users_model extends MY_Model {
 	 * @return array
 	 **/
 	public function team_memberships($userID){
-		$output = array();
-		$queryString = 	"SELECT teamID FROM usersTeams WHERE userID = ".$this->db->escape($userID);
-		$queryData = $this->db->query($queryString);
-		$output = $queryData->result_array();
-
-		$teams = array();
-		foreach($output as $row)
-			$teams[] = $row['teamID'];
-
-		return $teams;
+		// Search teamsUsers for userID and get a list of team IDs
+		$this->db->where( array('userID' => $userID) );
+		$IDRows = $this->db->get('teamsUsers')->result_array();
+		// Create empty array to output if there are no results
+		$all = array();
+		// Loop through all result rows, get the ID and use that to put all the data into the output array 
+		foreach($IDRows as $IDRow) {
+			$all[$IDRow['teamID']] = $this->teams_model->get($IDRow['teamID']);
+		}
+		return $all;
 	}
 	/**
 	 * returns an array of tournamentIDs that the user
@@ -175,7 +175,11 @@ class Users_model extends MY_Model {
 	 * @return array
 	 **/
 	public function tournament_memberships($userID){
+		// Get all tournaments, ready to iterate
 		$tournaments = $this->tournaments_model->get_all();
+		// Get a list of all teams that the user is associated with.
+		$teams = $this->team_memberships($userID);
+		
 		$userTournaments = array();
 		foreach($tournaments as $tournament) {
 			//$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
@@ -183,40 +187,8 @@ class Users_model extends MY_Model {
 			
 			check_if_actor();
 		}
-
-		// Get a list of all teams that the user is associated with.
-		$teams = $this->team_memberships($userID);
-
-		// Get a list of all tournaments with the key "teams" or "athletes"
-		// defined. We will then iterate through every row checking if 
-		// the userID or teamID exist in the thing.
-
-		$tournaments = array();
-		$queryString = 	"SELECT T.tournamentID, ".
-		 				"MAX(CASE WHEN TD.`key`='teams' THEN value END ) AS teams, ".
-		 				"MAX(CASE WHEN TD.`key`='athletes' THEN value END ) AS athletes ".
-		 				"FROM tournaments AS T, tournamentData AS TD ".
-		 				"WHERE TD.tournamentID = T.tournamentID ".
-		 				"AND T.centreID = ".$this->db->escape($centreID);
-		$queryData = $this->db->query($queryString);
-		$tournaments = $queryData->result();
-
-		foreach($tournaments as $tournament) 
-			if(isset($tournaments['teams'])){
-				$tournamentTeams = explode(",",$tournaments['teams']);
-				$intersection = array_intersect($teams, $tournamentTeams);
-				if(!empty($intersection)){
-					$tournamentIDs[] = $tournamentID;
-				}
-			} else if(isset($tournaments['athletes'])){
-				$tournamentAthletes = explode(",",$tournaments['athletes']);
-				$intersection = in_array($userID, $tournamentAthletes);
-				if(!empty($intersection)){
-					$tournamentIDs[] = $tournamentID;
-				}
-			}
 		
-		return $tournamentIDs;
+		return $userTournaments;
 	}
 	
 	/**
