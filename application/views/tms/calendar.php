@@ -2,19 +2,15 @@
 <p>Click the matches/tournaments for more information.</p>
 <p>Drag a match to change the start date/time, or stretch it from the bottom to change it's length.</p>
 <ul>
+	<li>Registration Periods are coloured as <span style="color:rgb(209, 59, 0);font-weight:bold;">red</span>.</li>
 	<li>Tournaments are coloured as <span style="color:rgb(73, 134, 231);font-weight:bold;">blue</span>.</li>
 	<li>Tournament matches are coloured as <span style="color:rgb(123, 209, 72);font-weight:bold;">green</span>.</li>
-	<li>Standard bookings are coloured as <span style="color:rgb(123, 209, 72);font-weight:bold;">brown</span>.</li>
 </ul>
 <?= form_open("tms/calendar", array('id' => 'filterForm'));?>
 <h2>Filter Category</h2>
 <table style="width:100%;">
 	<tr>
 		<td>View</td>
-		<?var_dump($viewSelection);
-		var_dump($sportSelection);
-		var_dump($tournamentSelection);
-		var_dump($venueSelection);?>
 		<td><?= form_dropdown('viewSelection', $viewOptions, $viewSelection ); ?></td>
 		<td>Sport</td>
 		<td><?= form_dropdown('sportSelection', $sportOptions, $sportSelection ); ?></td>
