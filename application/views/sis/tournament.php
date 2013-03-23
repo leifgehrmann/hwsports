@@ -1,7 +1,7 @@
 <h1><a href="/sis/tournaments">Tournaments</a><div class="icon subsection"></div><?=$tournament['name']?></h1>
 
 <? if ( $tournament['status'] == "inRegistration" ) { ?>
-<p><b>Start:</b><?=datetime_to_public_date($tournament['tournamentStart'])?> &ndash; <b>End:</b><?=datetime_to_public_date($tournament['tournamentEnd'])?></p>
+<p><b>Start:</b><?=$this->datetime_to_public_date($tournament['tournamentStart'])?> &ndash; <b>End:</b><?=$this->datetime_to_public_date($tournament['tournamentEnd'])?></p>
 <p><?=$tournament['description']?></p>
 <table>
 	<tr>
@@ -9,7 +9,7 @@
 		<td rowspan="2"><a href='/sis/signup/<?=$tournament['tournamentID']?>' class='button green'>Sign Up Now!</a></td>
 	</tr>
 	<tr>
-		<td><p>Registration ends on <?=datetime_to_public_date($tournament['registrationEnd'])?> at <?=datetime_to_public_time($tournament['registrationEnd'])?>.</p></td>
+		<td><p>Registration ends on <?=$this->datetime_to_public_date($tournament['registrationEnd'])?> at <?=$this->datetime_to_public_time($tournament['registrationEnd'])?>.</p></td>
 	</tr>
 </table>
 <? } ?>

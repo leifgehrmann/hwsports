@@ -47,77 +47,102 @@ class MY_Controller extends CI_Controller {
 			"teams" => $this->teams_model,
 			"tournament_actors" => $this->tournament_actors_model
 		);
-		
-		function obj2arr($obj) {
-			if(is_object($obj)) $obj = (array) $obj;
-			if(is_array($obj)) {
-				$new = array();
-				foreach($obj as $key => $val) {
-					$new[$key] = obj2arr($val);
-				}
+	}
+	
+	public function obj2arr($obj) {
+		if(is_object($obj)) $obj = (array) $obj;
+		if(is_array($obj)) {
+			$new = array();
+			foreach($obj as $key => $val) {
+				$new[$key] = obj2arr($val);
 			}
-			else $new = $obj;
-			return $new;       
 		}
-			
-		function datetime_to_standard($inDateTime) {
+		else $new = $obj;
+		return $new;       
+	}
+		
+	public function datetime_to_standard($inDateTime) {
+		try{
 			if(empty($inDateTime)) return $inDateTime;
 			if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_FORMAT);
 			$dateTime = new DateTime($inDateTime);
 			return $dateTime->format(DATE_TIME_FORMAT);
+		} catch (Exception $e) {
+			$this->form_validation->set_message('datetime_check', $e->getMessage());
+			return $inDateTime;
 		}
-		function datetime_to_unix($inDateTime) {
+	}
+	public function datetime_to_unix($inDateTime) {
+		try{
 			if(empty($inDateTime)) return $inDateTime;
 			if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_UNIX_FORMAT);
 			$dateTime = new DateTime($inDateTime);
 			return $dateTime->format(DATE_TIME_UNIX_FORMAT);
+		} catch (Exception $e) {
+			$this->form_validation->set_message('datetime_check', $e->getMessage());
+			return $inDateTime;
 		}
-		function datetime_to_public($inDateTime) {
+	}
+	public function datetime_to_public($inDateTime) {
+		try{
 			if(empty($inDateTime)) return $inDateTime;
 			if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_DATE_TIME_FORMAT);
 			$dateTime = new DateTime($inDateTime);
 			return $dateTime->format(PUBLIC_DATE_TIME_FORMAT);
+		} catch (Exception $e) {
+			$this->form_validation->set_message('datetime_check', $e->getMessage());
+			return $inDateTime;
 		}
-		function datetime_to_public_date($inDateTime) {
+	}
+	public function datetime_to_public_date($inDateTime) {
+		try{
 			if(empty($inDateTime)) return $inDateTime;
 			if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_DATE_FORMAT);
 			$dateTime = new DateTime($inDateTime);
 			return $dateTime->format(PUBLIC_DATE_FORMAT);
+		} catch (Exception $e) {
+			$this->form_validation->set_message('datetime_check', $e->getMessage());
+			return $inDateTime;
 		}
-		function datetime_to_public_time($inDateTime) {
+	}
+	public function datetime_to_public_time($inDateTime) {
+		try{
 			if(empty($inDateTime)) return $inDateTime;
 			if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_TIME_FORMAT);
 			$dateTime = new DateTime($inDateTime);
 			return $dateTime->format(PUBLIC_TIME_FORMAT);
+		} catch (Exception $e) {
+			$this->form_validation->set_message('datetime_check', $e->getMessage());
+			return $inDateTime;
 		}
-		
-		function generatePassword($length = 9, $available_sets = 'lud') {
-			$sets = array();
-			if(strpos($available_sets, 'l') !== false)
-				$sets[] = 'abcdefghjkmnpqrstuvwxyz';
-			if(strpos($available_sets, 'u') !== false)
-				$sets[] = 'ABCDEFGHJKMNPQRSTUVWXYZ';
-			if(strpos($available_sets, 'd') !== false)
-				$sets[] = '23456789';
-			if(strpos($available_sets, 's') !== false)
-				$sets[] = '!@#$%&*?';
+	}
+	
+	public function generatePassword($length = 9, $available_sets = 'lud') {
+		$sets = array();
+		if(strpos($available_sets, 'l') !== false)
+			$sets[] = 'abcdefghjkmnpqrstuvwxyz';
+		if(strpos($available_sets, 'u') !== false)
+			$sets[] = 'ABCDEFGHJKMNPQRSTUVWXYZ';
+		if(strpos($available_sets, 'd') !== false)
+			$sets[] = '23456789';
+		if(strpos($available_sets, 's') !== false)
+			$sets[] = '!@#$%&*?';
 
-			$all = '';
-			$password = '';
-			foreach($sets as $set)
-			{
-				$password .= $set[array_rand(str_split($set))];
-				$all .= $set;
-			}
-
-			$all = str_split($all);
-			for($i = 0; $i < $length - count($sets); $i++)
-				$password .= $all[array_rand($all)];
-
-			$password = str_shuffle($password);
-
-			return $password;
+		$all = '';
+		$password = '';
+		foreach($sets as $set)
+		{
+			$password .= $set[array_rand(str_split($set))];
+			$all .= $set;
 		}
+
+		$all = str_split($all);
+		for($i = 0; $i < $length - count($sets); $i++)
+			$password .= $all[array_rand($all)];
+
+		$password = str_shuffle($password);
+
+		return $password;
 	}
 }
 
