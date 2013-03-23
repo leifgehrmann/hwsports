@@ -892,21 +892,21 @@ class Tms extends MY_Controller {
 				'type'=>'text'
 			),
 			array(
-				'name'=>'email',
-				'label'=>'Email',
-				'restrict'=>'required|valid_email',
-				'type'=>'text'
-			),
-			array(
 				'name'=>'phone',
 				'label'=>'Phone',
-				'restrict'=>'required|xss_clean',
+				'restrict'=>'xss_clean',
 				'type'=>'text'
 			),
 			array(
 				'name'=>'address',
 				'label'=>'Address',
-				'restrict'=>'required|xss_clean',
+				'restrict'=>'xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'aboutMe',
+				'label'=>'Bio',
+				'restrict'=>'xss_clean',
 				'type'=>'text'
 			)
 		);
