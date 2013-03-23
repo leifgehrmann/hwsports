@@ -947,7 +947,7 @@ class Tms extends MY_Controller {
 		// We validate the data from the form
 		$newdata = $_POST;
 		// For each of the input types we will validate it.
-		$submitValue = $this->input->post('submit'));
+		$submitValue = $this->input->post('submit');
 		if($submitValue == 'Update User'){
 			foreach($userDetailsForm as $input){
 				$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
