@@ -50,9 +50,9 @@ class Db_Calendar extends MY_Controller {
 			$sportIDs 					= $query['sportIDs'];
 		if(array_key_exists('venueIDs',$query))
 			$venueIDs 					= $query['venueIDs'];
-		if(array_key_exists('showTournament',$query))
+		if(array_key_exists('showTournaments',$query))
 			$showTournaments 			= $query['showTournaments'];
-		if(array_key_exists('showRegistration',$query))
+		if(array_key_exists('showRegistrations',$query))
 			$showRegistrations 			= $query['showRegistrations'];
 		if(array_key_exists('showTournamentMatchesOnly',$query))
 			$showTournamentMatchesOnly 	= $query['showTournamentMatchesOnly'];
