@@ -1,6 +1,6 @@
 <h1><a href="/tms/teams/">Teams</a><div class="icon subsection"></div><?=$team['name']?></h1>
 
-<?=form_open("tms/match/$matchID", array('id' => 'matchDetailsForm'))?>
+<?=form_open("tms/team/$teamID", array('id' => 'teamDetailsForm'))?>
 <table>
 	<tr>
 		<td>Name</td>
@@ -17,14 +17,8 @@
 		<td colspan="3"><?=form_textarea($description)?></td>
 	</tr>
 	<tr>
-		<td>Start Time</td>
-		<td><?=form_input($startTime)?></td>
-		<td>End Time</td>
-		<td><?=form_input($endTime)?></td>
-	</tr>
-	<tr>
 		<td colspan="3"></td>
-		<td><?=form_submit(array('name'=>"submit", 'value'=>"Update Match", 'class'=>"right green"));?></td>
+		<td><?=form_submit(array('name'=>"submit", 'value'=>"Update Team", 'class'=>"right green"));?></td>
 	</tr>
 </table>
 <?=form_close();?>
