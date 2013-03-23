@@ -179,9 +179,8 @@ class Sis extends MY_Controller {
 	public function tournament($tournamentID)
 	{
 		$this->load->library('table');
-
-		
 		$tournament = $this->tournaments_model->get($tournamentID);
+		$this->data['matches'] = $this->matches_model->get_tournament_matches($tournamentID);
 		if($tournament==FALSE) {
 			$this->session->set_flashdata('message',  "Tournament ID $id does not exist.");
 			redirect("/sis/tournaments", 'refresh');
