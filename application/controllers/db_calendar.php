@@ -67,6 +67,7 @@ class Db_Calendar extends MY_Controller {
 		$tournaments 		= array();
 		$matches 			= array();
 
+		var_dump($query);
 		var_dump($showTournamentMatchesOnly);
 		var_dump($venueIDs);
 		var_dump($sportIDs);
