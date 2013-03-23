@@ -31,12 +31,6 @@ class Tms extends MY_Controller {
 			//redirect them to the sis homepage
 			redirect('/', 'refresh');
 		}
-		
-		$this->data['message'] = $this->session->flashdata('message');
-		$this->data['message_information'] = $this->session->flashdata('message_information');
-		$this->data['message_success'] = $this->session->flashdata('message_success');
-		$this->data['message_warning'] = $this->session->flashdata('message_warning');
-		$this->data['message_error'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message_error')));
 	}
 
 	/**
@@ -45,14 +39,20 @@ class Tms extends MY_Controller {
 	 * @param view 		The view to load
 	 * @param page 		The page ID it will have
 	 * @param title 	
-	 * @param data 		passed in data
 	 */
-	public function view($view,$page,$title,$data){
-		$data['title'] = $title;
-		$data['page'] = $page;
-		$this->load->view('tms/header',$data);
-		$this->load->view('tms/'.$view,$data);
-		$this->load->view('tms/footer',$data);
+	public function view($view,$page,$title){
+		// Set up error reporting
+		$this->data['message'] = $this->session->flashdata('message');
+		$this->data['message_information'] = $this->session->flashdata('message_information');
+		$this->data['message_success'] = $this->session->flashdata('message_success');
+		$this->data['message_warning'] = $this->session->flashdata('message_warning');
+		$this->data['message_error'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message_error')));
+		
+		$this->data['title'] = $title;
+		$this->data['page'] = $page;
+		$this->load->view('tms/header',$this->data);
+		$this->load->view('tms/'.$view,$this->data);
+		$this->load->view('tms/footer',$this->data);
 	}
 
 	/**
@@ -131,7 +131,7 @@ class Tms extends MY_Controller {
 		$this->data['latestTournaments'] 	= $latestTournaments;
 		$this->data['upcomingTournaments'] 	= $upcomingTournaments;
 
-		$this->view('home',"tmshome","Home",$this->data);
+		$this->view('home',"tmshome","Home");
 	}
 	public function tournaments()
 	{	
@@ -241,7 +241,7 @@ class Tms extends MY_Controller {
 				}
 			}
 		}
-		$this->view('tournaments',"tournaments","Tournaments",$this->data);
+		$this->view('tournaments',"tournaments","Tournaments");
 	}
 	
 	public function tournament($tournamentID) {
@@ -313,10 +313,6 @@ class Tms extends MY_Controller {
 			// For each of the input types we will validate it.
 			foreach($tournamentDetailsForm as $input){
 				$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
-				if($input['type']=='date'){
-					// Change dates from public, timepicker-friendly format to database-friendly ISO format.
-					if($this->input->post($input['name'])) $newdata[$input['name']] = $this->datetime_to_standard($this->input->post($input['name']));
-				}
 			}
 			if ($this->form_validation->run() == true) {
 				if($this->tournaments_model->update($tournamentID, $newdata)) {
@@ -545,7 +541,7 @@ class Tms extends MY_Controller {
 		// Send the start times
 		$this->data['startTimes'] = $startTimes;
 		
-		$this->view('tournament',"tournament","Tournament",$this->data);
+		$this->view('tournament',"tournament","Tournament");
 	}
 	
 	public function delete_tournament($tournamentID) {
@@ -583,7 +579,7 @@ class Tms extends MY_Controller {
 		$this->data['centreLat'] = $lat;
 		$this->data['centreLng'] = $lng;
 		
-		$this->view('venues',"venues","Tournament",$this->data);
+		$this->view('venues',"venues","Tournament");
 	}
 
 	public function venue($venueID)
@@ -647,11 +643,11 @@ class Tms extends MY_Controller {
 			}
 		}
 
-		$this->view('venue',"venue",$this->data['venue']['name']." | Venue",$this->data);
+		$this->view('venue',"venue",$this->data['venue']['name']." | Venue");
 	}
 	public function sports()
 	{
-		$this->view('sports',"sports","Sports",$this->data);
+		$this->view('sports',"sports","Sports");
 	}
 	public function sport($sportID)
 	{
@@ -707,7 +703,7 @@ class Tms extends MY_Controller {
 				}
 			}
 		}
-		$this->view('sport',"sport",$this->data['sport']['name']." | Sport",$this->data);
+		$this->view('sport',"sport",$this->data['sport']['name']." | Sport");
 	}
 	public function match($matchID)
 	{	
@@ -793,11 +789,11 @@ class Tms extends MY_Controller {
 		//$this->data['match']['startTime'] = $this->datetime_to_public($this->data['match']['startTime']); 
 		//$this->data['match']['endTime'] = $this->datetime_to_public($this->data['match']['endTime']); 
 
-		$this->view('match',"match",$this->data['match']['name']." | Match",$this->data);
+		$this->view('match',"match",$this->data['match']['name']." | Match");
 	}
 	public function matches()
 	{
-		$this->view('matches',"matches","Matches",$this->data);
+		$this->view('matches',"matches","Matches");
 	}
 	public function calendar()
 	{
@@ -846,18 +842,18 @@ class Tms extends MY_Controller {
 		$this->data['venueOptions'] = $venueOptions;
 		$this->data['venueSelection'] = $venueSelection;
 
-		$this->view('calendar',"calendar","Calendar",$this->data);
+		$this->view('calendar',"calendar","Calendar");
 	}
 	public function groups()
 	{
 		$this->data['groups'] = $this->ion_auth->groups()->result();
-		$this->view('groups',"groups","Groups",$this->data);
+		$this->view('groups',"groups","Groups");
 	}
 	public function group($groupID)
 	{
 		$group = $this->groups_model->get($groupID);
 		$this->data['group'] = $group;
-		$this->view('group',"group",$group['name']." | group",$this->data);
+		$this->view('group',"group",$group['name']." | group");
 	}
 	public function fixGroups($groupID) {
 		$users = $this->users_model->get_all();
@@ -879,7 +875,7 @@ class Tms extends MY_Controller {
 		$users = $this->users_model->get_all();
 		$this->data['users'] = $users;
 		
-		$this->view('users',"users","Users",$this->data);
+		$this->view('users',"users","Users");
 	}
 	public function user($userID)
 	{
@@ -992,7 +988,7 @@ class Tms extends MY_Controller {
 				}
 			}
 		}
-		$this->view('user',"user",$user['firstName']." ".$user['lastName']." | User",$this->data);
+		$this->view('user',"user",$user['firstName']." ".$user['lastName']." | User");
 	}
 	public function teams()
 	{	
@@ -1000,7 +996,7 @@ class Tms extends MY_Controller {
 		$teams = $this->teams_model->get_all();
 		$this->data['teams'] = $teams;
 		
-		$this->view('teams',"teams","Teams",$this->data);
+		$this->view('teams',"teams","Teams");
 	}
 	public function team($teamID)
 	{
@@ -1063,7 +1059,7 @@ class Tms extends MY_Controller {
 			}
 		}
 		$this->data['team'] = $team;
-		$this->view('team',"team",$team['name']." | Team",$this->data);
+		$this->view('team',"team",$team['name']." | Team");
 	}
 	public function announcements()
 	{
@@ -1071,7 +1067,7 @@ class Tms extends MY_Controller {
 		$announcements = $this->announcements_model->get_all();
 		$this->data['announcements'] = $announcements;
 
-		$this->view('announcements',"announcements","Announcements",$this->data);
+		$this->view('announcements',"announcements","Announcements");
 	}
 	public function announcement($announcementID)
 	{
@@ -1079,14 +1075,14 @@ class Tms extends MY_Controller {
 		$announcement = $this->announcements_model->get($announcementID);
 		$this->data['announcement'] = $announcement;
 
-		$this->view('annoucement',"annoucement",$announcement['title']." | Announcement",$this->data);
+		$this->view('annoucement',"annoucement",$announcement['title']." | Announcement");
 	}
 	public function reports()
 	{
-		$this->view('reports',"reports","Reports",$this->data);
+		$this->view('reports',"reports","Reports");
 	}
 	public function playground() {
-		$this->view('playground',"playground","Branding Playground",$this->data);
+		$this->view('playground',"playground","Branding Playground");
 	}
 	public function settings()
 	{
@@ -1141,7 +1137,7 @@ class Tms extends MY_Controller {
 				);
 			}
 
-			$this->view('settings',"settings","Centre Settings",$this->data);
+			$this->view('settings',"settings","Centre Settings");
 		}
 	}
 
@@ -1207,7 +1203,7 @@ class Tms extends MY_Controller {
 				'class' => 'color',
 				'value' => $this->form_validation->set_value('backgroundColour',(isset($this->data['centre']['backgroundColour']) ? $this->data['centre']['backgroundColour'] : '') )
 			);
-			$this->view('appearance',"appearance","Apprearance",$this->data);
+			$this->view('appearance',"appearance","Apprearance");
 		}
 	}
 
@@ -1262,7 +1258,7 @@ class Tms extends MY_Controller {
 			// Sanity checks passed, assume valid date
 			return TRUE;	
 		} catch (Exception $e) {
-			$this->form_validation->set_message('datetime_check', 'The %s field must contain a valid date in the ISO 8601 format: YYYY-MM-DDThh:mm:ssTZD (e.g. 1997-07-16T19:20:30+0100) Provided: '.var_export($strDateTime,1).' Debug Exception: '.$e->getMessage() );
+			$this->form_validation->set_message('datetime_check', 'The %s field must contain a valid date in the ISO 8601 format: YYYY-MM-DDThh:mm:ssTZD (e.g. 1997-07-16T19:20:30+0100) Provided: '.var_export($strDateTime,1) );
 			return FALSE;
 		}
 	}
