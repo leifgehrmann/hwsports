@@ -6,7 +6,7 @@
 		<td><?=form_input($name)?></td>
 		<? if($match['tournamentID']!="0") { ?>
 		<td>Tournament</td>
-		<td><a href="/tms/tourmament/<?=$match['tournamentID']?>"><?=$match['tournamentData']['name']?></a></td>
+		<td><a href="/tms/tournament/<?=$match['tournamentID']?>"><?=$match['tournamentData']['name']?></a></td>
 		<? } ?>
 	</tr>
 	<tr>
