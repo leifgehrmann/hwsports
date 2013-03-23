@@ -1,4 +1,4 @@
-<h1><a href="/sis/matches">Matches</a><div class="icon subsection"></div><?=$match['name']?></h1>
+<h1><a href="/sis/<?=$match['tournamentData']['tournamentID']?>"><?=$match['tournamentData']['name']?></a><div class="icon subsection"></div><?=$match['name']?></h1>
 <h2>Match Details</h2>
 <?php
 	$tmpl = array (
