@@ -117,6 +117,7 @@ class Db_Calendar extends MY_Controller {
 				} else if(in_array($match['venueID'],$venueIDs)) { $inVenue = TRUE; }
 				$inTournament = FALSE;
 				if($tournamentIDs=="all") { $inTournament = TRUE;
+				} else if($tournamentIDs=="none") { $inTournament = FALSE;
 				} else if(in_array($match['tournamentID'],$tournamentIDs)) { $inTournament = TRUE; }
 				if($inSport&&$inVenue&&$inTournament) {
 					$matches[$match['matchID']] = $match;
@@ -135,6 +136,7 @@ class Db_Calendar extends MY_Controller {
 				} else if(in_array($match['venueID'],$venueIDs)) { $inVenue = TRUE; }
 				$inTournament = FALSE;
 				if($tournamentIDs=="all") { $inTournament = TRUE;
+				} else if($tournamentIDs=="none") { $inTournament = FALSE;
 				} else if(in_array($match['tournamentID'],$tournamentIDs)) { $inTournament = TRUE; }
 				if($inSport&&$inVenue&&$inTournament) {
 					$matches[$match['matchID']] = $match;
@@ -321,7 +323,8 @@ class Db_Calendar extends MY_Controller {
 	// Returns the matches for particular venue
 	public function getVenueEventsTMS($venueID){
 		$query = array();
-		$query['tournamentIDs']		= "none";
+		$query['showTournaments']	= FALSE;
+		$query['showRegistrations']	= FALSE;
 		$query['venueIDs']			= array($venueID);
 		$query['matchUrl']			= "/tms/match/";
 		$this->getEvents($query);
