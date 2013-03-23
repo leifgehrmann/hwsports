@@ -8,7 +8,7 @@
 	</div>
 	<div class="widget-body">
 		<img style="float:right;width:40%;padding-left:20px;" src="http://www.hw.ac.uk/img/football-800x450.jpg" />
-		<p>On this website you can get the latest information about tournament events occuring on campus. This includes the calendar, scores of the matches, and winners of tournaments. You can also register here to purchase tickets and sign up for sports events.</p>
+		<p>On this website you can get the latest information about tournament events occuring at the riccarton sports centre. This includes a calendar, list of matches, and information about tournaments. You can also register here to sign up for sports tournaments.</p>
 		<a href="sis/help" class="button blue">More Information</a>
 	</div>
 </div>
@@ -16,14 +16,14 @@
 <div class="widget half matches">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
-		<div class="widget-title-centre">Latest Matches</div>
+		<div class="widget-title-centre">Past Matches</div>
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<? if(count($latestMatches)==0) { ?>
+		<? if(count($pastMatches)==0) { ?>
 			<p>There are no recent or current matches.</p>
 		<? } else {
-			foreach($latestMatches as $match){ 
+			foreach($pastMatches as $match){ 
 				$date = $this->method_call->datetime_to_public_date($match['startTime']);
 				$time = $this->method_call->datetime_to_public_time($match['startTime']);
 			?>
@@ -78,14 +78,14 @@
 <div class="widget half tournaments">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
-		<div class="widget-title-centre">Latest Tournaments</div>
+		<div class="widget-title-centre">Past Tournaments</div>
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<? if(count($latestTournaments)==0) { ?>
+		<? if(count($pastTournaments)==0) { ?>
 			<p>There are no recent or currently running tournaments.</p>
 		<? } else {
-			foreach($latestTournaments as $tournament){ 
+			foreach($pastTournaments as $tournament){ 
 				$start = $this->method_call->datetime_to_public_date($tournament['tournamentStart']);
 				$end = $this->method_call->datetime_to_public_date($tournament['tournamentEnd']);
 			?>
