@@ -637,7 +637,7 @@ class Tms extends MY_Controller {
 					'name'  => $input['name'],
 					'id'    => $input['name'],
 					'type'  => $input['type'],
-					'value' => $this->form_validation->set_value($input['type'], (isset($match[$input['name']]) ? $match[$input['name']] : ''))
+					'value' => $this->form_validation->set_value($input['type'], (isset($venue[$input['name']]) ? $venue[$input['name']] : ''))
 				);
 			}
 		}
