@@ -942,6 +942,23 @@ class Tms extends MY_Controller {
 		try {
 			// If date string is invalid, this should throw an exception. We're only calling it endDate because of the checking of date ranges 
 			$endDate = new DateTime($strDateTime);
+			// If the field has "end" at the start, we're assuming there's a corresponding "start" field.
+			if(substr($field, 0, 3)=="end") {
+				$endDateField = $field;
+				$startDateField = "start".substr($field, 3);
+				// Create a new DateTime object from the start date string, or today's date if there is no start string
+				$startDate = ( ($this->input->post($startDateField)===FALSE) ? new DateTime() : new DateTime($this->input->post($startDateField)) );
+				// If start datetime is equal to or after end datetime 
+				if( $startDate >= $endDate ) {
+					if($this->input->post($startDateField)) {
+						$error = "Date '$startDateField': ".datetime_to_public($startDate)." is not before end date: ".datetime_to_public($endDate);
+					} else {
+						$error = "Date '$endDateField': ".datetime_to_public($endDate)." is before current time: ".datetime_to_public($startDate);
+					}						
+					$this->form_validation->set_message('datetime_check', "Invalid date range specified: $error");
+					return FALSE;
+				}
+			}
 			// If the field has "End" at the end, we're assuming there's a corresponding "Start" field. 
 			if(substr($field, -3)=="End") {
 				$endDateField = $field;
