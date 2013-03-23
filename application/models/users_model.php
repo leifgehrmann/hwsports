@@ -180,7 +180,7 @@ class Users_model extends MY_Model {
 
 		for($tournaments as $tournament)
 			$tournament['actorsData'] = $this->tournaments_model->get_actors($tournament['tournamentID']);
-		foreach($roleID) {
+		foreach($tournament) {
 			check_if_actor();
 		}
 
