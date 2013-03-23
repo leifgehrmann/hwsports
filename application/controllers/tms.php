@@ -615,16 +615,16 @@ class Tms extends MY_Controller {
 	public function calendar()
 	{
 		// If stuff has been submitted via the form...
-		$viewSelect 		= $this->input->post('viewSelect');
-		$sportSelect 		= $this->input->post('sportSelect');
-		$tournamentSelect 	= $this->input->post('tournamentSelect');
-		$venueSelect 		= $this->input->post('venueSelect');
+		$viewSelection 			= $this->input->post('viewSelection');
+		$sportSelection 		= $this->input->post('sportSelection');
+		$tournamentSelection 	= $this->input->post('tournamentSelection');
+		$venueSelection 		= $this->input->post('venueSelection');
 
 		// fall back values in case form was not loaded.
-		if(!$viewSelect) 		$viewSelect 		= "all";
-		if(!$sportSelect) 		$sportSelect 		= "all";
-		if(!$tournamentSelect) 	$tournamentSelect 	= "all";
-		if(!$venueSelect) 		$venueSelect 		= "all";
+		if(!$viewSelection) 		$viewSelection 			= "all";
+		if(!$sportSelection) 		$sportSelection 		= "all";
+		if(!$tournamentSelection) 	$tournamentSelection 	= "all";
+		if(!$venueSelection) 		$venueSelection 		= "all";
 			
 		$viewOptions['all'] = "All Events";
 		$sportOptions['all'] = "All";
@@ -651,13 +651,13 @@ class Tms extends MY_Controller {
 		);
 
 		$this->data['viewOptions'] = $viewOptions;
-		$this->data['viewSelection'] = 'all';
+		$this->data['viewSelection'] = $sportSelection;
 		$this->data['sportOptions'] = $sportOptions;
-		$this->data['sportSelection'] = 'all';
+		$this->data['sportSelection'] = $sportSelection;
 		$this->data['tournamentOptions'] = $tournamentOptions;
-		$this->data['tournamentSelection'] = 'all';
+		$this->data['tournamentSelection'] = $tournamentSelection;
 		$this->data['venueOptions'] = $venueOptions;
-		$this->data['venueSelection'] = 'all';
+		$this->data['venueSelection'] = $venueSelection;
 
 		$this->view('calendar',"calendar","Calendar",$this->data);
 	}
