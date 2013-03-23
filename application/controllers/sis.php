@@ -27,11 +27,11 @@ class Sis extends MY_Controller {
 		//Set up errors
 		$this->data['message_error'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message_error')));
 		
-		$data['title'] = $title;
-		$data['page'] = $page;
-		$this->load->view('sis/header',$data);
-		$this->load->view('sis/'.$view,$data);
-		$this->load->view('sis/footer',$data);
+		$this->data['title'] = $title;
+		$this->data['page'] = $page;
+		$this->load->view('sis/header',$this->data);
+		$this->load->view('sis/'.$view,$this->data);
+		$this->load->view('sis/footer',$this->data);
 	}
 
 	/**

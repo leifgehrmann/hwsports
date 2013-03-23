@@ -49,11 +49,11 @@ class Tms extends MY_Controller {
 		$this->data['message_warning'] = $this->session->flashdata('message_warning');
 		$this->data['message_error'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message_error')));
 		
-		$data['title'] = $title;
-		$data['page'] = $page;
-		$this->load->view('tms/header',$data);
-		$this->load->view('tms/'.$view,$data);
-		$this->load->view('tms/footer',$data);
+		$this->data['title'] = $title;
+		$this->data['page'] = $page;
+		$this->load->view('tms/header',$this->data);
+		$this->load->view('tms/'.$view,$this->data);
+		$this->load->view('tms/footer',$this->data);
 	}
 
 	/**
