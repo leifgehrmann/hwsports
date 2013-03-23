@@ -629,16 +629,16 @@ class Tms extends MY_Controller {
 
 		foreach($venueDetailsForm as $input){
 			if(array_key_exists('type',$input)){
-				if($input['name']=="description"||$input['name']=="directions"){
-					$this->data[$input['name']]['style'] = 'width:100%;';
-					$this->data[$input['name']]['rows'] = '5';
-				}
 				$this->data[$input['name']] = array(
 					'name'  => $input['name'],
 					'id'    => $input['name'],
 					'type'  => $input['type'],
 					'value' => $this->form_validation->set_value($input['type'], (isset($venue[$input['name']]) ? $venue[$input['name']] : ''))
 				);
+				if($input['name']=="description"||$input['name']=="directions"){
+					$this->data[$input['name']]['style'] = 'width:100%;';
+					$this->data[$input['name']]['rows'] = '5';
+				}
 			}
 		}
 
