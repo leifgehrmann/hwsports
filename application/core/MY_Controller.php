@@ -61,7 +61,7 @@ class MY_Controller extends CI_Controller {
 		return $new;       
 	}
 		
-	public function $this->datetime_to_standard($inDateTime) {
+	public function datetime_to_standard($inDateTime) {
 		try{
 			if(empty($inDateTime)) return $inDateTime;
 			if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_FORMAT);
@@ -72,7 +72,7 @@ class MY_Controller extends CI_Controller {
 			return $inDateTime;
 		}
 	}
-	public function $this->datetime_to_unix($inDateTime) {
+	public function datetime_to_unix($inDateTime) {
 		try{
 			if(empty($inDateTime)) return $inDateTime;
 			if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_UNIX_FORMAT);
@@ -83,7 +83,7 @@ class MY_Controller extends CI_Controller {
 			return $inDateTime;
 		}
 	}
-	public function $this->datetime_to_public($inDateTime) {
+	public function datetime_to_public($inDateTime) {
 		try{
 			if(empty($inDateTime)) return $inDateTime;
 			if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_DATE_TIME_FORMAT);
@@ -94,7 +94,7 @@ class MY_Controller extends CI_Controller {
 			return $inDateTime;
 		}
 	}
-	public function $this->datetime_to_public_date($inDateTime) {
+	public function datetime_to_public_date($inDateTime) {
 		try{
 			if(empty($inDateTime)) return $inDateTime;
 			if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_DATE_FORMAT);
@@ -105,7 +105,7 @@ class MY_Controller extends CI_Controller {
 			return $inDateTime;
 		}
 	}
-	public function $this->datetime_to_public_time($inDateTime) {
+	public function datetime_to_public_time($inDateTime) {
 		try{
 			if(empty($inDateTime)) return $inDateTime;
 			if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_TIME_FORMAT);
@@ -117,7 +117,7 @@ class MY_Controller extends CI_Controller {
 		}
 	}
 	
-	public function $this->generatePassword($length = 9, $available_sets = 'lud') {
+	public function generatePassword($length = 9, $available_sets = 'lud') {
 		$sets = array();
 		if(strpos($available_sets, 'l') !== false)
 			$sets[] = 'abcdefghjkmnpqrstuvwxyz';
