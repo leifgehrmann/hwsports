@@ -67,6 +67,11 @@ class Db_Calendar extends MY_Controller {
 		$tournaments 		= array();
 		$matches 			= array();
 
+		var_dump($showTournamentMatchesOnly);
+		var_dump($venueIDs);
+		var_dump($sportIDs);
+		var_dump($tournamentIDs);
+
 		// We select all the tournaments with the appropriate sport.
 		if($tournamentIDs=="all") { // If we want all tournaments
 			$tournamentsAll = $this->tournaments_model->get_all();
