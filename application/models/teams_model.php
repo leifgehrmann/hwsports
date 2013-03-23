@@ -20,6 +20,7 @@ class Teams_model extends MY_Model {
 	public function get($ID) {
 		// Get all the teamData
 		$team = $this->get_object($ID, $this->objectIDKey, $this->dataTableName);
+		if(!$team) return FALSE;
 		// Fetch the IDs for all users in the team
 		$IDRows = $this->db->get_where('teamsUsers', array('teamID' => $ID))->result_array();
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 

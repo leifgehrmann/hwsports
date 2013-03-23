@@ -24,6 +24,7 @@ class Sports_model extends MY_Model {
 					);
 		// Get all data about this sport, the append the data from associated tables as specified above
 		$sport = $this->get_object($ID, $this->objectIDKey, $this->dataTableName, $this->relationTableName, $relations);
+		if(!$sport) return FALSE;
 		// We could do some other specific functional processing here before returning the results if we need to
 		return $sport;
 	}	
