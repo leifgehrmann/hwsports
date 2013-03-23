@@ -117,7 +117,7 @@ class Db_Calendar extends MY_Controller {
 				} else if(in_array($match['venueID'],$venueIDs)) { $inVenue = TRUE; }
 				$inTournament = FALSE;
 				if($tournamentIDs=="all") { $inTournament = TRUE;
-				} else if(in_array($match['tournamentID'],$tournamentIDs)) { $inVenue = TRUE; }
+				} else if(in_array($match['tournamentID'],$tournamentIDs)) { $inTournament = TRUE; }
 				if($inSport&&$inVenue&&$inTournament) {
 					$matches[$match['matchID']] = $match;
 				}
@@ -135,7 +135,7 @@ class Db_Calendar extends MY_Controller {
 				} else if(in_array($match['venueID'],$venueIDs)) { $inVenue = TRUE; }
 				$inTournament = FALSE;
 				if($tournamentIDs=="all") { $inTournament = TRUE;
-				} else if(in_array($match['tournamentID'],$tournamentIDs)) { $inVenue = TRUE; }
+				} else if(in_array($match['tournamentID'],$tournamentIDs)) { $inTournament = TRUE; }
 				if($inSport&&$inVenue&&$inTournament) {
 					$matches[$match['matchID']] = $match;
 				}
