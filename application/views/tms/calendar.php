@@ -11,15 +11,15 @@
 <table style="width:100%;">
 	<tr>
 		<td>View</td>
-		<td><?php echo form_dropdown('viewSelect', $viewOptions, $viewSelection ); ?></td>
+		<td><?php echo form_dropdown('viewSelection', $viewOptions, $viewSelection ); ?></td>
 		<td>Sport</td>
-		<td><?php echo form_dropdown('sportSelect', $sportOptions, $sportSelection ); ?></td>
+		<td><?php echo form_dropdown('sportSelection', $sportOptions, $sportSelection ); ?></td>
 	</tr>
 	<tr>
 		<td>Tournament</td>
-		<td><?php echo form_dropdown('tournamentSelect', $tournamentOptions, $tournamentSelection ); ?></td>
+		<td><?php echo form_dropdown('tournamentSelection', $tournamentOptions, $tournamentSelection ); ?></td>
 		<td>Venue</td>
-		<td><?php echo form_dropdown('venueSelect', $venueOptions, $venueSelection ); ?></td>
+		<td><?php echo form_dropdown('venueSelection', $venueOptions, $venueSelection ); ?></td>
 	</tr>
 	<tr>
 		<td colspan="3"></td>
