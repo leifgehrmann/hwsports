@@ -290,6 +290,7 @@ class Db_Calendar extends MY_Controller {
 		$query['tournamentUrl']		= "/tms/tournament/";
 		$query['matchUrl']			= "/tms/match/";
 		$query['registrationUrl']	= "/tms/tournament/";
+		var_dump($query);
 		$this->getEvents($query);
 	}
 
