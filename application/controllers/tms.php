@@ -644,10 +644,65 @@ class Tms extends MY_Controller {
 
 		$this->view('venue',"venue",$this->data['venue']['name']." | Venue",$this->data);
 	}
-
 	public function sports()
 	{
 		$this->view('sports',"sports","Sports",$this->data);
+	}
+	public function sport($sportID)
+	{
+		$sportDetailsForm = array(
+			array(
+				'name'=>'name',
+				'label'=>'Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'description',
+				'label'=>'Description',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			)
+		);
+		// Does the match even exist?
+		$this->data['sportID'] = $sportID;
+		$this->data['sport'] = $sport = $this->sports_model->get($sportID);
+		if($sport===FALSE) {
+			$this->session->set_flashdata('message_error',  "Sport ID $sportID does not exist.");
+			redirect("/tms/sports", 'refresh');
+		}
+
+		// We validate the data from the form
+		$newdata = $_POST;
+		// For each of the input types we will validate it.
+		foreach($sportDetailsForm as $input){
+			$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+		}
+		if ($this->form_validation->run() == true) {
+			if($this->sports_model->update($sportID, $newdata)) {
+				// Successful update, show success message
+				$this->session->set_flashdata('message_success',  'Successfully updated sport.');
+			} else {
+				$this->session->set_flashdata('message_error',  'Failed to update sport. Please contact Infusion Systems.');
+			}
+			redirect("/tms/sport/$sportID", 'refresh');
+		}
+
+		foreach($sportDetailsForm as $input){
+			if(array_key_exists('type',$input)){
+				$this->data[$input['name']] = array(
+					'name'  => $input['name'],
+					'id'    => $input['name'],
+					'type'  => $input['type'],
+					'value' => $this->form_validation->set_value($input['type'], (isset($sport[$input['name']]) ? $sport[$input['name']] : ''))
+				);
+				if($input['name']=="description"){
+					$this->data[$input['name']]['style'] = 'width:100%;';
+					$this->data[$input['name']]['rows'] = '5';
+				}
+			}
+		}
+		$this->view('sport',"sport",$this->data['sport']['name']." | Sport",$this->data);
 	}
 	public function match($matchID)
 	{	
