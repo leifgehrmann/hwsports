@@ -303,6 +303,12 @@ class Db_Calendar extends MY_Controller {
 			$query['showTournamentMatchesOnly']	= true;
 		else if($showTournamentMatchesOnly=='all')
 			$query['showTournamentMatchesOnly']	= false;
+		var_dump($sportID);
+		var_dump($tournamentID);
+		var_dump($venueID);
+		var_dump($sportID!='all') ;
+		var_dump($tournamentID!='all') ;
+		var_dump($venueID!='all') ;
 		$query['sportID']			= ($sportID!='all') 		? array($sportID) 		: 'all';
 		$query['tournamentIDs']		= ($tournamentID!='all') 	? array($tournamentID) 	: 'all';
 		$query['venueIDs']			= ($venueID!='all') 		? array($venueID) 		: 'all';
