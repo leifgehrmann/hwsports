@@ -90,7 +90,7 @@ class Sis extends MY_Controller {
 		foreach($allTournaments as $tournament) {
 			if(in_array($tournament['status'],array("inRegistration","preRegistration","postRegistration","preTournament"))) {
 				$upcomingTournaments[$tournament['tournamentID']] = $tournament;
-			} else if(){
+			} else {
 				$pastTournaments[$tournament['tournamentID']] = $tournament;
 			}
 		}
