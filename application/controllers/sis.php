@@ -24,6 +24,9 @@ class Sis extends MY_Controller {
 	 * @param data 		passed in data
 	 */
 	public function view($view,$page,$title,$data){
+		//Set up errors
+		$this->data['message_error'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message_error')));
+		
 		$data['title'] = $title;
 		$data['page'] = $page;
 		$this->load->view('sis/header',$data);

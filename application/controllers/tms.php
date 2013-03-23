@@ -31,12 +31,6 @@ class Tms extends MY_Controller {
 			//redirect them to the sis homepage
 			redirect('/', 'refresh');
 		}
-		
-		$this->data['message'] = $this->session->flashdata('message');
-		$this->data['message_information'] = $this->session->flashdata('message_information');
-		$this->data['message_success'] = $this->session->flashdata('message_success');
-		$this->data['message_warning'] = $this->session->flashdata('message_warning');
-		$this->data['message_error'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message_error')));
 	}
 
 	/**
@@ -48,6 +42,13 @@ class Tms extends MY_Controller {
 	 * @param data 		passed in data
 	 */
 	public function view($view,$page,$title,$data){
+		// Set up error reporting
+		$this->data['message'] = $this->session->flashdata('message');
+		$this->data['message_information'] = $this->session->flashdata('message_information');
+		$this->data['message_success'] = $this->session->flashdata('message_success');
+		$this->data['message_warning'] = $this->session->flashdata('message_warning');
+		$this->data['message_error'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message_error')));
+		
 		$data['title'] = $title;
 		$data['page'] = $page;
 		$this->load->view('tms/header',$data);
