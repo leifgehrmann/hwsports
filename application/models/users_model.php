@@ -17,6 +17,7 @@ class Users_model extends MY_Model {
 	public function get($ID) {
 		// Get all the userData
 		$user = $this->get_object($ID, $this->objectIDKey, $this->dataTableName, $this->relationTableName);
+		if(!$user) return FALSE;
 		$user['groups'] = $this->get_groups($ID);
 		return $user;
 	}

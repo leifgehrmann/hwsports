@@ -15,7 +15,9 @@ class Venues_model extends MY_Model {
 	 * @return array
 	 **/
 	public function get($ID) {
-		return $this->get_object($ID, $this->objectIDKey, $this->dataTableName);
+		$object = $this->get_object($ID, $this->objectIDKey, $this->dataTableName);
+		if(!$object) return FALSE;
+		return $object;
 	}
 	
 	/**

@@ -1,32 +1,26 @@
-<h1>Calendar</h1>
-<p>Click the matches/tournaments for more information.</p>
-<p>Drag a match to change the start date/time, or stretch it from the bottom to change it's length.</p>
-<ul>
-	<li>Registration periods are coloured as <span style="color:rgb(209, 59, 0);font-weight:bold;">red</span>.</li>
-	<li>Tournaments are coloured as <span style="color:rgb(73, 134, 231);font-weight:bold;">blue</span>.</li>
-	<li>Tournament matches are coloured as <span style="color:rgb(123, 209, 72);font-weight:bold;">green</span>.</li>
-</ul>
-<?= form_open("tms/calendar", array('id' => 'filterForm'));?>
-<h2>Filter Calendar</h2>
-<table style="width:100%;">
+<h1><a href="/tms/sports/">Sports</a><div class="icon subsection"></div><span id="title-name"><?=$this->data["sport"]["name"]?></span></h1>
+<?=form_open("tms/sport/$sportID", array('id' => 'sportDetailsForm'))?>
+<table>
 	<tr>
-		<td>View</td>
-		<td><?= form_dropdown('viewSelection', $viewOptions, $viewSelection ); ?></td>
-		<td>Sport</td>
-		<td><?= form_dropdown('sportSelection', $sportOptions, $sportSelection ); ?></td>
+		<td>Name</td>
+		<td><?=form_input($name)?></td>
+		<td>Sport Category:</td>
+		<td><?=$sport['sportCategoryData']['name']?></td>
 	</tr>
 	<tr>
-		<td>Tournament</td>
-		<td><?= form_dropdown('tournamentSelection', $tournamentOptions, $tournamentSelection ); ?></td>
-		<td>Venue</td>
-		<td><?= form_dropdown('venueSelection', $venueOptions, $venueSelection ); ?></td>
+		<td>Description</td>
+		<td colspan="3"><?=form_textarea($description)?></td>
 	</tr>
 	<tr>
 		<td colspan="3"></td>
-		<td><?= form_submit('submit', 'Submit Changes', array('class' => 'green')); ?></td>
+		<td><?=form_submit(array('name'=>"submit", 'value'=>"Update Sport", 'class'=>"right green"));?></td>
 	</tr>
 </table>
-<?= form_close();?>
+<?=form_close();?>
+
+
+<h2>Calendar</h2>
+
 <div id='calendar'></div>
 <script type='text/javascript' src='/js/vendor/fullcalendar/_loader.js'></script>
 <script type='text/javascript'>
@@ -39,7 +33,7 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			events: '/db_calendar/getAllEventsTMSselect/<?=$viewSelection?>/<?=$sportSelection?>/<?=$tournamentSelection?>/<?=$venueSelection?>',
+			events: '/db_calendar/getSportEventsTMS/<?=$sportID?>',
 			editable: true,
 			eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
 				//console.log(match);

@@ -34,6 +34,7 @@
 		$('#tournamentTeams').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/tournamentTeams/"+$('#tournamentID').html(),
+			"aaSorting": [[ 1, "asc" ]],
 			"aoColumns": [
 				{ "mData": "teamID" },
 				{ "mData": "name" },

@@ -73,6 +73,7 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 		$('#matches').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/data/matches",
+			"aaSorting": [[ 4, "asc" ]],
 			"aoColumns": [
 				{ "mData": "sportIcon" },
 				{ "mData": "matchID" },
@@ -104,8 +105,8 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 					{ "sExtends": "editor_create", "editor": editor },
 					{ "sExtends": "editor_edit",   "editor": editor },
 					{ "sExtends": "editor_remove", "editor": editor },
-					"select_all", 
-					"select_none",
+					//"select_all", 
+					//"select_none",
 					{
 						"sExtends":    "collection",
 						"sButtonText": "Export",

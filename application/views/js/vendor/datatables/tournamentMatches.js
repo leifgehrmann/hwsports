@@ -11,7 +11,7 @@
 				}, {
 					"label": "Sport",
 					"name": "sportID",
-					"type": "select"
+					"type": "hidden"
 				}, {
 					"label": "Venue",
 					"name": "venueID",
@@ -56,6 +56,7 @@
 		$('#tournamentMatches').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/tournamentMatches/"+$('#tournamentID').html(),
+			"aaSorting": [[ 3, "asc" ]],
 			"aoColumns": [
 				{ "mData": "matchID" },
 				{ "mData": "name" },
@@ -74,7 +75,7 @@
 			],
 			"aoColumnDefs": [
 				{ "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] },
-				{ "bVisible": false, "aTargets": [ 2, 5 ] }
+				{ "bVisible": false, "aTargets": [ 2, 6 ] }
             ],
 			"oTableTools": {
 				"sSwfPath": "/swf/copy_csv_xls_pdf.swf",

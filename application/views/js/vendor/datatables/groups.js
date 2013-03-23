@@ -51,6 +51,7 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 		$('#groups').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/data/groups/",
+			"aaSorting": [[ 1, "asc" ]],
 			"aoColumns": [
 				{ "mData": "groupID" },
 				{ "mData": "name" },
@@ -66,8 +67,8 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 					{ "sExtends": "editor_create", "editor": editor },
 					{ "sExtends": "editor_edit",   "editor": editor },
 					{ "sExtends": "editor_remove", "editor": editor },
-					"select_all", 
-					"select_none",
+					//"select_all", 
+					//"select_none",
 					{
 						"sExtends":    "collection",
 						"sButtonText": "Export",

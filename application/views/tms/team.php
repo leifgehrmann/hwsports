@@ -1,4 +1,27 @@
-<h1><?=$team['name']?>: Team Members</h1>
+<h1><a href="/tms/teams/">Teams</a><div class="icon subsection"></div><?=$team['name']?></h1>
+
+<?=form_open("tms/team/$teamID", array('id' => 'teamDetailsForm'))?>
+<table>
+	<tr>
+		<td>Name</td>
+		<td><?=form_input($name)?></td>
+	</tr>
+	<? if($team['associationNumber']) { ?>
+	<tr>
+		<td>Association Number</td>
+		<td><?=form_input($associationNumber)?></td>
+	</tr>
+	<? } ?>
+	<tr>
+		<td>Description</td>
+		<td colspan="3"><?=form_textarea($description)?></td>
+	</tr>
+	<tr>
+		<td colspan="3"></td>
+		<td><?=form_submit(array('name'=>"submit", 'value'=>"Update Team", 'class'=>"right green"));?></td>
+	</tr>
+</table>
+<?=form_close();?>
 
 <div id="main">
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="teamUsers" width="100%">

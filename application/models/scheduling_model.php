@@ -397,14 +397,16 @@ class Scheduling_model extends MY_Model {
 	 * @return boolean 
 	 **/
 
-	public function schedule_running($tournamentID)
+	public function schedule_running($tournamentID,$debug=FALSE)
 	{
+		if($debug){ echo "<pre/>"; }
 
 		// Get tournament Information
-		$tournament = $this->tournaments_model->get_tournament($tournamentID);
-		$venues     = $this->tournaments_model->get_venues($tournamentID);
-		$actors     = $this->tournaments_model->get_actors($tournamentID);
-		$athletes   = $actors['Athlete'];
+		$tournament = $this->tournaments_model->get($tournamentID);
+
+		// If the tournament does not exist, exit.
+		if($tournament==FALSE)
+			return "Tournament does not exist.";
 
 		$tournamentStart     = new DateTime($tournament['tournamentStart']);
 		$tournamentEnd       = new DateTime($tournament['tournamentEnd']);
@@ -417,19 +419,42 @@ class Scheduling_model extends MY_Model {
 			$matchWeekdayStartTimes[$weekday]    = explode(',',$tournament['startTimes'.$weekday]);
 		}
 
+		// Get actor and venue data
+		$venues     = $this->tournaments_model->get_venues($tournamentID);
+		$actors     = $this->tournaments_model->get_actors($tournamentID);
+		// Check if an umpire exists and that there are venues for the tournament.
+		if(!$venues) return "There are no venues that the tournament can take place at.";
+		if(count($venues)==0) return "There are no venues that the tournament can take place at.";
+		$athletes    = $actors['athlete'];
+		// Add tournamentActorData
+		foreach($athletes as $index=>$athlete)
+			$athletes[$index]['tournamentActorData'] = $this->tournament_actors_model->get($athlete['tournamentActorID']);
+
 		$matchDuration = new DateInterval('PT'.$tournament['matchDuration'].'M'); // Match duration is assumed to be in minutes
 		$matchMaximumPlays   = 1; // This is hard coded for now. This is the maximum number of matches a hurdler must play
 		$matchMinimumPlayers = 8; // This is hard coded for now. This is the minimum number of hurdlers that must be playing at once.
 
 		// Calculate number of matches we need
-		$numberOfMatches = ceil(log(count($athletes)/$matchMinimumPlayers)/log(2)+1);
+		if(count($athletes)<$matchMinimumPlayers)
+			$numberOfMatches = 1;
+		else
+			$numberOfMatches = ceil(log(count($athletes)/$matchMinimumPlayers)/log(2)+1);
 		$numberOfMatches += 1; // This takes into account the aulifier round.
+		if($debug){
+			echo "Number of athletes: ".count($athletes)."\n";
+			echo "Minimum matches per day: ".$matchMinimumPlayers."\n";
+			echo "Total number of matches: ".$numberOfMatches."\n";
+		}
 
 		// We first want all possible matches datetimes. This method
 		// returns all the possible combinations of start times
 		// and days of the tournament. from here we need to filter 
 		// by venue.
 		$matchDateTimes = $this->get_match_date_times($tournamentStart,$tournamentEnd,$matchWeekdayStartTimes,$matchDuration);
+		if($debug){
+			echo "all possible dates times"."\n";
+			var_dump($matchDateTimes);
+		}
 
 		foreach($matchDateTimes as $date=>$dateTimes)
 		{
@@ -461,6 +486,11 @@ class Scheduling_model extends MY_Model {
 				unset($matchDateTimes[$date]);
 		}
 
+		if($debug){
+			echo "dates times with venues"."\n";
+			var_dump($matchDateTimes);
+		}
+
 		$scheduledMatches = array(); // Our list of matches that we would like to output
 		$matchDateTimesSelected = array(); // associated array of date->datetime->data. This will be used to check for overlapping events
 		$matchUsage = array(); // associated array of dates, datetimes, and various other things
@@ -476,9 +506,13 @@ class Scheduling_model extends MY_Model {
 		}
 
 		// We now iterate through each possible day and time hopefully finding a day that works out just fine.
+		if($debug) echo "Number of matches to add: ".$numberOfMatches;
+		
 		$matchIndex = 0;
 		for( $matchIndex = 0; $matchIndex < $numberOfMatches; $matchIndex++ )
 		{
+			if($debug) echo "adding match ".$matchIndex."out of ".$numberOfMatches;
+
 			$added = false; // This will indicate if we could find a place to put this match in.
 			// Get list of days ordered by a fitness function that encourages
 			// the spread of days in a tournament.
@@ -488,11 +522,11 @@ class Scheduling_model extends MY_Model {
 			$weightedDates = $this->fitness_generator($matchUsageDates);
 			foreach($weightedDates as $date)
 			{
-				//echo "Attempting to add Event at date ".$date." for match ".$combination[0]." and ".$combination[1]."\n";
+				if($debug) echo "Attempting to add Event at date ".$date." for match "."\n";
 
 				// Have we already exceeded the number of matches that we can add already?
 				if($matchMaximumPlays <= $matchUsage[$date]['count']){
-					//echo "failed ".$dateTime." because team has already played max number of times"."\n";
+					if($debug) echo "failed ".$dateTime." because athletes have already played max number of times for that day"."\n";
 					continue;
 				}
 
@@ -504,7 +538,7 @@ class Scheduling_model extends MY_Model {
 				$weightedDateTimes = $this->fitness_generator($matchUsageDateTimes);
 				foreach($weightedDateTimes as $dateTimeWeight=>$dateTime)
 				{
-					//echo "Attempting to add Event at datetime ".$dateTime."\n";
+					if($debug) echo "Attempting to add Event at datetime ".$dateTime."\n";
 
 					// Is this match already conflicting with another match where the 
 					// players are already performing?
@@ -514,7 +548,7 @@ class Scheduling_model extends MY_Model {
 						{
 							// Are any of the teams that we care about actually playing during that time?
 							if($matchUsage[$date][$dateTimeSelected]['count']==0){
-								//echo "failed ".$dateTime." because the hurdlers are already playing at that time but in another venue"."\n";
+								if($debug) echo "failed ".$dateTime." because the athletes are already playing at that time but in another venue"."\n";
 								continue;
 							}
 
@@ -526,7 +560,7 @@ class Scheduling_model extends MY_Model {
 						}
 					// If there is a conflict, well we better check another time slot.
 					if($isOverlapping){
-						//echo "failed ".$dateTime." because of overlapping"."\n";
+						if($debug) echo "failed ".$dateTime." because of overlapping"."\n";
 						continue;
 					}
 
@@ -534,14 +568,15 @@ class Scheduling_model extends MY_Model {
 					// staff want to dictate priority, we can implement it here
 					// at some later point.
 					// You know what, lets just RANDOMLY select a venue for fun.
-					$matchVenueID = array_rand($matchDateTimes[$date][$dateTime]['venueIDs']);
+					$matchVenueID = $matchDateTimes[$date][$dateTime]['venueIDs'][array_rand($matchDateTimes[$date][$dateTime]['venueIDs'])];
 
 					// Hey thats it! Lets add our result to the selected array and a list of scheduled matches:
 					$newMatch = array();
 					$endTime = new DateTime($dateTime);
 					$endTime->add($matchDuration);
+					$newMatch['startTime'] = datetime_to_standard($dateTime);
 					$newMatch['endTime'] = datetime_to_standard($endTime);
-					$newMatch['venue'] = $matchVenueID;
+					$newMatch['venueID'] = $matchVenueID;
 					$matchDateTimesSelected[$date][$dateTime] = array();
 					$matchDateTimesSelected[$date][$dateTime]['venueID'] = $matchVenueID;
 					$scheduledMatches[] = $newMatch;
@@ -554,7 +589,7 @@ class Scheduling_model extends MY_Model {
 						{
 							unset($matchUsage[$date][$dateTime]);
 							unset($matchDateTimes[$date][$dateTime]);
-							//echo "removed ".$dateTime."\n";
+							if($debug) echo "removed ".$dateTime."\n";
 						}
 						foreach($matchDateTimes[$date] as $dateTimeAlt=>$dateTimeDataAlt)
 						{
@@ -567,7 +602,7 @@ class Scheduling_model extends MY_Model {
 								if(count($matchDateTimes[$date][$dateTimeAlt]['venueIDs'])==0){
 									unset($matchUsage[$date][$dateTimeAlt]);
 									unset($matchDateTimes[$date][$dateTimeAlt]);
-									//echo "removed ".$dateTime."\n";
+									if($debug) echo "removed ".$dateTime."\n";
 								}
 							}
 						}
@@ -578,7 +613,7 @@ class Scheduling_model extends MY_Model {
 						$matchUsage[$date][$dateTime]['count'] += 1;
 
 					// Stop the loop! We have just added our match!
-					//echo "Event was added at ".$dateTime." at the venue ".$matchDateTimesSelected[$date][$dateTime]['venueID']."\n";
+					if($debug) echo "Event was added at ".$dateTime." at the venue ".$matchDateTimesSelected[$date][$dateTime]['venueID']."\n";
 					$added = true;
 					break;
 				}
@@ -590,8 +625,7 @@ class Scheduling_model extends MY_Model {
 			// This will only occur if the entire thing above did not work.
 			// hopefully that doesn't happen a lot when we do testing. :)
 			if(!$added){
-				//echo "Not enough time slots to support this tournament style";
-				return FALSE;
+				return "Not enough time slots to support this tournament style";
 			}
 		}
 
@@ -627,16 +661,16 @@ class Scheduling_model extends MY_Model {
 
 		// Here we select all the hurdlers that don't have any
 		// previous performance.
-		$qualificationAthletes = array();
+		/*$qualificationAthletes = array();
 		foreach($athletes as $athlete)
 			if(!array_key_exists('personalBest',$athlete)){
 				$qualificationAthletes[] = $athlete;
 				// Some how we add data to our schedule matches 
-				$scheduledMatches[0]['Athlete'][] = $qualificationAthletes;
-			}
+				$scheduledMatches[0]['matchActorData']['athleteIDs'][] = $qualificationAthletes;
+			}*/
 
 		// We add these hurdles to the scheduled matches.
-		$scheduledMatches[0]['Athlete'] = $qualificationHurdlers;
+		/*$scheduledMatches[0]['matchActorData']['athleteIDs'] = $qualificationHurdlers;
 
 		// We want to now calculate the number of heats required
 		// so that we can put people in certain lanes.
@@ -654,11 +688,11 @@ class Scheduling_model extends MY_Model {
 			for($l=1;$l<=$lanes-($index<$h ? 1 : 0);$l++)
 			{
 				// Some how we add data to our schedule matches 
-				$scheduledMatches[0]['AthleteData'][$qualificationAthletes[$athleteIndex]]['heat'] = $h;
-				$scheduledMatches[0]['AthleteData'][$qualificationAthletes[$athleteIndex]]['lane'] = $l;
+				$scheduledMatches[0]['matchActorData']['athlete'][$qualificationAthletes[$athleteIndex]]['heat'] = $h;
+				$scheduledMatches[0]['matchActorData']['athlete'][$qualificationAthletes[$athleteIndex]]['lane'] = $l;
 			}
 			$athleteIndex++;
-		}
+		}*/
 
 		return $scheduledMatches;
 	}

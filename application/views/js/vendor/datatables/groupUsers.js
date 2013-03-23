@@ -49,6 +49,7 @@
 		$('#groupUsers').dataTable( {
 			"sDom": 'TC<"clear">Rlfrtip',
 			"sAjaxSource": "/datatables/groupUsers/"+$('#groupID').html(),
+			"aaSorting": [[ 2, "asc" ]],
 			"aoColumns": [
 				{ "mData": "userID" },
 				{ "mData": "firstName" },
@@ -69,8 +70,8 @@
 					{ "sExtends": "editor_create", "sButtonText": "Add User to Group", "editor": editor },
 					{ "sExtends": "editor_edit", "sButtonText": "Edit User", "editor": editor },
 					{ "sExtends": "editor_remove", "sButtonText": "Remove from Group", "editor": editor },
-					"select_all", 
-					"select_none",
+					//"select_all", 
+					//"select_none",
 					{
 						"sExtends":    "collection",
 						"sButtonText": "Export",

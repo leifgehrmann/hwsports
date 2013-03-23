@@ -50,9 +50,9 @@ class Db_Calendar extends MY_Controller {
 			$sportIDs 					= $query['sportIDs'];
 		if(array_key_exists('venueIDs',$query))
 			$venueIDs 					= $query['venueIDs'];
-		if(array_key_exists('showTournament',$query))
+		if(array_key_exists('showTournaments',$query))
 			$showTournaments 			= $query['showTournaments'];
-		if(array_key_exists('showRegistration',$query))
+		if(array_key_exists('showRegistrations',$query))
 			$showRegistrations 			= $query['showRegistrations'];
 		if(array_key_exists('showTournamentMatchesOnly',$query))
 			$showTournamentMatchesOnly 	= $query['showTournamentMatchesOnly'];
@@ -68,24 +68,29 @@ class Db_Calendar extends MY_Controller {
 		$matches 			= array();
 
 		// We select all the tournaments with the appropriate sport.
-		if($tournamentIDs=="all"){ // If we want all tournaments
+		if($tournamentIDs=="all") { // If we want all tournaments
 			$tournamentsAll = $this->tournaments_model->get_all();
-			foreach ($tournamentsAll as $tournament )
-				if($sportIDs=="all") // If we want only a particular sport
-					$tournaments[] = $tournament;
-				else
-					if(in_array($tournament['sportID'],$sportIDs))
-						$tournaments[] = $tournament;
+			foreach ($tournamentsAll as $tournament ) {
+				if($sportIDs=="all") {  // If we want only a particular sport
+					$tournaments[$tournament['tournamentID']] = $tournament;
+				} else {
+					if(in_array($tournament['sportID'],$sportIDs)) {
+						$tournaments[$tournament['tournamentID']] = $tournament;
+					}
+				}
+			}
 		} else if($tournamentIDs=="none") {
 
 		} else { // If we want only particular tournaments
-			foreach ($tournamentIDs as $tournamentID ){
+			foreach ($tournamentIDs as $tournamentID ) {
 				$tournament = $this->tournaments_model->get($tournamentID);
-				if($sportIDs=="all") // If we want only a particular sport
-					$tournaments[] = $tournament;
-				else
-					if(in_array($tournament['sportID'],$sportIDs))
-						$tournaments[] = $tournament;
+				if($sportIDs=="all") { // If we want only a particular sport
+					$tournaments[$tournament['tournamentID']] = $tournament;
+				} else {
+					if(in_array($tournament['sportID'],$sportIDs)) {
+						$tournaments[$tournament['tournamentID']] = $tournament;
+					}
+				}
 			}
 		}
 
@@ -103,44 +108,41 @@ class Db_Calendar extends MY_Controller {
 			} else {
 				$matchesAll = $this->matches_model->get_all();
 			}
-			foreach ($matchesAll as $match ){
-				if($sportIDs=="all") // If we want only a particular sport
-					if($venueIDs=="all") // If we want only a particular venue
-						$matches[] = $match;
-					else
-						if(in_array($match['venueID'],$venueIDs))
-							$matches[] = $match;
-				else
-					if(in_array($match['sportID'],$sportIDs))
-						if($venueIDs=="all") // If we want only a particular venue
-							$matches[] = $match;
-						else
-							if(in_array($match['venueID'],$venueIDs))
-								$matches[] = $match;
+			foreach ($matchesAll as $match ) {
+				$inSport = FALSE;
+				if($sportIDs=="all") { $inSport = TRUE;
+				} else if(in_array($match['sportID'],$sportIDs)) { $inSport = TRUE; }
+				$inVenue = FALSE;
+				if($venueIDs=="all") { $inVenue = TRUE;
+				} else if(in_array($match['venueID'],$venueIDs)) { $inVenue = TRUE; }
+				$inTournament = FALSE;
+				if($tournamentIDs=="all") { $inTournament = TRUE;
+				} else if($tournamentIDs=="none") { $inTournament = FALSE;
+				} else if(in_array($match['tournamentID'],$tournamentIDs)) { $inTournament = TRUE; }
+				if($inSport&&$inVenue&&$inTournament) {
+					$matches[$match['matchID']] = $match;
+				}
 			}
 		} else if($matchIDs=="none") {
 
 		} else { // If we only want particular matches
-			foreach ($matchIDs as $matchID ){
+			foreach ($matchIDs as $matchID ) {
 				$match = $this->matches_model->get($matchID);
-				if($sportIDs=="all") // If we want only a particular sport
-					if($venueIDs=="all") // If we want only a particular venue
-						$matches[] = $match;
-					else
-						if(in_array($match['venueID'],$venueIDs))
-							$matches[] = $match;
-				else
-					if(in_array($match['sportID'],$sportIDs))
-						if($venueIDs=="all") // If we want only a particular venue
-							$matches[] = $match;
-						else
-							if(in_array($match['venueID'],$venueIDs))
-								$matches[] = $match;
+				$inSport = FALSE;
+				if($sportIDs=="all") { $inSport = TRUE;
+				} else if(in_array($match['sportID'],$sportIDs)) { $inSport = TRUE; }
+				$inVenue = FALSE;
+				if($venueIDs=="all") { $inVenue = TRUE;
+				} else if(in_array($match['venueID'],$venueIDs)) { $inVenue = TRUE; }
+				$inTournament = FALSE;
+				if($tournamentIDs=="all") { $inTournament = TRUE;
+				} else if($tournamentIDs=="none") { $inTournament = FALSE;
+				} else if(in_array($match['tournamentID'],$tournamentIDs)) { $inTournament = TRUE; }
+				if($inSport&&$inVenue&&$inTournament) {
+					$matches[$match['matchID']] = $match;
+				}
 			}
 		}
-
-
-
 
 		// Inserting all the matches
 		foreach($matches as $match) {
@@ -271,6 +273,28 @@ class Db_Calendar extends MY_Controller {
 	 *
 	 */
 
+	// This is for the calendar page
+	public function getAllEventsTMSselect(
+		$showTournamentMatchesOnly='all', 
+		$sportID='all', 
+		$tournamentID='all', 
+		$venueID='all'
+	) {
+		$query = array();
+		// We specify where the urls go
+		if($showTournamentMatchesOnly=='tournaments')
+			$query['showTournamentMatchesOnly']	= true;
+		else if($showTournamentMatchesOnly=='all')
+			$query['showTournamentMatchesOnly']	= false;
+		$query['sportIDs']			= ($sportID!='all') 		? array($sportID) 		: 'all';
+		$query['tournamentIDs']		= ($tournamentID!='all') 	? array($tournamentID) 	: 'all';
+		$query['venueIDs']			= ($venueID!='all') 		? array($venueID) 		: 'all';
+		$query['tournamentUrl']		= "/tms/tournament/";
+		$query['matchUrl']			= "/tms/match/";
+		$query['registrationUrl']	= "/tms/tournament/";
+		$this->getEvents($query);
+	}
+
 	// This is for /tms/calendar/
 	// Returns all the matches, tournaments and registration periods
 	public function getAllEventsTMS() {
@@ -299,7 +323,8 @@ class Db_Calendar extends MY_Controller {
 	// Returns the matches for particular venue
 	public function getVenueEventsTMS($venueID){
 		$query = array();
-		$query['tournamentIDs']		= "none";
+		$query['showTournaments']	= FALSE;
+		$query['showRegistrations']	= FALSE;
 		$query['venueIDs']			= array($venueID);
 		$query['matchUrl']			= "/tms/match/";
 		$this->getEvents($query);

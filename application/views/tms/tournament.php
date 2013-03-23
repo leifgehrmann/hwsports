@@ -38,7 +38,7 @@
 			
 			<tr>
 				<td colspan="3"></td>
-				<td><?=form_submit(array('name'=>"submit", 'value'=>"Update", 'class'=>"green"));?></td>
+				<td><?=form_submit(array('name'=>"submit", 'value'=>"Update", 'class'=>"right green"));?></td>
 			</tr>
 		</table>
 		<?=form_close();?>
@@ -52,7 +52,7 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<? if( $tournament['scheduled'] == FALSE ) { ?>
+		<? if( $tournament['scheduled'] == FALSE || count($matches) == 0 ) { ?>
 		<?=form_open("tms/tournament/$tournamentID", array('id' => 'scheduleMatchesForm'), array('form'=>'scheduleMatchesForm', 'action'=>'update'))?>
 		<table>
 			<tr>
@@ -106,10 +106,10 @@
 		<?=form_close();?>
 		<? } else { ?>
 			<? if( $tournament['sportData']['sportCategoryID'] == "46" ) { ?>
-				<table><tr>
-					<td><p>The matches have been scheduled and are displayed below. Once you have completed a match i.e. filled in the results you can press the button to schedule the next match</p></td>
+				<!--<table><tr>
+					<td><p>The matches have been scheduled and are displayed below. Once you have completed a match (i.e. filled in the results) you can press the button to schedule the next match</p></td>
 					<td><?=form_submit(array('name'=>"submit", 'value'=>"Schedule next match", 'class'=>"green", 'onclick'=>"$('#schedulingDetailsForm input[name=\'action\']').val('schedule');"));?></td>
-				</tr></table>
+				</tr></table>-->
 				<h3>Rescheduling</h3>
 				<p>To reschedule individual matches you can use the table below.</p>
 				<p>To reschedule the entire tournament you must clear all matches in the table below.</p>
@@ -182,7 +182,7 @@
 			<script src="/js/vendor/datatables/tournamentUmpires.js"></script>
 		</div>
 	<? } else if($roleName=="athlete") { ?>
-		<h2>Umpires</h2>
+		<h2>Athletes</h2>
 		<p>Displayed below are a list of athletes for the tournament. </p>
 		<div class="tournamentAthletes">
 			<table cellpadding="0" cellspacing="0" border="0" class="display" id="tournamentAthletes" width="100%">
@@ -201,6 +201,8 @@
 			</table>
 			<script src="/js/vendor/datatables/tournamentAthletes.js"></script>
 		</div>
+	<? } else { ?>
+		<?=$roleName?>rolnema dfksjdfosdhf <?=$roleID?>
 	<? } ?>
 <? } ?>
 

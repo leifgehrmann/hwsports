@@ -122,8 +122,8 @@ class Tms extends MY_Controller {
 		usort($upcomingMatches, "cmpMatches");
 		usort($latestTournaments, "cmpTournaments");
 		usort($upcomingTournaments, "cmpTournaments");
-		$latestMatches 			= array_slice($latestMatches, -0, 10);
-		$upcomingMatches 		= array_slice($upcomingMatches, -0, 10);
+		$latestMatches 			= array_slice($latestMatches, -0, 5);
+		$upcomingMatches 		= array_slice($upcomingMatches, -0, 5);
 		$latestTournaments 		= array_slice($latestTournaments, -0, 5);
 		$upcomingTournaments 	= array_slice($upcomingTournaments, -0, 5);
 		$this->data['latestMatches'] 		= $latestMatches;
@@ -309,7 +309,7 @@ class Tms extends MY_Controller {
 			// For each of the input types we will validate it.
 			foreach($tournamentDetailsForm as $input){
 				$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
-				if($input['label']=='date'){
+				if($input['type']=='date'){
 					// Change dates from public, timepicker-friendly format to database-friendly ISO format.
 					if($this->input->post($input['name'])) $newdata[$input['name']] = datetime_to_standard($this->input->post($input['name']));
 				}
@@ -405,10 +405,9 @@ class Tms extends MY_Controller {
 					$this->session->set_flashdata('message_success', 'Successfully scheduled tournament!');
 					redirect("/tms/tournament/$tournamentID", 'refresh');
 				} else if($tournament['sportData']['sportCategoryID']==46){
-					// This execute the running scheduler
 					// We would like to get an array of roleIDs so that we can insert them into the actors table.
 					$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
-					// This execute the football family scheduler
+					// This execute the running scheduler
 					$scheduledMatches = $this->scheduling_model->schedule_running($tournamentID);
 					if(!is_array($scheduledMatches)) {
 						$this->session->set_flashdata('message_error', $scheduledMatches);
@@ -431,22 +430,15 @@ class Tms extends MY_Controller {
 							$this->session->set_flashdata('message_error', 'Failed to insert match. Please contact Infusion Systems.');
 							redirect("/tms/tournament/$tournamentID", 'refresh');
 						}
-						// Insert the teams for the match
+						
+						/*// Insert the teams for the match
 						foreach($match['matchActors']['teamIDs'] as $teamID) {
 							$matchRelations = array('matchID'=>$matchID,'roleID'=>$roleIDs['team'],'actorID'=>$teamID);
 							if($this->match_actors_model->insert($matchRelations)===FALSE) {
 								$this->session->set_flashdata('message_error', 'Failed to insert match actor. Please contact Infusion Systems.');
 								redirect("/tms/tournament/$tournamentID", 'refresh');
 							}
-						}
-						// Insert the umpires for the match
-						foreach($match['matchActors']['umpireIDs'] as $umpireID) {
-							$matchRelations = array('matchID'=>$matchID,'roleID'=>$roleIDs['umpire'],'actorID'=>$umpireID);
-							if($this->match_actors_model->insert($matchRelations)===FALSE) {
-								$this->session->set_flashdata('message_error', 'Failed to insert match actor. Please contact Infusion Systems.');
-								redirect("/tms/tournament/$tournamentID", 'refresh');
-							}
-						}
+						}*/
 					}
 					if($this->tournaments_model->update($tournamentID,array('scheduled'=>'1'))===FALSE) {
 						$this->session->set_flashdata('message_error', 'Failed to set tournament to scheduled. Please contact Infusion Systems.');
@@ -459,7 +451,8 @@ class Tms extends MY_Controller {
 			}
 		}
 
-		$this->data['roles'] = $this->sports_model->get_sport_category_roles_simple($tournamentID);
+		$this->data['roles'] = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID']);
+		$this->data['matches'] = $this->matches_model->get_tournament_matches($tournamentID);
 
 		// Set the values for the tournament details form
 		$this->data['name'] = array(
@@ -591,28 +584,210 @@ class Tms extends MY_Controller {
 
 	public function venue($venueID)
 	{
-		$this->load->library('table');
+		$venueDetailsForm = array(
+			array(
+				'name'=>'name',
+				'label'=>'Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'description',
+				'label'=>'Description',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'directions',
+				'label'=>'Directions',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			)
+		);
+		// Does the match even exist?
+		$this->data['venueID'] = $venueID;
+		$this->data['venue'] = $venue = $this->venues_model->get($venueID);
+		if($venue===FALSE) {
+			$this->session->set_flashdata('message_error',  "Venue ID $venueID does not exist.");
+			redirect("/tms/venues", 'refresh');
+		}
 
+		// We validate the data from the form
+		$newdata = $_POST;
+		// For each of the input types we will validate it.
+		foreach($venueDetailsForm as $input){
+			$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+		}
+		if ($this->form_validation->run() == true) {
+			if($this->venues_model->update($venueID, $newdata)) {
+				// Successful update, show success message
+				$this->session->set_flashdata('message_success',  'Successfully updated venue.');
+			} else {
+				$this->session->set_flashdata('message_error',  'Failed to update venue. Please contact Infusion Systems.');
+			}
+			redirect("/tms/venue/$venueID", 'refresh');
+		}
 
-		// Get data for this venue
-		$this->data['venue'] = $this->venues_model->get($venueID);
+		foreach($venueDetailsForm as $input){
+			if(array_key_exists('type',$input)){
+				$this->data[$input['name']] = array(
+					'name'  => $input['name'],
+					'id'    => $input['name'],
+					'type'  => $input['type'],
+					'value' => $this->form_validation->set_value($input['type'], (isset($venue[$input['name']]) ? $venue[$input['name']] : ''))
+				);
+				if($input['name']=="description"||$input['name']=="directions"){
+					$this->data[$input['name']]['style'] = 'width:100%;';
+					$this->data[$input['name']]['rows'] = '5';
+				}
+			}
+		}
 
 		$this->view('venue',"venue",$this->data['venue']['name']." | Venue",$this->data);
 	}
-
 	public function sports()
 	{
 		$this->view('sports',"sports","Sports",$this->data);
 	}
-	public function match($matchID)
+	public function sport($sportID)
 	{
-		$this->load->library('table');
+		$sportDetailsForm = array(
+			array(
+				'name'=>'name',
+				'label'=>'Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'description',
+				'label'=>'Description',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			)
+		);
+		// Does the match even exist?
+		$this->data['sportID'] = $sportID;
+		$this->data['sport'] = $sport = $this->sports_model->get($sportID);
+		if($sport===FALSE) {
+			$this->session->set_flashdata('message_error',  "Sport ID $sportID does not exist.");
+			redirect("/tms/sports", 'refresh');
+		}
 
+		// We validate the data from the form
+		$newdata = $_POST;
+		// For each of the input types we will validate it.
+		foreach($sportDetailsForm as $input){
+			$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+		}
+		if ($this->form_validation->run() == true) {
+			if($this->sports_model->update($sportID, $newdata)) {
+				// Successful update, show success message
+				$this->session->set_flashdata('message_success',  'Successfully updated sport.');
+			} else {
+				$this->session->set_flashdata('message_error',  'Failed to update sport. Please contact Infusion Systems.');
+			}
+			redirect("/tms/sport/$sportID", 'refresh');
+		}
 
-		// Get data for this venue
-		$this->data['match'] = $this->matches_model->get($matchID);
-		$this->data['match']['startTime'] = datetime_to_public($this->data['match']['startTime']); 
-		$this->data['match']['endTime'] = datetime_to_public($this->data['match']['endTime']); 
+		foreach($sportDetailsForm as $input){
+			if(array_key_exists('type',$input)){
+				$this->data[$input['name']] = array(
+					'name'  => $input['name'],
+					'id'    => $input['name'],
+					'type'  => $input['type'],
+					'value' => $this->form_validation->set_value($input['type'], (isset($sport[$input['name']]) ? $sport[$input['name']] : ''))
+				);
+				if($input['name']=="description"){
+					$this->data[$input['name']]['style'] = 'width:100%;';
+					$this->data[$input['name']]['rows'] = '5';
+				}
+			}
+		}
+		$this->view('sport',"sport",$this->data['sport']['name']." | Sport",$this->data);
+	}
+	public function match($matchID)
+	{	
+		$matchDetailsForm = array(
+			array(
+				'name'=>'name',
+				'label'=>'Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'description',
+				'label'=>'Description',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'startTime',
+				'label'=>'Start Time',
+				'restrict'=>'required|xss_clean|callback_datetime_check[startTime]',
+				'type'=>'date'
+			),
+			array(
+				'name'=>'endTime',
+				'label'=>'End Time',
+				'restrict'=>'required|xss_clean|callback_datetime_check[endTime]',
+				'type'=>'date'
+			)
+		);
+		// Does the match even exist?
+		$this->data['matchID'] = $matchID;
+		$this->data['match'] = $match = $this->matches_model->get($matchID);
+		if($match===FALSE) {
+			$this->session->set_flashdata('message_error',  "Match ID $matchID does not exist.");
+			redirect("/tms/matches", 'refresh');
+		}
+
+		// We validate the data from the form
+		$newdata = $_POST;
+		// For each of the input types we will validate it.
+		foreach($matchDetailsForm as $input){
+			$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+			if($input['type']=='date'){
+				// Change dates from public, timepicker-friendly format to database-friendly ISO format.
+				if($this->input->post($input['name'])) $newdata[$input['name']] = datetime_to_standard($this->input->post($input['name']));
+			}
+		}
+		if ($this->form_validation->run() == true) {
+			if($this->matches_model->update($matchID, $newdata)) {
+				// Successful update, show success message
+				$this->session->set_flashdata('message_success',  'Successfully updated match.');
+			} else {
+				$this->session->set_flashdata('message_error',  'Failed to update match. Please contact Infusion Systems.');
+			}
+			redirect("/tms/match/$matchID", 'refresh');
+		}
+
+		foreach($matchDetailsForm as $input){
+			if(array_key_exists('type',$input)){
+				if($input['name']=="description"){
+					$this->data[$input['name']]['style'] = 'width:100%;';
+					$this->data[$input['name']]['rows'] = '5';
+				}
+				if($input['type']=="date"){
+					$this->data[$input['name']] = array(
+						'name'  => $input['name'],
+						'id'    => $input['name'],
+						'type'  => 'text',
+						'class' => 'date',
+						'value' => datetime_to_public( $this->form_validation->set_value($input['name'], (isset($match[$input['name']]) ? $match[$input['name']] : '')))
+					);
+				} else {
+					$this->data[$input['name']] = array(
+						'name'  => $input['name'],
+						'id'    => $input['name'],
+						'type'  => $input['type'],
+						'value' => $this->form_validation->set_value($input['type'], (isset($match[$input['name']]) ? $match[$input['name']] : ''))
+					);
+				}
+			}
+		}
+		
+		//$this->data['match']['startTime'] = datetime_to_public($this->data['match']['startTime']); 
+		//$this->data['match']['endTime'] = datetime_to_public($this->data['match']['endTime']); 
 
 		$this->view('match',"match",$this->data['match']['name']." | Match",$this->data);
 	}
@@ -622,10 +797,18 @@ class Tms extends MY_Controller {
 	}
 	public function calendar()
 	{
+		// If stuff has been submitted via the form...
+		$viewSelection 			= $this->input->post('viewSelection');
+		$sportSelection 		= $this->input->post('sportSelection');
+		$tournamentSelection 	= $this->input->post('tournamentSelection');
+		$venueSelection 		= $this->input->post('venueSelection');
 
+		// fall back values in case form was not loaded.
+		if(!$viewSelection) 		$viewSelection 			= "all";
+		if(!$sportSelection) 		$sportSelection 		= "all";
+		if(!$tournamentSelection) 	$tournamentSelection 	= "all";
+		if(!$venueSelection) 		$venueSelection 		= "all";
 
-
-			
 		$viewOptions['all'] = "All Events";
 		$sportOptions['all'] = "All";
 		$tournamentOptions['all'] = "All";
@@ -651,13 +834,13 @@ class Tms extends MY_Controller {
 		);
 
 		$this->data['viewOptions'] = $viewOptions;
-		$this->data['viewSelection'] = 'all';
+		$this->data['viewSelection'] = $viewSelection;
 		$this->data['sportOptions'] = $sportOptions;
-		$this->data['sportSelection'] = 'all';
+		$this->data['sportSelection'] = $sportSelection;
 		$this->data['tournamentOptions'] = $tournamentOptions;
-		$this->data['tournamentSelection'] = 'all';
+		$this->data['tournamentSelection'] = $tournamentSelection;
 		$this->data['venueOptions'] = $venueOptions;
-		$this->data['venueSelection'] = 'all';
+		$this->data['venueSelection'] = $venueSelection;
 
 		$this->view('calendar',"calendar","Calendar",$this->data);
 	}
@@ -696,10 +879,111 @@ class Tms extends MY_Controller {
 	}
 	public function user($userID)
 	{
+		$userDetailsForm = array(
+			array(
+				'name'=>'firstName',
+				'label'=>'First Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'lastName',
+				'label'=>'Last Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'phone',
+				'label'=>'Phone',
+				'restrict'=>'xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'address',
+				'label'=>'Address',
+				'restrict'=>'xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'aboutMe',
+				'label'=>'Bio',
+				'restrict'=>'xss_clean',
+				'type'=>'text'
+			)
+		);
+		$emergencyDetailsForm = array(
+			array(
+				'name'=>'emergencyName',
+				'label'=>'Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'emergencyEmail',
+				'label'=>'Email',
+				'restrict'=>'required|valid_email',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'emergencyPhone',
+				'label'=>'Phone',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'emergencyAddress',
+				'label'=>'Address',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			)
+		);
+		// Does the match even exist?
+		$this->data['userID'] = $userID;
+		$this->data['user'] = $user = $this->users_model->get($userID);
+		if($user===FALSE) {
+			$this->session->set_flashdata('message_error',  "User ID $userID does not exist.");
+			redirect("/tms/users", 'refresh');
+		}
 
-		$user = $this->users_model->get($userID);
-		$this->data['user'] = $user;
-		
+		// We validate the data from the form
+		$newdata = $_POST;
+		// For each of the input types we will validate it.
+		$submitValue = $this->input->post('submit');
+		if($submitValue == 'Update User'){
+			foreach($userDetailsForm as $input){
+				$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+			}
+		} else if ($submitValue == 'Update Emergency Contact'){
+			foreach($emergencyDetailsForm as $input){
+				$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+			}
+		}
+		if ($submitValue!=FALSE && $this->form_validation->run() == true) {
+			if($this->users_model->update($userID, $newdata)) {
+				// Successful update, show success message
+				$this->session->set_flashdata('message_success',  'Successfully updated user.');
+			} else {
+				$this->session->set_flashdata('message_error',  'Failed to update user. Please contact Infusion Systems.');
+			}
+			redirect("/tms/user/$userID", 'refresh');
+		}
+
+		foreach(array($userDetailsForm, $emergencyDetailsForm) as $form){
+			foreach($form as $input){
+				if(array_key_exists('type',$input)){
+					$this->data[$input['name']] = array(
+						'name'  => $input['name'],
+						'id'    => $input['name'],
+						'type'  => $input['type'],
+						'value' => $this->form_validation->set_value($input['type'], (isset($user[$input['name']]) ? $user[$input['name']] : ''))
+					);
+					if($input['name']=="description"){
+						$this->data[$input['name']]['style'] = 'width:100%;';
+						$this->data[$input['name']]['rows'] = '5';
+					}
+				}
+			}
+		}
 		$this->view('user',"user",$user['firstName']." ".$user['lastName']." | User",$this->data);
 	}
 	public function teams()
@@ -712,8 +996,64 @@ class Tms extends MY_Controller {
 	}
 	public function team($teamID)
 	{
+		$teamDetailsForm = array(
+			array(
+				'name'=>'name',
+				'label'=>'Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'associationNumber',
+				'label'=>'Association Number',
+				'restrict'=>'xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'description',
+				'label'=>'Description',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			)
+		);
+		// Does the match even exist?
+		$this->data['teamID'] = $teamID;
+		$this->data['team'] = $team = $this->teams_model->get($teamID);
+		if($team===FALSE) {
+			$this->session->set_flashdata('message_error',  "Team ID $teamID does not exist.");
+			redirect("/tms/teams", 'refresh');
+		}
 
-		$team = $this->teams_model->get($teamID);
+		// We validate the data from the form
+		$newdata = $_POST;
+		// For each of the input types we will validate it.
+		foreach($teamDetailsForm as $input){
+			$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+		}
+		if ($this->form_validation->run() == true) {
+			if($this->teams_model->update($teamID, $newdata)) {
+				// Successful update, show success message
+				$this->session->set_flashdata('message_success',  'Successfully updated team.');
+			} else {
+				$this->session->set_flashdata('message_error',  'Failed to update team. Please contact Infusion Systems.');
+			}
+			redirect("/tms/team/$teamID", 'refresh');
+		}
+
+		foreach($teamDetailsForm as $input){
+			if(array_key_exists('type',$input)){
+				$this->data[$input['name']] = array(
+					'name'  => $input['name'],
+					'id'    => $input['name'],
+					'type'  => $input['type'],
+					'value' => $this->form_validation->set_value($input['type'], (isset($team[$input['name']]) ? $team[$input['name']] : ''))
+				);
+				if($input['name']=="description"){
+					$this->data[$input['name']]['style'] = 'width:100%;';
+					$this->data[$input['name']]['rows'] = '5';
+				}
+			}
+		}
 		$this->data['team'] = $team;
 		$this->view('team',"team",$team['name']." | Team",$this->data);
 	}
@@ -868,6 +1208,23 @@ class Tms extends MY_Controller {
 		try {
 			// If date string is invalid, this should throw an exception. We're only calling it endDate because of the checking of date ranges 
 			$endDate = new DateTime($strDateTime);
+			// If the field has "end" at the start, we're assuming there's a corresponding "start" field.
+			if(substr($field, 0, 3)=="end") {
+				$endDateField = $field;
+				$startDateField = "start".substr($field, 3);
+				// Create a new DateTime object from the start date string, or today's date if there is no start string
+				$startDate = ( ($this->input->post($startDateField)===FALSE) ? new DateTime() : new DateTime($this->input->post($startDateField)) );
+				// If start datetime is equal to or after end datetime 
+				if( $startDate >= $endDate ) {
+					if($this->input->post($startDateField)) {
+						$error = "Date '$startDateField': ".datetime_to_public($startDate)." is not before end date: ".datetime_to_public($endDate);
+					} else {
+						$error = "Date '$endDateField': ".datetime_to_public($endDate)." is before current time: ".datetime_to_public($startDate);
+					}						
+					$this->form_validation->set_message('datetime_check', "Invalid date range specified: $error");
+					return FALSE;
+				}
+			}
 			// If the field has "End" at the end, we're assuming there's a corresponding "Start" field. 
 			if(substr($field, -3)=="End") {
 				$endDateField = $field;
