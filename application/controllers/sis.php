@@ -56,13 +56,6 @@ class Sis extends MY_Controller {
 		$allTournaments	= $this->tournaments_model->get_all(); // Get all tournaments
 		$pastMatches = $this->matches_model->get_all(FALSE,$now); // Get all matches that have occured and today's matches
 		$upcomingMatches = $this->matches_model->get_all($now,FALSE); // Get all tournaments that occur after today
-		foreach($allTournaments as $tournament) {
-			if(in_array($tournament['status'],array("inRegistration","preRegistration","postRegistration"))) {
-				$upcomingTournaments[$tournament['tournamentID']] = $tournament;
-			} else {
-				$pastTournaments[$tournament['tournamentID']] = $tournament;
-			}
-		}
 
 		// Remove matches that are not in a tournament
 		foreach($pastMatches as $i=>$match)
@@ -94,6 +87,14 @@ class Sis extends MY_Controller {
 				}
 			}
 		}*/
+		foreach($allTournaments as $tournament) {
+			if(in_array($tournament['status'],array("inRegistration","preRegistration","postRegistration","preTournament"))) {
+				$upcomingTournaments[$tournament['tournamentID']] = $tournament;
+			} else if(){
+				$pastTournaments[$tournament['tournamentID']] = $tournament;
+			}
+		}
+
 		function cmpMatches($a, $b){
 			$a = new DateTime($a['endTime']);
 			$b = new DateTime($b['endTime']);
