@@ -185,7 +185,7 @@ class Users_model extends MY_Model {
 			//$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
 			$tournament['actorsData'] = $this->tournaments_model->get_actors($tournament['tournamentID']);
 			
-			check_if_actor();
+			$this->check_if_actor();
 		}
 		
 		return $userTournaments;
