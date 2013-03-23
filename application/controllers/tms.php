@@ -664,7 +664,7 @@ class Tms extends MY_Controller {
 						'id'    => $input['name'],
 						'type'  => 'text',
 						'class' => 'date',
-						'value' => datetime_to_public( $this->form_validation->set_value($input['name']), (isset($match[$input['name']]) ? $match[$input['name']] : ''))
+						'value' => datetime_to_public( $this->form_validation->set_value($input['name'], (isset($match[$input['name']]) ? $match[$input['name']] : ''))
 					);
 				} else {
 					$this->data[$input['name']] = array(
