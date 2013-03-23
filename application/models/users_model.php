@@ -176,11 +176,11 @@ class Users_model extends MY_Model {
 	 **/
 	public function tournament_memberships($userID){
 		$tournaments = $this->tournaments_model->get_all();
-		$centreID = $this->centreID;
-
-		for($tournaments as $tournament)
+		$userTournaments = array();
+		foreach($tournaments as $tournament) {
+			//$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
 			$tournament['actorsData'] = $this->tournaments_model->get_actors($tournament['tournamentID']);
-		foreach($tournament) {
+			
 			check_if_actor();
 		}
 
