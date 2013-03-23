@@ -983,11 +983,6 @@ class Tms extends MY_Controller {
 				}
 			}
 		}
-		$this->data['team'] = $team;
-		$this->view('team',"team",$team['name']." | Team",$this->data);
-		$user = $this->users_model->get($userID);
-		$this->data['user'] = $user;
-		
 		$this->view('user',"user",$user['firstName']." ".$user['lastName']." | User",$this->data);
 	}
 	public function teams()
