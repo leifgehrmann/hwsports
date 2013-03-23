@@ -65,7 +65,7 @@
 <div class="widget half tournaments">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
-		<div class="widget-title-centre">Latest Tournaments</div>
+		<div class="widget-title-centre">Current Tournaments</div>
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">

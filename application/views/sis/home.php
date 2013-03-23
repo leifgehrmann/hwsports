@@ -78,12 +78,12 @@
 <div class="widget half tournaments">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
-		<div class="widget-title-centre">Past Tournaments</div>
+		<div class="widget-title-centre">Current Tournaments</div>
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
 		<? if(count($pastTournaments)==0) { ?>
-			<p>There are no recent or currently running tournaments.</p>
+			<p>There are no currently running tournaments.</p>
 		<? } else {
 			foreach($pastTournaments as $tournament){ 
 				$start = $this->method_call->datetime_to_public_date($tournament['tournamentStart']);
