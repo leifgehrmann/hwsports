@@ -55,15 +55,15 @@
 
 <? if(count($user['team'])>0) { ?>
 <h2>Team Participation</h2>
-<? foreach($user['team'] as $team){ ?>
+<? foreach($user['teams'] as $team){ ?>
 <p><a href="/tms/team/<?=$team['teamID']?>"><?=$team['name']?></a></p>
 <? } ?>
 <? } ?>
 
-<? if(count($user['team'])>0) { ?>
+<? if(count($user['tournaments'])>0) { ?>
 <h2>Tournament Participation</h2>
-<? foreach($user['team'] as $team){ ?>
-<p><a href="/tms/team/<?=$team['teamID']?>"><?=$team['name']?></a></p>
+<? foreach($user['tournaments'] as $tournament){ ?>
+<p><a href="/tms/tournament/<?=$tournament['tournamentID']?>"><?=$tournament['name']?></a></p>
 <? } ?>
 <? } ?>
 
