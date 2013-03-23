@@ -309,7 +309,7 @@ class Tms extends MY_Controller {
 			// For each of the input types we will validate it.
 			foreach($tournamentDetailsForm as $input){
 				$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
-				if($input['label']=='date'){
+				if($input['type']=='date'){
 					// Change dates from public, timepicker-friendly format to database-friendly ISO format.
 					if($this->input->post($input['name'])) $newdata[$input['name']] = datetime_to_standard($this->input->post($input['name']));
 				}
@@ -597,14 +597,88 @@ class Tms extends MY_Controller {
 		$this->view('sports',"sports","Sports",$this->data);
 	}
 	public function match($matchID)
-	{
-		$this->load->library('table');
+	{	
+		$matchDetailsForm = array(
+			array(
+				'name'=>'name',
+				'label'=>'Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'description',
+				'label'=>'Description',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'startTime',
+				'label'=>'Start Time',
+				'restrict'=>'required|xss_clean|callback_datetime_check[startTime]',
+				'type'=>'date'
+			),
+			array(
+				'name'=>'endTime',
+				'label'=>'End Time',
+				'restrict'=>'required|xss_clean|callback_datetime_check[endTime]',
+				'type'=>'date'
+			)
+		);
+		// Does the match even exist?
+		$this->data['matchID'] = $matchID;
+		$this->data['match'] = $match = $this->matches_model->get($matchID);
+		if($match===FALSE) {
+			$this->session->set_flashdata('message_error',  "Match ID $matchID does not exist.");
+			redirect("/tms/matches", 'refresh');
+		}
 
+		// We validate the data from the form
+		$newdata = $_POST;
+		// For each of the input types we will validate it.
+		foreach($matchDetailsForm as $input){
+			$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+			if($input['type']=='date'){
+				// Change dates from public, timepicker-friendly format to database-friendly ISO format.
+				if($this->input->post($input['name'])) $newdata[$input['name']] = datetime_to_standard($this->input->post($input['name']));
+			}
+		}
+		if ($this->form_validation->run() == true) {
+			if($this->matches_model->update($matchID, $newdata)) {
+				// Successful update, show success message
+				$this->session->set_flashdata('message_success',  'Successfully updated match.');
+			} else {
+				$this->session->set_flashdata('message_error',  'Failed to update match. Please contact Infusion Systems.');
+			}
+			redirect("/tms/match/$matchID", 'refresh');
+		}
 
-		// Get data for this venue
-		$this->data['match'] = $this->matches_model->get($matchID);
-		$this->data['match']['startTime'] = datetime_to_public($this->data['match']['startTime']); 
-		$this->data['match']['endTime'] = datetime_to_public($this->data['match']['endTime']); 
+		foreach($matchDetailsForm as $input){
+			if(array_key_exists('type',$input)){
+				if($input['name']=="description"){
+					$this->data[$input['name']]['style'] = 'width:100%;';
+					$this->data[$input['name']]['rows'] = '5';
+				}
+				if($input['type']=="date"){
+					$this->data[$input['name']] = array(
+						'name'  => $input['name'],
+						'id'    => $input['name'],
+						'type'  => 'text',
+						'class' => 'date',
+						'value' => datetime_to_public( $this->form_validation->set_value($input['name']) )
+					);
+				} else {
+					$this->data[$input['name']] = array(
+						'name'  => $input['name'],
+						'id'    => $input['name'],
+						'type'  => $input['type'],
+						'value' => $this->form_validation->set_value($input['type'])
+					);
+				}
+			}
+		}
+		
+		//$this->data['match']['startTime'] = datetime_to_public($this->data['match']['startTime']); 
+		//$this->data['match']['endTime'] = datetime_to_public($this->data['match']['endTime']); 
 
 		$this->view('match',"match",$this->data['match']['name']." | Match",$this->data);
 	}
