@@ -181,10 +181,6 @@ class Tms extends MY_Controller {
 	
 		foreach($tournamentDetailsForm as $input){
 			$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
-			if($input['label']=='date'){
-				// Change dates from public, timepicker-friendly format to database-friendly ISO format.
-				if($this->input->post($input['name'])) $_POST[$input['name']] = datetime_to_standard($this->input->post($input['name']));
-			}
 		}
 		
 		if ($this->form_validation->run() == true) {
@@ -194,6 +190,14 @@ class Tms extends MY_Controller {
 				'sportID' => $_POST['sport']
 			);
 			
+			foreach($tournamentDetailsForm as $input){
+				$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+				if($input['label']=='date'){
+					// Change dates from public, timepicker-friendly format to database-friendly ISO format.
+					if($this->input->post($input['name'])) $newdata[$input['name']] = datetime_to_standard($this->input->post($input['name']));
+				}
+			}
+
 			$tournamentID = $this->tournaments_model->insert($newdata,$relationIDs);
 			if($tournamentID > -1) {
 				// Successful update, show success message

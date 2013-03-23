@@ -61,34 +61,59 @@ class MY_Controller extends CI_Controller {
 		}
 			
 		function datetime_to_standard($inDateTime) {
-			if(empty($inDateTime)) return $inDateTime;
-			if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_FORMAT);
-			$dateTime = new DateTime($inDateTime);
-			return $dateTime->format(DATE_TIME_FORMAT);
+			try{
+				if(empty($inDateTime)) return $inDateTime;
+				if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_FORMAT);
+				$dateTime = new DateTime($inDateTime);
+				return $dateTime->format(DATE_TIME_FORMAT);
+			} catch (Exception $e) {
+				$this->form_validation->set_message('datetime_check', $e->getMessage());
+				return $inDateTime;
+			}
 		}
 		function datetime_to_unix($inDateTime) {
-			if(empty($inDateTime)) return $inDateTime;
-			if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_UNIX_FORMAT);
-			$dateTime = new DateTime($inDateTime);
-			return $dateTime->format(DATE_TIME_UNIX_FORMAT);
+			try{
+				if(empty($inDateTime)) return $inDateTime;
+				if(is_object($inDateTime)) return $inDateTime->format(DATE_TIME_UNIX_FORMAT);
+				$dateTime = new DateTime($inDateTime);
+				return $dateTime->format(DATE_TIME_UNIX_FORMAT);
+			} catch (Exception $e) {
+				$this->form_validation->set_message('datetime_check', $e->getMessage());
+				return $inDateTime;
+			}
 		}
 		function datetime_to_public($inDateTime) {
-			if(empty($inDateTime)) return $inDateTime;
-			if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_DATE_TIME_FORMAT);
-			$dateTime = new DateTime($inDateTime);
-			return $dateTime->format(PUBLIC_DATE_TIME_FORMAT);
+			try{
+				if(empty($inDateTime)) return $inDateTime;
+				if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_DATE_TIME_FORMAT);
+				$dateTime = new DateTime($inDateTime);
+				return $dateTime->format(PUBLIC_DATE_TIME_FORMAT);
+			} catch (Exception $e) {
+				$this->form_validation->set_message('datetime_check', $e->getMessage());
+				return $inDateTime;
+			}
 		}
 		function datetime_to_public_date($inDateTime) {
-			if(empty($inDateTime)) return $inDateTime;
-			if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_DATE_FORMAT);
-			$dateTime = new DateTime($inDateTime);
-			return $dateTime->format(PUBLIC_DATE_FORMAT);
+			try{
+				if(empty($inDateTime)) return $inDateTime;
+				if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_DATE_FORMAT);
+				$dateTime = new DateTime($inDateTime);
+				return $dateTime->format(PUBLIC_DATE_FORMAT);
+			} catch (Exception $e) {
+				$this->form_validation->set_message('datetime_check', $e->getMessage());
+				return $inDateTime;
+			}
 		}
 		function datetime_to_public_time($inDateTime) {
-			if(empty($inDateTime)) return $inDateTime;
-			if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_TIME_FORMAT);
-			$dateTime = new DateTime($inDateTime);
-			return $dateTime->format(PUBLIC_TIME_FORMAT);
+			try{
+				if(empty($inDateTime)) return $inDateTime;
+				if(is_object($inDateTime)) return $inDateTime->format(PUBLIC_TIME_FORMAT);
+				$dateTime = new DateTime($inDateTime);
+				return $dateTime->format(PUBLIC_TIME_FORMAT);
+			} catch (Exception $e) {
+				$this->form_validation->set_message('datetime_check', $e->getMessage());
+				return $inDateTime;
+			}
 		}
 		
 		function generatePassword($length = 9, $available_sets = 'lud') {
