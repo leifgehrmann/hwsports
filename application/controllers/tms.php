@@ -625,12 +625,7 @@ class Tms extends MY_Controller {
 		if(!$sportSelection) 		$sportSelection 		= "all";
 		if(!$tournamentSelection) 	$tournamentSelection 	= "all";
 		if(!$venueSelection) 		$venueSelection 		= "all";
-		
-		var_dump($viewSelection);
-		var_dump($sportSelection);
-		var_dump($tournamentSelection);
-		var_dump($venueSelection);
-		
+
 		$viewOptions['all'] = "All Events";
 		$sportOptions['all'] = "All";
 		$tournamentOptions['all'] = "All";
@@ -655,13 +650,8 @@ class Tms extends MY_Controller {
 			'tournaments'    => 'Tournament Events'
 		);
 
-		var_dump($viewSelection);
-		var_dump($sportSelection);
-		var_dump($tournamentSelection);
-		var_dump($venueSelection);
-
 		$this->data['viewOptions'] = $viewOptions;
-		$this->data['viewSelection'] = $sportSelection;
+		$this->data['viewSelection'] = $viewSelection;
 		$this->data['sportOptions'] = $sportOptions;
 		$this->data['sportSelection'] = $sportSelection;
 		$this->data['tournamentOptions'] = $tournamentOptions;
