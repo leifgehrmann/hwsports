@@ -23,8 +23,8 @@
 			<p>There are no recent or current matches.</p>
 		<? } else {
 			foreach($latestMatches as $match){ 
-				$date = datetime_to_public_date($match['startTime']);
-				$time = datetime_to_public_time($match['startTime']);
+				$date = $this->datetime_to_public_date($match['startTime']);
+				$time = $this->datetime_to_public_time($match['startTime']);
 			?>
 			<div class="match 
 				matchID-<?=$match['matchID']?> 
@@ -54,8 +54,8 @@
 			<p>There are no upcoming matches.</p>
 		<? } else {
 			foreach($upcomingMatches as $match){ 
-				$date = datetime_to_public_date($match['startTime']);
-				$time = datetime_to_public_time($match['startTime']);
+				$date = $this->datetime_to_public_date($match['startTime']);
+				$time = $this->datetime_to_public_time($match['startTime']);
 			?>
 			<div class="match 
 				matchID-<?=$match['matchID']?> 
@@ -85,8 +85,8 @@
 			<p>There are no recent or currently running tournaments.</p>
 		<? } else {
 			foreach($latestTournaments as $tournament){ 
-				$start = datetime_to_public_date($tournament['tournamentStart']);
-				$end = datetime_to_public_date($tournament['tournamentEnd']);
+				$start = $this->datetime_to_public_date($tournament['tournamentStart']);
+				$end = $this->datetime_to_public_date($tournament['tournamentEnd']);
 			?>
 			<div class="tournament 
 				tournamentID-<?=$tournament['tournamentID']?> 
@@ -116,8 +116,8 @@
 			<p>There are no upcoming tournaments.</p>
 		<? } else {
 			foreach($upcomingTournaments as $tournament){ 
-				$start = datetime_to_public_date($tournament['tournamentStart']);
-				$end = datetime_to_public_date($tournament['tournamentEnd']);
+				$start = $this->datetime_to_public_date($tournament['tournamentStart']);
+				$end = $this->datetime_to_public_date($tournament['tournamentEnd']);
 			?>
 			<div class="tournament 
 				tournamentID-<?=$tournament['tournamentID']?> 

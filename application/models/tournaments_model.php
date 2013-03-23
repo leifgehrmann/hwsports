@@ -68,11 +68,11 @@ class Tournaments_model extends MY_Model {
 			($today >= $tournamentStartDate) && ($today >= $tournamentEndDate) ) {
 			$tournament['status'] = "postTournament";
 		} else {
-			$tournament['status'] = "ERROR: Tournament has invalid dates. Today's date is: ".datetime_to_public($today).".
-					Registration start date is: ".datetime_to_public($registrationStartDate)."
-					Registration end date is: ".datetime_to_public($registrationEndDate)."
-					Tournament start date is: ".datetime_to_public($tournamentStartDate)."
-					Tournament start date is: ".datetime_to_public($tournamentEndDate)."
+			$tournament['status'] = "ERROR: Tournament has invalid dates. Today's date is: ".$this->datetime_to_public($today).".
+					Registration start date is: ".$this->datetime_to_public($registrationStartDate)."
+					Registration end date is: ".$this->datetime_to_public($registrationEndDate)."
+					Tournament start date is: ".$this->datetime_to_public($tournamentStartDate)."
+					Tournament start date is: ".$this->datetime_to_public($tournamentEndDate)."
 					Please correct the dates below.";
 		}
 		// End tournament status logic 

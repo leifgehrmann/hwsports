@@ -98,7 +98,7 @@ class Users_model extends MY_Model {
 			if( isset($data['password']) ) {
 				$password = $data['password']; unset($data['password']);
 			} else {
-				$password = generatePassword();
+				$password = $this->generatePassword();
 			}
 			return $this->register($email,$password,$data);
 		}

@@ -299,7 +299,7 @@ class Scheduling_model extends MY_Model {
 					$endTime = new DateTime($dateTime);
 					$endTime->add($matchDuration);
 					$newMatch['name'] = $teams[$teamA]['name']." vs ".$teams[$teamB]['name'];
-					$newMatch['endTime'] = datetime_to_standard($endTime);
+					$newMatch['endTime'] = $this->datetime_to_standard($endTime);
 					$newMatch['matchActors']['teamIDs'] = array($teamA,$teamB);
 					$newMatch['matchActors']['umpireIDs'] = $matchUmpireIDs;
 					$newMatch['venueID'] = $matchVenueID;
@@ -574,8 +574,8 @@ class Scheduling_model extends MY_Model {
 					$newMatch = array();
 					$endTime = new DateTime($dateTime);
 					$endTime->add($matchDuration);
-					$newMatch['startTime'] = datetime_to_standard($dateTime);
-					$newMatch['endTime'] = datetime_to_standard($endTime);
+					$newMatch['startTime'] = $this->datetime_to_standard($dateTime);
+					$newMatch['endTime'] = $this->datetime_to_standard($endTime);
 					$newMatch['venueID'] = $matchVenueID;
 					$matchDateTimesSelected[$date][$dateTime] = array();
 					$matchDateTimesSelected[$date][$dateTime]['venueID'] = $matchVenueID;
@@ -846,7 +846,7 @@ class Scheduling_model extends MY_Model {
 		$matchDateTimes = array();
 		foreach( $dates as $date )
 		{
-			$dateString = datetime_to_standard($date);
+			$dateString = $this->datetime_to_standard($date);
 			// For each possible start time that a match can have on
 			// this particular weekday
 			if(!array_key_exists($this->get_weekday_string($weekday),$matchWeekdayStartTimes))
@@ -862,7 +862,7 @@ class Scheduling_model extends MY_Model {
 				$startDateTime->setTime($startHour, $startMinute, 0);
 				$endDateTime = clone $startDateTime;
 				$endDateTime->add($matchDuration);
-				$dateTimeString = datetime_to_standard($startDateTime);
+				$dateTimeString = $this->datetime_to_standard($startDateTime);
 
 				// If valid date, add it to our array
 				if( $endDateTime < $tournamentEnd )

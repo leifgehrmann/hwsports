@@ -60,13 +60,13 @@ class Datatables extends MY_Controller {
 					$object['DT_RowId'] = "$type-$ID";
 					// Format date/time objects for the public
 					if(isset($object['startTime']) && isset($object['endTime'])) {
-						$object['startTime'] = datetime_to_public($object['startTime']);
-						$object['endTime'] = datetime_to_public($object['endTime']);
+						$object['startTime'] = $this->datetime_to_public($object['startTime']);
+						$object['endTime'] = $this->datetime_to_public($object['endTime']);
 					} else if(isset($object['tournamentStart']) && isset($object['tournamentEnd']) && isset($object['registrationStart']) && isset($object['registrationEnd'])) {
-						$object['tournamentStart'] = datetime_to_public($object['tournamentStart']);
-						$object['tournamentEnd'] = datetime_to_public($object['tournamentEnd']);
-						$object['registrationStart'] = datetime_to_public($object['registrationStart']);
-						$object['registrationEnd'] = datetime_to_public($object['registrationEnd']);
+						$object['tournamentStart'] = $this->datetime_to_public($object['tournamentStart']);
+						$object['tournamentEnd'] = $this->datetime_to_public($object['tournamentEnd']);
+						$object['registrationStart'] = $this->datetime_to_public($object['registrationStart']);
+						$object['registrationEnd'] = $this->datetime_to_public($object['registrationEnd']);
 					}
 					if(isset($object['sportData'])) {
 						$object['sportIcon'] = "<div class='icon sportCategoryID-".$object['sportData']['sportCategoryID']." sportID-".$object['sportData']['sportID']."'></div>";

@@ -161,8 +161,8 @@ class Db_Calendar extends MY_Controller {
 					'id' => "match-".$match['matchID']
 				),
 				'title' => $match['name'],
-				'start' => datetime_to_standard($startTime),
-				'end' => datetime_to_standard($endTime),
+				'start' => $this->datetime_to_standard($startTime),
+				'end' => $this->datetime_to_standard($endTime),
 				'allDay' => false,
 				'className' => 	'match'.
 								' matchID-'.$match['matchID'].
@@ -200,8 +200,8 @@ class Db_Calendar extends MY_Controller {
 						'id' => "tournament-".$tournament['tournamentID']
 					),
 					'title' => $tournament['name'],
-					'start' => datetime_to_standard($tournamentStart),
-					'end' => datetime_to_standard($tournamentEnd),
+					'start' => $this->datetime_to_standard($tournamentStart),
+					'end' => $this->datetime_to_standard($tournamentEnd),
 					'allDay' => true,
 					'className' => 	'tournament'.
 									' sportID-'.$tournament['sportID'].
@@ -236,8 +236,8 @@ class Db_Calendar extends MY_Controller {
 						'id' => "registration-".$tournament['tournamentID']
 					),
 					'title' => $tournament['name']." Registration Period",
-					'start' => datetime_to_standard($registrationStart),
-					'end' => datetime_to_standard($registrationEnd),
+					'start' => $this->datetime_to_standard($registrationStart),
+					'end' => $this->datetime_to_standard($registrationEnd),
 					'allDay' => true,
 					'className' => 	'registration'.
 									' sportID-'.$tournament['sportID'].

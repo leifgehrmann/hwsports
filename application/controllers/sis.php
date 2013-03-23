@@ -124,9 +124,9 @@ class Sis extends MY_Controller {
 	public function matches() {			
 		$matches = $this->matches_model->get_all();
 		foreach($matches as $key => $match) {
-			$matches[$key]['date'] = datetime_to_public_date($match['startTime']);
-			$matches[$key]['startTime'] = datetime_to_public_time($match['startTime']);
-			$matches[$key]['endTime'] = datetime_to_public_time($match['endTime']);
+			$matches[$key]['date'] = $this->datetime_to_public_date($match['startTime']);
+			$matches[$key]['startTime'] = $this->datetime_to_public_time($match['startTime']);
+			$matches[$key]['endTime'] = $this->datetime_to_public_time($match['endTime']);
 		}
 		$this->data['matches'] = $matches;
 
@@ -146,9 +146,9 @@ class Sis extends MY_Controller {
 		}
 		
 		$match['tournamentData']['name'] = ($match['tournamentData'] ? $match['tournamentData']['name'] : "None");
-		$match['date'] = datetime_to_public_date($match['startTime']);
-		$match['startTime'] = datetime_to_public_time($match['startTime']);
-		$match['endTime'] = datetime_to_public_time($match['endTime']);
+		$match['date'] = $this->datetime_to_public_date($match['startTime']);
+		$match['startTime'] = $this->datetime_to_public_time($match['startTime']);
+		$match['endTime'] = $this->datetime_to_public_time($match['endTime']);
 		
 		$this->data['match'] = $match;
 		
@@ -361,7 +361,7 @@ class Sis extends MY_Controller {
 				$this->data['user']['email'] = $email;
 				$this->data['user']['password'] = "[user specified]";
 			} else {
-				$password = generatePassword();
+				$password = $this->generatePassword();
 				$newUserID = $this->users_model->register($email,$password,$userData);
 				$this->data['user'] = $userData;
 				$this->data['user']['id'] = $newUserID;
