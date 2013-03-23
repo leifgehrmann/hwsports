@@ -176,18 +176,39 @@ class Users_model extends MY_Model {
 	 **/
 	public function tournament_memberships($userID){
 		// Get all tournaments, ready to iterate
-		$tournaments = $this->tournaments_model->get_all();
+		$allTournaments = $this->tournaments_model->get_all();
 		// Get a list of all teams that the user is associated with.
-		$teams = $this->team_memberships($userID);
+		$userTeams = $this->team_memberships($userID);
 		
 		$userTournaments = array();
-		foreach($tournaments as $tournament) {
+		foreach($allTournaments as $tournament) {
 			//$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
-			$tournament['actorsData'] = $this->tournaments_model->get_actors($tournament['tournamentID']);
-			
-			$this->check_if_actor();
+			// Get all actors taking part in the current loop tournament
+			$tournamentActors = $this->tournaments_model->get_actors($tournament['tournamentID']);
+			// Loop through actors array (by role)
+			foreach($tournamentActors as $role => $roleActors) {
+				// Specific logic for team role since we aren't simply checking the actor ID for this
+				if($role == "team") {
+					// Loop through all teams in tournament and check if the team ID is in this user teams array
+					foreach($roleActors as $tournamentTeam) {
+						if(in_array($tournamentTeam['teamID'],$userTeams)) {
+							// User is in a team in this tournament, so we add this tournament to the output array and break out of both loops so we don't add it twice
+							$userTournaments[$tournament['tournamentID']] = $tournament;
+							break 2;
+						}
+					}			
+				} else {
+					// Loop through all "umpire" or "athlete" etc actors in tournament and check if the actor ID is the same as the user ID we're checking
+					foreach($roleActors as $tournamentUser) {
+						if($tournamentUser['actorID']==$userID) {
+							// User is in a team in this tournament, so we add this tournament to the output array and break out of both loops so we don't add it twice
+							$userTournaments[$tournament['tournamentID']] = $tournament;
+							break 2;
+						}
+					}
+				}
+			}
 		}
-		
 		return $userTournaments;
 	}
 	
