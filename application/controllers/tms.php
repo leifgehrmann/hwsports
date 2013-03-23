@@ -583,11 +583,64 @@ class Tms extends MY_Controller {
 
 	public function venue($venueID)
 	{
-		$this->load->library('table');
+		$venueDetailsForm = array(
+			array(
+				'name'=>'name',
+				'label'=>'Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'description',
+				'label'=>'Description',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'directions',
+				'label'=>'Directions',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			)
+		);
+		// Does the match even exist?
+		$this->data['venueID'] = $venueID;
+		$this->data['venue'] = $venue = $this->venues_model->get($venueID);
+		if($venue===FALSE) {
+			$this->session->set_flashdata('message_error',  "Venue ID $venueID does not exist.");
+			redirect("/tms/venues", 'refresh');
+		}
 
+		// We validate the data from the form
+		$newdata = $_POST;
+		// For each of the input types we will validate it.
+		foreach($venueDetailsForm as $input){
+			$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+		}
+		if ($this->form_validation->run() == true) {
+			if($this->venues_model->update($venueID, $newdata)) {
+				// Successful update, show success message
+				$this->session->set_flashdata('message_success',  'Successfully updated venue.');
+			} else {
+				$this->session->set_flashdata('message_error',  'Failed to update venue. Please contact Infusion Systems.');
+			}
+			redirect("/tms/venue/$venueID", 'refresh');
+		}
 
-		// Get data for this venue
-		$this->data['venue'] = $this->venues_model->get($venueID);
+		foreach($venueDetailsForm as $input){
+			if(array_key_exists('type',$input)){
+				if($input['name']=="description"||$input['name']=="directions"){
+					$this->data[$input['name']]['style'] = 'width:100%;';
+					$this->data[$input['name']]['rows'] = '5';
+				}
+				$this->data[$input['name']] = array(
+					'name'  => $input['name'],
+					'id'    => $input['name'],
+					'type'  => $input['type'],
+					'value' => $this->form_validation->set_value($input['type'], (isset($match[$input['name']]) ? $match[$input['name']] : ''))
+				);
+			}
+		}
 
 		$this->view('venue',"venue",$this->data['venue']['name']." | Venue",$this->data);
 	}
