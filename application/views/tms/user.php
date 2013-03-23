@@ -53,18 +53,27 @@
 </table>
 <?=form_close();?>
 
+<h2>Team Membership</h2>
 <? if(count($user['team'])>0) { ?>
-<h2>Team Participation</h2>
 <? foreach($user['teams'] as $team){ ?>
 <p><a href="/tms/team/<?=$team['teamID']?>"><?=$team['name']?></a></p>
 <? } ?>
+<? } else { ?>
+<p>This user is not a member of any teams.</p>
 <? } ?>
 
-<? if(count($user['tournaments'])>0) { ?>
 <h2>Tournament Participation</h2>
-<? foreach($user['tournaments'] as $tournament){ ?>
-<p><a href="/tms/tournament/<?=$tournament['tournamentID']?>"><?=$tournament['name']?></a></p>
+<? if(count($user['tournaments'])>0) { ?>
+<? foreach($user['tournaments'] as $tournament) { ?>
+<div class="tournament tournamentID-<?=$tournament['tournamentID']?> sportID-<?=$tournament['sportID']?> sportCategoryID-<?=$tournament['sportData']['sportCategoryID']?>">
+<p>
+	<div class="icon"></div>
+	<a href="/tms/tournament/<?=$tournament['tournamentID']?>"><?=$tournament['name']?></a>
+</p>
+</div>
 <? } ?>
+<? } else { ?>
+<p>This user is not participant in any of the tournaments.</p>
 <? } ?>
 
 
