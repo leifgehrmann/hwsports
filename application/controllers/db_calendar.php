@@ -118,7 +118,6 @@ class Db_Calendar extends MY_Controller {
 							if(in_array($match['venueID'],$venueIDs))
 								$matches[$match['matchID']] = $match;
 			}
-			echo "<pre>";var_dump($matches);
 		} else if($matchIDs=="none") {
 
 		} else { // If we only want particular matches
@@ -139,6 +138,7 @@ class Db_Calendar extends MY_Controller {
 								$matches[$match['matchID']] = $match;
 			}
 		}
+		echo "<pre>";var_dump($matches);
 
 
 
