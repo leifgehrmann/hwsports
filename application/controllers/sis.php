@@ -84,7 +84,7 @@ class Sis extends MY_Controller {
 			}
 		}
 		// We want to remove the tournaments that already exist in the latest tournaments
-		foreach($upcomingTournaments as $u=>$uTournament){
+		/*foreach($upcomingTournaments as $u=>$uTournament){
 			if($now<new DateTime($uTournament['tournamentStart']))
 				continue;
 			foreach($pastTournaments as $i=>$lTournament){
@@ -93,7 +93,7 @@ class Sis extends MY_Controller {
 					break;
 				}
 			}
-		}
+		}*/
 		function cmpMatches($a, $b){
 			$a = new DateTime($a['endTime']);
 			$b = new DateTime($b['endTime']);
