@@ -157,6 +157,10 @@ class Sis extends MY_Controller {
 				$venueOptions[$match['venueData']['venueID']] 					= $match['venueData']['name'];
 				$sportOptions[$match['sportData']['sportID']] 					= $match['sportData']['name'];
 
+				$isSport = TRUE;
+				$isTournament = TRUE;
+				$isVenue = TRUE;
+
 				if($sportSelection		!=	'all')
 					$isSport 		= ($match['sportData']['sportID']			== $sportSelection);
 				if($tournamentSelection	!=	'all')
@@ -168,6 +172,7 @@ class Sis extends MY_Controller {
 				$match['startTime'] = $this->datetime_to_public_time($match['startTime']);
 				$match['endTime'] 	= $this->datetime_to_public_time($match['endTime']);
 
+				if($isSport && $isTournament && $isVenue)
 				$selectedMatches[$match['matchID']] = $match;
 			}
 		}
