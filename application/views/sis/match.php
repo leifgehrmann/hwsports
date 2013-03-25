@@ -13,7 +13,7 @@
 		<p><b>Duration: </b><?=$match['duration']?></p>
 	</div>
 </div>
-<div class="widget half venue?>">
+<div class="widget half venue">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
 		<div class="widget-title-centre">Venue Details</div>
@@ -21,7 +21,7 @@
 	</div>
 	<div class="widget-body">
 		<p><b>Name: </b><?=$match['venueData']['name']?></p>
-		<? if(isset($match['description'])) { ?>
+		<? if(isset($match['venueData']['description'])) { ?>
 		<p><b>Directions: </b><?=$match['directions']['datetime']?></p>
 		<? } ?>
 		<p><a href="http://maps.google.com/maps?q=<?=$match['venueData']['lat']?>,<?=$match['venueData']['lng']?>">View on Google Maps</a></p>
