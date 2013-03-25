@@ -59,11 +59,11 @@
 
 
 <script>
-	var yuiEditorLinks = new YAHOO.widget.Editor('publicFooterLinks', {
+	var yuiEditorLinks = new YAHOO.widget.SimpleEditor('publicFooterLinks', {
 		height: '300px',
 		width: '522px',
-		dompath: true, //Turns on the bar at the bottom
-		animate: true //Animates the opening, closing and moving of Editor windows
+		dompath: true,
+		animate: true
 	});
 </script>
 
