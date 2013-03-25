@@ -50,9 +50,10 @@ $('input.color').ColorPicker({
 $('input.time').timepicker();
 
 </script>
+<? /*
 <script charset="utf-8" src="/js/vendor/tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript">
-/*
+
 tinyMCE.init({
 	// General options
 	mode : "textareas",
@@ -90,9 +91,10 @@ tinyMCE.init({
 		username : "Some User",
 		staffid : "991234"
 	}
-});*/
+});
 </script>
 <form method="post" action="somepage">
 	<textarea name="content" style="width:100%"></textarea>
-</form>
+</form> 
+*/ ?>
 <!-- /#main -->
