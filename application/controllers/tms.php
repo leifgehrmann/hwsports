@@ -1200,7 +1200,7 @@ class Tms extends MY_Controller {
 				'class' => 'color',
 				'value' => $this->form_validation->set_value('backgroundColour',(isset($this->data['centre']['backgroundColour']) ? $this->data['centre']['backgroundColour'] : '') )
 			);
-			$this->view('appearance',"appearance","Apprearance");
+			$this->view('appearance',"appearance","Appearance");
 		}
 	}
 
