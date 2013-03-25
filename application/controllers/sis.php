@@ -139,7 +139,7 @@ class Sis extends MY_Controller {
 	public function match($matchID)
 	{
 		$match = $this->matches_model->get($matchID);
-		
+
 		if($match==FALSE) {
 			$this->session->set_flashdata('message',  "Match ID $id does not exist.");
 			redirect("/sis/matches", 'refresh');
@@ -149,7 +149,7 @@ class Sis extends MY_Controller {
 		$endTime   = new DateTime($match['endTime']);
 		$duration = $endTime->diff($startTime);
 
-		$match['datetime'] = $this->datetime_to_public_datetime($startTime);
+		$match['datetime'] = $this->datetime_to_public($startTime);
 		$match['duration'] = $duration->format('%i minutes');
 		$this->data['match'] = $match;
 		
