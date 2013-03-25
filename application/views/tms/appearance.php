@@ -15,8 +15,12 @@
 		<td colspan="3"><?php echo form_textarea($address);?></td>
 	</tr>
 	<tr>
-		<td><label for="footerText">Footer Text:</label></td>
-		<td colspan="3"><?php echo form_textarea($footerText);?></td>
+		<td><label for="publicFooterLinks">Public Footer Links:</label></td>
+		<td colspan="3"><?php echo form_textarea($publicFooterLinks);?></td>
+	</tr>
+	<tr>
+		<td><label for="publicFooterContact">Public Contact Details:</label></td>
+		<td colspan="3"><?php echo form_textarea($publicFooterContact);?></td>
 	</tr>
 </table>
 <h2>Website Appearance</h2>

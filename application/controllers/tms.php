@@ -1145,7 +1145,8 @@ class Tms extends MY_Controller {
 		$this->form_validation->set_rules('address', 'Address', 'required|xss_clean');
 		$this->form_validation->set_rules('headerColour', 'Header Colour', 'required|xss_clean');
 		$this->form_validation->set_rules('backgroundColour', 'Background Colour', 'required|xss_clean');
-		$this->form_validation->set_rules('footerText', 'Footer Text', 'required|xss_clean');
+		$this->form_validation->set_rules('publicFooterLinks', 'Footer Links', 'required|xss_clean');
+		$this->form_validation->set_rules('publicFooterContact', 'Footer Contact Details', 'required|xss_clean');
 		
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
@@ -1178,11 +1179,17 @@ class Tms extends MY_Controller {
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('address',(isset($this->data['centre']['address']) ? $this->data['centre']['address'] : '') )
 			);
-			$this->data['footerText'] = array(
-				'name'  => 'footerText',
-				'id'    => 'footerText',
+			$this->data['publicFooterLinks'] = array(
+				'name'  => 'publicFooterLinks',
+				'id'    => 'publicFooterLinks',
 				'type'  => 'text',
-				'value' => $this->form_validation->set_value('footerText',(isset($this->data['centre']['footerText']) ? $this->data['centre']['footerText'] : '') )
+				'value' => $this->form_validation->set_value('publicFooterLinks',(isset($this->data['centre']['footerText']) ? $this->data['centre']['publicFooterLinks'] : '') )
+			);
+			$this->data['publicFooterContact'] = array(
+				'name'  => 'publicFooterContact',
+				'id'    => 'publicFooterContact',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('publicFooterContact',(isset($this->data['centre']['footerText']) ? $this->data['centre']['publicFooterContact'] : '') )
 			);
 			$this->data['headerColour'] = array(
 				'name'  => 'headerColour',
