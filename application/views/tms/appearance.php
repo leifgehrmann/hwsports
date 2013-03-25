@@ -54,6 +54,13 @@
 		});
 
 		$('input.time').timepicker();
+	});
+</script>
+
+
+<script>
+
+(function() {
 
 		var yuiEditorLinks = new YAHOO.widget.Editor('publicFooterLinks', {
 			height: '300px',
@@ -63,7 +70,7 @@
 		});
 		yuiEditorLinks.render();
 
-	});
+})();
 </script>
 
 <!-- /#main -->
