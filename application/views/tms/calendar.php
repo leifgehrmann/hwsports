@@ -23,7 +23,7 @@
 	</tr>
 	<tr>
 		<td colspan="3"></td>
-		<td><?= form_submit(array('name'='submit', 'value'='Filter Events', 'class' => 'green')); ?></td>
+		<td><?=form_submit(array('name'=>'submit', 'value'=>'Filter Events', 'class' => 'green'))?></td>
 	</tr>
 </table>
 <?= form_close();?>

@@ -18,7 +18,7 @@
 		<td></td>
 		<td></td>
 		<td></td>
-		<td><?= form_submit(array('name'='submit', 'value'='Filter Matches', 'class' => 'green')); ?></td>
+		<td><?=form_submit(array('name'=>'submit', 'value'=>'Filter Matches', 'class' => 'green'))?></td>
 	</tr>
 </table>
 <?= form_close();?>
