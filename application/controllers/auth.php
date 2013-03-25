@@ -575,7 +575,7 @@ class Auth extends MY_Controller {
 				$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
 			}
 		}
-		if ($submitValue!=FALSE && $this->form_validation->run() == true) {
+		if ($this->form_validation->run() == true) {
 			if($this->users_model->update($user['userID'], $newdata)) {
 				// Successful update, show success message
 				$this->session->set_flashdata('message_success',  'Successfully updated your profile.');
