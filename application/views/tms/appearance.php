@@ -54,16 +54,22 @@
 		});
 
 		$('input.time').timepicker();
-	});
-</script>
 
-
-<script>
-	var yuiEditorLinks = new YAHOO.widget.SimpleEditor('publicFooterLinks', {
-		height: '300px',
-		width: '522px',
-		dompath: true,
-		animate: true
+		var yuiEditorLinks = new YAHOO.widget.SimpleEditor('publicFooterLinks', {
+			height: '300px',
+			width: '522px',
+			dompath: true, //Turns on the bar at the bottom
+			animate: true //Animates the opening, closing and moving of Editor windows
+		});
+		yuiEditorLinks.render();
+		
+		var yuiEditorContact = new YAHOO.widget.SimpleEditor('publicFooterContact', {
+			height: '300px',
+			width: '522px',
+			dompath: true, //Turns on the bar at the bottom
+			animate: true //Animates the opening, closing and moving of Editor windows
+		});
+		yuiEditorContact.render();
 	});
 </script>
 
