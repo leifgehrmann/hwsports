@@ -1,4 +1,4 @@
-<h1><a href="/sis/<?=$match['tournamentData']['tournamentID']?>"><?=$match['tournamentData']['name']?></a><div class="icon subsection"></div><?=$match['name']?></h1>
+<h1><a href="/sis/tournament/<?=$match['tournamentData']['tournamentID']?>"><?=$match['tournamentData']['name']?></a><div class="icon subsection"></div><?=$match['name']?></h1>
 <div class="widget half match sportCategoryID-<?=$match['sportData']['sportCategoryID']?> sportID-<?=$match['sportID']?>">
 	<div class="widget-title">
 		<div class="widget-title-left icon"></div>
@@ -21,8 +21,8 @@
 	</div>
 	<div class="widget-body">
 		<p><b>Name: </b><?=$match['venueData']['name']?></p>
-		<? if(isset($match['venueData']['description'])) { ?>
-		<p><b>Directions: </b><?=$match['venueData']['description']?></p>
+		<? if(isset($match['venueData']['directions'])) { ?>
+		<p><b>Directions: </b><?=$match['venueData']['directions']?></p>
 		<? } ?>
 		<p><a href="http://maps.google.com/maps?q=<?=$match['venueData']['lat']?>,<?=$match['venueData']['lng']?>">View on Google Maps</a></p>
 	</div>
