@@ -1,7 +1,7 @@
 <? $this->method_call =& get_instance(); ?>
 <h1><a href="/sis/tournaments">Tournaments</a><div class="icon subsection"></div><?=$tournament['name']?></h1>
 
-<? if ( $tournament['status'] == "inRegistration" ) { ?>
+<? if ( $tournament['status'] == "inRegistration" && $tournament['hasRoles'] ) { ?>
 <p><b>Start:</b><?=$this->method_call->datetime_to_public_date($tournament['tournamentStart'])?> &ndash; <b>End:</b><?=$this->method_call->datetime_to_public_date($tournament['tournamentEnd'])?></p>
 <p><?=$tournament['description']?></p>
 <table>

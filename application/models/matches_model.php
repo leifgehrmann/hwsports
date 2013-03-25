@@ -79,6 +79,11 @@ class Matches_model extends MY_Model {
 	 * @return array
 	 **/
 	public function get_tournament_matches($tournamentID) {
+
+		// Test if tournament is a valid tournament
+		$tournament = $this->tournaments_model->get($tournamentID);
+		if(!$tournament) return FALSE;
+
 		// Query to return the IDs for everything which takes place at the specified sports centre
 		$where = array('tournamentID' => $tournamentID);
 		$IDRows = $this->db->select($this->objectIDKey)
@@ -89,7 +94,7 @@ class Matches_model extends MY_Model {
 		foreach($IDRows as $IDRow) {
 			$all[$IDRow['matchID']] = $this->get($IDRow['matchID']);
 		}
-		return (empty($all) ? FALSE : $all);
+		return $all;
 	}
 	
 	/**

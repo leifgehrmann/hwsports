@@ -192,13 +192,16 @@ class Sis extends MY_Controller {
 	{
 		$this->load->library('table');
 		$tournament = $this->tournaments_model->get($tournamentID);
-		$this->data['matches'] = $this->matches_model->get_tournament_matches($tournamentID);
 		if($tournament==FALSE) {
 			$this->session->set_flashdata('message',  "Tournament ID $id does not exist.");
 			redirect("/sis/tournaments", 'refresh');
 		}
+
+		$roles = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID']);
+		$tournament['hasRoles'] = (count($roles)==0) ? FALSE : TRUE;
 		
 		$this->data['tournament'] = $tournament;
+		$this->data['matches'] = $this->matches_model->get_tournament_matches($tournamentID);
 		
 		$this->data['tournamentTable'] = array(
 			array('<span class="bold">Name:</span>',$tournament['name']),
