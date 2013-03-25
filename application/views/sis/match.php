@@ -7,7 +7,7 @@
 	</div>
 	<div class="widget-body">
 		<? if(isset($match['description'])) { ?>
-		<p><?=$tournament['description']?></p>
+		<p><?=$match['description']?></p>
 		<? } ?>
 		<p><b>Date: </b><?=$match['datetime']?></p>
 		<p><b>Duration: </b><?=$match['duration']?></p>
