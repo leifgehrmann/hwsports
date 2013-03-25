@@ -35,6 +35,18 @@
 	<script charset="utf-8" src="/js/vendor/colorpicker/colorpicker.js"></script>
     <script charset="utf-8" src="/js/vendor/chosen/chosen.jquery.js"></script>
 
+		
+	<!-- Skin CSS file for YUI editor -->
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/editor/assets/skins/sam/simpleeditor.css" />
+	<!-- Utility Dependencies -->
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/fonts/fonts-min.css" />
+	<script src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script> 
+	<script src="http://yui.yahooapis.com/2.9.0/build/element/element-min.js"></script> 
+	<!-- Needed for Menus, Buttons and Overlays used in the Toolbar -->
+	<script src="http://yui.yahooapis.com/2.9.0/build/container/container_core-min.js"></script>
+	<!-- Source file for Rich Text Editor-->
+	<script src="http://yui.yahooapis.com/2.9.0/build/editor/simpleeditor-min.js"></script>
+	
 	<script>
 
 		/*var b = false;
