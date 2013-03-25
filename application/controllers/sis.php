@@ -158,7 +158,7 @@ class Sis extends MY_Controller {
 
 	public function tournaments()
 	{	
-		$this->data['tournaments'] = $this->tournaments_model->get_all();
+		$tournaments = $this->tournaments_model->get_all();
 
 		// We wish to have all our tournaments sorted by 
 		// year and placed into groups of the year. we
