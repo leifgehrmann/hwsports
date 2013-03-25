@@ -1,26 +1,4 @@
-<? 
-$this->method_call =& get_instance();
-
-
-// We wish to have all our tournaments sorted by 
-// year and placed into groups of the year. we
-// do this by putting all the tournaments into
-// particular year arrays.
-$yearTournaments = array();
-foreach($tournaments as $tournament) {
-	$date = new DateTime($tournament['tournamentStart']);
-	$year = date_format($date,'Y');
-	$yearTournaments[$year][] = $tournament;
-}
-function compareTournamentTime($a, $b) {
-	return strtotime($a["tournamentStart"]) - strtotime($b["tournamentStart"]);
-}
-
-foreach($yearTournaments as $year){
-	usort($year, "compareTournamentTime");
-}
-
-?>
+<? $this->method_call =& get_instance(); ?>
 
 <h1>Tournaments</h1>
 
@@ -43,7 +21,7 @@ foreach($yearTournaments as $year){
 					<p><b>End:</b> <?=$this->method_call->datetime_to_public_date($tournament['tournamentEnd'])?></p>
 					<div class="right">
 						<a href='/sis/tournament/<?=$tournament['tournamentID']?>' class='button normal'>Details</a>
-						<? if($tournament['status']=="inRegistration") { ?>
+						<? if($tournament['status']=="inRegistration"&&$tournament['hasRoles']) { ?>
 							<a href='/<?=( $this->ion_auth->logged_in() ? "sis/signup" : "auth/register")?>/<?=$tournament['tournamentID']?>' class='button green'>Sign up!</a>
 						<? } ?>
 					</div>

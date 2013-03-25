@@ -158,8 +158,32 @@ class Sis extends MY_Controller {
 
 	public function tournaments()
 	{	
-
 		$this->data['tournaments'] = $this->tournaments_model->get_all();
+
+		// We wish to have all our tournaments sorted by 
+		// year and placed into groups of the year. we
+		// do this by putting all the tournaments into
+		// particular year arrays.
+		$yearTournaments = array();
+		foreach($tournaments as $tournament) {
+			$date = new DateTime($tournament['tournamentStart']);
+			$year = date_format($date,'Y');
+			$yearTournaments[$year][] = $tournament;
+		}
+		function compareTournamentTime($a, $b) {
+			return strtotime($a["tournamentStart"]) - strtotime($b["tournamentStart"]);
+		}
+		foreach($yearTournaments as $year){
+			usort($year, "compareTournamentTime");
+		}
+		foreach($yearTournaments as $y=>$yearTournament) {
+			foreach($yearTournament as $t=>$tournament) {
+				$roles = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID']);
+				$yearTournaments[$y][$t]['hasRoles'] = (count($roles)==0) ? FALSE : TRUE;
+			}
+		}
+
+		$this->data['yearTournaments'] = $yearTournaments;
 		
 		$this->view('tournaments','tournaments','Tournaments',$this->data);
 	}
