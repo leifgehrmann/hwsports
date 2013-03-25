@@ -144,17 +144,25 @@ class Sis extends MY_Controller {
 
 		$matches = $this->matches_model->get_all();
 
+		$now = new DateTime();
 		$selectedMatches = array();
 		foreach($matches as $match) {
 			if(isset($match['tournamentData']['tournamentID'])) {
-				if(isset())
+				$start = new DateTime($match['startTime']);
+				if($viewSelection=='upcoming'&&!($now<$start))
+					continue;
+				if($viewSelection=='recent'&&!($start<$now))
+					continue;
 				$tournamentOptions[$match['tournamentData']['tournamentID']] 	= $match['tournamentData']['name'];
 				$venueOptions[$match['venueData']['venueID']] 					= $match['venueData']['name'];
 				$sportOptions[$match['sportData']['sportID']] 					= $match['sportData']['name'];
 
-				$isSport 		= ($match['sportData']['sportID']			==$venueSelection);
-				$isTournament 	= ($match['tournamentData']['tournamentID']	==$venueSelection);
-				$isVenue 		= ($match['venueData']['venueID']			==$venueSelection);
+				if($sportSelection		!=	'all')
+					$isSport 		= ($match['sportData']['sportID']			== $sportSelection);
+				if($tournamentSelection	!=	'all')
+					$isTournament 	= ($match['tournamentData']['tournamentID']	== $tournamentSelection);
+				if($venueSelection		!=	'all')
+					$isVenue 		= ($match['venueData']['venueID']			== $venueSelection);
 
 				$match['date'] 		= $this->datetime_to_public_date($match['startTime']);
 				$match['startTime'] = $this->datetime_to_public_time($match['startTime']);
