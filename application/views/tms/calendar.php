@@ -6,7 +6,7 @@
 	<li>Tournaments are coloured as <span style="color:rgb(73, 134, 231);font-weight:bold;">blue</span>.</li>
 	<li>Tournament matches are coloured as <span style="color:rgb(123, 209, 72);font-weight:bold;">green</span>.</li>
 </ul>
-<?= form_open("tms/calendar", array('id' => 'filterForm'));?>
+<?= form_open("/tms/calendar", array('id' => 'filterForm'));?>
 <h2>Filter Calendar</h2>
 <table style="width:100%;">
 	<tr>

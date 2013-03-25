@@ -1,6 +1,6 @@
 <h1>Matches</h1>
 <p>Filter the matches using the form below.</p>
-<?= form_open("tms/calendar", array('id' => 'filterForm'));?>
+<?= form_open("/sis/matches", array('id' => 'filterForm'));?>
 <table class="full">
 	<tr>
 		<td>View: </td>
