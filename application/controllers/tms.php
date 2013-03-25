@@ -380,7 +380,7 @@ class Tms extends MY_Controller {
 						// Insert the teams for the match
 						foreach($match['matchActors']['teamIDs'] as $teamID) {
 							$matchRelations = array('matchID'=>$matchID,'roleID'=>$roleIDs['team'],'actorID'=>$teamID);
-							if($this->match_actors_model->insert($matchRelations)===FALSE) {
+							if($this->match_actors_model->insert(array(),$matchRelations)===FALSE) {
 								$this->session->set_flashdata('message_error', 'Failed to insert match actor. Please contact Infusion Systems.');
 								redirect("/tms/tournament/$tournamentID", 'refresh');
 							}
@@ -388,7 +388,7 @@ class Tms extends MY_Controller {
 						// Insert the umpires for the match
 						foreach($match['matchActors']['umpireIDs'] as $umpireID) {
 							$matchRelations = array('matchID'=>$matchID,'roleID'=>$roleIDs['umpire'],'actorID'=>$umpireID);
-							if($this->match_actors_model->insert($matchRelations)===FALSE) {
+							if($this->match_actors_model->insert(array(),$matchRelations)===FALSE) {
 								$this->session->set_flashdata('message_error', 'Failed to insert match actor. Please contact Infusion Systems.');
 								redirect("/tms/tournament/$tournamentID", 'refresh');
 							}
@@ -431,7 +431,7 @@ class Tms extends MY_Controller {
 						/*// Insert the teams for the match
 						foreach($match['matchActors']['teamIDs'] as $teamID) {
 							$matchRelations = array('matchID'=>$matchID,'roleID'=>$roleIDs['team'],'actorID'=>$teamID);
-							if($this->match_actors_model->insert($matchRelations)===FALSE) {
+							if($this->match_actors_model->insert(array(),$matchRelations)===FALSE) {
 								$this->session->set_flashdata('message_error', 'Failed to insert match actor. Please contact Infusion Systems.');
 								redirect("/tms/tournament/$tournamentID", 'refresh');
 							}
@@ -1081,25 +1081,25 @@ class Tms extends MY_Controller {
 	public function playground() {
 		$this->view('playground',"playground","Branding Playground");
 	}
-	public function settings()
-	{
-		
+	public function settings() {
+		// Used to reduce wasted code re-writing days of the week by iteration
 		$weekdaysShort = array('mon','tue','wed','thu','fri','sat','sun');
-
-		for($i=0;$i<7;$i++)
-		{
-			$this->form_validation->set_rules($weekdaysShort[$i].'OpenTime', $weekdaysShort[$i].'day Open Time', 'required|xss_clean');
-			$this->form_validation->set_rules($weekdaysShort[$i].'CloseTime', $weekdaysShort[$i].'day Close Time', 'required|xss_clean');
+		// Set up input validation
+		foreach($weekdaysShort as $day) {
+			$this->form_validation->set_rules($day.'Open', $day.'day Open', 'xss_clean');
+			$this->form_validation->set_rules($day.'OpenTime', $day.'day Open Time', 'required|xss_clean');
+			$this->form_validation->set_rules($day.'CloseTime', $day.'day Close Time', 'required|xss_clean');
 		}
-		
+		// Validate input data
 		if ($this->form_validation->run() == true) {
-			$newdata = array(
-				
-			);
-			// If checkbox is unticked, it returns no value - this means FALSE
-			for($i=0;$i<7;$i++)
-				if(!isset($newdata[$weekdaysShort[$i].'Open'])) $newdata[$weekdaysShort[$i].'Open'] = 0;
-			
+			// Get valid input data from POST array so we aren't wildly entering stuff into the database
+			foreach($weekdaysShort as $day){
+				// If checkbox is unticked, it returns no value - this means FALSE
+				$newdata[$day.'Open'] = $this->input->post($day.'Open') ? $this->input->post($day.'Open') : 0;
+				$newdata[$day.'OpenTime'] = $this->input->post($day.'OpenTime') ? $this->input->post($day.'OpenTime') : 0;
+				$newdata[$day.'CloseTime'] = $this->input->post($day.'CloseTime') ? $this->input->post($day.'CloseTime') : 0;
+			}
+			// Put it all in the database
 			if($this->centre_model->update($this->data['centre']['centreID'],$newdata ) ) {
 				// Successful update, show success message
 				$this->session->set_flashdata('message_success',  'Successfully Updated');
@@ -1110,27 +1110,27 @@ class Tms extends MY_Controller {
 		} else {
 			//display the create user form
 			
-			for($i=0;$i<7;$i++){
-				$this->data[$weekdaysShort[$i].'Open'] = array(
-					'name'  => $weekdaysShort[$i].'Open',
-					'id'    => $weekdaysShort[$i].'Open',
+			foreach($weekdaysShort as $day) {
+				$this->data[$day.'Open'] = array(
+					'name'  => $day.'Open',
+					'id'    => $day.'Open',
 					'type'  => 'checkbox',
 					'value' => '1',
-					($this->data['centre'][$weekdaysShort[$i].'Open'] ? 'checked' : 'notchecked') => 'checked'
+					($this->data['centre'][$day.'Open'] ? 'checked' : 'notchecked') => 'checked'
 				);
-				$this->data[$weekdaysShort[$i].'OpenTime'] = array(
-					'name'  => $weekdaysShort[$i].'OpenTime',
-					'id'    => $weekdaysShort[$i].'OpenTime',
+				$this->data[$day.'OpenTime'] = array(
+					'name'  => $day.'OpenTime',
+					'id'    => $day.'OpenTime',
 					'type'  => 'text',
 					'class'  => 'time',
-					'value' => $this->form_validation->set_value($weekdaysShort[$i].'OpenTime',(isset($this->data['centre'][$weekdaysShort[$i].'OpenTime']) ? $this->data['centre'][$weekdaysShort[$i].'OpenTime'] : '') )
+					'value' => $this->form_validation->set_value($day.'OpenTime',$this->data['centre'][$day.'OpenTime'])
 				);
-				$this->data[$weekdaysShort[$i].'CloseTime'] = array(
-					'name'  => $weekdaysShort[$i].'CloseTime',
-					'id'    => $weekdaysShort[$i].'CloseTime',
+				$this->data[$day.'CloseTime'] = array(
+					'name'  => $day.'CloseTime',
+					'id'    => $day.'CloseTime',
 					'type'  => 'text',
 					'class'  => 'time',
-					'value' => $this->form_validation->set_value($weekdaysShort[$i].'CloseTime',(isset($this->data['centre'][$weekdaysShort[$i].'CloseTime']) ? $this->data['centre'][$weekdaysShort[$i].'CloseTime'] : '') )
+					'value' => $this->form_validation->set_value($day.'CloseTime',$this->data['centre'][$day.'CloseTime'])
 				);
 			}
 
