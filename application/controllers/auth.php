@@ -602,104 +602,15 @@ class Auth extends MY_Controller {
 			}
 		}
 
+		$this->data['message'] = $this->session->flashdata('message');
+		$this->data['message_information'] = $this->session->flashdata('message_information');
+		$this->data['message_success'] = $this->session->flashdata('message_success');
+		$this->data['message_warning'] = $this->session->flashdata('message_warning');
+		$this->data['message_error'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message_error')));
+
 		$this->data['title'] = "Edit Profie";
 		$this->data['page'] = "edituser";
 
-		//validate form input
-		//$this->form_validation->set_rules('firstName', 'First Name', 'required|xss_clean');
-		//$this->form_validation->set_rules('lastName', 'Last Name', 'required|xss_clean');
-		//$this->form_validation->set_rules('phone', 'Third Part of Phone', 'required|xss_clean|min_length[8]|max_length[12]');
-		
-		/*if (isset($_POST) && !empty($_POST))
-		{
-			// do we have a valid request?
-			if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id'))
-			{
-				show_error('This form post did not pass our security checks.');
-			}
-
-			$data = array(
-				'firstName' => $this->input->post('firstName'),
-				'lastName'  => $this->input->post('lastName'),
-				'phone'      => $this->input->post('phone')
-			);
-			
-			//Update the groups user belongs to
-			$groupData = $this->input->post('groups');
-			
-			if (isset($groupData) && !empty($groupData)) {
-				 
-				$this->ion_auth->remove_from_group('', $id);
-				
-				foreach ($groupData as $grp) {					
-					$this->ion_auth->add_to_group($grp, $id);
-				}
-				
-			}
-
-			//update the password if it was posted
-			if ($this->input->post('password'))
-			{
-				$this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
-				$this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'required');
-
-				$data['password'] = $this->input->post('password');
-			}
-
-			if ($this->form_validation->run() === TRUE)
-			{
-				$this->ion_auth->update($user->userID, $data);
-
-				//check to see if we are creating the user
-				//redirect them back to the admin page
-				$this->session->set_flashdata('message', "User Saved");
-				redirect("auth", 'refresh');
-			}
-		}
-
-		//display the edit user form
-		$this->data['csrf'] = $this->_get_csrf_nonce();
-
-		//set the flash data error message if there is one
-		$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
-
-		//pass the user to the view
-		$this->data['user'] = $user;
-		$this->data['groups'] = $groups;
-		$this->data['currentGroups'] = $currentGroups;
-		
-		$this->data['firstName'] = array(
-			'name'  => 'firstName',
-			'id'    => 'firstName',
-			'type'  => 'text',
-			'value' => $this->form_validation->set_value('firstName', $user->firstName),
-		);
-		$this->data['lastName'] = array(
-			'name'  => 'lastName',
-			'id'    => 'lastName',
-			'type'  => 'text',
-			'value' => $this->form_validation->set_value('lastName', $user->lastName),
-		);
-		$this->data['phone'] = array(
-			'name'  => 'phone',
-			'id'    => 'phone',
-			'type'  => 'text',
-			'value' => $this->form_validation->set_value('phone', $user->phone),
-		);
-		$this->data['password'] = array(
-			'name' => 'password',
-			'id'   => 'password',
-			'type' => 'password'
-		);
-		$this->data['password_confirm'] = array(
-			'name' => 'password_confirm',
-			'id'   => 'password_confirm',
-			'type' => 'password'
-		);
-
-		$data = Array(
-			'title' => "Auth"
-		);*/
 		$this->load->view('sis/header',$this->data);		
 		$this->load->view('auth/edit_user', $this->data);
 		$this->load->view('sis/footer',$this->data);
