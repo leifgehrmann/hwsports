@@ -576,13 +576,13 @@ class Auth extends MY_Controller {
 			}
 		}
 		if ($submitValue!=FALSE && $this->form_validation->run() == true) {
-			if($this->users_model->update($userID, $newdata)) {
+			if($this->users_model->update($user['userID'], $newdata)) {
 				// Successful update, show success message
-				$this->session->set_flashdata('message_success',  'Successfully updated user.');
+				$this->session->set_flashdata('message_success',  'Successfully updated your profile.');
 			} else {
 				$this->session->set_flashdata('message_error',  'Failed to update user. Please contact Infusion Systems.');
 			}
-			redirect("/tms/user/$userID", 'refresh');
+			redirect("/auth/edit_user/", 'refresh');
 		}
 
 		foreach(array($userDetailsForm, $emergencyDetailsForm) as $form){
