@@ -138,33 +138,21 @@ class Sis extends MY_Controller {
 
 	public function match($matchID)
 	{
-		$this->load->library('table');
-		
-
-		
 		$match = $this->matches_model->get($matchID);
+		
 		if($match==FALSE) {
 			$this->session->set_flashdata('message',  "Match ID $id does not exist.");
 			redirect("/sis/matches", 'refresh');
 		}
 		
-		$match['tournamentData']['name'] = ($match['tournamentData'] ? $match['tournamentData']['name'] : "None");
-		$match['date'] = $this->datetime_to_public_date($match['startTime']);
-		$match['startTime'] = $this->datetime_to_public_time($match['startTime']);
-		$match['endTime'] = $this->datetime_to_public_time($match['endTime']);
-		
+		$startTime = new DateTime($match['startTime']);
+		$endTime   = new DateTime($match['endTime']);
+		$duration = $endTime->diff($startTime);
+
+		$match['datetime'] = $this->datetime_to_public_datetime($startTime);
+		$match['duration'] = $duration->format('%i minutes');
 		$this->data['match'] = $match;
 		
-		$this->data['matchTable'] = array(
-			array('<span class="bold">Name:</span>',$match['name']),
-			array('<span class="bold">Description:</span>',$match['description']),
-			array('<span class="bold">Sport:</span>',$match['sportData']['name']),
-			array('<span class="bold">Venue:</span>',$match['venueData']['name']),
-			array('<span class="bold">Tournament:</span>',$match['tournamentData']['name']),
-			array('<span class="bold">Date:</span>',		$match['date']),
-			array('<span class="bold">Start Time:</span>',	$match['startTime']),
-			array('<span class="bold">End Time:</span>',	$match['endTime'])
-		);
 		$this->view('match','match',$match['name'].' | Match',$this->data);
 	}
 
