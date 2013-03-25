@@ -125,13 +125,55 @@ class Sis extends MY_Controller {
 	}
 
 	public function matches() {			
+		// If stuff has been submitted via the form...
+		$viewSelection 			= $this->input->post('viewSelection');
+		$sportSelection 		= $this->input->post('sportSelection');
+		$tournamentSelection 	= $this->input->post('tournamentSelection');
+		$venueSelection 		= $this->input->post('venueSelection');
+
+		// fall back values in case form was not loaded.
+		if(!$viewSelection) 		$viewSelection 			= "all";
+		if(!$sportSelection) 		$sportSelection 		= "all";
+		if(!$tournamentSelection) 	$tournamentSelection 	= "all";
+		if(!$venueSelection) 		$venueSelection 		= "all";
+
+		$viewOptions 		= array('all'=>"All Matches",'upcoming'=>"Upcoming Matches", 'recent'=>"Recent Matches");
+		$tournamentOptions 	= array('all'=>"All Tournaments");
+		$venueOptions 		= array('all'=>"All Venues");
+		$sportOptions 		= array('all'=>"All Sports");
+
 		$matches = $this->matches_model->get_all();
-		foreach($matches as $key => $match) {
-			$matches[$key]['date'] = $this->datetime_to_public_date($match['startTime']);
-			$matches[$key]['startTime'] = $this->datetime_to_public_time($match['startTime']);
-			$matches[$key]['endTime'] = $this->datetime_to_public_time($match['endTime']);
+
+		$selectedMatches = array();
+		foreach($matches as $match) {
+			if(isset($match['tournamentData']['tournamentID'])) {
+				if(isset())
+				$tournamentOptions[$match['tournamentData']['tournamentID']] 	= $match['tournamentData']['name'];
+				$venueOptions[$match['venueData']['venueID']] 					= $match['venueData']['name'];
+				$sportOptions[$match['sportData']['sportID']] 					= $match['sportData']['name'];
+
+				$isSport 		= ($match['sportData']['sportID']			==$venueSelection);
+				$isTournament 	= ($match['tournamentData']['tournamentID']	==$venueSelection);
+				$isVenue 		= ($match['venueData']['venueID']			==$venueSelection);
+
+				$match['date'] 		= $this->datetime_to_public_date($match['startTime']);
+				$match['startTime'] = $this->datetime_to_public_time($match['startTime']);
+				$match['endTime'] 	= $this->datetime_to_public_time($match['endTime']);
+
+				$selectedMatches[$match['matchID']] = $match;
+			}
 		}
-		$this->data['matches'] = $matches;
+
+		$this->data['matches'] = $selectedMatches;
+
+		$this->data['viewOptions'] = $viewOptions;
+		$this->data['viewSelection'] = $viewSelection;
+		$this->data['sportOptions'] = $sportOptions;
+		$this->data['sportSelection'] = $sportSelection;
+		$this->data['tournamentOptions'] = $tournamentOptions;
+		$this->data['tournamentSelection'] = $tournamentSelection;
+		$this->data['venueOptions'] = $venueOptions;
+		$this->data['venueSelection'] = $venueSelection;
 
 		$this->view('matches','matches','Matches',$this->data);
 	} 
