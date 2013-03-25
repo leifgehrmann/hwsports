@@ -39,6 +39,13 @@ class MY_Controller extends CI_Controller {
 			// Make all centre data accessible from all controllers and views
 			$this->data['centre'] = $this->centre_model->get( $row['centreID'] );
 			$this->centreID = $this->data['centre']['centreID'];
+			
+			$weekdaysShort = array('mon','tue','wed','thu','fri','sat','sun');
+			foreach($weekdaysShort as $day){
+				if(!isset($this->data['centre'][$day.'Open'])) $this->data['centre'][$day.'Open'] = 0;
+				if(!isset($this->data['centre'][$day.'CloseTime'])) $this->data['centre'][$day.'CloseTime'] = "00:00";
+				if(!isset($this->data['centre'][$day.'OpenTime'])) $this->data['centre'][$day.'OpenTime'] = "00:00";
+			}
 		}
 		
 		// Define other models so we can access objects from the database
