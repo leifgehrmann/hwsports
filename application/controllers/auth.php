@@ -491,35 +491,126 @@ class Auth extends MY_Controller {
 	}
 
 	//edit a user
-	function edit_user($id)
-	{
-		$this->data['title'] = "Edit User";
+	function edit_user()
+	{	
+		if (!$this->ion_auth->logged_in())
+		{
+			redirect('/', 'refresh');
+		}
+
+		$userDetailsForm = array(
+			array(
+				'name'=>'firstName',
+				'label'=>'First Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'lastName',
+				'label'=>'Last Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'phone',
+				'label'=>'Phone',
+				'restrict'=>'xss_clean|min_length[8]|max_length[12]',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'address',
+				'label'=>'Address',
+				'restrict'=>'xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'aboutMe',
+				'label'=>'Bio',
+				'restrict'=>'xss_clean',
+				'type'=>'text'
+			)
+		);
+		$emergencyDetailsForm = array(
+			array(
+				'name'=>'emergencyName',
+				'label'=>'Name',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'emergencyEmail',
+				'label'=>'Email',
+				'restrict'=>'required|valid_email',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'emergencyPhone',
+				'label'=>'Phone',
+				'restrict'=>'required|xss_clean|min_length[8]|max_length[12]',
+				'type'=>'text'
+			),
+			array(
+				'name'=>'emergencyAddress',
+				'label'=>'Address',
+				'restrict'=>'required|xss_clean',
+				'type'=>'text'
+			)
+		);
+
+		$this->data['user'] = $this->currentUser = $this->users_model->get_logged_in();
+		if($user===FALSE) {
+			$this->session->set_flashdata('message_error',  "User ID $userID does not exist.");
+			redirect("/tms/users", 'refresh');
+		}
+		// We validate the data from the form
+		$newdata = $_POST;
+		// For each of the input types we will validate it.
+		$submitValue = $this->input->post('submit');
+		if($submitValue == 'Update User'){
+			foreach($userDetailsForm as $input){
+				$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+			}
+		} else if ($submitValue == 'Update Emergency Contact'){
+			foreach($emergencyDetailsForm as $input){
+				$this->form_validation->set_rules($input['name'], $input['label'], $input['restrict']);
+			}
+		}
+		if ($submitValue!=FALSE && $this->form_validation->run() == true) {
+			if($this->users_model->update($userID, $newdata)) {
+				// Successful update, show success message
+				$this->session->set_flashdata('message_success',  'Successfully updated user.');
+			} else {
+				$this->session->set_flashdata('message_error',  'Failed to update user. Please contact Infusion Systems.');
+			}
+			redirect("/tms/user/$userID", 'refresh');
+		}
+
+		foreach(array($userDetailsForm, $emergencyDetailsForm) as $form){
+			foreach($form as $input){
+				if(array_key_exists('type',$input)){
+					$this->data[$input['name']] = array(
+						'name'  => $input['name'],
+						'id'    => $input['name'],
+						'type'  => $input['type'],
+						'value' => $this->form_validation->set_value($input['type'], (isset($user[$input['name']]) ? $user[$input['name']] : ''))
+					);
+					if($input['name']=="description"){
+						$this->data[$input['name']]['style'] = 'width:100%;';
+						$this->data[$input['name']]['rows'] = '5';
+					}
+				}
+			}
+		}
+
+		$this->data['title'] = "Edit Profie";
 		$this->data['page'] = "edituser";
 
-		$this->data['title'] = "Edit User";
-
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth', 'refresh');
-		}
-
-		$user = $this->ion_auth->user($id)->row();
-		$groups=$this->ion_auth->groups()->result_array();
-		$currentGroups = $this->ion_auth->get_users_groups($id)->result();
-		
-		//process the phone number
-		if (isset($user->phone) && !empty($user->phone))
-		{
-			$user->phone = explode('-', $user->phone);
-		}
-
 		//validate form input
-		$this->form_validation->set_rules('firstName', 'First Name', 'required|xss_clean');
-		$this->form_validation->set_rules('lastName', 'Last Name', 'required|xss_clean');
-		$this->form_validation->set_rules('phone', 'Third Part of Phone', 'required|xss_clean|min_length[8]|max_length[12]');
-		$this->form_validation->set_rules('groups', 'Groups', 'xss_clean');
+		//$this->form_validation->set_rules('firstName', 'First Name', 'required|xss_clean');
+		//$this->form_validation->set_rules('lastName', 'Last Name', 'required|xss_clean');
+		//$this->form_validation->set_rules('phone', 'Third Part of Phone', 'required|xss_clean|min_length[8]|max_length[12]');
 		
-		if (isset($_POST) && !empty($_POST))
+		/*if (isset($_POST) && !empty($_POST))
 		{
 			// do we have a valid request?
 			if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id'))
@@ -576,7 +667,7 @@ class Auth extends MY_Controller {
 		$this->data['user'] = $user;
 		$this->data['groups'] = $groups;
 		$this->data['currentGroups'] = $currentGroups;
-
+		
 		$this->data['firstName'] = array(
 			'name'  => 'firstName',
 			'id'    => 'firstName',
@@ -608,7 +699,7 @@ class Auth extends MY_Controller {
 
 		$data = Array(
 			'title' => "Auth"
-		);
+		);*/
 		$this->load->view('sis/header',$this->data);		
 		$this->load->view('auth/edit_user', $this->data);
 		$this->load->view('sis/footer',$this->data);

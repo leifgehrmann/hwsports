@@ -892,7 +892,7 @@ class Tms extends MY_Controller {
 			array(
 				'name'=>'phone',
 				'label'=>'Phone',
-				'restrict'=>'xss_clean',
+				'restrict'=>'xss_clean|min_length[8]|max_length[12]',
 				'type'=>'text'
 			),
 			array(
@@ -924,7 +924,7 @@ class Tms extends MY_Controller {
 			array(
 				'name'=>'emergencyPhone',
 				'label'=>'Phone',
-				'restrict'=>'required|xss_clean',
+				'restrict'=>'required|xss_clean|min_length[8]|max_length[12]',
 				'type'=>'text'
 			),
 			array(
