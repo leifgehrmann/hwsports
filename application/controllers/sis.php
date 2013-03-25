@@ -173,7 +173,7 @@ class Sis extends MY_Controller {
 				$match['endTime'] 	= $this->datetime_to_public_time($match['endTime']);
 
 				if($isSport && $isTournament && $isVenue)
-				$selectedMatches[$match['matchID']] = $match;
+					$selectedMatches[$match['matchID']] = $match;
 			}
 		}
 
