@@ -91,6 +91,7 @@ class Matches_model extends MY_Model {
 							   ->where($where)
 							   ->get()->result_array();
 		// Loop through all result rows, get the ID and use that to put all the data into the output array 
+		$all = array();
 		foreach($IDRows as $IDRow) {
 			$all[$IDRow['matchID']] = $this->get($IDRow['matchID']);
 		}
