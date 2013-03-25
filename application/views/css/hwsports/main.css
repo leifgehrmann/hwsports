@@ -580,7 +580,8 @@ div.widget.announcement     div.widget-title-left.icon  { background-position: -
 div.widget.tournaments      div.widget-title-left.icon  { background-position: -40px  -300px; }
 div.widget.tournament       div.widget-title-left.icon 	{ background-position: -40px  -300px; }
 div.widget.matches          div.widget-title-left.icon  { background-position: -40px  -320px; }
-div.widget.match            div.widget-title-left.icon 	{ background-position: -40px  -320px; }
+div.widget.match            div.widget-title-left.icon  { background-position: -40px  -320px; }
+div.widget.venue            div.widget-title-left.icon  { background-position: -40px  -320px; }
 div.widget.welcome-message  div.widget-title-left.icon 	{ background-position: -40px  -260px; }
 div.widget.subscribe        div.widget-title-left.icon 	{ background-position: -40px  -460px; }
 div.widget.profile          div.widget-title-left.icon 	{ background-position: -40px  -380px; }
