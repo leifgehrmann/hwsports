@@ -1151,7 +1151,7 @@ class Tms extends MY_Controller {
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
 			
-			if($this->centre_model->update($newdata)) {
+			if($this->centre_model->update($this->data['centre']['centreID'],$newdata)) {
 				// Successful update, show success message
 				$this->session->set_flashdata('message_success',  'Successfully Updated');
 			} else {
