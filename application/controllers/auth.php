@@ -557,10 +557,10 @@ class Auth extends MY_Controller {
 			)
 		);
 
-		$this->data['user'] = $this->currentUser = $this->users_model->get_logged_in();
+		$this->data['user'] = $user = $this->currentUser = $this->users_model->get_logged_in();
 		if($user===FALSE) {
-			$this->session->set_flashdata('message_error',  "User ID $userID does not exist.");
-			redirect("/tms/users", 'refresh');
+			$this->session->set_flashdata('message_error',  "You are a ghost ;)");
+			redirect("/", 'refresh');
 		}
 		// We validate the data from the form
 		$newdata = $_POST;
