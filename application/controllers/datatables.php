@@ -270,6 +270,7 @@ class Datatables extends MY_Controller {
 				$this->data($object);
 			break;
 			case "remove":
+				$this->data($object);/*
 				// Get the userID to delete from the many-to-many table
 				$delete_type_id = explode('-',$_POST['data'][0]);
 				$ID = $delete_type_id[1];
@@ -280,7 +281,7 @@ class Datatables extends MY_Controller {
 				$deleteOutput = $this->db->delete($relationTable, $deleteData);
 				// Define the return value based on deletion success
 				$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
-				$this->load->view('data', array('data' => json_encode($out)) );
+				$this->load->view('data', array('data' => json_encode($out)) );*/
 			break;
 		}
 	}
