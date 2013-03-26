@@ -179,7 +179,7 @@ class Datatables extends MY_Controller {
 	}
 	
 	// Handle filtered user tables slightly differently as we're only showing a subset of the users based on a where clause, and we only want to add new users by email search 
-	public function filtered_data($filtered_IDs,$relationTable,$relations,$loadIDKey,$updateIDKey,$object) {
+	public function filtered_data($filtered_IDs,$relationTable,$relations,$loadIDKey,$updateIDKey,$object,$passthrudelete=false) {
 		switch ($this->action) {
 			case "load":
 				if(count($filtered_IDs)) {
@@ -270,18 +270,21 @@ class Datatables extends MY_Controller {
 				$this->data($object);
 			break;
 			case "remove":
-				$this->data($object);/*
-				// Get the userID to delete from the many-to-many table
-				$delete_type_id = explode('-',$_POST['data'][0]);
-				$ID = $delete_type_id[1];
-				// This input array should already have whatever other IDs are required in the many-to-many table (such as groupID=>1)
-				$deleteData = $relations;
-				// Add the user ID to the insert data
-				$deleteData[$updateIDKey] = $ID;
-				$deleteOutput = $this->db->delete($relationTable, $deleteData);
-				// Define the return value based on deletion success
-				$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
-				$this->load->view('data', array('data' => json_encode($out)) );*/
+				if($passthrudelete) {
+					$this->data($object);
+				} else {
+					// Get the userID to delete from the many-to-many table
+					$delete_type_id = explode('-',$_POST['data'][0]);
+					$ID = $delete_type_id[1];
+					// This input array should already have whatever other IDs are required in the many-to-many table (such as groupID=>1)
+					$deleteData = $relations;
+					// Add the user ID to the insert data
+					$deleteData[$updateIDKey] = $ID;
+					$deleteOutput = $this->db->delete($relationTable, $deleteData);
+					// Define the return value based on deletion success
+					$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
+					$this->load->view('data', array('data' => json_encode($out)) );
+				}
 			break;
 		}
 	}
@@ -374,7 +377,7 @@ class Datatables extends MY_Controller {
 		foreach($filteredRows as $filteredRow) {
 			$filtered_IDs[] = $filteredRow[$updateIDKey];
 		}
-		$this->filtered_data($filtered_IDs,$relationTable,$relations,$loadIDKey,$updateIDKey,'matches');
+		$this->filtered_data($filtered_IDs,$relationTable,$relations,$loadIDKey,$updateIDKey,'matches',true);
 	}
 	
 	// Show the user what *exactly* will happen when they click delete
