@@ -43,8 +43,8 @@ class Tournament_actors_model extends MY_Model {
 									->where('actorID',$actorID)
 									->where('roleID',$roleID)
 									->get()->row_array();
-		if($tournamentActor===FALSE) return FALSE;
-		$tournamentActor = $this->get($tournamentActor['
+		if($query->num_rows() == 0) return FALSE;
+		return $this->get($tournamentActor['tournamentActorID']);
 	}
 	
 	/**
