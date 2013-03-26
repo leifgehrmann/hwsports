@@ -32,7 +32,8 @@ class Datatables extends MY_Controller {
 			"venues" => $this->venues_model,
 			"users" => $this->users_model,
 			"teams" => $this->teams_model,
-			"groups" => $this->groups_model
+			"groups" => $this->groups_model,
+			"tournamentActors" => $this->tournament_actors_model
 		);
 		
 		// Define action even if the use has just loaded the page
@@ -270,8 +271,13 @@ class Datatables extends MY_Controller {
 				$this->data($object);
 			break;
 			case "remove":
-				if(isset($relations['roleID']) {
-					$this->data($object);
+				if(isset($relations['roleID'])) {
+					$delete_type_id = explode('-',$_POST['data'][0]);
+					$ID = $delete_type_id[1];
+					// Execute the delete function of the correct model with the second parameter set to false to confirm deletion
+					$deleteOutput = $this->types_models[$relationTable]->delete($ID, false); 
+					// Define the return value based on deletion success
+					$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");
 				} else {
 					// Get the userID to delete from the many-to-many table
 					$delete_type_id = explode('-',$_POST['data'][0]);
