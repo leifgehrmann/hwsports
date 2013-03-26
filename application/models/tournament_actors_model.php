@@ -36,7 +36,7 @@ class Tournament_actors_model extends MY_Model {
 		return $tournamentActor + $actor + $actorData;
 	}
 
-	
+	// Allows us to find a tournamentActor (including ID) when we know the user or team ID and the roleID
 	public function find($actorID,$roleID) {
 		// Get the tournamentActor row from the tournamentActors table, joined with the role data from sportCategoryRoles. This gives us the info required to get the actual actor
 		$tournamentActor = $this->db->select('*')
