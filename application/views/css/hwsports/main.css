@@ -1,3 +1,27 @@
+<? function hexLighter($hex,$factor = 30) 
+    { 
+    $new_hex = ''; 
+     
+    $base['R'] = hexdec($hex{0}.$hex{1}); 
+    $base['G'] = hexdec($hex{2}.$hex{3}); 
+    $base['B'] = hexdec($hex{4}.$hex{5}); 
+     
+    foreach ($base as $k => $v) 
+        { 
+        $amount = 255 - $v; 
+        $amount = $amount / 100; 
+        $amount = round($amount * $factor); 
+        $new_decimal = $v + $amount; 
+     
+        $new_hex_component = dechex($new_decimal); 
+        if(strlen($new_hex_component) < 2) 
+            { $new_hex_component = "0".$new_hex_component; } 
+        $new_hex .= $new_hex_component; 
+        } 
+         
+    return $new_hex;     
+    }  ?>
+
 /* ==========================================================================
    HTML5 Boilerplate styles - h5bp.com (generated via initializr.com)
    ========================================================================== */
@@ -107,7 +131,7 @@ p  { font-size: 16px; top: 5px; }
 p.indent    { text-indent:20px; }
 
 a, h1 a, h2 a, h3 a, p a { color: #<?=$centre['backgroundColour']?>; }
-a:hover p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #4165C8; }
+a:hover p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #<?=hexLighter($centre['backgroundColour'],30)?>; }
 
 /* Lists, dictionaries */
 ul, dl, ol {
