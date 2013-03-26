@@ -179,7 +179,7 @@ class Datatables extends MY_Controller {
 	}
 	
 	// Handle filtered user tables slightly differently as we're only showing a subset of the users based on a where clause, and we only want to add new users by email search 
-	public function filtered_data($filtered_IDs,$relationTable,$relations,$loadIDKey,$updateIDKey,$object,$passthrudelete=false) {
+	public function filtered_data($filtered_IDs,$relationTable,$relations,$loadIDKey,$updateIDKey,$object) {
 		switch ($this->action) {
 			case "load":
 				if(count($filtered_IDs)) {
@@ -270,7 +270,7 @@ class Datatables extends MY_Controller {
 				$this->data($object);
 			break;
 			case "remove":
-				if($passthrudelete) {
+				if(isset($relations['roleID']) {
 					$this->data($object);
 				} else {
 					// Get the userID to delete from the many-to-many table
@@ -377,7 +377,7 @@ class Datatables extends MY_Controller {
 		foreach($filteredRows as $filteredRow) {
 			$filtered_IDs[] = $filteredRow[$updateIDKey];
 		}
-		$this->filtered_data($filtered_IDs,$relationTable,$relations,$loadIDKey,$updateIDKey,'matches',true);
+		$this->filtered_data($filtered_IDs,$relationTable,$relations,$loadIDKey,$updateIDKey,'matches');
 	}
 	
 	// Show the user what *exactly* will happen when they click delete
