@@ -274,6 +274,7 @@ class Sis extends MY_Controller {
 	}
 	public function ticketsinfo()
 	{
+		$this->data['centre'] = $this->centre_model->get($this->centreID);
 		$this->view('ticketsinfo','ticketsinfo','Tickets',$this->data);
 	}
 	public function account()

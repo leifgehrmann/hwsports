@@ -18,6 +18,31 @@
 		<td>&pound;3</td>
 	</tr>
 </table>
+<? if(
+	isset($centre['monOpen']) ||  
+	isset($centre['tueOpen']) ||  
+	isset($centre['wedOpen']) || 
+	isset($centre['thuOpen']) || 
+	isset($centre['friOpen']) || 
+	isset($centre['satOpen']) || 
+	isset($centre['sunOpen'])
+) { 
+	$wk = array('mon','tue','wed','thu','fri','sat','sun');
+	$w = array('Monday','Tuesady','Wednesday','Thursday','Friday','Saturday','Sunday');
+	?>
+<h2>What are the opening times of the sports centre</h2>
+<table>
+	<? foreach($i=0;$i<count($wk);$i++) { 
+		if(isset($centre['monOpen'])) {
+		if($centre['monOpen']==1) { 
+	?>
+	<tr>
+		<td><?=$w[$i]?></td>
+		<td><?=$centre[$wk[$i].'OpenTime']?></td>
+	</tr>
+	<? } } } ?>
+</table>
+<? } ?>
 <h2>How are tickets used?</h2>
 <p>To enter a venue, you must have a ticket at hand. Tickets are handed out at the Sports Centre.</p>
 

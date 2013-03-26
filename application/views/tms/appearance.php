@@ -23,7 +23,7 @@
 		<td colspan="3"><?php echo form_textarea($publicFooterContact);?></td>
 	</tr>
 </table>
-<h2>Website Appearance</h2>
+<!--<h2>Website Appearance</h2>
 <table>
 	<tr>
 		<td><label for="headerColour">Interface Colour:</label></td>
@@ -31,9 +31,9 @@
 		<td><label for="backgroundColour">Background Colour:</label></td>
 		<td><?php echo form_input($backgroundColour);?></td>
 	</tr>
-</table>
+</table>-->
 
-<p><?php echo form_submit('submit', 'Submit Changes', array('class' => 'green'));?></p>
+<p><?php echo form_submit(array('name'='submit', 'value'='Submit Changes', 'class' => 'green');?></p>
 
 <?php echo form_close();?>
 
