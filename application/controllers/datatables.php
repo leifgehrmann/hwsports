@@ -33,7 +33,8 @@ class Datatables extends MY_Controller {
 			"users" => $this->users_model,
 			"teams" => $this->teams_model,
 			"groups" => $this->groups_model,
-			"tournamentActors" => $this->tournament_actors_model
+			"tournamentActors" => $this->tournament_actors_model,
+			"matchActors" => $this->match_actors_model
 		);
 		
 		// Define action even if the use has just loaded the page
