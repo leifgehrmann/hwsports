@@ -27,8 +27,8 @@
 <p>Here one can modify the styling of the website. For now you can only change the interface colour, but this should be modifiable as the product develops.</p>
 <table>
 	<tr>
-		<td><label for="headerColour">Interface Colour:</label></td>
-		<td><?=form_input($headerColour)?></td>
+		<td><label for="backgroundColour">Interface Colour:</label></td>
+		<td><?=form_input($backgroundColour)?></td>
 	</tr>
 </table>
 
