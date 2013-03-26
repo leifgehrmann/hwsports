@@ -243,11 +243,11 @@ input.color {
 #content > figure, #content > blockquote,
 #content > address, #content > blockquote, #content > pre {clear:both;}
 
-#content h1 { color: <?=$centre['backgroundColour']?>; }
+#content h1 { color: #<?=$centre['backgroundColour']?>; }
 #content h1 div.icon.subsection {
     margin-left: 20px;
     margin-right: 20px;
-    background-color: <?=$centre['backgroundColour']?>;
+    background-color: #<?=$centre['backgroundColour']?>;
 }
 #content h3 div.icon, #content h2 div.icon {
     position: relative;
