@@ -122,7 +122,7 @@ $('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
 				]
 			},
 			"fnInitComplete": function ( settings, json ) {
-				// tournamentMatchesEditor.field('sportID').update( json.sports );
+				tournamentMatchesEditor.field('sportID').update( json.sports );
 				tournamentMatchesEditor.field('venueID').update( json.venues );
 			}
 		} );
