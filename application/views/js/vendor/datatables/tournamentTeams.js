@@ -31,7 +31,7 @@
 				"onInitRemove": function() {
 					$('.DTED_Lightbox_Wrapper').css('visibility','hidden');
 					$.fancybox({
-						href : '/datatables/predeleteTournamentTeam/'+$('.DTTT_selected').attr('id'),
+						href : '/datatables/predeleteTournamentTeam/'+$('#tournamentID').html()+'-'+$('.DTTT_selected').attr('id'),
 						type : 'ajax',
 						modal : true,
 						'beforeShow' : function() {

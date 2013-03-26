@@ -79,7 +79,7 @@
 				"onInitRemove": function() {
 					$('.DTED_Lightbox_Wrapper').css('visibility','hidden');
 					$.fancybox({
-						href : '/datatables/predeleteTournamentUmpire/'+$('.DTTT_selected').attr('id'),
+						href : '/datatables/predeleteTournamentUmpire/'+$('#tournamentID').html()+'-'+$('.DTTT_selected').attr('id'),
 						type : 'ajax',
 						modal : true,
 						'beforeShow' : function() {
