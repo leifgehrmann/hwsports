@@ -1151,7 +1151,7 @@ class Tms extends MY_Controller {
 		if ($this->form_validation->run() == true) {
 			$newdata = $_POST;
 			
-			if($this->centre_model->update($newdata)) {
+			if($this->centre_model->update($this->data['centre']['centreID'],$newdata)) {
 				// Successful update, show success message
 				$this->session->set_flashdata('message_success',  'Successfully Updated');
 			} else {
@@ -1183,13 +1183,13 @@ class Tms extends MY_Controller {
 				'name'  => 'publicFooterLinks',
 				'id'    => 'publicFooterLinks',
 				'type'  => 'text',
-				'value' => $this->form_validation->set_value('publicFooterLinks',(isset($this->data['centre']['footerText']) ? $this->data['centre']['publicFooterLinks'] : '') )
+				'value' => $this->form_validation->set_value('publicFooterLinks',(isset($this->data['centre']['publicFooterLinks']) ? $this->data['centre']['publicFooterLinks'] : '') )
 			);
 			$this->data['publicFooterContact'] = array(
 				'name'  => 'publicFooterContact',
 				'id'    => 'publicFooterContact',
 				'type'  => 'text',
-				'value' => $this->form_validation->set_value('publicFooterContact',(isset($this->data['centre']['footerText']) ? $this->data['centre']['publicFooterContact'] : '') )
+				'value' => $this->form_validation->set_value('publicFooterContact',(isset($this->data['centre']['publicFooterContact']) ? $this->data['centre']['publicFooterContact'] : '') )
 			);
 			$this->data['headerColour'] = array(
 				'name'  => 'headerColour',
