@@ -320,7 +320,7 @@ class Datatables extends MY_Controller {
 	// Handle datatables requests for the tournamentActors table, referencing the umpire role for this tournament which displays umpires in a specific tournament, with cool tournamentActor relations.
 	public function tournamentUmpires($tournamentID) {
 		if($this->action == "remove") {
-			$this->deleteTournamentUmpire($tournamentID.'-'.$_POST['data'][0],true);
+			$this->deleteTournamentUmpire($tournamentID.'-'.$_POST['data'][0],false);
 			return;
 		}
 		$tournament = $this->tournaments_model->get($tournamentID);
@@ -340,7 +340,7 @@ class Datatables extends MY_Controller {
 	// Handle datatables requests for the tournamentActors table, referencing the athlete role for this tournament which displays umpires in a specific tournament, with cool tournamentActor relations.
 	public function tournamentAthletes($tournamentID) {
 		if($this->action == "remove") {
-			$this->deleteTournamentAthlete($tournamentID.'-'.$_POST['data'][0],true);
+			$this->deleteTournamentAthlete($tournamentID.'-'.$_POST['data'][0],false);
 			return;
 		}
 		$tournament = $this->tournaments_model->get($tournamentID);
@@ -360,7 +360,7 @@ class Datatables extends MY_Controller {
 	// Handle datatables requests for the tournamentActors table, referencing the team role (roleID 2) which displays teams in a specific tournament, with cool tournamentActor relations.
 	public function tournamentTeams($tournamentID) {
 		if($this->action == "remove") {
-			$this->deleteTournamentTeam($tournamentID.'-'.$_POST['data'][0],true);
+			$this->deleteTournamentTeam($tournamentID.'-'.$_POST['data'][0],false);
 			return;
 		}
 		$tournament = $this->tournaments_model->get($tournamentID);
