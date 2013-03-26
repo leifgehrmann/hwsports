@@ -397,13 +397,54 @@ class Datatables extends MY_Controller {
 		$this->load->view('tms/delete-confirm.php',$this->data);
 	}
 	
-	// Show the user what *exactly* will happen when they click delete
-	public function predeleteTournamentActor($rowID) {
+	// Show the user what *exactly* will happen when they remove team from tournament
+	public function predeleteTournamentTeam($rowID) {
 		// Get type/model and object ID from type-ID input string
 		$type_id = explode('-',$rowID);
 		$actorID = $type_id[1];
+		// Get role ID
+		$tournament = $this->tournaments_model->get($tournamentID);
+		$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
+		$roleID = $roleIDs['team'];
+		// Get tournamentActorID from actorID and roleID
+		$actor = $this->tournament_actors_model->find($actorID,$roleID);
+		$tournamentActorID = $actor['tournamentActorID'];
 		// Execute the delete function of the model for this input, which just does a trial run when the second parameter is omitted.
-		$deleteOutput = $this->types_models['tournamentActors']->delete($ID);
+		$deleteOutput = $this->types_models['tournamentActors']->delete($tournamentActorID);
+		$this->data['dependencies'] = $deleteOutput;
+		$this->load->view('tms/delete-confirm.php',$this->data);
+	}
+	// Show the user what *exactly* will happen when they remove team from tournament
+	public function predeleteTournamentAthlete($rowID) {
+		// Get type/model and object ID from type-ID input string
+		$type_id = explode('-',$rowID);
+		$actorID = $type_id[1];
+		// Get role ID
+		$tournament = $this->tournaments_model->get($tournamentID);
+		$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
+		$roleID = $roleIDs['athlete'];
+		// Get tournamentActorID from actorID and roleID
+		$actor = $this->tournament_actors_model->find($actorID,$roleID);
+		$tournamentActorID = $actor['tournamentActorID'];
+		// Execute the delete function of the model for this input, which just does a trial run when the second parameter is omitted.
+		$deleteOutput = $this->types_models['tournamentActors']->delete($tournamentActorID);
+		$this->data['dependencies'] = $deleteOutput;
+		$this->load->view('tms/delete-confirm.php',$this->data);
+	}
+	// Show the user what *exactly* will happen when they remove team from tournament
+	public function predeleteTournamentUmpire($rowID) {
+		// Get type/model and object ID from type-ID input string
+		$type_id = explode('-',$rowID);
+		$actorID = $type_id[1];
+		// Get role ID
+		$tournament = $this->tournaments_model->get($tournamentID);
+		$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
+		$roleID = $roleIDs['umpire'];
+		// Get tournamentActorID from actorID and roleID
+		$actor = $this->tournament_actors_model->find($actorID,$roleID);
+		$tournamentActorID = $actor['tournamentActorID'];
+		// Execute the delete function of the model for this input, which just does a trial run when the second parameter is omitted.
+		$deleteOutput = $this->types_models['tournamentActors']->delete($tournamentActorID);
 		$this->data['dependencies'] = $deleteOutput;
 		$this->load->view('tms/delete-confirm.php',$this->data);
 	}

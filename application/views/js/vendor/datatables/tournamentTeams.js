@@ -27,6 +27,24 @@
 					if( $('.DTE_Action_Create').length ) {
 						$('.DTE_Field_Name_teamID').siblings('.DTE_Field').remove();
 					}
+				},
+				"onInitRemove": function() {
+					$('.DTED_Lightbox_Wrapper').css('visibility','hidden');
+					$.fancybox({
+						href : '/datatables/predeleteTournamentTeam/'+$('.DTTT_selected').attr('id'),
+						type : 'ajax',
+						modal : true,
+						'beforeShow' : function() {
+							jQuery("#fancycancel").click(function() {
+								$.fancybox.close();
+								$(".DTED_Lightbox_Close").click();
+$('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
+							jQuery("#fancyconfirm").click(function() {
+								$.fancybox.close();
+								$("button:contains('Delete')").click();
+$('.DTED_Lightbox_Wrapper').css('visibility','visible');							});
+						}
+					});
 				}
 			}
 		} );
