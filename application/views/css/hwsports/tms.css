@@ -170,7 +170,7 @@
 	margin-right:10px;
 }
 
-#menu a:hover { color: #3F68BB; }
+#menu a:hover { color: #<?=hexLighter($centre['backgroundColour'],30)?>; }
 #menu a.selected {
 	color: #<?=$centre['backgroundColour']?>;
 	font-weight:700;
@@ -189,7 +189,7 @@
 #menu div.icon.close			{ float: right; margin-right:10px; }
 
 #menu div.icon 							{ background-color: #333333; }
-#menu a:hover div.icon					{ background-color: #3F68BB; }
+#menu a:hover div.icon					{ background-color: #<?=hexLighter($centre['backgroundColour'],30)?>; }
 #menu a.selected div.icon 				{ background-color: #<?=$centre['backgroundColour']?>; }
 #menu a div.icon {
 	transition: 		background-color .1s;
