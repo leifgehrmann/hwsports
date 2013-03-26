@@ -1143,7 +1143,6 @@ class Tms extends MY_Controller {
 		$this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
 		$this->form_validation->set_rules('shortName', 'Short Name', 'required|xss_clean');
 		$this->form_validation->set_rules('address', 'Address', 'required|xss_clean');
-		$this->form_validation->set_rules('headerColour', 'Header Colour', 'required|xss_clean');
 		$this->form_validation->set_rules('backgroundColour', 'Background Colour', 'required|xss_clean');
 		$this->form_validation->set_rules('publicFooterLinks', 'Footer Links', 'required|xss_clean');
 		$this->form_validation->set_rules('publicFooterContact', 'Footer Contact Details', 'required|xss_clean');
