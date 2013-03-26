@@ -38,8 +38,8 @@
 		<th>Closing</th>
 	</tr>
 	<? for($i=0;$i<count($wk);$i++) { 
-		if(isset($centre['monOpen'])) {
-		if($centre['monOpen']==1) { 
+		if(isset($centre[$wk[$i].'Open'])) {
+		if($centre[$wk[$i].'Open']==1) { 
 	?>
 	<tr>
 		<td><?=$w[$i]?></td>
