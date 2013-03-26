@@ -401,8 +401,8 @@ class Datatables extends MY_Controller {
 	public function predeleteTournamentTeam($rowID) {
 		// Get type/model and object ID from type-ID input string
 		$tournament_type_id = explode('-',$rowID);
-		$tournamentID = $type_id[0];
-		$actorID = $type_id[2];
+		$tournamentID = $tournament_type_id[0];
+		$actorID = $tournament_type_id[2];
 		// Get role ID
 		$tournament = $this->tournaments_model->get($tournamentID);
 		$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
@@ -419,8 +419,8 @@ class Datatables extends MY_Controller {
 	public function predeleteTournamentAthlete($rowID) {
 		// Get type/model and object ID from type-ID input string
 		$tournament_type_id = explode('-',$rowID);
-		$tournamentID = $type_id[0];
-		$actorID = $type_id[2];
+		$tournamentID = $tournament_type_id[0];
+		$actorID = $tournament_type_id[2];
 		// Get role ID
 		$tournament = $this->tournaments_model->get($tournamentID);
 		$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
@@ -437,8 +437,8 @@ class Datatables extends MY_Controller {
 	public function predeleteTournamentUmpire($rowID) {
 		// Get type/model and object ID from type-ID input string
 		$tournament_type_id = explode('-',$rowID);
-		$tournamentID = $type_id[0];
-		$actorID = $type_id[2];
+		$tournamentID = $tournament_type_id[0];
+		$actorID = $tournament_type_id[2];
 		// Get role ID
 		$tournament = $this->tournaments_model->get($tournamentID);
 		$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
