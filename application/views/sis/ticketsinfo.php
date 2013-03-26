@@ -1,8 +1,7 @@
-
 <h1>Tickets</h1>
-<p>In order to purchase tickets, you have to first <a href="/auth/register/">register an account with us</a>. From your account interface you should then see the options to purchase tickets.</p>
+<p>To purchase tickets, visit the reception desk at the Riccarton Sports Centre. You have a choice of two tickets, Adult and Concession. The tickets will be handed out immediately at the desk.</p>
 <h2>What does a ticket exactly get?</h2>
-<p>Tickets are bought for a full day, not a particular match. Tickets cannot be used the next day.</p>
+<p>Tickets are bought for a full day, not a particular match. Tickets cannot be used on any other days.</p>
 <h2>How much do tickets cost?</h2>
 <p>We have two different tickets that one can purchase.</p>
 <table>
@@ -20,7 +19,7 @@
 	</tr>
 </table>
 <h2>How are tickets used?</h2>
-<p>To enter a venue, you must have a printed ticket to show. This can be checked</p>
+<p>To enter a venue, you must have a ticket at hand. Tickets are handed out at the Sports Centre.</p>
 
 <h2>I have a concession ticket, do I need identification?</h2>
 <p>Yes, a student ID will be enough to satisfy identification.</p>

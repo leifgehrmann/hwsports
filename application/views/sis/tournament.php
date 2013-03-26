@@ -14,6 +14,7 @@
 	</tr>
 </table>
 <? } ?>
+<? if ( in_array($tournament['status'],array('inTournament','preTournament','postTournament')) ) { ?>
 <h2>Matches</h2>
 <table class="full matches">
 	<thead>
@@ -41,7 +42,7 @@
 		<? } ?>
 	</tbody>
 </table>
-
+<? } ?>
 
 <script>
 $(document).ready(function(){
