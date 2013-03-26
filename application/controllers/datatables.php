@@ -403,7 +403,8 @@ class Datatables extends MY_Controller {
 		$loadIDKey = $updateIDKey = 'matchID';
 		$relationTable = 'matches';
 		$tournament = $this->tournaments_model->get($tournamentID);
-		$relations = array('tournamentID' => $tournamentID, 'sportID' => $tournament['sportID']);
+		$_POST['data']['sportID'] = $tournament['sportID'];
+		$relations = array('tournamentID' => $tournamentID);
 		$filteredRows = $this->db->get_where($relationTable,$relations)->result_array();
 		$filtered_IDs = array();
 		foreach($filteredRows as $filteredRow) {
