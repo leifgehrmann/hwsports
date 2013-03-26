@@ -1,6 +1,6 @@
 <h1>Appearance</h1>
 
-<?php echo form_open("tms/appearance", array('id' => 'settingsForm'));?>
+<?=form_open("tms/appearance", array('id' => 'settingsForm'))?>
 
 <h2>Main Textual Content</h2>
 <table class="yui-skin-sam">
@@ -23,19 +23,18 @@
 		<td colspan="3"><?php echo form_textarea($publicFooterContact);?></td>
 	</tr>
 </table>
-<!--<h2>Website Appearance</h2>
+<h2>Website Appearance</h2>
+<p>Here one can modify the styling of the website. For now you can only change the interface colour, but this should be modifiable as the product develops.</p>
 <table>
 	<tr>
 		<td><label for="headerColour">Interface Colour:</label></td>
-		<td><?php echo form_input($headerColour);?></td>
-		<td><label for="backgroundColour">Background Colour:</label></td>
-		<td><?php echo form_input($backgroundColour);?></td>
+		<td><?=form_input($headerColour)?></td>
 	</tr>
-</table>-->
+</table>
 
-<p><?php echo form_submit(array('name'='submit', 'value'='Submit Changes', 'class' => 'green');?></p>
+<p><?=form_submit(array('name'=>'submit', 'value'=>'Submit Changes', 'class' => 'green')?></p>
 
-<?php echo form_close();?>
+<?=form_close()?>
 
 <script type="text/javascript">
 	$(document).ready(function() {
