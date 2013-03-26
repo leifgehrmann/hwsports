@@ -81,7 +81,7 @@
 	color: #FFF;
 	padding-top:7px;
 }
-#header { background: #0D44A2; text-decoration: none; color: #FFF; }
+#header { background: #<?=$centre['backgroundColour']?>; text-decoration: none; color: #FFF; }
 
 
 /***************************************\
@@ -148,11 +148,11 @@
 
 #menu a:hover { color: #3F68BB; }
 #menu a.selected {
-	color: #0D42A8;
+	color: #<?=$centre['backgroundColour']?>;
 	font-weight:700;
 }
 #menu a.selected:hover {
-	color: #0D42A8;
+	color: #<?=$centre['backgroundColour']?>;
 	font-weight:700;
 }
 #menu a {
@@ -166,7 +166,7 @@
 
 #menu div.icon 							{ background-color: #333333; }
 #menu a:hover div.icon					{ background-color: #3F68BB; }
-#menu a.selected div.icon 				{ background-color: #0D42A8; }
+#menu a.selected div.icon 				{ background-color: #<?=$centre['backgroundColour']?>; }
 #menu a div.icon {
 	transition: 		background-color .1s;
 	-moz-transition: 	background-color .1s; /* Firefox 4 */

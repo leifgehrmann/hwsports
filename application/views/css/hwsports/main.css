@@ -106,7 +106,7 @@ h3 { font-size: 18px; top: 4px; }
 p  { font-size: 16px; top: 5px; }
 p.indent    { text-indent:20px; }
 
-a, h1 a, h2 a, h3 a, p a { color: #0D42A8; }
+a, h1 a, h2 a, h3 a, p a { color: #<?=$centre['backgroundColour']?>; }
 a:hover p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #4165C8; }
 
 /* Lists, dictionaries */
@@ -243,10 +243,11 @@ input.color {
 #content > figure, #content > blockquote,
 #content > address, #content > blockquote, #content > pre {clear:both;}
 
-#content h1 { color: #0D44A2; }
+#content h1 { color: <?=$centre['backgroundColour']?>; }
 #content h1 div.icon.subsection {
     margin-left: 20px;
     margin-right: 20px;
+    background-color: <?=$centre['backgroundColour']?>;
 }
 #content h3 div.icon, #content h2 div.icon {
     position: relative;
@@ -568,7 +569,7 @@ div.icon.dalek-white									{ background-position: -580px -540px; }
 .sportID-9	div.icon					{ background-position: -380px -260px; } /* Hurdling */
 
 /* For titles*/
-#content h1 div.icon.subsection 						{ background-position:  -20px  -80px; }
+#content h1 div.icon.subsection 						{ background-position: -320px  -80px; }
 
 /* For widgets */
 div.widget-title div.icon                               { background-position:   20px   20px; }
