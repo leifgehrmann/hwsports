@@ -131,7 +131,7 @@ p  { font-size: 16px; top: 5px; }
 p.indent    { text-indent:20px; }
 
 a, h1 a, h2 a, h3 a, p a { color: #<?=$centre['backgroundColour']?>; }
-a:hover p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #<?=hexLighter($centre['backgroundColour'],30)?>; }
+a:hover, p a:hover, h1 a:hover, h2 a:hover, h3 a:hover { color: #<?=hexLighter($centre['backgroundColour'],30)?>; }
 
 /* Lists, dictionaries */
 ul, dl, ol {
