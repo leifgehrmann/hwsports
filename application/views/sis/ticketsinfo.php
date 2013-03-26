@@ -28,11 +28,11 @@
 	isset($centre['sunOpen'])
 ) { 
 	$wk = array('mon','tue','wed','thu','fri','sat','sun');
-	$w = array('Monday','Tuesady','Wednesday','Thursday','Friday','Saturday','Sunday');
+	$w = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday');
 	?>
 <h2>What are the opening times of the sports centre</h2>
 <table>
-	<? foreach($i=0;$i<count($wk);$i++) { 
+	<? for($i=0;$i<count($wk);$i++) { 
 		if(isset($centre['monOpen'])) {
 		if($centre['monOpen']==1) { 
 	?>
