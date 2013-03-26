@@ -272,21 +272,14 @@ class Datatables extends MY_Controller {
 				$this->data($object);
 			break;
 			case "remove":
-				if(isset($relations['tournamentID'])) {
-					$delete_type_id = explode('-',$_POST['data'][0]);
-					$ID = $delete_type_id[1];
-					// Execute the delete function of the correct model with the second parameter set to false to confirm deletion
-					$deleteOutput = $this->types_models[$relationTable]->delete($ID, false); 
-				} else {
-					// Get the userID to delete from the many-to-many table
-					$delete_type_id = explode('-',$_POST['data'][0]);
-					$ID = $delete_type_id[1];
-					// This input array should already have whatever other IDs are required in the many-to-many table (such as groupID=>1)
-					$deleteData = $relations;
-					// Add the user ID to the insert data
-					$deleteData[$updateIDKey] = $ID;
-					$deleteOutput = $this->db->delete($relationTable, $deleteData);
-				}
+				// Get the userID to delete from the many-to-many table
+				$delete_type_id = explode('-',$_POST['data'][0]);
+				$ID = $delete_type_id[1];
+				// This input array should already have whatever other IDs are required in the many-to-many table (such as groupID=>1)
+				$deleteData = $relations;
+				// Add the user ID to the insert data
+				$deleteData[$updateIDKey] = $ID;
+				$deleteOutput = $this->db->delete($relationTable, $deleteData);
 				// Define the return value based on deletion success
 				$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
 				$this->load->view('data', array('data' => json_encode($out)) );
@@ -326,6 +319,9 @@ class Datatables extends MY_Controller {
 	
 	// Handle datatables requests for the tournamentActors table, referencing the umpire role for this tournament which displays umpires in a specific tournament, with cool tournamentActor relations.
 	public function tournamentUmpires($tournamentID) {
+		if($this->action == "remove") {
+			$this->deleteTournamentUmpire($tournamentID);
+		}
 		$tournament = $this->tournaments_model->get($tournamentID);
 		$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
 		$loadIDKey = 'userID';
@@ -342,6 +338,9 @@ class Datatables extends MY_Controller {
 	
 	// Handle datatables requests for the tournamentActors table, referencing the athlete role for this tournament which displays umpires in a specific tournament, with cool tournamentActor relations.
 	public function tournamentAthletes($tournamentID) {
+		if($this->action == "remove") {
+			$this->deleteTournamentAthlete($tournamentID);
+		}
 		$tournament = $this->tournaments_model->get($tournamentID);
 		$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
 		$loadIDKey = 'userID';
@@ -358,6 +357,9 @@ class Datatables extends MY_Controller {
 	
 	// Handle datatables requests for the tournamentActors table, referencing the team role (roleID 2) which displays teams in a specific tournament, with cool tournamentActor relations.
 	public function tournamentTeams($tournamentID) {
+		if($this->action == "remove") {
+			$this->deleteTournamentTeam($tournamentID);
+		}
 		$tournament = $this->tournaments_model->get($tournamentID);
 		$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
 		$loadIDKey = 'teamID';
@@ -398,7 +400,7 @@ class Datatables extends MY_Controller {
 	}
 	
 	// Show the user what *exactly* will happen when they remove team from tournament
-	public function predeleteTournamentTeam($rowID) {
+	public function deleteTournamentTeam($rowID,$test=true) {
 		// Get type/model and object ID from type-ID input string
 		$tournament_type_id = explode('-',$rowID);
 		$tournamentID = $tournament_type_id[0];
@@ -411,12 +413,18 @@ class Datatables extends MY_Controller {
 		$actor = $this->tournament_actors_model->find($actorID,$roleID);
 		$tournamentActorID = $actor['tournamentActorID'];
 		// Execute the delete function of the model for this input, which just does a trial run when the second parameter is omitted.
-		$deleteOutput = $this->types_models['tournamentActors']->delete($tournamentActorID);
+		$deleteOutput = $this->types_models['tournamentActors']->delete($tournamentActorID,$test);
 		$this->data['dependencies'] = $deleteOutput;
-		$this->load->view('tms/delete-confirm.php',$this->data);
+		if($test) {
+			$this->load->view('tms/delete-confirm.php',$this->data);
+		} else {
+			// Define the return value based on deletion success
+			$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
+			$this->load->view('data', array('data' => json_encode($out)) );
+		}
 	}
 	// Show the user what *exactly* will happen when they remove team from tournament
-	public function predeleteTournamentAthlete($rowID) {
+	public function deleteTournamentAthlete($rowID,$test=true) {
 		// Get type/model and object ID from type-ID input string
 		$tournament_type_id = explode('-',$rowID);
 		$tournamentID = $tournament_type_id[0];
@@ -429,12 +437,18 @@ class Datatables extends MY_Controller {
 		$actor = $this->tournament_actors_model->find($actorID,$roleID);
 		$tournamentActorID = $actor['tournamentActorID'];
 		// Execute the delete function of the model for this input, which just does a trial run when the second parameter is omitted.
-		$deleteOutput = $this->types_models['tournamentActors']->delete($tournamentActorID);
+		$deleteOutput = $this->types_models['tournamentActors']->delete($tournamentActorID,$test);
 		$this->data['dependencies'] = $deleteOutput;
-		$this->load->view('tms/delete-confirm.php',$this->data);
+		if($test) {
+			$this->load->view('tms/delete-confirm.php',$this->data);
+		} else {
+			// Define the return value based on deletion success
+			$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
+			$this->load->view('data', array('data' => json_encode($out)) );
+		}
 	}
 	// Show the user what *exactly* will happen when they remove team from tournament
-	public function predeleteTournamentUmpire($rowID) {
+	public function deleteTournamentUmpire($rowID,$test=true) {
 		// Get type/model and object ID from type-ID input string
 		$tournament_type_id = explode('-',$rowID);
 		$tournamentID = $tournament_type_id[0];
@@ -447,8 +461,14 @@ class Datatables extends MY_Controller {
 		$actor = $this->tournament_actors_model->find($actorID,$roleID);
 		$tournamentActorID = $actor['tournamentActorID'];
 		// Execute the delete function of the model for this input, which just does a trial run when the second parameter is omitted.
-		$deleteOutput = $this->types_models['tournamentActors']->delete($tournamentActorID);
+		$deleteOutput = $this->types_models['tournamentActors']->delete($tournamentActorID,$test);
 		$this->data['dependencies'] = $deleteOutput;
-		$this->load->view('tms/delete-confirm.php',$this->data);
+		if($test) {
+			$this->load->view('tms/delete-confirm.php',$this->data);
+		} else {
+			// Define the return value based on deletion success
+			$out = $deleteOutput ? array('id' => -1) : array('error' => "An error occurred. Please contact Infusion Systems.");// Send it back to the client, via our plain data dump view
+			$this->load->view('data', array('data' => json_encode($out)) );
+		}
 	}
 }
