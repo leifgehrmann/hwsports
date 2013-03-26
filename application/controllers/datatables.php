@@ -321,6 +321,7 @@ class Datatables extends MY_Controller {
 	public function tournamentUmpires($tournamentID) {
 		if($this->action == "remove") {
 			$this->deleteTournamentUmpire($tournamentID.'-'.$_POST['data'][0]);
+			return();
 		}
 		$tournament = $this->tournaments_model->get($tournamentID);
 		$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
@@ -340,6 +341,7 @@ class Datatables extends MY_Controller {
 	public function tournamentAthletes($tournamentID) {
 		if($this->action == "remove") {
 			$this->deleteTournamentAthlete($tournamentID.'-'.$_POST['data'][0]);
+			return();
 		}
 		$tournament = $this->tournaments_model->get($tournamentID);
 		$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
@@ -359,6 +361,7 @@ class Datatables extends MY_Controller {
 	public function tournamentTeams($tournamentID) {
 		if($this->action == "remove") {
 			$this->deleteTournamentTeam($tournamentID.'-'.$_POST['data'][0]);
+			return();
 		}
 		$tournament = $this->tournaments_model->get($tournamentID);
 		$roleIDs = $this->sports_model->get_sport_category_roles_simple($tournament['sportData']['sportCategoryID'],FALSE);
