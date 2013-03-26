@@ -22,8 +22,9 @@ class Tournament_actors_model extends MY_Model {
 									->from('tournamentActors')
 									->join('sportCategoryRoles', 'sportCategoryRoles.sportCategoryRoleID = tournamentActors.roleID')
 									->where('tournamentActorID',$ID)
-									->get()->row_array();
-		if($query->num_rows() == 0) return FALSE;
+									->get();
+		if($tournamentActor->num_rows() == 0) return FALSE;
+		$tournamentActor = $tournamentActor->row_array();
 		// For each actor, get the actual actor data, using the model as defined by the global array in the constructor 
 		$actor = $this->objects_models[$tournamentActor['actorTable']]->get($tournamentActor['actorID']);
 		$actor['sportCategoryRoleName'] = $tournamentActor['sportCategoryRoleName'];
@@ -42,8 +43,9 @@ class Tournament_actors_model extends MY_Model {
 									->from('tournamentActors')
 									->where('actorID',$actorID)
 									->where('roleID',$roleID)
-									->get()->row_array();
-		if($query->num_rows() == 0) return FALSE;
+									->get();
+		if($tournamentActor->num_rows() == 0) return FALSE;
+		$tournamentActor = $tournamentActor->row_array();
 		return $this->get($tournamentActor['tournamentActorID']);
 	}
 	
