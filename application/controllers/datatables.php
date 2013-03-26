@@ -272,7 +272,7 @@ class Datatables extends MY_Controller {
 				$this->data($object);
 			break;
 			case "remove":
-				if(isset($relations['roleID'])) {
+				if(isset($relations['tournamentID'])) {
 					$delete_type_id = explode('-',$_POST['data'][0]);
 					$ID = $delete_type_id[1];
 					// Execute the delete function of the correct model with the second parameter set to false to confirm deletion
