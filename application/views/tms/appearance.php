@@ -32,7 +32,7 @@
 	</tr>
 </table>
 
-<p><?=form_submit(array('name'=>'submit', 'value'=>'Submit Changes', 'class' => 'green')?></p>
+<p><?=form_submit(array('name'=>'submit', 'value'=>'Submit Changes', 'class' => 'green'))?></p>
 
 <?=form_close()?>
 
