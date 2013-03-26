@@ -32,6 +32,11 @@
 	?>
 <h2>What are the opening times of the sports centre</h2>
 <table>
+	<tr>
+		<th></th>
+		<th>Opening</th>
+		<th>Closing</th>
+	</tr>
 	<? for($i=0;$i<count($wk);$i++) { 
 		if(isset($centre['monOpen'])) {
 		if($centre['monOpen']==1) { 
@@ -39,6 +44,7 @@
 	<tr>
 		<td><?=$w[$i]?></td>
 		<td><?=$centre[$wk[$i].'OpenTime']?></td>
+		<td><?=$centre[$wk[$i].'CloseTime']?></td>
 	</tr>
 	<? } } } ?>
 </table>
