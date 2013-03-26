@@ -11,7 +11,7 @@
 				}, {
 					"label": "Sport",
 					"name": "sportID",
-					"type": "hidden"
+					"type": "select"
 				}, {
 					"label": "Venue",
 					"name": "venueID",
