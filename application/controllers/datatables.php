@@ -396,4 +396,15 @@ class Datatables extends MY_Controller {
 		$this->data['dependencies'] = $deleteOutput;
 		$this->load->view('tms/delete-confirm.php',$this->data);
 	}
+	
+	// Show the user what *exactly* will happen when they click delete
+	public function predeleteTournamentActor($rowID) {
+		// Get type/model and object ID from type-ID input string
+		$type_id = explode('-',$rowID);
+		$actorID = $type_id[1];
+		// Execute the delete function of the model for this input, which just does a trial run when the second parameter is omitted.
+		$deleteOutput = $this->types_models['tournamentActors']->delete($ID);
+		$this->data['dependencies'] = $deleteOutput;
+		$this->load->view('tms/delete-confirm.php',$this->data);
+	}
 }
