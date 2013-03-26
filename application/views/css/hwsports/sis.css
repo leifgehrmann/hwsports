@@ -1,3 +1,43 @@
+<? function colourBrightness($hex, $percent) {
+	// Work out if hash given
+	$hash = '';
+	if (stristr($hex,'#')) {
+		$hex = str_replace('#','',$hex);
+		$hash = '#';
+	}
+	/// HEX TO RGB
+	$rgb = array(hexdec(substr($hex,0,2)), hexdec(substr($hex,2,2)), hexdec(substr($hex,4,2)));
+	//// CALCULATE
+	for ($i=0; $i<3; $i++) {
+		// See if brighter or darker
+		if ($percent > 0) {
+			// Lighter
+			$rgb[$i] = round($rgb[$i] * $percent) + round(255 * (1-$percent));
+		} else {
+			// Darker
+			$positivePercent = $percent - ($percent*2);
+			$rgb[$i] = round($rgb[$i] * $positivePercent) + round(0 * (1-$positivePercent));
+		}
+		// In case rounding up causes us to go to 256
+		if ($rgb[$i] > 255) {
+			$rgb[$i] = 255;
+		}
+	}
+	//// RBG to Hex
+	$hex = '';
+	for($i=0; $i < 3; $i++) {
+		// Convert the decimal digit to hex
+		$hexDigit = dechex($rgb[$i]);
+		// Add a leading zero if necessary
+		if(strlen($hexDigit) == 1) {
+		$hexDigit = "0" . $hexDigit;
+		}
+		// Append to the hex string
+		$hex .= $hexDigit;
+	}
+	return $hash.$hex;
+} ?>
+
 /***************************************\
 
 			General Structure
@@ -38,7 +78,7 @@
 				
 \***************************************/
 
-#header 			{ background: #0D44A2; }
+#header 			{ background: #<?=$centre['backgroundColour']?>; }
 /*#header:hover 		{ background: #3F68BB; }*/
 #header 			{ font-weight: 700; text-decoration: none; color: #FFF; }
 #header-block 		{
@@ -85,9 +125,9 @@
 	color: inherit;
 	text-decoration:none;
 }
-#menu a:hover			{ color: #3F68BB; }
+#menu a:hover			{ color: #<?=colourBrightness($centre['backgroundColour'],10)?>; }
 #menu a.selected,
-#menu a.selected:hover 	{ color: #0D42A8; }
+#menu a.selected:hover 	{ color: #<?=$centre['backgroundColour']?>; }
 #menu a.selected,
 #menu a.selected:hover 	{ font-weight:700; }
 
@@ -113,8 +153,8 @@
 }
 
 #menu div.icon 							{ background-color: #333333; }
-#menu a:hover div.icon					{ background-color: #3F68BB; }
-#menu a.selected div.icon 				{ background-color: #0D42A8; }
+#menu a:hover div.icon					{ background-color: #<?=colourBrightness($centre['backgroundColour'],10)?>; }
+#menu a.selected div.icon 				{ background-color: #<?=$centre['backgroundColour']?>; }
 
 /***************************************\
 
@@ -270,7 +310,7 @@
                 
 \***************************************/
 
-div.widget.welcome-message 	div.widget-title { background: #0D44A2; }
+div.widget.welcome-message 	div.widget-title { background: #<?=$centre['backgroundColour']?>; }
 div.widget.subscribe 		div.widget-title { background: #D93600; }
 
 
