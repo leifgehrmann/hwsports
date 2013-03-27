@@ -59,7 +59,7 @@
 					</div>	
 			<? } ?>
 			<h3 class="sectionHeading" id="sectionHeading-submit">Final Step</h3>
-			<br />&nbsp;<a href="#" class="submitButton">Complete Sign Up Process</a>
+			<br />&nbsp;<a href="#" class="button green submitButton">Complete Sign Up Process</a>
 			<input type="hidden" name="role" value="<?=$roleID?>"></input>
 		</div>
 		
