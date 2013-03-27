@@ -90,9 +90,6 @@ class Tms extends MY_Controller {
 			}
 		}
 
-		var_dump("test");
-		die();
-
 		// We want to select the tournaments that are in a certain time range.
 		$upcomingTournaments = array();
 		$pastTournaments = array();
@@ -130,6 +127,9 @@ class Tms extends MY_Controller {
 		$this->data['upcomingMatches'] 		= $upcomingMatches;
 		$this->data['pastTournaments'] 		= $pastTournaments;
 		$this->data['upcomingTournaments'] 	= $upcomingTournaments;
+
+		var_dump("test");
+		die();
 
 		$this->view('home',"tmshome","Home");
 	}
