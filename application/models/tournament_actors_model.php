@@ -22,8 +22,9 @@ class Tournament_actors_model extends MY_Model {
 									->from('tournamentActors')
 									->join('sportCategoryRoles', 'sportCategoryRoles.sportCategoryRoleID = tournamentActors.roleID')
 									->where('tournamentActorID',$ID)
-									->get()->row_array();
-		if($tournamentActor===FALSE) return FALSE;
+									->get();
+		if($tournamentActor->num_rows() == 0) return FALSE;
+		$tournamentActor = $tournamentActor->row_array();
 		// For each actor, get the actual actor data, using the model as defined by the global array in the constructor 
 		$actor = $this->objects_models[$tournamentActor['actorTable']]->get($tournamentActor['actorID']);
 		$actor['sportCategoryRoleName'] = $tournamentActor['sportCategoryRoleName'];
@@ -35,6 +36,19 @@ class Tournament_actors_model extends MY_Model {
 		return $tournamentActor + $actor + $actorData;
 	}
 
+	// Allows us to find a tournamentActor (including ID) when we know the user or team ID and the roleID
+	public function find($actorID,$roleID) {
+		// Get the tournamentActor row from the tournamentActors table, joined with the role data from sportCategoryRoles. This gives us the info required to get the actual actor
+		$tournamentActor = $this->db->select('*')
+									->from('tournamentActors')
+									->where('actorID',$actorID)
+									->where('roleID',$roleID)
+									->get();
+		if($tournamentActor->num_rows() == 0) return FALSE;
+		$tournamentActor = $tournamentActor->row_array();
+		return $this->get($tournamentActor['tournamentActorID']);
+	}
+	
 	/**
 	 * Returns all data about all actors in specified tournament
 	 * 

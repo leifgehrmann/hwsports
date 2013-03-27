@@ -35,6 +35,19 @@ class Match_actors_model extends MY_Model {
 		return $matchActor + $actor + $actorData;
 	}
 
+	// Allows us to find a matchActor (including ID) when we know the user or team ID and the roleID
+	public function find($actorID,$roleID) {
+		// Get the matchActor row from the matchActors table, joined with the role data from sportCategoryRoles. This gives us the info required to get the actual actor
+		$matchActor = $this->db->select('*')
+									->from('matchActors')
+									->where('actorID',$actorID)
+									->where('roleID',$roleID)
+									->get();
+		if($matchActor->num_rows() == 0) return FALSE;
+		$matchActor = $matchActor->row_array();
+		return $this->get($matchActor['matchActorID']);
+	}
+	
 	/**
 	 * Returns all data about all actors in specified match
 	 * 
