@@ -51,10 +51,7 @@ class Tms extends MY_Controller {
 		$this->data['title'] = $title;
 		$this->data['page'] = $page;
 		$this->load->view('tms/header',$this->data);
-		var_dump("b");
 		$this->load->view('tms/'.$view,$this->data);
-		var_dump("a");
-		die();
 		$this->load->view('tms/footer',$this->data);
 	}
 

@@ -1,4 +1,4 @@
-<? $this->method_call =& get_instance(); ?>
+<? var_dump("a");$this->method_call =& get_instance(); die();?>
 <h1>Dashboard</h1>
 <div class="widget half matches">
 	<div class="widget-title">
