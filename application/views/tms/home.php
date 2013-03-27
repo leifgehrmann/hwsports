@@ -120,24 +120,8 @@
 				</p>
 			</div>
 			<? } ?>
-		<? } var_dump("i");die();?>
+		<? } ?>
 		<p><a href="/tms/tournaments/" class="button right blue">View All Tournaments</a></p>
 	</div>
 </div>
-<!--<div class="widget half icons">
-	<div class="widget-title">
-		<div class="widget-title-left icon"></div>
-		<div class="widget-title-centre">Happy small icons</div>
-		<div class="widget-title-right icon"></div>
-	</div>
-	<div class="widget-body">
-		<? for($i=1;$i<=46;$i++) { ?>
-			<div class="match 
-				sportCategoryID-<?=$i?> 
-				tournamentID-<?=$match['tournamentID']?>
-			">
-				<div style="margin-bottom:20px" class="icon left margin-right"></div>
-			</div>
-		<? } ?>
-	</div>
-</div>-->
+<?var_dump("k");die();?>
