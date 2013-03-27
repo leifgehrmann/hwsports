@@ -59,7 +59,7 @@
 					</div>	
 			<? } ?>
 			<h3 class="sectionHeading" id="sectionHeading-submit">Final Step</h3>
-			<button class="submitButton button green">Complete Sign Up Process</button>
+			&nbsp;<a href="#" class="submitButton button green">Complete Sign Up Process</a>
 			<input type="hidden" name="role" value="<?=$roleID?>"></input>
 		</div>
 		
@@ -95,7 +95,7 @@
 				return false;
 			});
 			//functionality of submit button
-			$("#sectionHeading-submit, .submitButton").unbind("click").unbind("dblclick").bind("click dblclick", (function () {
+			$("a.submitButton").unbind("click").unbind("dblclick").bind("click dblclick", (function () {
 				//get all team member IDs in CSV to submit
 				$(".addTeamMember").after(
 					"<input type='hidden' name='teamMemberIDs' id='teamMemberIDs' value='" + 
