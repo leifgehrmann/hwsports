@@ -27,7 +27,7 @@
 				</p>
 			</div>
 			<? } var_dump("c");?>
-		<? } var_dump("d");?>
+		<? } var_dump("d");die()?>
 		<p><a href="/tms/matches/" class="button right blue">View All Matches</a></p>
 	</div>
 </div>
