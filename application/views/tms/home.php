@@ -1,4 +1,4 @@
-<? var_dump("a");$this->method_call =& get_instance(); die();?>
+<? var_dump("a");$this->method_call =& get_instance();?>
 <h1>Dashboard</h1>
 <div class="widget half matches">
 	<div class="widget-title">
@@ -7,7 +7,7 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<? if(count($pastMatches)==0) { ?>
+		<? var_dump("b");if(count($pastMatches)==0) { ?>
 			<p>There are no recent matches.</p>
 		<? } else {
 			foreach($pastMatches as $match){ 
@@ -26,8 +26,8 @@
 					<span style="display: inline-block;padding-left: 40px;"><?=$date?> &mdash; <?=$time?></span>
 				</p>
 			</div>
-			<? } ?>
-		<? } ?>
+			<? } var_dump("c");?>
+		<? } var_dump("d");?>
 		<p><a href="/tms/matches/" class="button right blue">View All Matches</a></p>
 	</div>
 </div>
@@ -38,7 +38,7 @@
 		<div class="widget-title-right icon"></div>
 	</div>
 	<div class="widget-body">
-		<? if(count($upcomingMatches)==0) { ?>
+		<? var_dump("e");if(count($upcomingMatches)==0) { ?>
 			<p>There are no upcoming matches.</p>
 		<? } else {
 			foreach($upcomingMatches as $match){ 
