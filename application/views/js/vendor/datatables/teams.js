@@ -13,7 +13,8 @@
 					"name": "name"
 				}, {
 					"label": "Description",
-					"name": "description"
+					"name": "description",
+					"type": "textarea"
 				}, {
 					"label": "Association Number",
 					"name": "associationNumber"
