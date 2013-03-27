@@ -1,4 +1,4 @@
-<h1><a href="/tms/group/">Groups</a><div class="icon subsection"></div><?=$group['name']?></h1>
+<h1><a href="/tms/groups/">Groups</a><div class="icon subsection"></div><?=$group['name']?></h1>
 
 <a href="/tms/fixGroups/<?=$group['groupID']?>">Fix permissions</a> (Add ungrouped users to this group)<br />
 
