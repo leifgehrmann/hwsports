@@ -48,6 +48,9 @@ class Tms extends MY_Controller {
 		$this->data['message_warning'] = $this->session->flashdata('message_warning');
 		$this->data['message_error'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message_error')));
 		
+		var_dump("testc");
+		die();
+
 		$this->data['title'] = $title;
 		$this->data['page'] = $page;
 		$this->load->view('tms/header',$this->data);
@@ -118,6 +121,7 @@ class Tms extends MY_Controller {
 		usort($upcomingMatches, "cmpMatches");
 		usort($pastTournaments, "cmpTournaments");
 		usort($upcomingTournaments, "cmpTournaments");
+		var_dump("testb");
 
 		$pastMatches 			= array_slice($pastMatches, -0, 5);
 		$upcomingMatches 		= array_slice($upcomingMatches, -0, 5);
@@ -128,10 +132,9 @@ class Tms extends MY_Controller {
 		$this->data['pastTournaments'] 		= $pastTournaments;
 		$this->data['upcomingTournaments'] 	= $upcomingTournaments;
 
-		var_dump("test");
-		die();
+		var_dump("testa");
 
-		$this->view('home',"tmshome","Home");
+		$this->view('home',"tmshome","Dashboard");
 	}
 	public function tournaments()
 	{	
