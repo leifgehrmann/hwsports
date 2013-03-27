@@ -1,12 +1,13 @@
 <?php
 class Users_model extends MY_Model {
-
+	
 	public function __construct() {
         parent::__construct();
 		// Basic variables which apply to all table operations
 		$this->objectIDKey = "userID";
 		$this->dataTableName = "userData";
 		$this->relationTableName = "users";
+		$this->method_call =& get_instance();
     }
 	
 	/**
@@ -98,7 +99,7 @@ class Users_model extends MY_Model {
 			if( isset($data['password']) ) {
 				$password = $data['password']; unset($data['password']);
 			} else {
-				$password = $this->generatePassword();
+				$password = $this->method_call->generatePassword();
 			}
 			return $this->register($email,$password,$data);
 		}
