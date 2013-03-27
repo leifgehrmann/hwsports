@@ -104,8 +104,10 @@ class Datatables extends MY_Controller {
 					$newObject = $this->types_models[$type]->get($newID);
 					if(isset($newObject['sportData'])) {
 						$newObject['sportIcon'] = "<div class='icon sportCategoryID-".$newObject['sportData']['sportCategoryID']." sportID-".$newObject['sportData']['sportID']."'></div>";
+						$newObject['className'] = "sportCategoryID-".$newObject['sportData']['sportCategoryID']." sportID-".$newObject['sportData']['sportID'];
 					}
 					$newObject['detailsLink'] = "<a href='/tms/{$this->singulars[$type]}/$newID' class='button'>Details</a>";
+					
 					$out = array('id' => "$type-$newID", 'row' => $newObject);
 				} else {
 					$out = array('error' => "An error occurred. Please contact Infusion Systems.");
